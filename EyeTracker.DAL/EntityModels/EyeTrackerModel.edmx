@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EyeTrackerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EyeTrackerModelStoreContainer">
+          <EntitySet Name="ClickInfos" EntityType="EyeTrackerModel.Store.ClickInfos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserApplications" EntityType="EyeTrackerModel.Store.UserApplications" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ViewPartInfos" EntityType="EyeTrackerModel.Store.ViewPartInfos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VisitInfos" EntityType="EyeTrackerModel.Store.VisitInfos" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_ClickInfos_VisitInfoId" Association="EyeTrackerModel.Store.FK_ClickInfos_VisitInfoId">
+            <End Role="VisitInfos" EntitySet="VisitInfos" />
+            <End Role="ClickInfos" EntitySet="ClickInfos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ViewPartInfos_VisitInfoId" Association="EyeTrackerModel.Store.FK_ViewPartInfos_VisitInfoId">
+            <End Role="VisitInfos" EntitySet="VisitInfos" />
+            <End Role="ViewPartInfos" EntitySet="ViewPartInfos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitInfos_UserApplicationId" Association="EyeTrackerModel.Store.FK_VisitInfos_UserApplicationId">
+            <End Role="UserApplications" EntitySet="UserApplications" />
+            <End Role="VisitInfos" EntitySet="VisitInfos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ClickInfos">
+          <Key>
+            <PropertyRef Name="ClickInfo_Id" />
+          </Key>
+          <Property Name="ClickInfo_Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClickInfo_VisitInfoId" Type="bigint" Nullable="false" />
+          <Property Name="ClickInfo_Date" Type="datetime" Nullable="false" />
+          <Property Name="ClickInfo_ClientX" Type="int" Nullable="false" />
+          <Property Name="ClickInfo_ClientY" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserApplications">
+          <Key>
+            <PropertyRef Name="UserApplication_Id" />
+          </Key>
+          <Property Name="UserApplication_Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserApplication_UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserApplication_Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="UserApplication_CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViewPartInfos">
+          <Key>
+            <PropertyRef Name="ViewPartInfo_Id" />
+          </Key>
+          <Property Name="ViewPartInfo_Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ViewPartInfo_VisitInfoId" Type="bigint" Nullable="false" />
+          <Property Name="ViewPartInfo_Date" Type="datetime" Nullable="false" />
+          <Property Name="ViewPartInfo_TimeSpan" Type="int" Nullable="false" />
+          <Property Name="ViewPartInfo_ScrollLeft" Type="int" Nullable="false" />
+          <Property Name="ViewPartInfo_ScrollTop" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VisitInfos">
+          <Key>
+            <PropertyRef Name="VisitInfo_Id" />
+          </Key>
+          <Property Name="VisitInfo_Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="VisitInfo_UserApplicationId" Type="bigint" Nullable="false" />
+          <Property Name="VisitInfo_Ip" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="VisitInfo_PreviousVisitInfoId" Type="bigint" />
+          <Property Name="VisitInfo_PageUri" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="VisitInfo_Client" Type="int" Nullable="false" />
+          <Property Name="VisitInfo_Software" Type="int" Nullable="false" />
+          <Property Name="VisitInfo_ScreenWidth" Type="int" Nullable="false" />
+          <Property Name="VisitInfo_ScreenHeight" Type="int" Nullable="false" />
+          <Property Name="VisitInfo_ClientWidth" Type="int" Nullable="false" />
+          <Property Name="VisitInfo_ClientHeight" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ClickInfos_VisitInfoId">
+          <End Role="VisitInfos" Type="EyeTrackerModel.Store.VisitInfos" Multiplicity="1" />
+          <End Role="ClickInfos" Type="EyeTrackerModel.Store.ClickInfos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisitInfos">
+              <PropertyRef Name="VisitInfo_Id" />
+            </Principal>
+            <Dependent Role="ClickInfos">
+              <PropertyRef Name="ClickInfo_VisitInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ViewPartInfos_VisitInfoId">
+          <End Role="VisitInfos" Type="EyeTrackerModel.Store.VisitInfos" Multiplicity="1" />
+          <End Role="ViewPartInfos" Type="EyeTrackerModel.Store.ViewPartInfos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisitInfos">
+              <PropertyRef Name="VisitInfo_Id" />
+            </Principal>
+            <Dependent Role="ViewPartInfos">
+              <PropertyRef Name="ViewPartInfo_VisitInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitInfos_UserApplicationId">
+          <End Role="UserApplications" Type="EyeTrackerModel.Store.UserApplications" Multiplicity="1" />
+          <End Role="VisitInfos" Type="EyeTrackerModel.Store.VisitInfos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserApplications">
+              <PropertyRef Name="UserApplication_Id" />
+            </Principal>
+            <Dependent Role="VisitInfos">
+              <PropertyRef Name="VisitInfo_UserApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ClickInfo_Add" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClickInfo_VisitInfoId" Type="bigint" Mode="In" />
+          <Parameter Name="ClickInfo_Date" Type="datetime" Mode="In" />
+          <Parameter Name="ClickInfo_ClientX" Type="int" Mode="In" />
+          <Parameter Name="ClickInfo_ClientY" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ClickInfo_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClickInfo_VisitInfoId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetClickData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VisitInfo_UserApplicationId" Type="bigint" Mode="In" />
+          <Parameter Name="VisitInfo_PageUri" Type="varchar" Mode="In" />
+          <Parameter Name="VisitInfo_ScreenWidth" Type="int" Mode="In" />
+          <Parameter Name="VisitInfo_ScreenHeight" Type="int" Mode="In" />
+          <Parameter Name="VisitInfo_ClientWidth" Type="int" Mode="In" />
+          <Parameter Name="VisitInfo_ClientHeight" Type="int" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetViewPartData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VisitInfo_UserApplicationId" Type="bigint" Mode="In" />
+          <Parameter Name="VisitInfo_PageUri" Type="varchar" Mode="In" />
+          <Parameter Name="VisitInfo_ScreenWidth" Type="int" Mode="In" />
+          <Parameter Name="VisitInfo_ScreenHeight" Type="int" Mode="In" />
+          <Parameter Name="VisitInfo_ClientWidth" Type="int" Mode="In" />
+          <Parameter Name="VisitInfo_ClientHeight" Type="int" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Pages_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VisitInfo_UserApplicationId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="UserApplication_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserApplication_UserId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="UserApplication_Set" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserApplication_Id" Type="bigint" Mode="In" />
+          <Parameter Name="UserApplication_UserId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="UserApplication_Name" Type="varchar" Mode="In" />
+          <Parameter Name="UserApplication_CreateDate" Type="datetime" Mode="In" />
+          <Parameter Name="NewUserApplication_Id" Type="bigint" Mode="InOut" />
+        </Function>
+        <Function Name="ViewPartInfo_Add" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ViewPartInfo_VisitInfoId" Type="bigint" Mode="In" />
+          <Parameter Name="ViewPartInfo_Date" Type="datetime" Mode="In" />
+          <Parameter Name="ViewPartInfo_TimeSpan" Type="int" Mode="In" />
+          <Parameter Name="ViewPartInfo_ScrollLeft" Type="float" Mode="In" />
+          <Parameter Name="ViewPartInfo_ScrollTop" Type="float" Mode="In" />
+        </Function>
+        <Function Name="ViewPartInfo_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ViewPart_VisitInfoId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="VisitInfo_Add" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VisitInfo_UserApplicationId" Type="bigint" Mode="In" />
+          <Parameter Name="VisitInfo_Ip" Type="varchar" Mode="In" />
+          <Parameter Name="VisitInfo_PreviousVisitInfoId" Type="bigint" Mode="In" />
+          <Parameter Name="VisitInfo_PageUri" Type="varchar" Mode="In" />
+          <Parameter Name="VisitInfo_Client" Type="int" Mode="In" />
+          <Parameter Name="VisitInfo_Software" Type="int" Mode="In" />
+          <Parameter Name="VisitInfo_ScreenWidth" Type="int" Mode="In" />
+          <Parameter Name="VisitInfo_ScreenHeight" Type="int" Mode="In" />
+          <Parameter Name="VisitInfo_ClientWidth" Type="int" Mode="In" />
+          <Parameter Name="VisitInfo_ClientHeight" Type="int" Mode="In" />
+        </Function>
+        <Function Name="VisitInfo_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VisitInfo_UserApplicationId" Type="bigint" Mode="In" />
+        </Function>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EyeTrackerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EyeTrackerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClickInfos" EntityType="EyeTrackerModel.ClickInfo" />
+          <EntitySet Name="UserApplications" EntityType="EyeTrackerModel.UserApplication" />
+          <EntitySet Name="ViewPartInfos" EntityType="EyeTrackerModel.ViewPartInfo" />
+          <EntitySet Name="VisitInfos" EntityType="EyeTrackerModel.VisitInfo" />
+          <AssociationSet Name="FK_ClickInfos_VisitInfoId" Association="EyeTrackerModel.FK_ClickInfos_VisitInfoId">
+            <End Role="VisitInfos" EntitySet="VisitInfos" />
+            <End Role="ClickInfos" EntitySet="ClickInfos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitInfos_UserApplicationId" Association="EyeTrackerModel.FK_VisitInfos_UserApplicationId">
+            <End Role="UserApplications" EntitySet="UserApplications" />
+            <End Role="VisitInfos" EntitySet="VisitInfos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ViewPartInfos_VisitInfoId" Association="EyeTrackerModel.FK_ViewPartInfos_VisitInfoId">
+            <End Role="VisitInfos" EntitySet="VisitInfos" />
+            <End Role="ViewPartInfos" EntitySet="ViewPartInfos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ClickInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VisitInfoId" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="ClientX" Type="Int32" Nullable="false" />
+          <Property Name="ClientY" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="VisitInfo" Relationship="EyeTrackerModel.FK_ClickInfos_VisitInfoId" FromRole="ClickInfos" ToRole="VisitInfos" />
+        </EntityType>
+        <EntityType Name="UserApplication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="VisitInfos" Relationship="EyeTrackerModel.FK_VisitInfos_UserApplicationId" FromRole="UserApplications" ToRole="VisitInfos" />
+        </EntityType>
+        <EntityType Name="ViewPartInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VisitInfoId" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="TimeSpan" Type="Int32" Nullable="false" />
+          <Property Name="ScrollLeft" Type="Int32" Nullable="false" />
+          <Property Name="ScrollTop" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="VisitInfo" Relationship="EyeTrackerModel.FK_ViewPartInfos_VisitInfoId" FromRole="ViewPartInfos" ToRole="VisitInfos" />
+        </EntityType>
+        <EntityType Name="VisitInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserApplicationId" Type="Int64" Nullable="false" />
+          <Property Name="Ip" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PreviousVisitInfoId" Type="Int64" />
+          <Property Name="PageUri" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Client" Type="Int32" Nullable="false" />
+          <Property Name="Software" Type="Int32" Nullable="false" />
+          <Property Name="ScreenWidth" Type="Int32" Nullable="false" />
+          <Property Name="ScreenHeight" Type="Int32" Nullable="false" />
+          <Property Name="ClientWidth" Type="Int32" Nullable="false" />
+          <Property Name="ClientHeight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClickInfos" Relationship="EyeTrackerModel.FK_ClickInfos_VisitInfoId" FromRole="VisitInfos" ToRole="ClickInfos" />
+          <NavigationProperty Name="UserApplication" Relationship="EyeTrackerModel.FK_VisitInfos_UserApplicationId" FromRole="VisitInfos" ToRole="UserApplications" />
+          <NavigationProperty Name="ViewPartInfos" Relationship="EyeTrackerModel.FK_ViewPartInfos_VisitInfoId" FromRole="VisitInfos" ToRole="ViewPartInfos" />
+        </EntityType>
+        <Association Name="FK_ClickInfos_VisitInfoId">
+          <End Role="VisitInfos" Type="EyeTrackerModel.VisitInfo" Multiplicity="1" />
+          <End Role="ClickInfos" Type="EyeTrackerModel.ClickInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisitInfos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClickInfos">
+              <PropertyRef Name="VisitInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitInfos_UserApplicationId">
+          <End Role="UserApplications" Type="EyeTrackerModel.UserApplication" Multiplicity="1" />
+          <End Role="VisitInfos" Type="EyeTrackerModel.VisitInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserApplications">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VisitInfos">
+              <PropertyRef Name="UserApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ViewPartInfos_VisitInfoId">
+          <End Role="VisitInfos" Type="EyeTrackerModel.VisitInfo" Multiplicity="1" />
+          <End Role="ViewPartInfos" Type="EyeTrackerModel.ViewPartInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisitInfos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ViewPartInfos">
+              <PropertyRef Name="VisitInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EyeTrackerModelStoreContainer" CdmEntityContainer="EyeTrackerEntities">
+          <EntitySetMapping Name="ClickInfos"><EntityTypeMapping TypeName="EyeTrackerModel.ClickInfo"><MappingFragment StoreEntitySet="ClickInfos">
+            <ScalarProperty Name="Id" ColumnName="ClickInfo_Id" />
+            <ScalarProperty Name="VisitInfoId" ColumnName="ClickInfo_VisitInfoId" />
+            <ScalarProperty Name="Date" ColumnName="ClickInfo_Date" />
+            <ScalarProperty Name="ClientX" ColumnName="ClickInfo_ClientX" />
+            <ScalarProperty Name="ClientY" ColumnName="ClickInfo_ClientY" />
+          </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="EyeTrackerModel.ClickInfo">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EyeTrackerModel.Store.ClickInfo_Add">
+                  <ScalarProperty Name="ClientY" ParameterName="ClickInfo_ClientY" />
+                  <ScalarProperty Name="ClientX" ParameterName="ClickInfo_ClientX" />
+                  <ScalarProperty Name="Date" ParameterName="ClickInfo_Date" />
+                  <ScalarProperty Name="VisitInfoId" ParameterName="ClickInfo_VisitInfoId" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+            </EntitySetMapping>
+          <EntitySetMapping Name="UserApplications"><EntityTypeMapping TypeName="EyeTrackerModel.UserApplication"><MappingFragment StoreEntitySet="UserApplications">
+            <ScalarProperty Name="Id" ColumnName="UserApplication_Id" />
+            <ScalarProperty Name="UserId" ColumnName="UserApplication_UserId" />
+            <ScalarProperty Name="Name" ColumnName="UserApplication_Name" />
+            <ScalarProperty Name="CreateDate" ColumnName="UserApplication_CreateDate" />
+          </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="EyeTrackerModel.UserApplication">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EyeTrackerModel.Store.UserApplication_Set">
+                  <ScalarProperty Name="Id" ParameterName="NewUserApplication_Id" />
+                  <ScalarProperty Name="CreateDate" ParameterName="UserApplication_CreateDate" />
+                  <ScalarProperty Name="Name" ParameterName="UserApplication_Name" />
+                  <ScalarProperty Name="UserId" ParameterName="UserApplication_UserId" />
+                  <ScalarProperty Name="Id" ParameterName="UserApplication_Id" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="EyeTrackerModel.Store.UserApplication_Set">
+                  <ScalarProperty Name="Id" ParameterName="NewUserApplication_Id" Version="Current" />
+                  <ScalarProperty Name="CreateDate" ParameterName="UserApplication_CreateDate" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="UserApplication_Name" Version="Current" />
+                  <ScalarProperty Name="UserId" ParameterName="UserApplication_UserId" Version="Current" />
+                  <ScalarProperty Name="Id" ParameterName="UserApplication_Id" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ViewPartInfos"><EntityTypeMapping TypeName="EyeTrackerModel.ViewPartInfo"><MappingFragment StoreEntitySet="ViewPartInfos">
+            <ScalarProperty Name="Id" ColumnName="ViewPartInfo_Id" />
+            <ScalarProperty Name="VisitInfoId" ColumnName="ViewPartInfo_VisitInfoId" />
+            <ScalarProperty Name="Date" ColumnName="ViewPartInfo_Date" />
+            <ScalarProperty Name="TimeSpan" ColumnName="ViewPartInfo_TimeSpan" />
+            <ScalarProperty Name="ScrollLeft" ColumnName="ViewPartInfo_ScrollLeft" />
+            <ScalarProperty Name="ScrollTop" ColumnName="ViewPartInfo_ScrollTop" />
+          </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="EyeTrackerModel.ViewPartInfo">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EyeTrackerModel.Store.ViewPartInfo_Add">
+                  <ScalarProperty Name="ScrollTop" ParameterName="ViewPartInfo_ScrollTop" />
+                  <ScalarProperty Name="ScrollLeft" ParameterName="ViewPartInfo_ScrollLeft" />
+                  <ScalarProperty Name="TimeSpan" ParameterName="ViewPartInfo_TimeSpan" />
+                  <ScalarProperty Name="Date" ParameterName="ViewPartInfo_Date" />
+                  <ScalarProperty Name="VisitInfoId" ParameterName="ViewPartInfo_VisitInfoId" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+            </EntitySetMapping>
+          <EntitySetMapping Name="VisitInfos"><EntityTypeMapping TypeName="EyeTrackerModel.VisitInfo"><MappingFragment StoreEntitySet="VisitInfos">
+            <ScalarProperty Name="Id" ColumnName="VisitInfo_Id" />
+            <ScalarProperty Name="UserApplicationId" ColumnName="VisitInfo_UserApplicationId" />
+            <ScalarProperty Name="Ip" ColumnName="VisitInfo_Ip" />
+            <ScalarProperty Name="PreviousVisitInfoId" ColumnName="VisitInfo_PreviousVisitInfoId" />
+            <ScalarProperty Name="PageUri" ColumnName="VisitInfo_PageUri" />
+            <ScalarProperty Name="Client" ColumnName="VisitInfo_Client" />
+            <ScalarProperty Name="Software" ColumnName="VisitInfo_Software" />
+            <ScalarProperty Name="ScreenWidth" ColumnName="VisitInfo_ScreenWidth" />
+            <ScalarProperty Name="ScreenHeight" ColumnName="VisitInfo_ScreenHeight" />
+            <ScalarProperty Name="ClientWidth" ColumnName="VisitInfo_ClientWidth" />
+            <ScalarProperty Name="ClientHeight" ColumnName="VisitInfo_ClientHeight" />
+          </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="EyeTrackerModel.VisitInfo">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EyeTrackerModel.Store.VisitInfo_Add">
+                  <ScalarProperty Name="ClientHeight" ParameterName="VisitInfo_ClientHeight" />
+                  <ScalarProperty Name="ClientWidth" ParameterName="VisitInfo_ClientWidth" />
+                  <ScalarProperty Name="ScreenHeight" ParameterName="VisitInfo_ScreenHeight" />
+                  <ScalarProperty Name="ScreenWidth" ParameterName="VisitInfo_ScreenWidth" />
+                  <ScalarProperty Name="Software" ParameterName="VisitInfo_Software" />
+                  <ScalarProperty Name="Client" ParameterName="VisitInfo_Client" />
+                  <ScalarProperty Name="PageUri" ParameterName="VisitInfo_PageUri" />
+                  <ScalarProperty Name="PreviousVisitInfoId" ParameterName="VisitInfo_PreviousVisitInfoId" />
+                  <ScalarProperty Name="Ip" ParameterName="VisitInfo_Ip" />
+                  <ScalarProperty Name="UserApplicationId" ParameterName="VisitInfo_UserApplicationId" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="EyeTrackerModel">
+        <EntityTypeShape EntityType="EyeTrackerModel.ClickInfo" Width="1.5" PointX="5.25" PointY="1.125" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EyeTrackerModel.UserApplication" Width="1.5" PointX="0.75" PointY="2.75" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="EyeTrackerModel.ViewPartInfo" Width="1.5" PointX="5.25" PointY="4" Height="2.3648893229166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="EyeTrackerModel.VisitInfo" Width="1.5" PointX="3" PointY="1.875" Height="3.7109993489583335" IsExpanded="true" />
+        <AssociationConnector Association="EyeTrackerModel.FK_ClickInfos_VisitInfoId" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="2.5862939453125" />
+          <ConnectorPoint PointX="5.25" PointY="2.5862939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="EyeTrackerModel.FK_VisitInfos_UserApplicationId" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="3.7401432291666667" />
+          <ConnectorPoint PointX="3" PointY="3.7401432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="EyeTrackerModel.FK_ViewPartInfos_VisitInfoId" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="4.7929996744791667" />
+          <ConnectorPoint PointX="5.25" PointY="4.7929996744791667" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
