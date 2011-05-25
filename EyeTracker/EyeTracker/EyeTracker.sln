@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker", "EyeTracker\Ey
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker.Tests", "EyeTracker.Tests\EyeTracker.Tests.csproj", "{F4E2C76F-172E-4020-920E-E070839C9AF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker.Model", "EyeTracker.Model\EyeTracker.Model.csproj", "{F5D9FA27-BAAF-4B4B-97F0-0A71F2210009}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker.Common", "EyeTracker.Model\EyeTracker.Common.csproj", "{F5D9FA27-BAAF-4B4B-97F0-0A71F2210009}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker.DAL", "EyeTracker.DAL\EyeTracker.DAL.csproj", "{726E47E8-4DA8-4BDF-96E2-9E9CE6EB1454}"
 EndProject

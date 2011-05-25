@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,8 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="HeatMapImage.cs" />
+    <Compile Include="Models\ClickInfoViewModel.cs" />
+    <Compile Include="Models\ViewPartInfoViewModel.cs" />
+    <Compile Include="Models\VisitInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EyeTracker.DAL\EyeTracker.DAL.csproj">
+      <Project>{726E47E8-4DA8-4BDF-96E2-9E9CE6EB1454}</Project>
+      <Name>EyeTracker.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyeTracker.Model\EyeTracker.Common.csproj">
+      <Project>{F5D9FA27-BAAF-4B4B-97F0-0A71F2210009}</Project>
+      <Name>EyeTracker.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

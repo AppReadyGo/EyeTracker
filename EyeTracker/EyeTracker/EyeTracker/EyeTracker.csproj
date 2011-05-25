@@ -72,6 +72,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Model\AnalyticsPackage.cs" />
+    <Compile Include="Model\Enumerators.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -112,9 +114,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EyeTracker.Model\EyeTracker.Model.csproj">
+    <ProjectReference Include="..\EyeTracker.Core\EyeTracker.Core.csproj">
+      <Project>{28075AB1-E262-4FBC-846C-BF11A6E5FE41}</Project>
+      <Name>EyeTracker.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyeTracker.Model\EyeTracker.Common.csproj">
       <Project>{F5D9FA27-BAAF-4B4B-97F0-0A71F2210009}</Project>
-      <Name>EyeTracker.Model</Name>
+      <Name>EyeTracker.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
