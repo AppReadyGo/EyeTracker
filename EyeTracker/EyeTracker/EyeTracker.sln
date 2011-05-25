@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker.Model", "EyeTrac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker.DAL", "EyeTracker.DAL\EyeTracker.DAL.csproj", "{726E47E8-4DA8-4BDF-96E2-9E9CE6EB1454}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker.Core", "EyeTracker.Core\EyeTracker.Core.csproj", "{28075AB1-E262-4FBC-846C-BF11A6E5FE41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{726E47E8-4DA8-4BDF-96E2-9E9CE6EB1454}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{726E47E8-4DA8-4BDF-96E2-9E9CE6EB1454}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{726E47E8-4DA8-4BDF-96E2-9E9CE6EB1454}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28075AB1-E262-4FBC-846C-BF11A6E5FE41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28075AB1-E262-4FBC-846C-BF11A6E5FE41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28075AB1-E262-4FBC-846C-BF11A6E5FE41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28075AB1-E262-4FBC-846C-BF11A6E5FE41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
