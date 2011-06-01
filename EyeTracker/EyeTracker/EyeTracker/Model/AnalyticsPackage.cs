@@ -11,7 +11,7 @@ namespace EyeTracker.Model
     public class AnalyticsPackage
     {
         [DataMember(Name = "vid")]
-        public string VisitId { get; set; }
+        public long VisitId { get; set; }
 
         [DataMember(Name = "vpd")]
         public ViewPartInfoViewModel[] ViewParts { get; set; }
