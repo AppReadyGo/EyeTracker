@@ -12,6 +12,9 @@ namespace EyeTracker.Core.Models
         [DataMember(Name = "cid")]
         public string ClientId { get; set; }
 
+        [DataMember(Name = "d")]
+        public string Date { get; set; }
+
         [DataMember(Name = "sw")]
         public int ScreenWidth { get; set; }
 
@@ -25,6 +28,8 @@ namespace EyeTracker.Core.Models
         public int ClientHeight { get; set; }
 
         [DataMember(Name = "uri")]
-        public string Uri { get; set; }
+        public string PageUri { get; set; }
+
+        public string Ip { get; set; }
     }
 }

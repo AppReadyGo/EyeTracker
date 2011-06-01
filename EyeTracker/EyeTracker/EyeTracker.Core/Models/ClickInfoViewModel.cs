@@ -12,9 +12,6 @@ namespace EyeTracker.Core.Models
         [DataMember(Name = "d")]
         public string StrDate { get; set; }
 
-        //TODO: convert in Automaper
-        //public DateTime Date { get { return DateTime.Parse(StrDate); } }
-
         [DataMember(Name = "cx")]
         public int ClientX { get; set; }
 

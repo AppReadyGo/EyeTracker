@@ -1,6 +1,9 @@
 ﻿var mobillify = {
-    dataHandlerUrl: '{HANDLER_URL}',
+    visitHandlerUrl: '{VISIT_HANDLER_URL}',
+    packageHandlerUrl: '{PACKAGE_HANDLER_URL}',
     clientId: '{CLIENT_ID}',
+    visitId: -1,
+    winSize: null,
     clicksData: new Array(),
     viewPartsData: new Array(),
     init: function () {
@@ -9,28 +12,37 @@
         document.onscroll = mobillify.onscroll;
         document.onclick = mobillify.onclick;
         window.onbeforeunload = function () {
-            if (mobillify.clicksData.length > 0 || mobillify.viewPartsData.length > 0) {
+            if (mobillify.visitId > 0 && (mobillify.clicksData.length > 0 || mobillify.viewPartsData.length > 0)) {
+                var lastPart = mobillify.viewPartsData[mobillify.viewPartsData.length - 1];
+                lastPart.finishDate = new Date();
                 mobillify.setCookie('mobillifyData', mobillify.serializeData(), 30);
             }
         }
 
-        var winSize = mobillify.getWinSize();
+        mobillify.winSize = mobillify.getWinSize();
         var data = '{';
         data += '"cid":"' + mobillify.clientId + '",';
-        data += '"sw":' + winSize.w + ',';
-        data += '"sh":' + winSize.h + ',';
+        data += '"sw":' + mobillify.winSize.w + ',';
+        data += '"sh":' + mobillify.winSize.h + ',';
         data += '"cw":' + mobillify.clientWidth() + ',';
-        data += '"ch":' + mobillify.clientHeight();
+        data += '"ch":' + mobillify.clientHeight() + ',';
+        data += '"d":"' + new Date().toUTCString() + '",';
+        data += '"uri":"' + location.href + '"';
         data += '}';
-        mobillify.sendData('init', data);
+        mobillify.sendData(mobillify.visitHandlerUrl, data, function (xmlhttp) {
+            var res = eval("(" + xmlhttp.responseText + ')');
+            if (!res.WasError) {
+                mobillify.visitId = res.Value;
+            }
+        });
         data = mobillify.getCookie('mobillifyData');
         if (data) {
-            mobillify.sendData('pack', data);
+            mobillify.sendData(mobillify.packageHandlerUrl, data);
             mobillify.setCookie('mobillifyData', null, -365);
         }
     },
     serializeData: function () {
-        var data = '{"cid":"' + mobillify.clientId + '"';
+        var data = '{"vid":"' + mobillify.visitId + '"';
         data += ',"vpd":[';
         for (var i = 0; i < mobillify.viewPartsData.length; i++) {
             var curPart = mobillify.viewPartsData[i];
@@ -52,11 +64,13 @@
         return data;
     },
     sendPackage: function () {
-        if (mobillify.clicksData.length + mobillify.viewPartsData.length > 10) {
-            mobillify.sendData('pack', mobillify.serializeData(), function () { mobillify.viewPartsData = new Array(); mobillify.clicksData = new Array(); });
+        if (mobillify.visitId > 0 && (mobillify.clicksData.length + mobillify.viewPartsData.length > 10)) {
+            mobillify.sendData(mobillify.packageHandlerUrl, mobillify.serializeData(), function () { mobillify.viewPartsData = new Array(); mobillify.clicksData = new Array(); });
+            mobillify.clicksData = new Array();
+            mobillify.viewPartsData = new Array();
         }
     },
-    sendData: function (action, data, onreadystatechange) {
+    sendData: function (dataHandlerUrl, data, onreadystatechange) {
         var xmlhttp;
         //Put data to cookies
         //setCookie('cachedData', data, 1);
@@ -67,15 +81,12 @@
         else {// code for IE6, IE5
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xmlhttp.onreadystatechange = onreadystatechange;
-        /*function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        //setCookie('cachedData', null, -365);
-        package.mouseEvents = new Array();
-        package.parts = new Array();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                if (onreadystatechange) onreadystatechange(xmlhttp);
+            }
         }
-        }*/
-        xmlhttp.open("GET", mobillify.dataHandlerUrl + "?a=" + action + "&d=" + data, true);
+        xmlhttp.open("GET", dataHandlerUrl + "/?json=" + data, true);
         xmlhttp.send();
     },
     getWinSize: function () {
@@ -97,18 +108,26 @@
         return { w: winW, h: winH };
     },
     clientWidth: function () {
-        return mobillify.filterResults(
-                    window.innerWidth ? window.innerWidth : 0,
-                    document.documentElement ? document.documentElement.clientWidth : 0,
-                    document.body ? document.body.clientWidth : 0
-                );
+        var db = document.body;
+        var dde = document.documentElement;
+
+        return Math.max(db.scrollWidth, dde.scrollWidth, db.offsetWidth, dde.offsetWidth, db.clientWidth, dde.clientWidth)
+        //        return mobillify.filterResults(
+        //                    window.innerWidth ? window.innerWidth : 0,
+        //                    document.documentElement ? document.documentElement.clientWidth : 0,
+        //                    document.body ? document.body.clientWidth : 0
+        //                );
     },
     clientHeight: function () {
-        return mobillify.filterResults(
-                    window.innerHeight ? window.innerHeight : 0,
-                    document.documentElement ? document.documentElement.clientHeight : 0,
-                    document.body ? document.body.clientHeight : 0
-                );
+        var db = document.body;
+        var dde = document.documentElement;
+
+        return Math.max(db.scrollHeight, dde.scrollHeight, db.offsetHeight, dde.offsetHeight, db.clientHeight, dde.clientHeight)
+        //        return mobillify.filterResults(
+        //                    window.innerHeight ? window.innerHeight : 0,
+        //                    document.documentElement ? document.documentElement.clientHeight : 0,
+        //                    document.body ? document.body.clientHeight : 0
+        //                );
     },
     filterResults: function (n_win, n_docel, n_body) {
         var n_result = n_win ? n_win : 0;
@@ -149,8 +168,12 @@
     },
     onscroll: function () {
         var curDate = new Date();
-        var lastPart = mobillify.viewPartsData.length > 0 ? mobillify.viewPartsData[mobillify.viewPartsData.length - 1] : mobillify.getViewPart(new Date());
-        if ((curDate.getSeconds() - lastPart.startDate.getSeconds()) > 2) {
+        if (mobillify.viewPartsData.length == 0) {
+            mobillify.viewPartsData.push(mobillify.getViewPart(new Date()));
+        }
+        var lastPart = mobillify.viewPartsData[mobillify.viewPartsData.length - 1];
+        var diff = mobillify.dateDiffInSec(curDate, lastPart.startDate)
+        if (diff > 2) {
             lastPart.finishDate = curDate;
             mobillify.viewPartsData.push(mobillify.getViewPart(curDate));
             mobillify.sendPackage();
@@ -171,6 +194,28 @@
             scrollTop: mobillify.scrollTop(),
             finishDate: new Date()
         };
+    },
+    dateDiffInSec: function (date1, date2) {
+        var diff = new Date();
+        diff.setTime(Math.abs(date1.getTime() - date2.getTime()));
+
+        var timediff = diff.getTime();
+        /*
+        var weeks = Math.floor(timediff / (1000 * 60 * 60 * 24 * 7));
+        timediff -= weeks * (1000 * 60 * 60 * 24 * 7);
+ 
+        var days = Math.floor(timediff / (1000 * 60 * 60 * 24));
+        timediff -= days * (1000 * 60 * 60 * 24);
+ 
+        var hours = Math.floor(timediff / (1000 * 60 * 60));
+        timediff -= hours * (1000 * 60 * 60);
+ 
+        var mins = Math.floor(timediff / (1000 * 60));
+        timediff -= mins * (1000 * 60);
+        */
+        var secs = Math.floor(timediff / 1000);
+        timediff -= secs * 1000;
+        return secs;
     }
 };
 mobillify.init();

@@ -31,32 +31,32 @@ namespace EyeTracker.DAL.EntityModels
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class EyeTrackerEntities : ObjectContext
+    public partial class Entities : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new EyeTrackerEntities object using the connection string found in the 'EyeTrackerEntities' section of the application configuration file.
+        /// Initializes a new Entities object using the connection string found in the 'Entities' section of the application configuration file.
         /// </summary>
-        public EyeTrackerEntities() : base("name=EyeTrackerEntities", "EyeTrackerEntities")
+        public Entities() : base("name=Entities", "Entities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new EyeTrackerEntities object.
+        /// Initialize a new Entities object.
         /// </summary>
-        public EyeTrackerEntities(string connectionString) : base(connectionString, "EyeTrackerEntities")
+        public Entities(string connectionString) : base(connectionString, "Entities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new EyeTrackerEntities object.
+        /// Initialize a new Entities object.
         /// </summary>
-        public EyeTrackerEntities(EntityConnection connection) : base(connection, "EyeTrackerEntities")
+        public Entities(EntityConnection connection) : base(connection, "Entities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -392,17 +392,17 @@ namespace EyeTracker.DAL.EntityModels
         /// <summary>
         /// Create a new UserApplication object.
         /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="createDate">Initial value of the CreateDate property.</param>
-        public static UserApplication CreateUserApplication(global::System.Int64 id, global::System.Guid userId, global::System.String name, global::System.DateTime createDate)
+        /// <param name="userApplication_Id">Initial value of the UserApplication_Id property.</param>
+        /// <param name="userApplication_UserId">Initial value of the UserApplication_UserId property.</param>
+        /// <param name="userApplication_Name">Initial value of the UserApplication_Name property.</param>
+        /// <param name="userApplication_CreateDate">Initial value of the UserApplication_CreateDate property.</param>
+        public static UserApplication CreateUserApplication(global::System.Int64 userApplication_Id, global::System.Guid userApplication_UserId, global::System.String userApplication_Name, global::System.DateTime userApplication_CreateDate)
         {
             UserApplication userApplication = new UserApplication();
-            userApplication.Id = id;
-            userApplication.UserId = userId;
-            userApplication.Name = name;
-            userApplication.CreateDate = createDate;
+            userApplication.UserApplication_Id = userApplication_Id;
+            userApplication.UserApplication_UserId = userApplication_UserId;
+            userApplication.UserApplication_Name = userApplication_Name;
+            userApplication.UserApplication_CreateDate = userApplication_CreateDate;
             return userApplication;
         }
 
@@ -414,99 +414,99 @@ namespace EyeTracker.DAL.EntityModels
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 Id
+        public global::System.Int64 UserApplication_Id
         {
             get
             {
-                return _Id;
+                return _UserApplication_Id;
             }
             set
             {
-                if (_Id != value)
+                if (_UserApplication_Id != value)
                 {
-                    OnIdChanging(value);
-                    ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Id");
-                    OnIdChanged();
+                    OnUserApplication_IdChanging(value);
+                    ReportPropertyChanging("UserApplication_Id");
+                    _UserApplication_Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserApplication_Id");
+                    OnUserApplication_IdChanged();
                 }
             }
         }
-        private global::System.Int64 _Id;
-        partial void OnIdChanging(global::System.Int64 value);
-        partial void OnIdChanged();
+        private global::System.Int64 _UserApplication_Id;
+        partial void OnUserApplication_IdChanging(global::System.Int64 value);
+        partial void OnUserApplication_IdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid UserId
+        public global::System.Guid UserApplication_UserId
         {
             get
             {
-                return _UserId;
+                return _UserApplication_UserId;
             }
             set
             {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
+                OnUserApplication_UserIdChanging(value);
+                ReportPropertyChanging("UserApplication_UserId");
+                _UserApplication_UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserApplication_UserId");
+                OnUserApplication_UserIdChanged();
             }
         }
-        private global::System.Guid _UserId;
-        partial void OnUserIdChanging(global::System.Guid value);
-        partial void OnUserIdChanged();
+        private global::System.Guid _UserApplication_UserId;
+        partial void OnUserApplication_UserIdChanging(global::System.Guid value);
+        partial void OnUserApplication_UserIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Name
+        public global::System.String UserApplication_Name
         {
             get
             {
-                return _Name;
+                return _UserApplication_Name;
             }
             set
             {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
+                OnUserApplication_NameChanging(value);
+                ReportPropertyChanging("UserApplication_Name");
+                _UserApplication_Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("UserApplication_Name");
+                OnUserApplication_NameChanged();
             }
         }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
+        private global::System.String _UserApplication_Name;
+        partial void OnUserApplication_NameChanging(global::System.String value);
+        partial void OnUserApplication_NameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime CreateDate
+        public global::System.DateTime UserApplication_CreateDate
         {
             get
             {
-                return _CreateDate;
+                return _UserApplication_CreateDate;
             }
             set
             {
-                OnCreateDateChanging(value);
-                ReportPropertyChanging("CreateDate");
-                _CreateDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreateDate");
-                OnCreateDateChanged();
+                OnUserApplication_CreateDateChanging(value);
+                ReportPropertyChanging("UserApplication_CreateDate");
+                _UserApplication_CreateDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserApplication_CreateDate");
+                OnUserApplication_CreateDateChanged();
             }
         }
-        private global::System.DateTime _CreateDate;
-        partial void OnCreateDateChanging(global::System.DateTime value);
-        partial void OnCreateDateChanged();
+        private global::System.DateTime _UserApplication_CreateDate;
+        partial void OnUserApplication_CreateDateChanging(global::System.DateTime value);
+        partial void OnUserApplication_CreateDateChanged();
 
         #endregion
     
