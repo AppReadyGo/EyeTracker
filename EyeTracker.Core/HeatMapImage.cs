@@ -5,7 +5,8 @@ using System.Web;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;
-using EyeTracker.DAL.Models;
+using EyeTracker.Core.Models;
+using EyeTracker.DAL.Interfaces;
 
 namespace EyeTracker.Models
 {
@@ -129,16 +130,16 @@ namespace EyeTracker.Models
         }
 
 
-        public static Image CreateViewHeatMap(List<ViewPartInfo> viewParts, int screenWidth, int screenHeight, int clientWidth, int clientHeight, Image bgImg)
+        public static Image CreateViewHeatMap(List<ViewHeatMapData> viewParts, int clientWidth, int clientHeight, Image bgImg)
         {
             int[,] heatMap = new int[clientWidth, clientHeight];
             int maxTimeSpan = 0;//The time span is up color of heat map
 
             foreach (var curPart in viewParts)
             {
-                for (int i = curPart.ScrollLeft; i < clientWidth && i < curPart.ScrollLeft + screenWidth; i++)
+                for (int i = curPart.ScrollLeft; i < clientWidth && i < curPart.ScrollLeft + curPart.ScreenWidth; i++)
                 {
-                    for (int j = curPart.ScrollTop; j < clientHeight && i < curPart.ScrollTop + screenHeight; j++)
+                    for (int j = curPart.ScrollTop; j < clientHeight && i < curPart.ScrollTop + curPart.ScreenHeight; j++)
                     {
                         heatMap[i, j] += curPart.TimeSpan;
                         if (heatMap[i, j] > maxTimeSpan) maxTimeSpan = heatMap[i, j];
@@ -171,9 +172,9 @@ namespace EyeTracker.Models
             return bgImg;
         }
 
-        public static Image CreateClickHeatMap(List<ClickInfo> clicks, int screenWidth, int screenHeight, int clientWidth, int clientHeight, Image bgImg)
+        public static Image CreateClickHeatMap(List<ClickHeatMapData> clicks, int clientWidth, int clientHeight, Image bgImg)
         {
-            int maxCounter = clicks.Max(curClick => curClick.Count);
+            int maxCounter = clicks.Count > 0 ? clicks.Max(curClick => curClick.Count) : 0;
 
             Bitmap bmpPic = new Bitmap(clientWidth, clientHeight);
             using (Graphics g = Graphics.FromImage(bmpPic))

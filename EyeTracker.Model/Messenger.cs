@@ -4,12 +4,9 @@ using System.Configuration;
 using System.Linq;
 using System.Xml.Linq;
 using System.Net.Mail;
-using CirriNet.Common;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using CirriNet.Logger;
-using CirriNet.DAL;
 using System.Web;
 using EyeTracker.Common.Logger;
 

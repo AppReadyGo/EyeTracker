@@ -57,7 +57,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountModels.cs" />
     <Compile Include="Analytics.cs" />
     <Compile Include="ApplicationLogging.cs" />
     <Compile Include="Enumerators.cs" />
@@ -65,7 +64,6 @@
     <Compile Include="Messenger.cs" />
     <Compile Include="OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewPartData.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

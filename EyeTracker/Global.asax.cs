@@ -21,6 +21,26 @@ namespace EyeTracker
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
+            routes.MapRoute(
+                "AjaxVisit", // Route name
+                "{controller}/{action}/{json}", // URL with parameters
+                new { controller = "Analytics", action = "Visit" } // Parameter defaults
+            );
+            routes.MapRoute(
+                "AjaxPackage", // Route name
+                "{controller}/{action}/{json}", // URL with parameters
+                new { controller = "Analytics", action = "Package" } // Parameter defaults
+            );
+            routes.MapRoute(
+                "ClickHeatMapImage", // Route name
+                "{controller}/{action}/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", // URL with parameters
+                new { controller = "Analytics", action = "ClickHeatMapImage" } // Parameter defaults
+            );
+            routes.MapRoute(
+                "ViewHeatMapImage", // Route name
+                "{controller}/{action}/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", // URL with parameters
+                new { controller = "Analytics", action = "ViewHeatMapImage" } // Parameter defaults
+            );
 
         }
 

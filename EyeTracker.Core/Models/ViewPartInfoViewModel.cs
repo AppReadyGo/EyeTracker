@@ -12,8 +12,6 @@ namespace EyeTracker.Core.Models
         [DataMember(Name = "sd")]
         public string StrStartDate { get; set; }
 
-        //public DateTime StartDate { get { return DateTime.Parse(StrStartDate); } }
-
         [DataMember(Name = "sl")]
         public int ScrollLeft { get; set; }
 
@@ -22,7 +20,5 @@ namespace EyeTracker.Core.Models
 
         [DataMember(Name = "fd")]
         public string StrFinishDate { get; set; }
-
-        //public DateTime FinishDate { get { return DateTime.Parse(StrFinishDate); } }
     }
 }

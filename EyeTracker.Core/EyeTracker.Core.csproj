@@ -31,8 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\ThridParty\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -42,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalyticsService.cs" />
     <Compile Include="HeatMapImage.cs" />
+    <Compile Include="IAnalyticsService.cs" />
     <Compile Include="Models\ClickInfoViewModel.cs" />
     <Compile Include="Models\ViewPartInfoViewModel.cs" />
     <Compile Include="Models\VisitInfoViewModel.cs" />
