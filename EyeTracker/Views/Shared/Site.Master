@@ -10,7 +10,7 @@
 <body>
     <div class="page">
 
-        <div id="header">
+<%--        <div id="header">
             <div id="title">
                 <h1>My MVC Application</h1>
             </div>
@@ -28,13 +28,13 @@
             
             </div>
         </div>
-
+--%>
         <div id="main">
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
 
-            <div id="footer">
+<%--            <div id="footer">
             </div>
-        </div>
+--%>        </div>
     </div>
 </body>
 </html>

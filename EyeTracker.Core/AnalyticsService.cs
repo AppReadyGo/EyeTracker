@@ -8,11 +8,14 @@ using EyeTracker.Common;
 using EyeTracker.Core.Models;
 using AutoMapper;
 using EyeTracker.DAL.EntityModels;
+using EyeTracker.Common.Logger;
+using System.Reflection;
 
 namespace EyeTracker.Core
 {
     public class AnalyticsService : IAnalyticsService
     {
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         private IAnalyticsRepository repository;
 
         public AnalyticsService()
@@ -49,6 +52,7 @@ namespace EyeTracker.Core
             }
             catch (Exception exp)
             {
+                log.WriteError(exp, "GetClickHeatMapData");
                 result = new OperationResult<List<ClickHeatMapData>>(ErrorNumber.General);
             }
             return result;
@@ -78,6 +82,7 @@ namespace EyeTracker.Core
             }
             catch (Exception exp)
             {
+                log.WriteError(exp, "GetViewHeatMapData");
                 result = new OperationResult<List<ViewHeatMapData>>(ErrorNumber.General);
             }
             return result;
@@ -95,6 +100,7 @@ namespace EyeTracker.Core
             }
             catch (Exception exp)
             {
+                log.WriteError(exp, "AddVisitInfo");
                 result = new OperationResult<long>(ErrorNumber.General);
             }
             return result;
@@ -107,9 +113,11 @@ namespace EyeTracker.Core
             {
                 Mapper.CreateMap<ViewPartInfoViewModel, ViewPartInfo>()
                     .ForMember(dest => dest.Date, opt => opt.MapFrom(src => DateTime.Parse(src.StrStartDate)))
-                    .ForMember(dest => dest.TimeSpan, opt => opt.MapFrom(src => (int)(DateTime.Parse(src.StrFinishDate) - DateTime.Parse(src.StrStartDate)).TotalSeconds))
-                    .ForMember(dest => dest.VisitInfoId, opt => opt.UseValue<long>(visitInfoId));
+                    .ForMember(dest => dest.TimeSpan, opt => opt.MapFrom(src => (int)(DateTime.Parse(src.StrFinishDate) - DateTime.Parse(src.StrStartDate)).TotalSeconds));
+                    //.ForMember(dest => dest.VisitInfoId, opt => opt.UseValue<long>(visitInfoId));
                 var eViewPartInfo = Mapper.Map<ViewPartInfoViewModel, ViewPartInfo>(viewPartInfo);
+                eViewPartInfo.VisitInfoId = visitInfoId;
+                log.WriteInformation("AddViewPartInfo:visitInfoId:{0}, eViewPartInfo.VisitInfoId:{1}", visitInfoId, eViewPartInfo.VisitInfoId);
                 if (eViewPartInfo.TimeSpan > 0)
                 {
                     repository.AddViewPartInfo(eViewPartInfo);
@@ -118,6 +126,7 @@ namespace EyeTracker.Core
             }
             catch (Exception exp)
             {
+                log.WriteError(exp, "AddViewPartInfo");
                 result = new OperationResult<long>(ErrorNumber.General);
             }
             return result;
@@ -129,14 +138,16 @@ namespace EyeTracker.Core
             try
             {
                 Mapper.CreateMap<ClickInfoViewModel, ClickInfo>()
-                   .ForMember(dest => dest.Date, opt => opt.MapFrom(src => DateTime.Parse(src.StrDate)))
-                   .ForMember(dest => dest.VisitInfoId, opt => opt.UseValue<long>(visitInfoId));
+                   .ForMember(dest => dest.Date, opt => opt.MapFrom(src => DateTime.Parse(src.StrDate)));
+                   //.ForMember(dest => dest.VisitInfoId, opt => opt.UseValue<long>(visitInfoId));
                 var eClickInfo = Mapper.Map<ClickInfoViewModel, ClickInfo>(clickInfo);
+                eClickInfo.VisitInfoId = visitInfoId;
                 repository.AddClickInfo(eClickInfo);
                 result = new OperationResult();
             }
             catch (Exception exp)
             {
+                log.WriteError(exp, "AddClickInfo");
                 result = new OperationResult<long>(ErrorNumber.General);
             }
             return result;

@@ -7,11 +7,15 @@ using System.Drawing.Imaging;
 using System.Threading;
 using EyeTracker.Core.Models;
 using EyeTracker.DAL.Interfaces;
+using EyeTracker.Common.Logger;
+using System.Reflection;
 
 namespace EyeTracker.Models
 {
     public static class HeatMapImage
     {
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
         private const double WAVE_LENGTH_VIOLET = 350;
         private const double WAVE_LENGTH_BLUE_VIOLET = 420;
         private const double WAVE_LENGTH_BLUE = 440;
@@ -132,6 +136,7 @@ namespace EyeTracker.Models
 
         public static Image CreateViewHeatMap(List<ViewHeatMapData> viewParts, int clientWidth, int clientHeight, Image bgImg)
         {
+            log.WriteInformation("-->CreateViewHeatMap: viewParts:{0},clientWidth:{1},clientHeight:{2}",viewParts.Count,clientWidth,clientHeight);
             int[,] heatMap = new int[clientWidth, clientHeight];
             int maxTimeSpan = 0;//The time span is up color of heat map
 
@@ -139,7 +144,7 @@ namespace EyeTracker.Models
             {
                 for (int i = curPart.ScrollLeft; i < clientWidth && i < curPart.ScrollLeft + curPart.ScreenWidth; i++)
                 {
-                    for (int j = curPart.ScrollTop; j < clientHeight && i < curPart.ScrollTop + curPart.ScreenHeight; j++)
+                    for (int j = curPart.ScrollTop; j < clientHeight && j < curPart.ScrollTop + curPart.ScreenHeight; j++)
                     {
                         heatMap[i, j] += curPart.TimeSpan;
                         if (heatMap[i, j] > maxTimeSpan) maxTimeSpan = heatMap[i, j];
@@ -174,6 +179,7 @@ namespace EyeTracker.Models
 
         public static Image CreateClickHeatMap(List<ClickHeatMapData> clicks, int clientWidth, int clientHeight, Image bgImg)
         {
+            log.WriteInformation("-->CreateClickHeatMap: clicks:{0},clientWidth:{1},clientHeight:{2}", clicks.Count, clientWidth, clientHeight);
             int maxCounter = clicks.Count > 0 ? clicks.Max(curClick => curClick.Count) : 0;
 
             Bitmap bmpPic = new Bitmap(clientWidth, clientHeight);
@@ -181,12 +187,17 @@ namespace EyeTracker.Models
             {
                 g.FillRectangle(new SolidBrush(Color.Black), 0, 0, bmpPic.Width, bmpPic.Height);
             }
+            bmpPic = SetImgOpacity((Image)bmpPic, IMAGE_OPACITY);
             foreach (var curClick in clicks)
             {
-                bmpPic.SetPixel(curClick.ClientX, curClick.ClientY, getColorFromWaveLength(((int)(curClick.Count * WAVE_LENGTH_DIFF / maxCounter)) + WAVE_LENGTH_BLUE));
+                var pntBmp = CreateBlurPoint(33, getColorFromWaveLength(((int)(curClick.Count * WAVE_LENGTH_DIFF / maxCounter)) + WAVE_LENGTH_BLUE));
+                //bmpPic.SetPixel(curClick.ClientX, curClick.ClientY, getColorFromWaveLength(((int)(curClick.Count * WAVE_LENGTH_DIFF / maxCounter)) + WAVE_LENGTH_BLUE));
+                using (Graphics g = Graphics.FromImage(bmpPic))
+                {
+                    g.DrawImage(pntBmp, curClick.ClientX-3, curClick.ClientY-3);
+                }
             }
 
-            bmpPic = SetImgOpacity((Image)bmpPic, IMAGE_OPACITY);
 
             using (Graphics g = Graphics.FromImage(bgImg))
             {
@@ -194,6 +205,33 @@ namespace EyeTracker.Models
             }
 
             return bgImg;
+        }
+
+        private static Image CreateBlurPoint(int width, Color color)
+        {
+            Bitmap bmpPic = new Bitmap(width, width);
+            float opacity = 0.03F;
+
+            for (int i = 1; i < width; i++)
+            {
+                using (Bitmap tmpBm = new Bitmap(width, width))
+                {
+                    using (Graphics tmpG = Graphics.FromImage(tmpBm))
+                    {
+                        using (Brush b = new SolidBrush(color))
+                        {
+                            tmpG.FillEllipse(b, (width-i)/2,(width-i)/2, i, i);
+                        }
+                    }
+                    var opacBmp = SetImgOpacity((Image)tmpBm, opacity);
+                    using (Graphics g = Graphics.FromImage(bmpPic))
+                    {
+                        g.DrawImage(opacBmp, 0, 0);
+                    }
+                    opacBmp.Dispose();
+                }
+            }
+            return bmpPic;
         }
     }
 }
