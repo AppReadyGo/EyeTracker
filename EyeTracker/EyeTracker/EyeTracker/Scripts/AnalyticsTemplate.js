@@ -12,11 +12,12 @@
         document.onscroll = mobillify.onscroll;
         document.onclick = mobillify.onclick;
         window.onbeforeunload = function () {
-            if (mobillify.visitId > 0 && (mobillify.clicksData.length > 0 || mobillify.viewPartsData.length > 0)) {
-                var lastPart = mobillify.viewPartsData[mobillify.viewPartsData.length - 1];
-                lastPart.finishDate = new Date();
-                mobillify.setCookie('mobillifyData', mobillify.serializeData(), 30);
-            }
+            mobillify.addDataToCookie();
+        }
+        data = mobillify.getCookie('mobillifyData');
+        if (data) {
+            mobillify.sendData(mobillify.packageHandlerUrl, data);
+            mobillify.setCookie('mobillifyData', null, -365);
         }
 
         mobillify.winSize = mobillify.getWinSize();
@@ -33,12 +34,16 @@
             var res = eval("(" + xmlhttp.responseText + ')');
             if (!res.WasError) {
                 mobillify.visitId = res.Value;
+            } else {
+                alert(xmlhttp.responseText);
             }
         });
-        data = mobillify.getCookie('mobillifyData');
-        if (data) {
-            mobillify.sendData(mobillify.packageHandlerUrl, data);
-            mobillify.setCookie('mobillifyData', null, -365);
+    },
+    addDataToCookie: function () {
+        if (mobillify.visitId > 0 && (mobillify.clicksData.length > 0 || mobillify.viewPartsData.length > 0)) {
+            var lastPart = mobillify.viewPartsData[mobillify.viewPartsData.length - 1];
+            lastPart.finishDate = new Date();
+            mobillify.setCookie('mobillifyData', mobillify.serializeData(), 30);
         }
     },
     serializeData: function () {
@@ -64,17 +69,22 @@
         return data;
     },
     sendPackage: function () {
-        if (mobillify.visitId > 0 && (mobillify.clicksData.length + mobillify.viewPartsData.length > 10)) {
-            mobillify.sendData(mobillify.packageHandlerUrl, mobillify.serializeData(), function () { mobillify.viewPartsData = new Array(); mobillify.clicksData = new Array(); });
+        if (mobillify.visitId > 0 && (mobillify.clicksData.length + mobillify.viewPartsData.length > 3)) {
+            var data = mobillify.serializeData();
+            mobillify.viewPartsData = new Array();
+            mobillify.clicksData = new Array();
+            mobillify.sendData(mobillify.packageHandlerUrl, data, function (xmlhttp) {
+                var res = eval("(" + xmlhttp.responseText + ')');
+                if (res.WasError) {
+                    alert(xmlhttp.responseText);
+                }
+            });
             mobillify.clicksData = new Array();
             mobillify.viewPartsData = new Array();
         }
     },
     sendData: function (dataHandlerUrl, data, onreadystatechange) {
         var xmlhttp;
-        //Put data to cookies
-        //setCookie('cachedData', data, 1);
-
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
         }
@@ -82,12 +92,18 @@
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            if (xmlhttp.readyState == 4 && (xmlhttp.status == 200 || xmlhttp.status == 0)) {
                 if (onreadystatechange) onreadystatechange(xmlhttp);
             }
         }
-        xmlhttp.open("GET", dataHandlerUrl + "/?json=" + data, true);
-        xmlhttp.send();
+
+        data = 'json=' + data;
+        xmlhttp.open("POST", dataHandlerUrl, true);
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xmlhttp.setRequestHeader("Content-length", data.length);
+        xmlhttp.setRequestHeader("Connection", "close");
+        xmlhttp.send(data);
+
     },
     getWinSize: function () {
         var winW = 0, winH = 0;
@@ -96,8 +112,8 @@
             winH = document.body.offsetHeight;
         }
         if (document.compatMode == 'CSS1Compat' &&
-                        document.documentElement &&
-                        document.documentElement.offsetWidth) {
+        document.documentElement &&
+        document.documentElement.offsetWidth) {
             winW = document.documentElement.offsetWidth;
             winH = document.documentElement.offsetHeight;
         }
@@ -154,17 +170,17 @@
     },
     scrollLeft: function () {
         return mobillify.filterResults(
-                    window.pageXOffset ? window.pageXOffset : 0,
-                    document.documentElement ? document.documentElement.scrollLeft : 0,
-                    document.body ? document.body.scrollLeft : 0
-                );
+        window.pageXOffset ? window.pageXOffset : 0,
+        document.documentElement ? document.documentElement.scrollLeft : 0,
+        document.body ? document.body.scrollLeft : 0
+        );
     },
     scrollTop: function () {
         return mobillify.filterResults(
-                    window.pageYOffset ? window.pageYOffset : 0,
-                    document.documentElement ? document.documentElement.scrollTop : 0,
-                    document.body ? document.body.scrollTop : 0
-                );
+        window.pageYOffset ? window.pageYOffset : 0,
+        document.documentElement ? document.documentElement.scrollTop : 0,
+        document.body ? document.body.scrollTop : 0
+        );
     },
     onscroll: function () {
         var curDate = new Date();
@@ -175,8 +191,11 @@
         var diff = mobillify.dateDiffInSec(curDate, lastPart.startDate)
         if (diff > 2) {
             lastPart.finishDate = curDate;
-            mobillify.viewPartsData.push(mobillify.getViewPart(curDate));
             mobillify.sendPackage();
+            mobillify.viewPartsData.push(mobillify.getViewPart(curDate));
+        } else {
+            lastPart.scrollLeft = mobillify.scrollLeft();
+            lastPart.scrollTop = mobillify.scrollTop();
         }
     },
     onclick: function (e) {
@@ -185,6 +204,7 @@
             clientX: e.clientX,
             clientY: e.clientY
         });
+        mobillify.addDataToCookie();
         mobillify.sendPackage();
     },
     getViewPart: function (curDate) {

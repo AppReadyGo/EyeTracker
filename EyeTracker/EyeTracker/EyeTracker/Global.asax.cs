@@ -22,6 +22,11 @@ namespace EyeTracker
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
             routes.MapRoute(
+                "JavaScript", // Route name
+                "{controller}/{action}/{clientId}", // URL with parameters
+                new { controller = "Analytics", action = "JavaScript" } // Parameter defaults
+            );
+            routes.MapRoute(
                 "AjaxVisit", // Route name
                 "{controller}/{action}/{json}", // URL with parameters
                 new { controller = "Analytics", action = "Visit" } // Parameter defaults
