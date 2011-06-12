@@ -18,7 +18,7 @@ namespace EyeTracker.Common
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
 
-        private static void SendEmail(string from, List<string> toList, string subject, string body)
+        public static void SendEmail(string from, List<string> toList, string subject, string body)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace EyeTracker.Common
                     mail.To.Add(curTo);
                 }
 
-                mail.From = new MailAddress(fromAccount);
+                mail.From = new MailAddress(fromAccount,"Finger Print");
 
                 mail.Subject = subject;
                 AlternateView htmlView = AlternateView.CreateAlternateViewFromString(body, null, "text/html");

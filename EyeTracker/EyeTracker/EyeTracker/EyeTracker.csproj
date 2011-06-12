@@ -77,6 +77,7 @@
     <Compile Include="Model\AnalyticsPackage.cs" />
     <Compile Include="Model\Enumerators.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Text.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -84,6 +85,7 @@
     <Content Include="Test.htm" />
     <Content Include="Users_Resources\Screens\1.1263.902.png" />
     <Content Include="Users_Resources\Screens\3.980.1249.png" />
+    <Content Include="Views\Analytics\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

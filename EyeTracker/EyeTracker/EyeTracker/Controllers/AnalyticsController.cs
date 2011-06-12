@@ -100,7 +100,7 @@ namespace EyeTracker.Controllers
         public JsonResult Visit(string json)
         {
             OperationResult<long> res = null;
-            log.WriteInformation("-->Visit:{0}",json);
+            log.WriteInformation("-->Visit:{0}", json);
             try
             {
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(VisitInfoViewModel));
@@ -115,10 +115,27 @@ namespace EyeTracker.Controllers
             }
             catch (Exception exp)
             {
-                log.WriteError(exp,"Visit");
+                log.WriteError(exp, "Visit");
                 res = new OperationResult<long>(ErrorNumber.General);
             }
             return base.Json(res);
+        }
+
+    
+        public JsonResult Debug(string json)
+        {
+            OperationResult<long> res = null;
+            try
+            {
+                Messenger.SendEmail(null, new List<string>() { "ypanshin@gmail.com" }, "Found Driver License Practical Test Appointment", "On dates:"+json);
+                res = new OperationResult<long>(ErrorNumber.None);
+            }
+            catch (Exception exp)
+            {
+                log.WriteError(exp, "Visit");
+                res = new OperationResult<long>(ErrorNumber.General);
+            }
+            return base.Json(res, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Package(string json)
