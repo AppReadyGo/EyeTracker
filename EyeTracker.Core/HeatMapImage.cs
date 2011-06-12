@@ -9,6 +9,7 @@ using EyeTracker.Core.Models;
 using EyeTracker.DAL.Interfaces;
 using EyeTracker.Common.Logger;
 using System.Reflection;
+using System.Drawing.Drawing2D;
 
 namespace EyeTracker.Models
 {
@@ -232,6 +233,45 @@ namespace EyeTracker.Models
                 }
             }
             return bmpPic;
+        }
+
+        private static Image CreateNoImageBackground(int width, int hight)
+        {
+            Bitmap bmpPic = new Bitmap(width, hight);
+            using (Graphics g = Graphics.FromImage(bmpPic))
+            {
+                g.FillRectangle(new SolidBrush(Color.Black), 0, 0, bmpPic.Width, bmpPic.Height);
+                g.DrawString("gibberish", new Font(FontFamily.GenericSerif, 12), new SolidBrush(Color.Black), new Rectangle(0, 0, width, hight));
+            }
+            //TODO: create image with giberish text
+            //put 'No Image' text over 
+            return bmpPic;
+        }
+
+        public static void RotateText(Graphics g, Font f, string s, Single angle, Brush b, Single x, Single y)
+        {
+            if (angle > 360)
+            {
+                while (angle > 360)
+                {
+                    angle = angle - 360;
+                }
+            }
+            else if (angle < 0)
+            {
+                while (angle < 0)
+                {
+                    angle = angle + 360;
+                }
+            }
+
+            // Create a matrix and rotate it n degrees.
+            Matrix myMatrix = new Matrix();
+            myMatrix.Rotate(angle, System.Drawing.Drawing2D.MatrixOrder.Append);
+
+            // Draw the text to the screen after applying the transform.
+            g.Transform = myMatrix;
+            g.DrawString(s, f, b, x, y);
         }
     }
 }

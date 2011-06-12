@@ -13,6 +13,21 @@ using System.Reflection;
 
 namespace EyeTracker.Core
 {
+    public interface IAnalyticsService
+    {
+        OperationResult<List<ClickHeatMapData>> GetClickHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
+        OperationResult<List<ViewHeatMapData>> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
+
+        OperationResult<long> AddVisitInfo(VisitInfoViewModel visitInfo);
+
+        OperationResult AddViewPartInfo(long visitInfoId, ViewPartInfoViewModel viewPartInfo);
+
+        OperationResult AddClickInfo(long visitInfoId, ClickInfoViewModel clickInfo);
+
+        OperationResult<string> GetClientId(long appId);
+        OperationResult<long> GetApplicationId(string clientId);
+    }
+    
     public class AnalyticsService : IAnalyticsService
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
@@ -152,5 +167,34 @@ namespace EyeTracker.Core
             }
             return result;
         }
+
+        public OperationResult<string> GetClientId(long appId)
+        {
+            OperationResult<string> result = null;
+            try
+            {
+                result = new OperationResult<string>(Encryption.EncryptLow(appId.ToString(),Encryption.ENCRYPTION_KEY));
+            }
+            catch (Exception exp)
+            {
+                //result = new OperationResult<string>(exp, ErrorNumber.General, "GetClientId: {0}", appId);
+            }
+            return result;
+        }
+
+        public OperationResult<long> GetApplicationId(string clientId)
+        {
+            OperationResult<long> result = null;
+            try
+            {
+                result = new OperationResult<long>(long.Parse(Encryption.DecryptLow(clientId, Encryption.ENCRYPTION_KEY)));
+            }
+            catch (Exception exp)
+            {
+                //result = new OperationResult<long>(exp, ErrorNumber.General, "GetApplicationId: {0}", clientId);
+            }
+            return result;
+        }
+
     }
 }
