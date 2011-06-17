@@ -39,8 +39,9 @@ namespace EyeTracker.Controllers
             return View();
         }
 
-        public FileResult JavaScript(string clientId)
+        public FileResult JavaScriptFile(string clientId)
         {
+            log.WriteInformation("-->JavaScriptFile(clientId:{0})",clientId);
             var dir = Server.MapPath("/Scripts");
             var path = Path.Combine(dir, "AnalyticsTemplate.js");
             var file = new FileInfo(path);
@@ -56,6 +57,7 @@ namespace EyeTracker.Controllers
                     content = content.Replace("{CLIENT_ID}", clientId);
                 }
             }
+            log.WriteInformation("JavaScriptFile-->");
             return base.File(System.Text.Encoding.UTF8.GetBytes(content), "text/javascript");
         }
 
@@ -73,6 +75,7 @@ namespace EyeTracker.Controllers
                     image.Save(mStream, ImageFormat.Png);
                     imageData = mStream.ToArray();
                 }
+                image.Dispose();
 
             }
             return base.File(imageData, "Image/png");
@@ -99,8 +102,8 @@ namespace EyeTracker.Controllers
 
         public JsonResult Visit(string json)
         {
+            log.WriteInformation("-->Visit(json:{0})", json);
             OperationResult<long> res = null;
-            log.WriteInformation("-->Visit:{0}", json);
             try
             {
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(VisitInfoViewModel));
@@ -109,15 +112,13 @@ namespace EyeTracker.Controllers
                 var visitInfo = serializer.ReadObject(ms) as VisitInfoViewModel;
                 visitInfo.Ip = Request.UserHostAddress;
                 res = service.AddVisitInfo(visitInfo);
-
-                log.WriteInformation("Visit:{0}-->", res);
                 Response.AddHeader("Access-Control-Allow-Origin", "*");
             }
             catch (Exception exp)
             {
-                log.WriteError(exp, "Visit");
-                res = new OperationResult<long>(ErrorNumber.General);
+                res = new OperationResult<long>(exp, "Visit");
             }
+            log.WriteInformation("Visit:{0}-->", res);
             return base.Json(res);
         }
 
@@ -132,18 +133,17 @@ namespace EyeTracker.Controllers
             }
             catch (Exception exp)
             {
-                log.WriteError(exp, "Visit");
-                res = new OperationResult<long>(ErrorNumber.General);
+                res = new OperationResult<long>(exp, "Debug");
             }
             return base.Json(res, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Package(string json)
         {
+            log.WriteInformation("-->Package:{0}", json);
             OperationResult res = null;
             try
             {
-                log.WriteInformation("-->Package:{0}", json);
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(AnalyticsPackage));
 
                 MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(json));
@@ -160,14 +160,13 @@ namespace EyeTracker.Controllers
                     if (curRes.WasError) res = curRes;
                 }
 
-                log.WriteInformation("Package:{0}-->", res);
                 Response.AddHeader("Access-Control-Allow-Origin", "*");
             }
             catch (Exception exp)
             {
-                log.WriteError(exp, "Package");
-                res = new OperationResult<long>(ErrorNumber.General);
+                res = new OperationResult<long>(exp, "Package");
             }
+            log.WriteInformation("Package:{0}-->", res);
             return base.Json(res);
         }
 

@@ -10,6 +10,7 @@ using AutoMapper;
 using EyeTracker.DAL.EntityModels;
 using EyeTracker.Common.Logger;
 using System.Reflection;
+using EyeTracker.DAL.Models;
 
 namespace EyeTracker.Core
 {
@@ -23,6 +24,8 @@ namespace EyeTracker.Core
         OperationResult AddViewPartInfo(long visitInfoId, ViewPartInfoViewModel viewPartInfo);
 
         OperationResult AddClickInfo(long visitInfoId, ClickInfoViewModel clickInfo);
+
+        OperationResult<AnalyticsInfo> GetAnalyticsInfo(string userId, long? appId, string pageUri);
 
         OperationResult<string> GetClientId(long appId);
         OperationResult<long> GetApplicationId(string clientId);
@@ -48,6 +51,7 @@ namespace EyeTracker.Core
             OperationResult<List<ClickHeatMapData>> result = null;
             try
             {
+                log.WriteInformation("GetClickHeatMapData(appId:{0}, pageUri:{1}, clientWidth:{2}, clientHeight:{3}, fromDate:{4}, toDate:{5})", appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
                 if (fromDate >= toDate)
                 {
                     result = new OperationResult<List<ClickHeatMapData>>(ErrorNumber.WrongParameter);
@@ -67,8 +71,7 @@ namespace EyeTracker.Core
             }
             catch (Exception exp)
             {
-                log.WriteError(exp, "GetClickHeatMapData");
-                result = new OperationResult<List<ClickHeatMapData>>(ErrorNumber.General);
+                result = new OperationResult<List<ClickHeatMapData>>(exp, "GetClickHeatMapData(appId:{0},pageUri:{1},clientWidth:{2},clientHeight:{3})",appId, pageUri, clientWidth, clientHeight);
             }
             return result;
         }
@@ -97,8 +100,7 @@ namespace EyeTracker.Core
             }
             catch (Exception exp)
             {
-                log.WriteError(exp, "GetViewHeatMapData");
-                result = new OperationResult<List<ViewHeatMapData>>(ErrorNumber.General);
+                result = new OperationResult<List<ViewHeatMapData>>(exp, "GetViewHeatMapData(appId:{0},pageUri:{1},clientWidth:{2},clientHeight:{3})", appId, pageUri, clientWidth, clientHeight);
             }
             return result;
         }
@@ -115,8 +117,7 @@ namespace EyeTracker.Core
             }
             catch (Exception exp)
             {
-                log.WriteError(exp, "AddVisitInfo");
-                result = new OperationResult<long>(ErrorNumber.General);
+                result = new OperationResult<long>(exp, "AddVisitInfo");
             }
             return result;
         }
@@ -141,8 +142,7 @@ namespace EyeTracker.Core
             }
             catch (Exception exp)
             {
-                log.WriteError(exp, "AddViewPartInfo");
-                result = new OperationResult<long>(ErrorNumber.General);
+                result = new OperationResult<long>(exp, "AddViewPartInfo");
             }
             return result;
         }
@@ -162,8 +162,21 @@ namespace EyeTracker.Core
             }
             catch (Exception exp)
             {
-                log.WriteError(exp, "AddClickInfo");
-                result = new OperationResult<long>(ErrorNumber.General);
+                result = new OperationResult<long>(exp, "AddClickInfo");
+            }
+            return result;
+        }
+
+        public OperationResult<AnalyticsInfo> GetAnalyticsInfo(string userId, long? appId, string pageUri)
+        {
+            OperationResult<AnalyticsInfo> result = null;
+            try
+            {
+                return new OperationResult<AnalyticsInfo>(repository.GetAnalyticsInfo(userId, appId, pageUri));
+            }
+            catch(Exception exp)
+            {
+                result = new OperationResult<AnalyticsInfo>(exp, "GetAnalyticsInfo");
             }
             return result;
         }
@@ -177,7 +190,7 @@ namespace EyeTracker.Core
             }
             catch (Exception exp)
             {
-                //result = new OperationResult<string>(exp, ErrorNumber.General, "GetClientId: {0}", appId);
+                result = new OperationResult<string>(exp, "GetClientId(appId:{0})",appId);
             }
             return result;
         }
@@ -191,7 +204,7 @@ namespace EyeTracker.Core
             }
             catch (Exception exp)
             {
-                //result = new OperationResult<long>(exp, ErrorNumber.General, "GetApplicationId: {0}", clientId);
+                result = new OperationResult<long>(exp, "GetApplicationId(clientId:{0})", clientId);
             }
             return result;
         }

@@ -4,6 +4,8 @@ using System.Configuration;
 using System.Linq;
 using System.Xml.Linq;
 using System.Runtime.Serialization;
+using EyeTracker.Common.Logger;
+using System.Reflection;
 
 
 
@@ -11,6 +13,12 @@ namespace EyeTracker.Common
 {
     public class OperationResult
     {
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
+//#if DEBUG
+//            this.showExceptionMessages = true;//Always show errors in debug mode
+//#endif
+
         public bool WasError { get; private set; }
         public ErrorNumber Error { get; private set; }
         public string ErrorMessage { get; private set; }
@@ -29,11 +37,42 @@ namespace EyeTracker.Common
             }
         }
 
-        public OperationResult(ErrorNumber errNumber, string errorMessage)
+        public OperationResult(ErrorNumber errNumber, string errorMessage, params object[] args)
         {
+            errorMessage = string.Format(errorMessage, args);
             ErrorMessage = errorMessage;
             Error = errNumber;
             WasError = true;
+        }
+
+        public OperationResult(Exception exp)
+            : this(false, exp, string.Empty)
+        {
+        }
+
+        public OperationResult(bool showExceptionMessages, Exception exp)
+            : this(showExceptionMessages, exp, string.Empty)
+        {
+        }
+
+        public OperationResult(Exception exp, string errorMessage, params object[] args)
+            : this(false, exp, errorMessage, args)
+        {
+        }
+        public OperationResult(bool showExceptionMessages, Exception exp, string errorMessage, params object[] args)
+            : this(ErrorNumber.General)
+        {
+            errorMessage = string.Format(errorMessage, args);
+            log.WriteError(exp, errorMessage);
+            ErrorMessage = errorMessage;
+#if DEBUG
+            showExceptionMessages = true;
+#endif
+            if (showExceptionMessages)
+            {
+                ErrorMessage += string.IsNullOrEmpty(errorMessage) ? string.Empty : ", Exception:";
+                ErrorMessage += (exp.InnerException == null ? exp.Message : exp.InnerException.Message);
+            }
         }
 
         public override string ToString()
@@ -62,10 +101,22 @@ namespace EyeTracker.Common
         {
         }
 
-        public OperationResult(ErrorNumber errNumber, string errorMessage)
-            : base(errNumber, errorMessage)
+        public OperationResult(bool showExceptionMessages, Exception exp)
+            : base(showExceptionMessages, exp)
         {
         }
+
+        public OperationResult(bool showExceptionMessages, Exception exp, string errorMessage, params object[] args)
+            : base(showExceptionMessages, exp, errorMessage, args)
+        {
+        }
+
+        public OperationResult(ErrorNumber errNumber, string errorMessage, params object[] args)
+            : base(errNumber, errorMessage, args){ }
+
+        public OperationResult(Exception exp) : base(exp){}
+
+        public OperationResult(Exception exp, string errorMessage, params object[] args) : base(exp, errorMessage, args){}
 
         public OperationResult(T value, ErrorNumber errNumber)
             : base(errNumber)

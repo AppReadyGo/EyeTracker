@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using EyeTracker;
-using EyeTracker.Controllers;
+using EyeTracker.BackOffice;
+using EyeTracker.BackOffice.Controllers;
 
-namespace EyeTracker.Tests.Controllers
+namespace EyeTracker.BackOffice.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
