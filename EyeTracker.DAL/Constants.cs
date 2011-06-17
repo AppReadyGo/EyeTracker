@@ -10,6 +10,8 @@ namespace EyeTracker.DAL
         public const string SP_GET_CLICK_DATA = "GetClickData";
         public const string SP_GET_VIEW_PART_DATA = "GetViewPartData";
 
+        public const string SP_GET_ANALYTICS_INFO = "GetAnalyticsInfo";
+
         public const string SP_CLICK_INFO_ADD = "ClickInfo_Add";
         public const string SP_VIEW_PART_INFO_ADD = "ViewPartInfo_Add";
         public const string SP_VISIT_INFO_ADD = "VisitInfo_Add";
@@ -41,6 +43,12 @@ namespace EyeTracker.DAL
         public const string VISIT_INFO_PREV_VISIT_INFO_ID = "VisitInfo_PreviousVisitInfoId";
         public const string VISIT_INFO_IP = "VisitInfo_Ip";
 
+        public const string USER_APPLICATION_USER_ID = "UserApplication_UserId";
+        public const string USER_APPLICATION_ID = "UserApplication_Id";
+        public const string USER_APPLICATION_NAME = "UserApplication_Name";
+        public const string USER_APPLICATION_CREATE_DATE = "UserApplication_CreateDate";
 
+        #region Logging
+        #endregion Logging
     }
 }

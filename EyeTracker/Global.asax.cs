@@ -17,36 +17,36 @@ namespace EyeTracker
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "JavaScript", // Route name
+                "Analytics/JavaScript/{clientId}.js", // URL with parameters
+                new { controller = "Analytics", action = "JavaScriptFile" } // Parameter defaults
+            );
+            routes.MapRoute(
+                "AjaxVisit", // Route name
+                "Analytics/{action}/{json}", // URL with parameters
+                new { controller = "Analytics" } // Parameter defaults
+            );/*
+            routes.MapRoute(
+                "AjaxPackage", // Route name
+                "Analytics/Package/{json}", // URL with parameters
+                new { controller = "Analytics", action = "Package" } // Parameter defaults
+            );*/
+            routes.MapRoute(
+                "ClickHeatMapImage", // Route name
+                "Analytics/{action}/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", // URL with parameters
+                new { controller = "Analytics" } // Parameter defaults
+            );/*
+            routes.MapRoute(
+                "ViewHeatMapImage", // Route name
+                "Analytics/ViewHeatMapImage/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", // URL with parameters
+                new { controller = "Analytics", action = "ViewHeatMapImage" } // Parameter defaults
+            );*/
+
+            routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
-            routes.MapRoute(
-                "JavaScript", // Route name
-                "{controller}/{action}/{clientId}", // URL with parameters
-                new { controller = "Analytics", action = "JavaScript" } // Parameter defaults
-            );
-            routes.MapRoute(
-                "AjaxVisit", // Route name
-                "{controller}/{action}/{json}", // URL with parameters
-                new { controller = "Analytics", action = "Visit" } // Parameter defaults
-            );
-            routes.MapRoute(
-                "AjaxPackage", // Route name
-                "{controller}/{action}/{json}", // URL with parameters
-                new { controller = "Analytics", action = "Package" } // Parameter defaults
-            );
-            routes.MapRoute(
-                "ClickHeatMapImage", // Route name
-                "{controller}/{action}/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", // URL with parameters
-                new { controller = "Analytics", action = "ClickHeatMapImage" } // Parameter defaults
-            );
-            routes.MapRoute(
-                "ViewHeatMapImage", // Route name
-                "{controller}/{action}/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", // URL with parameters
-                new { controller = "Analytics", action = "ViewHeatMapImage" } // Parameter defaults
-            );
-
         }
 
         protected void Application_Start()

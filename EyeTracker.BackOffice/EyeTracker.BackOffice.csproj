@@ -6,12 +6,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A4744B5C-1F7E-413D-8F64-36A866D0838E}</ProjectGuid>
+    <ProjectGuid>{8EF2A901-976F-4385-BAFB-8AB746432E60}</ProjectGuid>
     <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EyeTracker</RootNamespace>
-    <AssemblyName>EyeTracker</AssemblyName>
+    <RootNamespace>EyeTracker.BackOffice</RootNamespace>
+    <AssemblyName>EyeTracker.BackOffice</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
   </PropertyGroup>
@@ -41,8 +41,6 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -72,24 +70,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Model\AccountModels.cs" />
-    <Compile Include="Model\AnalyticsPackage.cs" />
-    <Compile Include="Model\Enumerators.cs" />
+    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Text.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Scripts\AnalyticsTemplate.js" />
-    <Content Include="Test.htm" />
-    <Content Include="Users_Resources\Screens\1.1263.902.png" />
-    <Content Include="Users_Resources\Screens\3.980.1249.png" />
-    <Content Include="Views\Analytics\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -153,7 +142,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1058</DevelopmentServerPort>
+          <DevelopmentServerPort>41662</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

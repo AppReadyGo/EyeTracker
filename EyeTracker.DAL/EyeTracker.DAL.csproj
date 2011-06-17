@@ -53,17 +53,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnalyticsRepository.cs" />
+    <Compile Include="BackOfficeRepository.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="EntityModels\Analytics.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Analytics.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnalyticsInfo.cs" />
     <Compile Include="Models\ClickHeatMapData.cs" />
-    <Compile Include="Interfaces\IAnalyticsRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IRepositoryContext.cs" />
     <Compile Include="Models\ClickInfo.cs" />
+    <Compile Include="Models\LogCollectionsInfo.cs" />
+    <Compile Include="Models\LogInfo.cs" />
     <Compile Include="Models\ViewHeatMapData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
