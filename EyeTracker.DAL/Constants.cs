@@ -12,6 +12,8 @@ namespace EyeTracker.DAL
 
         public const string SP_GET_ANALYTICS_INFO = "GetAnalyticsInfo";
 
+        public const string SP_CLEAR_ANALYTICS = "ClearAnalytics";
+
         public const string SP_CLICK_INFO_ADD = "ClickInfo_Add";
         public const string SP_VIEW_PART_INFO_ADD = "ViewPartInfo_Add";
         public const string SP_VISIT_INFO_ADD = "VisitInfo_Add";

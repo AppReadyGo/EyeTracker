@@ -25,6 +25,8 @@ namespace EyeTracker.DAL
         void AddClickInfo(ClickInfo clickInfo);
 
         AnalyticsInfo GetAnalyticsInfo(string userId, long? appId, string pageUri);
+
+        void ClearAnalytics(string userId, long appId, string pageUri, int width, int height);
     }
     
     public class AnalyticsRepository : IAnalyticsRepository
@@ -195,5 +197,25 @@ namespace EyeTracker.DAL
             }
             return result;
         }
+
+        #region IAnalyticsRepository Members
+
+
+        public void ClearAnalytics(string userId, long appId, string pageUri, int width, int height)
+        {
+            var database = DatabaseFactory.CreateDatabase();
+            using (DbCommand command = database.GetStoredProcCommand(Constants.SP_CLEAR_ANALYTICS))
+            {
+                database.AddInParameter(command, Constants.USER_APPLICATION_USER_ID, DbType.String, userId);
+                database.AddInParameter(command, Constants.USER_APPLICATION_ID, DbType.Int64, appId);
+                database.AddInParameter(command, Constants.VISIT_INFO_PAGE_URI, DbType.String, pageUri);
+                database.AddInParameter(command, Constants.VISIT_INFO_CLIENT_WIDTH, DbType.Int32, width);
+                database.AddInParameter(command, Constants.VISIT_INFO_CLIENT_HEIGHT, DbType.Int32, height);
+
+                database.ExecuteNonQuery(command);
+            }
+        }
+
+        #endregion
     }
 }

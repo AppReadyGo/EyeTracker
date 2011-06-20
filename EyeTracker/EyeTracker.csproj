@@ -89,6 +89,8 @@
     <Content Include="Test.htm" />
     <Content Include="Users_Resources\Screens\1.1263.902.png" />
     <Content Include="Users_Resources\Screens\3.980.1249.png" />
+    <Content Include="Users_Resources\Screens\2.320.690.png" />
+    <Content Include="Users_Resources\Screens\3.320.837.png" />
     <Content Include="Views\Analytics\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

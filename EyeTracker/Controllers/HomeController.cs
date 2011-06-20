@@ -24,6 +24,15 @@ namespace EyeTracker.Controllers
             this.service = service;
         }
 
+        public ActionResult Clear(long appId, string pageUri, string clientSize)
+        {
+            string[] split = clientSize.Split('|');
+            int width = int.Parse(split[0]);
+            int height = int.Parse(split[1]);
+            var analyticsInfoRes = service.ClearAnalytics("CED35BCA-3CC4-425B-A042-6ABCC2C6F250", appId, pageUri, width, height);
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Index(long? appId, string pageUri, string clientSize)
         {
             var analyticsInfoRes = service.GetAnalyticsInfo("CED35BCA-3CC4-425B-A042-6ABCC2C6F250", appId, pageUri);
@@ -72,6 +81,11 @@ namespace EyeTracker.Controllers
 
             ViewData["viewHeatMapImgUrl"] = viewHeatMapImgUrl;
             ViewData["clickHeatMapImgUrl"] = clickHeatMapImgUrl;
+
+            ViewData["appId"] = appId;
+            ViewData["pageUri"] = pageUri;
+            ViewData["clientSize"] = clientSize;
+
             return View();
         }
 
