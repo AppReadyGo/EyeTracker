@@ -7,6 +7,7 @@ using System.Web.Routing;
 using EyeTracker.Core;
 using AutoMapper;
 using EyeTracker.DAL.Models;
+using System.Web.Security;
 
 namespace EyeTracker.Controllers
 {
@@ -35,6 +36,10 @@ namespace EyeTracker.Controllers
 
         public ActionResult Index(long? appId, string pageUri, string clientSize)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("LogOn", "Account");
+            }
             var analyticsInfoRes = service.GetAnalyticsInfo("CED35BCA-3CC4-425B-A042-6ABCC2C6F250", appId, pageUri);
             List<SelectListItem> applications = null;
             List<SelectListItem> uriList = null;
