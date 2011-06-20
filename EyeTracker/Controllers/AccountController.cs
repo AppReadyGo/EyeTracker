@@ -80,6 +80,7 @@ namespace EyeTracker.Controllers
 
         public ActionResult Register()
         {
+            return RedirectToAction("LogOn");
             ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
             return View();
         }
