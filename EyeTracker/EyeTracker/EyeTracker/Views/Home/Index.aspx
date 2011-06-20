@@ -12,6 +12,10 @@
     <%: Html.DropDownList("pageUri", (IEnumerable<SelectListItem>)ViewData["uriList"])%>
     <%: Html.DropDownList("clientSize", (IEnumerable<SelectListItem>)ViewData["clientSizes"])%>
     <input type="submit" value="Show" />
+    <%if (ViewData["appId"] != null && ViewData["pageUri"] != null && ViewData["clientSize"] != null)
+      { %>
+    <%:Html.ActionLink("Clear", "Clear", new { appId = ViewData["appId"], pageUri = ViewData["pageUri"], clientSize = ViewData["clientSize"] })%>
+    <%} %>
     <p style="color:Red;"><%:ViewData["errorMessage"]%></p>
 <% } %>
     </p>

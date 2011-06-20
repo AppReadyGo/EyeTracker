@@ -135,6 +135,11 @@
         //                );
     },
     clientHeight: function () {
+        //TODO:Remove it
+        if (mobillify.clientId == 3) {
+            return 837;
+        }
+
         var db = document.body;
         var dde = document.documentElement;
 

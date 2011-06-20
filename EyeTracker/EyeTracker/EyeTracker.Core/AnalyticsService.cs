@@ -29,6 +29,8 @@ namespace EyeTracker.Core
 
         OperationResult<string> GetClientId(long appId);
         OperationResult<long> GetApplicationId(string clientId);
+
+        OperationResult ClearAnalytics(string userId, long appId, string pageUri, int width, int height);
     }
     
     public class AnalyticsService : IAnalyticsService
@@ -209,5 +211,25 @@ namespace EyeTracker.Core
             return result;
         }
 
+
+        #region IAnalyticsService Members
+
+
+        public OperationResult ClearAnalytics(string userId, long appId, string pageUri, int width, int height)
+        {
+            OperationResult result = null;
+            try
+            {
+                repository.ClearAnalytics(userId, appId, pageUri, width, height);
+                result = new OperationResult();
+            }
+            catch (Exception exp)
+            {
+                result = new OperationResult(exp, "ClearAnalytics(userId:{0})", userId);
+            }
+            return result;
+        }
+
+        #endregion
     }
 }
