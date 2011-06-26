@@ -73,6 +73,7 @@ namespace EyeTracker.Common
                 ErrorMessage += string.IsNullOrEmpty(errorMessage) ? string.Empty : ", Exception:";
                 ErrorMessage += (exp.InnerException == null ? exp.Message : exp.InnerException.Message);
             }
+            log.WriteError(exp, errorMessage);
         }
 
         public override string ToString()

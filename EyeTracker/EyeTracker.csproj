@@ -81,6 +81,10 @@
     <Compile Include="Model\AnalyticsPackage.cs" />
     <Compile Include="Model\Enumerators.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Content\ComingSoon.css" />
+    <Content Include="Content\img\btn.png" />
+    <Content Include="Content\img\title.png" />
+    <Content Include="index.htm" />
     <Content Include="Text.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -92,7 +96,12 @@
     <Content Include="Users_Resources\Screens\3.980.1249.png" />
     <Content Include="Users_Resources\Screens\2.320.690_.png" />
     <Content Include="Users_Resources\Screens\3.320.837.png" />
+    <Content Include="Users_Resources\Screens\4.1349.5073.png" />
+    <Content Include="Users_Resources\Screens\4.1664.5123.png" />
+    <Content Include="Users_Resources\Screens\4.1168.5030.png" />
+    <Content Include="Users_Resources\Screens\4.1096.5093.png" />
     <Content Include="Views\Analytics\Index.aspx" />
+    <Content Include="Views\Home\ComingSoon.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -60,6 +60,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Analytics.edmx</DependentUpon>
     </Compile>
+    <Compile Include="HomeRepository.cs" />
     <Compile Include="Models\AnalyticsInfo.cs" />
     <Compile Include="Models\ClickHeatMapData.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
