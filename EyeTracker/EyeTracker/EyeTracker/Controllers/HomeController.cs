@@ -25,6 +25,36 @@ namespace EyeTracker.Controllers
             this.service = service;
         }
 
+        public ActionResult ComingSoon()
+        {
+            ViewData["ErrorMessage"] = string.Empty;
+            return View();
+        }
+
+        public ActionResult Subscribe(string email)
+        {
+            string ErrorMessage = string.Empty;
+            if(string.IsNullOrEmpty(email))
+            {
+                ErrorMessage = "Invalid Email Address.";
+            }
+            if(!Validator.IsValidEmail(email))
+            {
+                ErrorMessage = "Invalid Email Address.";
+            }
+            if(string.IsNullOrEmpty(ErrorMessage))
+            {
+                var serv = new HomeService();
+                var res = serv.Subscribe(email);
+                if (res.WasError)
+                {
+                    ErrorMessage = "Something wrong is happen on our server...";
+                }
+            }
+            ViewData["ErrorMessage"] = ErrorMessage;
+            return View("ComingSoon");
+        }
+
         public ActionResult Clear(long appId, string pageUri, string clientSize)
         {
             string[] split = clientSize.Split('|');
