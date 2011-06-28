@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using EyeTracker.Models;
+using EyeTracker.Core.Services;
 
 namespace EyeTracker.Controllers
 {

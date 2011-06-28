@@ -7,19 +7,22 @@
     clicksData: new Array(),
     viewPartsData: new Array(),
     init: function () {
+        //Create a new view part object
         mobillify.viewPartsData.push(mobillify.getViewPart(new Date()));
-
+        //Attach events
         document.onscroll = mobillify.onscroll;
         document.onclick = mobillify.onclick;
         window.onbeforeunload = function () {
             mobillify.addDataToCookie();
         }
+        //Check if cookies has previous view data
         data = mobillify.getCookie('mobillifyData');
         if (data) {
+            //Send cookies data to server
             mobillify.sendData(mobillify.packageHandlerUrl, data);
             mobillify.setCookie('mobillifyData', null, -365);
         }
-
+        //Create and send to server visit object
         mobillify.winSize = mobillify.getWinSize();
         var data = '{';
         data += '"cid":"' + mobillify.clientId + '",';
@@ -34,8 +37,6 @@
             var res = eval("(" + xmlhttp.responseText + ')');
             if (!res.WasError) {
                 mobillify.visitId = res.Value;
-            } else {
-                alert(xmlhttp.responseText);
             }
         });
     },
@@ -47,25 +48,28 @@
         }
     },
     serializeData: function () {
-        var data = '{"vid":"' + mobillify.visitId + '"';
-        data += ',"vpd":[';
-        for (var i = 0; i < mobillify.viewPartsData.length; i++) {
-            var curPart = mobillify.viewPartsData[i];
-            data += '{"sd":"' + curPart.startDate.toUTCString() + '"';
-            data += ',"sl":' + curPart.scrollLeft;
-            data += ',"st":' + curPart.scrollTop;
-            data += ',"fd":"' + curPart.finishDate.toUTCString() + '"';
-            data += '},';
+        var data = null;
+        if (mobillify.visitId > 0) {
+            data = '{"vid":"' + mobillify.visitId + '"';
+            data += ',"vpd":[';
+            for (var i = 0; i < mobillify.viewPartsData.length; i++) {
+                var curPart = mobillify.viewPartsData[i];
+                data += '{"sd":"' + curPart.startDate.toUTCString() + '"';
+                data += ',"sl":' + curPart.scrollLeft;
+                data += ',"st":' + curPart.scrollTop;
+                data += ',"fd":"' + curPart.finishDate.toUTCString() + '"';
+                data += '},';
+            }
+            data += '],"cd":[';
+            for (var i = 0; i < mobillify.clicksData.length; i++) {
+                var curClick = mobillify.clicksData[i];
+                data += '{"d":"' + curClick.date.toUTCString() + '"';
+                data += ',"cx":' + curClick.clientX;
+                data += ',"cy":' + curClick.clientY;
+                data += '},';
+            }
+            data += ']}';
         }
-        data += '],"cd":[';
-        for (var i = 0; i < mobillify.clicksData.length; i++) {
-            var curClick = mobillify.clicksData[i];
-            data += '{"d":"' + curClick.date.toUTCString() + '"';
-            data += ',"cx":' + curClick.clientX;
-            data += ',"cy":' + curClick.clientY;
-            data += '},';
-        }
-        data += ']}';
         return data;
     },
     sendPackage: function () {
@@ -73,14 +77,7 @@
             var data = mobillify.serializeData();
             mobillify.viewPartsData = new Array();
             mobillify.clicksData = new Array();
-            mobillify.sendData(mobillify.packageHandlerUrl, data, function (xmlhttp) {
-                var res = eval("(" + xmlhttp.responseText + ')');
-                if (res.WasError) {
-                    alert(xmlhttp.responseText);
-                }
-            });
-            mobillify.clicksData = new Array();
-            mobillify.viewPartsData = new Array();
+            mobillify.sendData(mobillify.packageHandlerUrl, data);
         }
     },
     sendData: function (dataHandlerUrl, data, onreadystatechange) {
@@ -127,7 +124,7 @@
         var db = document.body;
         var dde = document.documentElement;
 
-        return Math.max(db.scrollWidth, dde.scrollWidth, db.offsetWidth, dde.offsetWidth, db.clientWidth, dde.clientWidth)
+        return Math.max(db ? db.scrollWidth : 0, dde.scrollWidth, db ? db.offsetWidth : 0, dde.offsetWidth, db ? db.clientWidth : 0, dde.clientWidth)
         //        return mobillify.filterResults(
         //                    window.innerWidth ? window.innerWidth : 0,
         //                    document.documentElement ? document.documentElement.clientWidth : 0,
@@ -143,7 +140,7 @@
         var db = document.body;
         var dde = document.documentElement;
 
-        return Math.max(db.scrollHeight, dde.scrollHeight, db.offsetHeight, dde.offsetHeight, db.clientHeight, dde.clientHeight)
+        return Math.max(db ? db.scrollHeight : 0, dde.scrollHeight, db ? db.offsetHeight : 0, dde.offsetHeight, db ? db.clientHeight : 0, dde.clientHeight)
         //        return mobillify.filterResults(
         //                    window.innerHeight ? window.innerHeight : 0,
         //                    document.documentElement ? document.documentElement.clientHeight : 0,

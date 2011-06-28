@@ -52,15 +52,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityTrackingRepository.cs" />
     <Compile Include="AnalyticsRepository.cs" />
+    <Compile Include="ApplicationsRepository.cs" />
     <Compile Include="BackOfficeRepository.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Models\Constants.cs" />
     <Compile Include="EntityModels\Analytics.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Analytics.edmx</DependentUpon>
     </Compile>
-    <Compile Include="HomeRepository.cs" />
+    <Compile Include="Models\Enumerators.cs" />
     <Compile Include="Models\AnalyticsInfo.cs" />
     <Compile Include="Models\ClickHeatMapData.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="Models\ClickInfo.cs" />
     <Compile Include="Models\LogCollectionsInfo.cs" />
     <Compile Include="Models\LogInfo.cs" />
+    <Compile Include="Models\UserActivity.cs" />
     <Compile Include="Models\ViewHeatMapData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

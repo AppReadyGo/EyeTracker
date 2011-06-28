@@ -10,6 +10,7 @@ using EyeTracker.DAL.Models;
 using System.Text;
 using EyeTracker.Common.Logger;
 using System.Reflection;
+using EyeTracker.Core.Services;
 
 namespace EyeTracker.BackOffice.Controllers
 {
@@ -55,7 +56,7 @@ namespace EyeTracker.BackOffice.Controllers
                 threadId
                 );
             StringBuilder sb = new StringBuilder();
-            if (!logInfoList.WasError)
+            if (!logInfoList.HasError)
             {
                 foreach (var info in logInfoList.Value)
                 {
@@ -71,7 +72,7 @@ namespace EyeTracker.BackOffice.Controllers
 
             List<SelectListItem> categoriesListItems = null, severitiesListItems = null;
             var logCollRes = service.GetLogCollections();
-            if (!logCollRes.WasError)
+            if (!logCollRes.HasError)
             {
                 Mapper.CreateMap<KeyValuePair<int, string>, SelectListItem>()
                    .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Value))

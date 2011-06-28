@@ -16,6 +16,7 @@ using EyeTracker.Model;
 using EyeTracker.Core;
 using EyeTracker.Common.Logger;
 using System.Reflection;
+using EyeTracker.Core.Services;
 
 namespace EyeTracker.Controllers
 {
@@ -42,6 +43,14 @@ namespace EyeTracker.Controllers
         public FileResult JavaScriptFile(string clientId)
         {
             log.WriteInformation("-->JavaScriptFile(clientId:{0})",clientId);
+
+#if DEBUG
+            if (clientId == "UNIT_TEST")
+            {
+                //TODO: get client id for test user account
+            }
+#endif
+            //TODO: check client id
             var dir = Server.MapPath("/Scripts");
             var path = Path.Combine(dir, "AnalyticsTemplate.js");
             var file = new FileInfo(path);
@@ -51,11 +60,17 @@ namespace EyeTracker.Controllers
                 using (var stream = file.OpenText())
                 {
                     content = stream.ReadToEnd();
-                    string url = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.ApplicationPath == "/" ? "" : Request.ApplicationPath);
-                    content = content.Replace("{VISIT_HANDLER_URL}", url + Url.Action("Visit"));
-                    content = content.Replace("{PACKAGE_HANDLER_URL}", url +  Url.Action("Package"));
-                    content = content.Replace("{CLIENT_ID}", clientId);
                 }
+                string url = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.ApplicationPath == "/" ? "" : Request.ApplicationPath);
+                content = content.Replace("{VISIT_HANDLER_URL}", url + Url.Action("Visit"));
+                content = content.Replace("{PACKAGE_HANDLER_URL}", url +  Url.Action("Package"));
+                content = content.Replace("{CLIENT_ID}", clientId);
+#if DEBUG
+                if (clientId == "UNIT_TEST")
+                {
+                    content = content.Replace("mobillify.init();", "");
+                }
+#endif
             }
             log.WriteInformation("JavaScriptFile-->");
             return base.File(System.Text.Encoding.UTF8.GetBytes(content), "text/javascript");
@@ -66,7 +81,7 @@ namespace EyeTracker.Controllers
             byte[] imageData = null;
             log.WriteInformation("ClickHeatMapImage: appId:{0}, pageUri:{1}, clientWidth:{2}, clientHeight:{3}, fromDate:{4}, toDate:{5}", appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
             var opResult = service.GetClickHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
-            if (!opResult.WasError)
+            if (!opResult.HasError)
             {
                 Image bgImg = GetBackgroundImage(appId, clientWidth, clientHeight);
                 Image image = HeatMapImage.CreateClickHeatMap(opResult.Value, clientWidth, clientHeight, bgImg);
@@ -86,7 +101,7 @@ namespace EyeTracker.Controllers
             byte[] imageData = null;
             log.WriteInformation("ViewHeatMapImage: appId:{0}, pageUri:{1}, clientWidth:{2}, clientHeight:{3}, fromDate:{4}, toDate:{5}",appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
             var opResult = service.GetViewHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
-            if (!opResult.WasError)
+            if (!opResult.HasError)
             {
                 Image bgImg = GetBackgroundImage(appId, clientWidth, clientHeight);
                 Image image = HeatMapImage.CreateViewHeatMap(opResult.Value, clientWidth, clientHeight, bgImg);
@@ -152,12 +167,12 @@ namespace EyeTracker.Controllers
                 foreach (var curClikInfo in packageObject.Clicks)
                 {
                     var curRes = service.AddClickInfo(packageObject.VisitId, curClikInfo);
-                    if (curRes.WasError) res = curRes;
+                    if (curRes.HasError) res = curRes;
                 }
                 foreach (var curViewPartInfo in packageObject.ViewParts)
                 {
                     var curRes = service.AddViewPartInfo(packageObject.VisitId, curViewPartInfo);
-                    if (curRes.WasError) res = curRes;
+                    if (curRes.HasError) res = curRes;
                 }
 
                 Response.AddHeader("Access-Control-Allow-Origin", "*");

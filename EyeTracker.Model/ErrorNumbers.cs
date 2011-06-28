@@ -11,6 +11,8 @@ namespace EyeTracker.Common
     {
         None = 0,
         General = 1,
-        WrongParameter
+        WrongParameter,
+        AccessDenied,
+        WrongDescription
     }
 }
