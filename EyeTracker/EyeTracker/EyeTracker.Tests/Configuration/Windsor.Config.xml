@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <components>
+    <component id="ActivityTrackingRepository" service="EyeTracker.DAL.IActivityTrackingRepository, EyeTracker.DAL" type="EyeTracker.Tests.FakeData.FakeActivityTrackingRepository, EyeTracker.Tests"/>
+    <component id="AnalyticsRepository" service="EyeTracker.DAL.IAnalyticsRepository, EyeTracker.DAL" type="EyeTracker.Tests.FakeData.FakeAnalyticsRepository, EyeTracker.Tests"/>
+    <component id="ApplicationsRepository" service="EyeTracker.DAL.IApplicationsRepository, EyeTracker.DAL" type="EyeTracker.Tests.FakeData.FakeApplicationsRepository, EyeTracker.Tests"/>
+    <component id="BackOfficeRepository" service="EyeTracker.DAL.IBackOfficeRepository, EyeTracker.DAL" type="EyeTracker.Tests.FakeData.FakeBackOfficeRepository, EyeTracker.Tests"/>
+
+    <component id="BackOfficeService" service="EyeTracker.Core.Services.IBackOfficeService, EyeTracker.Core" type="EyeTracker.Core.Services.BackOfficeService, EyeTracker.Core"/>
+    <component id="ApplicationsService" service="EyeTracker.Core.Services.IApplicationsService, EyeTracker.Core" type="EyeTracker.Core.Services.ApplicationsService, EyeTracker.Core"/>
+    <component id="AnalyticsService" service="EyeTracker.Core.Services.IAnalyticsService, EyeTracker.Core" type="EyeTracker.Core.Services.AnalyticsService, EyeTracker.Core"/>
+    <component id="ActivityTrackingService" service="EyeTracker.Core.Services.IActivityTrackingService, EyeTracker.Core" type="EyeTracker.Core.Services.ActivityTrackingService, EyeTracker.Core"/>
+
+    <component id="ActivityTracking" service="EyeTracker.Core.ActivityTracking, EyeTracker.Core" type="EyeTracker.Core.ActivityTracking, EyeTracker.Core"/>
+
+    <component id="MembershipService" service="EyeTracker.Core.Services.IMembershipService, EyeTracker.Core" type="EyeTracker.Tests.FakeData.FakeMembershipService, EyeTracker.Tests"/>
+    <component id="FakeDataBase" service="EyeTracker.Tests.FakeData.IFakeDataBase, EyeTracker.Tests" type="EyeTracker.Tests.FakeData.FakeDataBase, EyeTracker.Tests"/>
+  </components>
+</configuration>
+

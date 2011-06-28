@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\ThridParty\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\ThridParty\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -43,31 +49,62 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analytics.cs" />
+    <Compile Include="FakeData\FakeActivityTrackingRepository.cs" />
+    <Compile Include="FakeData\FakeAnalyticsRepository.cs" />
+    <Compile Include="FakeData\FakeApplicationsRepository.cs" />
+    <Compile Include="FakeData\FakeBackOfficeRepository.cs" />
+    <Compile Include="FakeData\FakeDataBase.cs" />
+    <Compile Include="FakeData\FakeMembershipService.cs" />
+    <Compile Include="FakeData\IFakeDataBase.cs" />
+    <Compile Include="FakeData\RealDataBase.cs" />
+    <Compile Include="FakeData\RealMembershipService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\AccountControllerTest.cs" />
-    <Compile Include="TDD\AnalyticsServiceTest.cs" />
+    <Compile Include="TDD\Controllers\AnalyticsControllerTest.cs" />
+    <Compile Include="TDD\Services\ActivityTrackingServiceTest.cs" />
+    <Compile Include="TDD\Services\AnalyticsServiceTest.cs" />
+    <Compile Include="TDD\Services\ApplicationsServiceTest.cs" />
+    <Compile Include="TDD\Services\BackOfficeServiceTest.cs" />
+    <Compile Include="Utilites.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
+    <Content Include="Configuration\Windsor.Config.RealDb.xml" />
+    <Content Include="Configuration\Windsor.Config.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EyeTracker.Core\EyeTracker.Core.csproj">
+      <Project>{28075AB1-E262-4FBC-846C-BF11A6E5FE41}</Project>
+      <Name>EyeTracker.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyeTracker.DAL\EyeTracker.DAL.csproj">
+      <Project>{726E47E8-4DA8-4BDF-96E2-9E9CE6EB1454}</Project>
+      <Name>EyeTracker.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyeTracker.Model\EyeTracker.Common.csproj">
+      <Project>{F5D9FA27-BAAF-4B4B-97F0-0A71F2210009}</Project>
+      <Name>EyeTracker.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EyeTracker\EyeTracker.csproj">
       <Project>{A4744B5C-1F7E-413D-8F64-36A866D0838E}</Project>
       <Name>EyeTracker</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

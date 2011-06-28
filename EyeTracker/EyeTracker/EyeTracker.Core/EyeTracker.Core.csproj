@@ -35,11 +35,13 @@
       <HintPath>..\ThridParty\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,16 +49,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnalyticsService.cs" />
-    <Compile Include="BackOfficeService.cs" />
+    <Compile Include="ActivityTracking.cs" />
+    <Compile Include="Services\AccountMembershipService.cs" />
+    <Compile Include="Services\AnalyticsService.cs" />
+    <Compile Include="Services\ApplicationsService.cs" />
+    <Compile Include="Services\BackOfficeService.cs" />
     <Compile Include="Encryption.cs" />
     <Compile Include="HeatMapImage.cs" />
-    <Compile Include="HomeService.cs" />
     <Compile Include="Models\ClickInfoViewModel.cs" />
     <Compile Include="Models\ViewPartInfoViewModel.cs" />
     <Compile Include="Models\VisitInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validator.cs" />
+    <Compile Include="Services\ActivityTrackingService.cs" />
+    <Compile Include="Services\FormsAuthenticationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EyeTracker.DAL\EyeTracker.DAL.csproj">

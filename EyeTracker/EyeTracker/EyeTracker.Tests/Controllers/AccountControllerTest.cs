@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EyeTracker;
 using EyeTracker.Controllers;
 using EyeTracker.Models;
+using EyeTracker.Core.Services;
 
 namespace EyeTracker.Tests.Controllers
 {
@@ -319,7 +320,7 @@ namespace EyeTracker.Tests.Controllers
             AccountController controller = new AccountController()
             {
                 FormsService = new MockFormsAuthenticationService(),
-                MembershipService = new MockMembershipService()
+                MembershipService = Utilites.Container.Resolve<IMembershipService>()
             };
             controller.ControllerContext = new ControllerContext()
             {
@@ -365,38 +366,5 @@ namespace EyeTracker.Tests.Controllers
                 }
             }
         }
-
-        private class MockMembershipService : IMembershipService
-        {
-            public int MinPasswordLength
-            {
-                get { return 10; }
-            }
-
-            public bool ValidateUser(string userName, string password)
-            {
-                return (userName == "someUser" && password == "goodPassword");
-            }
-
-            public MembershipCreateStatus CreateUser(string userName, string password, string email)
-            {
-                if (userName == "duplicateUser")
-                {
-                    return MembershipCreateStatus.DuplicateUserName;
-                }
-
-                // verify that values are what we expected
-                Assert.AreEqual("goodPassword", password);
-                Assert.AreEqual("goodEmail", email);
-
-                return MembershipCreateStatus.Success;
-            }
-
-            public bool ChangePassword(string userName, string oldPassword, string newPassword)
-            {
-                return (userName == "someUser" && oldPassword == "goodOldPassword" && newPassword == "goodNewPassword");
-            }
-        }
-
     }
 }

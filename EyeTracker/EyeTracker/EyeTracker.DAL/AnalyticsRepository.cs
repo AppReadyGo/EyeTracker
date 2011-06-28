@@ -31,11 +31,6 @@ namespace EyeTracker.DAL
     
     public class AnalyticsRepository : IAnalyticsRepository
     {
-
-        public AnalyticsRepository()
-        {
-        }
-
         public long AddVisitInfo(VisitInfo visitInfo)
         {
             long result = -1;
@@ -198,9 +193,6 @@ namespace EyeTracker.DAL
             return result;
         }
 
-        #region IAnalyticsRepository Members
-
-
         public void ClearAnalytics(string userId, long appId, string pageUri, int width, int height)
         {
             var database = DatabaseFactory.CreateDatabase();
@@ -216,6 +208,5 @@ namespace EyeTracker.DAL
             }
         }
 
-        #endregion
     }
 }

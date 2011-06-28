@@ -8,6 +8,7 @@ using EyeTracker.Core;
 using AutoMapper;
 using EyeTracker.DAL.Models;
 using System.Web.Security;
+using EyeTracker.Core.Services;
 
 namespace EyeTracker.Controllers
 {
@@ -23,36 +24,6 @@ namespace EyeTracker.Controllers
         public HomeController(IAnalyticsService service)
         {
             this.service = service;
-        }
-
-        public ActionResult ComingSoon()
-        {
-            ViewData["ErrorMessage"] = string.Empty;
-            return View();
-        }
-
-        public ActionResult Subscribe(string email)
-        {
-            string ErrorMessage = string.Empty;
-            if(string.IsNullOrEmpty(email))
-            {
-                ErrorMessage = "Invalid Email Address.";
-            }
-            if(!Validator.IsValidEmail(email))
-            {
-                ErrorMessage = "Invalid Email Address.";
-            }
-            if(string.IsNullOrEmpty(ErrorMessage))
-            {
-                var serv = new HomeService();
-                var res = serv.Subscribe(email);
-                if (res.WasError)
-                {
-                    ErrorMessage = "Something wrong is happen on our server...";
-                }
-            }
-            ViewData["ErrorMessage"] = ErrorMessage;
-            return View("ComingSoon");
         }
 
         public ActionResult Clear(long appId, string pageUri, string clientSize)
@@ -74,7 +45,7 @@ namespace EyeTracker.Controllers
             List<SelectListItem> applications = null;
             List<SelectListItem> uriList = null;
             List<SelectListItem> clientSizes = null;
-            if (!analyticsInfoRes.WasError)
+            if (!analyticsInfoRes.HasError)
             {
                 Mapper.CreateMap<KeyValuePair<long, string>, SelectListItem>()
                    .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Value))

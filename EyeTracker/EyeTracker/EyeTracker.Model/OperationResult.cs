@@ -19,13 +19,13 @@ namespace EyeTracker.Common
 //            this.showExceptionMessages = true;//Always show errors in debug mode
 //#endif
 
-        public bool WasError { get; private set; }
+        public bool HasError { get; private set; }
         public ErrorNumber Error { get; private set; }
         public string ErrorMessage { get; private set; }
 
-        public OperationResult()
-        {
-        }
+        public OperationResult(){}
+
+        public OperationResult(OperationResult res) : this(res.Error) { }
 
         public OperationResult(ErrorNumber errNumber)
         {
@@ -33,7 +33,7 @@ namespace EyeTracker.Common
             {
                 ErrorMessage = errNumber.ToString();
                 Error = errNumber;
-                WasError = true;
+                HasError = true;
             }
         }
 
@@ -42,7 +42,7 @@ namespace EyeTracker.Common
             errorMessage = string.Format(errorMessage, args);
             ErrorMessage = errorMessage;
             Error = errNumber;
-            WasError = true;
+            HasError = true;
         }
 
         public OperationResult(Exception exp)
@@ -73,12 +73,11 @@ namespace EyeTracker.Common
                 ErrorMessage += string.IsNullOrEmpty(errorMessage) ? string.Empty : ", Exception:";
                 ErrorMessage += (exp.InnerException == null ? exp.Message : exp.InnerException.Message);
             }
-            log.WriteError(exp, errorMessage);
         }
 
         public override string ToString()
         {
-            if (WasError)
+            if (HasError)
                 return string.Format("Error Number:{0}, Message:{1}", (int)Error, ErrorMessage);
             return base.ToString();
         }
@@ -88,24 +87,18 @@ namespace EyeTracker.Common
     {
         public T Value { get; private set; }
 
-        public OperationResult()
-        {
-        }
+        public OperationResult() {}
 
         public OperationResult(T value)
         {
             Value = value;
         }
 
-        public OperationResult(ErrorNumber errNumber)
-            : base(errNumber)
-        {
-        }
+        public OperationResult(OperationResult res) : base(res.Error) { }
 
-        public OperationResult(bool showExceptionMessages, Exception exp)
-            : base(showExceptionMessages, exp)
-        {
-        }
+        public OperationResult(ErrorNumber errNumber) : base(errNumber){}
+
+        public OperationResult(bool showExceptionMessages, Exception exp) : base(showExceptionMessages, exp){}
 
         public OperationResult(bool showExceptionMessages, Exception exp, string errorMessage, params object[] args)
             : base(showExceptionMessages, exp, errorMessage, args)
