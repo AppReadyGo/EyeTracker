@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using EyeTracker.Common;
 using EyeTracker.DAL.Models;
+using EyeTracker.DAL.EntityModels;
 
 namespace EyeTracker.Core.Services
 {
@@ -48,7 +49,13 @@ namespace EyeTracker.Core.Services
                 return new OperationResult(userRes);
             }
             string userId = userRes.Value.ProviderUserKey.ToString();
-            return tracking.Write(userId, userActivityType, description, linkedObjectId);
+            return tracking.Write(new UserActivity() { 
+                Date = DateTime.UtcNow,
+                UserId = new Guid(userId),
+                ActivityType = userActivityType,
+                Description = description,
+                LinkedObjectId = linkedObjectId
+            });
         }
 
         public OperationResult<List<UserActivity>> Get(UserActivityType userActivityType)

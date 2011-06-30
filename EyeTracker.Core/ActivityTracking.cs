@@ -5,6 +5,7 @@ using System.Text;
 using EyeTracker.DAL;
 using EyeTracker.Common;
 using EyeTracker.DAL.Models;
+using EyeTracker.DAL.EntityModels;
 
 namespace EyeTracker.Core
 {
@@ -21,18 +22,23 @@ namespace EyeTracker.Core
 
         public OperationResult Write(string userId, UserActivityType userActivityType, string description, int? linkedObjectId)
         {
+            return Write(new UserActivity() { Date = DateTime.UtcNow, UserId = new Guid(userId), ActivityType = userActivityType, Description = description, LinkedObjectId = linkedObjectId });
+        }
+
+        public OperationResult Write(UserActivity userActivity)
+        {
             try
             {
-                if (!string.IsNullOrEmpty(description) && description.Length > 1000)
+                if (!string.IsNullOrEmpty(userActivity.Description) && userActivity.Description.Length > 1000)
                 {
                     return new OperationResult(ErrorNumber.WrongDescription);
                 }
-                repository.Write(userId, userActivityType, description, linkedObjectId);
+                repository.Write(userActivity);
                 return new OperationResult(ErrorNumber.None);
             }
             catch (Exception exp)
             {
-                return new OperationResult(exp, "Error in call: ActivityTracking.Write(userActivityType:{0}, description:{1}), linkedObjectId:{2}", userActivityType, description, linkedObjectId);
+                return new OperationResult(exp, "Error in call: ActivityTracking.Write(userActivityType:{0}, description:{1}), linkedObjectId:{2}", userActivity.ActivityType, userActivity.Description, userActivity.LinkedObjectId);
             }
         }
 
@@ -40,7 +46,7 @@ namespace EyeTracker.Core
         {
             try
             {
-                return new OperationResult<List<UserActivity>>(repository.Get(userId, userActivityType, fromDate, toDate, lastActivitesCount));
+                return new OperationResult<List<UserActivity>>(repository.Get(new Guid(userId), userActivityType, fromDate, toDate, lastActivitesCount));
             }
             catch (Exception exp)
             {

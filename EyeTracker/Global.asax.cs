@@ -4,6 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using EyeTracker.CustomModelBinders;
+using EyeTracker.DAL.EntityModels;
+using Castle.Windsor;
+using EyeTracker.Windsor;
+using EyeTracker.Model;
 
 namespace EyeTracker
 {
@@ -12,13 +17,15 @@ namespace EyeTracker
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        WindsorContainer applicationWideWindsorContainer = new WindsorContainer();
+        
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
                 "JavaScript", 
-                "Analytics/JavaScript/{clientId}.js",
+                "Analytics/JavaScript/{filename}.js",
                 new { controller = "Analytics", action = "JavaScriptFile" } 
             );
             routes.MapRoute(
@@ -54,6 +61,13 @@ namespace EyeTracker
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
+
+            ModelBinders.Binders[typeof(VisitInfo)] = new JsonVisitInfoModelBinder();
+            ModelBinders.Binders[typeof(PackageInfo)] = new JsonPackageModelBinder();
+
+            ControllerBuilder.Current.SetControllerFactory(new WindsorFactory(applicationWideWindsorContainer));
+            // Initialize / install components in container
+            applicationWideWindsorContainer.Install(new WindsorInstaller());
         }
     }
 }

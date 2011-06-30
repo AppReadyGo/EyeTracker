@@ -5,7 +5,6 @@ using System.Web;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;
-using EyeTracker.Core.Models;
 using EyeTracker.DAL.Interfaces;
 using EyeTracker.Common.Logger;
 using System.Reflection;

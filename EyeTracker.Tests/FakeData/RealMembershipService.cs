@@ -89,7 +89,10 @@ namespace EyeTracker.Tests.FakeData
         }
         public void LogOut()
         {
-            tracking.Write(curUser.ProviderUserKey.ToString(), UserActivityType.LogOut, null, null);
+            if (curUser != null)
+            {
+                tracking.Write(curUser.ProviderUserKey.ToString(), UserActivityType.LogOut, null, null);
+            }
             curUser = null;
         }
 

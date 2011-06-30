@@ -6,6 +6,7 @@ using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
 using System.Configuration;
 using EyeTracker.DAL.Models;
+using EyeTracker.DAL.EntityModels;
 
 namespace EyeTracker.Tests
 {
@@ -55,7 +56,7 @@ namespace EyeTracker.Tests
                 Date = Utilites.RandomPastDate(),
                 Description = Utilites.RandomString(10),
                 LinkedObjectId = null,
-                Type = UserActivityType.AddApplication
+                ActivityType = UserActivityType.AddApplication
             };
         }
 
