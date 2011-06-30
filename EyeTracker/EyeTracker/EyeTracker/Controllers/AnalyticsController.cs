@@ -10,13 +10,13 @@ using System.Drawing;
 using EyeTracker.Models;
 using System.Drawing.Imaging;
 using System.Runtime.Serialization.Json;
-using EyeTracker.Core.Models;
 using EyeTracker.Common;
 using EyeTracker.Model;
 using EyeTracker.Core;
 using EyeTracker.Common.Logger;
 using System.Reflection;
 using EyeTracker.Core.Services;
+using EyeTracker.DAL.EntityModels;
 
 namespace EyeTracker.Controllers
 {
@@ -40,16 +40,10 @@ namespace EyeTracker.Controllers
             return View();
         }
 
-        public FileResult JavaScriptFile(string clientId)
+        public FileResult JavaScriptFile(string filename)
         {
-            log.WriteInformation("-->JavaScriptFile(clientId:{0})",clientId);
+            log.WriteInformation("-->JavaScriptFile(filename:{0})", filename);
 
-#if DEBUG
-            if (clientId == "UNIT_TEST")
-            {
-                //TODO: get client id for test user account
-            }
-#endif
             //TODO: check client id
             var dir = Server.MapPath("/Scripts");
             var path = Path.Combine(dir, "AnalyticsTemplate.js");
@@ -64,12 +58,8 @@ namespace EyeTracker.Controllers
                 string url = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.ApplicationPath == "/" ? "" : Request.ApplicationPath);
                 content = content.Replace("{VISIT_HANDLER_URL}", url + Url.Action("Visit"));
                 content = content.Replace("{PACKAGE_HANDLER_URL}", url +  Url.Action("Package"));
-                content = content.Replace("{CLIENT_ID}", clientId);
-#if DEBUG
-                if (clientId == "UNIT_TEST")
-                {
-                    content = content.Replace("mobillify.init();", "");
-                }
+#if JSUNITTEST
+                content = content.Replace("_mfyaq.init();", "");
 #endif
             }
             log.WriteInformation("JavaScriptFile-->");
@@ -114,25 +104,34 @@ namespace EyeTracker.Controllers
             return base.File(imageData, "Image/png");
         }
 
-
-        public JsonResult Visit(string json)
+        [HttpPost]
+        public JsonResult Visit(VisitInfo visitInfo)
         {
-            log.WriteInformation("-->Visit(json:{0})", json);
+            log.WriteInformation("-->Visit()");
             OperationResult<long> res = null;
-            try
+            if (ModelState.IsValid)
             {
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(VisitInfoViewModel));
-
-                var ms = new MemoryStream(Encoding.Unicode.GetBytes(json));
-                var visitInfo = serializer.ReadObject(ms) as VisitInfoViewModel;
                 visitInfo.Ip = Request.UserHostAddress;
+#if JSUNITTEST
+                res = new OperationResult<long>(1);
+#else
                 res = service.AddVisitInfo(visitInfo);
-                Response.AddHeader("Access-Control-Allow-Origin", "*");
+#endif
             }
-            catch (Exception exp)
+            else
             {
-                res = new OperationResult<long>(exp, "Visit");
+                var sb = new StringBuilder();
+                foreach (var key in ModelState.Keys)
+                {
+                    var error = ModelState[key].Errors.FirstOrDefault();
+                    if (error != null)
+                    {
+                        sb.AppendFormat("{0} ", error.ErrorMessage);
+                    }
+                }
+                res = new OperationResult<long>(ErrorNumber.WrongParameter, sb.ToString());
             }
+            Response.AddHeader("Access-Control-Allow-Origin", "*");
             log.WriteInformation("Visit:{0}-->", res);
             return base.Json(res);
         }
@@ -153,25 +152,29 @@ namespace EyeTracker.Controllers
             return base.Json(res, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Package(string json)
+        public JsonResult Package(PackageInfo packageInfo)
         {
-            log.WriteInformation("-->Package:{0}", json);
+            log.WriteInformation("-->Package(clicks:{0}, parts:{1})", packageInfo.clicks.Count, packageInfo.parts.Count);
             OperationResult res = null;
             try
             {
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(AnalyticsPackage));
-
-                MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(json));
-                AnalyticsPackage packageObject = serializer.ReadObject(ms) as AnalyticsPackage;
                 res = new OperationResult();
-                foreach (var curClikInfo in packageObject.Clicks)
+                foreach (var curClikInfo in packageInfo.clicks)
                 {
-                    var curRes = service.AddClickInfo(packageObject.VisitId, curClikInfo);
+#if JSUNITTEST
+                    var curRes = new OperationResult();
+#else
+                    var curRes = service.AddClickInfo(curClikInfo);
+#endif
                     if (curRes.HasError) res = curRes;
                 }
-                foreach (var curViewPartInfo in packageObject.ViewParts)
+                foreach (var curViewPartInfo in packageInfo.parts)
                 {
-                    var curRes = service.AddViewPartInfo(packageObject.VisitId, curViewPartInfo);
+#if JSUNITTEST
+                    var curRes = new OperationResult();
+#else
+                    var curRes = service.AddViewPartInfo(curViewPartInfo);
+#endif
                     if (curRes.HasError) res = curRes;
                 }
 

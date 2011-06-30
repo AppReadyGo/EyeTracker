@@ -4,9 +4,10 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EyeTrackerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="EyeTrackerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="EyeTrackerModelStoreContainer">
           <EntitySet Name="ClickInfos" EntityType="EyeTrackerModel.Store.ClickInfos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserActivities" EntityType="EyeTrackerModel.Store.UserActivities" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserApplications" EntityType="EyeTrackerModel.Store.UserApplications" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ViewPartInfos" EntityType="EyeTrackerModel.Store.ViewPartInfos" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="VisitInfos" EntityType="EyeTrackerModel.Store.VisitInfos" store:Type="Tables" Schema="dbo" />
@@ -32,6 +33,17 @@
           <Property Name="ClickInfo_Date" Type="datetime" Nullable="false" />
           <Property Name="ClickInfo_ClientX" Type="int" Nullable="false" />
           <Property Name="ClickInfo_ClientY" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserActivities">
+          <Key>
+            <PropertyRef Name="UserActivity_Id" />
+          </Key>
+          <Property Name="UserActivity_Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserActivity_Type" Type="smallint" Nullable="false" />
+          <Property Name="UserActivity_Date" Type="datetime" Nullable="false" />
+          <Property Name="UserActivity_Description" Type="varchar" MaxLength="500" />
+          <Property Name="UserActivity_UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserActivity_LinkedObjectId" Type="bigint" />
         </EntityType>
         <EntityType Name="UserApplications">
           <Key>
@@ -105,8 +117,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EyeTrackerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -127,6 +138,7 @@
             <End Role="VisitInfos" EntitySet="VisitInfos" />
             <End Role="ViewPartInfos" EntitySet="ViewPartInfos" />
           </AssociationSet>
+          <EntitySet Name="UserActivities" EntityType="EyeTrackerModel.UserActivity" />
         </EntityContainer>
         <EntityType Name="ClickInfo">
           <Key>
@@ -141,12 +153,12 @@
         </EntityType>
         <EntityType Name="UserApplication">
           <Key>
-            <PropertyRef Name="UserApplication_Id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="UserApplication_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserApplication_UserId" Type="Guid" Nullable="false" />
-          <Property Name="UserApplication_Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="UserApplication_CreateDate" Type="DateTime" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="VisitInfos" Relationship="EyeTrackerModel.FK_VisitInfos_UserApplicationId" FromRole="UserApplications" ToRole="VisitInfos" />
         </EntityType>
         <EntityType Name="ViewPartInfo">
@@ -197,7 +209,7 @@
           <End Role="VisitInfos" Type="EyeTrackerModel.VisitInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserApplications">
-              <PropertyRef Name="UserApplication_Id" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="VisitInfos">
               <PropertyRef Name="UserApplicationId" />
@@ -216,6 +228,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="Int64" Name="LinkedObjectId" />
+          <Property Type="Int16" Name="Type" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -230,10 +253,10 @@
             <ScalarProperty Name="ClientY" ColumnName="ClickInfo_ClientY" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="UserApplications"><EntityTypeMapping TypeName="EyeTrackerModel.UserApplication"><MappingFragment StoreEntitySet="UserApplications">
-            <ScalarProperty Name="UserApplication_Id" ColumnName="UserApplication_Id" />
-            <ScalarProperty Name="UserApplication_UserId" ColumnName="UserApplication_UserId" />
-            <ScalarProperty Name="UserApplication_Name" ColumnName="UserApplication_Name" />
-            <ScalarProperty Name="UserApplication_CreateDate" ColumnName="UserApplication_CreateDate" />
+            <ScalarProperty Name="Id" ColumnName="UserApplication_Id" />
+            <ScalarProperty Name="UserId" ColumnName="UserApplication_UserId" />
+            <ScalarProperty Name="Name" ColumnName="UserApplication_Name" />
+            <ScalarProperty Name="CreateDate" ColumnName="UserApplication_CreateDate" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="ViewPartInfos"><EntityTypeMapping TypeName="EyeTrackerModel.ViewPartInfo"><MappingFragment StoreEntitySet="ViewPartInfos">
             <ScalarProperty Name="Id" ColumnName="ViewPartInfo_Id" />
@@ -256,6 +279,18 @@
             <ScalarProperty Name="ClientWidth" ColumnName="VisitInfo_ClientWidth" />
             <ScalarProperty Name="ClientHeight" ColumnName="VisitInfo_ClientHeight" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="UserActivities">
+            <EntityTypeMapping TypeName="EyeTrackerModel.UserActivity">
+              <MappingFragment StoreEntitySet="UserActivities">
+                <ScalarProperty Name="Type" ColumnName="UserActivity_Type" />
+                <ScalarProperty Name="LinkedObjectId" ColumnName="UserActivity_LinkedObjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserActivity_UserId" />
+                <ScalarProperty Name="Description" ColumnName="UserActivity_Description" />
+                <ScalarProperty Name="Date" ColumnName="UserActivity_Date" />
+                <ScalarProperty Name="Id" ColumnName="UserActivity_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -293,6 +328,7 @@
           <ConnectorPoint PointX="4.5" PointY="4.7929996744791667" />
           <ConnectorPoint PointX="5.25" PointY="4.7929996744791667" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="EyeTrackerModel.UserActivity" Width="1.5" PointX="0.75" PointY="6.75" Height="1.9802864583333317" />
       </Diagram>
     </Diagrams>
   </Designer>

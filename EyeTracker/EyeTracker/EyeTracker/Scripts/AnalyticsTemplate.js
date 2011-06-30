@@ -1,59 +1,61 @@
-﻿var mobillify = {
-    visitHandlerUrl: '{VISIT_HANDLER_URL}',
-    packageHandlerUrl: '{PACKAGE_HANDLER_URL}',
-    clientId: '{CLIENT_ID}',
-    visitId: -1,
-    winSize: null,
-    clicksData: new Array(),
-    viewPartsData: new Array(),
-    init: function () {
+﻿var _mfyaq = _mfyaq || {};
+
+_mfyaq.visitHandlerUrl = '{VISIT_HANDLER_URL}',
+_mfyaq.packageHandlerUrl = '{PACKAGE_HANDLER_URL}',
+_mfyaq.visitId = -1,
+_mfyaq.winSize = null,
+_mfyaq.clicksData = new Array(),
+_mfyaq.viewPartsData = new Array(),
+_mfyaq.init = function () {
         //Create a new view part object
-        mobillify.viewPartsData.push(mobillify.getViewPart(new Date()));
+        _mfyaq.viewPartsData.push(_mfyaq.getViewPart(new Date()));
         //Attach events
-        document.onscroll = mobillify.onscroll;
-        document.onclick = mobillify.onclick;
+        document.onscroll = _mfyaq.onscroll;
+        document.onclick = _mfyaq.onclick;
         window.onbeforeunload = function () {
-            mobillify.addDataToCookie();
+            _mfyaq.addDataToCookie();
         }
         //Check if cookies has previous view data
-        data = mobillify.getCookie('mobillifyData');
+        data = _mfyaq.getCookie('_mfyaq');
         if (data) {
             //Send cookies data to server
-            mobillify.sendData(mobillify.packageHandlerUrl, data);
-            mobillify.setCookie('mobillifyData', null, -365);
+            _mfyaq.sendData(_mfyaq.packageHandlerUrl, data);
+            _mfyaq.setCookie('_mfyaq', null, -365);
         }
         //Create and send to server visit object
-        mobillify.winSize = mobillify.getWinSize();
+        _mfyaq.winSize = _mfyaq.getWinSize();
         var data = '{';
-        data += '"cid":"' + mobillify.clientId + '",';
-        data += '"sw":' + mobillify.winSize.w + ',';
-        data += '"sh":' + mobillify.winSize.h + ',';
-        data += '"cw":' + mobillify.clientWidth() + ',';
-        data += '"ch":' + mobillify.clientHeight() + ',';
+        data += '"cid":"' + _mfyaq.key + '",';
+        data += '"sw":' + _mfyaq.winSize.w + ',';
+        data += '"sh":' + _mfyaq.winSize.h + ',';
+        data += '"cw":' + _mfyaq.clientWidth() + ',';
+        data += '"ch":' + _mfyaq.clientHeight() + ',';
         data += '"d":"' + new Date().toUTCString() + '",';
         data += '"uri":"' + location.href + '"';
         data += '}';
-        mobillify.sendData(mobillify.visitHandlerUrl, data, function (xmlhttp) {
+        _mfyaq.sendData(_mfyaq.visitHandlerUrl, data, function (xmlhttp) {
             var res = eval("(" + xmlhttp.responseText + ')');
-            if (!res.WasError) {
-                mobillify.visitId = res.Value;
+            if (!res.HasError) {
+                _mfyaq.visitId = res.Value;
             }
         });
-    },
-    addDataToCookie: function () {
-        if (mobillify.visitId > 0 && (mobillify.clicksData.length > 0 || mobillify.viewPartsData.length > 0)) {
-            var lastPart = mobillify.viewPartsData[mobillify.viewPartsData.length - 1];
-            lastPart.finishDate = new Date();
-            mobillify.setCookie('mobillifyData', mobillify.serializeData(), 30);
+    };
+_mfyaq.addDataToCookie = function () {
+        if (_mfyaq.visitId > 0 && (_mfyaq.clicksData.length > 0 || _mfyaq.viewPartsData.length > 0)) {
+            if (_mfyaq.viewPartsData.length > 0) {
+                var lastPart = _mfyaq.viewPartsData[_mfyaq.viewPartsData.length - 1];
+                lastPart.finishDate = new Date();
+            }
+            _mfyaq.setCookie('_mfyaq', _mfyaq.serializeData(), 30);
         }
-    },
-    serializeData: function () {
+    };
+_mfyaq.serializeData = function () {
         var data = null;
-        if (mobillify.visitId > 0) {
-            data = '{"vid":"' + mobillify.visitId + '"';
+        if (_mfyaq.visitId > 0) {
+            data = '{"vid":"' + _mfyaq.visitId + '"';
             data += ',"vpd":[';
-            for (var i = 0; i < mobillify.viewPartsData.length; i++) {
-                var curPart = mobillify.viewPartsData[i];
+            for (var i = 0; i < _mfyaq.viewPartsData.length; i++) {
+                var curPart = _mfyaq.viewPartsData[i];
                 data += '{"sd":"' + curPart.startDate.toUTCString() + '"';
                 data += ',"sl":' + curPart.scrollLeft;
                 data += ',"st":' + curPart.scrollTop;
@@ -61,8 +63,8 @@
                 data += '},';
             }
             data += '],"cd":[';
-            for (var i = 0; i < mobillify.clicksData.length; i++) {
-                var curClick = mobillify.clicksData[i];
+            for (var i = 0; i < _mfyaq.clicksData.length; i++) {
+                var curClick = _mfyaq.clicksData[i];
                 data += '{"d":"' + curClick.date.toUTCString() + '"';
                 data += ',"cx":' + curClick.clientX;
                 data += ',"cy":' + curClick.clientY;
@@ -71,16 +73,16 @@
             data += ']}';
         }
         return data;
-    },
-    sendPackage: function () {
-        if (mobillify.visitId > 0 && (mobillify.clicksData.length + mobillify.viewPartsData.length > 3)) {
-            var data = mobillify.serializeData();
-            mobillify.viewPartsData = new Array();
-            mobillify.clicksData = new Array();
-            mobillify.sendData(mobillify.packageHandlerUrl, data);
+    };
+_mfyaq.sendPackage = function () {
+        if (_mfyaq.visitId > 0 && (_mfyaq.clicksData.length + _mfyaq.viewPartsData.length > 3)) {
+            var data = _mfyaq.serializeData();
+            _mfyaq.viewPartsData = new Array();
+            _mfyaq.clicksData = new Array();
+            _mfyaq.sendData(_mfyaq.packageHandlerUrl, data);
         }
-    },
-    sendData: function (dataHandlerUrl, data, onreadystatechange) {
+    };
+_mfyaq.sendData = function (dataHandlerUrl, data, onreadystatechange) {
         var xmlhttp;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -94,15 +96,15 @@
             }
         }
 
-        data = 'json=' + data;
+        //data = 'json=' + data;
         xmlhttp.open("POST", dataHandlerUrl, true);
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xmlhttp.setRequestHeader("Content-length", data.length);
         xmlhttp.setRequestHeader("Connection", "close");
         xmlhttp.send(data);
 
-    },
-    getWinSize: function () {
+    };
+_mfyaq.getWinSize = function () {
         var winW = 0, winH = 0;
         if (document.body && document.body.offsetWidth) {
             winW = document.body.offsetWidth;
@@ -119,21 +121,21 @@
             winH = window.innerHeight;
         }
         return { w: winW, h: winH };
-    },
-    clientWidth: function () {
+    };
+_mfyaq.clientWidth = function () {
         var db = document.body;
         var dde = document.documentElement;
 
         return Math.max(db ? db.scrollWidth : 0, dde.scrollWidth, db ? db.offsetWidth : 0, dde.offsetWidth, db ? db.clientWidth : 0, dde.clientWidth)
-        //        return mobillify.filterResults(
+        //        return _mfyaq.filterResults(
         //                    window.innerWidth ? window.innerWidth : 0,
         //                    document.documentElement ? document.documentElement.clientWidth : 0,
         //                    document.body ? document.body.clientWidth : 0
         //                );
-    },
-    clientHeight: function () {
+    };
+_mfyaq.clientHeight = function () {
         //TODO:Remove it
-        if (mobillify.clientId == 3) {
+        if (_mfyaq.Key == 3) {
             return 837;
         }
 
@@ -141,25 +143,25 @@
         var dde = document.documentElement;
 
         return Math.max(db ? db.scrollHeight : 0, dde.scrollHeight, db ? db.offsetHeight : 0, dde.offsetHeight, db ? db.clientHeight : 0, dde.clientHeight)
-        //        return mobillify.filterResults(
+        //        return _mfyaq.filterResults(
         //                    window.innerHeight ? window.innerHeight : 0,
         //                    document.documentElement ? document.documentElement.clientHeight : 0,
         //                    document.body ? document.body.clientHeight : 0
         //                );
-    },
-    filterResults: function (n_win, n_docel, n_body) {
+    };
+_mfyaq.filterResults = function (n_win, n_docel, n_body) {
         var n_result = n_win ? n_win : 0;
         if (n_docel && (!n_result || (n_result > n_docel)))
             n_result = n_docel;
         return n_body && (!n_result || (n_result > n_body)) ? n_body : n_result;
-    },
-    setCookie: function (c_name, value, exdays) {
+    };
+_mfyaq.setCookie = function (c_name, value, exdays) {
         var exdate = new Date();
         exdate.setDate(exdate.getDate() + exdays);
         var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
         document.cookie = c_name + "=" + c_value;
-    },
-    getCookie: function (c_name) {
+    };
+_mfyaq.getCookie = function (c_name) {
         var i, x, y, ARRcookies = document.cookie.split(";");
         for (i = 0; i < ARRcookies.length; i++) {
             x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
@@ -169,55 +171,55 @@
                 return unescape(y);
             }
         }
-    },
-    scrollLeft: function () {
-        return mobillify.filterResults(
+    };
+_mfyaq.scrollLeft = function () {
+        return _mfyaq.filterResults(
         window.pageXOffset ? window.pageXOffset : 0,
         document.documentElement ? document.documentElement.scrollLeft : 0,
         document.body ? document.body.scrollLeft : 0
         );
-    },
-    scrollTop: function () {
-        return mobillify.filterResults(
+    };
+_mfyaq.scrollTop = function () {
+        return _mfyaq.filterResults(
         window.pageYOffset ? window.pageYOffset : 0,
         document.documentElement ? document.documentElement.scrollTop : 0,
         document.body ? document.body.scrollTop : 0
         );
-    },
-    onscroll: function () {
+    };
+_mfyaq.onscroll = function () {
         var curDate = new Date();
-        if (mobillify.viewPartsData.length == 0) {
-            mobillify.viewPartsData.push(mobillify.getViewPart(new Date()));
+        if (_mfyaq.viewPartsData.length == 0) {
+            _mfyaq.viewPartsData.push(_mfyaq.getViewPart(new Date()));
         }
-        var lastPart = mobillify.viewPartsData[mobillify.viewPartsData.length - 1];
-        var diff = mobillify.dateDiffInSec(curDate, lastPart.startDate)
+        var lastPart = _mfyaq.viewPartsData[_mfyaq.viewPartsData.length - 1];
+        var diff = _mfyaq.dateDiffInSec(curDate, lastPart.startDate)
         if (diff > 2) {
             lastPart.finishDate = curDate;
-            mobillify.sendPackage();
-            mobillify.viewPartsData.push(mobillify.getViewPart(curDate));
+            _mfyaq.sendPackage();
+            _mfyaq.viewPartsData.push(_mfyaq.getViewPart(curDate));
         } else {
-            lastPart.scrollLeft = mobillify.scrollLeft();
-            lastPart.scrollTop = mobillify.scrollTop();
+            lastPart.scrollLeft = _mfyaq.scrollLeft();
+            lastPart.scrollTop = _mfyaq.scrollTop();
         }
-    },
-    onclick: function (e) {
-        mobillify.clicksData.push({
+    };
+_mfyaq.onclick = function (e) {
+        _mfyaq.clicksData.push({
             date: new Date(),
             clientX: e.clientX,
             clientY: e.clientY
         });
-        mobillify.addDataToCookie();
-        mobillify.sendPackage();
-    },
-    getViewPart: function (curDate) {
+        _mfyaq.addDataToCookie();
+        _mfyaq.sendPackage();
+    };
+_mfyaq.getViewPart = function (curDate) {
         return {
             startDate: curDate,
-            scrollLeft: mobillify.scrollLeft(),
-            scrollTop: mobillify.scrollTop(),
+            scrollLeft: _mfyaq.scrollLeft(),
+            scrollTop: _mfyaq.scrollTop(),
             finishDate: new Date()
         };
-    },
-    dateDiffInSec: function (date1, date2) {
+    };
+_mfyaq.dateDiffInSec = function (date1, date2) {
         var diff = new Date();
         diff.setTime(Math.abs(date1.getTime() - date2.getTime()));
 
@@ -238,6 +240,6 @@
         var secs = Math.floor(timediff / 1000);
         timediff -= secs * 1000;
         return secs;
-    }
-};
-mobillify.init();
+    };
+
+_mfyaq.init();

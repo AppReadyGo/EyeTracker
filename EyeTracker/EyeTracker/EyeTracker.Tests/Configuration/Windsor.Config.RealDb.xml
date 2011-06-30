@@ -1,28 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
   <components>
-    <component id="AccountRepository" service="Fin.Data.IAccountRepository, Fin.Data" type="Fin.Data.AccountRepository, Fin.Data"/>
-    <component id="CurrencyRepository" service="Fin.Data.ICurrencyRepository, Fin.Data" type="Fin.Data.CurrencyRepository, Fin.Data"/>
-    <component id="TransactionRepository" service="Fin.Data.ITransactionRepository, Fin.Data" type="Fin.Data.TransactionRepository, Fin.Data"/>
-    <component id="TagsRepository" service="Fin.Data.ITagsRepository, Fin.Data" type="Fin.Data.TagsRepository, Fin.Data"/>
-    <component id="RulesRepository" service="Fin.Data.IRulesRepository, Fin.Data" type="Fin.Data.RulesRepository, Fin.Data"/>
-    <component id="ReportRepository" service="Fin.Data.IReportRepository, Fin.Data" type="Fin.Data.ReportRepository, Fin.Data"/>
-    <component id="ActivityTrackingRepository" service="Fin.Data.IActivityTrackingRepository, Fin.Data" type="Fin.Data.ActivityTrackingRepository, Fin.Data"/>
+    <component id="ActivityTrackingRepository" service="EyeTracker.DAL.IActivityTrackingRepository, EyeTracker.DAL" type="EyeTracker.DAL.ActivityTrackingRepository, EyeTracker.DAL"/>
+    <component id="AnalyticsRepository" service="EyeTracker.DAL.IAnalyticsRepository, EyeTracker.DAL" type="EyeTracker.DAL.AnalyticsRepository, EyeTracker.DAL"/>
+    <component id="ApplicationsRepository" service="EyeTracker.DAL.IApplicationsRepository, EyeTracker.DAL" type="EyeTracker.DAL.ApplicationsRepository, EyeTracker.DAL"/>
+    <component id="BackOfficeRepository" service="EyeTracker.DAL.IBackOfficeRepository, EyeTracker.DAL" type="EyeTracker.DAL.BackOfficeRepository, EyeTracker.DAL"/>
 
-    <component id="CurrencyService" service="Fin.Core.Services.ICurrencyService, Fin.Core" type="Fin.Core.Services.CurrencyService, Fin.Core"/>
-    <component id="AccountService" service="Fin.Core.Services.IAccountService, Fin.Core" type="Fin.Core.Services.AccountService, Fin.Core"/>
-    <component id="TransactionService" service="Fin.Core.Services.ITransactionService, Fin.Core" type="Fin.Core.Services.TransactionService, Fin.Core"/>
-    <component id="TagsService" service="Fin.Core.Services.ITagsService, Fin.Core" type="Fin.Core.Services.TagsService, Fin.Core"/>
-    <component id="RulesService" service="Fin.Core.Services.IRulesService, Fin.Core" type="Fin.Core.Services.RulesService, Fin.Core"/>
-    <component id="ReportService" service="Fin.Core.Services.IReportService, Fin.Core" type="Fin.Core.Services.ReportService, Fin.Core"/>
-    <component id="ActivityTrackingService" service="Fin.Core.Services.IActivityTrackingService, Fin.Core" type="Fin.Core.Services.ActivityTrackingService, Fin.Core"/>
+    <component id="BackOfficeService" service="EyeTracker.Core.Services.IBackOfficeService, EyeTracker.Core" type="EyeTracker.Core.Services.BackOfficeService, EyeTracker.Core"/>
+    <component id="ApplicationsService" service="EyeTracker.Core.Services.IApplicationsService, EyeTracker.Core" type="EyeTracker.Core.Services.ApplicationsService, EyeTracker.Core"/>
+    <component id="AnalyticsService" service="EyeTracker.Core.Services.IAnalyticsService, EyeTracker.Core" type="EyeTracker.Core.Services.AnalyticsService, EyeTracker.Core"/>
+    <component id="ActivityTrackingService" service="EyeTracker.Core.Services.IActivityTrackingService, EyeTracker.Core" type="EyeTracker.Core.Services.ActivityTrackingService, EyeTracker.Core"/>
 
-    <component id="RatesProvider" service="Fin.Core.IRatesProvider, Fin.Core" type="Fin.Core.GoogleRatesProvider, Fin.Core"/>
-    <component id="ActivityTracking" service="Fin.Core.ActivityTracking, Fin.Core" type="Fin.Core.ActivityTracking, Fin.Core"/>
+    <component id="ActivityTracking" service="EyeTracker.Core.ActivityTracking, EyeTracker.Core" type="EyeTracker.Core.ActivityTracking, EyeTracker.Core"/>
 
-    <component id="DashboardController" service="Fin.Controllers.DashboardController, Fin" type="Fin.Controllers.DashboardController, Fin"/>
+    <component id="MembershipService" service="EyeTracker.Core.Services.IMembershipService, EyeTracker.Core" type="EyeTracker.Tests.FakeData.RealMembershipService, EyeTracker.Tests"/>
+    <component id="FakeDataBase" service="EyeTracker.Tests.FakeData.IFakeDataBase, EyeTracker.Tests" type="EyeTracker.Tests.FakeData.RealDataBase, EyeTracker.Tests"/>
 
-    <component id="MembershipService" service="Fin.Core.Services.IMembershipService, Fin.Core" type="Fin.Tests.FakeData.RealMembershipService, Fin.Tests"/>
-    <component id="FakeDataBase" service="Fin.Tests.FakeData.IFakeDataBase, Fin.Tests" type="Fin.Tests.FakeData.RealDataBase, Fin.Tests"/>
+
   </components>
 </configuration>

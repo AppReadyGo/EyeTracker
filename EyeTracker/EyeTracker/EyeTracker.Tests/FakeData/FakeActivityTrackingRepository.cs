@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using EyeTracker.DAL;
 using EyeTracker.DAL.Models;
+using EyeTracker.DAL.EntityModels;
 
 namespace EyeTracker.Tests.FakeData
 {
@@ -16,25 +17,19 @@ namespace EyeTracker.Tests.FakeData
             fakeDataBase = (FakeDataBase)Utilites.Container.Resolve<IFakeDataBase>();
         }
 
-        public void Write(string userId, UserActivityType userActivityType, string description, int? linkedObjectId)
+        public void Write(UserActivity userActivity)
         {
-            fakeDataBase.AddUserActivity(userId, new UserActivity()
-            {
-                Date = DateTime.UtcNow,
-                Description = description,
-                Type = userActivityType,
-                LinkedObjectId = linkedObjectId
-            });
+            fakeDataBase.AddUserActivity(userActivity.UserId.ToString(), userActivity);
         }
 
-        public List<UserActivity> Get(string userId, UserActivityType? userActivityType, DateTime? fromDate, DateTime? toDate, int? lastActivitesCount)
+        public List<UserActivity> Get(Guid userId, UserActivityType? userActivityType, DateTime? fromDate, DateTime? toDate, int? lastActivitesCount)
         {
-            if (fakeDataBase.UserActivities.ContainsKey(userId))
+            if (fakeDataBase.UserActivities.ContainsKey(userId.ToString()))
             {
-                var res = fakeDataBase.UserActivities[userId].Where(curItem =>
+                var res = fakeDataBase.UserActivities[userId.ToString()].Where(curItem =>
                     (!fromDate.HasValue || curItem.Date >= fromDate.Value) &&
                     (!toDate.HasValue || curItem.Date <= toDate.Value) &&
-                    (!userActivityType.HasValue || curItem.Type == userActivityType));
+                    (!userActivityType.HasValue || curItem.ActivityType == userActivityType));
                 return lastActivitesCount.HasValue ? res.Reverse().Take(lastActivitesCount.Value).ToList() : res.ToList();
             }
             return new List<UserActivity>();

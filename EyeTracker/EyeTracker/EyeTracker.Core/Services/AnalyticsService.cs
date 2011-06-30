@@ -5,12 +5,14 @@ using System.Text;
 using EyeTracker.DAL.Interfaces;
 using EyeTracker.DAL;
 using EyeTracker.Common;
-using EyeTracker.Core.Models;
 using AutoMapper;
 using EyeTracker.DAL.EntityModels;
 using EyeTracker.Common.Logger;
 using System.Reflection;
 using EyeTracker.DAL.Models;
+using System.IO;
+using System.Collections;
+using System.Net;
 
 namespace EyeTracker.Core.Services
 {
@@ -19,11 +21,11 @@ namespace EyeTracker.Core.Services
         OperationResult<List<ClickHeatMapData>> GetClickHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
         OperationResult<List<ViewHeatMapData>> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
 
-        OperationResult<long> AddVisitInfo(VisitInfoViewModel visitInfo);
+        OperationResult<long> AddVisitInfo(VisitInfo visitInfo);
 
-        OperationResult AddViewPartInfo(long visitInfoId, ViewPartInfoViewModel viewPartInfo);
+        OperationResult AddViewPartInfo(ViewPartInfo viewPartInfo);
 
-        OperationResult AddClickInfo(long visitInfoId, ClickInfoViewModel clickInfo);
+        OperationResult AddClickInfo(ClickInfo clickInfo);
 
         OperationResult<AnalyticsInfo> GetAnalyticsInfo(string userId, long? appId, string pageUri);
 
@@ -32,14 +34,14 @@ namespace EyeTracker.Core.Services
 
         OperationResult ClearAnalytics(string userId, long appId, string pageUri, int width, int height);
     }
-    
+
     public class AnalyticsService : IAnalyticsService
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         private IAnalyticsRepository repository;
 
         public AnalyticsService()
-            :this(new AnalyticsRepository())
+            : this(new AnalyticsRepository())
         {
         }
 
@@ -73,7 +75,7 @@ namespace EyeTracker.Core.Services
             }
             catch (Exception exp)
             {
-                result = new OperationResult<List<ClickHeatMapData>>(exp, "GetClickHeatMapData(appId:{0},pageUri:{1},clientWidth:{2},clientHeight:{3})",appId, pageUri, clientWidth, clientHeight);
+                result = new OperationResult<List<ClickHeatMapData>>(exp, "GetClickHeatMapData(appId:{0},pageUri:{1},clientWidth:{2},clientHeight:{3})", appId, pageUri, clientWidth, clientHeight);
             }
             return result;
         }
@@ -107,15 +109,14 @@ namespace EyeTracker.Core.Services
             return result;
         }
 
-        public OperationResult<long> AddVisitInfo(VisitInfoViewModel visitInfo)
+        public OperationResult<long> AddVisitInfo(VisitInfo visitInfo)
         {
             OperationResult<long> result = null;
             try
             {
-                Mapper.CreateMap<VisitInfoViewModel, VisitInfo>()
-                    .ForMember(dest => dest.UserApplicationId, opt => opt.MapFrom(src => long.Parse(src.ClientId)));
-                var eVisitInfo = Mapper.Map<VisitInfoViewModel, VisitInfo>(visitInfo);
-                result = new OperationResult<long>(repository.AddVisitInfo(eVisitInfo));
+                //TODO: add validation
+
+                result = new OperationResult<long>(repository.AddVisitInfo(visitInfo));
             }
             catch (Exception exp)
             {
@@ -124,21 +125,15 @@ namespace EyeTracker.Core.Services
             return result;
         }
 
-        public OperationResult AddViewPartInfo(long visitInfoId, ViewPartInfoViewModel viewPartInfo)
+        public OperationResult AddViewPartInfo(ViewPartInfo viewPartInfo)
         {
             OperationResult result = null;
             try
             {
-                Mapper.CreateMap<ViewPartInfoViewModel, ViewPartInfo>()
-                    .ForMember(dest => dest.Date, opt => opt.MapFrom(src => DateTime.Parse(src.StrStartDate)))
-                    .ForMember(dest => dest.TimeSpan, opt => opt.MapFrom(src => (int)(DateTime.Parse(src.StrFinishDate) - DateTime.Parse(src.StrStartDate)).TotalSeconds));
-                    //.ForMember(dest => dest.VisitInfoId, opt => opt.UseValue<long>(visitInfoId));
-                var eViewPartInfo = Mapper.Map<ViewPartInfoViewModel, ViewPartInfo>(viewPartInfo);
-                eViewPartInfo.VisitInfoId = visitInfoId;
-                log.WriteInformation("AddViewPartInfo:visitInfoId:{0}, eViewPartInfo.VisitInfoId:{1}", visitInfoId, eViewPartInfo.VisitInfoId);
-                if (eViewPartInfo.TimeSpan > 0)
+                log.WriteInformation("AddViewPartInfo:visitInfoId:{0}", viewPartInfo.VisitInfoId);
+                if (viewPartInfo.TimeSpan > 0)
                 {
-                    repository.AddViewPartInfo(eViewPartInfo);
+                    repository.AddViewPartInfo(viewPartInfo);
                 }
                 result = new OperationResult();
             }
@@ -149,17 +144,12 @@ namespace EyeTracker.Core.Services
             return result;
         }
 
-        public OperationResult AddClickInfo(long visitInfoId, ClickInfoViewModel clickInfo)
+        public OperationResult AddClickInfo(ClickInfo clickInfo)
         {
             OperationResult result = null;
             try
             {
-                Mapper.CreateMap<ClickInfoViewModel, ClickInfo>()
-                   .ForMember(dest => dest.Date, opt => opt.MapFrom(src => DateTime.Parse(src.StrDate)));
-                   //.ForMember(dest => dest.VisitInfoId, opt => opt.UseValue<long>(visitInfoId));
-                var eClickInfo = Mapper.Map<ClickInfoViewModel, ClickInfo>(clickInfo);
-                eClickInfo.VisitInfoId = visitInfoId;
-                repository.AddClickInfo(eClickInfo);
+                repository.AddClickInfo(clickInfo);
                 result = new OperationResult();
             }
             catch (Exception exp)
@@ -176,7 +166,7 @@ namespace EyeTracker.Core.Services
             {
                 return new OperationResult<AnalyticsInfo>(repository.GetAnalyticsInfo(userId, appId, pageUri));
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 result = new OperationResult<AnalyticsInfo>(exp, "GetAnalyticsInfo");
             }
@@ -188,11 +178,11 @@ namespace EyeTracker.Core.Services
             OperationResult<string> result = null;
             try
             {
-                result = new OperationResult<string>(Encryption.EncryptLow(appId.ToString(),Encryption.ENCRYPTION_KEY));
+                result = new OperationResult<string>(Encryption.EncryptLow(appId.ToString(), Encryption.ENCRYPTION_KEY));
             }
             catch (Exception exp)
             {
-                result = new OperationResult<string>(exp, "GetClientId(appId:{0})",appId);
+                result = new OperationResult<string>(exp, "GetClientId(appId:{0})", appId);
             }
             return result;
         }
@@ -231,5 +221,6 @@ namespace EyeTracker.Core.Services
         }
 
         #endregion
+
     }
 }
