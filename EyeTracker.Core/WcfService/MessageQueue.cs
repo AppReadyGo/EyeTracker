@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EyeTracker.Wcf
+namespace EyeTracker.Core.WcfService
 {
-    class VisitInfoViewModel
+    public class MessageQueue
     {
     }
 }

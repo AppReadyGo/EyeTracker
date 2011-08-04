@@ -50,6 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -79,17 +80,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnalyticsService.svc.cs">
-      <DependentUpon>AnalyticsService.svc</DependentUpon>
-    </Compile>
-    <Compile Include="IAnalyticsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VisitInfoViewModel.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\EyeTracker.DAL\EyeTracker.DAL.csproj">
+      <Project>{726E47E8-4DA8-4BDF-96E2-9E9CE6EB1454}</Project>
+      <Name>EyeTracker.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EyeTracker.Model\EyeTracker.Common.csproj">
       <Project>{F5D9FA27-BAAF-4B4B-97F0-0A71F2210009}</Project>
       <Name>EyeTracker.Common</Name>
