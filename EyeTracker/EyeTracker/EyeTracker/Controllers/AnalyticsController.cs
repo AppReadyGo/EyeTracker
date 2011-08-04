@@ -74,7 +74,7 @@ namespace EyeTracker.Controllers
             if (!opResult.HasError)
             {
                 Image bgImg = GetBackgroundImage(appId, clientWidth, clientHeight);
-                Image image = HeatMapImage.CreateClickHeatMap(opResult.Value, clientWidth, clientHeight, bgImg);
+                Image image = HeatMapImage_.CreateClickHeatMap(opResult.Value, clientWidth, clientHeight, bgImg);
                 using (MemoryStream mStream = new MemoryStream())
                 {
                     image.Save(mStream, ImageFormat.Png);
@@ -94,7 +94,7 @@ namespace EyeTracker.Controllers
             if (!opResult.HasError)
             {
                 Image bgImg = GetBackgroundImage(appId, clientWidth, clientHeight);
-                Image image = HeatMapImage.CreateViewHeatMap(opResult.Value, clientWidth, clientHeight, bgImg);
+                Image image = HeatMapImage_.CreateViewHeatMap(opResult.Value, clientWidth, clientHeight, bgImg);
                 using (MemoryStream mStream = new MemoryStream())
                 {
                     image.Save(mStream, ImageFormat.Png);

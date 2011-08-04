@@ -67,6 +67,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions">
@@ -92,6 +93,9 @@
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\AccountControllerTest.cs" />
     <Compile Include="TDD\Controllers\AnalyticsControllerTest.cs" />
+    <Compile Include="TDD\Other\ClickProcessorTest.cs" />
+    <Compile Include="TDD\Other\HeatMapImageTest.cs" />
+    <Compile Include="TDD\Other\WebsiteSnapshotTest.cs" />
     <Compile Include="TDD\Services\ActivityTrackingServiceTest.cs" />
     <Compile Include="TDD\Services\AnalyticsServiceTest.cs" />
     <Compile Include="TDD\Services\ApplicationsServiceTest.cs" />

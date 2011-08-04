@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="EyeTracker.Wcf.AnalyticsService" CodeBehind="AnalyticsService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="EyeTracker.Core.Wcf.AnalyticsService" Factory="System.ServiceModel.Activation.WebServiceHostFactory"%>
