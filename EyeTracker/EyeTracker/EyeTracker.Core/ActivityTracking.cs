@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using EyeTracker.DAL;
 using EyeTracker.Common;
-using EyeTracker.DAL.Models;
-using EyeTracker.DAL.EntityModels;
+using EyeTracker.DAL.Domain;
 
 namespace EyeTracker.Core
 {

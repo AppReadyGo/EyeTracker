@@ -6,7 +6,7 @@ using System.Web.Security;
 using EyeTracker.Core;
 using EyeTracker.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using EyeTracker.DAL.Models;
+using EyeTracker.DAL.Domain;
 
 namespace EyeTracker.Tests.FakeData
 {
@@ -107,6 +107,18 @@ namespace EyeTracker.Tests.FakeData
         public List<string> GetUserIds()
         {
             return usersList.Keys.ToList();
+        }
+
+
+        public OperationResult<Guid> GetCurrentUserId()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void DeleteUser(string userName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

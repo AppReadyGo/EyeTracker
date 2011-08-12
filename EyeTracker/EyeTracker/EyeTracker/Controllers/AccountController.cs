@@ -9,6 +9,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using EyeTracker.Models;
 using EyeTracker.Core.Services;
+using EyeTracker.DAL.Domain;
 
 namespace EyeTracker.Controllers
 {
@@ -19,6 +20,16 @@ namespace EyeTracker.Controllers
 
         public IFormsAuthenticationService FormsService { get; set; }
         public IMembershipService MembershipService { get; set; }
+        private IAccountService acountService = null;
+
+        public AccountController(): this(new AccountService())
+        {
+        }
+
+        public AccountController(IAccountService acountService)
+        {
+            this.acountService = acountService;
+        }
 
         protected override void Initialize(RequestContext requestContext)
         {
@@ -81,8 +92,9 @@ namespace EyeTracker.Controllers
 
         public ActionResult Register()
         {
-            return RedirectToAction("LogOn");
+            //return RedirectToAction("LogOn");
             ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            ViewData["TimeZoneList"] = acountService.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
             return View();
         }
 
@@ -91,12 +103,23 @@ namespace EyeTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                //User name will be email
+                model.UserName = model.Email;
                 // Attempt to register the user
                 MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
+
+                    //Add account information to database
+                    var res = acountService.Add(new AccountInfo() { TimeZone = model.TimeZone });
+                    if (res.HasError)
+                    {
+                        FormsService.SignOut();
+                        MembershipService.DeleteUser(model.UserName);
+                        ModelState.AddModelError("","Error to register, please contact to support.");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 else

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using EyeTracker.Core;
 using AutoMapper;
 using EyeTracker.Common;
-using EyeTracker.DAL.Models;
+using EyeTracker.DAL.Domain;
 using System.Text;
 using EyeTracker.Common.Logger;
 using System.Reflection;

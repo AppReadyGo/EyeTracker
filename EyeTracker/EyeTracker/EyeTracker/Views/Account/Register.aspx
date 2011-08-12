@@ -18,15 +18,7 @@
         <div>
             <fieldset>
                 <legend>Account Information</legend>
-                
-                <div class="editor-label">
-                    <%: Html.LabelFor(m => m.UserName) %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.TextBoxFor(m => m.UserName) %>
-                    <%: Html.ValidationMessageFor(m => m.UserName) %>
-                </div>
-                
+                                
                 <div class="editor-label">
                     <%: Html.LabelFor(m => m.Email) %>
                 </div>
@@ -50,11 +42,19 @@
                     <%: Html.PasswordFor(m => m.ConfirmPassword) %>
                     <%: Html.ValidationMessageFor(m => m.ConfirmPassword) %>
                 </div>
-                
+                                 
+                <div class="editor-label">
+                    <%: Html.LabelFor(m => m.TimeZone) %>
+                </div>
+                <div class="editor-field">
+                    <%: Html.DropDownListFor(m => m.TimeZone, new SelectList((IEnumerable<object>)ViewData["TimeZoneList"], "Id", "DisplayName"))%>
+                    <%: Html.ValidationMessageFor(m => m.TimeZone)%>
+                </div>
+               
                 <p>
                     <input type="submit" value="Register" />
                 </p>
-            </fieldset>
-        </div>
+             </fieldset>
+       </div>
     <% } %>
 </asp:Content>

@@ -7,13 +7,13 @@ using System.Runtime.Serialization.Json;
 using System.IO;
 using System.Text;
 using System.Runtime.Serialization;
-using EyeTracker.DAL.EntityModels;
 using EyeTracker.Core.Services;
 using EyeTracker.Common.Logger;
 using System.Reflection;
 using EyeTracker.Windsor;
 using AutoMapper;
 using EyeTracker.Model;
+using EyeTracker.DAL.Domain;
 
 namespace EyeTracker.CustomModelBinders
 {

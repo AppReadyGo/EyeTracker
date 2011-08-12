@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using EyeTracker.DAL;
 using EyeTracker.DAL.Interfaces;
-using EyeTracker.DAL.EntityModels;
+using EyeTracker.DAL.Domain;
 
 namespace EyeTracker.Tests.FakeData
 {
@@ -30,12 +30,12 @@ namespace EyeTracker.Tests.FakeData
             throw new NotImplementedException();
         }
 
-        public void AddClickInfo(DAL.EntityModels.ClickInfo clickInfo)
+        public void AddClickInfo(ClickInfo clickInfo)
         {
             throw new NotImplementedException();
         }
 
-        public DAL.Models.AnalyticsInfo GetAnalyticsInfo(string userId, long? appId, string pageUri)
+        public AnalyticsInfo GetAnalyticsInfo(string userId, long? appId, string pageUri)
         {
             throw new NotImplementedException();
         }

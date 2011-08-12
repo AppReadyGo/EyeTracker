@@ -5,10 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using EyeTracker.CustomModelBinders;
-using EyeTracker.DAL.EntityModels;
 using Castle.Windsor;
 using EyeTracker.Windsor;
 using EyeTracker.Model;
+using EyeTracker.DAL.Domain;
 
 namespace EyeTracker
 {
