@@ -82,7 +82,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="AnalyticsHandler.ashx" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EyeTracker.DAL\EyeTracker.DAL.csproj">
       <Project>{726E47E8-4DA8-4BDF-96E2-9E9CE6EB1454}</Project>

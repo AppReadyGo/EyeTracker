@@ -5,8 +5,7 @@ using System.Text;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
 using System.Configuration;
-using EyeTracker.DAL.Models;
-using EyeTracker.DAL.EntityModels;
+using EyeTracker.DAL.Domain;
 
 namespace EyeTracker.Tests
 {

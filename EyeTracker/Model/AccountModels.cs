@@ -50,7 +50,6 @@ namespace EyeTracker.Models
     [PropertiesMustMatch("Password", "ConfirmPassword", ErrorMessage = "The password and confirmation password do not match.")]
     public class RegisterModel
     {
-        [Required]
         [DisplayName("User name")]
         public string UserName { get; set; }
 
@@ -69,6 +68,10 @@ namespace EyeTracker.Models
         [DataType(DataType.Password)]
         [DisplayName("Confirm password")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DisplayName("Time Zone")]
+        public short TimeZone { get; set; }
     }
     #endregion
 

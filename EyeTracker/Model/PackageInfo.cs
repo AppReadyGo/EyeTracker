@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using EyeTracker.DAL.EntityModels;
+using EyeTracker.DAL.Domain;
 
 namespace EyeTracker.Model
 {

@@ -16,7 +16,7 @@ using EyeTracker.Core;
 using EyeTracker.Common.Logger;
 using System.Reflection;
 using EyeTracker.Core.Services;
-using EyeTracker.DAL.EntityModels;
+using EyeTracker.DAL.Domain;
 
 namespace EyeTracker.Controllers
 {

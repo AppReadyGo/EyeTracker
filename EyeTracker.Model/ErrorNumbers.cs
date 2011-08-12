@@ -13,6 +13,10 @@ namespace EyeTracker.Common
         General = 1,
         WrongParameter,
         AccessDenied,
-        WrongDescription
+        WrongDescription,
+        NotFound,
+        WrongFirstName,
+        WrongLastName,
+        WrongTimeZone
     }
 }

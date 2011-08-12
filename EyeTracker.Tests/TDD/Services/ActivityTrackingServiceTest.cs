@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EyeTracker.Tests.FakeData;
 using EyeTracker.Core.Services;
-using EyeTracker.DAL.Models;
+using EyeTracker.DAL.Domain;
 using EyeTracker.Common;
 
 namespace EyeTracker.Tests.TDD.Services

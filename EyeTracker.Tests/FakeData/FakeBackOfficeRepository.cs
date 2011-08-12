@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EyeTracker.DAL;
-using EyeTracker.DAL.Models;
+using EyeTracker.DAL.Domain;
 
 namespace EyeTracker.Tests.FakeData
 {

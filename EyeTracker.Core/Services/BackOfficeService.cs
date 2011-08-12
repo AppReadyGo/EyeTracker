@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using EyeTracker.DAL;
 using EyeTracker.Common;
-using EyeTracker.DAL.Models;
+using EyeTracker.DAL.Domain;
 using EyeTracker.Common.Logger;
 using System.Reflection;
 

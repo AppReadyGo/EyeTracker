@@ -82,7 +82,7 @@
     <Compile Include="Analytics.cs" />
     <Compile Include="FakeData\FakeActivityTrackingRepository.cs" />
     <Compile Include="FakeData\FakeAnalyticsRepository.cs" />
-    <Compile Include="FakeData\FakeApplicationsRepository.cs" />
+    <Compile Include="FakeData\FakeApplicationRepository.cs" />
     <Compile Include="FakeData\FakeBackOfficeRepository.cs" />
     <Compile Include="FakeData\FakeDataBase.cs" />
     <Compile Include="FakeData\FakeMembershipService.cs" />

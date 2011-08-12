@@ -5,10 +5,9 @@ using System.Text;
 using EyeTracker.DAL.Interfaces;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data.Common;
-using EyeTracker.DAL.EntityModels;
 using System.Configuration;
 using System.Data;
-using EyeTracker.DAL.Models;
+using EyeTracker.DAL.Domain;
 
 namespace EyeTracker.DAL
 {

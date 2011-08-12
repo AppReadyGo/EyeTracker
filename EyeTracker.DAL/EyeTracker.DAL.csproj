@@ -47,6 +47,12 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\ThridParty\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Library.Common">
+      <HintPath>..\ThridParty\Library.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThridParty\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -55,10 +61,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThridParty\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\ThridParty\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -68,36 +76,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountRepository.cs" />
     <Compile Include="ActivityTrackingRepository.cs" />
     <Compile Include="AnalyticsRepository.cs" />
-    <Compile Include="ApplicationsRepository.cs" />
+    <Compile Include="Domain\ApplicationInfo.cs" />
+    <Compile Include="ApplicationRepository.cs" />
     <Compile Include="BackOfficeRepository.cs" />
-    <Compile Include="EntityModels\UserActivity.cs" />
-    <Compile Include="Models\Constants.cs" />
-    <Compile Include="EntityModels\Analytics.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Analytics.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Enumerators.cs" />
-    <Compile Include="Models\AnalyticsInfo.cs" />
-    <Compile Include="Models\ClickHeatMapData.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Interfaces\IRepositoryContext.cs" />
-    <Compile Include="Models\LogCollectionsInfo.cs" />
-    <Compile Include="Models\LogInfo.cs" />
-    <Compile Include="Models\ViewHeatMapData.cs" />
+    <Compile Include="Domain\AccountInfo.cs" />
+    <Compile Include="Domain\ClickInfo.cs" />
+    <Compile Include="Domain\ViewPartInfo.cs" />
+    <Compile Include="Domain\VisitInfo.cs" />
+    <Compile Include="ReportRepository.cs" />
+    <Compile Include="Domain\Constants.cs" />
+    <Compile Include="Domain\Enumerators.cs" />
+    <Compile Include="Domain\AnalyticsInfo.cs" />
+    <Compile Include="Domain\ClickHeatMapData.cs" />
+    <Compile Include="Domain\LogCollectionsInfo.cs" />
+    <Compile Include="Domain\LogInfo.cs" />
+    <Compile Include="Domain\ViewHeatMapData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Domain\UserActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
-    <EntityDeploy Include="EntityModels\Analytics.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Analytics.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <ProjectReference Include="..\EyeTracker.Model\EyeTracker.Common.csproj">
+      <Project>{F5D9FA27-BAAF-4B4B-97F0-0A71F2210009}</Project>
+      <Name>EyeTracker.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

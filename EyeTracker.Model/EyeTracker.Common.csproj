@@ -86,12 +86,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\EyeTracker.DAL\EyeTracker.DAL.csproj">
-      <Project>{726E47E8-4DA8-4BDF-96E2-9E9CE6EB1454}</Project>
-      <Name>EyeTracker.DAL</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

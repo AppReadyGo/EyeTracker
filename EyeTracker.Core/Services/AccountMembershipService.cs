@@ -19,7 +19,10 @@ namespace EyeTracker.Core.Services
         bool ValidateUser(string userName, string password);
         MembershipCreateStatus CreateUser(string userName, string password, string email);
         bool ChangePassword(string userName, string oldPassword, string newPassword);
+        void DeleteUser(string userName);
         OperationResult<MembershipUser> GetCurrentUser();
+        OperationResult<Guid> GetCurrentUserId();
+
     }
 
     public class AccountMembershipService : IMembershipService
@@ -94,6 +97,27 @@ namespace EyeTracker.Core.Services
                 return new OperationResult<MembershipUser>(ErrorNumber.AccessDenied);
             }
             return new OperationResult<MembershipUser>(user);
+        }
+
+
+
+        public OperationResult<Guid> GetCurrentUserId()
+        {
+            var getCurUserRes = GetCurrentUser();
+            if (getCurUserRes.HasError)
+            {
+                return new OperationResult<Guid>(getCurUserRes);
+            }
+            else
+            {
+                return new OperationResult<Guid>(new Guid(getCurUserRes.Value.ProviderUserKey.ToString()));
+            }
+        }
+
+
+        public void DeleteUser(string userName)
+        {
+            _provider.DeleteUser(userName, true);
         }
     }
 }

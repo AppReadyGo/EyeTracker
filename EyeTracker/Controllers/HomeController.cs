@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using EyeTracker.Core;
 using AutoMapper;
-using EyeTracker.DAL.Models;
+using EyeTracker.DAL.Domain;
 using System.Web.Security;
 using EyeTracker.Core.Services;
 
