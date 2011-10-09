@@ -1,0 +1,47 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> - <asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <link href="<%: Url.Content("~/Content/Site.css") %>" rel="stylesheet" type="text/css" />
+    <script src="<%: Url.Content("~/Scripts/3rdParty/jquery-1.4.1.min.js") %>" type="text/javascript"></script>
+    <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
+</head>
+
+<body>
+    <div class="page">
+
+        <div id="header">
+            <div id="logindisplay">
+                <% Html.RenderPartial("LogOnUserControl"); %>
+            </div> 
+            
+            <div id="main_menu" class="panel">
+                <div>
+<%
+    if (Request.IsAuthenticated) {
+%>
+                    <%: Html.ActionLink("Applications", "", "Application")%>
+                    <a href="/Tutorials">Tutorials</a>
+                    <%: Html.ActionLink("Account Details", "Details", "Account")%>
+<%
+    }
+    else {
+%> 
+                    <a href="/">Home</a>
+                    <a href="/Tutorials">Tutorials</a>
+                    <a href="/PlansPricing">Plans & Pricing</a>
+                    <a href="/Products">Products</a>
+<%
+    }
+%>                
+                </div>
+                <h2><asp:ContentPlaceHolder ID="Title" runat="server" /></h2>
+            </div>
+        </div>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        <div id="footer"></div>
+    </div>
+</body>
+</html>
