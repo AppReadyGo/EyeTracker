@@ -1,0 +1,10 @@
+﻿
+
+table.page-wrapper{width:100%;}
+table.page-wrapper{margin:0;padding:0;border:0;}
+table.page-wrapper > tbody > tr > td{margin:0;padding:0;border:0;vertical-align:top;}
+.left-menu{width:160px;}
+.left-menu a{color:#666666;text-decoration:none;line-height:29px;border-radius:2px 2px 2px 2px;border:1px solid rgba(0, 0, 0, 0.1);
+                   background:-moz-linear-gradient(center top , #F5F5F5, #F1F1F1) repeat scroll 0 0 #F5F5F5;
+                   text-align:center;width:140px;display:inline-block;font-size:12px;margin:4px;font-weight:bold;cursor:pointer;}
+.left-menu a:hover{border:1px solid rgba(0, 0, 0, 0.4);color:#333333;}

@@ -1,0 +1,11 @@
+﻿
+
+/*charts*/
+.charts{border:1px solid #DDDDDD;border-top:none;padding:15px 5px 15px 5px;}
+
+
+#tooltip,#expander{border:1px solid #525252;padding:10px;background-color:#FFF;position:absolute;display:none;-moz-border-radius: 7px;border-radius: 7px;font-family:Arial;font-size:10px;}
+.red{color:Red;}
+.green{color:Green;}
+.today{position:absolute;color:#666;font-size:smaller;}
+

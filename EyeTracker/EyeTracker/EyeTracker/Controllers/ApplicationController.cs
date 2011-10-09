@@ -20,17 +20,17 @@ using EyeTracker.DAL.Domain;
 
 namespace EyeTracker.Controllers
 {
-    public class AnalyticsController : Controller
+    public class ApplicationController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         private IAnalyticsService service;
 
-        public AnalyticsController()
+        public ApplicationController()
             :this(new AnalyticsService())
         {
         }
 
-        public AnalyticsController(IAnalyticsService service)
+        public ApplicationController(IAnalyticsService service)
         {
             this.service = service;
         }

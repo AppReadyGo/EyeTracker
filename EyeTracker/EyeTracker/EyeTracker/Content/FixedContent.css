@@ -1,0 +1,6 @@
+﻿
+
+.fixed_content{margin:auto;width:722px;background:url(img/fixed_shadow_left.png) repeat-y left;}
+.fixed_content > div{width:722px;background:url(img/fixed_shadow_right.png) repeat-y right;}
+.fixed_content > div > p{height:10px;background:url(img/fixed_shadow_right.png) no-repeat top center;margin:0;}
+.fixed_content div.inner-content{margin:0 57px;padding: 10px 0 10px 0;}

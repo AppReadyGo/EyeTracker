@@ -1,0 +1,19 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<asp:Content ContentPlaceHolderID="TitleContent" runat="server">
+    <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
+    <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="Title" runat="server">
+    <asp:ContentPlaceHolder ID="Title" runat="server" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+    <div id="top_menu" class="panel">
+        <asp:ContentPlaceHolder ID="TopMenu" runat="server" />
+    </div>
+    <div id="main" class="panel">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    </div>
+</asp:Content>
