@@ -1,0 +1,38 @@
+﻿
+table.grey{width:100%;border-collapse: collapse;}
+table.grey td.negative{color:red;}
+table.grey caption{background: none repeat scroll 0 0 #EFEFEF;border-color: #CCCCCC #CCCCCC -moz-use-text-color;border-style: solid solid none;border-width: 1px 1px 0;
+  height: 24px;padding: 3px 8px;vertical-align: middle;font-size:105%;border-top:2px solid #666666;font-weight:bold;}
+table.grey th{background-color:#E5E5E5;border:1px solid #BBBBBB;padding:0.6em;font-weight:normal;}
+table.grey td{border:1px solid #DDDDDD;padding:0.5em 0.6em;}
+table.grey col.headers{background-color:#F0F0F0;}
+table.grey col.values{background-color:#FFF;}
+table.grey tr.footer td{background-color:#E5E5E5;border:1px solid #BBBBBB;}
+table.grey tr.sub-footer td{background-color:#F9F9F9;border-bottom: 1px solid #BBBBBB;}
+
+table.grey td.no-data{background-color:#FFF;font-size:120%;text-align:center;}
+
+
+table.nav{width:100%;border-collapse: collapse;}
+table.nav td{padding:0.5em 0.6em;}
+table.nav a{cursor:pointer;color:#005C9C;}
+table.nav a:hover{text-decoration:none;}
+table.nav{background-color: #EEEEEE;border-bottom: 1px solid #CCCCCC;padding: 5px;}
+table.nav td.prev{width:25%;text-align:left;} 
+table.nav td.next{width:25%;text-align:right;}
+table.nav td.cur{width:50%;font-size:105%;text-align:center;}
+
+
+.left-arrow-icon {background: url("img/sprites.png") no-repeat scroll -168px -37px transparent;cursor: pointer;display: inline-block;
+  height: 19px;padding: 0;vertical-align: middle;width: 9px;margin-right:5px;}
+.right-arrow-icon {background: url("img/sprites.png") no-repeat scroll -67px -8px transparent;cursor: pointer;display: inline-block;
+  height: 19px;padding: 0;vertical-align: middle;width: 9px;margin-left:5px;}
+  
+div.page-nav a{cursor:pointer;color:#005C9C;}
+div.page-nav select{margin-right:32px;}
+div.page-nav a:hover{text-decoration:none;}
+div.page-nav{background-color: #EEEEEE;border-bottom: 1px solid #CCCCCC;border-left: 1px solid #CCCCCC;border-right: 1px solid #CCCCCC;padding: 5px;text-align:right;}
+div.page-nav a.prev{background:url(/Content/img/button_previous.gif); display:inline-block; width:18px;height:17px;margin:0 2px 0 4px;} 
+div.page-nav a.next{background:url(/Content/img/button_next.gif); display:inline-block; width:18px;height:17px;margin:0 4px 0 2px;}
+
+

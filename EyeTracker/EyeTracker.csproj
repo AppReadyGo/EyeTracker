@@ -97,7 +97,9 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomeController_.cs" />
     <Compile Include="CustomModelBinders\JsonPackageModelBinder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -109,6 +111,23 @@
     <Compile Include="CustomModelBinders\JsonVisitInfoModelBinder.cs" />
     <Compile Include="Windsor\WindsorFactory.cs" />
     <Compile Include="Windsor\WindsorInstaller.cs" />
+    <Content Include="Content\LeftMenu.css" />
+    <Content Include="Content\Form.css" />
+    <Content Include="Content\LogOn.css" />
+    <Content Include="Content\Home.css" />
+    <Content Include="Content\FixedContent.css" />
+    <Content Include="Content\img\btn.png" />
+    <Content Include="Content\img\header_bg_btn.png" />
+    <Content Include="Content\img\header_bg.png" />
+    <Content Include="Content\img\btn_border.png" />
+    <Content Include="Content\img\main_baner.png" />
+    <Content Include="Content\img\fixed_shadow_left.png" />
+    <Content Include="Content\img\fixed_shadow_right.png" />
+    <Content Include="Content\img\title.png" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\Site__.css" />
+    <Content Include="Content\Table.css" />
+    <Content Include="Content\TableChart.css" />
     <Content Include="Content\Tests\qunit.css" />
     <Content Include="Scripts\Tests\TDD\AnalyticsTemplateTest.js" />
     <Content Include="Scripts\Tests\TDD\QUnitTest.htm" />
@@ -149,15 +168,23 @@
     <Content Include="Users_Resources\Screens\4.1664.5123.png" />
     <Content Include="Users_Resources\Screens\4.1168.5030.png" />
     <Content Include="Users_Resources\Screens\4.1096.5093.png" />
-    <Content Include="Views\Analytics\Index.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Views\Account\Details.aspx" />
+    <Content Include="Views\Analytics\EyeTracker.aspx" />
+    <Content Include="Views\Application\Index.aspx" />
+    <Content Include="Views\Home\PageContent.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Home\Index_.aspx" />
+    <Content Include="Views\Shared\LogOnUserControl.ascx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\Site_.css" />
     <Content Include="Scripts\ThridParty\jquery-1.4.1.js" />
     <Content Include="Scripts\ThridParty\jquery-1.4.1.min.js" />
     <Content Include="Scripts\ThridParty\jquery-1.4.1-vsdoc.js" />
@@ -174,12 +201,14 @@
     <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Account\Register.aspx" />
-    <Content Include="Views\Home\About.aspx" />
-    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Home\Index__.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
-    <Content Include="Views\Shared\LogOnUserControl.ascx" />
+    <Content Include="Views\Shared\LogOnUserControl_.ascx" />
     <Content Include="Views\Shared\Site.Master" />
+    <Content Include="Views\Analytics\LeftMenu.master" />
+    <None Include="Views\Shared\Site_.Master" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\TopMenu.Master" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -198,6 +227,9 @@
       <Project>{F5D9FA27-BAAF-4B4B-97F0-0A71F2210009}</Project>
       <Name>EyeTracker.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\FixedContent.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

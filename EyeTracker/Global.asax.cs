@@ -24,36 +24,62 @@ namespace EyeTracker
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "JavaScript", 
-                "Analytics/JavaScript/{filename}.js",
-                new { controller = "Analytics", action = "JavaScriptFile" } 
+                "Home", // Route name
+                "", // URL with parameters
+                new { controller = "Home", action = "Index" } // Parameter defaults
             );
             routes.MapRoute(
-                "AjaxVisit", // Route name
-                "Analytics/{action}/{json}", // URL with parameters
-                new { controller = "Analytics" } // Parameter defaults
-            );/*
+                "Account", // Route name
+                "Account/{action}", // URL with parameters
+                new { controller = "Account", action = "LogOn" } 
+            );
             routes.MapRoute(
-                "AjaxPackage", // Route name
-                "Analytics/Package/{json}", // URL with parameters
-                new { controller = "Analytics", action = "Package" } // Parameter defaults
-            );*/
+                "Application", // Route name
+                "Application/{action}", // URL with parameters
+                new { controller = "Application", action = "Index" }
+            );
             routes.MapRoute(
-                "ClickHeatMapImage", // Route name
-                "Analytics/{action}/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", // URL with parameters
-                new { controller = "Analytics" } // Parameter defaults
-            );/*
+                "Analytics", // Route name
+                "Analytics/{action}", // URL with parameters
+                new { controller = "Analytics", action = "EyeTracker" }
+            );
             routes.MapRoute(
-                "ViewHeatMapImage", // Route name
-                "Analytics/ViewHeatMapImage/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", // URL with parameters
-                new { controller = "Analytics", action = "ViewHeatMapImage" } // Parameter defaults
-            );*/
+                "Content", // Route name
+                "{urlPart1}/{urlPart2}/{urlPart3}", // URL with parameters
+                new { controller = "Home", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional }
+            );
 
-            routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-            );
+            //routes.MapRoute(
+            //    "JavaScript", 
+            //    "Analytics/JavaScript/{filename}.js",
+            //    new { controller = "Analytics", action = "JavaScriptFile" } 
+            //);
+            //routes.MapRoute(
+            //    "AjaxVisit", // Route name
+            //    "Analytics/{action}/{json}", // URL with parameters
+            //    new { controller = "Analytics" } // Parameter defaults
+            //);/*
+            //routes.MapRoute(
+            //    "AjaxPackage", // Route name
+            //    "Analytics/Package/{json}", // URL with parameters
+            //    new { controller = "Analytics", action = "Package" } // Parameter defaults
+            //);*/
+            //routes.MapRoute(
+            //    "ClickHeatMapImage", // Route name
+            //    "Analytics/{action}/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", // URL with parameters
+            //    new { controller = "Analytics" } // Parameter defaults
+            //);/*
+            //routes.MapRoute(
+            //    "ViewHeatMapImage", // Route name
+            //    "Analytics/ViewHeatMapImage/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", // URL with parameters
+            //    new { controller = "Analytics", action = "ViewHeatMapImage" } // Parameter defaults
+            //);*/
+
+            //routes.MapRoute(
+            //    "Default", // Route name
+            //    "{controller}/{action}/{id}", // URL with parameters
+            //    new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+            //);
         }
 
         protected void Application_Start()
@@ -65,9 +91,9 @@ namespace EyeTracker
             ModelBinders.Binders[typeof(VisitInfo)] = new JsonVisitInfoModelBinder();
             ModelBinders.Binders[typeof(PackageInfo)] = new JsonPackageModelBinder();
 
-            ControllerBuilder.Current.SetControllerFactory(new WindsorFactory(applicationWideWindsorContainer));
-            // Initialize / install components in container
-            applicationWideWindsorContainer.Install(new WindsorInstaller());
+            //ControllerBuilder.Current.SetControllerFactory(new WindsorFactory(applicationWideWindsorContainer));
+            //// Initialize / install components in container
+            //applicationWideWindsorContainer.Install(new WindsorInstaller());
         }
     }
 }

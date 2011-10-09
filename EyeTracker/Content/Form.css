@@ -1,0 +1,7 @@
+﻿.form {background: none repeat scroll 0 0 #FFFFFF; border: 1px solid #EEEEEE; padding: 10px;width:400px;}
+.form fieldset{border:1px solid #DDD;padding: 0 5px 5px;}
+.form fieldset label{display: block;float: left;width: 150px;padding: 0;margin: 5px 0 0;text-align: right;clear:left;}
+.form fieldset input,form fieldset select,form fieldset textarea{width:auto;margin:5px 0 0 10px;clear:right;border:1px solid #DDD;}
+.form fieldset input.error,form fieldset select.error,form fieldset textarea.error{border:1px solid red;}
+.form fieldset p{margin:0px;font-size:0.9em;}
+.form fieldset a{cursor:pointer;}
