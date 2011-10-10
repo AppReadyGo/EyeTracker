@@ -60,6 +60,9 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\ThridParty\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\ThridParty\Elmah.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -96,15 +99,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeController_.cs" />
+    <Compile Include="Controllers\CustomExceptions.cs" />
     <Compile Include="CustomModelBinders\JsonPackageModelBinder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Model\AccountModels.cs" />
+    <Compile Include="Model\AdminModels.cs" />
     <Compile Include="Model\Enumerators.cs" />
     <Compile Include="Model\PackageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,9 +213,13 @@
     <Content Include="Views\Shared\LogOnUserControl_.ascx" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Analytics\LeftMenu.master" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Membership.cshtml" />
+    <Content Include="Views\Admin\UserEdit.cshtml" />
     <None Include="Views\Shared\Site_.Master" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\TopMenu.Master" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -222,6 +233,10 @@
     <ProjectReference Include="..\EyeTracker.DAL\EyeTracker.DAL.csproj">
       <Project>{726E47E8-4DA8-4BDF-96E2-9E9CE6EB1454}</Project>
       <Name>EyeTracker.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyeTracker.Domain\EyeTracker.Domain.csproj">
+      <Project>{6225C68F-4446-41B2-B774-316A5F04001A}</Project>
+      <Name>EyeTracker.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\EyeTracker.Model\EyeTracker.Common.csproj">
       <Project>{F5D9FA27-BAAF-4B4B-97F0-0A71F2210009}</Project>
