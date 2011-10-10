@@ -29,6 +29,16 @@ namespace EyeTracker
                 new { controller = "Home", action = "Index" } // Parameter defaults
             );
             routes.MapRoute(
+                "Admin_elmah",
+                "Admin/Elmah/{query}",
+                new { action = "Elmah", controller = "Admin", query = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+               "Admin_edit",
+               "Admin/{action}/{id}",
+               new { action = "UserEdit", controller = "Admin" }
+            );
+            routes.MapRoute(
                 "Account", // Route name
                 "Account/{action}", // URL with parameters
                 new { controller = "Account", action = "LogOn" } 
