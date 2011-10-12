@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using NHibernate.Mapping.ByCode.Conformist;
 
-namespace EyeTracker.Domain.Model
+namespace EyeTracker.Domain.Model.BackOffice
 {
 
-    public class ApplicationMapping : ClassMapping<Application>
+    public class SystemApplicationMapping : ClassMapping<SystemApplication>
     {
-        public ApplicationMapping()
+        public SystemApplicationMapping()
         {
             Table("aspnet_Applications");
             Id(x => x.Id, map => map.Column("ApplicationId"));

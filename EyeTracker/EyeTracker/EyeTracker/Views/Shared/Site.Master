@@ -25,8 +25,13 @@
                     <%: Html.ActionLink("Applications", "", "Application")%>
                     <a href="/Tutorials">Tutorials</a>
                     <%: Html.ActionLink("Account Details", "Details", "Account")%>
-<%
-    }
+
+        <%if (Context.User.IsInRole("Administrators")){%>
+                    <%: Html.ActionLink("Elmah", "", "Admin")%>
+                    <%: Html.ActionLink("Membership", "Membership", "Admin")%>
+         <%}%>
+
+<%    }
     else {
 %> 
                     <a href="/">Home</a>

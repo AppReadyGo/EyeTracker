@@ -20,7 +20,7 @@ namespace EyeTracker.Domain.Model
         public virtual int ScreenHeight { get; set; }
         public virtual int ClientWidth { get; set; }
         public virtual int ClientHeight { get; set; }
-        public virtual UserApplication App { get; set; }
+        public virtual Application App { get; set; }
         public virtual IList<Click> Clicks { get; set; }
         public virtual IList<ViewPart> ViewParts { get; set; }
     }

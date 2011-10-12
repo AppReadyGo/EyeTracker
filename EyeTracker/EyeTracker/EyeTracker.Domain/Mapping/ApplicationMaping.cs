@@ -7,9 +7,9 @@ using EyeTracker.Domain.Model;
 
 namespace EyeTracker.Domain.Mapping
 {
-    public class UserApplicationMaping : ClassMapping<UserApplication>
+    public class ApplicationMaping : ClassMapping<Application>
     {
-        public UserApplicationMaping()
+        public ApplicationMaping()
         {
             Id(x => x.Id, map => map.Column("UserApplicationId"));
             Property(x => x.Description, map =>
