@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using EyeTracker.Domain.Model;
 using EyeTracker.Domain.Repository;
+using EyeTracker.Domain.Model.BackOffice;
 
 namespace EyeTracker.Core.Services
 {

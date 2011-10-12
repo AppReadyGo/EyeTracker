@@ -14,6 +14,7 @@ using NHibernate.Tool.hbm2ddl;
 using NHibernate.Dialect;
 using System.Configuration;
 using EyeTracker.Domain.Model;
+using EyeTracker.Domain.Model.BackOffice;
 
 namespace EyeTracker.Domain.Repository
 {
@@ -60,9 +61,9 @@ namespace EyeTracker.Domain.Repository
             var res = new MembershipInfo();
             using (ISession session = sessionFactory.OpenSession())
             {
-                res.Applications = session.CreateCriteria<Application>().List<Application>();
-                res.Roles = session.CreateCriteria<Role>().List<Role>();
-                res.Users = session.CreateCriteria<User>().List<User>();
+                res.Applications = session.CreateCriteria<SystemApplication>().List<SystemApplication>();
+                res.Roles = session.CreateCriteria<SystemRole>().List<SystemRole>();
+                res.Users = session.CreateCriteria<SystemUser>().List<SystemUser>();
             }
             return res;
         }
@@ -84,9 +85,9 @@ namespace EyeTracker.Domain.Repository
             {
                 res = session.Get<T>(id);
                 var type = typeof(T);
-                if (type == typeof(User))
+                if (type == typeof(SystemUser))
                 {
-                    var tRes = res as User;
+                    var tRes = res as SystemUser;
                     NHibernateUtil.Initialize(tRes.Roles);
                 }
             }
@@ -131,7 +132,7 @@ namespace EyeTracker.Domain.Repository
 
             //SchemaMetadataUpdater.QuoteTableAndColumns(cfg);
 
-            var cmpl = mapper.CompileMappingFor(new List<Type>() { typeof(Application), typeof(Role), typeof(User) });
+            var cmpl = mapper.CompileMappingFor(new List<Type>() { typeof(SystemApplication), typeof(SystemRole), typeof(SystemUser) });
             var str = Serialize(cmpl);
             Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception(str));
 

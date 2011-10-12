@@ -110,9 +110,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HTMLTable.cs" />
     <Compile Include="Model\AccountModels.cs" />
     <Compile Include="Model\AdminModels.cs" />
-    <Compile Include="Model\Enumerators.cs" />
+    <Compile Include="Model\ApplicationModel.cs" />
     <Compile Include="Model\PackageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomModelBinders\JsonVisitInfoModelBinder.cs" />
@@ -178,6 +179,7 @@
     <Content Include="Views\Account\Details.aspx" />
     <Content Include="Views\Analytics\EyeTracker.aspx" />
     <Content Include="Views\Application\Index.aspx" />
+    <Content Include="Views\Application\New.aspx" />
     <Content Include="Views\Home\PageContent.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\Index_.aspx" />
@@ -213,13 +215,12 @@
     <Content Include="Views\Shared\LogOnUserControl_.ascx" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Analytics\LeftMenu.master" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\Membership.cshtml" />
-    <Content Include="Views\Admin\UserEdit.cshtml" />
+    <Content Include="Views\Admin\Index.aspx" />
+    <Content Include="Views\Admin\Membership.aspx" />
+    <Content Include="Views\Admin\UserEdit.aspx" />
     <None Include="Views\Shared\Site_.Master" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\TopMenu.Master" />
-    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

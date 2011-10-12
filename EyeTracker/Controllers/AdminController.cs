@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using EyeTracker.Core.Services;
 using EyeTracker.Model;
 using EyeTracker.Domain.Model;
+using EyeTracker.Domain.Model.BackOffice;
 
 namespace EyeTracker.Controllers
 {
@@ -44,7 +45,7 @@ namespace EyeTracker.Controllers
 
         public ActionResult UserEdit(Guid id)
         {
-            User curUser = adminService.Get<User>(id);
+            SystemUser curUser = adminService.Get<SystemUser>(id);
             var userModel = new UserModel()
             {
                 Id = curUser.Id,
@@ -52,7 +53,7 @@ namespace EyeTracker.Controllers
                 Email = curUser.Email,
                 Roles = curUser.Roles.Select(curItem => curItem.Id).ToList()
             };
-            IList<Role> roles = adminService.GetAll<Role>();
+            IList<SystemRole> roles = adminService.GetAll<SystemRole>();
             ViewBag.Roles = roles;
             return View(userModel);
         }
@@ -60,11 +61,11 @@ namespace EyeTracker.Controllers
         [HttpPost]
         public ActionResult UserEdit(UserModel userModel)
         {
-            IList<Role> roles = adminService.GetAll<Role>();
+            IList<SystemRole> roles = adminService.GetAll<SystemRole>();
             ViewBag.Roles = roles;
             if (ModelState.IsValid)
             {
-                var user = adminService.Get<User>(userModel.Id);
+                var user = adminService.Get<SystemUser>(userModel.Id);
                 user.Name = userModel.Name;
                 user.Email = userModel.Email;
                 if (userModel.Roles != null)
@@ -75,7 +76,7 @@ namespace EyeTracker.Controllers
                 {
                     user.Roles = null;
                 }
-                adminService.Edit<User>(user);
+                adminService.Edit<SystemUser>(user);
                 return RedirectToAction("Membership");
             }
             return View(userModel);

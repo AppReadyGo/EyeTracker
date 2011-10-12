@@ -5,12 +5,13 @@ using System.Text;
 using NHibernate.Mapping.ByCode.Conformist;
 using EyeTracker.Domain.Model;
 using NHibernate.Mapping.ByCode;
+using EyeTracker.Domain.Model.BackOffice;
 
-namespace EyeTracker.Domain.Mapping
+namespace EyeTracker.Domain.Mapping.BackOffice
 {
-    public class UserMapping : ClassMapping<User>
+    public class SystemUserMapping : ClassMapping<SystemUser>
     {
-        public UserMapping()
+        public SystemUserMapping()
         {
             Table("aspnet_Users");
             Id(x => x.Id, map => map.Column("UserId"));

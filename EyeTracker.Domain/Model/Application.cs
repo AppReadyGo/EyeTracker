@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using EyeTracker.Domain.Model.BackOffice;
 
 namespace EyeTracker.Domain.Model
 {
-    public class Application : Entity
+    public class Application
     {
+        public virtual int Id { get; set; }
         public virtual string Description { get; set; }
-        public virtual IList<Role> Roles { get; set; }
-        public virtual IList<User> Users { get; set; }
+        public virtual DateTime CreateDate { get; protected set; }
+        public virtual SystemUser User { get; set; }
     }
 }
