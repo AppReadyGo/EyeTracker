@@ -123,6 +123,9 @@ namespace EyeTracker.Controllers
 
         public ActionResult New()
         {
+            ViewBag.PackageLink = "http://mobillify.com";
+            ViewBag.PropertyId = "MA-******-***";
+            ViewBag.CodeSample = "<script type=\"text/javascript\">\nvar _gaq = _gaq || [];_\ngaq.push(['_setAccount', 'UA-1970564-12']);";
             return View(new ApplicationModel());
         }
 
