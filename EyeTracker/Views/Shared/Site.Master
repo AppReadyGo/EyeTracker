@@ -22,7 +22,7 @@
 <%
     if (Request.IsAuthenticated) {
 %>
-                    <%: Html.ActionLink("Applications", "", "Application")%>
+                    <%: Html.ActionLink("Portfolios", "", "Portfolio")%>
                     <a href="/Tutorials">Tutorials</a>
                     <%: Html.ActionLink("Account Details", "Details", "Account")%>
 

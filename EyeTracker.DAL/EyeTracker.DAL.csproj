@@ -82,7 +82,6 @@
     <Compile Include="ActivityTrackingRepository.cs" />
     <Compile Include="AnalyticsRepository.cs" />
     <Compile Include="Domain\ApplicationInfo.cs" />
-    <Compile Include="ApplicationRepository.cs" />
     <Compile Include="BackOfficeRepository.cs" />
     <Compile Include="Domain\AccountInfo.cs" />
     <Compile Include="Domain\ClickInfo.cs" />

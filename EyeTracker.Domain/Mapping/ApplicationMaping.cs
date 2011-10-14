@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NHibernate.Mapping.ByCode.Conformist;
 using EyeTracker.Domain.Model;
+using NHibernate.Mapping.ByCode;
 
 namespace EyeTracker.Domain.Mapping
 {
@@ -17,11 +18,14 @@ namespace EyeTracker.Domain.Mapping
                 map.Length(225);
                 map.NotNullable(true);
             });
+            Property(x => x.Type, map => map.NotNullable(true));
             Property(x => x.CreateDate, map => map.NotNullable(true));
-            ManyToOne(p => p.User, map =>
+            Bag(x => x.Portfolios, map =>
             {
-                map.Column("UserId");
-            });
+                map.Table("PortfolioApplication");
+                map.Key(k => k.Column("ApplicationId"));
+                map.Cascade(Cascade.All);
+            }, r => r.ManyToMany(mmp => mmp.Column("PortfolioId")));
         }
     }
 }

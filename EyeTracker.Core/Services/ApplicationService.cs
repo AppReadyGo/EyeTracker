@@ -5,16 +5,17 @@ using System.Text;
 using EyeTracker.DAL;
 using EyeTracker.DAL.Domains;
 using EyeTracker.Common;
+using EyeTracker.Domain.Model;
 
 namespace EyeTracker.Core.Services
 {
     public interface IApplicationService
     {
-        OperationResult<int> Add(ApplicationInfo application);
-        OperationResult<ApplicationInfo> Get(int appId);
-        OperationResult<List<ApplicationInfo>> GetAll();
+        OperationResult<int> Add(Application application);
+        OperationResult<Application> Get(int appId);
+        OperationResult<List<Application>> GetAll();
         OperationResult Remove(int appId);
-        OperationResult Update(ApplicationInfo application);
+        OperationResult Update(Application application);
     }
     public class ApplicationService : IApplicationService
     {
@@ -28,7 +29,7 @@ namespace EyeTracker.Core.Services
             this.repository = repository;
         }
 
-        public OperationResult<int> Add(ApplicationInfo application)
+        public OperationResult<int> Add(Application application)
         {
             //Check Security
             //Check application properties
@@ -42,16 +43,16 @@ namespace EyeTracker.Core.Services
             }
         }
 
-        public OperationResult<ApplicationInfo> Get(int appId)
+        public OperationResult<Application> Get(int appId)
         {
             //Check Security
             try
             {
-                return new OperationResult<ApplicationInfo>(repository.Get(appId));
+                return new OperationResult<Application>(repository.Get(appId));
             }
             catch (Exception exp)
             {
-                return new OperationResult<ApplicationInfo>(exp);
+                return new OperationResult<Application>(exp);
             }
         }
 
@@ -69,7 +70,7 @@ namespace EyeTracker.Core.Services
             }
         }
 
-        public OperationResult Update(ApplicationInfo application)
+        public OperationResult Update(Application application)
         {
             //Check Security
             //Check application properties
@@ -85,16 +86,16 @@ namespace EyeTracker.Core.Services
         }
 
 
-        public OperationResult<List<ApplicationInfo>> GetAll()
+        public OperationResult<List<Application>> GetAll()
         {
             //Check Security
             try
             {
-                return new OperationResult<List<ApplicationInfo>>(repository.GetAll());
+                return new OperationResult<List<Application>>(repository.GetAll());
             }
             catch (Exception exp)
             {
-                return new OperationResult<List<ApplicationInfo>>(exp);
+                return new OperationResult<List<Application>>(exp);
             }
         }
     }

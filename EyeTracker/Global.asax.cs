@@ -9,6 +9,7 @@ using Castle.Windsor;
 using EyeTracker.Windsor;
 using EyeTracker.Model;
 using EyeTracker.DAL.Domain;
+using EyeTracker.Domain;
 
 namespace EyeTracker
 {
@@ -45,8 +46,8 @@ namespace EyeTracker
             );
             routes.MapRoute(
                 "Application", // Route name
-                "Application/{action}", // URL with parameters
-                new { controller = "Application", action = "Index" }
+                "Application/{action}/{portfolioId}", // URL with parameters
+                new { controller = "Application", action = "Index", portfolioId = UrlParameter.Optional }
             );
             routes.MapRoute(
                 "Analytics", // Route name

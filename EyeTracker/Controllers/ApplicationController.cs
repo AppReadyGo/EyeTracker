@@ -18,22 +18,27 @@ using System.Reflection;
 using EyeTracker.Core.Services;
 using EyeTracker.DAL.Domain;
 using EyeTracker.Helpers;
+using EyeTracker.Domain.Model;
 
 namespace EyeTracker.Controllers
 {
     public class ApplicationController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
-        private IAnalyticsService service;
+        private IApplicationService service;
+        private IPortfolioService portfolioService;
+        private IAnalyticsService analyticsService;
 
         public ApplicationController()
-            :this(new AnalyticsService())
+            : this(new ApplicationService(), new PortfolioService(), new AnalyticsService())
         {
         }
 
-        public ApplicationController(IAnalyticsService service)
+        public ApplicationController(IApplicationService service, IPortfolioService portfolioService, IAnalyticsService analyticsService)
         {
             this.service = service;
+            this.portfolioService = portfolioService;
+            this.analyticsService = analyticsService;
         }
 
         public ActionResult Index()
@@ -121,8 +126,10 @@ namespace EyeTracker.Controllers
             return View();
         }
 
-        public ActionResult New()
+        public ActionResult New(int portfolioId)
         {
+            ViewBag.PortfolioId = portfolioId;
+            ViewData["TypesList"] = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() });
             ViewBag.PackageLink = "http://mobillify.com";
             ViewBag.PropertyId = "MA-******-***";
             ViewBag.CodeSample = "<script type=\"text/javascript\">\nvar _gaq = _gaq || [];_\ngaq.push(['_setAccount', 'UA-1970564-12']);";
@@ -130,16 +137,53 @@ namespace EyeTracker.Controllers
         }
 
         [HttpPost]
-        public ActionResult New(ApplicationModel model)
+        public JsonResult New(ApplicationModel model)
         {
+            OperationResult<string> res = null;
             if (ModelState.IsValid)
             {
-                return RedirectToAction("");
+                var portfolioRes = portfolioService.Get(model.PortfolioId);
+                if (portfolioRes.HasError)
+                {
+                    res = new OperationResult<string>(portfolioRes);
+                }
+                else
+                {
+                    var app = new Application(portfolioRes.Value, model.Description, model.Type);
+                    var appRes = service.Add(app);
+                    if (appRes.HasError)
+                    {
+                    }
+                    else
+                    {
+                        string key = "";
+                        switch (app.Type)
+                        {
+                            case ApplicationType.Android:
+                                key = "MA";
+                                break;
+                            case ApplicationType.Web:
+                                key = "WP";
+                                break;
+                            case ApplicationType.iPhone:
+                                key = "MI";
+                                break;
+                            case ApplicationType.WebMobile:
+                                key = "WM";
+                                break;
+                            case ApplicationType.WindowsMobile:
+                                key = "MW";
+                                break;
+                        }
+                        res = new OperationResult<string>(string.Format("{0}-{1:000000}-{2:0000}", key, model.PortfolioId, appRes.Value));
+                    }
+                }
             }
             else
             {
-                return View();
+                res = new OperationResult<string>();
             }
+            return Json(res);
         }
 
         public FileResult JavaScriptFile(string filename)
@@ -172,7 +216,7 @@ namespace EyeTracker.Controllers
         {
             byte[] imageData = null;
             log.WriteInformation("ClickHeatMapImage: appId:{0}, pageUri:{1}, clientWidth:{2}, clientHeight:{3}, fromDate:{4}, toDate:{5}", appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
-            var opResult = service.GetClickHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
+            var opResult = analyticsService.GetClickHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
             if (!opResult.HasError)
             {
                 Image bgImg = GetBackgroundImage(appId, clientWidth, clientHeight);
@@ -192,7 +236,7 @@ namespace EyeTracker.Controllers
         {
             byte[] imageData = null;
             log.WriteInformation("ViewHeatMapImage: appId:{0}, pageUri:{1}, clientWidth:{2}, clientHeight:{3}, fromDate:{4}, toDate:{5}",appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
-            var opResult = service.GetViewHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
+            var opResult = analyticsService.GetViewHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
             if (!opResult.HasError)
             {
                 Image bgImg = GetBackgroundImage(appId, clientWidth, clientHeight);
