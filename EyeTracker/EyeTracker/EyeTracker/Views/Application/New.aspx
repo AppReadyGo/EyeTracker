@@ -4,6 +4,9 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
     <link href="../../Content/ApplicationNew.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/ApplicationNew.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var newAppURL = '/Application/New/<%: ViewBag.PortfolioId %>/';
+    </script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Title" runat="server">New Application</asp:Content>
 
@@ -15,6 +18,7 @@
     <h3>1. Application Configuration</h3>
     <div><%: Html.LabelFor(m => m.Description)%> <%: Html.TextBoxFor(m => m.Description)%></div>
     <div><%: Html.ValidationMessageFor(m => m.Description)%></div>
+    <div><%: Html.LabelFor(m => m.Type)%> <%: Html.DropDownListFor(m => m.Type, (IEnumerable<SelectListItem>)ViewData["TypesList"]) %></div>
     <p><a id="create_lnk">Create</a></p>
 </div>
 <div id="sample_code" class="step">
@@ -22,7 +26,7 @@
     <div>Package: <a href="<%: ViewBag.PackageLink %>">Android Package 1.0.1</a></div>
     <div>Property ID: <strong><%: ViewBag.PropertyId %></strong></div>
     <textarea><%: ViewBag.CodeSample %></textarea>
-    <p><a id="save_lnk">Save</a></p>
+    <p><a id="done_lnk">Done</a></p>
 </div>
 <div id="overlay" class="overlay"></div>
 </asp:Content>

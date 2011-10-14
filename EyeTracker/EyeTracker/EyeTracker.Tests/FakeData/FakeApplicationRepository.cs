@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EyeTracker.DAL;
+using EyeTracker.Domain.Model;
 
 namespace EyeTracker.Tests.FakeData
 {
     class FakeApplicationRepository : IApplicationRepository
     {
-        public int Add(DAL.Domains.ApplicationInfo application)
+        public int Add(Application application)
         {
             throw new NotImplementedException();
         }
 
-        public DAL.Domains.ApplicationInfo Get(int appId)
+        public Application Get(int appId)
         {
             throw new NotImplementedException();
         }
@@ -23,12 +24,12 @@ namespace EyeTracker.Tests.FakeData
             throw new NotImplementedException();
         }
 
-        public void Update(DAL.Domains.ApplicationInfo application)
+        public void Update(Application application)
         {
             throw new NotImplementedException();
         }
 
-        public List<DAL.Domains.ApplicationInfo> GetAll()
+        public List<Application> GetAll()
         {
             throw new NotImplementedException();
         }

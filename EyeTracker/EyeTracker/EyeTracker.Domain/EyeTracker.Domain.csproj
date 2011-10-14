@@ -37,6 +37,9 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\ThridParty\NHibernate-3.2.0\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="Library.Common">
+      <HintPath>..\ThridParty\Library.Common.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\ThridParty\NHibernate-3.2.0\NHibernate.dll</HintPath>
     </Reference>
@@ -56,8 +59,10 @@
     <Compile Include="Mapping\BackOffice\SystemRoleMapping.cs" />
     <Compile Include="Mapping\ApplicationMaping.cs" />
     <Compile Include="Mapping\BackOffice\SystemUserMapping.cs" />
+    <Compile Include="Mapping\PortfolioMapping.cs" />
     <Compile Include="Mapping\ViewPartMaping.cs" />
     <Compile Include="Model\AccountProfiler.cs" />
+    <Compile Include="Model\ApplicationType.cs" />
     <Compile Include="Model\BackOffice\SystemApplication.cs" />
     <Compile Include="Mapping\BackOffice\SystemApplicationMapping.cs" />
     <Compile Include="Model\Click.cs" />
@@ -67,9 +72,12 @@
     <Compile Include="Model\BackOffice\MembershipInfo.cs" />
     <Compile Include="Model\BackOffice\SystemRole.cs" />
     <Compile Include="Model\Application.cs" />
+    <Compile Include="Model\Portfolio.cs" />
     <Compile Include="Model\ViewPart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AdminRepository.cs" />
+    <Compile Include="Repository\ApplicationRepository.cs" />
+    <Compile Include="Repository\PortfolioRepository.cs" />
     <Compile Include="Repository\ReportsRepository.cs" />
   </ItemGroup>
   <ItemGroup />

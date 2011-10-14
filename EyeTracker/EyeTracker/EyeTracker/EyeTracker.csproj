@@ -106,6 +106,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeController_.cs" />
     <Compile Include="Controllers\CustomExceptions.cs" />
+    <Compile Include="Controllers\PortfolioController.cs" />
+    <Compile Include="Model\PortfolioModel.cs" />
     <Compile Include="CustomModelBinders\JsonPackageModelBinder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -185,6 +187,8 @@
     <Content Include="Views\Home\PageContent.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\Index_.aspx" />
+    <Content Include="Views\Portfolio\Index.aspx" />
+    <Content Include="Views\Portfolio\New.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
