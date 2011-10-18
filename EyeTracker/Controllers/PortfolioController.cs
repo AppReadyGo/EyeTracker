@@ -28,77 +28,29 @@ namespace EyeTracker.Controllers
 
         public ActionResult Index()
         {
+            var portfRes = service.GetAll();
+            if (portfRes.HasError)
+            {
+                return View("Error");
+            }
+
             var columnHeaders = new List<HTMLTable.Cell>() {
                     new HTMLTable.Cell() { Value = "Description" }, 
-                    new HTMLTable.Cell() { Value = "" }, 
-                    new HTMLTable.Cell() { Value = "" } 
+                    new HTMLTable.Cell() { Value = "Applications" }, 
+                    new HTMLTable.Cell() { Value = "% Change" } 
                 };
             var data = new List<List<HTMLTable.Cell>>();
 
-            var portfRes = service.GetAll();
-            if (0 != 0)
+            if (portfRes.Value.Count > 0)
             {
-                //decimal? balance = transList[0].Balance;
-                //if (balance.HasValue)
-                //{
-                //    columnHeaders.Add(new HTMLTable.Cell() { Value = "Balance" });
-                //}
-                //columnHeaders.Add(new HTMLTable.Cell() { Value = "Actions" });
-                //var curDate = DateTime.MaxValue;
-                //HTMLTable.Cell curMonthCell = null;
-                //HTMLTable.Cell curDayCell = null;
-                //short monthRows = 0;
-                //short dayRows = 0;
-                ////Create table
-                //foreach (var curTrans in transList)
-                //{
-                //    var cells = new List<HTMLTable.Cell>();
-                //    if (curDate.Month != curTrans.Date.Month || curDate.Year != curTrans.Date.Year)
-                //    {
-                //        if (curMonthCell != null)
-                //        {
-                //            curMonthCell.RowSpan = monthRows;
-                //        }
-                //        monthRows = 0;
-                //        curMonthCell = new HTMLTable.Cell() { Value = curTrans.Date.ToString("MMM yyyy"), StyleClass = "month-cell" };
-                //        cells.Add(curMonthCell);
-                //    }
-                //    if (curDate.Day != curTrans.Date.Day || curDate.Month != curTrans.Date.Month || curDate.Year != curTrans.Date.Year)
-                //    {
-                //        if (curDayCell != null)
-                //        {
-                //            curDayCell.RowSpan = dayRows;
-                //        }
-                //        dayRows = 0;
-                //        curDayCell = new HTMLTable.Cell() { Value = curTrans.Date.ToString("dd"), StyleClass = "day-cell" };
-                //        cells.Add(curDayCell);
-                //    }
-                //    string id = curTrans.TypeId == 0 ? "" : curTrans.Id.ToString();
-                //    cells.Add(new HTMLTable.Cell() { Value = id });
-                //    cells.Add(new HTMLTable.Cell() { Value = GetPopupHtml(curTrans.Id, curTrans.Attachments, curTrans.Tags, curTrans.Notes) + curTrans.Description });
-                //    string type = curTrans.TypeId == 0 ? "Analyzed" : curTrans.Type.ToString();
-                //    cells.Add(new HTMLTable.Cell() { Value = type });
-                //    string status = curTrans.TypeId == 0 ? "" : curTrans.Status.ToString();
-                //    cells.Add(new HTMLTable.Cell() { Value = status });
-                //    cells.Add(new HTMLTable.Cell() { Value = curTrans.Amount.ToString("£ 0.00"), StyleClass = curTrans.Amount > 0 ? "positive-amount" : "" });
-                //    if (balance.HasValue)
-                //    {
-                //        balance += curTrans.Amount;
-                //        cells.Add(new HTMLTable.Cell() { Value = balance.Value.ToString("£ 0.00"), StyleClass = Utilites.GetAmountClass(balance.Value) });
-                //    }
-                //    string actions = curTrans.TypeId == 0 ? string.Format("<a href=\"/Analysis/EditIntelTransaction/{0}\">Edit</a><input type=\"checkbox\" disabled=\"disabled\"/>", curTrans.Id) : string.Format("<a href=\"javascript:editTransaction({0});\" title=\"{2}\">Edit</a><input type=\"checkbox\" value=\"{0}\" sequence=\"{1}\"/>", curTrans.Id, curTrans.ScheduleId.HasValue ? "true" : "false", curTrans.ImportNote);
-                //    cells.Add(new HTMLTable.Cell() { Value = actions });
-                //    data.Add(cells);
-                //    monthRows++;
-                //    dayRows++;
-                //    curDate = curTrans.Date;
-                //}
-                //curMonthCell.RowSpan = monthRows;
-                //curDayCell.RowSpan = dayRows;
-
-                //int pagesCount = (int)(transListRes.RowsCount / rowsOnPage);
-                //if ((pagesCount * rowsOnPage) < transListRes.RowsCount) pagesCount++;
-                //curPage = transListRes.CurPage;
+                //Create table
+                foreach (var curPortfolio in portfRes.Value)
+                {
+                    var cells = new List<HTMLTable.Cell>();
+                    cells.Add(new HTMLTable.Cell() { Value = curPortfolio.Description });
+                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"\\Application\\{0}\" >{1}</a>", curPortfolio.Id, curPortfolio.Applications.Count) });
+                    cells.Add(new HTMLTable.Cell() { Value = "0.00%" });
+                }
             }
             else
             {
@@ -113,22 +65,57 @@ namespace EyeTracker.Controllers
 
         public ActionResult New()
         {
-            return View(new PortfolioModel());
+            ViewBag.Title = "New";
+            return View("NewEdit", new PortfolioModel());
         }
 
         [HttpPost]
         public ActionResult New(PortfolioModel model)
         {
+            ViewBag.Title = "New";
             if (ModelState.IsValid)
             {
                 return RedirectToAction("");
             }
             else
             {
-                return View();
+                return View("NewEdit");
             }
         }
 
+        public ActionResult Edit()
+        {
+            ViewBag.Title = "Edit";
+            var countriesRes = service.GetCountries();
+            if (!countriesRes.HasError)
+            {
+                ViewData["CountriesList"] = countriesRes.Value.Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
+                return View("NewEdit", new PortfolioModel());
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
 
+        [HttpPost]
+        public ActionResult Edit(PortfolioModel model)
+        {
+            ViewBag.Title = "Edit";
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("");
+            }
+            else
+            {
+                return View("NewEdit");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Remove(int id)
+        {
+            return View();
+        }
     }
 }

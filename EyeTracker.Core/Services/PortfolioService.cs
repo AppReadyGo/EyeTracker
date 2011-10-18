@@ -13,6 +13,8 @@ namespace EyeTracker.Core.Services
         OperationResult<Portfolio> Get(int id);
 
         OperationResult<IList<Portfolio>> GetAll();
+
+        OperationResult<IList<Country>> GetCountries();
     }
 
     public class PortfolioService : IPortfolioService
@@ -63,6 +65,18 @@ namespace EyeTracker.Core.Services
             catch (Exception exp)
             {
                 return new OperationResult<IList<Portfolio>>(exp);
+            }
+        }
+
+        public OperationResult<IList<Country>> GetCountries()
+        {
+            try
+            {
+                return new OperationResult<IList<Country>>(repository.GetCountries());
+            }
+            catch (Exception exp)
+            {
+                return new OperationResult<IList<Country>>(exp);
             }
         }
     }

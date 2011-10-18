@@ -15,5 +15,9 @@ namespace EyeTracker.Model
         [DataType(DataType.Text)]
         [DisplayName("Description")]
         public virtual string Description { get; set; }
+
+        [Required]
+        [DisplayName("Country")]
+        public virtual int CountryId { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace EyeTracker.Domain.Model
     {
         public virtual int Id { get; set; }
         public virtual string Description { get; set; }
+        public virtual Country Country { get; set; }
         public virtual DateTime CreateDate { get; protected set; }
         public virtual SystemUser User { get; set; }
         public virtual IList<Application> Applications { get; set; }
