@@ -13,6 +13,8 @@ namespace EyeTracker.Domain.Repository
         Portfolio Get(int id);
 
         IList<Portfolio> GetAll(Guid userId);
+
+        IList<Country> GetCountries();
     }
 
     public class PortfolioRepository : IPortfolioRepository
@@ -31,6 +33,14 @@ namespace EyeTracker.Domain.Repository
             {
                 return session.QueryOver<Portfolio>()
                     .Where(p => p.User.Id == userId).List();
+            }
+        }
+
+        public IList<Country> GetCountries()
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                return session.QueryOver<Country>().List();
             }
         }
     }

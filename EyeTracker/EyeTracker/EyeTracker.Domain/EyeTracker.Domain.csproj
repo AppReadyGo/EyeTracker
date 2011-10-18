@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Mapping\AccountProfilerMaping.cs" />
     <Compile Include="Mapping\ClickMaping.cs" />
+    <Compile Include="Mapping\CountryMapping.cs" />
     <Compile Include="Mapping\PageViewMaping.cs" />
     <Compile Include="Mapping\BackOffice\SystemRoleMapping.cs" />
     <Compile Include="Mapping\ApplicationMaping.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Model\BackOffice\SystemApplication.cs" />
     <Compile Include="Mapping\BackOffice\SystemApplicationMapping.cs" />
     <Compile Include="Model\Click.cs" />
+    <Compile Include="Model\Country.cs" />
     <Compile Include="Model\PageView.cs" />
     <Compile Include="Model\BackOffice\SystemUser.cs" />
     <Compile Include="Model\Entity.cs" />

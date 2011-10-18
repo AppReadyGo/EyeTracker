@@ -50,6 +50,11 @@ namespace EyeTracker
                 new { controller = "Application", action = "Index", portfolioId = UrlParameter.Optional }
             );
             routes.MapRoute(
+                "Portfolio", // Route name
+                "Portfolio/{action}/{portfolioId}", // URL with parameters
+                new { controller = "Portfolio", action = "Index", portfolioId = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 "Analytics", // Route name
                 "Analytics/{action}", // URL with parameters
                 new { controller = "Analytics", action = "EyeTracker" }

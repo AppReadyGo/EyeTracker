@@ -188,7 +188,7 @@
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\Index_.aspx" />
     <Content Include="Views\Portfolio\Index.aspx" />
-    <Content Include="Views\Portfolio\New.aspx" />
+    <Content Include="Views\Portfolio\NewEdit.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

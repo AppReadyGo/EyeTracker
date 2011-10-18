@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">Logs</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<iframe id="the_iframe" src="@Url.Action("Elmah")" width="100%" style="border:0;" onload="calcHeight();" scrolling="no"></iframe>
+<iframe id="the_iframe" src="<%: Url.Action("Elmah") %>" width="100%" style="border:0;" onload="calcHeight();" scrolling="no"></iframe>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
