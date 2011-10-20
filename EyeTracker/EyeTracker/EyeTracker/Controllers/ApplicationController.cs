@@ -41,83 +41,39 @@ namespace EyeTracker.Controllers
             this.analyticsService = analyticsService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int portfolioId)
         {
+            var appRes = service.GetAll(portfolioId);
+            if (appRes.HasError)
+            {
+                return View("Error");
+            }
+
+            ViewBag.PortfolioId = portfolioId;
             var columnHeaders = new List<HTMLTable.Cell>() {
                     new HTMLTable.Cell() { Value = "Description" }, 
-                    new HTMLTable.Cell() { Value = "" }, 
+                    new HTMLTable.Cell() { Value = "Type" }, 
+                    new HTMLTable.Cell() { Value = "% Change" },
                     new HTMLTable.Cell() { Value = "" } 
                 };
             var data = new List<List<HTMLTable.Cell>>();
 
-
-            if (0 != 0)
+            if (appRes.Value.Count > 0)
             {
-                //decimal? balance = transList[0].Balance;
-                //if (balance.HasValue)
-                //{
-                //    columnHeaders.Add(new HTMLTable.Cell() { Value = "Balance" });
-                //}
-                //columnHeaders.Add(new HTMLTable.Cell() { Value = "Actions" });
-                //var curDate = DateTime.MaxValue;
-                //HTMLTable.Cell curMonthCell = null;
-                //HTMLTable.Cell curDayCell = null;
-                //short monthRows = 0;
-                //short dayRows = 0;
-                ////Create table
-                //foreach (var curTrans in transList)
-                //{
-                //    var cells = new List<HTMLTable.Cell>();
-                //    if (curDate.Month != curTrans.Date.Month || curDate.Year != curTrans.Date.Year)
-                //    {
-                //        if (curMonthCell != null)
-                //        {
-                //            curMonthCell.RowSpan = monthRows;
-                //        }
-                //        monthRows = 0;
-                //        curMonthCell = new HTMLTable.Cell() { Value = curTrans.Date.ToString("MMM yyyy"), StyleClass = "month-cell" };
-                //        cells.Add(curMonthCell);
-                //    }
-                //    if (curDate.Day != curTrans.Date.Day || curDate.Month != curTrans.Date.Month || curDate.Year != curTrans.Date.Year)
-                //    {
-                //        if (curDayCell != null)
-                //        {
-                //            curDayCell.RowSpan = dayRows;
-                //        }
-                //        dayRows = 0;
-                //        curDayCell = new HTMLTable.Cell() { Value = curTrans.Date.ToString("dd"), StyleClass = "day-cell" };
-                //        cells.Add(curDayCell);
-                //    }
-                //    string id = curTrans.TypeId == 0 ? "" : curTrans.Id.ToString();
-                //    cells.Add(new HTMLTable.Cell() { Value = id });
-                //    cells.Add(new HTMLTable.Cell() { Value = GetPopupHtml(curTrans.Id, curTrans.Attachments, curTrans.Tags, curTrans.Notes) + curTrans.Description });
-                //    string type = curTrans.TypeId == 0 ? "Analyzed" : curTrans.Type.ToString();
-                //    cells.Add(new HTMLTable.Cell() { Value = type });
-                //    string status = curTrans.TypeId == 0 ? "" : curTrans.Status.ToString();
-                //    cells.Add(new HTMLTable.Cell() { Value = status });
-                //    cells.Add(new HTMLTable.Cell() { Value = curTrans.Amount.ToString("£ 0.00"), StyleClass = curTrans.Amount > 0 ? "positive-amount" : "" });
-                //    if (balance.HasValue)
-                //    {
-                //        balance += curTrans.Amount;
-                //        cells.Add(new HTMLTable.Cell() { Value = balance.Value.ToString("£ 0.00"), StyleClass = Utilites.GetAmountClass(balance.Value) });
-                //    }
-                //    string actions = curTrans.TypeId == 0 ? string.Format("<a href=\"/Analysis/EditIntelTransaction/{0}\">Edit</a><input type=\"checkbox\" disabled=\"disabled\"/>", curTrans.Id) : string.Format("<a href=\"javascript:editTransaction({0});\" title=\"{2}\">Edit</a><input type=\"checkbox\" value=\"{0}\" sequence=\"{1}\"/>", curTrans.Id, curTrans.ScheduleId.HasValue ? "true" : "false", curTrans.ImportNote);
-                //    cells.Add(new HTMLTable.Cell() { Value = actions });
-                //    data.Add(cells);
-                //    monthRows++;
-                //    dayRows++;
-                //    curDate = curTrans.Date;
-                //}
-                //curMonthCell.RowSpan = monthRows;
-                //curDayCell.RowSpan = dayRows;
-
-                //int pagesCount = (int)(transListRes.RowsCount / rowsOnPage);
-                //if ((pagesCount * rowsOnPage) < transListRes.RowsCount) pagesCount++;
-                //curPage = transListRes.CurPage;
+                //Create table
+                foreach (var curApp in appRes.Value)
+                {
+                    var cells = new List<HTMLTable.Cell>();
+                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Application/Analyticst/{0}/{1}\">{2}</a>", portfolioId, curApp.Id, curApp.Description) });
+                    cells.Add(new HTMLTable.Cell() { Value = curApp.Type.ToString() });
+                    cells.Add(new HTMLTable.Cell() { Value = "0.00%" });
+                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Application/Edit/{0}/{1}\">edit</a>&nbsp;<a href=\"/Application/Remove/{0}/{1}\">remove</a>", portfolioId, curApp.Id) });
+                    data.Add(cells);
+                }
             }
             else
             {
-                data.Add(new List<HTMLTable.Cell>() { new HTMLTable.Cell() { ColSpan = 8, StyleClass = "no-data", Value = "No Transactions" } });
+                data.Add(new List<HTMLTable.Cell>() { new HTMLTable.Cell() { ColSpan = 8, StyleClass = "no-data", Value = "No Applications" } });
             }
 
             ViewData["caption"] = new HTMLTable.Cell() { Value = "Accounts" };
@@ -131,9 +87,9 @@ namespace EyeTracker.Controllers
             ViewBag.PortfolioId = portfolioId;
             ViewData["TypesList"] = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() });
             ViewBag.PackageLink = "http://mobillify.com";
-            ViewBag.PropertyId = "MA-******-***";
-            ViewBag.CodeSample = "<script type=\"text/javascript\">\nvar _gaq = _gaq || [];_\ngaq.push(['_setAccount', 'UA-1970564-12']);";
-            return View(new ApplicationModel());
+            ViewBag.PropertyId = "**-******-***";
+            ViewBag.CodeSample = "<script type=\"text/javascript\">\nvar _gaq = _gaq || [];_\ngaq.push(['_setAccount', '**-******-***']);";
+            return View("NewEdit",new ApplicationModel());
         }
 
         [HttpPost]
@@ -153,28 +109,11 @@ namespace EyeTracker.Controllers
                     var appRes = service.Add(app);
                     if (appRes.HasError)
                     {
+                        res = new OperationResult<string>(appRes);
                     }
                     else
                     {
-                        string key = "";
-                        switch (app.Type)
-                        {
-                            case ApplicationType.Android:
-                                key = "MA";
-                                break;
-                            case ApplicationType.Web:
-                                key = "WP";
-                                break;
-                            case ApplicationType.iPhone:
-                                key = "MI";
-                                break;
-                            case ApplicationType.WebMobile:
-                                key = "WM";
-                                break;
-                            case ApplicationType.WindowsMobile:
-                                key = "MW";
-                                break;
-                        }
+                        string key = GetAppKey(app.Type);
                         res = new OperationResult<string>(string.Format("{0}-{1:000000}-{2:0000}", key, model.PortfolioId, appRes.Value));
                     }
                 }
@@ -184,6 +123,84 @@ namespace EyeTracker.Controllers
                 res = new OperationResult<string>();
             }
             return Json(res);
+        }
+
+        private static string GetAppKey(ApplicationType type)
+        {
+            string key = "";
+            switch (type)
+            {
+                case ApplicationType.Android:
+                    key = "MA";
+                    break;
+                case ApplicationType.Web:
+                    key = "WP";
+                    break;
+                case ApplicationType.iPhone:
+                    key = "MI";
+                    break;
+                case ApplicationType.WebMobile:
+                    key = "WM";
+                    break;
+                case ApplicationType.WindowsMobile:
+                    key = "MW";
+                    break;
+            }
+            return key;
+        }
+
+        public ActionResult Edit(int portfolioId, int appId)
+        {
+            var appRes = service.Get(appId);
+            if (appRes.HasError)
+            {
+                return View("Error");
+            }
+            else
+            {
+                var app = appRes.Value;
+                var model = new ApplicationModel { 
+                    Id = app.Id,
+                    Description = app.Description,
+                    PortfolioId = portfolioId,
+                    Type = app.Type
+                };
+                ViewBag.PortfolioId = portfolioId;
+                ViewData["TypesList"] = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() });
+                ViewBag.PackageLink = "http://mobillify.com";
+                ViewBag.PropertyId = string.Format("{0}-{1:000000}-{2:0000}",GetAppKey(app.Type), portfolioId, appId);
+                ViewBag.CodeSample = "<script type=\"text/javascript\">\nvar _gaq = _gaq || [];_\ngaq.push(['_setAccount', '" + ViewBag.PropertyId + "']);";
+                return View("NewEdit", model);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ApplicationModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var portfolioRes = portfolioService.Get(model.PortfolioId);
+                if (portfolioRes.HasError)
+                {
+                    return View("Error");
+                }
+                else
+                {
+                    var appRes = service.Update(model.Id, model.Description, model.Type);
+                    if (appRes.HasError)
+                    {
+                        return View("Error");
+                    }
+                    else
+                    {
+                        return RedirectToRoute("ApplicationDef");
+                    }
+                }
+            }
+            else
+            {
+                return View("NewEdit", model);
+            }
         }
 
         public FileResult JavaScriptFile(string filename)

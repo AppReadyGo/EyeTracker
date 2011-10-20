@@ -7,8 +7,8 @@ namespace EyeTracker.Domain.Model
 {
     public class Country
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int TimeZone { get; set; }
+        public virtual int Id { get; set; }
+        public virtual string Name { get; set; }
+        public virtual int TimeZone { get; set; }
     }
 }

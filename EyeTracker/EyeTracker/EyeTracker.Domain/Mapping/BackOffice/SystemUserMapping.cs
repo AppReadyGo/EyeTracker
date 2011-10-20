@@ -27,21 +27,21 @@ namespace EyeTracker.Domain.Mapping.BackOffice
                 map.Key(key => key.Column("UserId"));
                 map.Property(x => x.Email);
             });
-            Join("UserProfiler", map =>
-            {
-                map.Key(key => key.Column("UserId"));
-                map.Property(x => x.TimeZone);
-            });
+            //Join("UserProfiler", map =>
+            //{
+            //    map.Key(key => key.Column("UserId"));
+            //    map.Property(x => x.TimeZone);
+            //});
             ManyToOne(p => p.App, map =>
             {
                 map.Lazy(LazyRelation.NoLazy);
                 map.Column("ApplicationId");
             });
-            ManyToOne(p => p.Profiler, map =>
-            {
-                map.NotNullable(true);
-                map.Column("ProfilerId");
-            });
+            //ManyToOne(p => p.Profiler, map =>
+            //{
+            //    map.NotNullable(true);
+            //    map.Column("ProfilerId");
+            //});
             Bag(x => x.Roles, map =>
             {
                 map.Table("aspnet_UsersInRoles");

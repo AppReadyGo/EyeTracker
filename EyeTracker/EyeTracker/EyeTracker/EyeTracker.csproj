@@ -121,7 +121,7 @@
     <Compile Include="CustomModelBinders\JsonVisitInfoModelBinder.cs" />
     <Compile Include="Windsor\WindsorFactory.cs" />
     <Compile Include="Windsor\WindsorInstaller.cs" />
-    <Content Include="Content\ApplicationNew.css" />
+    <Content Include="Content\ApplicationNewEdit.css" />
     <Content Include="Content\LeftMenu.css" />
     <Content Include="Content\Form.css" />
     <Content Include="Content\LogOn.css" />
@@ -140,7 +140,7 @@
     <Content Include="Content\Table.css" />
     <Content Include="Content\TableChart.css" />
     <Content Include="Content\Tests\qunit.css" />
-    <Content Include="Scripts\ApplicationNew.js" />
+    <Content Include="Scripts\ApplicationNewEdit.js" />
     <Content Include="Scripts\Tests\TDD\AnalyticsTemplateTest.js" />
     <Content Include="Scripts\Tests\TDD\QUnitTest.htm" />
     <Content Include="Text.txt" />
@@ -183,7 +183,7 @@
     <Content Include="Views\Account\Details.aspx" />
     <Content Include="Views\Analytics\EyeTracker.aspx" />
     <Content Include="Views\Application\Index.aspx" />
-    <Content Include="Views\Application\New.aspx" />
+    <Content Include="Views\Application\NewEdit.aspx" />
     <Content Include="Views\Home\PageContent.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\Index_.aspx" />

@@ -7,7 +7,7 @@
 <asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">Applications</asp:Content>
 <asp:Content ID="Title" ContentPlaceHolderID="Title" runat="server">Applications</asp:Content>
 <asp:Content ID="TopMenu" ContentPlaceHolderID="TopMenu" runat="server">
-    <%:Html.ActionLink("New Application", "New") %>
+    <a href="/Application/New/<%= ViewBag.PortfolioId %>">New Application</a>
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <%= Html.Table((List<List<EyeTracker.Helpers.HTMLTable.Cell>>)ViewData["data"], (EyeTracker.Helpers.HTMLTable.Cell)ViewData["caption"], (List<EyeTracker.Helpers.HTMLTable.Cell>)ViewData["columnHeaders"], null, null, "grey", "acc_table")%>

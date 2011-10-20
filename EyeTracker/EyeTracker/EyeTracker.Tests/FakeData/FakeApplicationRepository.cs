@@ -33,5 +33,25 @@ namespace EyeTracker.Tests.FakeData
         {
             throw new NotImplementedException();
         }
+
+        #region IApplicationRepository Members
+
+
+        public void Update(int appId, string description, ApplicationType type)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IApplicationRepository Members
+
+
+        public IList<Application> GetAll(int portfolioId)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

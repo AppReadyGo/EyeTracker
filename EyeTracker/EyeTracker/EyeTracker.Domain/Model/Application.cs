@@ -26,5 +26,10 @@ namespace EyeTracker.Domain.Model
             this.Portfolios = new List<Portfolio>() { portfolio };
         }
 
+        protected internal virtual void Update(string description, ApplicationType type)
+        {
+            this.Description = description;
+            this.Type = type;
+        }
     }
 }

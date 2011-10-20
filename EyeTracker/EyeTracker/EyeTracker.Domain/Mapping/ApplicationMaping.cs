@@ -12,7 +12,7 @@ namespace EyeTracker.Domain.Mapping
     {
         public ApplicationMaping()
         {
-            Id(x => x.Id, map => map.Column("UserApplicationId"));
+            Id(x => x.Id, map => map.Generator(Generators.Identity));
             Property(x => x.Description, map =>
             {
                 map.Length(225);
