@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using EyeTracker.Domain.Model;
 using NHibernate;
-using Library.Common.Data;
+using EyeTracker.Domain;
+using NHibernate.Linq;
 
 namespace EyeTracker.DAL
 {
@@ -16,9 +17,9 @@ namespace EyeTracker.DAL
 
         void Remove(int appId);
 
-        void Update(Application application);
+        void Update(int appId, string description, ApplicationType type);
 
-        List<Application> GetAll();
+        IList<Application> GetAll(int portfolioId);
     }
 
     public class ApplicationRepository : IApplicationRepository
@@ -30,6 +31,7 @@ namespace EyeTracker.DAL
                 using (ITransaction transaction = session.BeginTransaction())
                 {
                     session.Save(application);
+                    transaction.Commit();
                     return application.Id;
                 }
             }
@@ -37,7 +39,10 @@ namespace EyeTracker.DAL
 
         public Application Get(int appId)
         {
-            throw new NotImplementedException();
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                return session.Get<Application>(appId);
+            }
         }
 
         public void Remove(int appId)
@@ -45,14 +50,26 @@ namespace EyeTracker.DAL
             throw new NotImplementedException();
         }
 
-        public void Update(Application application)
+        public void Update(int appId, string description, ApplicationType type)
         {
-            throw new NotImplementedException();
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    var app = session.Get<Application>(appId);
+                    app.Update(description, type);
+                    transaction.Commit();
+                }
+            }
         }
 
-        public List<Application> GetAll()
+        public IList<Application> GetAll(int portfolioId)
         {
-            throw new NotImplementedException();
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                return session.Query<Application>()
+                    .Where(a => a.Portfolios.Select(p => p.Id).Contains(portfolioId)).ToList();
+            }
         }
     }
 }

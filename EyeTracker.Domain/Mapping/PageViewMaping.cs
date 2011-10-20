@@ -12,7 +12,7 @@ namespace EyeTracker.Domain.Mapping
     {
         public PageViewMaping()
         {
-            Id(x => x.Id, map => map.Column("PageViewId"));
+            Id(x => x.Id, map => map.Generator(Generators.Identity));
             Property(x => x.Path, map =>
             {
                 map.Length(225);
@@ -23,11 +23,11 @@ namespace EyeTracker.Domain.Mapping
                 map.Length(15);
                 map.NotNullable(true);
             });
-            ManyToOne(p => p.OSLanguage, map =>
-            {
-                map.Lazy(LazyRelation.NoLazy);
-                map.Column("OSLanguageId");
-            });
+            //ManyToOne(p => p.OSLanguage, map =>
+            //{
+            //    map.Lazy(LazyRelation.NoLazy);
+            //    map.Column("OSLanguageId");
+            //});
             ManyToOne(p => p.Country, map =>
             {
                 map.Lazy(LazyRelation.NoLazy);

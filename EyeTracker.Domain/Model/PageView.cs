@@ -10,8 +10,8 @@ namespace EyeTracker.Domain.Model
         public virtual long Id { get; set; }
         public virtual string Path { get; set; }
         public virtual string IP { get; set; }
-        public virtual string OSLanguage { get; set; }
-        public virtual string Country { get; set; }
+        public virtual int OSLanguage { get; set; }
+        public virtual Country Country { get; set; }
         public virtual string City { get; set; }
         public virtual string OperationSystem { get; set; }
         public virtual string Browser { get; set; }

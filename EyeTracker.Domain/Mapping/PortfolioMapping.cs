@@ -12,7 +12,7 @@ namespace EyeTracker.Domain.Mapping
     {
         public PortfolioMapping()
         {
-            Id(p => p.Id, map => map.Generator(Generators.Sequence));
+            Id(p => p.Id, map => map.Generator(Generators.Identity));
             Property(p => p.Description, map => {
                 map.Length(255);
                 map.NotNullable(true);
@@ -33,6 +33,7 @@ namespace EyeTracker.Domain.Mapping
                 map.Table("PortfolioApplication");
                 map.Key(k => k.Column("PortfolioId"));
                 map.Cascade(Cascade.All);
+                map.Lazy(CollectionLazy.NoLazy);
             }, r => r.ManyToMany(mmp => mmp.Column("ApplicationId")));
         }
     }

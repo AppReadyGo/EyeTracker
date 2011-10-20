@@ -46,8 +46,13 @@ namespace EyeTracker
             );
             routes.MapRoute(
                 "Application", // Route name
-                "Application/{action}/{portfolioId}", // URL with parameters
-                new { controller = "Application", action = "Index", portfolioId = UrlParameter.Optional }
+                "Application/{action}/{portfolioId}/{appId}", // URL with parameters
+                new { controller = "Application", action = "Index", appId = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                "ApplicationDef", // Route name
+                "Application/{portfolioId}", // URL with parameters
+                new { controller = "Application", action = "Index" }
             );
             routes.MapRoute(
                 "Portfolio", // Route name

@@ -37,8 +37,13 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\ThridParty\NHibernate-3.2.0\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Library.Common">
-      <HintPath>..\ThridParty\Library.Common.dll</HintPath>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThridParty\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThridParty\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\ThridParty\NHibernate-3.2.0\NHibernate.dll</HintPath>
@@ -76,6 +81,7 @@
     <Compile Include="Model\Application.cs" />
     <Compile Include="Model\Portfolio.cs" />
     <Compile Include="Model\ViewPart.cs" />
+    <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AdminRepository.cs" />
     <Compile Include="Repository\ApplicationRepository.cs" />

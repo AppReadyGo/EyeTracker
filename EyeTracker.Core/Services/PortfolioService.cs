@@ -15,6 +15,8 @@ namespace EyeTracker.Core.Services
         OperationResult<IList<Portfolio>> GetAll();
 
         OperationResult<IList<Country>> GetCountries();
+
+        OperationResult<int> AddPortfolio(string description, int countryId);
     }
 
     public class PortfolioService : IPortfolioService
@@ -79,5 +81,29 @@ namespace EyeTracker.Core.Services
                 return new OperationResult<IList<Country>>(exp);
             }
         }
+
+        #region IPortfolioService Members
+
+
+        public OperationResult<int> AddPortfolio(string description, int countryId)
+        {
+            try
+            {
+                //Check Security
+                var userRes = membershipService.GetCurrentUserId();
+                if (userRes.HasError)
+                {
+                    return new OperationResult<int>(userRes);
+                }
+                var id = repository.AddPortfolio(description, countryId, userRes.Value);
+                return new OperationResult<int>(id);
+            }
+            catch (Exception exp)
+            {
+                return new OperationResult<int>(exp);
+            }
+        }
+
+        #endregion
     }
 }

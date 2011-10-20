@@ -8,11 +8,23 @@ namespace EyeTracker.Domain.Model
 {
     public class Portfolio
     {
-        public virtual int Id { get; set; }
-        public virtual string Description { get; set; }
-        public virtual Country Country { get; set; }
+        public virtual int Id { get; protected set; }
+        public virtual string Description { get; protected set; }
+        public virtual Country Country { get; protected set; }
         public virtual DateTime CreateDate { get; protected set; }
-        public virtual SystemUser User { get; set; }
-        public virtual IList<Application> Applications { get; set; }
+        public virtual SystemUser User { get; protected set; }
+        public virtual IList<Application> Applications { get; protected set; }
+
+        public Portfolio()
+        {
+            CreateDate = DateTime.UtcNow;
+        }
+
+        public Portfolio(string description, Country country, SystemUser user) : this()
+        {
+            this.Description = description;
+            this.Country = country;
+            this.User = user;
+        }
     }
 }

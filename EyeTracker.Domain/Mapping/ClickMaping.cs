@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NHibernate.Mapping.ByCode.Conformist;
 using EyeTracker.Domain.Model;
+using NHibernate.Mapping.ByCode;
 
 namespace EyeTracker.Domain.Mapping
 {
@@ -11,7 +12,7 @@ namespace EyeTracker.Domain.Mapping
     {
         public ClickMaping()
         {
-            Id(x => x.Id, map => map.Column("ClickId"));
+            Id(x => x.Id, map => map.Generator(Generators.Identity));
         }
     }
 }

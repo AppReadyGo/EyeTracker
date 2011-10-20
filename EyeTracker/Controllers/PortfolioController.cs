@@ -8,6 +8,7 @@ using System.Reflection;
 using EyeTracker.Core.Services;
 using EyeTracker.Helpers;
 using EyeTracker.Model;
+using EyeTracker.Domain.Model;
 
 namespace EyeTracker.Controllers
 {
@@ -15,15 +16,17 @@ namespace EyeTracker.Controllers
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         private IPortfolioService service;
+        private IAccountService accountService;
 
         public PortfolioController()
-            : this(new PortfolioService())
+            : this(new PortfolioService(), new AccountService())
         {
         }
 
-        public PortfolioController(IPortfolioService service)
+        public PortfolioController(IPortfolioService service, IAccountService accountService)
         {
             this.service = service;
+            this.accountService = accountService;
         }
 
         public ActionResult Index()
@@ -37,7 +40,8 @@ namespace EyeTracker.Controllers
             var columnHeaders = new List<HTMLTable.Cell>() {
                     new HTMLTable.Cell() { Value = "Description" }, 
                     new HTMLTable.Cell() { Value = "Applications" }, 
-                    new HTMLTable.Cell() { Value = "% Change" } 
+                    new HTMLTable.Cell() { Value = "% Change" },
+                    new HTMLTable.Cell() { Value = "" } 
                 };
             var data = new List<List<HTMLTable.Cell>>();
 
@@ -47,14 +51,16 @@ namespace EyeTracker.Controllers
                 foreach (var curPortfolio in portfRes.Value)
                 {
                     var cells = new List<HTMLTable.Cell>();
-                    cells.Add(new HTMLTable.Cell() { Value = curPortfolio.Description });
-                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"\\Application\\{0}\" >{1}</a>", curPortfolio.Id, curPortfolio.Applications.Count) });
+                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Portfolio/Analyticst/{0}\">{1}</a>", curPortfolio.Id, curPortfolio.Description) });
+                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Application/{0}\" >{1}</a>", curPortfolio.Id, curPortfolio.Applications.Count) });
                     cells.Add(new HTMLTable.Cell() { Value = "0.00%" });
+                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Portfolio/Edit/{0}\">edit</a>&nbsp;<a href=\"/Portfolio/Remove/{0}\">remove</a>", curPortfolio.Id) });
+                    data.Add(cells);
                 }
             }
             else
             {
-                data.Add(new List<HTMLTable.Cell>() { new HTMLTable.Cell() { ColSpan = 8, StyleClass = "no-data", Value = "No Transactions" } });
+                data.Add(new List<HTMLTable.Cell>() { new HTMLTable.Cell() { ColSpan = 8, StyleClass = "no-data", Value = "No Portfolios" } });
             }
 
             ViewData["caption"] = new HTMLTable.Cell() { Value = "Accounts" };
@@ -66,7 +72,16 @@ namespace EyeTracker.Controllers
         public ActionResult New()
         {
             ViewBag.Title = "New";
-            return View("NewEdit", new PortfolioModel());
+            var countriesRes = service.GetCountries();
+            if (!countriesRes.HasError)
+            {
+                ViewData["CountriesList"] = countriesRes.Value.Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
+                return View("NewEdit", new PortfolioModel());
+            }
+            else
+            {
+                return View("Error");
+            }
         }
 
         [HttpPost]
@@ -75,11 +90,28 @@ namespace EyeTracker.Controllers
             ViewBag.Title = "New";
             if (ModelState.IsValid)
             {
-                return RedirectToAction("");
+                var res = service.AddPortfolio(model.Description, model.CountryId);
+                if (res.HasError)
+                {
+                    return View("Error");
+                }
+                else
+                {
+                    return RedirectToAction("");
+                }
             }
             else
             {
-                return View("NewEdit");
+                var countriesRes = service.GetCountries();
+                if (!countriesRes.HasError)
+                {
+                    ViewData["CountriesList"] = countriesRes.Value.Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
+                    return View("NewEdit", new PortfolioModel());
+                }
+                else
+                {
+                    return View("Error");
+                }
             }
         }
 

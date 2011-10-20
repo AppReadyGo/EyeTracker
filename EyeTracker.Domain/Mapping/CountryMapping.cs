@@ -12,7 +12,8 @@ namespace EyeTracker.Domain.Mapping
     {
         public CountryMapping()
         {
-            Id(p => p.Id, map => map.Generator(Generators.Sequence));
+            Table("[Country]");
+            Id(p => p.Id, map => map.Generator(Generators.Identity));
             Property(p => p.Name, map =>
             {
                 map.Length(50);

@@ -13,9 +13,9 @@ namespace EyeTracker.Core.Services
     {
         OperationResult<int> Add(Application application);
         OperationResult<Application> Get(int appId);
-        OperationResult<List<Application>> GetAll();
+        OperationResult<IList<Application>> GetAll(int portfolioId);
         OperationResult Remove(int appId);
-        OperationResult Update(Application application);
+        OperationResult Update(int appId, string description, ApplicationType type);
     }
     public class ApplicationService : IApplicationService
     {
@@ -70,13 +70,13 @@ namespace EyeTracker.Core.Services
             }
         }
 
-        public OperationResult Update(Application application)
+        public OperationResult Update(int appId, string description, ApplicationType type)
         {
             //Check Security
             //Check application properties
             try
             {
-                repository.Update(application);
+                repository.Update(appId, description, type);
                 return new OperationResult();
             }
             catch (Exception exp)
@@ -86,16 +86,16 @@ namespace EyeTracker.Core.Services
         }
 
 
-        public OperationResult<List<Application>> GetAll()
+        public OperationResult<IList<Application>> GetAll(int portfolioId)
         {
             //Check Security
             try
             {
-                return new OperationResult<List<Application>>(repository.GetAll());
+                return new OperationResult<IList<Application>>(repository.GetAll(portfolioId));
             }
             catch (Exception exp)
             {
-                return new OperationResult<List<Application>>(exp);
+                return new OperationResult<IList<Application>>(exp);
             }
         }
     }
