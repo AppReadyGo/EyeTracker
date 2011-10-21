@@ -7,6 +7,15 @@ namespace EyeTracker.Core
 {
     public static class Extentions
     {
+        public static double MilliTimeStamp(this DateTime date)
+        {
+            DateTime d1 = new DateTime(1970, 1, 1);
+            DateTime d2 = date.ToUniversalTime();
+            TimeSpan ts = new TimeSpan(d2.Ticks - d1.Ticks);
+
+            return ts.TotalMilliseconds;
+        }
+
         /// <summary>
         /// Merge point with distance less than mergeDist and if the point Intensity more than minIntensity
         /// </summary>

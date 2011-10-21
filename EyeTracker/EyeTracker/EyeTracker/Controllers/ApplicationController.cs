@@ -19,6 +19,7 @@ using EyeTracker.Core.Services;
 using EyeTracker.DAL.Domain;
 using EyeTracker.Helpers;
 using EyeTracker.Domain.Model;
+using System.Web.Script.Serialization;
 
 namespace EyeTracker.Controllers
 {
@@ -64,7 +65,7 @@ namespace EyeTracker.Controllers
                 foreach (var curApp in appRes.Value)
                 {
                     var cells = new List<HTMLTable.Cell>();
-                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Application/Analyticst/{0}/{1}\">{2}</a>", portfolioId, curApp.Id, curApp.Description) });
+                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Application/Dashboard/{0}/{1}\">{2}</a>", portfolioId, curApp.Id, curApp.Description) });
                     cells.Add(new HTMLTable.Cell() { Value = curApp.Type.ToString() });
                     cells.Add(new HTMLTable.Cell() { Value = "0.00%" });
                     cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Application/Edit/{0}/{1}\">edit</a>&nbsp;<a href=\"/Application/Remove/{0}/{1}\">remove</a>", portfolioId, curApp.Id) });
@@ -202,6 +203,53 @@ namespace EyeTracker.Controllers
                 return View("NewEdit", model);
             }
         }
+
+        public ActionResult Dashboard(int portfolioId, int appId)
+        {
+            var points = new Dictionary<DateTime, int> { { DateTime.Now.AddDays(-5), 40 }, { DateTime.Now.AddDays(-4), 30 }, { DateTime.Now.AddDays(-3), 10 }, { DateTime.Now.AddDays(-2), 50 }, { DateTime.Now.AddDays(-1), 40 } };
+            //Fill chart data
+            var chartInitData = new List<object>();
+            chartInitData.Add(new
+            {
+                data = points.OrderBy(curItem => curItem.Key).Select(curItem => new object[] { curItem.Key.MilliTimeStamp(), curItem.Value }),
+                color = "#461D7C"
+            });
+            ViewBag.ChartInitData = new JavaScriptSerializer().Serialize(chartInitData);
+            ViewBag.PortfolioId = portfolioId;
+            ViewBag.ApplicationId = appId;
+            return View();
+        }
+
+        public ActionResult Usage(int portfolioId, int appId)
+        {
+            var points = new Dictionary<DateTime, int> { { DateTime.Now.AddDays(-5), 40 }, { DateTime.Now.AddDays(-4), 30 }, { DateTime.Now.AddDays(-3), 10 }, { DateTime.Now.AddDays(-2), 50 }, { DateTime.Now.AddDays(-1), 40 } };
+            //Fill chart data
+            var chartInitData = new List<object>();
+            chartInitData.Add(new
+            {
+                data = points.OrderBy(curItem => curItem.Key).Select(curItem => new object[] { curItem.Key.MilliTimeStamp(), curItem.Value }),
+                color = "#461D7C"
+            });
+            ViewBag.ChartInitData = new JavaScriptSerializer().Serialize(chartInitData);
+            ViewBag.PortfolioId = portfolioId;
+            ViewBag.ApplicationId = appId;
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public FileResult JavaScriptFile(string filename)
         {

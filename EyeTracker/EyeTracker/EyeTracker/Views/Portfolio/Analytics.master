@@ -1,0 +1,24 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Analytics.Master" Inherits="System.Web.Mvc.ViewMasterPage"%>
+<asp:Content ContentPlaceHolderID="TitleContent" runat="server">
+        Portfolio - <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
+    <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="Title" runat="server">
+    Portfolio - <asp:ContentPlaceHolder ID="Title" runat="server" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="TopMenu" runat="server">
+    <%:Html.ActionLink("Portfolios", "") %>
+</asp:Content>
+<asp:Content ContentPlaceHolderID="LeftMenu" runat="server">
+    <a href="/Portfolio/Dashboard/<%: ViewBag.PortfolioId %>">Dashboard</a>
+    <a href="/Portfolio/Usage/<%: ViewBag.PortfolioId %>">Usage</a>
+    <a <%--href="/Portfolio/Visitors/<%: ViewBag.PortfolioId %>"--%> class="disabled">Visitors</a>
+    <a <%--href="/Portfolio/MapOverlay/<%: ViewBag.PortfolioId %>"--%> class="disabled">Map Overlay</a>
+    <a <%--href="/Portfolio/TraficSources/<%: ViewBag.PortfolioId %>"--%> class="disabled">Trafic Sources</a>
+    <a <%--href="/Portfolio/ContentOverview/<%: ViewBag.PortfolioId %>"--%> class="disabled">Content Overview</a>
+</asp:Content>
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+</asp:Content>
