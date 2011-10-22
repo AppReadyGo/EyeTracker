@@ -5,7 +5,6 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="Title" runat="server">Eye Tracker</asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-
-<h2>Analytics</h2>
-
+Screen Size: <%: Html.DropDownList("ScreenSize", (IEnumerable<SelectListItem>)ViewData["ScreenSizes"]) %>
+<img src="<%: ViewBag.EyeTrackerImageUrl %>" />
 </asp:Content>

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EyeTracker.DAL.Domain
+namespace EyeTracker.Domain.Model.Events
 {
-    public class ClickInfo
+    public class ViewPartEvent
     {
-        public int ClientX { get; set; }
+        public int ScrollTop { get; set; }
 
-        public int ClientY { get; set; }
+        public int ScrollLeft { get; set; }
+
+        public long TimeSpan { get; set; }
 
         public DateTime Date { get; set; }
 
