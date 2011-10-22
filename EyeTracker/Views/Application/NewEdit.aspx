@@ -24,8 +24,13 @@
     <div><%: Html.LabelFor(m => m.Type)%> <%: Html.DropDownListFor(m => m.Type, (IEnumerable<SelectListItem>)ViewData["TypesList"])%></div>
     <p><a id="create_lnk">Create</a></p>
 </div>
+<div id="screens" class="step">
+    <h3>2. Screenshots upload</h3>
+    <div><img /> 500 X 600 <a>change</a></div>
+    <div>New: <input /> X <input /> <input type="file" /><a >add</a></div>
+</div>
 <div id="sample_code" class="step">
-    <h3>2. Download package and insert into your code</h3>
+    <h3>3. Download package and insert into your code</h3>
     <div>Package: <a href="<%: ViewBag.PackageLink %>">Android Package 1.0.1</a></div>
     <div>Property ID: <strong id="property"><%: ViewBag.PropertyId%></strong></div>
     <textarea id="code"><%: ViewBag.CodeSample%></textarea>

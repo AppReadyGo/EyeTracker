@@ -14,6 +14,7 @@ using EyeTracker.Windsor;
 using AutoMapper;
 using EyeTracker.Model;
 using EyeTracker.DAL.Domain;
+using EyeTracker.Domain.Model.Events;
 
 namespace EyeTracker.CustomModelBinders
 {
@@ -66,7 +67,7 @@ namespace EyeTracker.CustomModelBinders
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             JsonPackage package = null;
-            PackageInfo packageInfo = new PackageInfo() { clicks = new List<ClickInfo>(), parts = new List<ViewPartInfo>() };
+            PackageEvent packageEvent = new PackageEvent() { clicks = new List<ClickEvent>(), parts = new List<ViewPartEvent>() };
             ModelStateDictionary mState = bindingContext.ModelState;
             string json = HttpUtility.UrlDecode(controllerContext.HttpContext.Request.Form.ToString());
             try
@@ -88,7 +89,7 @@ namespace EyeTracker.CustomModelBinders
                     }
                     if (mState.IsValid)
                     {
-                        packageInfo.clicks.Add(new ClickInfo()
+                        packageEvent.clicks.Add(new ClickEvent()
                         {
                             Date = date,
                             VisitInfoId = package.VisitId,
@@ -118,7 +119,7 @@ namespace EyeTracker.CustomModelBinders
                     }
                     if (mState.IsValid)
                     {
-                        packageInfo.parts.Add(new ViewPartInfo()
+                        packageEvent.parts.Add(new ViewPartInfo()
                         {
                             Date = date,
                             VisitInfoId = package.VisitId,
@@ -138,7 +139,7 @@ namespace EyeTracker.CustomModelBinders
                 Guid guid = log.WriteError(exp, "JsonPackageModelBinder Error, json:{0}", json);
                 mState.AddModelError("GeneralError", "Please contact to customer service: customerservice@mobillify.com, error guid:" + guid.ToString());
             }
-            return packageInfo;
+            return packageEvent;
         }
     }
 }

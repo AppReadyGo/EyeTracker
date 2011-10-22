@@ -103,6 +103,7 @@
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeController_.cs" />
     <Compile Include="Controllers\CustomExceptions.cs" />
@@ -116,7 +117,6 @@
     <Compile Include="Model\AccountModels.cs" />
     <Compile Include="Model\AdminModels.cs" />
     <Compile Include="Model\ApplicationModel.cs" />
-    <Compile Include="Model\PackageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomModelBinders\JsonVisitInfoModelBinder.cs" />
     <Compile Include="Windsor\WindsorFactory.cs" />
