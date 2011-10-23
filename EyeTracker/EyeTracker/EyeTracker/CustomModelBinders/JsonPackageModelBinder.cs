@@ -119,7 +119,7 @@ namespace EyeTracker.CustomModelBinders
                     }
                     if (mState.IsValid)
                     {
-                        packageEvent.parts.Add(new ViewPartInfo()
+                        packageEvent.parts.Add(new ViewPartEvent()
                         {
                             Date = date,
                             VisitInfoId = package.VisitId,

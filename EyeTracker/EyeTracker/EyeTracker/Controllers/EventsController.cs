@@ -8,6 +8,7 @@ using EyeTracker.Common;
 using EyeTracker.Common.Logger;
 using System.Reflection;
 using System.Text;
+using EyeTracker.Core.Services;
 
 namespace EyeTracker.Controllers
 {
@@ -15,6 +16,18 @@ namespace EyeTracker.Controllers
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         
+        private IEventsServices eventsServices = null;
+
+        public EventsController()
+            : this(new EventsServices())
+        {
+        }
+
+        public EventsController(IEventsServices eventsServices)
+        {
+            this.eventsServices = eventsServices;
+        }
+
         [HttpPost]
         public JsonResult Visit(VisitEvent visitEvent)
         {
@@ -26,7 +39,7 @@ namespace EyeTracker.Controllers
 #if JSUNITTEST
                 res = new OperationResult<long>(1);
 #else
-                res = service.AddVisitInfo(visitInfo);
+                res = eventsServices.AddVisitEvent(visitEvent);
 #endif
             }
             else
@@ -47,21 +60,6 @@ namespace EyeTracker.Controllers
             return base.Json(res);
         }
 
-        public JsonResult Debug(string json)
-        {
-            OperationResult<long> res = null;
-            try
-            {
-                Messenger.SendEmail(null, new List<string>() { "ypanshin@gmail.com" }, "Found Driver License Practical Test Appointment", "On dates:" + json);
-                res = new OperationResult<long>(ErrorNumber.None);
-            }
-            catch (Exception exp)
-            {
-                res = new OperationResult<long>(exp, "Debug");
-            }
-            return base.Json(res, JsonRequestBehavior.AllowGet);
-        }
-
         public JsonResult Package(PackageEvent packageEvent)
         {
             log.WriteInformation("-->Package(clicks:{0}, parts:{1})", packageEvent.clicks.Count, packageEvent.parts.Count);
@@ -69,24 +67,19 @@ namespace EyeTracker.Controllers
             try
             {
                 res = new OperationResult();
-                foreach (var curClikInfo in packageEvent.clicks)
-                {
 #if JSUNITTEST
-                    var curRes = new OperationResult();
+                var curRes = new OperationResult();
 #else
-                    var curRes = service.AddClickInfo(curClikInfo);
+                var curRes = eventsServices.AddClickEvents(packageEvent.clicks);
 #endif
-                    if (curRes.HasError) res = curRes;
-                }
-                foreach (var curViewPartInfo in packageEvent.parts)
-                {
+                if (curRes.HasError) res = curRes;
+
 #if JSUNITTEST
-                    var curRes = new OperationResult();
+                curRes = new OperationResult();
 #else
-                    var curRes = service.AddViewPartInfo(curViewPartInfo);
+                curRes = eventsServices.AddViewPartEvents(packageEvent.parts);
 #endif
-                    if (curRes.HasError) res = curRes;
-                }
+                if (curRes.HasError) res = curRes;
 
                 Response.AddHeader("Access-Control-Allow-Origin", "*");
             }
@@ -97,6 +90,5 @@ namespace EyeTracker.Controllers
             log.WriteInformation("Package:{0}-->", res);
             return base.Json(res);
         }
-
     }
 }

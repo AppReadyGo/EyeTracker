@@ -60,9 +60,16 @@
   <ItemGroup>
     <Compile Include="Mapping\AccountProfilerMaping.cs" />
     <Compile Include="Mapping\ClickMaping.cs" />
+    <Compile Include="Mapping\BrowserMapping.cs" />
+    <Compile Include="Mapping\OperationSystemMapping.cs" />
     <Compile Include="Mapping\Events\ClickEventMapping.cs" />
     <Compile Include="Mapping\CountryMapping.cs" />
-    <Compile Include="Mapping\Events\PackageEventMapping.cs" />
+    <Compile Include="Mapping\Events\VisitEventMapping.cs" />
+    <Compile Include="Mapping\Events\ViewPartEventMapping.cs" />
+    <Compile Include="Mapping\LanguageMapping.cs" />
+    <Compile Include="Mapping\NameableMapping.cs" />
+    <Compile Include="Model\Browser.cs" />
+    <Compile Include="Model\OperationSystem.cs" />
     <Compile Include="Mapping\PageViewMaping.cs" />
     <Compile Include="Mapping\BackOffice\SystemRoleMapping.cs" />
     <Compile Include="Mapping\ApplicationMaping.cs" />
@@ -79,9 +86,11 @@
     <Compile Include="Model\Events\PackageEvent.cs" />
     <Compile Include="Model\Events\ViewPartEvent.cs" />
     <Compile Include="Model\Events\VisitEvent.cs" />
+    <Compile Include="Model\Language.cs" />
+    <Compile Include="Model\Nameable.cs" />
     <Compile Include="Model\PageView.cs" />
     <Compile Include="Model\BackOffice\SystemUser.cs" />
-    <Compile Include="Model\Entity.cs" />
+    <Compile Include="Model\BackOffice\Entity.cs" />
     <Compile Include="Model\BackOffice\MembershipInfo.cs" />
     <Compile Include="Model\BackOffice\SystemRole.cs" />
     <Compile Include="Model\Application.cs" />
@@ -91,9 +100,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AdminRepository.cs" />
     <Compile Include="Repository\ApplicationRepository.cs" />
+    <Compile Include="Repository\DataRepository.cs" />
     <Compile Include="Repository\EventsRepository.cs" />
     <Compile Include="Repository\PortfolioRepository.cs" />
-    <Compile Include="Repository\ReportsRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

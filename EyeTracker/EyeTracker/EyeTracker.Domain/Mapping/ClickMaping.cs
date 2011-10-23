@@ -13,6 +13,14 @@ namespace EyeTracker.Domain.Mapping
         public ClickMaping()
         {
             Id(x => x.Id, map => map.Generator(Generators.Identity));
+            Property(p => p.Date, map => map.NotNullable(true));
+            Property(p => p.X, map => map.NotNullable(true));
+            Property(p => p.Y, map => map.NotNullable(true));
+            ManyToOne(p => p.PageView, map =>
+                {
+                    map.NotNullable(true);
+                    map.Column("PageViewId");
+                });
         }
     }
 }

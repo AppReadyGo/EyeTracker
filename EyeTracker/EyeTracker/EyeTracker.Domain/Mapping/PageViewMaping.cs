@@ -12,27 +12,55 @@ namespace EyeTracker.Domain.Mapping
     {
         public PageViewMaping()
         {
-            Id(x => x.Id, map => map.Generator(Generators.Identity));
+            Id(x => x.Id, map => { });
+            Property(p => p.Date, map => map.NotNullable(true));
+            OneToOne(p => p.PreviousPageView, map => { });
             Property(x => x.Path, map =>
             {
-                map.Length(225);
+                map.Length(256);
                 map.NotNullable(true);
             });
-            Property(x => x.IP, map =>
+            Property(p => p.Ip, map => map.Length(15));
+            ManyToOne(p => p.Language, map =>
             {
-                map.Length(15);
-                map.NotNullable(true);
+                map.Lazy(LazyRelation.NoLazy);
+                map.Column("LanguageId");
             });
-            //ManyToOne(p => p.OSLanguage, map =>
-            //{
-            //    map.Lazy(LazyRelation.NoLazy);
-            //    map.Column("OSLanguageId");
-            //});
             ManyToOne(p => p.Country, map =>
             {
                 map.Lazy(LazyRelation.NoLazy);
                 map.Column("CountryId");
             });
+            Property(p => p.City, map => map.Length(50));
+            ManyToOne(p => p.OperationSystem, map =>
+            {
+                map.Lazy(LazyRelation.NoLazy);
+                map.Column("OperationSystemId");
+            });
+            ManyToOne(p => p.Browser, map =>
+            {
+                map.Lazy(LazyRelation.NoLazy);
+                map.Column("BrowserId");
+            });
+            Property(p => p.ScreenWidth, map => map.NotNullable(true));
+            Property(p => p.ScreenHeight, map => map.NotNullable(true));
+            Property(p => p.ClientWidth, map => map.NotNullable(true));
+            Property(p => p.ClientHeight, map => map.NotNullable(true));
+            ManyToOne(p => p.Application, map =>
+            {
+                map.Lazy(LazyRelation.NoLazy);
+                map.Column("ApplicationId");
+            });
+            Bag(p => p.Clicks, map =>
+            {
+                map.Key(k => k.Column("Id"));
+                map.Lazy(CollectionLazy.Lazy);
+            }, prop => prop.OneToMany());
+            Bag(p => p.ViewParts, map =>
+            {
+                map.Key(k => k.Column("Id"));
+                map.Lazy(CollectionLazy.Lazy);
+            }, prop => prop.OneToMany());
         }
     }
 }

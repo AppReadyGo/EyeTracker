@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EyeTracker.Domain.Model.Events;
+using NHibernate;
 
 namespace EyeTracker.Domain.Repository
 {
@@ -10,23 +11,54 @@ namespace EyeTracker.Domain.Repository
     {
         long AddVisitEvent(VisitEvent visitEvent);
 
-        void AddViewPartEvent(ViewPartEvent viewPartEvent);
+        void AddViewPartEvents(IEnumerable<ViewPartEvent> viewPartEvent);
 
-        void AddClickEvent(ClickEvent clickEvent);
+        void AddClickEvents(IEnumerable<ClickEvent> clickEvent);
     }
 
     public class EventsRepository : IEventsRepository
     {
-        public long AddVisitInfo(VisitEvent visitEvent)
+        public long AddVisitEvent(VisitEvent visitEvent)
         {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    session.Save(visitEvent);
+                    transaction.Commit();
+                    return visitEvent.Id;
+                }
+            }
         }
 
-        public void AddViewPartInfo(ViewPartEvent viewPartEvent)
+        public void AddViewPartEvents(IEnumerable<ViewPartEvent> viewPartEvents)
         {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    foreach (var curEvent in viewPartEvents)
+                    {
+                        session.Save(curEvent);
+                    }
+                    transaction.Commit();
+                }
+            }
         }
 
-        public void AddClickInfo(ClickEvent clickEvent)
+        public void AddClickEvents(IEnumerable<ClickEvent> clickEvents)
         {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    foreach (var curEvent in clickEvents)
+                    {
+                        session.Save(curEvent);
+                    }
+                    transaction.Commit();
+                }
+            }
         }
     }
 }

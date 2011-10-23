@@ -7,14 +7,14 @@ namespace EyeTracker.Domain.Model.Events
 {
     public class ViewPartEvent
     {
-        public int ScrollTop { get; set; }
+        public virtual int ScrollTop { get; set; }
 
-        public int ScrollLeft { get; set; }
+        public virtual int ScrollLeft { get; set; }
 
-        public long TimeSpan { get; set; }
+        public virtual long TimeSpan { get; set; }
 
-        public DateTime Date { get; set; }
+        public virtual DateTime Date { get; set; }
 
-        public long VisitInfoId { get; set; }
+        public virtual long VisitInfoId { get; set; }
     }
 }

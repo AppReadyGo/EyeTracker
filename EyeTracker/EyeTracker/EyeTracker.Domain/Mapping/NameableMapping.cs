@@ -8,18 +8,14 @@ using NHibernate.Mapping.ByCode;
 
 namespace EyeTracker.Domain.Mapping
 {
-    public class ViewPartMaping : ClassMapping<ViewPart>
+    public class NameableMapping<T> : ClassMapping<T> where T : Nameable
     {
-        public ViewPartMaping()
+        public NameableMapping()
         {
             Id(x => x.Id, map => map.Generator(Generators.Identity));
-            Property(p => p.Date, map => map.NotNullable(true));
-            Property(p => p.X, map => map.NotNullable(true));
-            Property(p => p.Y, map => map.NotNullable(true));
-            ManyToOne(p => p.PageView, map =>
-            {
+            Property(x => x.Name, map => {
+                map.Length(100);
                 map.NotNullable(true);
-                map.Column("PageViewId");
             });
         }
     }

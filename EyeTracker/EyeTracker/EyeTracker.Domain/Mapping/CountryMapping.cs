@@ -10,15 +10,20 @@ namespace EyeTracker.Domain.Mapping
 {
     public class CountryMapping : ClassMapping<Country>
     {
-        public CountryMapping()
+        public CountryMapping() 
+            : base()
         {
             Table("[Country]");
-            Id(p => p.Id, map => map.Generator(Generators.Identity));
-            Property(p => p.Name, map =>
+
+            Id(p => p.GeoId, map => { });
+            Property(x => x.Name, map =>
             {
-                map.Length(50);
                 map.NotNullable(true);
+                map.Length(70);
             });
+            Property(x => x.Code, map => map.NotNullable(true));
+            Property(x => x.ISOCode, map => map.Length(2));
+            Property(x => x.NativeName, map => map.Length(70));
             Property(x => x.TimeZone, map => map.NotNullable(true));
         }
     }

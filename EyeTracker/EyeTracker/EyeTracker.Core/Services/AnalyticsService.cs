@@ -18,17 +18,13 @@ namespace EyeTracker.Core.Services
     public interface IAnalyticsService
     {
         OperationResult<List<ClickHeatMapData>> GetClickHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
+        
         OperationResult<List<ViewHeatMapData>> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
-
-        OperationResult<long> AddVisitInfo(VisitInfo visitInfo);
-
-        OperationResult AddViewPartInfo(ViewPartInfo viewPartInfo);
-
-        OperationResult AddClickInfo(ClickInfo clickInfo);
 
         OperationResult<AnalyticsInfo> GetAnalyticsInfo(string userId, long? appId, string pageUri);
 
         OperationResult<string> GetClientId(long appId);
+
         OperationResult<long> GetApplicationId(string clientId);
 
         OperationResult ClearAnalytics(string userId, long appId, string pageUri, int width, int height);
@@ -107,57 +103,6 @@ namespace EyeTracker.Core.Services
             }
             return result;
         }
-
-        public OperationResult<long> AddVisitInfo(VisitInfo visitInfo)
-        {
-            OperationResult<long> result = null;
-            try
-            {
-                //TODO: add validation
-
-                result = new OperationResult<long>(repository.AddVisitInfo(visitInfo));
-            }
-            catch (Exception exp)
-            {
-                result = new OperationResult<long>(exp, "AddVisitInfo");
-            }
-            return result;
-        }
-
-        public OperationResult AddViewPartInfo(ViewPartInfo viewPartInfo)
-        {
-            OperationResult result = null;
-            try
-            {
-                log.WriteInformation("AddViewPartInfo:visitInfoId:{0}", viewPartInfo.VisitInfoId);
-                if (viewPartInfo.TimeSpan > 0)
-                {
-                    repository.AddViewPartInfo(viewPartInfo);
-                }
-                result = new OperationResult();
-            }
-            catch (Exception exp)
-            {
-                result = new OperationResult<long>(exp, "AddViewPartInfo");
-            }
-            return result;
-        }
-
-        public OperationResult AddClickInfo(ClickInfo clickInfo)
-        {
-            OperationResult result = null;
-            try
-            {
-                repository.AddClickInfo(clickInfo);
-                result = new OperationResult();
-            }
-            catch (Exception exp)
-            {
-                result = new OperationResult<long>(exp, "AddClickInfo");
-            }
-            return result;
-        }
-
         public OperationResult<AnalyticsInfo> GetAnalyticsInfo(string userId, long? appId, string pageUri)
         {
             OperationResult<AnalyticsInfo> result = null;

@@ -32,7 +32,7 @@ namespace EyeTracker.Domain.Mapping.BackOffice
             //    map.Key(key => key.Column("UserId"));
             //    map.Property(x => x.TimeZone);
             //});
-            ManyToOne(p => p.App, map =>
+            ManyToOne(p => p.Application, map =>
             {
                 map.Lazy(LazyRelation.NoLazy);
                 map.Column("ApplicationId");

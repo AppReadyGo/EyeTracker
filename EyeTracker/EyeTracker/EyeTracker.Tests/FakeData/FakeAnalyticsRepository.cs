@@ -5,6 +5,7 @@ using System.Text;
 using EyeTracker.DAL;
 using EyeTracker.DAL.Interfaces;
 using EyeTracker.DAL.Domain;
+using EyeTracker.Domain.Model.Events;
 
 namespace EyeTracker.Tests.FakeData
 {
@@ -20,17 +21,17 @@ namespace EyeTracker.Tests.FakeData
             throw new NotImplementedException();
         }
 
-        public long AddVisitInfo(VisitInfo visitInfo)
+        public long AddVisitInfo(VisitEvent visitInfo)
         {
             throw new NotImplementedException();
         }
 
-        public void AddViewPartInfo(ViewPartInfo viewPartInfo)
+        public void AddViewPartInfo(ViewPartEvent viewPartInfo)
         {
             throw new NotImplementedException();
         }
 
-        public void AddClickInfo(ClickInfo clickInfo)
+        public void AddClickInfo(ClickEvent clickInfo)
         {
             throw new NotImplementedException();
         }

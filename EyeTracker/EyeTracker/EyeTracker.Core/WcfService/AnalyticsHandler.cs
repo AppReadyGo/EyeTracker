@@ -7,6 +7,7 @@ using EyeTracker.Common;
 using System.Runtime.Serialization.Json;
 using System.IO;
 using EyeTracker.DAL.Domain;
+using EyeTracker.Domain.Model.Events;
 
 namespace EyeTracker.Core.WcfService
 {
@@ -30,10 +31,10 @@ namespace EyeTracker.Core.WcfService
 
         public OperationResult<long> Visit(string jsonData)
         {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(VisitInfo));
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(VisitEvent));
 
             MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(jsonData));
-            VisitInfo visitInfo = serializer.ReadObject(ms) as VisitInfo;
+            VisitEvent visitEvent = serializer.ReadObject(ms) as VisitEvent;
             ////TODO: Add the visit to db
             //OperationResult<long> res = null;
 
@@ -42,10 +43,10 @@ namespace EyeTracker.Core.WcfService
 
         public OperationResult Package(string jsonData)
         {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(PackageInfo));
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(PackageEvent));
 
             MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(jsonData));
-            PackageInfo packageObject = serializer.ReadObject(ms) as PackageInfo;
+            PackageEvent packageObject = serializer.ReadObject(ms) as PackageEvent;
             //TODO: Add the package to db
             return new OperationResult(ErrorNumber.General);
         }

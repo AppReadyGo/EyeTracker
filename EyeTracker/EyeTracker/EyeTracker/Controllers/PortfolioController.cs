@@ -77,7 +77,7 @@ namespace EyeTracker.Controllers
             var countriesRes = service.GetCountries();
             if (!countriesRes.HasError)
             {
-                ViewData["CountriesList"] = countriesRes.Value.Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
+                ViewData["CountriesList"] = countriesRes.Value.Select(c => new SelectListItem() { Text = c.Name, Value = c.GeoId.ToString() });
                 return View("NewEdit", new PortfolioModel());
             }
             else
@@ -107,7 +107,7 @@ namespace EyeTracker.Controllers
                 var countriesRes = service.GetCountries();
                 if (!countriesRes.HasError)
                 {
-                    ViewData["CountriesList"] = countriesRes.Value.Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
+                    ViewData["CountriesList"] = countriesRes.Value.Select(c => new SelectListItem() { Text = c.Name, Value = c.GeoId.ToString() });
                     return View("NewEdit", new PortfolioModel());
                 }
                 else
@@ -123,7 +123,7 @@ namespace EyeTracker.Controllers
             var countriesRes = service.GetCountries();
             if (!countriesRes.HasError)
             {
-                ViewData["CountriesList"] = countriesRes.Value.Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() });
+                ViewData["CountriesList"] = countriesRes.Value.Select(c => new SelectListItem() { Text = c.Name, Value = c.GeoId.ToString() });
                 return View("NewEdit", new PortfolioModel());
             }
             else
