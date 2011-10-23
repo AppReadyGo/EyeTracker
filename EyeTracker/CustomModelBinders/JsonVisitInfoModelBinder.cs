@@ -12,6 +12,7 @@ using EyeTracker.Common.Logger;
 using System.Reflection;
 using EyeTracker.Windsor;
 using EyeTracker.DAL.Domain;
+using EyeTracker.Domain.Model.Events;
 
 namespace EyeTracker.CustomModelBinders
 {
@@ -23,7 +24,7 @@ namespace EyeTracker.CustomModelBinders
         private class JsonVisitInfo
         {
             [DataMember(Name = "cid")]
-            public string ClientId { get; set; }
+            public string Key { get; set; }
 
             [DataMember(Name = "d")]
             public string Date { get; set; }
@@ -46,7 +47,7 @@ namespace EyeTracker.CustomModelBinders
 
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
-            var visitInfo = new VisitInfo();
+            var visitInfo = new VisitEvent();
             ModelStateDictionary mState = bindingContext.ModelState;
             string json = HttpUtility.UrlDecode(controllerContext.HttpContext.Request.Form.ToString());
             try
@@ -56,14 +57,6 @@ namespace EyeTracker.CustomModelBinders
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(JsonVisitInfo));
                 MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(json));
                 var visitInfoModel = serializer.ReadObject(ms) as JsonVisitInfo;
-
-                //Get application id
-                var appIdRes = service.GetApplicationId(visitInfoModel.ClientId);
-                if (appIdRes.HasError)
-                {
-                    mState.Add("ClientId(cid)", new ModelState { });
-                    mState.AddModelError("ClientId(cid)", "Wrong format");
-                }
 
                 //Get date
                 DateTime date;
@@ -75,14 +68,14 @@ namespace EyeTracker.CustomModelBinders
 
                 if (mState.IsValid)
                 {
-                    visitInfo.UserApplicationId = appIdRes.Value;
+                    visitInfo.Key = visitInfoModel.Key;
                     //TODO: Add date
                     //visitInfo.Date = date;
                     visitInfo.ScreenWidth = visitInfoModel.ScreenWidth;
                     visitInfo.ScreenHeight = visitInfoModel.ScreenHeight;
                     visitInfo.ClientWidth = visitInfoModel.ClientWidth;
                     visitInfo.ClientHeight = visitInfoModel.ClientHeight;
-                    visitInfo.PageUri = visitInfoModel.PageUri;
+                    visitInfo.Path = visitInfoModel.PageUri;
                 }
             }
             catch (Exception exp)

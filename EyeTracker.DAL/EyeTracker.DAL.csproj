@@ -84,7 +84,6 @@
     <Compile Include="Domain\ApplicationInfo.cs" />
     <Compile Include="BackOfficeRepository.cs" />
     <Compile Include="Domain\AccountInfo.cs" />
-    <Compile Include="Domain\VisitInfo.cs" />
     <Compile Include="ReportRepository.cs" />
     <Compile Include="Domain\Constants.cs" />
     <Compile Include="Domain\Enumerators.cs" />

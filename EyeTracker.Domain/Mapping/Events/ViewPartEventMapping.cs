@@ -9,13 +9,14 @@ using EyeTracker.Domain.Model.Events;
 
 namespace EyeTracker.Domain.Mapping
 {
-    public class ClickEventMapping : ClassMapping<ClickEvent>
+    public class ViewPartEventMapping : ClassMapping<ViewPartEvent>
     {
-        public ClickEventMapping()
+        public ViewPartEventMapping()
         {
             Property(p => p.Date, map => map.NotNullable(true));
-            Property(p => p.ClientX, map => map.NotNullable(true));
-            Property(p => p.ClientY, map => map.NotNullable(true));
+            Property(p => p.ScrollTop, map => map.NotNullable(true));
+            Property(p => p.ScrollLeft, map => map.NotNullable(true));
+            Property(p => p.TimeSpan, map => map.NotNullable(true));
             Property(p => p.VisitInfoId, map => map.NotNullable(true));
         }
     }

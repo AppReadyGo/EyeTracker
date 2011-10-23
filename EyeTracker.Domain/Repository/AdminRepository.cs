@@ -31,12 +31,11 @@ namespace EyeTracker.Domain.Repository
 
     public class AdminRepository : IAdminRepository
     {
-        static ISessionFactory sessionFactory;
-        public AdminRepository()
-        {
-            if (sessionFactory == null)
-                sessionFactory = BuildSessionFactory(this.GetType(), ConfigurationManager.ConnectionStrings["ApplicationServices"].ToString());
-        }
+        //public AdminRepository()
+        //{
+        //    if (sessionFactory == null)
+        //        sessionFactory = BuildSessionFactory(this.GetType(), ConfigurationManager.ConnectionStrings["ApplicationServices"].ToString());
+        //}
 
         protected static string Serialize(HbmMapping hbmElement)
         {
@@ -59,7 +58,7 @@ namespace EyeTracker.Domain.Repository
         public MembershipInfo GetMembership()
         {
             var res = new MembershipInfo();
-            using (ISession session = sessionFactory.OpenSession())
+            using (ISession session = NHibernateHelper.OpenSession())
             {
                 res.Applications = session.CreateCriteria<SystemApplication>().List<SystemApplication>();
                 res.Roles = session.CreateCriteria<SystemRole>().List<SystemRole>();
@@ -71,7 +70,7 @@ namespace EyeTracker.Domain.Repository
         public IList<T> GetAll<T>() where T : Entity, new()
         {
             IList<T> res = null;
-            using (ISession session = sessionFactory.OpenSession())
+            using (ISession session = NHibernateHelper.OpenSession())
             {
                 res = session.QueryOver<T>().List();
             }
@@ -81,7 +80,7 @@ namespace EyeTracker.Domain.Repository
         public T Get<T>(Guid id) where T : Entity, new()
         {
             T res = null;
-            using (ISession session = sessionFactory.OpenSession())
+            using (ISession session = NHibernateHelper.OpenSession())
             {
                 res = session.Get<T>(id);
                 var type = typeof(T);
@@ -96,7 +95,7 @@ namespace EyeTracker.Domain.Repository
 
         public void Edit<T>(T entity) where T : Entity, new()
         {
-            using (ISession session = sessionFactory.OpenSession())
+            using (ISession session = NHibernateHelper.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
                 {
@@ -106,38 +105,38 @@ namespace EyeTracker.Domain.Repository
             }
         }
 
-        private static ISessionFactory BuildSessionFactory(Type type, string connectionString)
-        {
-            var mapper = new ModelMapper();
+//        private static ISessionFactory BuildSessionFactory(Type type, string connectionString)
+//        {
+//            var mapper = new ModelMapper();
 
-            mapper.AddMappings(type.Assembly.GetTypes());
+//            mapper.AddMappings(type.Assembly.GetTypes());
 
-            var cfg = new NHibernate.Cfg.Configuration();
+//            var cfg = new NHibernate.Cfg.Configuration();
 
-            cfg.DataBaseIntegration(c =>
-            {
-                c.ConnectionString = connectionString;
-                c.Driver<SqlClientDriver>();
-                c.Dialect<MsSql2008Dialect>();
+//            cfg.DataBaseIntegration(c =>
+//            {
+//                c.ConnectionString = connectionString;
+//                c.Driver<SqlClientDriver>();
+//                c.Dialect<MsSql2008Dialect>();
 
-#if DEBUG
-                c.LogSqlInConsole = true;
-                c.LogFormattedSql = true;
-#endif
-                c.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
-                c.SchemaAction = SchemaAutoAction.Update;
-            });
+//#if DEBUG
+//                c.LogSqlInConsole = true;
+//                c.LogFormattedSql = true;
+//#endif
+//                c.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
+//                c.SchemaAction = SchemaAutoAction.Update;
+//            });
 
-            cfg.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
+//            cfg.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
 
-            //SchemaMetadataUpdater.QuoteTableAndColumns(cfg);
+//            //SchemaMetadataUpdater.QuoteTableAndColumns(cfg);
 
-            var cmpl = mapper.CompileMappingFor(new List<Type>() { typeof(SystemApplication), typeof(SystemRole), typeof(SystemUser) });
-            var str = Serialize(cmpl);
-            Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception(str));
+//            var cmpl = mapper.CompileMappingFor(new List<Type>() { typeof(SystemApplication), typeof(SystemRole), typeof(SystemUser) });
+//            var str = Serialize(cmpl);
+//            Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception(str));
 
-            return cfg.BuildSessionFactory();
-        }
+//            return cfg.BuildSessionFactory();
+//        }
 
 
     }

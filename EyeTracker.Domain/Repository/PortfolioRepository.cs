@@ -53,7 +53,7 @@ namespace EyeTracker.Domain.Repository
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                var country = session.QueryOver<Country>().Where(c => c.Id == countryId).SingleOrDefault();
+                var country = session.QueryOver<Country>().Where(c => c.GeoId == countryId).SingleOrDefault();
                 var user = session.QueryOver<SystemUser>().Where(u => u.Id == guid).SingleOrDefault();
                 var portfolio = new Portfolio(description, country, user);
                 using (ITransaction transaction = session.BeginTransaction())

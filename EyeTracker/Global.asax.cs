@@ -10,6 +10,7 @@ using EyeTracker.Windsor;
 using EyeTracker.Model;
 using EyeTracker.DAL.Domain;
 using EyeTracker.Domain;
+using EyeTracker.Domain.Model.Events;
 
 namespace EyeTracker
 {
@@ -109,9 +110,12 @@ namespace EyeTracker
 
             RegisterRoutes(RouteTable.Routes);
 
-            ModelBinders.Binders[typeof(VisitInfo)] = new JsonVisitInfoModelBinder();
-            ModelBinders.Binders[typeof(PackageInfo)] = new JsonPackageModelBinder();
+            ModelBinders.Binders[typeof(VisitEvent)] = new JsonVisitInfoModelBinder();
+            ModelBinders.Binders[typeof(PackageEvent)] = new JsonPackageModelBinder();
 
+            using (var session = NHibernateHelper.OpenSession())
+            {
+            }
             //ControllerBuilder.Current.SetControllerFactory(new WindsorFactory(applicationWideWindsorContainer));
             //// Initialize / install components in container
             //applicationWideWindsorContainer.Install(new WindsorInstaller());

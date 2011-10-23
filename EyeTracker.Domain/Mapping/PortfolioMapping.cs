@@ -34,7 +34,7 @@ namespace EyeTracker.Domain.Mapping
                 map.Key(k => k.Column("PortfolioId"));
                 map.Cascade(Cascade.All);
                 map.Lazy(CollectionLazy.NoLazy);
-            }, r => r.ManyToMany(mmp => mmp.Column("ApplicationId")));
+            }, r => r.OneToMany());
         }
     }
 }

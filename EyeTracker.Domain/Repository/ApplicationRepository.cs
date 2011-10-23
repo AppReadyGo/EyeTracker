@@ -68,7 +68,7 @@ namespace EyeTracker.DAL
             using (ISession session = NHibernateHelper.OpenSession())
             {
                 return session.Query<Application>()
-                    .Where(a => a.Portfolios.Select(p => p.Id).Contains(portfolioId)).ToList();
+                    .Where(a => a.Portfolio.Id == portfolioId).ToList();
             }
         }
     }

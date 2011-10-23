@@ -7,24 +7,30 @@ namespace EyeTracker.Domain.Model.Events
 {
     public class VisitEvent
     {
-        public long UserApplicationId { get; set; }
+        public virtual long Id { get; set; }
 
-        public string Ip { get; set; }
+        public virtual string Key { get; set; }
 
-        public int PreviousVisitInfoId { get; set; }
+        public virtual DateTime Date { get; set; }
 
-        public string PageUri { get; set; }
+        public virtual string Path { get; set; }
 
-        public int Client { get; set; }
+        public virtual int PreviousVisitId { get; set; }
 
-        public int Software { get; set; }
+        public virtual string Ip { get; set; }
 
-        public int ScreenWidth { get; set; }
+        public virtual string Language { get; set; }
 
-        public int ScreenHeight { get; set; }
+        public virtual string OS { get; set; }
 
-        public int ClientWidth { get; set; }
+        public virtual string Browser { get; set; }
 
-        public int ClientHeight { get; set; }
+        public virtual int ScreenWidth { get; set; }
+
+        public virtual int ScreenHeight { get; set; }
+
+        public virtual int ClientWidth { get; set; }
+
+        public virtual int ClientHeight { get; set; }
     }
 }

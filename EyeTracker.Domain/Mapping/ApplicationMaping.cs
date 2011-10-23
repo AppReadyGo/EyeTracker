@@ -20,12 +20,12 @@ namespace EyeTracker.Domain.Mapping
             });
             Property(x => x.Type, map => map.NotNullable(true));
             Property(x => x.CreateDate, map => map.NotNullable(true));
-            Bag(x => x.Portfolios, map =>
+            ManyToOne(x => x.Portfolio, map =>
             {
-                map.Table("PortfolioApplication");
-                map.Key(k => k.Column("ApplicationId"));
-                map.Cascade(Cascade.All);
-            }, r => r.ManyToMany(mmp => mmp.Column("PortfolioId")));
+                map.NotNullable(true);
+                map.Column("PortfolioId");
+                map.Lazy(LazyRelation.NoLazy);
+            });
         }
     }
 }
