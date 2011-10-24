@@ -40,7 +40,15 @@ namespace EyeTracker.Controllers
 
         public ActionResult PageContent(string urlPart1, string urlPart2, string urlPart3)
         {
-            ViewBag.Url = urlPart1 + "/" + urlPart2 + "/" + urlPart3;
+            ViewBag.Url = urlPart1;
+            if (!string.IsNullOrEmpty(urlPart2))
+            {
+                ViewBag.Url += "/" + urlPart2;
+            }
+            if (!string.IsNullOrEmpty(urlPart3))
+            {
+                ViewBag.Url += "/" + urlPart3;
+            }
             return View();
         }
     }

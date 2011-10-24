@@ -5,9 +5,7 @@
 <asp:Content ID="Title" ContentPlaceHolderID="Title" runat="server">Eye Tracker</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-<h2>Index</h2>
-
+<div class="panel"></div>
 </asp:Content>
 
 
