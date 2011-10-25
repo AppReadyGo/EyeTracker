@@ -284,36 +284,6 @@ namespace EyeTracker.Controllers
             return base.File(imageData, "Image/png");
         }
 
-        #region Services functionality
-
-        public FileResult JavaScriptFile(string filename)
-        {
-            log.WriteInformation("-->JavaScriptFile(filename:{0})", filename);
-
-            //TODO: check client id
-            var dir = Server.MapPath("/Scripts");
-            var path = Path.Combine(dir, "AnalyticsTemplate.js");
-            var file = new FileInfo(path);
-            string content = string.Empty;
-            if (file.Exists)
-            {
-                using (var stream = file.OpenText())
-                {
-                    content = stream.ReadToEnd();
-                }
-                string url = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.ApplicationPath == "/" ? "" : Request.ApplicationPath);
-                content = content.Replace("{VISIT_HANDLER_URL}", url + Url.Action("Visit"));
-                content = content.Replace("{PACKAGE_HANDLER_URL}", url + Url.Action("Package"));
-#if JSUNITTEST
-                content = content.Replace("_mfyaq.init();", "");
-#endif
-            }
-            log.WriteInformation("JavaScriptFile-->");
-            return base.File(System.Text.Encoding.UTF8.GetBytes(content), "text/javascript");
-        }
-
-        #endregion
-
         private Image GetBackgroundImage(long appId, int clientWidth, int clientHeight)
         {
             string bgPath = Path.Combine(Server.MapPath("/Users_Resources/Screens"), string.Format("{0}.{1}.{2}.png", appId, clientWidth, clientHeight));

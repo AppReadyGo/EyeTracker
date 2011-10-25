@@ -13,6 +13,7 @@ namespace EyeTracker.Domain.Mapping
     {
         public ClickEventMapping()
         {
+            Id(p => p.Id, map => map.Generator(Generators.Identity));
             Property(p => p.Date, map => map.NotNullable(true));
             Property(p => p.ClientX, map => map.NotNullable(true));
             Property(p => p.ClientY, map => map.NotNullable(true));

@@ -58,6 +58,7 @@ $(document).ready(function () {
     });
     //Disable not exsists types
     $('#Type option[value!=3]').attr('disabled', true);
+    $('#Type option[value=1]').attr('disabled', null);
     $('#Type option[value=3]').attr('selected', true);
     //--
 });

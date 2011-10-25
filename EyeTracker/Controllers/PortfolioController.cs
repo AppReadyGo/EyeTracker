@@ -11,6 +11,8 @@ using EyeTracker.Model;
 using EyeTracker.Domain.Model;
 using System.Web.Script.Serialization;
 using EyeTracker.Core;
+using EyeTracker.Common;
+using EyeTracker.Domain;
 
 namespace EyeTracker.Controllers
 {
@@ -19,16 +21,18 @@ namespace EyeTracker.Controllers
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         private IPortfolioService service;
         private IAccountService accountService;
+        private IReportsService reportService;
 
         public PortfolioController()
-            : this(new PortfolioService(), new AccountService())
+            : this(new PortfolioService(), new AccountService(), new ReportsService())
         {
         }
 
-        public PortfolioController(IPortfolioService service, IAccountService accountService)
+        public PortfolioController(IPortfolioService service, IAccountService accountService, IReportsService reportService)
         {
             this.service = service;
             this.accountService = accountService;
+            this.reportService = reportService;
         }
 
         public ActionResult Index()
@@ -169,12 +173,16 @@ namespace EyeTracker.Controllers
 
         public ActionResult Usage(int portfolioId)
         {
-            var points = new Dictionary<DateTime, int>{{DateTime.Now.AddDays(-5), 40},{DateTime.Now.AddDays(-4), 30},{DateTime.Now.AddDays(-3), 10},{DateTime.Now.AddDays(-2), 50},{DateTime.Now.AddDays(-1), 40}};
+            var reportRes = reportService.GetVisitsData(DateTime.UtcNow.AddDays(-30), DateTime.UtcNow, portfolioId, null, DataGrouping.Day);
+            if (reportRes.HasError)
+            {
+                return View("Error");
+            }
             //Fill chart data
             var chartInitData = new List<object>();
             chartInitData.Add(new
             {
-                data = points.OrderBy(curItem => curItem.Key).Select(curItem => new object[] { curItem.Key.MilliTimeStamp(), curItem.Value }),
+                data = reportRes.Value.OrderBy(curItem => curItem.Key).Select(curItem => new object[] { curItem.Key.MilliTimeStamp(), curItem.Value }),
                 color = "#461D7C"
             });
             ViewBag.ChartInitData = new JavaScriptSerializer().Serialize(chartInitData);

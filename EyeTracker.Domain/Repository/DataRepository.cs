@@ -21,7 +21,7 @@ namespace EyeTracker.Domain.Repository
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                long appId = long.Parse(visitEvent.Key.Split(new char[] { '-' })[2]);
+                int appId = int.Parse(visitEvent.Key.Split(new char[] { '-' })[2]);
                 var application = session.Get<Application>(appId);
                 var visit = new PageView
                  {
@@ -63,6 +63,7 @@ namespace EyeTracker.Domain.Repository
                         visit.Language = new Language { Name = visitEvent.Language };
                     }
                 }
+
                 if (!string.IsNullOrEmpty(visitEvent.OS))
                 {
                     visit.OperationSystem = session.QueryOver<OperationSystem>()

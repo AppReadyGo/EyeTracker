@@ -26,6 +26,17 @@ namespace EyeTracker
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "JavaScript",
+                "Data/Analytics/{key}.js",
+                new { controller = "Data", action = "Analytics" }
+            );
+            routes.MapRoute(
+                "AjaxData", // Route name
+                "Data/{action}/", // URL with parameters
+                new { controller = "Data" } // Parameter defaults
+            );
+
+            routes.MapRoute(
                 "Home", // Route name
                 "", // URL with parameters
                 new { controller = "Home", action = "Index" } // Parameter defaults

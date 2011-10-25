@@ -87,6 +87,7 @@
     <Compile Include="Services\EventsServices.cs" />
     <Compile Include="Services\FormsAuthenticationService.cs" />
     <Compile Include="Services\PortfolioService.cs" />
+    <Compile Include="Services\ReportsService.cs" />
     <Compile Include="Services\ReportsServices.cs" />
     <Compile Include="WcfService\AnalyticsHandler.cs" />
     <Compile Include="WcfService\AnalyticsService.cs" />

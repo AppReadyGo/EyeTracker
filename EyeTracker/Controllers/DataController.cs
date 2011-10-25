@@ -9,21 +9,22 @@ using EyeTracker.Common.Logger;
 using System.Reflection;
 using System.Text;
 using EyeTracker.Core.Services;
+using System.IO;
 
 namespace EyeTracker.Controllers
 {
-    public class EventsController : Controller
+    public class DataController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         
         private IEventsServices eventsServices = null;
 
-        public EventsController()
+        public DataController()
             : this(new EventsServices())
         {
         }
 
-        public EventsController(IEventsServices eventsServices)
+        public DataController(IEventsServices eventsServices)
         {
             this.eventsServices = eventsServices;
         }
@@ -60,6 +61,7 @@ namespace EyeTracker.Controllers
             return base.Json(res);
         }
 
+        [HttpPost]
         public JsonResult Package(PackageEvent packageEvent)
         {
             log.WriteInformation("-->Package(clicks:{0}, parts:{1})", packageEvent.clicks.Count, packageEvent.parts.Count);
@@ -89,6 +91,30 @@ namespace EyeTracker.Controllers
             }
             log.WriteInformation("Package:{0}-->", res);
             return base.Json(res);
+        }
+
+        public FileResult Analytics(string key)
+        {
+            //TODO: check client id
+            var dir = Server.MapPath("/Scripts");
+            var path = Path.Combine(dir, "AnalyticsTemplate.js");
+            var file = new FileInfo(path);
+            string content = string.Empty;
+            if (file.Exists)
+            {
+                using (var stream = file.OpenText())
+                {
+                    content = stream.ReadToEnd();
+                }
+                string url = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.ApplicationPath == "/" ? "" : Request.ApplicationPath);
+                content = content.Replace("{VISIT_HANDLER_URL}", url + "/Data/Visit/");
+                content = content.Replace("{PACKAGE_HANDLER_URL}", url + "/Data/Package/");
+                content = content.Replace("{KEY}", key);
+#if JSUNITTEST
+                content = content.Replace("_mfyaq.init();", "");
+#endif
+            }
+            return base.File(System.Text.Encoding.UTF8.GetBytes(content), "text/javascript");
         }
     }
 }

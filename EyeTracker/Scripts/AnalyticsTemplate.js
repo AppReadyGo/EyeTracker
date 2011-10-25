@@ -6,6 +6,7 @@ _mfyaq.visitId = -1,
 _mfyaq.winSize = null,
 _mfyaq.clicksData = new Array(),
 _mfyaq.viewPartsData = new Array(),
+_mfyaq.key = '{KEY}',
 _mfyaq.init = function () {
         //Create a new view part object
         _mfyaq.viewPartsData.push(_mfyaq.getViewPart(new Date()));
@@ -134,11 +135,6 @@ _mfyaq.clientWidth = function () {
         //                );
     };
 _mfyaq.clientHeight = function () {
-        //TODO:Remove it
-        if (_mfyaq.Key == 3) {
-            return 837;
-        }
-
         var db = document.body;
         var dde = document.documentElement;
 

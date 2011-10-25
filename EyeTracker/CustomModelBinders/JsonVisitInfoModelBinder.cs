@@ -69,8 +69,7 @@ namespace EyeTracker.CustomModelBinders
                 if (mState.IsValid)
                 {
                     visitInfo.Key = visitInfoModel.Key;
-                    //TODO: Add date
-                    //visitInfo.Date = date;
+                    visitInfo.Date = date;
                     visitInfo.ScreenWidth = visitInfoModel.ScreenWidth;
                     visitInfo.ScreenHeight = visitInfoModel.ScreenHeight;
                     visitInfo.ClientWidth = visitInfoModel.ClientWidth;

@@ -48,17 +48,18 @@ namespace EyeTracker.Domain.Mapping
             Property(p => p.ClientHeight, map => map.NotNullable(true));
             ManyToOne(p => p.Application, map =>
             {
+                map.NotNullable(true);
                 map.Lazy(LazyRelation.NoLazy);
                 map.Column("ApplicationId");
             });
             Bag(p => p.Clicks, map =>
             {
-                map.Key(k => k.Column("Id"));
+                map.Key(k => k.Column("PageViewId"));
                 map.Lazy(CollectionLazy.Lazy);
             }, prop => prop.OneToMany());
             Bag(p => p.ViewParts, map =>
             {
-                map.Key(k => k.Column("Id"));
+                map.Key(k => k.Column("PageViewId"));
                 map.Lazy(CollectionLazy.Lazy);
             }, prop => prop.OneToMany());
         }

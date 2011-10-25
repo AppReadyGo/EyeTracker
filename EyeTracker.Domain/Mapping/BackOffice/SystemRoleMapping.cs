@@ -32,6 +32,7 @@ namespace EyeTracker.Domain.Mapping.BackOffice
                 map.Table("aspnet_UsersInRoles");
                 map.Key(k => k.Column("RoleId"));
             }, r => r.ManyToMany(mmp => mmp.Column("UserId")));
+            SchemaAction(NHibernate.Mapping.ByCode.SchemaAction.None);
         }
     }
 }

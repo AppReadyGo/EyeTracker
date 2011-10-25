@@ -50,7 +50,7 @@ namespace EyeTracker.Controllers
             {
                 Id = curUser.Id,
                 Name = curUser.Name,
-                Email = curUser.Email,
+                Email = curUser.Membership.Email,
                 Roles = curUser.Roles.Select(curItem => curItem.Id).ToList()
             };
             IList<SystemRole> roles = adminService.GetAll<SystemRole>();
@@ -67,7 +67,7 @@ namespace EyeTracker.Controllers
             {
                 var user = adminService.Get<SystemUser>(userModel.Id);
                 user.Name = userModel.Name;
-                user.Email = userModel.Email;
+                user.Membership.Email = userModel.Email;
                 if (userModel.Roles != null)
                 {
                     user.Roles = roles.Where(curItem => userModel.Roles.Contains(curItem.Id)).ToList();

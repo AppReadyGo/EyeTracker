@@ -58,7 +58,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumirators.cs" />
     <Compile Include="Mapping\AccountProfilerMaping.cs" />
+    <Compile Include="Mapping\BackOffice\SystemMembershipMapping.cs" />
+    <Compile Include="Model\BackOffice\SystemMembership.cs" />
     <Compile Include="Mapping\ClickMaping.cs" />
     <Compile Include="Mapping\BrowserMapping.cs" />
     <Compile Include="Mapping\OperationSystemMapping.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="Repository\DataRepository.cs" />
     <Compile Include="Repository\EventsRepository.cs" />
     <Compile Include="Repository\PortfolioRepository.cs" />
+    <Compile Include="Repository\ReportsRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

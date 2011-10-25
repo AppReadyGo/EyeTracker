@@ -11,4 +11,5 @@ namespace EyeTracker.Common
         FatalError = 1,
         Error
     }
+
 }
