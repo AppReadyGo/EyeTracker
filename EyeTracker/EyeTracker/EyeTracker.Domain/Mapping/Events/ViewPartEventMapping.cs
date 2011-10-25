@@ -13,6 +13,7 @@ namespace EyeTracker.Domain.Mapping
     {
         public ViewPartEventMapping()
         {
+            Id(p => p.Id, map => map.Generator(Generators.Identity));
             Property(p => p.Date, map => map.NotNullable(true));
             Property(p => p.ScrollTop, map => map.NotNullable(true));
             Property(p => p.ScrollLeft, map => map.NotNullable(true));

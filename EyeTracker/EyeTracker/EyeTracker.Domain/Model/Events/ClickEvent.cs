@@ -7,6 +7,8 @@ namespace EyeTracker.Domain.Model.Events
 {
     public class ClickEvent
     {
+        public virtual long Id { get; set; }
+
         public virtual int ClientX { get; set; }
 
         public virtual int ClientY { get; set; }

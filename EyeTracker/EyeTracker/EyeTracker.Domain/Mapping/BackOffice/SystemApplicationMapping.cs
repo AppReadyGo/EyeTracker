@@ -28,6 +28,7 @@ namespace EyeTracker.Domain.Model.BackOffice
             {
                 map.Key(k => k.Column("ApplicationId"));
             }, r => r.OneToMany());
+            SchemaAction(NHibernate.Mapping.ByCode.SchemaAction.None);
         }
     }
 

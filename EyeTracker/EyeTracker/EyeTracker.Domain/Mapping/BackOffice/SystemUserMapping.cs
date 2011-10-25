@@ -22,11 +22,12 @@ namespace EyeTracker.Domain.Mapping.BackOffice
                 map.NotNullable(true);
             });
             Property(x => x.LastActivityDate, map => { });
-            Join("aspnet_Membership", map =>
-            {
-                map.Key(key => key.Column("UserId"));
-                map.Property(x => x.Email);
-            });
+            OneToOne(x => x.Membership, map => map.Lazy(LazyRelation.NoLazy));
+            //Join("aspnet_Membership", map =>
+            //{
+            //    map.Key(key => key.Column("UserId"));
+            //    map.Property(x => x.Email);
+            //});
             //Join("UserProfiler", map =>
             //{
             //    map.Key(key => key.Column("UserId"));
@@ -48,6 +49,7 @@ namespace EyeTracker.Domain.Mapping.BackOffice
                 map.Key(k => k.Column("UserId"));
                 map.Cascade(Cascade.All);
             }, r => r.ManyToMany(mmp => mmp.Column("RoleId")));
+            SchemaAction(NHibernate.Mapping.ByCode.SchemaAction.None);
         }
     }
 }

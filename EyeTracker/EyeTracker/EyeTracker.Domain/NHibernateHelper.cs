@@ -10,6 +10,7 @@ using NHibernate.Driver;
 using NHibernate.Dialect;
 using System.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
+using NHibernate.Tool.hbm2ddl;
 
 namespace EyeTracker.Domain
 {
@@ -59,12 +60,12 @@ namespace EyeTracker.Domain
                 c.LogFormattedSql = true;
 #endif
                 c.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
-                c.SchemaAction = SchemaAutoAction.Update;
+                c.SchemaAction = SchemaAutoAction.Create;
             });
 
             cfg.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
 
-            //SchemaMetadataUpdater.QuoteTableAndColumns(cfg);
+            SchemaMetadataUpdater.QuoteTableAndColumns(cfg);
 
             //var cmpl = mapper.CompileMappingFor(new List<Type>() { typeof(Application), typeof(Role), typeof(User) });
             //var cmpl = mapper.CompileMappingFor(new List<Type>() { typeof(Address), typeof(Organisation), typeof(OrganisationLicences), typeof(OrganisationJoined), typeof(Country), typeof(OrganisationType) });
