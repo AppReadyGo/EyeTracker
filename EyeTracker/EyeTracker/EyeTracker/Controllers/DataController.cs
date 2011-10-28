@@ -93,7 +93,7 @@ namespace EyeTracker.Controllers
             return base.Json(res);
         }
 
-        public FileResult Analytics(string key)
+        public FileResult Analytics(string filename)
         {
             //TODO: check client id
             var dir = Server.MapPath("/Scripts");
@@ -109,7 +109,6 @@ namespace EyeTracker.Controllers
                 string url = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.ApplicationPath == "/" ? "" : Request.ApplicationPath);
                 content = content.Replace("{VISIT_HANDLER_URL}", url + "/Data/Visit/");
                 content = content.Replace("{PACKAGE_HANDLER_URL}", url + "/Data/Package/");
-                content = content.Replace("{KEY}", key);
 #if JSUNITTEST
                 content = content.Replace("_mfyaq.init();", "");
 #endif

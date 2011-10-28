@@ -32,6 +32,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PackageAsSingleFile>false</PackageAsSingleFile>
+    <PublishDatabases>false</PublishDatabases>
+    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
+    <ExcludeApp_Data>false</ExcludeApp_Data>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+    <DeployEncryptKey>a45QJPbnTQNFk</DeployEncryptKey>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UnitTest|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -121,6 +127,7 @@
     <Compile Include="Model\AccountModels.cs" />
     <Compile Include="Model\AdminModels.cs" />
     <Compile Include="Model\ApplicationModel.cs" />
+    <Compile Include="Model\ScreenDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomModelBinders\JsonVisitInfoModelBinder.cs" />
     <Compile Include="Windsor\WindsorFactory.cs" />
@@ -176,7 +183,6 @@
     <Content Include="Scripts\ThridParty\Flot\jquery.flot.symbol.min.js" />
     <Content Include="Scripts\ThridParty\Flot\jquery.flot.threshold.js" />
     <Content Include="Scripts\ThridParty\Flot\jquery.flot.threshold.min.js" />
-    <Content Include="Text.txt" />
     <Content Include="Scripts\ThridParty\jquery-1.4.4.js" />
     <Content Include="Scripts\ThridParty\jquery-1.4.4-vsdoc.js" />
     <Content Include="Scripts\ThridParty\jquery-1.4.4.min.js" />
@@ -204,15 +210,6 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Scripts\AnalyticsTemplate.js" />
-    <Content Include="Users_Resources\Screens\1.1263.902.png" />
-    <Content Include="Users_Resources\Screens\2.320.690.png" />
-    <Content Include="Users_Resources\Screens\3.980.1249.png" />
-    <Content Include="Users_Resources\Screens\2.320.690_.png" />
-    <Content Include="Users_Resources\Screens\3.320.837.png" />
-    <Content Include="Users_Resources\Screens\4.1349.5073.png" />
-    <Content Include="Users_Resources\Screens\4.1664.5123.png" />
-    <Content Include="Users_Resources\Screens\4.1168.5030.png" />
-    <Content Include="Users_Resources\Screens\4.1096.5093.png" />
     <Content Include="Views\Application\Fingerprint.aspx" />
     <Content Include="Views\Application\EyeTracker.aspx" />
     <Content Include="Views\Application\Dashboard.aspx" />
@@ -220,6 +217,7 @@
     <Content Include="Views\Analytics\EyeTracker.aspx" />
     <Content Include="Views\Application\Index.aspx" />
     <Content Include="Views\Application\NewEdit.aspx" />
+    <Content Include="Views\Application\ScreenDetails.aspx" />
     <Content Include="Views\Application\Usage.aspx" />
     <Content Include="Views\Home\PageContent.aspx" />
     <Content Include="Views\Home\Index.aspx" />
@@ -273,6 +271,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\Tests\UnitTests\" />
+    <Folder Include="Users_Resources\Screens\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EyeTracker.Core\EyeTracker.Core.csproj">

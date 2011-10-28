@@ -68,10 +68,6 @@ namespace EyeTracker.Models
         [DataType(DataType.Password)]
         [DisplayName("Confirm password")]
         public string ConfirmPassword { get; set; }
-
-        [Required]
-        [DisplayName("Time Zone")]
-        public short TimeZone { get; set; }
     }
     #endregion
 

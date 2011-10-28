@@ -23,11 +23,7 @@ namespace EyeTracker.Domain.Mapping
                 map.Column("UserId");
                 map.NotNullable(true);
             });
-            ManyToOne(p => p.Country, map =>
-            {
-                map.Column("CountryId");
-                map.NotNullable(true);
-            });
+            Property(x => x.TimeZone, map => map.NotNullable(true));
             Bag(x => x.Applications, map =>
             {
                 map.Table("PortfolioApplication");

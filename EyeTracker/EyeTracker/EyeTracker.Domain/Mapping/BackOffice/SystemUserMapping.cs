@@ -14,7 +14,7 @@ namespace EyeTracker.Domain.Mapping.BackOffice
         public SystemUserMapping()
         {
             Table("aspnet_Users");
-            Id(x => x.Id, map => map.Column("UserId"));
+            Id(x => x.Id, map => { map.Column("UserId"); map.Generator(Generators.Guid); });
             Property(x => x.Name, map =>
             {
                 map.Column("UserName");
@@ -22,7 +22,7 @@ namespace EyeTracker.Domain.Mapping.BackOffice
                 map.NotNullable(true);
             });
             Property(x => x.LastActivityDate, map => { });
-            OneToOne(x => x.Membership, map => map.Lazy(LazyRelation.NoLazy));
+            //ManyToOne(x => x.Membership, map => { map.Lazy(LazyRelation.NoLazy); map.Column("UserId"); });
             //Join("aspnet_Membership", map =>
             //{
             //    map.Key(key => key.Column("UserId"));

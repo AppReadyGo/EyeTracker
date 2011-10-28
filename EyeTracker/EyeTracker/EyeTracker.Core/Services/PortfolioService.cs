@@ -16,7 +16,7 @@ namespace EyeTracker.Core.Services
 
         OperationResult<IList<Country>> GetCountries();
 
-        OperationResult<int> AddPortfolio(string description, int countryId);
+        OperationResult<int> AddPortfolio(string description, int timeZone);
     }
 
     public class PortfolioService : IPortfolioService
@@ -85,7 +85,7 @@ namespace EyeTracker.Core.Services
         #region IPortfolioService Members
 
 
-        public OperationResult<int> AddPortfolio(string description, int countryId)
+        public OperationResult<int> AddPortfolio(string description, int timeZone)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace EyeTracker.Core.Services
                 {
                     return new OperationResult<int>(userRes);
                 }
-                var id = repository.AddPortfolio(description, countryId, userRes.Value);
+                var id = repository.AddPortfolio(description, timeZone, userRes.Value);
                 return new OperationResult<int>(id);
             }
             catch (Exception exp)

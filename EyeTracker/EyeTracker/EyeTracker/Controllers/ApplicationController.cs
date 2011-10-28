@@ -205,6 +205,17 @@ namespace EyeTracker.Controllers
             }
         }
 
+        public ActionResult ScreenDetails(int portfolioId, int appId)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ScreenDetails(ScreenDetailsModel screenDetails)
+        {
+            return View();
+        }
+
         public ActionResult Dashboard(int portfolioId, int appId)
         {
             var points = new Dictionary<DateTime, int> { { DateTime.Now.AddDays(-5), 40 }, { DateTime.Now.AddDays(-4), 30 }, { DateTime.Now.AddDays(-3), 10 }, { DateTime.Now.AddDays(-2), 50 }, { DateTime.Now.AddDays(-1), 40 } };

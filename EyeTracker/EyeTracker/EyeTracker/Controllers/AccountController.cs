@@ -92,9 +92,7 @@ namespace EyeTracker.Controllers
 
         public ActionResult Register()
         {
-            //return RedirectToAction("LogOn");
             ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-            ViewData["TimeZoneList"] = acountService.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
             return View();
         }
 
@@ -113,13 +111,13 @@ namespace EyeTracker.Controllers
                     FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
 
                     //Add account information to database
-                    var res = acountService.Add(new AccountInfo() { TimeZone = model.TimeZone });
-                    if (res.HasError)
-                    {
-                        FormsService.SignOut();
-                        MembershipService.DeleteUser(model.UserName);
-                        ModelState.AddModelError("","Error to register, please contact to support.");
-                    }
+                    //var res = acountService.Add(new AccountInfo() { TimeZone = model.TimeZone });
+                    //if (res.HasError)
+                    //{
+                    //    FormsService.SignOut();
+                    //    MembershipService.DeleteUser(model.UserName);
+                    //    ModelState.AddModelError("","Error to register, please contact to support.");
+                    //}
                     return RedirectToAction("Index", "Home");
                 }
                 else

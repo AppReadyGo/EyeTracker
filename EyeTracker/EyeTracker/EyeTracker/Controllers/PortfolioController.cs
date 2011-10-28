@@ -13,6 +13,7 @@ using System.Web.Script.Serialization;
 using EyeTracker.Core;
 using EyeTracker.Common;
 using EyeTracker.Domain;
+using System.Collections.ObjectModel;
 
 namespace EyeTracker.Controllers
 {
@@ -81,7 +82,7 @@ namespace EyeTracker.Controllers
             var countriesRes = service.GetCountries();
             if (!countriesRes.HasError)
             {
-                ViewData["CountriesList"] = countriesRes.Value.Select(c => new SelectListItem() { Text = c.Name, Value = c.GeoId.ToString() });
+                ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
                 return View("NewEdit", new PortfolioModel());
             }
             else
@@ -96,7 +97,7 @@ namespace EyeTracker.Controllers
             ViewBag.Title = "New";
             if (ModelState.IsValid)
             {
-                var res = service.AddPortfolio(model.Description, model.CountryId);
+                var res = service.AddPortfolio(model.Description, model.TimeZone);
                 if (res.HasError)
                 {
                     return View("Error");
@@ -127,7 +128,7 @@ namespace EyeTracker.Controllers
             var countriesRes = service.GetCountries();
             if (!countriesRes.HasError)
             {
-                ViewData["CountriesList"] = countriesRes.Value.Select(c => new SelectListItem() { Text = c.Name, Value = c.GeoId.ToString() });
+                ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
                 return View("NewEdit", new PortfolioModel());
             }
             else
@@ -188,6 +189,11 @@ namespace EyeTracker.Controllers
             ViewBag.ChartInitData = new JavaScriptSerializer().Serialize(chartInitData);
             ViewBag.PortfolioId = portfolioId;
             return View();
+        }
+
+        public OperationResult<ReadOnlyCollection<TimeZoneInfo>> GetTimeZones()
+        {
+            return new OperationResult<ReadOnlyCollection<TimeZoneInfo>>(TimeZoneInfo.GetSystemTimeZones());
         }
     }
 }

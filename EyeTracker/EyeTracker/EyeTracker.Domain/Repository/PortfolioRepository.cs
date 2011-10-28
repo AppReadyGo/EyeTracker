@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using EyeTracker.Domain.Model;
 using NHibernate;
+using NHibernate.Linq;
 using EyeTracker.Domain.Model.BackOffice;
 
 namespace EyeTracker.Domain.Repository
@@ -16,7 +17,7 @@ namespace EyeTracker.Domain.Repository
 
         IList<Country> GetCountries();
 
-        int AddPortfolio(string description, int countryId, Guid guid);
+        int AddPortfolio(string description, int timeZone, Guid guid);
     }
 
     public class PortfolioRepository : IPortfolioRepository
@@ -49,13 +50,12 @@ namespace EyeTracker.Domain.Repository
         #region IPortfolioRepository Members
 
 
-        public int AddPortfolio(string description, int countryId, Guid guid)
+        public int AddPortfolio(string description, int timeZone, Guid guid)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                var country = session.QueryOver<Country>().Where(c => c.GeoId == countryId).SingleOrDefault();
-                var user = session.QueryOver<SystemUser>().Where(u => u.Id == guid).SingleOrDefault();
-                var portfolio = new Portfolio(description, country, user);
+                var user = session.Get<SystemUser>(guid);
+                var portfolio = new Portfolio(description, timeZone, user);
                 using (ITransaction transaction = session.BeginTransaction())
                 {
                     session.Save(portfolio);

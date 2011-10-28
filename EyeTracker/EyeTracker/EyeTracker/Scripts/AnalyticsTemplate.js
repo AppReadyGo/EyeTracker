@@ -6,7 +6,6 @@ _mfyaq.visitId = -1,
 _mfyaq.winSize = null,
 _mfyaq.clicksData = new Array(),
 _mfyaq.viewPartsData = new Array(),
-_mfyaq.key = '{KEY}',
 _mfyaq.init = function () {
         //Create a new view part object
         _mfyaq.viewPartsData.push(_mfyaq.getViewPart(new Date()));

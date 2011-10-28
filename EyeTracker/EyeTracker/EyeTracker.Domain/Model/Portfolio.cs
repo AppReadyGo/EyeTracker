@@ -10,7 +10,7 @@ namespace EyeTracker.Domain.Model
     {
         public virtual int Id { get; protected set; }
         public virtual string Description { get; protected set; }
-        public virtual Country Country { get; protected set; }
+        public virtual int TimeZone { get; protected set; }
         public virtual DateTime CreateDate { get; protected set; }
         public virtual SystemUser User { get; protected set; }
         public virtual IList<Application> Applications { get; protected set; }
@@ -20,10 +20,11 @@ namespace EyeTracker.Domain.Model
             CreateDate = DateTime.UtcNow;
         }
 
-        public Portfolio(string description, Country country, SystemUser user) : this()
+        public Portfolio(string description, int timeZone, SystemUser user)
+            : this()
         {
             this.Description = description;
-            this.Country = country;
+            this.TimeZone = timeZone;
             this.User = user;
         }
     }
