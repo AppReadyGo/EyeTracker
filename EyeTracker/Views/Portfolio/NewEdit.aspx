@@ -16,7 +16,7 @@
     <%: Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")%>
         <div><%: Html.LabelFor(m => m.Description)%> <%: Html.TextBoxFor(m => m.Description)%></div>
         <div><%: Html.ValidationMessageFor(m => m.Description)%></div>
-        <div><%: Html.LabelFor(m => m.CountryId)%> <%: Html.DropDownListFor(m => m.CountryId, (IEnumerable<SelectListItem>)ViewData["CountriesList"]) %></div>
+        <div><%: Html.LabelFor(m => m.TimeZone) %><%: Html.DropDownListFor(m => m.TimeZone, new SelectList((IEnumerable<object>)ViewData["TimeZoneList"], "Id", "DisplayName"))%></div>
         <p><input type="submit" value="Create" /></p>
     </fieldset>
 <% }%>

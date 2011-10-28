@@ -15,7 +15,7 @@
             <fieldset>
                 <legend>Log on</legend>
                 <p>
-                    Please enter your username and password. <%--<%: Html.ActionLink("Register", "Register") %> if you don't have an account.--%>
+                    Please enter your username and password. <%: Html.ActionLink("Register", "Register") %> if you don't have an account.
                 </p>
                 
                 <div class="editor-label">

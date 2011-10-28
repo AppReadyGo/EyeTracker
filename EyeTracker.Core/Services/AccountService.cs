@@ -17,7 +17,6 @@ namespace EyeTracker.Core.Services
         OperationResult<AccountInfo> Get(int accId);
         OperationResult Remove(int accId);
         OperationResult Update(AccountInfo account);
-        OperationResult<ReadOnlyCollection<TimeZoneInfo>> GetTimeZones();
     }
 
     public class AccountService : IAccountService
@@ -144,19 +143,6 @@ namespace EyeTracker.Core.Services
             catch (Exception exp)
             {
                 return new OperationResult(exp);
-            }
-        }
-
-
-        public OperationResult<ReadOnlyCollection<TimeZoneInfo>> GetTimeZones()
-        {
-            try
-            {
-                return new OperationResult<ReadOnlyCollection<TimeZoneInfo>>(TimeZoneInfo.GetSystemTimeZones());
-            }
-            catch (Exception exp)
-            {
-                return new OperationResult<ReadOnlyCollection<TimeZoneInfo>>(exp);
             }
         }
     }

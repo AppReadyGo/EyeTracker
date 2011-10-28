@@ -17,7 +17,7 @@ namespace EyeTracker.Model
         public virtual string Description { get; set; }
 
         [Required]
-        [DisplayName("Country")]
-        public virtual int CountryId { get; set; }
+        [DisplayName("Time Zone")]
+        public short TimeZone { get; set; }
     }
 }

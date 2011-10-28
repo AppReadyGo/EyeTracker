@@ -13,7 +13,7 @@ namespace EyeTracker.Domain.Mapping
         public CountryMapping() 
             : base()
         {
-            Table("[Country]");
+            Table("Countries");
 
             Id(p => p.GeoId, map => { });
             Property(x => x.Name, map =>

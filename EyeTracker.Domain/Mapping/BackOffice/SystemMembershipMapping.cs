@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NHibernate.Mapping.ByCode.Conformist;
 using EyeTracker.Domain.Model.BackOffice;
+using NHibernate.Mapping.ByCode;
 
 namespace EyeTracker.Domain.Mapping.BackOffice
 {
@@ -12,6 +13,12 @@ namespace EyeTracker.Domain.Mapping.BackOffice
         public SystemMembershipMapping()
         {
             Table("aspnet_Membership");
+            //ManyToOne(p => p.User, map =>
+            //{
+            //    map.Lazy(LazyRelation.NoLazy);
+            //    map.Column("UserId");
+            //    map.NotNullable(true);
+            //});
             Property(x => x.Email, map =>
             {
                 map.Length(255);

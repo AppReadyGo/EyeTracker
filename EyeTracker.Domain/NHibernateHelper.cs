@@ -58,9 +58,12 @@ namespace EyeTracker.Domain
 #if DEBUG
                 c.LogSqlInConsole = true;
                 c.LogFormattedSql = true;
+                c.SchemaAction = SchemaAutoAction.Validate;
+#else
+                c.SchemaAction = SchemaAutoAction.Validate;
 #endif
                 c.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
-                c.SchemaAction = SchemaAutoAction.Create;
+
             });
 
             cfg.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());

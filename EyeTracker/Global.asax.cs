@@ -27,7 +27,7 @@ namespace EyeTracker
 
             routes.MapRoute(
                 "JavaScript",
-                "Data/Analytics/{key}.js",
+                "Analytics/{filename}",
                 new { controller = "Data", action = "Analytics" }
             );
             routes.MapRoute(
