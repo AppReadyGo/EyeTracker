@@ -217,7 +217,9 @@ namespace EyeTracker.Controllers
             {
                 res = new { HasError = false, ScreenId = 0 };
             }
-            return base.Json(res);
+            var actionResult = base.Json(res);
+            actionResult.ContentType = "text/html";
+            return actionResult;
         }
 
         public ActionResult Dashboard(int portfolioId, int appId)
