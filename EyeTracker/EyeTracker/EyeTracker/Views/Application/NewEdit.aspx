@@ -4,9 +4,11 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
     <link href="<%: Url.Content("~/Content/ApplicationNewEdit.css")%>" rel="stylesheet" type="text/css" />
     <script src="<%: Url.Content("~/Scripts/ApplicationNewEdit.js")%>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/ThridParty/ajaxfileupload.js")%>" type="text/javascript"></script>
     <script type="text/javascript">
         var newAppURL = '/Application/New/<%: ViewBag.PortfolioId %>/';
         var appId = <%: Model.Id %>;
+        var addScreenURL = '/Application/AddScreen/<%: ViewBag.PortfolioId %>/';
     </script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Title" runat="server">New Application</asp:Content>
@@ -24,38 +26,52 @@
     <div><%: Html.LabelFor(m => m.Type)%> <%: Html.DropDownListFor(m => m.Type, (IEnumerable<SelectListItem>)ViewData["TypesList"])%></div>
     <p><a id="create_lnk">Create</a></p>
 </div>
+<div id="sample_code">
 <div id="screens" class="step">
     <h3>2. Screenshots</h3>
-    <div><img /> 500 X 600 <a>change</a></div>
-    <div id="new_screen">
-    <iframe src="/Application/ScreenDetails/<%= ViewBag.PortfolioId %>/<%= Model.Id %>"></iframe>
+    <ul id="screens_list">
+        <li><a class="remove-btn">X</a><a class="img-lnk">100X200</a></li>
+    </ul>
+    <fieldset>
+        <legend>New Screen</legend>
+        <div class="error" id="screen_error"></div>
+        <div>Width: <input id="screen_width"/></div>
+        <div>Height: <input id="screen_height"/></div>
+        <div>Image: <input type="file" id="screen_img" name="screen_img"/></div>
+        <div><a id="add_screen_btn">add</a></div>
+    </fieldset>
+    <div id="new_screen" class="new-screen">
+        <noscript>          
+        <p>Please enable JavaScript to use file uploader.</p>
+        </noscript>
     </div>
+    <a id="add_screen_btn">add</a>
 </div>
 <div id="sample_web_code" class="step">
     <h3>3. Paste this code on your site</h3>
     <div>Copy the following code, then paste it onto every page you want to track immediately before the closing &lt;/head&gt; tag.</div>
-    <textarea readonly="readonly">
-    <script type="text/javascript">
+    <textarea readonly="readonly" id="web_code">
+        <script type="text/javascript">
 
-        var _mfyaq = _mfyaq || {};
-        _mfyaq.key = '<%: ViewBag.PropertyId%>';
+            var _mfyaq = _mfyaq || {};
+            _mfyaq.key = '<%: ViewBag.PropertyId%>';
 
-        (function () {
-            var mfyaq = document.createElement('script'); mfyaq.type = 'text/javascript'; mfyaq.async = true;
-            mfyaq.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www')
-            mfyaq.src += 'fingerprint.mobillify.com/analytics.js';
-            var scr = document.getElementsByTagName('script')[0]; scr.parentNode.insertBefore(mfyaq, scr);
-        })();
+            (function () {
+                var mfyaq = document.createElement('script'); mfyaq.type = 'text/javascript'; mfyaq.async = true;
+                mfyaq.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www')
+                mfyaq.src += 'fingerprint.mobillify.com/analytics.js';
+                var scr = document.getElementsByTagName('script')[0]; scr.parentNode.insertBefore(mfyaq, scr);
+            })();
 
-    </script>
+        </script>
     </textarea>
     <p><a id="done_lnk">Save</a></p>
 </div>
 <div id="sample_android_code" class="step">
     <h3>3. Download package and insert into your code</h3>
     <div>Package: <a href="<%: ViewBag.PackageLink %>">Android Package 1.0.1</a></div>
-    <div>Property ID: <strong id="Strong1"><%: ViewBag.PropertyId%></strong></div>
-    <textarea readonly="readonly">
+    <div>Property ID: <strong id="property_id"><%: ViewBag.PropertyId%></strong></div>
+    <textarea readonly="readonly" id="android_code">
 public static void main(String[] args) {
  
 int radius = 0;
@@ -92,7 +108,8 @@ System.out.println("Area of a circle is " + area);
 }
 
     </textarea>
-    <p><a id="A1">Save</a></p>
+    <p><a id="save_btn">Save</a></p>
+</div>
 </div>
 </form>
 <div id="overlay" class="overlay"></div>

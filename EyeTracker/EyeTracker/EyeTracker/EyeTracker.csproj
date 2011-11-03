@@ -151,6 +151,7 @@
     <Content Include="Content\Table.css" />
     <Content Include="Content\TableChart.css" />
     <Content Include="Content\Tests\qunit.css" />
+    <Content Include="Scripts\ThridParty\ajaxfileupload.js" />
     <Content Include="Scripts\ApplicationNewEdit.js" />
     <Content Include="Scripts\ApplicationDashboard.js" />
     <Content Include="Scripts\ApplicationUsage.js" />
