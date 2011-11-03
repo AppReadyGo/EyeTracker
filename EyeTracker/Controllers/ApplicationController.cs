@@ -97,13 +97,13 @@ namespace EyeTracker.Controllers
         [HttpPost]
         public JsonResult New(ApplicationModel model)
         {
-            OperationResult<string> res = null;
+            object res = null;
             if (ModelState.IsValid)
             {
                 var portfolioRes = portfolioService.Get(model.PortfolioId);
                 if (portfolioRes.HasError)
                 {
-                    res = new OperationResult<string>(portfolioRes);
+                    res = new { HasError = true };
                 }
                 else
                 {
@@ -111,18 +111,22 @@ namespace EyeTracker.Controllers
                     var appRes = service.Add(app);
                     if (appRes.HasError)
                     {
-                        res = new OperationResult<string>(appRes);
+                        res = new { HasError = true };
                     }
                     else
                     {
                         string key = GetAppKey(app.Type);
-                        res = new OperationResult<string>(string.Format("{0}-{1:000000}-{2:0000}", key, model.PortfolioId, appRes.Value));
+                        res = new { 
+                            HasError = false, 
+                            code = string.Format("{0}-{1:000000}-{2:0000}", key, model.PortfolioId, appRes.Value),
+                            appId = appRes.Value
+                        };
                     }
                 }
             }
             else
             {
-                res = new OperationResult<string>();
+                res = new { };
             }
             return Json(res);
         }
@@ -205,15 +209,15 @@ namespace EyeTracker.Controllers
             }
         }
 
-        public ActionResult ScreenDetails(int portfolioId, int appId)
-        {
-            return View();
-        }
-
         [HttpPost]
-        public ActionResult ScreenDetails(ScreenDetailsModel screenDetails)
+        public ActionResult AddScreen(ScreenDetailsModel screenDetails)
         {
-            return View();
+            object res = null;
+            if (ModelState.IsValid)
+            {
+                res = new { HasError = false, ScreenId = 0 };
+            }
+            return base.Json(res);
         }
 
         public ActionResult Dashboard(int portfolioId, int appId)

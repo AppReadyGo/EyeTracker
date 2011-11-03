@@ -1,19 +1,98 @@
 ﻿
-function showOverlay() {
-    var step = $('#sample_code');
-    var width = step.width();
-    var height = step.height();
-    var offset = step.offset();
-    $('#overlay').css({ width: width, height: height + 3, top: offset.top, left: offset.left });
+function showOverlay(elem) {
+    var width = elem.outerWidth();
+    var height = elem.outerHeight();
+    var offset = elem.offset();
+    $('#overlay').css({ width: width, height: height, top: offset.top, left: offset.left });
+    $('#overlay').show();
+}
+
+function centerElement(parent,elem) {
+    var offset = elem.offset();
+    var l = offset.left + (parent.outerWidth() / 2) - (elem.outerWidth() / 2);
+    var t = offset.top + (parent.outerHeight() / 2) - (elem.outerHeight() / 2);
+    elem.css({ top: t, left: l });
+}
+
+function switchType(type) {
+    $('#screens').hide();
+    $('#sample_web_code').hide();
+    $('#sample_android_code').hide();
+    switch (type*1) {
+        case 1: //Web
+            $('#sample_web_code').show();
+            break;
+        case 2: //Web Mobile
+            break;
+        case 3: //Android
+            $('#sample_android_code').show();
+            $('#screens').show();
+            break;
+        case 4: //iPhone
+            break;
+        case 5: //Windows
+            break;
+    }
+    showOverlay($('#sample_code'));
 }
 
 $(document).ready(function () {
     if (appId == 0) {
-        showOverlay();
+        showOverlay($('#sample_code'));
     } else {
         $('#overlay').hide();
         $('#create_lnk').hide();
+        $('#Type').attr('disabled', 'disabled');
     }
+    $('#Type').change(function () {
+        switchType($(this).val());
+    });
+    function screenRemoveBtnClick() {
+    }
+    function screenImgBtnClick() {
+    }
+    $('#screens_list .remove-btn').click(screenRemoveBtnClick);
+    $('#screens_list .img-lnk').click(screenImgBtnClick);
+
+    $('#add_screen_btn').click(function () {
+        appId = 1;
+        var width = $('#screen_width').val() * 1;
+        var height = $('#screen_height').val() * 1;
+        if (width == 0 || height == 0) {
+            $('#screen_error').text('Width or height is wrong format');
+        } else {
+            /*
+            $("#loading").ajaxStart(function () {
+            $(this).show();
+            }).ajaxComplete(function () {
+            $(this).hide();
+            });
+            */
+            $.ajaxFileUpload({
+                url: addScreenURL + appId + '/?Width=' + width + '&Height=' + height,
+                secureuri: false,
+                fileElementId: 'screen_img',
+                dataType: 'json',
+                success: function (data, status) {
+                    if (data.HasError) {
+                        $('#screen_error').text('Something wrong happen, please contact to administrator.');
+                    } else {
+                        var remBtn = $('<a class="remove-btn">X</a>');
+                        remBtn.click(screenRemoveBtnClick);
+                        var imgBtn = $('<a class="img-lnk">'+width+'X'+height+'</a>');
+                        imgBtn.click(screenImgBtnClick);
+                        var li = $('<li></li>');
+                        li.append(remBtn);
+                        li.append(imgBtn);
+                        $('#screens_list').append(li);
+                    }
+                },
+                error: function (data, status, e) {
+                    alert(e);
+                }
+            });
+        }
+    });
     $('#create_lnk').click(function () {
         var desc = $('#Description').val();
         var type = $('#Type').val();
@@ -27,7 +106,7 @@ $(document).ready(function () {
             $('#Description').removeClass('input-validation-error');
             $('.validation-summary-errors').remove();
             $('#description_error').empty();
-            showOverlay();
+            showOverlay($('#sample_code'));
             $.ajax({
                 url: newAppURL,
                 dataType: 'json',
@@ -39,8 +118,11 @@ $(document).ready(function () {
                     } else {
                         $('#overlay').hide();
                         $('#create_lnk').hide();
-                        $('#code').html($('#code').html().replace('**-******-***', json.Value));
-                        $('#property').text($('#property').text().replace('**-******-***', json.Value));
+                        $('#web_code').html($('#web_code').html().replace('**-******-***', json.code));
+                        $('#android_code').html($('#android_code').html().replace('**-******-***', json.code));
+                        $('#property_id').text($('#property_id').text().replace('**-******-***', json.code));
+                        $('#Type').attr('disabled', 'disabled');
+                        appId = json.appId;
                     }
                 }
             });
@@ -56,9 +138,12 @@ $(document).ready(function () {
             $('#application_form')[0].submit();
         }
     });
+    $('#save_btn').click(function () {
+    });
     //Disable not exsists types
     $('#Type option[value!=3]').attr('disabled', true);
     $('#Type option[value=1]').attr('disabled', null);
     $('#Type option[value=3]').attr('selected', true);
     //--
+    switchType($('#Type').val());
 });
