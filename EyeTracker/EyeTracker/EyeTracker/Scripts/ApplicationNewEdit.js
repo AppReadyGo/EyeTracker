@@ -48,6 +48,8 @@ $(document).ready(function () {
         switchType($(this).val());
     });
     function screenRemoveBtnClick() {
+        var li = $(this).parent();
+        li.remove();
     }
     function screenImgBtnClick() {
     }
@@ -79,12 +81,15 @@ $(document).ready(function () {
                     } else {
                         var remBtn = $('<a class="remove-btn">X</a>');
                         remBtn.click(screenRemoveBtnClick);
-                        var imgBtn = $('<a class="img-lnk">'+width+'X'+height+'</a>');
+                        var imgBtn = $('<a class="img-lnk">' + width + 'X' + height + '</a>');
                         imgBtn.click(screenImgBtnClick);
                         var li = $('<li></li>');
                         li.append(remBtn);
                         li.append(imgBtn);
                         $('#screens_list').append(li);
+                        $('#screen_width').val('');
+                        $('#screen_height').val('');
+                        $('#screen_img').val('');
                     }
                 },
                 error: function (data, status, e) {
