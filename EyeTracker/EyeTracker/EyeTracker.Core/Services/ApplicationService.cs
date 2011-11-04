@@ -16,6 +16,8 @@ namespace EyeTracker.Core.Services
         OperationResult<IList<Application>> GetAll(int portfolioId);
         OperationResult Remove(int appId);
         OperationResult Update(int appId, string description, ApplicationType type);
+        OperationResult<int> AddScreen(Screen screen);
+
     }
     public class ApplicationService : IApplicationService
     {
@@ -96,6 +98,18 @@ namespace EyeTracker.Core.Services
             catch (Exception exp)
             {
                 return new OperationResult<IList<Application>>(exp);
+            }
+        }
+
+        public OperationResult<int> AddScreen(Screen screen)
+        {
+            try
+            {
+                return new OperationResult<int>(repository.AddScreen(screen));
+            }
+            catch (Exception exp)
+            {
+                return new OperationResult<int>(exp);
             }
         }
     }

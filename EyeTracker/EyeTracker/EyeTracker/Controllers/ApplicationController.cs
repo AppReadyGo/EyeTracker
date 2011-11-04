@@ -86,6 +86,7 @@ namespace EyeTracker.Controllers
 
         public ActionResult New(int portfolioId)
         {
+            ViewBag.Screens = new List<Screen>();
             ViewBag.PortfolioId = portfolioId;
             ViewData["TypesList"] = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() });
             ViewBag.PackageLink = "http://mobillify.com";
@@ -171,6 +172,7 @@ namespace EyeTracker.Controllers
                     PortfolioId = portfolioId,
                     Type = app.Type
                 };
+                ViewBag.Screens = appRes.Value.Screens;
                 ViewBag.PortfolioId = portfolioId;
                 ViewData["TypesList"] = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() });
                 ViewBag.PackageLink = "http://mobillify.com";
@@ -215,11 +217,49 @@ namespace EyeTracker.Controllers
             object res = null;
             if (ModelState.IsValid)
             {
+                var screen = new Screen { 
+                    ApplicationId = screenDetails.AppId,
+                    Width = screenDetails.Width,
+                    Height = screenDetails.Height
+                };
+                var addRes = service.AddScreen(screen);
+                if (!addRes.HasError)
+                {
+                    var file = Request.Files["screen_img"];
+                    string tmpFileFullName = null;
+                    if (file.ContentLength > 0)
+                    {
+                        tmpFileFullName = Path.Combine(HttpContext.Server.MapPath("/Users_Resources/Screens/"), string.Format("{0}_{1}X{2}{3}", addRes.Value, screen.Width, screen.Height, Path.GetExtension(file.FileName)));
+                        file.SaveAs(tmpFileFullName);
+                    }
+                }
                 res = new { HasError = false, ScreenId = 0 };
             }
             var actionResult = base.Json(res);
             actionResult.ContentType = "text/html";
             return actionResult;
+        }
+
+        public ActionResult Screen(int screen)
+        {
+            var res = transactionService.Get(transId);
+            if (!res.HasError &&
+                res.Value.Attachments != null &&
+                res.Value.Attachments.FirstOrDefault(curAttach => curAttach.Id == attachId) != null)
+            {
+                string ext = Path.GetExtension(Request.Url.AbsolutePath);
+                var dir = Server.MapPath("/Attachments");
+                var path = Path.Combine(dir, "Transaction_Attachment_" + attachId + ext);
+                return base.File(path, MIMEAssistant.GetMIMEType(Request.Url.AbsolutePath));
+            }
+            else if (res.Error == ErrorNumber.AccessDenied)
+            {
+                return RedirectToAction("LogOn", "Member");
+            }
+            else
+            {
+                return View("Error");
+            }
         }
 
         public ActionResult Dashboard(int portfolioId, int appId)

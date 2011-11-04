@@ -26,6 +26,14 @@ namespace EyeTracker.Domain.Mapping
                 map.Column("PortfolioId");
                 map.Lazy(LazyRelation.NoLazy);
             });
+            Set(p => p.Screens, 
+                map => {
+                    map.Key(k => k.Column("ApplicationId"));
+                    map.Lazy(CollectionLazy.NoLazy);
+                    map.Table("ApplicationScreens");
+                    map.Cascade(Cascade.All);
+                },
+                rel => rel.OneToMany() );
         }
     }
 }

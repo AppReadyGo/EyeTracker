@@ -30,7 +30,10 @@
 <div id="screens" class="step">
     <h3>2. Screenshots</h3>
     <ul id="screens_list">
-        <li><a class="remove-btn">X</a><a class="img-lnk">100X200</a></li>
+    <%foreach (var curScreen in ViewBag.Screens)
+      { %>
+        <li><a class="remove-btn">X</a><a class="img-lnk"><%:curScreen.Width %>X<%:curScreen.Height %></a></li>
+    <%} %>
     </ul>
     <fieldset>
         <legend>New Screen</legend>
