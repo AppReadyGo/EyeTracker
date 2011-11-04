@@ -20,6 +20,8 @@ namespace EyeTracker.DAL
         void Update(int appId, string description, ApplicationType type);
 
         IList<Application> GetAll(int portfolioId);
+
+        int AddScreen(Screen screen);
     }
 
     public class ApplicationRepository : IApplicationRepository
@@ -70,6 +72,19 @@ namespace EyeTracker.DAL
                 return session.Query<Application>()
                     .Where(a => a.Portfolio.Id == portfolioId).ToList();
             }
+        }
+
+        public int AddScreen(Screen screen)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    session.Save(screen);
+                    transaction.Commit();
+                }
+            }
+            return screen.Id;
         }
     }
 }

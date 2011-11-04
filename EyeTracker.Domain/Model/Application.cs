@@ -13,9 +13,11 @@ namespace EyeTracker.Domain.Model
         public virtual DateTime CreateDate { get; protected set; }
         public virtual ApplicationType Type { get; protected set; }
         public virtual Portfolio Portfolio { get; protected set; }
+        public virtual IEnumerable<Screen> Screens { get; set; }
 
         public Application()
         {
+            Screens = new List<Screen>();
         }
 
         public Application(Portfolio portfolio, string description, ApplicationType type)
