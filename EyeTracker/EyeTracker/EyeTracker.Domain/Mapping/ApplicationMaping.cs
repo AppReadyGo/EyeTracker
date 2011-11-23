@@ -25,6 +25,7 @@ namespace EyeTracker.Domain.Mapping
                 map.NotNullable(true);
                 map.Column("PortfolioId");
                 map.Lazy(LazyRelation.NoLazy);
+                map.Cascade(Cascade.DeleteOrphans);
             });
             Set(p => p.Screens, 
                 map => {

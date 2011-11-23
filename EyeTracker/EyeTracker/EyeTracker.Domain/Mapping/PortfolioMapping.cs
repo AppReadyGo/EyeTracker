@@ -24,12 +24,13 @@ namespace EyeTracker.Domain.Mapping
                 map.NotNullable(true);
             });
             Property(x => x.TimeZone, map => map.NotNullable(true));
-            Bag(x => x.Applications, map =>
+            Set(x => x.Applications, map =>
             {
-                map.Table("PortfolioApplication");
                 map.Key(k => k.Column("PortfolioId"));
-                map.Cascade(Cascade.All);
                 map.Lazy(CollectionLazy.NoLazy);
+                map.Cascade(Cascade.DeleteOrphans);
+                map.Access(Accessor.Field);
+                map.Inverse(true);
             }, r => r.OneToMany());
         }
     }

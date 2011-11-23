@@ -5,10 +5,13 @@
     <link href="<%: Url.Content("~/Content/ApplicationNewEdit.css")%>" rel="stylesheet" type="text/css" />
     <script src="<%: Url.Content("~/Scripts/ApplicationNewEdit.js")%>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/ThridParty/ajaxfileupload.js")%>" type="text/javascript"></script>
+	<script type="text/javascript" src="<%: Url.Content("~/Scripts/ThridParty/fancybox/jquery.fancybox-1.3.4.pack.js")%>"></script>
+	<link rel="stylesheet" type="text/css" href="<%: Url.Content("~/Scripts/ThridParty/fancybox/jquery.fancybox-1.3.4.css")%>" media="screen" />
     <script type="text/javascript">
         var newAppURL = '/Application/New/<%: ViewBag.PortfolioId %>/';
         var appId = <%: Model.Id %>;
         var addScreenURL = '/Application/AddScreen/<%: ViewBag.PortfolioId %>/';
+        var screenImgURL = '/Application/Screen/';
     </script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="Title" runat="server">New Application</asp:Content>
@@ -17,7 +20,7 @@
     <a href="/Application/<%= ViewBag.PortfolioId %>">All Application</a>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<form id="application_form" method="post" action="/Application/Edit/<%= ViewBag.PortfolioId %>">
+<form id="application_form" name="applicationForm" method="post" action="/Application/Edit/<%= ViewBag.PortfolioId %>">
 <%: Html.HiddenFor(m => m.Id)%>
 <div id="app_config" class="step">
     <h3>1. Application Configuration</h3>
@@ -27,12 +30,13 @@
     <p><a id="create_lnk">Create</a></p>
 </div>
 <div id="sample_code">
-<div id="screens" class="step">
+<!--div id="screens" class="step" style="display:none;">
+    <div id="img_preview" class="img-preview"><div><img src="" /><a>X</a></div></div>
     <h3>2. Screenshots</h3>
     <ul id="screens_list">
     <%foreach (var curScreen in ViewBag.Screens)
       { %>
-        <li><a class="remove-btn">X</a><a class="img-lnk"><%:curScreen.Width %>X<%:curScreen.Height %></a></li>
+        <li><a class="remove-btn">&nbsp</a><a class="img-lnk" href="/Application/Screen/<%: Model.Id %>/<%:curScreen.Width %>/<%:curScreen.Height %>/screen.jpg"><%:curScreen.Width %>X<%:curScreen.Height %></a></li>
     <%} %>
     </ul>
     <fieldset>
@@ -43,13 +47,7 @@
         <div>Image: <input type="file" id="screen_img" name="screen_img"/></div>
         <div><a id="add_screen_btn">add</a></div>
     </fieldset>
-    <div id="new_screen" class="new-screen">
-        <noscript>          
-        <p>Please enable JavaScript to use file uploader.</p>
-        </noscript>
-    </div>
-    <a id="add_screen_btn">add</a>
-</div>
+ </div-->
 <div id="sample_web_code" class="step">
     <h3>3. Paste this code on your site</h3>
     <div>Copy the following code, then paste it onto every page you want to track immediately before the closing &lt;/head&gt; tag.</div>
@@ -111,7 +109,7 @@ System.out.println("Area of a circle is " + area);
 }
 
     </textarea>
-    <p><a id="save_btn">Save</a></p>
+    <p><a id="save_btn" onclick="document.applicationForm.submit();">Save</a></p>
 </div>
 </div>
 </form>

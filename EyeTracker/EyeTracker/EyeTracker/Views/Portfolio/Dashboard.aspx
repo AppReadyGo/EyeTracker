@@ -6,21 +6,46 @@
 <script src="<%: Url.Content("~/Scripts/ThridParty/Flot/jquery.flot.min.js")%>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Scripts/ThridParty/Flot/jquery.flot.resize.min.js")%>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Scripts/PortfolioDashboard.js")%>" type="text/javascript"></script>
+<link href="<%: Url.Content("~/Content/Dashboard.css")%>" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
-    var chartData = <%= ViewBag.ChartInitData %>;
+    var usageChartData = <%= ViewBag.UsageInitData %>;
 </script>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="Title" runat="server">Dashboard</asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<table>
+<table class="dashboard">
 <tr>
-    <td>
+    <td colspan="2">
         <div class="charts">
-            <div id="charts_place_holder" style="height:200px;width:400px;"></div>
+            <p>Usage</p>
+            <div id="usage_charts_place_holder" style="height:200px;width:875px;"></div>
         </div>
-        <a href="/Portfolio/Usage/<%: ViewBag.PortfolioId %>">Usage</a>
+    </td>
+</tr><tr>  
+    <td>
+        <p>Visitors</p>
+        <div id="visitors_charts_place_holder" style="height:200px;width:437px;"></div>
     </td>
     <td>
+        <p>Map Overlay</p>
+        <img src="/Content/img/world_map.jpg" class="item" />
+    </td>
+</tr><tr>  
+    <td>
+        <p>Trafic Sources</p>
+        <div class="item"></div>
+    </td>
+    <td>
+        <p>Content Overview</p>
+        <table>
+            <thead><tr><th>Path</th><th>Views</th><th>% Views</th></tr></thead>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+        </table>
+        <div class="item"></div>
     </td>
 </tr>
 </table>

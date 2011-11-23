@@ -18,6 +18,10 @@ namespace EyeTracker.Domain.Repository
         IList<Country> GetCountries();
 
         int AddPortfolio(string description, int timeZone, Guid guid);
+
+        void Update(int id, string description, int timeZone);
+
+        void Remove(int id);
     }
 
     public class PortfolioRepository : IPortfolioRepository
@@ -47,9 +51,6 @@ namespace EyeTracker.Domain.Repository
             }
         }
 
-        #region IPortfolioRepository Members
-
-
         public int AddPortfolio(string description, int timeZone, Guid guid)
         {
             using (ISession session = NHibernateHelper.OpenSession())
@@ -65,6 +66,31 @@ namespace EyeTracker.Domain.Repository
             }
         }
 
-        #endregion
+        public void Update(int id, string description, int timeZone)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                var portfolio = session.Get<Portfolio>(id);
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    portfolio.Update(description, timeZone);
+                    session.Update(portfolio);
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public void Remove(int id)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                var portfolio = session.Get<Portfolio>(id);
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    session.Delete(portfolio);
+                    transaction.Commit();
+                }
+            }
+        }
     }
 }

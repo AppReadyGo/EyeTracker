@@ -53,5 +53,30 @@ namespace EyeTracker.Tests.FakeData
         }
 
         #endregion
+
+        #region IApplicationRepository Members
+
+
+        public long AddScreen(Screen screen)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Screen GetScreen(int appId, int width, int height)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IApplicationRepository Members
+
+
+        public void Update(int appId, string description)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

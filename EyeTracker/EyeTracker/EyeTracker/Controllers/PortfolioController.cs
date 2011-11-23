@@ -59,7 +59,7 @@ namespace EyeTracker.Controllers
                 {
                     var cells = new List<HTMLTable.Cell>();
                     cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Portfolio/Dashboard/{0}\">{1}</a>", curPortfolio.Id, curPortfolio.Description) });
-                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Application/{0}\" >{1}</a>", curPortfolio.Id, curPortfolio.Applications.Count) });
+                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Application/{0}\" >{1}</a>", curPortfolio.Id, curPortfolio.Applications.Count()) });
                     cells.Add(new HTMLTable.Cell() { Value = "0.00%" });
                     cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Portfolio/Edit/{0}\">edit</a>&nbsp;<a href=\"/Portfolio/Remove/{0}\">remove</a>", curPortfolio.Id) });
                     data.Add(cells);
@@ -112,7 +112,7 @@ namespace EyeTracker.Controllers
                 var countriesRes = service.GetCountries();
                 if (!countriesRes.HasError)
                 {
-                    ViewData["CountriesList"] = countriesRes.Value.Select(c => new SelectListItem() { Text = c.Name, Value = c.GeoId.ToString() });
+                    ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
                     return View("NewEdit", new PortfolioModel());
                 }
                 else
@@ -122,18 +122,31 @@ namespace EyeTracker.Controllers
             }
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
-            ViewBag.Title = "Edit";
-            var countriesRes = service.GetCountries();
-            if (!countriesRes.HasError)
+            var portfolioRes = service.Get(id);
+            if (portfolioRes.HasError)
             {
-                ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
-                return View("NewEdit", new PortfolioModel());
+                return View("Error");
             }
             else
             {
-                return View("Error");
+                var model = new PortfolioModel { 
+                    Id = portfolioRes.Value.Id,
+                    Description = portfolioRes.Value.Description,
+                    TimeZone = portfolioRes.Value.TimeZone
+                };
+                ViewBag.Title = "Edit";
+                var countriesRes = service.GetCountries();
+                if (!countriesRes.HasError)
+                {
+                    ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
+                    return View("NewEdit", model);
+                }
+                else
+                {
+                    return View("Error");
+                }
             }
         }
 
@@ -143,6 +156,7 @@ namespace EyeTracker.Controllers
             ViewBag.Title = "Edit";
             if (ModelState.IsValid)
             {
+                var res = service.Update(model.Id, model.Description, model.TimeZone);
                 return RedirectToAction("");
             }
             else
@@ -151,30 +165,37 @@ namespace EyeTracker.Controllers
             }
         }
 
-        [HttpPost]
         public ActionResult Remove(int id)
         {
-            return View();
+            var res = service.Remove(id);
+            if (res.HasError)
+            {
+                return View("Error");
+            }
+            else
+            {
+                return RedirectToAction("");
+            }
         }
 
-        public ActionResult Dashboard(int portfolioId)
+        public ActionResult Dashboard(int Id)
         {
             var points = new Dictionary<DateTime, int> { { DateTime.Now.AddDays(-5), 40 }, { DateTime.Now.AddDays(-4), 30 }, { DateTime.Now.AddDays(-3), 10 }, { DateTime.Now.AddDays(-2), 50 }, { DateTime.Now.AddDays(-1), 40 } };
             //Fill chart data
-            var chartInitData = new List<object>();
-            chartInitData.Add(new
+            var usageInitData = new List<object>();
+            usageInitData.Add(new
             {
                 data = points.OrderBy(curItem => curItem.Key).Select(curItem => new object[] { curItem.Key.MilliTimeStamp(), curItem.Value }),
                 color = "#461D7C"
             });
-            ViewBag.ChartInitData = new JavaScriptSerializer().Serialize(chartInitData);
-            ViewBag.PortfolioId = portfolioId;
+            ViewBag.UsageInitData = new JavaScriptSerializer().Serialize(usageInitData);
+            ViewBag.PortfolioId = Id;
             return View();
         }
 
-        public ActionResult Usage(int portfolioId)
+        public ActionResult Usage(int Id)
         {
-            var reportRes = reportService.GetVisitsData(DateTime.UtcNow.AddDays(-30), DateTime.UtcNow, portfolioId, null, DataGrouping.Day);
+            var reportRes = reportService.GetVisitsData(DateTime.UtcNow.AddDays(-30), DateTime.UtcNow, Id, null, DataGrouping.Day);
             if (reportRes.HasError)
             {
                 return View("Error");
@@ -187,7 +208,7 @@ namespace EyeTracker.Controllers
                 color = "#461D7C"
             });
             ViewBag.ChartInitData = new JavaScriptSerializer().Serialize(chartInitData);
-            ViewBag.PortfolioId = portfolioId;
+            ViewBag.PortfolioId = Id;
             return View();
         }
 

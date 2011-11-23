@@ -20,6 +20,7 @@ namespace EyeTracker.Domain.Mapping
             {
                 map.NotNullable(true);
                 map.Column("PageViewId");
+                map.Cascade(Cascade.All);
             });
         }
     }

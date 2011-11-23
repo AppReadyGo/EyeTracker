@@ -11,5 +11,6 @@ namespace EyeTracker.Domain.Model
         public virtual long ApplicationId { get; set; }
         public virtual int Width { get; set; }
         public virtual int Height { get; set; }
+        public virtual string FileExtension { get; set; }
     }
 }

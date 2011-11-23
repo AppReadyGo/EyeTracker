@@ -9,7 +9,7 @@
     Portfolio - <asp:ContentPlaceHolder ID="Title" runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="TopMenu" runat="server">
-    <%:Html.ActionLink("Portfolios", "") %>
+    <a  href="/Portfolio">Portfolios</a>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="LeftMenu" runat="server">
     <a href="/Portfolio/Dashboard/<%: ViewBag.PortfolioId %>">Dashboard</a>
