@@ -17,11 +17,13 @@ namespace EyeTracker.DAL
 
         void Remove(int appId);
 
-        void Update(int appId, string description, ApplicationType type);
+        void Update(int appId, string description);
 
         IList<Application> GetAll(int portfolioId);
 
-        int AddScreen(Screen screen);
+        long AddScreen(Screen screen);
+
+        Screen GetScreen(int appId, int width, int height);
     }
 
     public class ApplicationRepository : IApplicationRepository
@@ -49,17 +51,25 @@ namespace EyeTracker.DAL
 
         public void Remove(int appId)
         {
-            throw new NotImplementedException();
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    var app = session.Get<Application>(appId);
+                    session.Delete(app);
+                    transaction.Commit();
+                }
+            }
         }
 
-        public void Update(int appId, string description, ApplicationType type)
+        public void Update(int appId, string description)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
                 {
                     var app = session.Get<Application>(appId);
-                    app.Update(description, type);
+                    app.Update(description);
                     transaction.Commit();
                 }
             }
@@ -74,7 +84,7 @@ namespace EyeTracker.DAL
             }
         }
 
-        public int AddScreen(Screen screen)
+        public long AddScreen(Screen screen)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -85,6 +95,15 @@ namespace EyeTracker.DAL
                 }
             }
             return screen.Id;
+        }
+
+        public Screen GetScreen(int appId, int width, int height)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                return session.Query<Screen>()
+                    .Where(s => s.ApplicationId == appId && s.Width == width && s.Height == height).FirstOrDefault();
+            }
         }
     }
 }

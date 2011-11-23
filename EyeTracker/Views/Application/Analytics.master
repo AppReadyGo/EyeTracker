@@ -9,12 +9,12 @@
     Application - <asp:ContentPlaceHolder ID="Title" runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="TopMenu" runat="server">
-    <%:Html.ActionLink("Applications", "") %>
+    <a  href="/Application/<%: ViewBag.PortfolioId %>">Applications</a>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="LeftMenu" runat="server">
     <a href="/Application/Dashboard/<%: ViewBag.PortfolioId %>/<%: ViewBag.ApplicationId %>">Dashboard</a>
     <a href="/Application/EyeTracker/<%: ViewBag.PortfolioId %>/<%: ViewBag.ApplicationId %>">Eye Tracker</a>
-    <a href="/Application/Fingerprints/<%: ViewBag.PortfolioId %>/<%: ViewBag.ApplicationId %>">Fingerprints</a>
+    <a href="/Application/Fingerprint/<%: ViewBag.PortfolioId %>/<%: ViewBag.ApplicationId %>">Fingerprints</a>
     <a href="/Application/Usage/<%: ViewBag.PortfolioId %>/<%: ViewBag.ApplicationId %>">Usage</a>
     <a <%--href="/Application/Visitors/<%: ViewBag.PortfolioId %>/<%: ViewBag.ApplicationId %>"--%> class="disabled">Visitors</a>
     <a <%--href="/Application/MapOverlay/<%: ViewBag.PortfolioId %>/<%: ViewBag.ApplicationId %>"--%> class="disabled">Map Overlay</a>

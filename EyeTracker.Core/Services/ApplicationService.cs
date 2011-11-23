@@ -15,8 +15,9 @@ namespace EyeTracker.Core.Services
         OperationResult<Application> Get(int appId);
         OperationResult<IList<Application>> GetAll(int portfolioId);
         OperationResult Remove(int appId);
-        OperationResult Update(int appId, string description, ApplicationType type);
-        OperationResult<int> AddScreen(Screen screen);
+        OperationResult Update(int appId, string description);
+        OperationResult<long> AddScreen(Screen screen);
+        OperationResult<Screen> GetScreen(int appId, int width, int height);
 
     }
     public class ApplicationService : IApplicationService
@@ -72,13 +73,13 @@ namespace EyeTracker.Core.Services
             }
         }
 
-        public OperationResult Update(int appId, string description, ApplicationType type)
+        public OperationResult Update(int appId, string description)
         {
             //Check Security
             //Check application properties
             try
             {
-                repository.Update(appId, description, type);
+                repository.Update(appId, description);
                 return new OperationResult();
             }
             catch (Exception exp)
@@ -101,15 +102,27 @@ namespace EyeTracker.Core.Services
             }
         }
 
-        public OperationResult<int> AddScreen(Screen screen)
+        public OperationResult<long> AddScreen(Screen screen)
         {
             try
             {
-                return new OperationResult<int>(repository.AddScreen(screen));
+                return new OperationResult<long>(repository.AddScreen(screen));
             }
             catch (Exception exp)
             {
-                return new OperationResult<int>(exp);
+                return new OperationResult<long>(exp);
+            }
+        }
+
+        public OperationResult<Screen> GetScreen(int appId, int width, int height)
+        {
+            try
+            {
+                return new OperationResult<Screen>(repository.GetScreen(appId, width, height));
+            }
+            catch (Exception exp)
+            {
+                return new OperationResult<Screen>(exp);
             }
         }
     }

@@ -16,6 +16,7 @@ namespace EyeTracker.Domain.Mapping
             Property(p => p.ApplicationId, map => map.NotNullable(true));
             Property(p => p.Height, map => map.NotNullable(true));
             Property(p => p.Width, map => map.NotNullable(true));
+            Property(p => p.FileExtension, map => { map.NotNullable(true); map.Length(5); });
         }
     }
 }

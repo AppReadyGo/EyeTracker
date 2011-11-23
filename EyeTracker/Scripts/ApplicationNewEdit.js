@@ -1,10 +1,12 @@
 ﻿
 function showOverlay(elem) {
-    var width = elem.outerWidth();
-    var height = elem.outerHeight();
-    var offset = elem.offset();
-    $('#overlay').css({ width: width, height: height, top: offset.top, left: offset.left });
-    $('#overlay').show();
+    if (appId == 0) {
+        var width = elem.outerWidth();
+        var height = elem.outerHeight();
+        var offset = elem.offset();
+        $('#overlay').css({ width: width, height: height, top: offset.top, left: offset.left });
+        $('#overlay').show();
+    }
 }
 
 function centerElement(parent,elem) {
@@ -52,12 +54,23 @@ $(document).ready(function () {
         li.remove();
     }
     function screenImgBtnClick() {
+        var width = $(this).attr('width');
+        var height = $(this).attr('height');
+        var css = null;
+        if (width > height) {
+            css = { width: 200 };
+        } else {
+            css = { height: 200 };
+        }
+        $('#img_preview img').css(css);
+        $('#img_preview img').attr('src', screenImgURL + appId + '/' + width + '/' + height);
+        $('#img_preview').show();
     }
     $('#screens_list .remove-btn').click(screenRemoveBtnClick);
     $('#screens_list .img-lnk').click(screenImgBtnClick);
+    $('#screens_list .img-lnk').fancybox();
 
     $('#add_screen_btn').click(function () {
-        appId = 1;
         var width = $('#screen_width').val() * 1;
         var height = $('#screen_height').val() * 1;
         if (width == 0 || height == 0) {
@@ -79,10 +92,9 @@ $(document).ready(function () {
                     if (data.HasError) {
                         $('#screen_error').text('Something wrong happen, please contact to administrator.');
                     } else {
-                        var remBtn = $('<a class="remove-btn">X</a>');
+                        var remBtn = $('<a class="remove-btn">&nbsp</a>');
                         remBtn.click(screenRemoveBtnClick);
-                        var imgBtn = $('<a class="img-lnk">' + width + 'X' + height + '</a>');
-                        imgBtn.click(screenImgBtnClick);
+                        var imgBtn = $('<a class="img-lnk" src="' + screenImgURL + appId + '/' + width + '/' + height + '/screen.jpg">' + width + 'X' + height + '</a>');
                         var li = $('<li></li>');
                         li.append(remBtn);
                         li.append(imgBtn);
@@ -90,10 +102,11 @@ $(document).ready(function () {
                         $('#screen_width').val('');
                         $('#screen_height').val('');
                         $('#screen_img').val('');
+                        imgBtn.fancybox();
                     }
                 },
                 error: function (data, status, e) {
-                    alert(e);
+                    $('#screen_error').text('Something wrong happen, please contact to administrator.');
                 }
             });
         }
@@ -128,6 +141,7 @@ $(document).ready(function () {
                         $('#property_id').text($('#property_id').text().replace('**-******-***', json.code));
                         $('#Type').attr('disabled', 'disabled');
                         appId = json.appId;
+                        $('#Id').val(appId);
                     }
                 }
             });

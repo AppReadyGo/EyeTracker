@@ -30,55 +30,70 @@ namespace EyeTracker
                 "Analytics/{filename}",
                 new { controller = "Data", action = "Analytics" }
             );
+
             routes.MapRoute(
-                "AjaxData", // Route name
-                "Data/{action}/", // URL with parameters
-                new { controller = "Data" } // Parameter defaults
+                "AjaxData", 
+                "Data/{action}/", 
+                new { controller = "Data" } 
             );
 
             routes.MapRoute(
-                "Home", // Route name
-                "", // URL with parameters
-                new { controller = "Home", action = "Index" } // Parameter defaults
+                "Home", 
+                "", 
+                new { controller = "Home", action = "Index" } 
             );
+
             routes.MapRoute(
                 "Admin_elmah",
                 "Admin/Elmah/{query}",
                 new { action = "Elmah", controller = "Admin", query = UrlParameter.Optional }
             );
+
             routes.MapRoute(
                "Admin_edit",
                "Admin/{action}/{id}",
                new { action = "UserEdit", controller = "Admin" }
             );
+
             routes.MapRoute(
-                "Account", // Route name
-                "Account/{action}", // URL with parameters
+                "Account", 
+                "Account/{action}", 
                 new { controller = "Account", action = "LogOn" } 
             );
+
             routes.MapRoute(
-                "Application", // Route name
-                "Application/{action}/{portfolioId}/{appId}", // URL with parameters
+                "ApplicationScreen", 
+                "Application/Screen/{appId}/{width}/{height}/{file}", 
+                new { controller = "Application", action = "Screen", appId = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                "Application", 
+                "Application/{action}/{portfolioId}/{appId}", 
                 new { controller = "Application", action = "Index", appId = UrlParameter.Optional }
             );
+
             routes.MapRoute(
-                "ApplicationDef", // Route name
-                "Application/{portfolioId}", // URL with parameters
+                "ApplicationDef", 
+                "Application/{portfolioId}", 
                 new { controller = "Application", action = "Index" }
             );
+
             routes.MapRoute(
-                "Portfolio", // Route name
-                "Portfolio/{action}/{portfolioId}", // URL with parameters
-                new { controller = "Portfolio", action = "Index", portfolioId = UrlParameter.Optional }
+                "Portfolio", 
+                "Portfolio/{action}/{id}",
+                new { controller = "Portfolio", action = "Index", id = UrlParameter.Optional }
             );
+
             routes.MapRoute(
-                "Analytics", // Route name
-                "Analytics/{action}", // URL with parameters
+                "Analytics", 
+                "Analytics/{action}", 
                 new { controller = "Analytics", action = "EyeTracker" }
             );
+
             routes.MapRoute(
-                "Content", // Route name
-                "{urlPart1}/{urlPart2}/{urlPart3}", // URL with parameters
+                "Content", 
+                "{urlPart1}/{urlPart2}/{urlPart3}", 
                 new { controller = "Home", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional }
             );
 
@@ -88,30 +103,30 @@ namespace EyeTracker
             //    new { controller = "Analytics", action = "JavaScriptFile" } 
             //);
             //routes.MapRoute(
-            //    "AjaxVisit", // Route name
-            //    "Analytics/{action}/{json}", // URL with parameters
-            //    new { controller = "Analytics" } // Parameter defaults
+            //    "AjaxVisit", 
+            //    "Analytics/{action}/{json}", 
+            //    new { controller = "Analytics" } 
             //);/*
             //routes.MapRoute(
-            //    "AjaxPackage", // Route name
-            //    "Analytics/Package/{json}", // URL with parameters
-            //    new { controller = "Analytics", action = "Package" } // Parameter defaults
+            //    "AjaxPackage", 
+            //    "Analytics/Package/{json}", 
+            //    new { controller = "Analytics", action = "Package" } 
             //);*/
             //routes.MapRoute(
-            //    "ClickHeatMapImage", // Route name
-            //    "Analytics/{action}/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", // URL with parameters
-            //    new { controller = "Analytics" } // Parameter defaults
+            //    "ClickHeatMapImage", 
+            //    "Analytics/{action}/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", 
+            //    new { controller = "Analytics" } 
             //);/*
             //routes.MapRoute(
-            //    "ViewHeatMapImage", // Route name
-            //    "Analytics/ViewHeatMapImage/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", // URL with parameters
-            //    new { controller = "Analytics", action = "ViewHeatMapImage" } // Parameter defaults
+            //    "ViewHeatMapImage", 
+            //    "Analytics/ViewHeatMapImage/{appId}/{pageUri}/{screenWidth}/{screenHeight}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", 
+            //    new { controller = "Analytics", action = "ViewHeatMapImage" } 
             //);*/
 
             //routes.MapRoute(
-            //    "Default", // Route name
-            //    "{controller}/{action}/{id}", // URL with parameters
-            //    new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+            //    "Default", 
+            //    "{controller}/{action}/{id}", 
+            //    new { controller = "Home", action = "Index", id = UrlParameter.Optional } 
             //);
         }
 

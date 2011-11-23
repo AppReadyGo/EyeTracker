@@ -10,7 +10,7 @@ using EyeTracker.Domain.Model.BackOffice;
 
 namespace EyeTracker.Controllers
 {
-    [Authorize(Roles = "Administrators")]
+   // [Authorize(Roles = "Administrators")]
     public class AdminController : Controller
     {
         IAdminService adminService;

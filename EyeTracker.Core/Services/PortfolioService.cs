@@ -17,6 +17,10 @@ namespace EyeTracker.Core.Services
         OperationResult<IList<Country>> GetCountries();
 
         OperationResult<int> AddPortfolio(string description, int timeZone);
+
+        OperationResult Update(int id, string description, int timeZone);
+
+        OperationResult Remove(int id);
     }
 
     public class PortfolioService : IPortfolioService
@@ -82,9 +86,6 @@ namespace EyeTracker.Core.Services
             }
         }
 
-        #region IPortfolioService Members
-
-
         public OperationResult<int> AddPortfolio(string description, int timeZone)
         {
             try
@@ -104,6 +105,37 @@ namespace EyeTracker.Core.Services
             }
         }
 
-        #endregion
+
+        public OperationResult Update(int id, string description, int timeZone)
+        {
+            try
+            {
+                //Check Security
+                var userRes = membershipService.GetCurrentUserId();
+                if (userRes.HasError)
+                {
+                    return new OperationResult<int>(userRes);
+                }
+                repository.Update(id, description, timeZone);
+                return new OperationResult();
+            }
+            catch (Exception exp)
+            {
+                return new OperationResult(exp);
+            }
+        }
+
+        public OperationResult Remove(int id)
+        {
+            try
+            {
+                repository.Remove(id);
+                return new OperationResult();
+            }
+            catch (Exception exp)
+            {
+                return new OperationResult(exp);
+            }
+        }
     }
 }

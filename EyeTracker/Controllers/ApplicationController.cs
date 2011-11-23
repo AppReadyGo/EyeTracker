@@ -194,7 +194,7 @@ namespace EyeTracker.Controllers
                 }
                 else
                 {
-                    var appRes = service.Update(model.Id, model.Description, model.Type);
+                    var appRes = service.Update(model.Id, model.Description);
                     if (appRes.HasError)
                     {
                         return View("Error");
@@ -217,48 +217,57 @@ namespace EyeTracker.Controllers
             object res = null;
             if (ModelState.IsValid)
             {
+                var file = Request.Files["screen_img"];
                 var screen = new Screen { 
                     ApplicationId = screenDetails.AppId,
                     Width = screenDetails.Width,
-                    Height = screenDetails.Height
+                    Height = screenDetails.Height,
+                    FileExtension = Path.GetExtension(file.FileName)
                 };
                 var addRes = service.AddScreen(screen);
                 if (!addRes.HasError)
                 {
-                    var file = Request.Files["screen_img"];
                     string tmpFileFullName = null;
                     if (file.ContentLength > 0)
                     {
-                        tmpFileFullName = Path.Combine(HttpContext.Server.MapPath("/Users_Resources/Screens/"), string.Format("{0}_{1}X{2}{3}", addRes.Value, screen.Width, screen.Height, Path.GetExtension(file.FileName)));
+                        tmpFileFullName = Path.Combine(HttpContext.Server.MapPath("/Users_Resources/Screens/"), string.Format("{0}_{1}X{2}{3}", screenDetails.AppId, screen.Width, screen.Height, screen.FileExtension));
                         file.SaveAs(tmpFileFullName);
                     }
+                    res = new { HasError = false, ScreenId = addRes.Value };
                 }
-                res = new { HasError = false, ScreenId = 0 };
+                else
+                {
+                    res = new { HasError = true, ScreenId = -1 };
+                }
             }
             var actionResult = base.Json(res);
             actionResult.ContentType = "text/html";
             return actionResult;
         }
 
-        public ActionResult Screen(int screen)
+        public ActionResult Remove(int portfolioId, int appId)
         {
-            var res = transactionService.Get(transId);
-            if (!res.HasError &&
-                res.Value.Attachments != null &&
-                res.Value.Attachments.FirstOrDefault(curAttach => curAttach.Id == attachId) != null)
+            var res = service.Remove(appId);
+            if (res.HasError)
             {
-                string ext = Path.GetExtension(Request.Url.AbsolutePath);
-                var dir = Server.MapPath("/Attachments");
-                var path = Path.Combine(dir, "Transaction_Attachment_" + attachId + ext);
-                return base.File(path, MIMEAssistant.GetMIMEType(Request.Url.AbsolutePath));
-            }
-            else if (res.Error == ErrorNumber.AccessDenied)
-            {
-                return RedirectToAction("LogOn", "Member");
+                return View("Error");
             }
             else
             {
-                return View("Error");
+                return RedirectToAction("");
+            }
+        }
+        public FileResult Screen(int appId, int width, int height, string file)
+        {
+            var res = service.GetScreen(appId, width, height);
+            if (!res.HasError && res.Value != null)
+            {
+                string tmpFileFullName = Path.Combine(HttpContext.Server.MapPath("/Users_Resources/Screens/"), string.Format("{0}_{1}X{2}{3}", res.Value.ApplicationId, res.Value.Width, res.Value.Height, res.Value.FileExtension));
+                return base.File(tmpFileFullName, MIMEAssistant.GetMIMEType(tmpFileFullName));
+            }
+            else
+            {
+                throw new HttpException(404, "Not found");
             }
         }
 
@@ -299,7 +308,7 @@ namespace EyeTracker.Controllers
             ViewBag.PortfolioId = portfolioId;
             ViewBag.ApplicationId = appId;
             ViewData["ScreenSizes"] = new List<SelectListItem> { new SelectListItem { Text = "800 X 600", Value = "800X600" }, new SelectListItem { Text = "900 X 300", Value = "900X300" } };
-            ViewBag.EyeTrackerImageUrl = "";
+            ViewBag.EyeTrackerImageUrl = string.Format("/Application/ViewHeatMapImage/{0}/", appId);
             return View();
         }
 

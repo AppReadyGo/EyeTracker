@@ -18,6 +18,6 @@ namespace EyeTracker.Model
 
         [Required]
         [DisplayName("Time Zone")]
-        public short TimeZone { get; set; }
+        public int TimeZone { get; set; }
     }
 }
