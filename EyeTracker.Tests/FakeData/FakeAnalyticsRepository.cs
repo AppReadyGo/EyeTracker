@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EyeTracker.DAL;
-using EyeTracker.DAL.Interfaces;
 using EyeTracker.DAL.Domain;
 using EyeTracker.Domain.Model.Events;
+using EyeTracker.Domain.Model;
+using EyeTracker.Domain.Repository;
 
 namespace EyeTracker.Tests.FakeData
 {
@@ -45,5 +46,19 @@ namespace EyeTracker.Tests.FakeData
         {
             throw new NotImplementedException();
         }
+
+        #region IAnalyticsRepository Members
+
+        IEnumerable<ClickHeatMapData> IAnalyticsRepository.GetClickHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<ViewHeatMapData> IAnalyticsRepository.GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

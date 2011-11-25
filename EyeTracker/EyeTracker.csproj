@@ -156,6 +156,7 @@
     <Content Include="Content\Table.css" />
     <Content Include="Content\TableChart.css" />
     <Content Include="Content\Tests\qunit.css" />
+    <Content Include="Scripts\Image.js" />
     <Content Include="Scripts\ThridParty\ajaxfileupload.js" />
     <Content Include="Scripts\ApplicationNewEdit.js" />
     <Content Include="Scripts\ApplicationDashboard.js" />
@@ -243,7 +244,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\AnalyticsTemplate.js" />
     <Content Include="Views\Application\Fingerprint.aspx" />
-    <Content Include="Views\Application\EyeTracker.aspx" />
+    <Content Include="Views\Application\Image.aspx" />
     <Content Include="Views\Application\Dashboard.aspx" />
     <Content Include="Views\Account\Details.aspx" />
     <Content Include="Views\Analytics\EyeTracker.aspx" />
@@ -259,14 +260,14 @@
     <Content Include="Views\Portfolio\Index.aspx" />
     <Content Include="Views\Portfolio\NewEdit.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
-    <Content Include="Web_.config">
+    <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web_.Debug.config">
-      <DependentUpon>Web_.config</DependentUpon>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Web_.Release.config">
-      <DependentUpon>Web_.config</DependentUpon>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Content\Site_.css" />
     <Content Include="Scripts\ThridParty\jquery-1.4.1.js" />

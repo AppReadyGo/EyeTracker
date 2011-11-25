@@ -80,7 +80,6 @@
   <ItemGroup>
     <Compile Include="AccountRepository.cs" />
     <Compile Include="ActivityTrackingRepository.cs" />
-    <Compile Include="AnalyticsRepository.cs" />
     <Compile Include="Domain\ApplicationInfo.cs" />
     <Compile Include="BackOfficeRepository.cs" />
     <Compile Include="Domain\AccountInfo.cs" />
@@ -88,10 +87,8 @@
     <Compile Include="Domain\Constants.cs" />
     <Compile Include="Domain\Enumerators.cs" />
     <Compile Include="Domain\AnalyticsInfo.cs" />
-    <Compile Include="Domain\ClickHeatMapData.cs" />
     <Compile Include="Domain\LogCollectionsInfo.cs" />
     <Compile Include="Domain\LogInfo.cs" />
-    <Compile Include="Domain\ViewHeatMapData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\UserActivity.cs" />
   </ItemGroup>

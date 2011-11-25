@@ -5,11 +5,11 @@ using System.Web;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;
-using EyeTracker.DAL.Interfaces;
 using EyeTracker.Common.Logger;
 using System.Reflection;
 using System.Drawing.Drawing2D;
 using System.Text;
+using EyeTracker.Domain.Model;
 
 namespace EyeTracker.Models
 {
@@ -135,13 +135,13 @@ namespace EyeTracker.Models
         }
 
 
-        public static Image CreateViewHeatMap(List<ViewHeatMapData> viewParts, int clientWidth, int clientHeight, Image bgImg)
+        public static Image CreateViewHeatMap(IEnumerable<ViewHeatMapData> viewParts, int clientWidth, int clientHeight, Image bgImg)
         {
             if (bgImg == null)
             {
                 bgImg = CreateNoImageBackground(clientWidth, clientHeight);
             }
-            log.WriteInformation("-->CreateViewHeatMap: viewParts:{0},clientWidth:{1},clientHeight:{2}",viewParts.Count,clientWidth,clientHeight);
+            log.WriteInformation("-->CreateViewHeatMap: viewParts:{0},clientWidth:{1},clientHeight:{2}",viewParts.Count(),clientWidth,clientHeight);
             int[,] heatMap = new int[clientWidth, clientHeight];
             int maxTimeSpan = 0;//The time span is up color of heat map
 
@@ -182,15 +182,15 @@ namespace EyeTracker.Models
             return bgImg;
         }
 
-        public static Image CreateClickHeatMap(List<ClickHeatMapData> clicks, int clientWidth, int clientHeight, Image bgImg)
+        public static Image CreateClickHeatMap(IEnumerable<ClickHeatMapData> clicks, int clientWidth, int clientHeight, Image bgImg)
         {
             if (bgImg == null)
             {
                 bgImg = CreateNoImageBackground(clientWidth, clientHeight);
             }
 
-            log.WriteInformation("CreateClickHeatMap: clicks:{0},clientWidth:{1},clientHeight:{2}", clicks.Count, clientWidth, clientHeight);
-            int maxCounter = clicks.Count > 0 ? clicks.Max(curClick => curClick.Count) : 0;
+            log.WriteInformation("CreateClickHeatMap: clicks:{0},clientWidth:{1},clientHeight:{2}", clicks.Count(), clientWidth, clientHeight);
+            int maxCounter = clicks.Count() > 0 ? clicks.Max(curClick => curClick.Count) : 0;
 
             Bitmap bmpPic = new Bitmap(clientWidth, clientHeight);
             using (Graphics g = Graphics.FromImage(bmpPic))

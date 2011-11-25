@@ -31,12 +31,13 @@ namespace EyeTracker.Controllers
             string[] split = clientSize.Split('|');
             int width = int.Parse(split[0]);
             int height = int.Parse(split[1]);
-            var analyticsInfoRes = service.ClearAnalytics("CED35BCA-3CC4-425B-A042-6ABCC2C6F250", appId, pageUri, width, height);
+            //var analyticsInfoRes = service.ClearAnalytics("CED35BCA-3CC4-425B-A042-6ABCC2C6F250", appId, pageUri, width, height);
             return RedirectToAction("Index");
         }
 
         public ActionResult Index(long? appId, string pageUri, string clientSize)
         {
+            /*
             if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("LogOn", "Account");
@@ -91,7 +92,7 @@ namespace EyeTracker.Controllers
             ViewData["appId"] = appId;
             ViewData["pageUri"] = pageUri;
             ViewData["clientSize"] = clientSize;
-
+            */
             return View();
         }
 

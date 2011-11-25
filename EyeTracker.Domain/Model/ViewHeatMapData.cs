@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EyeTracker.DAL.Interfaces
+namespace EyeTracker.Domain.Model
 {
     public class ViewHeatMapData
     {

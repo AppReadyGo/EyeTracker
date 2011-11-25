@@ -32,7 +32,6 @@ namespace EyeTracker.Windsor
 
 
             // Respository and Service registrations
-            container.Register(Component.For<IAnalyticsRepository>().ImplementedBy<AnalyticsRepository>().LifeStyle.PerWebRequest);
             container.Register(Component.For<IAnalyticsService>().ImplementedBy<AnalyticsService>().LifeStyle.PerWebRequest);
 
 #if JSUNITTEST

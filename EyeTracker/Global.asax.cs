@@ -27,7 +27,7 @@ namespace EyeTracker
 
             routes.MapRoute(
                 "JavaScript",
-                "Analytics/{filename}",
+                "Analytics/{filename}.js",
                 new { controller = "Data", action = "Analytics" }
             );
 
@@ -65,6 +65,12 @@ namespace EyeTracker
                 "ApplicationScreen", 
                 "Application/Screen/{appId}/{width}/{height}/{file}", 
                 new { controller = "Application", action = "Screen", appId = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                "ApplicationViewHeatMapImage", 
+                "Application/ViewHeatMapImage/{appId}/{pageUri}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", 
+                new { controller = "Application", action = "ViewHeatMapImage" }
             );
 
             routes.MapRoute(

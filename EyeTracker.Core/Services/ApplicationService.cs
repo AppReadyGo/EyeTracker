@@ -18,8 +18,9 @@ namespace EyeTracker.Core.Services
         OperationResult Update(int appId, string description);
         OperationResult<long> AddScreen(Screen screen);
         OperationResult<Screen> GetScreen(int appId, int width, int height);
-
+        OperationResult<EyeTrackerData> GetEyeTrackerData(int appId, DateTime fromDate, DateTime toDate);
     }
+
     public class ApplicationService : IApplicationService
     {
         IApplicationRepository repository = null;
@@ -123,6 +124,18 @@ namespace EyeTracker.Core.Services
             catch (Exception exp)
             {
                 return new OperationResult<Screen>(exp);
+            }
+        }
+
+        public OperationResult<EyeTrackerData> GetEyeTrackerData(int appId, DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                return new OperationResult<EyeTrackerData>(repository.GetEyeTrackerData(appId, fromDate, toDate));
+            }
+            catch (Exception exp)
+            {
+                return new OperationResult<EyeTrackerData>(exp);
             }
         }
     }

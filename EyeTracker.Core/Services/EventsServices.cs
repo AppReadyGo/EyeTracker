@@ -57,6 +57,7 @@ namespace EyeTracker.Core.Services
             try
             {
                 eventRepository.AddViewPartEvents(viewPartEvents);
+                dataRepository.ParseViewPartEvents(viewPartEvents);
                 return new OperationResult();
             }
             catch (Exception exp)
@@ -70,6 +71,7 @@ namespace EyeTracker.Core.Services
             try
             {
                 eventRepository.AddClickEvents(clickEvents);
+                dataRepository.ParseClickEvents(clickEvents);
                 return new OperationResult();
             }
             catch (Exception exp)
