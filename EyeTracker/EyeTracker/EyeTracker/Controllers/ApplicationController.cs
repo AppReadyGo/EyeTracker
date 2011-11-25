@@ -21,6 +21,7 @@ using EyeTracker.Helpers;
 using EyeTracker.Domain.Model;
 using System.Web.Script.Serialization;
 using EyeTracker.Domain.Model.Events;
+using EyeTracker.Domain;
 
 namespace EyeTracker.Controllers
 {
@@ -30,17 +31,19 @@ namespace EyeTracker.Controllers
         private IApplicationService service;
         private IPortfolioService portfolioService;
         private IAnalyticsService analyticsService;
+        private IReportsService reportService;
 
         public ApplicationController()
-            : this(new ApplicationService(), new PortfolioService(), new AnalyticsService())
+            : this(new ApplicationService(), new PortfolioService(), new AnalyticsService(), new ReportsService())
         {
         }
 
-        public ApplicationController(IApplicationService service, IPortfolioService portfolioService, IAnalyticsService analyticsService)
+        public ApplicationController(IApplicationService service, IPortfolioService portfolioService, IAnalyticsService analyticsService, IReportsService reportService)
         {
             this.service = service;
             this.portfolioService = portfolioService;
             this.analyticsService = analyticsService;
+            this.reportService = reportService;
         }
 
         public ActionResult Index(int portfolioId)
@@ -289,12 +292,16 @@ namespace EyeTracker.Controllers
 
         public ActionResult Usage(int portfolioId, int appId)
         {
-            var points = new Dictionary<DateTime, int> { { DateTime.Now.AddDays(-5), 40 }, { DateTime.Now.AddDays(-4), 30 }, { DateTime.Now.AddDays(-3), 10 }, { DateTime.Now.AddDays(-2), 50 }, { DateTime.Now.AddDays(-1), 40 } };
+            var reportRes = reportService.GetVisitsData(DateTime.UtcNow.AddDays(-30), DateTime.UtcNow, null, appId, DataGrouping.Day);
+            if (reportRes.HasError)
+            {
+                return View("Error");
+            }
             //Fill chart data
             var chartInitData = new List<object>();
             chartInitData.Add(new
             {
-                data = points.OrderBy(curItem => curItem.Key).Select(curItem => new object[] { curItem.Key.MilliTimeStamp(), curItem.Value }),
+                data = reportRes.Value.OrderBy(curItem => curItem.Key).Select(curItem => new object[] { curItem.Key.MilliTimeStamp(), curItem.Value }),
                 color = "#461D7C"
             });
             ViewBag.ChartInitData = new JavaScriptSerializer().Serialize(chartInitData);
@@ -307,9 +314,58 @@ namespace EyeTracker.Controllers
         {
             ViewBag.PortfolioId = portfolioId;
             ViewBag.ApplicationId = appId;
-            ViewData["ScreenSizes"] = new List<SelectListItem> { new SelectListItem { Text = "800 X 600", Value = "800X600" }, new SelectListItem { Text = "900 X 300", Value = "900X300" } };
-            ViewBag.EyeTrackerImageUrl = string.Format("/Application/ViewHeatMapImage/{0}/", appId);
-            return View();
+
+            DateTime fromDate = DateTime.UtcNow.AddDays(-30);
+            DateTime toDate = DateTime.UtcNow;
+            var res = service.GetEyeTrackerData(appId, fromDate, toDate);
+            if (res.HasError)
+            {
+                return View("Error");
+            }
+            else
+            {
+                if (res.Value.PageUris.Count() == 0 || res.Value.ScreenSizes.Count() == 0)
+                {
+                    ViewBag.NoData = true;
+                }
+                else
+                {
+                    ViewBag.NoData = false;
+                    ViewData["ScreenSizes"] = new List<SelectListItem>(res.Value.ScreenSizes.Select(s => new SelectListItem { Text = string.Format("{0} X {1}", s.Width, s.Height), Value = string.Format("{0}X{1}", s.Width, s.Height) }));
+                    ViewData["PageUris"] = new List<SelectListItem>(res.Value.PageUris.Select(s => new SelectListItem { Text = s, Value = s }));
+                    ViewBag.EyeTrackerImageUrl = string.Format("/Application/ViewHeatMapImage/{0}/?appId={0}&pageUri={1}&clientWidth={2}&clientHeight={3}&fromDate={4}&toDate={5}", appId, HttpUtility.UrlEncode(res.Value.PageUris.First()), res.Value.ScreenSizes.First().Width, res.Value.ScreenSizes.First().Height, HttpUtility.UrlEncode(fromDate.ToString("HH:mm dd-MMM-yyyy")), HttpUtility.UrlEncode(toDate.ToString("HH:mm dd-MMM-yyyy")));
+                }
+                return View("Image");
+            }
+        }
+
+        public ActionResult Fingerprint(int portfolioId, int appId)
+        {
+            ViewBag.PortfolioId = portfolioId;
+            ViewBag.ApplicationId = appId;
+
+            DateTime fromDate = DateTime.UtcNow.AddDays(-30);
+            DateTime toDate = DateTime.UtcNow;
+            var res = service.GetEyeTrackerData(appId, fromDate, toDate);
+            if (res.HasError)
+            {
+                return View("Error");
+            }
+            else
+            {
+                if (res.Value.PageUris.Count() == 0 || res.Value.ScreenSizes.Count() == 0)
+                {
+                    ViewBag.NoData = true;
+                }
+                else
+                {
+                    ViewBag.NoData = false;
+                    ViewData["ScreenSizes"] = new List<SelectListItem>(res.Value.ScreenSizes.Select(s => new SelectListItem { Text = string.Format("{0} X {1}", s.Width, s.Height), Value = string.Format("{0}X{1}", s.Width, s.Height) }));
+                    ViewData["PageUris"] = new List<SelectListItem>(res.Value.PageUris.Select(s => new SelectListItem { Text = s, Value = s }));
+                    ViewBag.EyeTrackerImageUrl = string.Format("/Application/ClickHeatMapImage/{0}/?appId={0}&pageUri={1}&clientWidth={2}&clientHeight={3}&fromDate={4}&toDate={5}", appId, HttpUtility.UrlEncode(res.Value.PageUris.First()), res.Value.ScreenSizes.First().Width, res.Value.ScreenSizes.First().Height, HttpUtility.UrlEncode(fromDate.ToString("HH:mm dd-MMM-yyyy")), HttpUtility.UrlEncode(toDate.ToString("HH:mm dd-MMM-yyyy")));
+                }
+                return View("Image");
+            }
         }
 
         public FileResult ClickHeatMapImage(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)

@@ -24,6 +24,8 @@ namespace EyeTracker.DAL
         long AddScreen(Screen screen);
 
         Screen GetScreen(int appId, int width, int height);
+
+        EyeTrackerData GetEyeTrackerData(int appId, DateTime fromDate, DateTime toDate);
     }
 
     public class ApplicationRepository : IApplicationRepository
@@ -103,6 +105,25 @@ namespace EyeTracker.DAL
             {
                 return session.Query<Screen>()
                     .Where(s => s.ApplicationId == appId && s.Width == width && s.Height == height).FirstOrDefault();
+            }
+        }
+
+        public EyeTrackerData GetEyeTrackerData(int appId, DateTime fromDate, DateTime toDate)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                var data = new EyeTrackerData();
+                data.PageUris = session.Query<PageView>()
+                    .Where(p => p.Application.Id == appId && p.Date >= fromDate && p.Date <= toDate)
+                    .Select(p => p.Path)
+                    .Distinct()
+                    .ToList();
+                data.ScreenSizes = session.Query<PageView>()
+                    .Where(p => p.Application.Id == appId && p.Date >= fromDate && p.Date <= toDate)
+                    .GroupBy(p => new { ClientWidth = p.ClientWidth, ClientHeight = p.ClientHeight })
+                    .Select(p => new ScreenSize { Width = p.Key.ClientWidth, Height = p.Key.ClientHeight })
+                    .ToList();
+                return data;
             }
         }
     }

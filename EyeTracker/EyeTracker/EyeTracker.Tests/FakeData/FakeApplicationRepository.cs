@@ -78,5 +78,15 @@ namespace EyeTracker.Tests.FakeData
         }
 
         #endregion
+
+        #region IApplicationRepository Members
+
+
+        public EyeTrackerData GetEyeTrackerData(int appId, DateTime fromDate, DateTime toDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

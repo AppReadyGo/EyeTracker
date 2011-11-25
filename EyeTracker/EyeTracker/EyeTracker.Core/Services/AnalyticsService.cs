@@ -2,32 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EyeTracker.DAL.Interfaces;
-using EyeTracker.DAL;
 using EyeTracker.Common;
 using AutoMapper;
 using EyeTracker.Common.Logger;
 using System.Reflection;
-using EyeTracker.DAL.Domain;
 using System.IO;
 using System.Collections;
 using System.Net;
+using EyeTracker.Domain.Repository;
+using EyeTracker.Domain.Model;
 
 namespace EyeTracker.Core.Services
 {
     public interface IAnalyticsService
     {
-        OperationResult<List<ClickHeatMapData>> GetClickHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
-        
-        OperationResult<List<ViewHeatMapData>> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
+        OperationResult<IEnumerable<ClickHeatMapData>> GetClickHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
 
-        OperationResult<AnalyticsInfo> GetAnalyticsInfo(string userId, long? appId, string pageUri);
+        OperationResult<IEnumerable<ViewHeatMapData>> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
 
-        OperationResult<string> GetClientId(long appId);
+        //OperationResult<Dictionary<DateTime, int>> GetPortfolioUsageData(long portfolioId, string pageUri, DateTime fromDate, DateTime toDate);
 
-        OperationResult<long> GetApplicationId(string clientId);
-
-        OperationResult ClearAnalytics(string userId, long appId, string pageUri, int width, int height);
+        //OperationResult<Dictionary<DateTime, int>> GetApplicationUsageData(long appId, string pageUri, DateTime fromDate, DateTime toDate);
     }
 
     public class AnalyticsService : IAnalyticsService
@@ -45,126 +40,63 @@ namespace EyeTracker.Core.Services
             this.repository = repository;
         }
 
-        public OperationResult<List<ClickHeatMapData>> GetClickHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
+        public OperationResult<IEnumerable<ClickHeatMapData>> GetClickHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
         {
-            OperationResult<List<ClickHeatMapData>> result = null;
+            OperationResult<IEnumerable<ClickHeatMapData>> result = null;
             try
             {
                 log.WriteInformation("GetClickHeatMapData(appId:{0}, pageUri:{1}, clientWidth:{2}, clientHeight:{3}, fromDate:{4}, toDate:{5})", appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
                 if (fromDate >= toDate)
                 {
-                    result = new OperationResult<List<ClickHeatMapData>>(ErrorNumber.WrongParameter);
+                    result = new OperationResult<IEnumerable<ClickHeatMapData>>(ErrorNumber.WrongParameter);
                 }
                 else if (clientWidth <= 0 || clientHeight <= 0)
                 {
-                    result = new OperationResult<List<ClickHeatMapData>>(ErrorNumber.WrongParameter);
+                    result = new OperationResult<IEnumerable<ClickHeatMapData>>(ErrorNumber.WrongParameter);
                 }
                 else if (string.IsNullOrEmpty(pageUri))
                 {
-                    result = new OperationResult<List<ClickHeatMapData>>(ErrorNumber.WrongParameter);
+                    result = new OperationResult<IEnumerable<ClickHeatMapData>>(ErrorNumber.WrongParameter);
                 }
                 else
                 {
-                    result = new OperationResult<List<ClickHeatMapData>>(repository.GetClickHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate));
+                    result = new OperationResult<IEnumerable<ClickHeatMapData>>(repository.GetClickHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate));
                 }
             }
             catch (Exception exp)
             {
-                result = new OperationResult<List<ClickHeatMapData>>(exp, "GetClickHeatMapData(appId:{0},pageUri:{1},clientWidth:{2},clientHeight:{3})", appId, pageUri, clientWidth, clientHeight);
+                result = new OperationResult<IEnumerable<ClickHeatMapData>>(exp, "GetClickHeatMapData(appId:{0},pageUri:{1},clientWidth:{2},clientHeight:{3})", appId, pageUri, clientWidth, clientHeight);
             }
             return result;
         }
 
-        public OperationResult<List<ViewHeatMapData>> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
+        public OperationResult<IEnumerable<ViewHeatMapData>> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
         {
-            OperationResult<List<ViewHeatMapData>> result = null;
+            OperationResult<IEnumerable<ViewHeatMapData>> result = null;
             try
             {
                 if (fromDate >= toDate)
                 {
-                    result = new OperationResult<List<ViewHeatMapData>>(ErrorNumber.WrongParameter);
+                    result = new OperationResult<IEnumerable<ViewHeatMapData>>(ErrorNumber.WrongParameter);
                 }
                 else if (clientWidth <= 0 || clientHeight <= 0)
                 {
-                    result = new OperationResult<List<ViewHeatMapData>>(ErrorNumber.WrongParameter);
+                    result = new OperationResult<IEnumerable<ViewHeatMapData>>(ErrorNumber.WrongParameter);
                 }
                 else if (string.IsNullOrEmpty(pageUri))
                 {
-                    result = new OperationResult<List<ViewHeatMapData>>(ErrorNumber.WrongParameter);
+                    result = new OperationResult<IEnumerable<ViewHeatMapData>>(ErrorNumber.WrongParameter);
                 }
                 else
                 {
-                    result = new OperationResult<List<ViewHeatMapData>>(repository.GetViewHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate));
+                    result = new OperationResult<IEnumerable<ViewHeatMapData>>(repository.GetViewHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate));
                 }
             }
             catch (Exception exp)
             {
-                result = new OperationResult<List<ViewHeatMapData>>(exp, "GetViewHeatMapData(appId:{0},pageUri:{1},clientWidth:{2},clientHeight:{3})", appId, pageUri, clientWidth, clientHeight);
+                result = new OperationResult<IEnumerable<ViewHeatMapData>>(exp, "GetViewHeatMapData(appId:{0},pageUri:{1},clientWidth:{2},clientHeight:{3})", appId, pageUri, clientWidth, clientHeight);
             }
             return result;
         }
-        public OperationResult<AnalyticsInfo> GetAnalyticsInfo(string userId, long? appId, string pageUri)
-        {
-            OperationResult<AnalyticsInfo> result = null;
-            try
-            {
-                return new OperationResult<AnalyticsInfo>(repository.GetAnalyticsInfo(userId, appId, pageUri));
-            }
-            catch (Exception exp)
-            {
-                result = new OperationResult<AnalyticsInfo>(exp, "GetAnalyticsInfo");
-            }
-            return result;
-        }
-
-        public OperationResult<string> GetClientId(long appId)
-        {
-            OperationResult<string> result = null;
-            try
-            {
-                result = new OperationResult<string>(Encryption.EncryptLow(appId.ToString(), Encryption.ENCRYPTION_KEY));
-            }
-            catch (Exception exp)
-            {
-                result = new OperationResult<string>(exp, "GetClientId(appId:{0})", appId);
-            }
-            return result;
-        }
-
-        public OperationResult<long> GetApplicationId(string clientId)
-        {
-            OperationResult<long> result = null;
-            try
-            {
-                result = new OperationResult<long>(long.Parse(Encryption.DecryptLow(clientId, Encryption.ENCRYPTION_KEY)));
-            }
-            catch (Exception exp)
-            {
-                result = new OperationResult<long>(exp, "GetApplicationId(clientId:{0})", clientId);
-            }
-            return result;
-        }
-
-
-        #region IAnalyticsService Members
-
-
-        public OperationResult ClearAnalytics(string userId, long appId, string pageUri, int width, int height)
-        {
-            OperationResult result = null;
-            try
-            {
-                repository.ClearAnalytics(userId, appId, pageUri, width, height);
-                result = new OperationResult();
-            }
-            catch (Exception exp)
-            {
-                result = new OperationResult(exp, "ClearAnalytics(userId:{0})", userId);
-            }
-            return result;
-        }
-
-        #endregion
-
-    }
+     }
 }
