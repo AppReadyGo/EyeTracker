@@ -32,5 +32,9 @@ namespace EyeTracker.Domain.Model.Events
         public virtual int ClientWidth { get; set; }
 
         public virtual int ClientHeight { get; set; }
+
+        public virtual IEnumerable<ClickEvent> Clicks { get; set; }
+
+        public virtual IEnumerable<ViewPartEvent> ViewParts { get; set; }
     }
 }

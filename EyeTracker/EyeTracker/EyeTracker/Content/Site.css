@@ -346,6 +346,8 @@ div#title
 .panel-w-header{background-color:#FFFFFF;border:1px solid #C4C4C4;border-top:none;-moz-border-radius-bottomright: 5px;-moz-border-radius-bottomleft: 5px;border-bottom-right-radius:5px;border-bottom-right-radius:5px;padding:4px;margin:0 4px 4px 4px;}
 .panel{background-color:#FFFFFF;border:1px solid #C4C4C4;-moz-border-radius: 5px;border-radius: 5px;padding:4px;margin:4px;}
 
+.panel.main{padding:20px;}
+
 .panel-w-header ul{margin:10px;padding:0;}
 .panel-w-header li{list-style-type: none;}
 

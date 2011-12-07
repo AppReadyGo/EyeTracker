@@ -21,7 +21,7 @@
             <div id="usage_charts_place_holder" style="height:200px;width:875px;"></div>
         </div>
     </td>
-</tr><tr>  
+</tr><%--<tr>  
     <td>
         <p>Visitors</p>
         <div id="visitors_charts_place_holder" style="height:200px;width:437px;"></div>
@@ -46,5 +46,5 @@
             <tr><td></td><td></td><td></td></tr>
         </table>
         <div class="item"></div>
-    </td></tr>
+    </td></tr>--%>
 </table></asp:Content>

@@ -1,0 +1,32 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Main.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
+    <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
+   <link href="<%: Url.Content("~/Content/BeforeLogin.css") %>" rel="stylesheet" type="text/css" />
+   <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+    <div class="header">
+        <a class="logo" href="/"><img src="/Content/images/logo.png"></a>
+        <ul class="login-menu"><li><a href="/account/logon">Login</a></li><li><a href="/account/register">Register</a></li></ul>
+        <ul class="main-menu">
+            <li class="selected"><span><a href="/">Home</a></span></li>
+            <li><a href="/Tutorials/">Tutorials</a></li>
+            <li><a href="/Products">Products</a></li>
+            <li><a href="/PlanAndPricing">Plans and Pricing</a></li>
+            <li><a href="/Contacts">Contacts</a></li>
+        </ul>
+    </div>
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    <div class="footer">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/Tutorials/">Tutorials</a></li>
+            <li><a href="/Products">Products</a></li>
+            <li><a href="/PlanAndPricing">Plans and Pricing</a></li>
+            <li><a href="/Contacts">Contacts</a></li>
+        </ul>
+        <span>&#64; 2011<%= DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "" %> <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></span>
+    </div>
+</asp:Content>

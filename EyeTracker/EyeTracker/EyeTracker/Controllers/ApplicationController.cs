@@ -25,20 +25,28 @@ using EyeTracker.Domain;
 
 namespace EyeTracker.Controllers
 {
+    [Authorize]
     public class ApplicationController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+        
         private IApplicationService service;
         private IPortfolioService portfolioService;
         private IAnalyticsService analyticsService;
         private IReportsService reportService;
 
         public ApplicationController()
-            : this(new ApplicationService(), new PortfolioService(), new AnalyticsService(), new ReportsService())
+            : this(new ApplicationService(), 
+            new PortfolioService(), 
+            new AnalyticsService(), 
+            new ReportsService())
         {
         }
 
-        public ApplicationController(IApplicationService service, IPortfolioService portfolioService, IAnalyticsService analyticsService, IReportsService reportService)
+        public ApplicationController(IApplicationService service, 
+            IPortfolioService portfolioService, 
+            IAnalyticsService analyticsService, 
+            IReportsService reportService)
         {
             this.service = service;
             this.portfolioService = portfolioService;
@@ -333,7 +341,7 @@ namespace EyeTracker.Controllers
                     ViewBag.NoData = false;
                     ViewData["ScreenSizes"] = new List<SelectListItem>(res.Value.ScreenSizes.Select(s => new SelectListItem { Text = string.Format("{0} X {1}", s.Width, s.Height), Value = string.Format("{0}X{1}", s.Width, s.Height) }));
                     ViewData["PageUris"] = new List<SelectListItem>(res.Value.PageUris.Select(s => new SelectListItem { Text = s, Value = s }));
-                    ViewBag.EyeTrackerImageUrl = string.Format("/Application/ViewHeatMapImage/{0}/?appId={0}&pageUri={1}&clientWidth={2}&clientHeight={3}&fromDate={4}&toDate={5}", appId, HttpUtility.UrlEncode(res.Value.PageUris.First()), res.Value.ScreenSizes.First().Width, res.Value.ScreenSizes.First().Height, HttpUtility.UrlEncode(fromDate.ToString("HH:mm dd-MMM-yyyy")), HttpUtility.UrlEncode(toDate.ToString("HH:mm dd-MMM-yyyy")));
+                    ViewBag.EyeTrackerImageUrl = string.Format("/Application/ViewHeatMapImage/{0}/?appId={0}&pageUri={1}&clientWidth={2}&clientHeight={3}&fromDate={4}&toDate={5}&preview=true", appId, HttpUtility.UrlEncode(res.Value.PageUris.First()), res.Value.ScreenSizes.First().Width, res.Value.ScreenSizes.First().Height, HttpUtility.UrlEncode(fromDate.ToString("HH:mm dd-MMM-yyyy")), HttpUtility.UrlEncode(toDate.ToString("HH:mm dd-MMM-yyyy")));
                 }
                 return View("Image");
             }
@@ -362,16 +370,15 @@ namespace EyeTracker.Controllers
                     ViewBag.NoData = false;
                     ViewData["ScreenSizes"] = new List<SelectListItem>(res.Value.ScreenSizes.Select(s => new SelectListItem { Text = string.Format("{0} X {1}", s.Width, s.Height), Value = string.Format("{0}X{1}", s.Width, s.Height) }));
                     ViewData["PageUris"] = new List<SelectListItem>(res.Value.PageUris.Select(s => new SelectListItem { Text = s, Value = s }));
-                    ViewBag.EyeTrackerImageUrl = string.Format("/Application/ClickHeatMapImage/{0}/?appId={0}&pageUri={1}&clientWidth={2}&clientHeight={3}&fromDate={4}&toDate={5}", appId, HttpUtility.UrlEncode(res.Value.PageUris.First()), res.Value.ScreenSizes.First().Width, res.Value.ScreenSizes.First().Height, HttpUtility.UrlEncode(fromDate.ToString("HH:mm dd-MMM-yyyy")), HttpUtility.UrlEncode(toDate.ToString("HH:mm dd-MMM-yyyy")));
+                    ViewBag.EyeTrackerImageUrl = string.Format("/Application/ClickHeatMapImage/{0}/?appId={0}&pageUri={1}&clientWidth={2}&clientHeight={3}&fromDate={4}&toDate={5}&preview=true", appId, HttpUtility.UrlEncode(res.Value.PageUris.First()), res.Value.ScreenSizes.First().Width, res.Value.ScreenSizes.First().Height, HttpUtility.UrlEncode(fromDate.ToString("HH:mm dd-MMM-yyyy")), HttpUtility.UrlEncode(toDate.ToString("HH:mm dd-MMM-yyyy")));
                 }
                 return View("Image");
             }
         }
 
-        public FileResult ClickHeatMapImage(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
+        public FileResult ClickHeatMapImage(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate, bool preview)
         {
             byte[] imageData = null;
-            log.WriteInformation("ClickHeatMapImage: appId:{0}, pageUri:{1}, clientWidth:{2}, clientHeight:{3}, fromDate:{4}, toDate:{5}", appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
             var opResult = analyticsService.GetClickHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
             if (!opResult.HasError)
             {
@@ -385,13 +392,19 @@ namespace EyeTracker.Controllers
                 image.Dispose();
 
             }
-            return base.File(imageData, "Image/png");
+            if (imageData == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
+            else
+            {
+                return base.File(imageData, "Image/png");
+            }
         }
 
-        public FileResult ViewHeatMapImage(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
+        public FileResult ViewHeatMapImage(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate, bool preview)
         {
             byte[] imageData = null;
-            log.WriteInformation("ViewHeatMapImage: appId:{0}, pageUri:{1}, clientWidth:{2}, clientHeight:{3}, fromDate:{4}, toDate:{5}",appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
             var opResult = analyticsService.GetViewHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
             if (!opResult.HasError)
             {
@@ -403,7 +416,14 @@ namespace EyeTracker.Controllers
                     imageData = mStream.ToArray();
                 }
             }
-            return base.File(imageData, "Image/png");
+            if (imageData == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
+            else
+            {
+                return base.File(imageData, "Image/png");
+            }
         }
 
         private Image GetBackgroundImage(long appId, int clientWidth, int clientHeight)
