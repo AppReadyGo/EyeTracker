@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 
 namespace EyeTracker.Controllers
 {
+    [Authorize]
     public class PortfolioController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);

@@ -68,8 +68,14 @@ namespace EyeTracker
             );
 
             routes.MapRoute(
-                "ApplicationViewHeatMapImage", 
-                "Application/ViewHeatMapImage/{appId}/{pageUri}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}", 
+                "ApplicationClickHeatMapImage",
+                "Application/ClickHeatMapImage/{appId}/{pageUri}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}/{preview}",
+                new { controller = "Application", action = "ClickHeatMapImage" }
+            );
+
+            routes.MapRoute(
+                "ApplicationViewHeatMapImage",
+                "Application/ViewHeatMapImage/{appId}/{pageUri}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}/{preview}",
                 new { controller = "Application", action = "ViewHeatMapImage" }
             );
 
@@ -142,8 +148,9 @@ namespace EyeTracker
 
             RegisterRoutes(RouteTable.Routes);
 
-            ModelBinders.Binders[typeof(VisitEvent)] = new JsonVisitInfoModelBinder();
-            ModelBinders.Binders[typeof(PackageEvent)] = new JsonPackageModelBinder();
+            //ModelBinders.Binders[typeof(VisitEvent)] = new JsonVisitInfoModelBinder();
+            //ModelBinders.Binders[typeof(PackageEvent)] = new JsonPackageModelBinder();
+            ModelBinders.Binders[typeof(PackageEvent)] = new JsonMobileDataModelBinder();
 
             using (var session = NHibernateHelper.OpenSession())
             {

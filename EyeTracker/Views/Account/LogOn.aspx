@@ -1,13 +1,9 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<EyeTracker.Models.LogOnModel>" %>
-
-<asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">Log On</asp:Content>
-<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
-    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="../../Content/FixedContent.css" rel="stylesheet" type="text/css" />
-    <link href="../../Content/LogOn.css" rel="stylesheet" type="text/css" />
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Home.Master" Inherits="System.Web.Mvc.ViewPage<EyeTracker.Models.LogOnModel>" %>
+<asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Log On</asp:Content>
+<asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
+    <link href="<%: Url.Content("~/Content/Account.LogOn.css") %>" rel="stylesheet" type="text/css" />
 </asp:Content>
-<asp:Content ID="Title" ContentPlaceHolderID="Title" runat="server">Log On</asp:Content>
-<asp:Content ID="loginContent" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div id="main" class="panel">
     <% using (Html.BeginForm()) { %>
         <%: Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.") %>

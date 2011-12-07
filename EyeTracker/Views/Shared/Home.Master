@@ -1,0 +1,35 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/BeforeLogin.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
+    <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
+    <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
+    <link href="<%: Url.Content("~/Content/Home.Index.Master.css") %>" rel="stylesheet" type="text/css" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+<div class="middle-panel">
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+</div>
+<div class="content-wrapper">
+    <div class="content"><div>
+        <div>
+            <h3>Touch Map</h3>
+            <p>Get to know everywhere your visitors click anywhere on the page, whether it's links, images, text or dead space. See, what advertisements, images and links aren't getting enough clicks, and what call to action buttons are being ignored.</p>
+            <div class="action"><a href="">Read more</a></div>
+        </div>
+        <div>
+            <h3>Eye Track</h3>
+            <p>Understand how much attention your visitors pay to a specific website area. Realize what your visitors care about the most, what they read, and what part of content was completely skipped over.</p>
+            <div class="action"><a href="">Read more</a></div>
+        </div>
+        <div>
+            <h3>Eye Track</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris volutpat turpis non ipsum egestas eget sodales quam feugiat. Vivamus purus lorem, commodo eu tempor id, tincidunt nec enim. Donec aliquet lorem nec massa egestas tincidunt. Ut vehicula ultricies metus, pulvinar posuere enim facilisis nec. Quisque nec mauris leo. Mauris posuere lobortis sem, eget convallis nibh cursus ut.</p>
+            <div class="action"><a href="">Read more</a></div>
+        </div>
+        <p style="clear:both;"></p>
+    </div></div>
+</div>
+</asp:Content>
+
+

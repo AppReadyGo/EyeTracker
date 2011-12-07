@@ -19,7 +19,7 @@
         <td class="left-menu"><div class="panel left-menu">
             <asp:ContentPlaceHolder ID="LeftMenu" runat="server" />
         </div></td>
-        <td><div class="panel">
+        <td><div class="panel main">
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div></td>
         </tr>

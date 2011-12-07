@@ -93,6 +93,37 @@ namespace EyeTracker.Controllers
             return base.Json(res);
         }
 
+        [HttpPost]
+        public JsonResult Mobile(PackageEvent packageEvent)
+        {
+            OperationResult res = null;
+            try
+            {
+                res = new OperationResult();
+#if JSUNITTEST
+                var curRes = new OperationResult();
+#else
+                var curRes = eventsServices.AddClickEvents(packageEvent.clicks);
+#endif
+                if (curRes.HasError) res = curRes;
+
+#if JSUNITTEST
+                curRes = new OperationResult();
+#else
+                curRes = eventsServices.AddViewPartEvents(packageEvent.parts);
+#endif
+                if (curRes.HasError) res = curRes;
+
+                Response.AddHeader("Access-Control-Allow-Origin", "*");
+            }
+            catch (Exception exp)
+            {
+                res = new OperationResult<long>(exp, "Package");
+            }
+            log.WriteInformation("Package:{0}-->", res);
+            return base.Json(res);
+        }
+
         public FileResult Analytics(string filename)
         {
             //TODO: check client id

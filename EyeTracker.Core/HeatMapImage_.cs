@@ -31,41 +31,42 @@ namespace EyeTracker.Models
 
         private const float IMAGE_OPACITY = 0.5f;
 
-        private static Color getColorFromWaveLength(double Wavelength)
+        private const int INTENSITY_MAX = 255;
+
+        private static Color GetColorFromWaveLength(/*byte Alpha,*/ double Wavelength)
         {
             double Gamma = 1.00;
-            int IntensityMax = 255;
             double Blue;
             double Green;
             double Red;
             double Factor;
 
-            if (Wavelength >= WAVE_LENGTH_VIOLET && Wavelength <= 439)
+            if (Wavelength >= WAVE_LENGTH_VIOLET && Wavelength < WAVE_LENGTH_VIOLET)
             {
                 Red = -(Wavelength - WAVE_LENGTH_BLUE) / (WAVE_LENGTH_BLUE - WAVE_LENGTH_VIOLET);
                 Green = 0.0;
                 Blue = 1.0;
             }
-            else if (Wavelength >= WAVE_LENGTH_BLUE && Wavelength <= 489)
+            else if (Wavelength >= WAVE_LENGTH_BLUE && Wavelength < WAVE_LENGTH_BLUE_LIGHT)
             {
                 Red = 0.0;
                 Green = (Wavelength - WAVE_LENGTH_BLUE) / (WAVE_LENGTH_BLUE_LIGHT - WAVE_LENGTH_BLUE);
                 Blue = 1.0;
             }
-            else if (Wavelength >= WAVE_LENGTH_BLUE_LIGHT && Wavelength <= 509)
+            else if (Wavelength >= WAVE_LENGTH_BLUE_LIGHT && Wavelength < WAVE_LENGTH_GREEN)
             {
                 Red = 0.0;
                 Green = 1.0;
                 Blue = -(Wavelength - WAVE_LENGTH_GREEN) / (WAVE_LENGTH_GREEN - WAVE_LENGTH_BLUE_LIGHT);
 
             }
-            else if (Wavelength >= WAVE_LENGTH_GREEN && Wavelength <= 579)
+            else if (Wavelength >= WAVE_LENGTH_GREEN && Wavelength < WAVE_LENGTH_YELLOW)
             {
                 Red = (Wavelength - WAVE_LENGTH_GREEN) / (WAVE_LENGTH_YELLOW - WAVE_LENGTH_GREEN);
                 Green = 1.0;
                 Blue = 0.0;
             }
-            else if (Wavelength >= WAVE_LENGTH_YELLOW && Wavelength <= 644)
+            else if (Wavelength >= WAVE_LENGTH_YELLOW && Wavelength < WAVE_LENGTH_RED_YELLOW)
             {
                 Red = 1.0;
                 Green = -(Wavelength - WAVE_LENGTH_RED_YELLOW) / (WAVE_LENGTH_RED_YELLOW - WAVE_LENGTH_YELLOW);
@@ -100,11 +101,11 @@ namespace EyeTracker.Models
                 Factor = 0.0;
             }
 
-            int R = factorAdjust(Red, Factor, IntensityMax, Gamma);
-            int G = factorAdjust(Green, Factor, IntensityMax, Gamma);
-            int B = factorAdjust(Blue, Factor, IntensityMax, Gamma);
+            int R = factorAdjust(Red, Factor, INTENSITY_MAX, Gamma);
+            int G = factorAdjust(Green, Factor, INTENSITY_MAX, Gamma);
+            int B = factorAdjust(Blue, Factor, INTENSITY_MAX, Gamma);
 
-            return Color.FromArgb(R, G, B);
+            return Color.FromArgb(/*Alpha, */R, G, B);
         }
 
         private static int factorAdjust(double Color, double Factor, int IntensityMax, double Gamma)
@@ -168,7 +169,7 @@ namespace EyeTracker.Models
                 {
                     if (heatMap[i, j] > 0)
                     {
-                        bmpPic.SetPixel(i, j, getColorFromWaveLength(((int)(heatMap[i, j] * WAVE_LENGTH_DIFF / maxTimeSpan)) + WAVE_LENGTH_BLUE));
+                        bmpPic.SetPixel(i, j, GetColorFromWaveLength(((int)(heatMap[i, j] * WAVE_LENGTH_DIFF / maxTimeSpan)) + WAVE_LENGTH_BLUE));
                     }
                 }
             }
@@ -182,7 +183,7 @@ namespace EyeTracker.Models
             return bgImg;
         }
 
-        public static Image CreateClickHeatMap(IEnumerable<ClickHeatMapData> clicks, int clientWidth, int clientHeight, Image bgImg)
+        public static Image CreateClickHeatMap(IEnumerable<ClickHeatMapData> clicks, int clientWidth, int clientHeight, Image bgImg, int? maxHeight = null, int? maxWidth = null)
         {
             if (bgImg == null)
             {
@@ -200,7 +201,7 @@ namespace EyeTracker.Models
             bmpPic = SetImgOpacity((Image)bmpPic, IMAGE_OPACITY);
             foreach (var curClick in clicks)
             {
-                var pntBmp = CreateBlurPoint(33, getColorFromWaveLength(((int)(curClick.Count * WAVE_LENGTH_DIFF / maxCounter)) + WAVE_LENGTH_BLUE));
+                var pntBmp = CreateBlurPoint(33, GetColorFromWaveLength(((int)(curClick.Count * WAVE_LENGTH_DIFF / maxCounter)) + WAVE_LENGTH_BLUE));
                 //bmpPic.SetPixel(curClick.ClientX, curClick.ClientY, getColorFromWaveLength(((int)(curClick.Count * WAVE_LENGTH_DIFF / maxCounter)) + WAVE_LENGTH_BLUE));
                 using (Graphics g = Graphics.FromImage(bmpPic))
                 {
@@ -213,8 +214,23 @@ namespace EyeTracker.Models
             {
                 g.DrawImage(bmpPic, 0, 0);
             }
+            if(maxHeight.HasValue || maxWidth.HasValue)
+            {
+                if(clientHeight > clientWidth)
+                {
 
+                }
+                else
+                {
+                }
+                //int newHeight = maxHeight.HasValue ? (clientHeight > clientWidth ? maxHeight.Value : )
+                //return bgImg.GetThumbnailImage(, null, IntPtr.Zero);
+                return null;
+            }
+            else
+            {
             return bgImg;
+            }
         }
 
         private static Image CreateBlurPoint(int width, Color color)
