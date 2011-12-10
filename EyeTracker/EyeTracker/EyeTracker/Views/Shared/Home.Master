@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
-    <link href="<%: Url.Content("~/Content/Home.Index.Master.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%: Url.Content("~/Content/Home.Master.css") %>" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="middle-panel">

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Home.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Home.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 <asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Home</asp:Content>
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
     <script src="<%: Url.Content("~/Scripts/ThridParty/jquery.roundabout.min.js") %>" type="text/javascript"></script>
@@ -16,8 +16,7 @@
 		<li><img src="/Content/images/traffic.jpg" /></li>
 	</ul>
 </div>
-    <a href="/register" class="btn-access">ACCESS ANALITYCS</a>
-</div>
+<a href="/register" class="btn-access">ACCESS ANALITYCS</a>
 </asp:Content>
 
 
