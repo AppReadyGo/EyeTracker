@@ -132,7 +132,8 @@
     <Compile Include="Model\ScreenDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomModelBinders\JsonVisitInfoModelBinder.cs" />
-    <Content Include="Content\Home.Index.Master.css" />
+    <Content Include="Content\Content.Master.css" />
+    <Content Include="Content\Home.Master.css" />
     <Content Include="Content\images\beforelogn.header.selected.center.jpg" />
     <Content Include="Content\images\beforelogn.header.selected.left.jpg" />
     <Content Include="Content\images\beforelogn.header.selected.right.jpg" />
@@ -156,7 +157,7 @@
     <Content Include="Content\img\world_map.jpg" />
     <Content Include="Content\LeftMenu.css" />
     <Content Include="Content\Form.css" />
-    <Content Include="Content\LogOn.css" />
+    <Content Include="Content\Account.LogOn.css" />
     <Content Include="Content\Home.css" />
     <Content Include="Content\FixedContent.css" />
     <Content Include="Content\img\btn.png" />
@@ -318,6 +319,7 @@
     <Content Include="Views\Shared\Main.Master" />
     <Content Include="Views\Shared\BeforeLogin.Master" />
     <Content Include="Views\Shared\Home.Master" />
+    <Content Include="Views\Shared\Content.Master" />
     <None Include="Views\Shared\Site_.Master" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\TopMenu.Master" />

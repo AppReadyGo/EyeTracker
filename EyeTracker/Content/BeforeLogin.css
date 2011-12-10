@@ -9,7 +9,7 @@
 .header ul.main-menu{font-size:20px;color:#fff;}
 .header ul.main-menu li{padding:84px 0px 7px 0px;}
 .header ul.main-menu span{padding:84px 0px 7px 0px;}
-.header ul.main-menu a{color:#fff;padding:84px 25px 7px 25px;}
+.header ul.main-menu a{color:#fff;padding:84px 13px 7px 13px;}
 
 .header ul.main-menu li.selected{background:url(images/beforelogn.header.selected.center.jpg) repeat-x center center;}
 .header ul.main-menu li.selected span{background:url(images/beforelogn.header.selected.left.jpg) no-repeat center left;}
