@@ -34,12 +34,15 @@ namespace EyeTracker.Controllers
             }
             else
             {
+                ViewData["home"] = "class=\"selected\"";
                 return View();
             }
         }
 
         public ActionResult PageContent(string urlPart1, string urlPart2, string urlPart3)
         {
+            ViewBag.Title = "Some content title";
+            ViewBag.Content = "Some content";
             ViewBag.Url = urlPart1;
             if (!string.IsNullOrEmpty(urlPart2))
             {
@@ -49,6 +52,7 @@ namespace EyeTracker.Controllers
             {
                 ViewBag.Url += "/" + urlPart3;
             }
+            ViewData[urlPart1] = "class=\"selected\"";
             return View();
         }
     }

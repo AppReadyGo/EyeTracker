@@ -1,25 +1,19 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewMasterPage"%>
-<asp:Content ContentPlaceHolderID="TitleContent" runat="server">
-        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/AfterLogin.Master" Inherits="System.Web.Mvc.ViewMasterPage"%>
+<asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
+        <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
         <link href="<%: Url.Content("~/Content/LeftMenu.css")%>" rel="stylesheet" type="text/css" />
         <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
 </asp:Content>
-<asp:Content ContentPlaceHolderID="Title" runat="server">
-        <asp:ContentPlaceHolder ID="Title" runat="server" />
-</asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <div id="top_menu" class="panel">
-        <asp:ContentPlaceHolder ID="TopMenu" runat="server" />
-    </div>
     <table class="page-wrapper">
     <tbody>
         <tr>
-        <td class="left-menu"><div class="panel left-menu">
+        <td class="left-menu"><div class="left-menu">
             <asp:ContentPlaceHolder ID="LeftMenu" runat="server" />
         </div></td>
-        <td><div class="panel main">
+        <td><div class="main">
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div></td>
         </tr>

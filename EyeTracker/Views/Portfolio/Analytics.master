@@ -1,15 +1,10 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Analytics.Master" Inherits="System.Web.Mvc.ViewMasterPage"%>
-<asp:Content ContentPlaceHolderID="TitleContent" runat="server">
-        Portfolio - <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+<asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
+        Portfolio - <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
+    <link href="<%: Url.Content("~/Content/Portfolio.Analytics.master.css") %>" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
-</asp:Content>
-<asp:Content ContentPlaceHolderID="Title" runat="server">
-    Portfolio - <asp:ContentPlaceHolder ID="Title" runat="server" />
-</asp:Content>
-<asp:Content ContentPlaceHolderID="TopMenu" runat="server">
-    <a  href="/Portfolio">Portfolios</a>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="LeftMenu" runat="server">
     <a href="/Portfolio/Dashboard/<%: ViewBag.PortfolioId %>">Dashboard</a>
@@ -20,5 +15,6 @@
     <a <%--href="/Portfolio/ContentOverview/<%: ViewBag.PortfolioId %>"--%> class="disabled">Content Overview</a>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
+        <div class="period">From: <a><%=DateTime.UtcNow.ToString("dd MMM yyyy") %></a> To:<a><%=DateTime.UtcNow.ToString("dd MMM yyyy") %></a></div>
         <asp:ContentPlaceHolder ID="MainContent" runat="server" />
 </asp:Content>
