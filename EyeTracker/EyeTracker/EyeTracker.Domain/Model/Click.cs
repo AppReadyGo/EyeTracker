@@ -5,6 +5,10 @@ using System.Text;
 
 namespace EyeTracker.Domain.Model
 {
+    /// <summary>
+    /// this class represents Click data model 
+    /// each instance of this class contains base information about one single click (touch)
+    /// </summary>
     public class Click
     {
         public virtual long Id { get; set; }
