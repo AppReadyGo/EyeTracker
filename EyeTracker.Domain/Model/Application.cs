@@ -8,7 +8,7 @@ namespace EyeTracker.Domain.Model
 {
     public class Application
     {
-        public virtual long Id { get; protected set; }
+        public virtual int Id { get; protected set; }
         public virtual string Description { get; protected set; }
         public virtual DateTime CreateDate { get; protected set; }
         public virtual ApplicationType Type { get; protected set; }
