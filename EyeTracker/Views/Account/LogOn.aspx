@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Content.Master" Inherits="System.Web.Mvc.ViewPage<EyeTracker.Models.LogOnModel>" %>
 <asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Log On</asp:Content>
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
-    <link href="<%: Url.Content("~/Content/Account.LogOn.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%: Url.Content("~/Content/shared/Form.css") %>" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <% using (Html.BeginForm()) { %>
     <%: Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.") %>
-        <fieldset class="form">
+        <fieldset>
             <h3>Log On</h3>
             <p>
                 Please enter your username and password. 
