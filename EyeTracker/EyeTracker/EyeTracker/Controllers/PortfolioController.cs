@@ -48,8 +48,7 @@ namespace EyeTracker.Controllers
             var columnHeaders = new List<HTMLTable.Cell>() {
                     new HTMLTable.Cell() { Value = "Description" }, 
                     new HTMLTable.Cell() { Value = "Applications" }, 
-                    new HTMLTable.Cell() { Value = "% Change" },
-                    new HTMLTable.Cell() { Value = "" } 
+                    new HTMLTable.Cell() { Value = "% Change" }
                 };
             var data = new List<List<HTMLTable.Cell>>();
 
@@ -59,10 +58,9 @@ namespace EyeTracker.Controllers
                 foreach (var curPortfolio in portfRes.Value)
                 {
                     var cells = new List<HTMLTable.Cell>();
-                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Portfolio/Dashboard/{0}\">{1}</a>", curPortfolio.Id, curPortfolio.Description) });
+                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Portfolio/Remove/{0}\">remove</a>&nbsp;<a href=\"/Portfolio/Edit/{0}\">edit</a>&nbsp;<a href=\"/Portfolio/Dashboard/{0}\">{1}</a>", curPortfolio.Id, curPortfolio.Description) });
                     cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Application/{0}\" >{1}</a>", curPortfolio.Id, curPortfolio.Applications.Count()) });
                     cells.Add(new HTMLTable.Cell() { Value = "0.00%" });
-                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Portfolio/Edit/{0}\">edit</a>&nbsp;<a href=\"/Portfolio/Remove/{0}\">remove</a>", curPortfolio.Id) });
                     data.Add(cells);
                 }
             }
@@ -74,6 +72,7 @@ namespace EyeTracker.Controllers
             ViewData["caption"] = new HTMLTable.Cell() { Value = "Accounts" };
             ViewData["columnHeaders"] = columnHeaders;
             ViewData["data"] = data;
+            ViewData["Portfolios"] = "class=\"selected\"";
             return View();
         }
 

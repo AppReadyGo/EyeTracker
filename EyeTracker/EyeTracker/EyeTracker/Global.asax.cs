@@ -105,7 +105,7 @@ namespace EyeTracker
 
             routes.MapRoute(
                 "Content", 
-                "{urlPart1}/{urlPart2}/{urlPart3}", 
+                "{urlPart1}/{urlPart2}/{urlPart3}/", 
                 new { controller = "Home", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional }
             );
 
