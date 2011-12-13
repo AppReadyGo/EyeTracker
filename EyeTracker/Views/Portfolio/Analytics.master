@@ -7,6 +7,14 @@
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="LeftMenu" runat="server">
+    <a href="/Portfolio/" class="back">Portfolios List</a>
+    <a href="/Portfolio/Dashboard/" class="open"><%: ViewBag.PortfolioName%></a>
+        <div>
+            <%foreach (var application in ViewBag.Applications)
+              { %>
+            <a href="/Application/<%: application.Key%>"><%: application.Value%></a>
+            <%} %>
+        </div>
     <a href="/Portfolio/Dashboard/<%: ViewBag.PortfolioId %>">Dashboard</a>
     <a href="/Portfolio/Usage/<%: ViewBag.PortfolioId %>">Usage</a>
     <a <%--href="/Portfolio/Visitors/<%: ViewBag.PortfolioId %>"--%> class="disabled">Visitors</a>

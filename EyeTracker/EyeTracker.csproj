@@ -157,7 +157,7 @@
     <Content Include="Content\Dashboard.css" />
     <Content Include="Content\img\remove_icon.gif" />
     <Content Include="Content\img\world_map.jpg" />
-    <Content Include="Content\LeftMenu.css" />
+    <Content Include="Content\Analytics.Master.css" />
     <Content Include="Content\shared\Form.css" />
     <Content Include="Content\Account.LogOn.css" />
     <Content Include="Content\Home.css" />
