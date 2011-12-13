@@ -3,8 +3,21 @@
         Portfolio - <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
+    <script src="<%: Url.Content("~/Scripts/ThridParty/jquery-ui.min.js")%>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/portfolio.analytics.master.js")%>" type="text/javascript"></script>
+    <link href="<%: Url.Content("~/Content/themes/base/jquery-ui.css") %>" rel="stylesheet" type="text/css" />
     <link href="<%: Url.Content("~/Content/Portfolio.Analytics.master.css") %>" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
+    <script type="text/javascript">
+        var portfolio = {
+            dateFrom: '<%=ViewBag.FromDate.ToString("dd MMM yyyy") %>',
+            dateFromMin: '',
+            dateFromMax: '<%=ViewBag.ToDate.ToString("dd MMM yyyy") %>',
+            dateTo: '<%=ViewBag.ToDate.ToString("dd MMM yyyy") %>',
+            dateToMin: '<%=ViewBag.FromDate.ToString("dd MMM yyyy") %>',
+            dateToMax: ''
+        };
+    </script>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="LeftMenu" runat="server">
     <a href="/Portfolio/" class="back">Portfolios List</a>
@@ -23,6 +36,6 @@
     <a <%--href="/Portfolio/ContentOverview/<%: ViewBag.PortfolioId %>"--%> class="disabled">Content Overview</a>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-        <div class="period">From: <a><%=DateTime.UtcNow.ToString("dd MMM yyyy") %></a> To:<a><%=DateTime.UtcNow.ToString("dd MMM yyyy") %></a></div>
-        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+<div class="period"><span><a id="date_from_lnk"><%= ViewBag.FromDate.ToString("dd MMM yyyy") %></a><input type="text" id="date_from" name="date_from" value="<%=ViewBag.FromDate.ToString("dd MMM yyyy") %>" /> - <a class="right" id="date_to_lnk"><%= ViewBag.ToDate.ToString("dd MMM yyyy") %></a><input type="text" id="date_to" name="date_to" value="<%=ViewBag.ToDate.ToString("dd MMM yyyy") %>"/></span></div>
+<asp:ContentPlaceHolder ID="MainContent" runat="server" />
 </asp:Content>

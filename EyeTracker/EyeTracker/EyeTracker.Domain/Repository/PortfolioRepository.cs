@@ -22,6 +22,8 @@ namespace EyeTracker.Domain.Repository
         void Update(int id, string description, int timeZone);
 
         void Remove(int id);
+
+        DashboardData GetDashboardData(int id, DateTime fromDate, DateTime toDate);
     }
 
     public class PortfolioRepository : IPortfolioRepository
@@ -90,6 +92,21 @@ namespace EyeTracker.Domain.Repository
                     session.Delete(portfolio);
                     transaction.Commit();
                 }
+            }
+        }
+
+        public DashboardData GetDashboardData(int id, DateTime fromDate, DateTime toDate)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                var portfolio = session.Get<Portfolio>(id);
+                var dashboard = new DashboardData { 
+                    PortfolioDescription = portfolio.Description, 
+                    Applications = portfolio.Applications.ToDictionary(a => a.Id, a => a.Description),
+                    ViewsData = new Dictionary<DateTime,int>()
+                };
+
+                return dashboard;
             }
         }
     }

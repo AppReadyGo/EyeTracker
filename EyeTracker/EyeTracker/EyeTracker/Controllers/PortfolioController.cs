@@ -180,18 +180,22 @@ namespace EyeTracker.Controllers
 
         public ActionResult Dashboard(int Id)
         {
-            var points = new Dictionary<DateTime, int> { { DateTime.Now.AddDays(-5), 40 }, { DateTime.Now.AddDays(-4), 30 }, { DateTime.Now.AddDays(-3), 10 }, { DateTime.Now.AddDays(-2), 50 }, { DateTime.Now.AddDays(-1), 40 } };
+            DateTime fromDate = DateTime.UtcNow.AddDays(-30);
+            DateTime toDate = DateTime.UtcNow;
+            var data = service.GetDashboardData(Id, fromDate, toDate);
             //Fill chart data
             var usageInitData = new List<object>();
             usageInitData.Add(new
             {
-                data = points.OrderBy(curItem => curItem.Key).Select(curItem => new object[] { curItem.Key.MilliTimeStamp(), curItem.Value }),
+                data = data.Value.ViewsData.OrderBy(curItem => curItem.Key).Select(curItem => new object[] { curItem.Key.MilliTimeStamp(), curItem.Value }),
                 color = "#461D7C"
             });
             ViewBag.UsageInitData = new JavaScriptSerializer().Serialize(usageInitData);
-            ViewBag.PortfolioId = Id; 
-            ViewBag.PortfolioName = "Some portfolio";
-            ViewBag.Applications = new Dictionary<int, string>() { { 1, "App 1" }, { 2, "App 2" } };
+            ViewBag.PortfolioId = Id;
+            ViewBag.PortfolioName = data.Value.PortfolioDescription;
+            ViewBag.Applications = data.Value.Applications;
+            ViewBag.FromDate = fromDate;
+            ViewBag.ToDate = toDate;
             return View();
         }
 
