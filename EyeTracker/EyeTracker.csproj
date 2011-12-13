@@ -143,6 +143,9 @@
     <Content Include="Content\images\home.index.shadow.right.png" />
     <Content Include="Content\images\traffic.jpg" />
     <Content Include="Content\Portfolio.Analytics.master.css" />
+    <Content Include="Content\shared\dashboard.css" />
+    <Content Include="Scripts\portfolio.analytics.master.js" />
+    <Content Include="Scripts\date.picker.js" />
     <Content Include="Scripts\home.index.js" />
     <Content Include="Scripts\ThridParty\jquery.roundabout.js" />
     <Content Include="Scripts\ThridParty\jquery.roundabout.min.js" />
@@ -154,7 +157,7 @@
     <Content Include="Content\images\beforelogn.header.bg.jpg" />
     <Content Include="Content\images\home.index.carousel.access.png" />
     <Content Include="Content\Main.css" />
-    <Content Include="Content\Dashboard.css" />
+    <Content Include="Content\Portfolio.Dashboard.css" />
     <Content Include="Content\img\remove_icon.gif" />
     <Content Include="Content\img\world_map.jpg" />
     <Content Include="Content\Analytics.Master.css" />

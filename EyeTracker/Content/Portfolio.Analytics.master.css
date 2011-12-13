@@ -1,2 +1,9 @@
 ﻿
-.period{text-align:right;}
+.period{text-align:right;border:1px solid #BBB;border-radius:4px;
+        padding:4px;background-color:#F5F5F5;margin-bottom:10px;}
+.period span input{display:none;}
+.period span a{cursor:pointer;font-size:17px;padding:4px;
+               border-left:1px solid #F5F5F5;border-right:1px solid #F5F5F5;}
+.period span a:hover{border:#999;border-left:1px solid #BBB;
+                     border-right:1px solid #BBB;}
+.period span a.right:hover{border-right:1px solid #F5F5F5;}

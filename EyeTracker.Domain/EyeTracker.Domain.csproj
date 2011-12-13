@@ -74,6 +74,7 @@
     <Compile Include="Mapping\NameableMapping.cs" />
     <Compile Include="Model\Browser.cs" />
     <Compile Include="Model\ClickHeatMapData.cs" />
+    <Compile Include="Model\DashboardData.cs" />
     <Compile Include="Model\EyeTrackerData.cs" />
     <Compile Include="Model\OperationSystem.cs" />
     <Compile Include="Mapping\PageViewMaping.cs" />
