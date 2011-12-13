@@ -3,16 +3,16 @@
         <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
-        <link href="<%: Url.Content("~/Content/LeftMenu.css")%>" rel="stylesheet" type="text/css" />
+        <link href="<%: Url.Content("~/Content/Analytics.Master.css")%>" rel="stylesheet" type="text/css" />
         <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <table class="page-wrapper">
     <tbody>
         <tr>
-        <td class="left-menu"><div class="left-menu">
+        <td class="left-menu">
             <asp:ContentPlaceHolder ID="LeftMenu" runat="server" />
-        </div></td>
+        </td>
         <td><div class="main">
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div></td>

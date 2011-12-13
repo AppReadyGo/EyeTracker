@@ -189,7 +189,9 @@ namespace EyeTracker.Controllers
                 color = "#461D7C"
             });
             ViewBag.UsageInitData = new JavaScriptSerializer().Serialize(usageInitData);
-            ViewBag.PortfolioId = Id;
+            ViewBag.PortfolioId = Id; 
+            ViewBag.PortfolioName = "Some portfolio";
+            ViewBag.Applications = new Dictionary<int, string>() { { 1, "App 1" }, { 2, "App 2" } };
             return View();
         }
 

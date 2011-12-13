@@ -1,0 +1,17 @@
+﻿
+
+.left-menu{vertical-align:top;width:160px;}
+.left-menu > a{color:#666666;text-decoration:none;line-height:23px;border-radius:2px 2px 2px 2px;border:1px solid rgba(0, 0, 0, 0.1);border-top:1px solid #F5F5F5;
+                   background:-moz-linear-gradient(center top , #F5F5F5, #F1F1F1) repeat scroll 0 0 #F5F5F5;
+                   text-align:left;padding-left:10px; width:140px;display:inline-block;font-size:12px;margin:0px;font-weight:bold;cursor:pointer;}
+.left-menu > div > a{color:#666666;text-decoration:none;line-height:23px;border:1px solid rgba(0, 0, 0, 0.1);border-top:1px solid #F5F5F5;
+                   background:-moz-linear-gradient(center top , #F5F5F5, #F1F1F1) repeat scroll 0 0 #F5F5F5;
+                   text-align:left;padding-left:15px; width:131px;display:inline-block;font-size:12px;margin:0px;cursor:pointer;margin-left:4px;}
+
+.left-menu > a.back{border:1px solid rgba(0, 0, 0, 0.1);}
+.left-menu > a.open{}
+
+
+.left-menu a:hover{border:1px solid rgba(0, 0, 0, 0.4);color:#333333;}
+.left-menu a.disabled{cursor:default;color:#AAA;}
+.left-menu a.disabled:hover{border:1px solid rgba(0, 0, 0, 0.1);color:#AAA;}
