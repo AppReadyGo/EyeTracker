@@ -182,18 +182,31 @@ namespace EyeTracker.Controllers
         {
             DateTime fromDate = DateTime.UtcNow.AddDays(-30);
             DateTime toDate = DateTime.UtcNow;
-            var data = service.GetDashboardData(Id, fromDate, toDate);
+            var dataResult = service.GetDashboardData(Id, fromDate, toDate);
+            var data = new List<object[]>();
+            int diffDays = (toDate - fromDate).Days;
+            for (int i = 0; i < diffDays; i++)
+            {
+                int count = 0;
+                var curDate = fromDate.AddDays(i);
+                if (dataResult.Value.ViewsData.ContainsKey(curDate))
+                {
+                    count = dataResult.Value.ViewsData[curDate];
+                }
+                data.Add(new object[] { curDate.MilliTimeStamp(), count });
+            }
+
             //Fill chart data
             var usageInitData = new List<object>();
             usageInitData.Add(new
             {
-                data = data.Value.ViewsData.OrderBy(curItem => curItem.Key).Select(curItem => new object[] { curItem.Key.MilliTimeStamp(), curItem.Value }),
+                data = data,
                 color = "#461D7C"
             });
             ViewBag.UsageInitData = new JavaScriptSerializer().Serialize(usageInitData);
             ViewBag.PortfolioId = Id;
-            ViewBag.PortfolioName = data.Value.PortfolioDescription;
-            ViewBag.Applications = data.Value.Applications;
+            ViewBag.PortfolioName = dataResult.Value.PortfolioDescription;
+            ViewBag.Applications = dataResult.Value.Applications;
             ViewBag.FromDate = fromDate;
             ViewBag.ToDate = toDate;
             return View();

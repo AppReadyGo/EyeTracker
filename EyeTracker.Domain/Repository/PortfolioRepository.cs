@@ -100,10 +100,19 @@ namespace EyeTracker.Domain.Repository
             using (ISession session = NHibernateHelper.OpenSession())
             {
                 var portfolio = session.Get<Portfolio>(id);
+
+                var appIds = portfolio.Applications.Select(a => a.Id).ToArray();
+
+                var views = session.Query<PageView>()
+                    .Where(pv => appIds.Contains(pv.Application.Id) && pv.Date >= fromDate && pv.Date <= toDate)
+                    .GroupBy(g => g.Date)
+                    .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
+                    .ToList();
+
                 var dashboard = new DashboardData { 
                     PortfolioDescription = portfolio.Description, 
                     Applications = portfolio.Applications.ToDictionary(a => a.Id, a => a.Description),
-                    ViewsData = new Dictionary<DateTime,int>()
+                    ViewsData = views.ToDictionary(v => v.Key, v => v.Value)
                 };
 
                 return dashboard;
