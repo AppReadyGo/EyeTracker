@@ -1,9 +1,12 @@
 ﻿
-.period{text-align:right;border:1px solid #BBB;border-radius:4px;
+.period{text-align:left;border:1px solid #BBB;border-radius:4px;
         padding:4px;background-color:#F5F5F5;margin-bottom:10px;}
-.period span input{display:none;}
-.period span a{cursor:pointer;font-size:17px;padding:4px;
-               border-left:1px solid #F5F5F5;border-right:1px solid #F5F5F5;}
-.period span a:hover{border:#999;border-left:1px solid #BBB;
-                     border-right:1px solid #BBB;}
-.period span a.right:hover{border-right:1px solid #F5F5F5;}
+.period > a{cursor:pointer;font-size:17px;padding:4px;
+               border-right:1px solid #F5F5F5;}
+.period > a:hover{border-right:1px solid #BBB;}
+.date-panel{font-family:"Trebuchet MS","Helvetica","Arial","Verdana","sans-serif";font-size:10px;background-color:#F5F5F5;
+            border:1px solid #BBB;padding:10px;z-index:1;position:absolute;margin-top:4px;display:none;}
+.date-panel > div{float:right;}
+.date-panel > div.actions{clear:both;margin-top:5px;}
+.date-panel > div.actions a{color:#2779AA;cursor:pointer;font-weight:bold;}
+.date-panel > div.actions a:hover{color:#2779AA;text-decoration:underline;}
