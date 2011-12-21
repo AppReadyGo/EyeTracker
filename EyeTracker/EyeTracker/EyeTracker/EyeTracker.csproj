@@ -110,7 +110,6 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\MIMEAssistant.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -118,8 +117,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeController_.cs" />
     <Compile Include="Controllers\CustomExceptions.cs" />
-    <Compile Include="Controllers\PortfolioController.cs" />
+    <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="CustomModelBinders\JsonMobileDataModelBinder.cs" />
+    <Compile Include="Model\AnalyticsType.cs" />
     <Compile Include="Model\PortfolioModel.cs" />
     <Compile Include="CustomModelBinders\JsonPackageModelBinder.cs" />
     <Compile Include="Global.asax.cs">
@@ -286,7 +286,6 @@
     <Content Include="Views\Application\Image.aspx" />
     <Content Include="Views\Application\Dashboard.aspx" />
     <Content Include="Views\Account\Details.aspx" />
-    <Content Include="Views\Analytics\EyeTracker.aspx" />
     <Content Include="Views\Application\Index.aspx" />
     <Content Include="Views\Application\NewEdit.aspx" />
     <Content Include="Views\Application\ScreenDetails.aspx" />
@@ -295,10 +294,10 @@
     <Content Include="Views\Home\PageContent.aspx" />
     <Content Include="Views\Home\Index___.aspx" />
     <Content Include="Views\Home\Index_.aspx" />
-    <Content Include="Views\Portfolio\Usage.aspx" />
-    <Content Include="Views\Portfolio\Dashboard.aspx" />
-    <Content Include="Views\Portfolio\Index.aspx" />
-    <Content Include="Views\Portfolio\NewEdit.aspx" />
+    <Content Include="Views\Analytics\Usage.aspx" />
+    <Content Include="Views\Analytics\Dashboard.aspx" />
+    <Content Include="Views\Analytics\Index.aspx" />
+    <Content Include="Views\Analytics\NewEdit.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -334,9 +333,8 @@
     <Content Include="Views\Admin\Index.aspx" />
     <Content Include="Views\Admin\Membership.aspx" />
     <Content Include="Views\Admin\UserEdit.aspx" />
-    <Content Include="Views\Analytics\Analytics.master" />
     <Content Include="Views\Application\Analytics.master" />
-    <Content Include="Views\Portfolio\Analytics.master" />
+    <Content Include="Views\Analytics\Analytics.master" />
     <Content Include="Views\Shared\Main.Master" />
     <Content Include="Views\Shared\BeforeLogin.Master" />
     <Content Include="Views\Shared\Home.Master" />
