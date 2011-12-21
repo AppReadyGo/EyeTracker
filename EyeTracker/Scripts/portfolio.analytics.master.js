@@ -28,25 +28,26 @@ $(function () {
         $('#date_panel').show();
     });
     $("#datepicker_from").datepicker({
-        defaultDate: portfolio.dateFrom,
+        defaultDate: analytics.dateFrom,
         dateFormat: 'dd M yy',
         onSelect: onSelect,
         beforeShow: beforeShow,
-        maxDate: portfolio.dateFromMax,
-        minDate: portfolio.dateFromMin
+        maxDate: analytics.dateFromMax,
+        minDate: analytics.dateFromMin
     });
     $("#datepicker_to").datepicker({
-        defaultDate: portfolio.dateTo,
+        defaultDate: analytics.dateTo,
         dateFormat: 'dd M yy',
         onSelect: onSelect,
         beforeShow: beforeShow,
-        maxDate: portfolio.dateToMax,
-        minDate: portfolio.dateToMin
+        maxDate: analytics.dateToMax,
+        minDate: analytics.dateToMin
     });
     $('#apply_btn').click(function () {
         var from = $("#datepicker_from").datepicker("getDate");
         var to = $("#datepicker_to").datepicker("getDate");
         $('#date_btn').text($.datepicker.formatDate('dd M yy', from) + ' - ' + $.datepicker.formatDate('dd M yy', to));
         $('#date_panel').hide();
+        document.location.href = '/Portfolio/' + analytics.type + '/Dashboard/' + analytics.id + '/' + $.datepicker.formatDate('dd-M-yy', from) + '/' + $.datepicker.formatDate('dd-M-yy', to)
     });
 });

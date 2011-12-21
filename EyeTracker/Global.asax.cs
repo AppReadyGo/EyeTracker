@@ -92,15 +92,15 @@ namespace EyeTracker
             );
 
             routes.MapRoute(
-                "Portfolio", 
-                "Portfolio/{action}/{id}",
-                new { controller = "Portfolio", action = "Index", id = UrlParameter.Optional }
+                "Analytics",
+                "Analytics/{action}/{id}",
+                new { controller = "Analytics", action = "Index", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
-                "Analytics", 
-                "Analytics/{action}", 
-                new { controller = "Analytics", action = "EyeTracker" }
+                "AnalyticsData",
+                "Analytics/{type}/{action}/{id}/{fromDate}/{toDate}",
+                new { controller = "Analytics", action = "Dashboard", fromDate = UrlParameter.Optional, toDate = UrlParameter.Optional }
             );
 
             routes.MapRoute(
