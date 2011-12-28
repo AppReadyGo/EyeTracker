@@ -60,5 +60,25 @@ namespace EyeTracker.Tests.FakeData
         }
 
         #endregion
+
+        #region IAnalyticsRepository Members
+
+
+        public DashboardData GetDashboardData(int id, DateTime fromDate, DateTime toDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IAnalyticsRepository Members
+
+
+        public DashboardData GetDashboardData(AnalyticsType type, int id, DateTime fromDate, DateTime toDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

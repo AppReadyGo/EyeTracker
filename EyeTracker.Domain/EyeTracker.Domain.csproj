@@ -62,6 +62,7 @@
     <Compile Include="Mapping\AccountProfilerMaping.cs" />
     <Compile Include="Mapping\BackOffice\SystemMembershipMapping.cs" />
     <Compile Include="Mapping\ScreenMapping.cs" />
+    <Compile Include="Model\AnalyticsType.cs" />
     <Compile Include="Model\BackOffice\SystemMembership.cs" />
     <Compile Include="Mapping\ClickMaping.cs" />
     <Compile Include="Mapping\BrowserMapping.cs" />

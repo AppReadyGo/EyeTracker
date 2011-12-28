@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Analytics.Master" Inherits="System.Web.Mvc.ViewMasterPage"%>
+<%@ Import Namespace="EyeTracker.Helpers" %>
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
         Portfolio - <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
 </asp:Content>
@@ -9,31 +10,32 @@
     <link href="<%: Url.Content("~/Content/Portfolio.Analytics.master.css") %>" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
     <script type="text/javascript">
-        var portfolio = {
+        var analytics = {
             dateFrom: '<%=ViewBag.FromDate.ToString("dd MMM yyyy") %>',
             dateFromMin: '<%=DateTime.UtcNow.AddYears(-20).ToString("dd MMM yyyy") %>',
             dateFromMax: '<%=ViewBag.ToDate.ToString("dd MMM yyyy") %>',
             dateTo: '<%=ViewBag.ToDate.ToString("dd MMM yyyy") %>',
             dateToMin: '<%=ViewBag.FromDate.ToString("dd MMM yyyy") %>',
-            dateToMax: '<%=DateTime.UtcNow.ToString("dd MMM yyyy") %>'
+            dateToMax: '<%=DateTime.UtcNow.ToString("dd MMM yyyy") %>',
+            type: '<%=ViewBag.Type%>',
+            id: <%: ViewBag.Id %>
         };
     </script>
 </asp:Content>
+<asp:Content ID="TopMenu" ContentPlaceHolderID="TopMenu" runat="server">
+<div class="bread-crumb"><%= Html.BreadCrumbNavigation((List<KeyValuePair<string, string>>)ViewData["breadCrumbItems"])%></div>
+</asp:Content>
 <asp:Content ContentPlaceHolderID="LeftMenu" runat="server">
-    <a href="/Portfolio/" class="back">Portfolios List</a>
-    <a href="/Portfolio/Dashboard/" class="open"><%: ViewBag.PortfolioName%></a>
-        <div>
-            <%foreach (var application in ViewBag.Applications)
-              { %>
-            <a href="/Application/<%: application.Key%>"><%: application.Value%></a>
-            <%} %>
-        </div>
-    <a href="/Portfolio/Dashboard/<%: ViewBag.PortfolioId %>">Dashboard</a>
-    <a href="/Portfolio/Usage/<%: ViewBag.PortfolioId %>">Usage</a>
-    <a <%--href="/Portfolio/Visitors/<%: ViewBag.PortfolioId %>"--%> class="disabled">Visitors</a>
-    <a <%--href="/Portfolio/MapOverlay/<%: ViewBag.PortfolioId %>"--%> class="disabled">Map Overlay</a>
-    <a <%--href="/Portfolio/TraficSources/<%: ViewBag.PortfolioId %>"--%> class="disabled">Trafic Sources</a>
-    <a <%--href="/Portfolio/ContentOverview/<%: ViewBag.PortfolioId %>"--%> class="disabled">Content Overview</a>
+    <%if (ViewBag.AnalyticsType == EyeTracker.Domain.Model.AnalyticsType.Portfolio)
+    {%>
+      <a href="/Application/<%: ViewBag.Id %>">Applications</a>
+    <%} %>
+    <a href="/Analytics/<%: ViewBag.AnalyticsType %>/Dashboard/<%: ViewBag.Id %>">Dashboard</a>
+    <a href="/Portfolio/Usage/<%: ViewBag.Id %>">Usage</a>
+    <a <%--href="/Portfolio/Visitors/<%: ViewBag.Id %>"--%> class="disabled">Visitors</a>
+    <a <%--href="/Portfolio/MapOverlay/<%: ViewBag.Id %>"--%> class="disabled">Map Overlay</a>
+    <a <%--href="/Portfolio/TraficSources/<%: ViewBag.Id %>"--%> class="disabled">Trafic Sources</a>
+    <a <%--href="/Portfolio/ContentOverview/<%: ViewBag.Id %>"--%> class="disabled">Content Overview</a>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="period">

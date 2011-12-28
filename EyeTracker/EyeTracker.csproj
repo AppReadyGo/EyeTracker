@@ -118,8 +118,9 @@
     <Compile Include="Controllers\HomeController_.cs" />
     <Compile Include="Controllers\CustomExceptions.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="CustomModelBinders\JsonMobileDataModelBinder.cs" />
-    <Compile Include="Model\AnalyticsType.cs" />
+    <Compile Include="Helpers\General.cs" />
     <Compile Include="Model\PortfolioModel.cs" />
     <Compile Include="CustomModelBinders\JsonPackageModelBinder.cs" />
     <Compile Include="Global.asax.cs">
@@ -296,8 +297,8 @@
     <Content Include="Views\Home\Index_.aspx" />
     <Content Include="Views\Analytics\Usage.aspx" />
     <Content Include="Views\Analytics\Dashboard.aspx" />
-    <Content Include="Views\Analytics\Index.aspx" />
-    <Content Include="Views\Analytics\NewEdit.aspx" />
+    <Content Include="Views\Portfolio\Index.aspx" />
+    <Content Include="Views\Portfolio\NewEdit.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

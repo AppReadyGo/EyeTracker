@@ -77,7 +77,7 @@ namespace EyeTracker.Controllers
                 foreach (var curApp in appRes.Value)
                 {
                     var cells = new List<HTMLTable.Cell>();
-                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Application/Dashboard/{0}/{1}\">{2}</a>", portfolioId, curApp.Id, curApp.Description) });
+                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Analytics/Application/Dashboard/{0}\">{1}</a>", curApp.Id, curApp.Description) });
                     cells.Add(new HTMLTable.Cell() { Value = curApp.Type.ToString() });
                     cells.Add(new HTMLTable.Cell() { Value = "0.00%" });
                     cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Application/Edit/{0}/{1}\">edit</a>&nbsp;<a href=\"/Application/Remove/{0}/{1}\">remove</a>", portfolioId, curApp.Id) });

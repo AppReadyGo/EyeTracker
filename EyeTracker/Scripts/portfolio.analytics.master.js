@@ -48,6 +48,6 @@ $(function () {
         var to = $("#datepicker_to").datepicker("getDate");
         $('#date_btn').text($.datepicker.formatDate('dd M yy', from) + ' - ' + $.datepicker.formatDate('dd M yy', to));
         $('#date_panel').hide();
-        document.location.href = '/Portfolio/' + analytics.type + '/Dashboard/' + analytics.id + '/' + $.datepicker.formatDate('dd-M-yy', from) + '/' + $.datepicker.formatDate('dd-M-yy', to)
+        document.location.href = '/Analytics/' + analytics.type + '/Dashboard/' + analytics.id + '/' + $.datepicker.formatDate('dd-M-yy', from) + '/' + $.datepicker.formatDate('dd-M-yy', to)
     });
 });

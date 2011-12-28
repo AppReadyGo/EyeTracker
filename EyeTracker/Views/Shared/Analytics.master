@@ -7,6 +7,7 @@
         <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ContentPlaceHolder ID="TopMenu" runat="server" />
     <table class="page-wrapper">
     <tbody>
         <tr>
