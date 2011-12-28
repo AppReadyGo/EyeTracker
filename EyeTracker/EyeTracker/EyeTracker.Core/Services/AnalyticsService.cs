@@ -23,6 +23,8 @@ namespace EyeTracker.Core.Services
         //OperationResult<Dictionary<DateTime, int>> GetPortfolioUsageData(long portfolioId, string pageUri, DateTime fromDate, DateTime toDate);
 
         //OperationResult<Dictionary<DateTime, int>> GetApplicationUsageData(long appId, string pageUri, DateTime fromDate, DateTime toDate);
+
+        OperationResult<DashboardData> GetDashboardData(AnalyticsType type, int id, DateTime fromDate, DateTime toDate);
     }
 
     public class AnalyticsService : IAnalyticsService
@@ -98,5 +100,17 @@ namespace EyeTracker.Core.Services
             }
             return result;
         }
-     }
+
+        public OperationResult<DashboardData> GetDashboardData(AnalyticsType type, int id, DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                return new OperationResult<DashboardData>(repository.GetDashboardData(type, id, fromDate, toDate));
+            }
+            catch (Exception exp)
+            {
+                return new OperationResult<DashboardData>(exp);
+            }
+        }
+    }
 }

@@ -21,8 +21,6 @@ namespace EyeTracker.Core.Services
         OperationResult Update(int id, string description, int timeZone);
 
         OperationResult Remove(int id);
-
-        OperationResult<DashboardData> GetDashboardData(int id, DateTime fromDate, DateTime toDate);
     }
 
     public class PortfolioService : IPortfolioService
@@ -137,18 +135,6 @@ namespace EyeTracker.Core.Services
             catch (Exception exp)
             {
                 return new OperationResult(exp);
-            }
-        }
-
-        public OperationResult<DashboardData> GetDashboardData(int id, DateTime fromDate, DateTime toDate)
-        {
-            try
-            {
-                return new OperationResult<DashboardData>(repository.GetDashboardData(id, fromDate, toDate));
-            }
-            catch (Exception exp)
-            {
-                return new OperationResult<DashboardData>(exp);
             }
         }
     }

@@ -21,161 +21,24 @@ namespace EyeTracker.Controllers
     public class AnalyticsController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
-        private IPortfolioService service;
+        private IPortfolioService portfolioService;
         private IAccountService accountService;
         private IReportsService reportService;
+        private IApplicationService applicationService;
+        private IAnalyticsService analyticsService;
 
         public AnalyticsController()
-            : this(new PortfolioService(), new AccountService(), new ReportsService())
+            : this(new PortfolioService(), new ApplicationService(), new AnalyticsService(), new AccountService(), new ReportsService())
         {
         }
 
-        public AnalyticsController(IPortfolioService service, IAccountService accountService, IReportsService reportService)
+        public AnalyticsController(IPortfolioService portfolioService, IApplicationService applicationService, IAnalyticsService analyticsService, IAccountService accountService, IReportsService reportService)
         {
-            this.service = service;
+            this.portfolioService = portfolioService;
             this.accountService = accountService;
             this.reportService = reportService;
-        }
-
-        public ActionResult Index()
-        {
-            var portfRes = service.GetAll();
-            if (portfRes.HasError)
-            {
-                return View("Error");
-            }
-
-            var columnHeaders = new List<HTMLTable.Cell>() {
-                    new HTMLTable.Cell() { Value = "Description" }, 
-                    new HTMLTable.Cell() { Value = "Applications" }, 
-                    new HTMLTable.Cell() { Value = "% Change" }
-                };
-            var data = new List<List<HTMLTable.Cell>>();
-
-            if (portfRes.Value.Count > 0)
-            {
-                //Create table
-                foreach (var curPortfolio in portfRes.Value)
-                {
-                    var cells = new List<HTMLTable.Cell>();
-                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Portfolio/Remove/{0}\">remove</a>&nbsp;<a href=\"/Portfolio/Edit/{0}\">edit</a>&nbsp;<a href=\"/Portfolio/Dashboard/{0}\">{1}</a>", curPortfolio.Id, curPortfolio.Description) });
-                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Application/{0}\" >{1}</a>", curPortfolio.Id, curPortfolio.Applications.Count()) });
-                    cells.Add(new HTMLTable.Cell() { Value = "0.00%" });
-                    data.Add(cells);
-                }
-            }
-            else
-            {
-                data.Add(new List<HTMLTable.Cell>() { new HTMLTable.Cell() { ColSpan = 8, StyleClass = "no-data", Value = "No Portfolios" } });
-            }
-
-            ViewData["caption"] = new HTMLTable.Cell() { Value = "Accounts" };
-            ViewData["columnHeaders"] = columnHeaders;
-            ViewData["data"] = data;
-            ViewData["Portfolios"] = "class=\"selected\"";
-            return View();
-        }
-
-        public ActionResult New()
-        {
-            ViewBag.Title = "New";
-            var countriesRes = service.GetCountries();
-            if (!countriesRes.HasError)
-            {
-                ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
-                return View("NewEdit", new PortfolioModel());
-            }
-            else
-            {
-                return View("Error");
-            }
-        }
-
-        [HttpPost]
-        public ActionResult New(PortfolioModel model)
-        {
-            ViewBag.Title = "New";
-            if (ModelState.IsValid)
-            {
-                var res = service.AddPortfolio(model.Description, model.TimeZone);
-                if (res.HasError)
-                {
-                    return View("Error");
-                }
-                else
-                {
-                    return RedirectToAction("");
-                }
-            }
-            else
-            {
-                var countriesRes = service.GetCountries();
-                if (!countriesRes.HasError)
-                {
-                    ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
-                    return View("NewEdit", new PortfolioModel());
-                }
-                else
-                {
-                    return View("Error");
-                }
-            }
-        }
-
-        public ActionResult Edit(int id)
-        {
-            var portfolioRes = service.Get(id);
-            if (portfolioRes.HasError)
-            {
-                return View("Error");
-            }
-            else
-            {
-                var model = new PortfolioModel { 
-                    Id = portfolioRes.Value.Id,
-                    Description = portfolioRes.Value.Description,
-                    TimeZone = portfolioRes.Value.TimeZone
-                };
-                ViewBag.Title = "Edit";
-                var countriesRes = service.GetCountries();
-                if (!countriesRes.HasError)
-                {
-                    ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
-                    return View("NewEdit", model);
-                }
-                else
-                {
-                    return View("Error");
-                }
-            }
-        }
-
-        [HttpPost]
-        public ActionResult Edit(PortfolioModel model)
-        {
-            ViewBag.Title = "Edit";
-            if (ModelState.IsValid)
-            {
-                var res = service.Update(model.Id, model.Description, model.TimeZone);
-                return RedirectToAction("");
-            }
-            else
-            {
-                return View("NewEdit");
-            }
-        }
-
-        public ActionResult Remove(int id)
-        {
-            var res = service.Remove(id);
-            if (res.HasError)
-            {
-                return View("Error");
-            }
-            else
-            {
-                return RedirectToAction("");
-            }
+            this.applicationService = applicationService;
+            this.analyticsService = analyticsService;
         }
 
         public ActionResult Dashboard(AnalyticsType type, int Id, DateTime? fromDate, DateTime? toDate)
@@ -190,19 +53,13 @@ namespace EyeTracker.Controllers
                 toDate = DateTime.UtcNow;
             }
 
-            DashboardData dashboardData = null;
-            if (type == AnalyticsType.Portfolio)
+            var dataResult = analyticsService.GetDashboardData(type, Id, fromDate.Value, toDate.Value);
+            if (dataResult.HasError)
             {
-                var dataResult = service.GetDashboardData(Id, fromDate.Value, toDate.Value);
-                if (dataResult.HasError)
-                {
-                    return View("Error");
-                }
-                dashboardData = dataResult.Value;
+                return View("Error");
             }
-            else
-            {
-            }
+            var dashboardData = dataResult.Value;
+
             var data = new List<object[]>();
             int diffDays = (toDate.Value - fromDate.Value).Days;
             for (int i = 0; i < diffDays; i++)
@@ -223,13 +80,30 @@ namespace EyeTracker.Controllers
                 data = data,
                 color = "#461D7C"
             });
+
             ViewBag.Type = type.ToString();
             ViewBag.UsageInitData = new JavaScriptSerializer().Serialize(usageInitData);
-            ViewBag.PortfolioId = Id;
-            ViewBag.PortfolioName = dashboardData.PortfolioDescription;
-            ViewBag.Applications = dashboardData.Applications;
+            ViewBag.Id = Id;
+            ViewBag.CurrentName = dashboardData.Description;
             ViewBag.FromDate = fromDate;
             ViewBag.ToDate = toDate;
+            ViewBag.AnalyticsType = type;
+
+            var navigationItems = new List<KeyValuePair<string, string>>() 
+            { 
+                new KeyValuePair<string, string>("/Portfolio","Portfolios")
+            };
+
+            if (type == AnalyticsType.Application)
+            {
+                var appDashboardData = (ApplicationDashboardData)dashboardData;
+                navigationItems.Add(new KeyValuePair<string, string>(string.Format("/Analytics/{0}/Dashboard/{1}", AnalyticsType.Portfolio, appDashboardData.PortfolioId), appDashboardData.PortfolioDescription));
+                navigationItems.Add(new KeyValuePair<string, string>("/Application", "Applications"));
+            }
+            navigationItems.Add(new KeyValuePair<string, string>(null, dashboardData.Description));
+
+            ViewData["breadCrumbItems"] = navigationItems;
+
             return View();
         }
 
@@ -250,11 +124,6 @@ namespace EyeTracker.Controllers
             ViewBag.ChartInitData = new JavaScriptSerializer().Serialize(chartInitData);
             ViewBag.PortfolioId = Id;
             return View();
-        }
-
-        public OperationResult<ReadOnlyCollection<TimeZoneInfo>> GetTimeZones()
-        {
-            return new OperationResult<ReadOnlyCollection<TimeZoneInfo>>(TimeZoneInfo.GetSystemTimeZones());
         }
     }
 }

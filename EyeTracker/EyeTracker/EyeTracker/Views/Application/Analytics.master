@@ -9,7 +9,7 @@
     <link href="<%: Url.Content("~/Content/Portfolio.Analytics.master.css") %>" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
     <script type="text/javascript">
-        var portfolio = {
+        var analytics = {
             dateFrom: '<%=ViewBag.FromDate.ToString("dd MMM yyyy") %>',
             dateFromMin: '<%=DateTime.UtcNow.AddYears(-20).ToString("dd MMM yyyy") %>',
             dateFromMax: '<%=ViewBag.ToDate.ToString("dd MMM yyyy") %>',

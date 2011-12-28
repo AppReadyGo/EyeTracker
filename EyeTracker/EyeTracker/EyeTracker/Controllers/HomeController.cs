@@ -9,6 +9,7 @@ using AutoMapper;
 using EyeTracker.DAL.Domain;
 using System.Web.Security;
 using EyeTracker.Core.Services;
+using EyeTracker.Domain.Model;
 
 namespace EyeTracker.Controllers
 {

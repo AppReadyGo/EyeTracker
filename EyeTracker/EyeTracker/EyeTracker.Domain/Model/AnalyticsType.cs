@@ -1,5 +1,5 @@
 ﻿
-namespace EyeTracker.Model
+namespace EyeTracker.Domain.Model
 {
     public enum AnalyticsType
     {
