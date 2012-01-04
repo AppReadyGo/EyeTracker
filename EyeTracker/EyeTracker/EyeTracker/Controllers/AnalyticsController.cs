@@ -41,6 +41,20 @@ namespace EyeTracker.Controllers
             this.analyticsService = analyticsService;
         }
 
+        public ActionResult Index()
+        {
+            var res = analyticsService.GetCurrentUserPortfolios();
+            if (res.HasError)
+            {
+                return View("Error");
+            }
+
+            ViewBag.Data = res.Value;
+
+            ViewData["analytics"] = "class=\"selected\"";
+            return View();
+        }
+
         public ActionResult Dashboard(AnalyticsType type, int Id, DateTime? fromDate, DateTime? toDate)
         {
             if (!fromDate.HasValue)
@@ -91,7 +105,7 @@ namespace EyeTracker.Controllers
 
             var navigationItems = new List<KeyValuePair<string, string>>() 
             { 
-                new KeyValuePair<string, string>("/Portfolio","Portfolios")
+                new KeyValuePair<string, string>("/Analytics","Portfolios")
             };
 
             if (type == AnalyticsType.Application)
@@ -123,6 +137,18 @@ namespace EyeTracker.Controllers
             });
             ViewBag.ChartInitData = new JavaScriptSerializer().Serialize(chartInitData);
             ViewBag.PortfolioId = Id;
+            return View();
+        }
+
+        public ActionResult FingerPrint(int id)
+        {
+            ViewData["analytics"] = "class=\"selected\"";
+            return View();
+        }
+
+        public ActionResult EyeTracker(int id)
+        {
+            ViewData["analytics"] = "class=\"selected\"";
             return View();
         }
     }

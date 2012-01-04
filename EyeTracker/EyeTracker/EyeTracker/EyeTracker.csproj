@@ -140,10 +140,13 @@
     <Content Include="Content\images\beforelogn.header.selected.left.jpg" />
     <Content Include="Content\images\beforelogn.header.selected.right.jpg" />
     <Content Include="Content\images\beforelogn.footer.bg.png" />
+    <Content Include="Content\images\expanded_icon.gif" />
+    <Content Include="Content\images\expand_icon.gif" />
     <Content Include="Content\images\home.index.shadow.left.png" />
     <Content Include="Content\images\home.index.shadow.right.png" />
     <Content Include="Content\images\traffic.jpg" />
     <Content Include="Content\Portfolio.Analytics.master.css" />
+    <Content Include="Content\Analytics.Index.css" />
     <Content Include="Content\shared\dashboard.css" />
     <Content Include="Content\themes\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
     <Content Include="Content\themes\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
@@ -160,6 +163,7 @@
     <Content Include="Content\themes\cupertino\images\ui-icons_72a7cf_256x240.png" />
     <Content Include="Content\themes\cupertino\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\themes\cupertino\jquery-ui.css" />
+    <Content Include="Scripts\Analytics.Index.js" />
     <Content Include="Scripts\portfolio.analytics.master.js" />
     <Content Include="Scripts\date.picker.js" />
     <Content Include="Scripts\home.index.js" />
@@ -283,7 +287,8 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Scripts\AnalyticsTemplate.js" />
-    <Content Include="Views\Application\Fingerprint.aspx" />
+    <Content Include="Views\Analytics\FingerPrint.aspx" />
+    <Content Include="Views\Analytics\EyeTracker.aspx" />
     <Content Include="Views\Application\Image.aspx" />
     <Content Include="Views\Application\Dashboard.aspx" />
     <Content Include="Views\Account\Details.aspx" />
@@ -297,7 +302,7 @@
     <Content Include="Views\Home\Index_.aspx" />
     <Content Include="Views\Analytics\Usage.aspx" />
     <Content Include="Views\Analytics\Dashboard.aspx" />
-    <Content Include="Views\Portfolio\Index.aspx" />
+    <Content Include="Views\Analytics\Index.aspx" />
     <Content Include="Views\Portfolio\NewEdit.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Web.config">

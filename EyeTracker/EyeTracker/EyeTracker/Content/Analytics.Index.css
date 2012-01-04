@@ -1,0 +1,11 @@
+﻿
+
+tr.main{height:15px;}
+tr.main td{cursor:pointer;height:15px;}
+tr.sub{display:none;}
+tr.sub table{margin-left:10px;}
+tr.sub tr{cursor:pointer;}
+
+td.space{width:10px;}
+td.expand{background:url("images/expand_icon.gif") no-repeat scroll left center transparent;}
+td.expanded{background:url("images/expanded_icon.gif") no-repeat scroll left center transparent;}
