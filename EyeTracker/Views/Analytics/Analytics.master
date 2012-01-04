@@ -26,12 +26,13 @@
 <div class="bread-crumb"><%= Html.BreadCrumbNavigation((List<KeyValuePair<string, string>>)ViewData["breadCrumbItems"])%></div>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="LeftMenu" runat="server">
-    <%if (ViewBag.AnalyticsType == EyeTracker.Domain.Model.AnalyticsType.Portfolio)
-    {%>
-      <a href="/Application/<%: ViewBag.Id %>">Applications</a>
-    <%} %>
     <a href="/Analytics/<%: ViewBag.AnalyticsType %>/Dashboard/<%: ViewBag.Id %>">Dashboard</a>
-    <a href="/Portfolio/Usage/<%: ViewBag.Id %>">Usage</a>
+    <%if (ViewBag.AnalyticsType == EyeTracker.Domain.Model.AnalyticsType.Application)
+    {%>
+      <a href="/Analytics/FingerPrint/<%: ViewBag.Id %>">Finger Print</a>
+      <a href="/Analytics/EyeTracker/<%: ViewBag.Id %>">Eye Tracker</a>
+    <%} %>
+    <a href="/Analytics/<%: ViewBag.AnalyticsType %>/Usage/<%: ViewBag.Id %>">Usage</a>
     <a <%--href="/Portfolio/Visitors/<%: ViewBag.Id %>"--%> class="disabled">Visitors</a>
     <a <%--href="/Portfolio/MapOverlay/<%: ViewBag.Id %>"--%> class="disabled">Map Overlay</a>
     <a <%--href="/Portfolio/TraficSources/<%: ViewBag.Id %>"--%> class="disabled">Trafic Sources</a>

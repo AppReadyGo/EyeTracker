@@ -16,26 +16,29 @@ namespace EyeTracker.Controllers
     public class PortfolioController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
-        private IPortfolioService portfolioService;
+        private IAnalyticsService analyticsService;
 
         public PortfolioController()
-            : this(new PortfolioService(), new ApplicationService(), new AnalyticsService(), new AccountService(), new ReportsService())
+            : this(new AnalyticsService())
         {
         }
 
-        public PortfolioController(IPortfolioService portfolioService, IApplicationService applicationService, IAnalyticsService analyticsService, IAccountService accountService, IReportsService reportService)
+        public PortfolioController(IAnalyticsService analyticsService)
         {
-            this.portfolioService = portfolioService;
+            this.analyticsService = analyticsService;
         }
 
         public ActionResult Index()
         {
-            var res = portfolioService.GetAll();
+            var res = analyticsService.GetCurrentUserPortfolios();
             if (res.HasError)
             {
                 return View("Error");
             }
 
+            ViewBag.Data = res.Value;
+            
+            /*
             var columnHeaders = new List<HTMLTable.Cell>() {
                     new HTMLTable.Cell() { Value = "Description" }, 
                     new HTMLTable.Cell() { Value = "Applications" }, 
@@ -64,12 +67,14 @@ namespace EyeTracker.Controllers
             ViewData["columnHeaders"] = columnHeaders;
             ViewData["data"] = data;
             ViewData["Portfolios"] = "class=\"selected\"";
+             */
             return View();
         }
 
         public ActionResult New()
         {
             ViewBag.Title = "New";
+            /*
             var countriesRes = portfolioService.GetCountries();
             if (!countriesRes.HasError)
             {
@@ -79,12 +84,14 @@ namespace EyeTracker.Controllers
             else
             {
                 return View("Error");
-            }
+            }*/
+            return View("Error");
         }
 
         [HttpPost]
         public ActionResult New(PortfolioModel model)
         {
+            /*
             ViewBag.Title = "New";
             if (ModelState.IsValid)
             {
@@ -110,11 +117,12 @@ namespace EyeTracker.Controllers
                 {
                     return View("Error");
                 }
-            }
+            }*/
+            return View("Error");
         }
 
         public ActionResult Edit(int id)
-        {
+        {/*
             var portfolioRes = portfolioService.Get(id);
             if (portfolioRes.HasError)
             {
@@ -139,12 +147,14 @@ namespace EyeTracker.Controllers
                 {
                     return View("Error");
                 }
-            }
+            }*/
+            return View("Error");
         }
 
         [HttpPost]
         public ActionResult Edit(PortfolioModel model)
         {
+            /*
             ViewBag.Title = "Edit";
             if (ModelState.IsValid)
             {
@@ -154,11 +164,13 @@ namespace EyeTracker.Controllers
             else
             {
                 return View("NewEdit");
-            }
+            }*/
+            return View("Error");
         }
 
         public ActionResult Remove(int id)
         {
+            /*
             var res = portfolioService.Remove(id);
             if (res.HasError)
             {
@@ -168,6 +180,8 @@ namespace EyeTracker.Controllers
             {
                 return RedirectToAction("");
             }
+             */
+             return View("Error");
         }
 
 

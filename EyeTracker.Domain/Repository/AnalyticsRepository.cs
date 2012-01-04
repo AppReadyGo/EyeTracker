@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using EyeTracker.Domain.Model;
 using NHibernate;
 using NHibernate.Linq;
+using EyeTracker.Domain.Common;
 
 namespace EyeTracker.Domain.Repository
 {
@@ -15,6 +16,7 @@ namespace EyeTracker.Domain.Repository
 
         DashboardData GetDashboardData(AnalyticsType type, int id, DateTime fromDate, DateTime toDate);
 
+        IEnumerable<PortfolioDetails> GetCurrentUserPortfolios(Guid userId);
     }
     
     public class AnalyticsRepository : IAnalyticsRepository
@@ -98,6 +100,42 @@ namespace EyeTracker.Domain.Repository
                 }
 
                 return res;
+            }
+        }
+
+        public IEnumerable<PortfolioDetails> GetCurrentUserPortfolios(Guid userId)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                var portfolios = session.Query<Portfolio>()
+                    .Where(p => p.User.Id == userId)
+                    .Select(p => new
+                    {
+                        key = p.Id,
+                        details = new PortfolioDetails
+                            {
+                                Id = p.Id,
+                                Description = p.Description,
+                                Visits = 0
+                            }
+                    }).ToList();
+
+                var portfoliosIds = portfolios.Select(p => p.key).ToArray();
+
+                var applications = session.Query<Application>()
+                    .Where(a => portfoliosIds.Contains(a.Portfolio.Id))
+                    .Select(a => new { key = a.Portfolio.Id, app = new ApplicationDetails
+                                {
+                                    Id = a.Id,
+                                    Description = a.Description,
+                                    Visits = 0
+                                }});
+
+                foreach(var item in portfolios)
+                {
+                    item.details.Applications = applications.Where(ai => ai.key == item.key).Select(ai => ai.app).ToList();
+                }
+                return portfolios.Select(p => p.details);
             }
         }
     }

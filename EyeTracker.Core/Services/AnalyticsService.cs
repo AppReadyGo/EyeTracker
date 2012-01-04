@@ -11,6 +11,7 @@ using System.Collections;
 using System.Net;
 using EyeTracker.Domain.Repository;
 using EyeTracker.Domain.Model;
+using EyeTracker.Domain.Common;
 
 namespace EyeTracker.Core.Services
 {
@@ -25,21 +26,25 @@ namespace EyeTracker.Core.Services
         //OperationResult<Dictionary<DateTime, int>> GetApplicationUsageData(long appId, string pageUri, DateTime fromDate, DateTime toDate);
 
         OperationResult<DashboardData> GetDashboardData(AnalyticsType type, int id, DateTime fromDate, DateTime toDate);
+
+        OperationResult<IEnumerable<PortfolioDetails>> GetCurrentUserPortfolios();
     }
 
     public class AnalyticsService : IAnalyticsService
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         private IAnalyticsRepository repository;
+        private IMembershipService membershipService;
 
         public AnalyticsService()
-            : this(new AnalyticsRepository())
+            : this(new AnalyticsRepository(), new AccountMembershipService())
         {
         }
 
-        public AnalyticsService(IAnalyticsRepository repository)
+        public AnalyticsService(IAnalyticsRepository repository, IMembershipService membershipService)
         {
             this.repository = repository;
+            this.membershipService = membershipService;
         }
 
         public OperationResult<IEnumerable<ClickHeatMapData>> GetClickHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
@@ -110,6 +115,23 @@ namespace EyeTracker.Core.Services
             catch (Exception exp)
             {
                 return new OperationResult<DashboardData>(exp);
+            }
+        }
+
+        public OperationResult<IEnumerable<PortfolioDetails>> GetCurrentUserPortfolios()
+        {
+            try
+            {
+                var userRes = membershipService.GetCurrentUserId();
+                if (userRes.HasError)
+                {
+                    return new OperationResult<IEnumerable<PortfolioDetails>>(userRes);
+                }
+                return new OperationResult<IEnumerable<PortfolioDetails>>(repository.GetCurrentUserPortfolios(userRes.Value));
+            }
+            catch (Exception exp)
+            {
+                return new OperationResult<IEnumerable<PortfolioDetails>>(exp);
             }
         }
     }

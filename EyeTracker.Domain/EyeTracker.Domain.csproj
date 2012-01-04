@@ -58,6 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ApplicationDetails.cs" />
+    <Compile Include="Common\PortfolioDetails.cs" />
     <Compile Include="Enumirators.cs" />
     <Compile Include="Mapping\AccountProfilerMaping.cs" />
     <Compile Include="Mapping\BackOffice\SystemMembershipMapping.cs" />

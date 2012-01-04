@@ -14,9 +14,6 @@ using EyeTracker.Domain.Model.Events;
 
 namespace EyeTracker
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-
     public class MvcApplication : System.Web.HttpApplication
     {
         WindsorContainer applicationWideWindsorContainer = new WindsorContainer();
@@ -101,6 +98,12 @@ namespace EyeTracker
                 "AnalyticsData",
                 "Analytics/{type}/{action}/{id}/{fromDate}/{toDate}",
                 new { controller = "Analytics", action = "Dashboard", fromDate = UrlParameter.Optional, toDate = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                "Analytics",
+                "Analytics/{action}",
+                new { controller = "Analytics", action = "Index", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

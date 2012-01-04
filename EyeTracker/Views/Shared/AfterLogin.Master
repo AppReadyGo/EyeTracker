@@ -11,7 +11,7 @@
         <a class="logo" href="/"><img src="/Content/images/logo.png"></a>
         <ul class="login-menu"><li><a href="/account/logon">Logout</a></li></ul>
         <ul class="main-menu">
-            <li <%= ViewData["Portfolios"] %>><span><a href="/">Portfolios</a></span></li>
+            <li <%= ViewData["Analytics"] %>><span><a href="/">Analytics</a></span></li>
             <li <%= ViewData["MyAccount"] %>><span><a href="/">My Account</a></span></li>
             <li <%= ViewData["Tutorials"] %>><a href="/Tutorials/">Tutorials</a></li>
             <li <%= ViewData["Products"] %>><a href="/Products">Products</a></li>

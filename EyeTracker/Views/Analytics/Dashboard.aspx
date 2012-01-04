@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="Analytics.master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">Dashboard</asp:Content>
+
+
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
 <script src="<%: Url.Content("~/Scripts/ThridParty/DateFormat.js")%>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Scripts/ThridParty/Flot/jquery.flot.min.js")%>" type="text/javascript"></script>
@@ -12,6 +14,8 @@
     var usageChartData = <%= ViewBag.UsageInitData %>;
 </script>
 </asp:Content>
+
+
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <table class="dashboard">
 <tr>
