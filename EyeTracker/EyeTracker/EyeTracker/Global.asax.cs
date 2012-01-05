@@ -102,7 +102,7 @@ namespace EyeTracker
 
             routes.MapRoute(
                 "Analytics",
-                "Analytics/{action}",
+                "Analytics/{action}/{id}",
                 new { controller = "Analytics", action = "Index", id = UrlParameter.Optional }
             );
 

@@ -131,6 +131,7 @@
     <Compile Include="Model\AdminModels.cs" />
     <Compile Include="Model\ApplicationModel.cs" />
     <Compile Include="Model\ScreenDetailsModel.cs" />
+    <Compile Include="Model\SelectorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomModelBinders\JsonVisitInfoModelBinder.cs" />
     <Content Include="Content\Content.Master.css" />
@@ -287,8 +288,10 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Scripts\AnalyticsTemplate.js" />
+    <Content Include="Views\Analytics\Filter.ascx" />
     <Content Include="Views\Analytics\FingerPrint.aspx" />
     <Content Include="Views\Analytics\EyeTracker.aspx" />
+    <Content Include="Views\Analytics\Selector.ascx" />
     <Content Include="Views\Application\Image.aspx" />
     <Content Include="Views\Application\Dashboard.aspx" />
     <Content Include="Views\Account\Details.aspx" />
