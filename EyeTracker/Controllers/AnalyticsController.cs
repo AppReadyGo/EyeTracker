@@ -99,9 +99,9 @@ namespace EyeTracker.Controllers
             ViewBag.UsageInitData = new JavaScriptSerializer().Serialize(usageInitData);
             ViewBag.Id = Id;
             ViewBag.CurrentName = dashboardData.Description;
-            ViewBag.FromDate = fromDate;
-            ViewBag.ToDate = toDate;
             ViewBag.AnalyticsType = type;
+
+            BindFilterData(fromDate.Value, toDate.Value);
 
             var navigationItems = new List<KeyValuePair<string, string>>() 
             { 
@@ -117,6 +117,13 @@ namespace EyeTracker.Controllers
             navigationItems.Add(new KeyValuePair<string, string>(null, dashboardData.Description));
 
             ViewData["breadCrumbItems"] = navigationItems;
+
+            ViewData["Applications"] = new SelectorModel
+            {
+                Title = "Application",
+                Items = new Dictionary<int, string>() { { 1, "Appl 1" } },
+                SelectedItems = new Dictionary<int, string>() { { 1, "Appl 2" } }
+            };
 
             return View();
         }
@@ -150,6 +157,12 @@ namespace EyeTracker.Controllers
         {
             ViewData["analytics"] = "class=\"selected\"";
             return View();
+        }
+
+        private void BindFilterData(DateTime fromDate, DateTime toDate)
+        {
+            ViewBag.FromDate = fromDate;
+            ViewBag.ToDate = toDate;
         }
     }
 }

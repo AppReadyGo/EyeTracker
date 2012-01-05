@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Analytics.Master" Inherits="System.Web.Mvc.ViewMasterPage"%>
+<%@ Register src="Filter.ascx" tagname="Filter" tagprefix="uc" %>
 <%@ Import Namespace="EyeTracker.Helpers" %>
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
         Portfolio - <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
@@ -9,21 +10,10 @@
     <link href="<%: Url.Content("~/Content/themes/cupertino/jquery-ui.css") %>" rel="stylesheet" type="text/css" />
     <link href="<%: Url.Content("~/Content/Portfolio.Analytics.master.css") %>" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
-    <script type="text/javascript">
-        var analytics = {
-            dateFrom: '<%=ViewBag.FromDate.ToString("dd MMM yyyy") %>',
-            dateFromMin: '<%=DateTime.UtcNow.AddYears(-20).ToString("dd MMM yyyy") %>',
-            dateFromMax: '<%=ViewBag.ToDate.ToString("dd MMM yyyy") %>',
-            dateTo: '<%=ViewBag.ToDate.ToString("dd MMM yyyy") %>',
-            dateToMin: '<%=ViewBag.FromDate.ToString("dd MMM yyyy") %>',
-            dateToMax: '<%=DateTime.UtcNow.ToString("dd MMM yyyy") %>',
-            type: '<%=ViewBag.Type%>',
-            id: <%: ViewBag.Id %>
-        };
-    </script>
 </asp:Content>
 <asp:Content ID="TopMenu" ContentPlaceHolderID="TopMenu" runat="server">
-<div class="bread-crumb"><%= Html.BreadCrumbNavigation((List<KeyValuePair<string, string>>)ViewData["breadCrumbItems"])%></div>
+    <div class="bread-crumb"><%= Html.BreadCrumbNavigation((List<KeyValuePair<string, string>>)ViewData["breadCrumbItems"])%>
+    </div>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="LeftMenu" runat="server">
     <a href="/Analytics/<%: ViewBag.AnalyticsType %>/Dashboard/<%: ViewBag.Id %>">Dashboard</a>
@@ -39,12 +29,6 @@
     <a <%--href="/Portfolio/ContentOverview/<%: ViewBag.Id %>"--%> class="disabled">Content Overview</a>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<div class="period">
-    <a id="date_btn"><%= ViewBag.FromDate.ToString("dd MMM yyyy") %> - <%= ViewBag.ToDate.ToString("dd MMM yyyy") %></a>
-    <div id="date_panel" class="date-panel">
-        <div id="datepicker_to"></div><div id="datepicker_from"></div>
-        <div class="actions"><a id="apply_btn">Apply</a></div>
-    </div>
-</div>
-<asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    <uc:Filter runat="server" />
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
 </asp:Content>
