@@ -6,8 +6,15 @@ namespace EyeTracker.Model
     {
         public string Title { get; set; }
 
-        public Dictionary<int, string> Items { get; set; }
+        public IEnumerable<SelectorItem> Items { get; set; }
 
-        public Dictionary<int, string> SelectedItems { get; set; }
+        public IEnumerable<SelectorItem> SelectedItems { get; set; }
+    }
+
+    public class SelectorItem
+    {
+        public int Id { get; set; }
+        public string Text { get; set; }
+        public int Index { get; set; }
     }
 }

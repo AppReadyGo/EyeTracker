@@ -145,6 +145,7 @@
     <Content Include="Content\images\expand_icon.gif" />
     <Content Include="Content\images\home.index.shadow.left.png" />
     <Content Include="Content\images\home.index.shadow.right.png" />
+    <Content Include="Content\images\selector.arrow.png" />
     <Content Include="Content\images\traffic.jpg" />
     <Content Include="Content\Portfolio.Analytics.master.css" />
     <Content Include="Content\Analytics.Index.css" />
@@ -165,6 +166,7 @@
     <Content Include="Content\themes\cupertino\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\themes\cupertino\jquery-ui.css" />
     <Content Include="Scripts\Analytics.Index.js" />
+    <Content Include="Scripts\analytics.selector.js" />
     <Content Include="Scripts\portfolio.analytics.master.js" />
     <Content Include="Scripts\date.picker.js" />
     <Content Include="Scripts\home.index.js" />
