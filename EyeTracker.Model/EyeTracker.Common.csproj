@@ -69,6 +69,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
@@ -82,6 +83,7 @@
     <Compile Include="Enumerators.cs" />
     <Compile Include="ErrorNumbers.cs" />
     <Compile Include="Messenger.cs" />
+    <Compile Include="ObjectSerializator.cs" />
     <Compile Include="OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
