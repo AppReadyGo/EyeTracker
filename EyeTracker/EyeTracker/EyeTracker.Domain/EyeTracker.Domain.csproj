@@ -51,6 +51,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -77,6 +78,9 @@
     <Compile Include="Mapping\NameableMapping.cs" />
     <Compile Include="Model\Browser.cs" />
     <Compile Include="Model\ClickHeatMapData.cs" />
+    <Compile Include="Model\Events\IEvent.cs" />
+    <Compile Include="Model\Events\ScrollEvent.cs" />
+    <Compile Include="Model\Events\SessionInfoEvent.cs" />
     <Compile Include="Model\DashboardData.cs" />
     <Compile Include="Model\EyeTrackerData.cs" />
     <Compile Include="Model\OperationSystem.cs" />
@@ -119,7 +123,9 @@
     <Compile Include="Repository\PortfolioRepository.cs" />
     <Compile Include="Repository\ReportsRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MQ\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

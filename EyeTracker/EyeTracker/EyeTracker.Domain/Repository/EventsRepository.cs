@@ -7,6 +7,9 @@ using NHibernate;
 
 namespace EyeTracker.Domain.Repository
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IEventsRepository
     {
         long AddVisitEvent(VisitEvent visitEvent);
@@ -16,6 +19,10 @@ namespace EyeTracker.Domain.Repository
         void AddClickEvents(IEnumerable<ClickEvent> clickEvent);
     }
 
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class EventsRepository : IEventsRepository
     {
         public long AddVisitEvent(VisitEvent visitEvent)
