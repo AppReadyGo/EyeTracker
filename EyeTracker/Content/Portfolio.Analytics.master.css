@@ -1,9 +1,21 @@
 ﻿
-.period{text-align:left;border:1px solid #BBB;border-radius:4px;
+.filter{text-align:left;border:1px solid #BBB;border-radius:4px;
         padding:4px;background-color:#F5F5F5;margin-bottom:10px;}
-.period > a{cursor:pointer;font-size:17px;padding:4px;
-               border-right:1px solid #F5F5F5;}
-.period > a:hover{border-right:1px solid #BBB;}
+.filter ul{margin:0;padding:0;}
+.filter ul li{list-style-type:none;}
+.filter > a,.filter a.link{cursor:pointer;font-size:17px;padding:4px;
+											border-right:1px solid #F5F5F5;}
+.filter > a:hover,.filter a.link:hover{xborder-right:1px solid #BBB;}
+
+.filter a.link{background:url("images/selector.arrow.png") no-repeat scroll right center transparent;padding-right:17px;}
+.filter .selector{width:300px;float:left;position:relative;}
+.filter .pop-up{display:none;position:absolute;border:1px solid #BBB;
+				padding:4px;background-color:#F5F5F5;width:300px;z-index:1;}
+.filter .pop-up ul{max-height:150px;overflow-y:auto;}
+.filter .pop-up .action{text-align:right;}
+.filter .pop-up .action a{color:#2779AA;font-size:10px;margin:5px;cursor:pointer;}
+.filter .pop-up .action a:hover{text-decoration:underline;}
+
 .date-panel{font-family:"Trebuchet MS","Helvetica","Arial","Verdana","sans-serif";font-size:10px;background-color:#F5F5F5;
             border:1px solid #BBB;padding:10px;z-index:1;position:absolute;margin-top:4px;display:none;}
 .date-panel > div{float:right;}

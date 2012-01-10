@@ -118,11 +118,19 @@ namespace EyeTracker.Controllers
 
             ViewData["breadCrumbItems"] = navigationItems;
 
+            
+
             ViewData["Applications"] = new SelectorModel
             {
-                Title = "Application",
-                Items = new Dictionary<int, string>() { { 1, "Appl 1" } },
-                SelectedItems = new Dictionary<int, string>() { { 1, "Appl 2" } }
+                Title = "Add Application",
+                Items = Enumerable.Range(8, 30).Select((num, i) => new SelectorItem { Id = num, Text = "App " + num, Index = i }),
+                SelectedItems = new List<SelectorItem>()
+            };
+            ViewData["ScreenSizes"] = new SelectorModel
+            {
+                Title = "Screen Sizes",
+                Items = Enumerable.Range(8, 30).Select((num, i) => new SelectorItem { Id = num, Text = "App " + num, Index = i }),
+                SelectedItems = new List<SelectorItem>()
             };
 
             return View();
