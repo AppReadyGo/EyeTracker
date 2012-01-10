@@ -56,7 +56,7 @@ namespace EyeTracker.Domain.Model
         /// <param name="type"></param>
         public Application(Portfolio portfolio, string description, ApplicationType type)
         {
-            this.CreateDate = DateTime.UtcNow;
+            ;
             this.Description = description;
             this.Type = type;
             this.Portfolio = portfolio;

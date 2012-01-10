@@ -5,8 +5,12 @@ using System.Text;
 
 namespace EyeTracker.Domain.Model.Events
 {
-    public class ViewPartEvent
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ViewPartEvent : IEvent
     {
+        //[System.Obsolete("don`t use this property", true)]
         public virtual long Id { get; set; }
 
         public virtual int ScrollTop { get; set; }
@@ -16,7 +20,8 @@ namespace EyeTracker.Domain.Model.Events
         public virtual long TimeSpan { get; set; }
 
         public virtual DateTime Date { get; set; }
-
+        
+        //[System.Obsolete("don`t use this property", true)]
         public virtual long VisitInfoId { get; set; }
     }
 }

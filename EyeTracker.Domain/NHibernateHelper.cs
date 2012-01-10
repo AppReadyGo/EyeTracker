@@ -58,7 +58,7 @@ namespace EyeTracker.Domain
 #if DEBUG
                 c.LogSqlInConsole = true;
                 c.LogFormattedSql = true;
-                c.SchemaAction = SchemaAutoAction.Update;
+                c.SchemaAction = SchemaAutoAction.Create;
 #else
                 c.SchemaAction = SchemaAutoAction.Validate;
 #endif

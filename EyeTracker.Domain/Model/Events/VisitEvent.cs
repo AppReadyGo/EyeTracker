@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EyeTracker.Domain.Model.Events
 {
-    public class VisitEvent
+    public class VisitEvent : IEvent
     {
         public virtual long Id { get; set; }
 

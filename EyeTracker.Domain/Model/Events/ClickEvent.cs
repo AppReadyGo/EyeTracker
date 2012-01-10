@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EyeTracker.Domain.Model.Events
 {
-    public class ClickEvent
+    public class ClickEvent : IEvent
     {
         public virtual long Id { get; set; }
 
@@ -16,5 +16,7 @@ namespace EyeTracker.Domain.Model.Events
         public virtual DateTime Date { get; set; }
 
         public virtual long VisitInfoId { get; set; }
+
+        public virtual int Press { get; set; }
     }
 }
