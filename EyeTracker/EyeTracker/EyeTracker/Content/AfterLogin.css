@@ -21,7 +21,8 @@
 
 .header li{list-style-type:none;display:inline;}
 
-.main-content{padding:20px;}
+.main-content{padding:20px;min-height:500px;border-top:3px solid orange;}
+.main-content h3.title{margin-top:0;font-size:17px;}
 
 .footer{color:#3e5163;width:100%;height:87px;text-align:center;background:url(images/beforelogn.footer.bg.png) repeat-x center center;}
 .footer ul{margin:0;padding:0;}

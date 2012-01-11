@@ -5,7 +5,6 @@ to use a different color start by replacing all instances of
 ----------------------------------------------------------*/
 body
 {
-    background: url("https://ssl.gstatic.com/analytics/20110830/images/header_background.png") repeat-x scroll 0 0 #EDF0F4;
     font-size: .75em;
     font-family: Verdana, Helvetica, Sans-Serif;
     margin: 0;

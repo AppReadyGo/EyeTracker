@@ -16,83 +16,39 @@ namespace EyeTracker.Controllers
     public class PortfolioController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
-        private IAnalyticsService analyticsService;
+        private IPortfolioService portfolioService;
 
         public PortfolioController()
-            : this(new AnalyticsService())
+            : this(new PortfolioService())
         {
         }
 
-        public PortfolioController(IAnalyticsService analyticsService)
+        public PortfolioController(IPortfolioService portfolioService)
         {
-            this.analyticsService = analyticsService;
-        }
-
-        public ActionResult Index()
-        {
-            var res = analyticsService.GetCurrentUserPortfolios();
-            if (res.HasError)
-            {
-                return View("Error");
-            }
-
-            ViewBag.Data = res.Value;
-            
-            /*
-            var columnHeaders = new List<HTMLTable.Cell>() {
-                    new HTMLTable.Cell() { Value = "Description" }, 
-                    new HTMLTable.Cell() { Value = "Applications" }, 
-                    new HTMLTable.Cell() { Value = "% Change" }
-                };
-            var data = new List<List<HTMLTable.Cell>>();
-
-            if (res.Value.Count > 0)
-            {
-                //Create table
-                foreach (var curPortfolio in res.Value)
-                {
-                    var cells = new List<HTMLTable.Cell>();
-                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Portfolio/Remove/{0}\">remove</a>&nbsp;<a href=\"/Portfolio/Edit/{0}\">edit</a>&nbsp;<a href=\"/Analytics/Portfolio/Dashboard/{0}\">{1}</a>", curPortfolio.Id, curPortfolio.Description) });
-                    cells.Add(new HTMLTable.Cell() { Value = string.Format("<a href=\"/Application/{0}\" >{1}</a>", curPortfolio.Id, curPortfolio.Applications.Count()) });
-                    cells.Add(new HTMLTable.Cell() { Value = "0.00%" });
-                    data.Add(cells);
-                }
-            }
-            else
-            {
-                data.Add(new List<HTMLTable.Cell>() { new HTMLTable.Cell() { ColSpan = 8, StyleClass = "no-data", Value = "No Portfolios" } });
-            }
-
-            ViewData["caption"] = new HTMLTable.Cell() { Value = "Accounts" };
-            ViewData["columnHeaders"] = columnHeaders;
-            ViewData["data"] = data;
-            ViewData["Portfolios"] = "class=\"selected\"";
-             */
-            return View();
+            this.portfolioService = portfolioService;
         }
 
         public ActionResult New()
         {
-            ViewBag.Title = "New";
-            /*
+            ViewData["analytics"] = "class=\"selected\"";
+           
             var countriesRes = portfolioService.GetCountries();
             if (!countriesRes.HasError)
             {
                 ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
-                return View("NewEdit", new PortfolioModel());
+                return View(new PortfolioModel());
             }
             else
             {
                 return View("Error");
-            }*/
-            return View("Error");
+            }
         }
 
         [HttpPost]
         public ActionResult New(PortfolioModel model)
         {
-            /*
             ViewBag.Title = "New";
+            ViewData["analytics"] = "class=\"selected\"";
             if (ModelState.IsValid)
             {
                 var res = portfolioService.AddPortfolio(model.Description, model.TimeZone);
@@ -117,8 +73,7 @@ namespace EyeTracker.Controllers
                 {
                     return View("Error");
                 }
-            }*/
-            return View("Error");
+            }
         }
 
         public ActionResult Edit(int id)
