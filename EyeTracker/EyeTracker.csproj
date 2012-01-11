@@ -197,7 +197,7 @@
     <Content Include="Content\img\remove_icon.gif" />
     <Content Include="Content\img\world_map.jpg" />
     <Content Include="Content\Analytics.Master.css" />
-    <Content Include="Content\shared\Form.css" />
+    <Content Include="Content\shared\form.css" />
     <Content Include="Content\Account.LogOn.css" />
     <Content Include="Content\Home.css" />
     <Content Include="Content\FixedContent.css" />
@@ -320,6 +320,7 @@
     <Content Include="Views\Analytics\Usage.aspx" />
     <Content Include="Views\Analytics\Dashboard.aspx" />
     <Content Include="Views\Analytics\Index.aspx" />
+    <Content Include="Views\Portfolio\New.aspx" />
     <Content Include="Views\Portfolio\NewEdit.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Web.config">

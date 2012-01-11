@@ -15,16 +15,22 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h3>Portfolios</h3>
+    <h3 class="title">Portfolios</h3>
     <table>
-        <thead></thead>
+        <caption><a href="Portfolio/New">New Portfolio</a></caption>
         <tbody>
+        <%if (ViewBag.Count == 0)
+          {%>
+           <tr><td>No Portfolios</td></tr>
+        <%}
+          else
+          {%>
         <%foreach (var item in ViewBag.Data)
           {%>
         <tr class="main" itemid="<%: item.Id %>">
             <td class="expand space"></td>
-            <td><%: item.Description %></td>
-            <td> Visits: <%: item.Visits %></td>
+            <td><%: item.Description%></td>
+            <td> Visits: <%: item.Visits%></td>
         </tr>
         <tr class="sub" itemid="<%: item.Id %>">
             <td></td>
@@ -42,6 +48,7 @@
             </table>
             </td>
         </tr>
+        <%} %>
         <%} %>
         </tbody>
     </table>

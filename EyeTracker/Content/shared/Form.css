@@ -1,7 +1,13 @@
 ﻿
-form{padding:50px;}
-form fieldset{border:none;width:362px;background-color:#F5F5F5;margin:auto;border:1px solid #C5C9C9;color:#595959;text-align:left;}
-form fieldset h3{color:#572d00;margin:0;font-size:20px;font-weight:bold;}
-form fieldset .editor-label{margin-top:5px;}
+form table {}
+form caption{font-size:15px;border-bottom:1px solid #ccc;text-align:left;}
+
+
+
+
+xform{padding:50px;}
+xform fieldset{border:none;width:362px;background-color:#F5F5F5;margin:auto;border:1px solid #C5C9C9;color:#595959;text-align:left;}
+xform fieldset h3{color:#572d00;margin:0;font-size:20px;font-weight:bold;}
+xform fieldset .editor-label{margin-top:5px;}
 
 input[type=text],input[type=password]{border: 1px solid #CCCCCC;padding:5px;font-size:17px;width:350px;}

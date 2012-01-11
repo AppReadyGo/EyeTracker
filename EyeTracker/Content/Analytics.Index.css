@@ -1,4 +1,7 @@
 ﻿
+table {width:100%;}
+table caption{border-bottom:2px solid #CCC;text-align:left;}
+table caption a{text-decoration:none;}
 
 tr.main{height:15px;}
 tr.main td{cursor:pointer;height:15px;}

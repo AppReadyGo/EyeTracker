@@ -49,6 +49,7 @@ namespace EyeTracker.Controllers
                 return View("Error");
             }
 
+            ViewBag.Count = res.Value.Count();
             ViewBag.Data = res.Value;
 
             ViewData["analytics"] = "class=\"selected\"";
