@@ -132,16 +132,17 @@ $(document).ready(function () {
                 data: { "Description": desc, "Type": type },
                 success: function (json) {
                     if (json.HasError) {
-                        $('#app_config').prepend('<div class="validation-summary-errors"><span>Account creation was unsuccessful. Please contact to administrator.</span></div>');
+                        $('#tbody').prepend('<tr><td colspan="2" class="validation-summary-errors"><span>Account creation was unsuccessful. Please contact to administrator.</span></td></tr>');
                     } else {
                         $('#overlay').hide();
-                        $('#create_lnk').hide();
+                        $('#action_pnl').hide();
                         $('#web_code').html($('#web_code').html().replace('**-******-***', json.code));
                         $('#android_code').html($('#android_code').html().replace('**-******-***', json.code));
                         $('#property_id').text($('#property_id').text().replace('**-******-***', json.code));
                         $('#Type').attr('disabled', 'disabled');
                         appId = json.appId;
                         $('#Id').val(appId);
+                        $('#edit_form').attr("action", $('#edit_form').attr("action") + appId);
                     }
                 }
             });

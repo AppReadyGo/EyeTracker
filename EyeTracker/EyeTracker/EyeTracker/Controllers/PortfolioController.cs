@@ -58,7 +58,7 @@ namespace EyeTracker.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("");
+                    return Redirect("/Analytics");
                 }
             }
             else
@@ -67,7 +67,7 @@ namespace EyeTracker.Controllers
                 if (!countriesRes.HasError)
                 {
                     ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
-                    return View("NewEdit", new PortfolioModel());
+                    return View(new PortfolioModel());
                 }
                 else
                 {

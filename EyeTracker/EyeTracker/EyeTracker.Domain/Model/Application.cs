@@ -45,6 +45,7 @@ namespace EyeTracker.Domain.Model
         public Application()
         {
             Screens = new List<Screen>();
+            CreateDate = DateTime.UtcNow;
         }
 
 
@@ -55,8 +56,8 @@ namespace EyeTracker.Domain.Model
         /// <param name="description"></param>
         /// <param name="type"></param>
         public Application(Portfolio portfolio, string description, ApplicationType type)
+            : this()
         {
-            ;
             this.Description = description;
             this.Type = type;
             this.Portfolio = portfolio;

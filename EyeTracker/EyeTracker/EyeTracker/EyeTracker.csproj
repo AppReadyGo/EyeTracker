@@ -133,6 +133,7 @@
     <Compile Include="CustomModelBinders\Parsers\JsonScrollParser.cs" />
     <Compile Include="CustomModelBinders\Parsers\JsonViewAreaParser.cs" />
     <Compile Include="Helpers\General.cs" />
+    <Compile Include="Model\ApplicationEditModel.cs" />
     <Compile Include="Model\PortfolioModel.cs" />
     <Compile Include="CustomModelBinders\JsonPackageModelBinder.cs" />
     <Compile Include="Global.asax.cs">
@@ -187,7 +188,7 @@
     <Content Include="Scripts\ThridParty\jquery.roundabout.min.js" />
     <Compile Include="Windsor\WindsorFactory.cs" />
     <Compile Include="Windsor\WindsorInstaller.cs" />
-    <Content Include="Content\ApplicationNewEdit.css" />
+    <Content Include="Content\application.new.css" />
     <Content Include="Content\BeforeLogin.css" />
     <Content Include="Content\Home.Index.css" />
     <Content Include="Content\images\beforelogn.header.bg.jpg" />
@@ -209,7 +210,7 @@
     <Content Include="Content\img\fixed_shadow_left.png" />
     <Content Include="Content\img\fixed_shadow_right.png" />
     <Content Include="Content\img\title.png" />
-    <Content Include="Content\ProfileNewEdit.css" />
+    <Content Include="Content\Profile.New.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Site__.css" />
     <Content Include="Content\Table.css" />
@@ -217,7 +218,7 @@
     <Content Include="Content\Tests\qunit.css" />
     <Content Include="Scripts\Image.js" />
     <Content Include="Scripts\ThridParty\ajaxfileupload.js" />
-    <Content Include="Scripts\ApplicationNewEdit.js" />
+    <Content Include="Scripts\application.new.js" />
     <Content Include="Scripts\ApplicationDashboard.js" />
     <Content Include="Scripts\ApplicationUsage.js" />
     <Content Include="Scripts\PortfolioDashboard.js" />
@@ -306,6 +307,7 @@
     <Content Include="Views\Analytics\FingerPrint.aspx" />
     <Content Include="Views\Analytics\EyeTracker.aspx" />
     <Content Include="Views\Analytics\Selector.ascx" />
+    <Content Include="Views\Application\New.aspx" />
     <Content Include="Views\Application\Image.aspx" />
     <Content Include="Views\Application\Dashboard.aspx" />
     <Content Include="Views\Account\Details.aspx" />
