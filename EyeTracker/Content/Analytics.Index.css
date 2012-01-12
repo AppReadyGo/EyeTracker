@@ -1,6 +1,6 @@
 ﻿
 table {width:100%;}
-table caption{border-bottom:2px solid #CCC;text-align:left;}
+table caption{border-bottom:2px solid #CCC;text-align:left;margin-bottom:25px;}
 table caption a{text-decoration:none;}
 
 tr.main{height:15px;}
@@ -9,6 +9,7 @@ tr.sub{display:none;}
 tr.sub table{margin-left:10px;}
 tr.sub tr{cursor:pointer;}
 
+td{padding:3px 0 3px 0;}
 td.space{width:10px;}
 td.expand{background:url("images/expand_icon.gif") no-repeat scroll left center transparent;}
 td.expanded{background:url("images/expanded_icon.gif") no-repeat scroll left center transparent;}

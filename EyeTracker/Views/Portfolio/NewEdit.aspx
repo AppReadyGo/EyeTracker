@@ -2,7 +2,7 @@
 
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
     <link href="<%: Url.Content("~/Content/Form.css")%>" rel="stylesheet" type="text/css" />
-    <link href="<%: Url.Content("~/Content/ProfileNewEdit.css")%>" rel="stylesheet" type="text/css" />
+    <link href="<%: Url.Content("~/Content/Profile.New.css")%>" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <div class="form">

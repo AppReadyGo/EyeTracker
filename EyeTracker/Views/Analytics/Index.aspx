@@ -37,12 +37,19 @@
             <td colspan="2">
             <table>
                 <tbody>
-                <%foreach (var app in item.Applications)
+                <%if (item.Applications.Count > 0)
                   { %>
-                <tr itemid="<%: app.Id %>">
-                <td><%: app.Description%></td>
-                <td> Visits: <%: app.Visits%></td>
-                </tr>
+                    <%foreach (var app in item.Applications)
+                      { %>
+                        <tr itemid="<%: app.Id %>">
+                            <td><%: app.Description%></td>
+                            <td> Visits: <%: app.Visits%></td>
+                        </tr>
+                    <%} %>
+                <%}
+                  else
+                  {%>
+                    <tr><td>The portfolio does not have applications, please <a href="/Application/New/<%: item.Id %>">add application.</a></td></tr>
                 <%} %>
                 </tbody>
             </table>

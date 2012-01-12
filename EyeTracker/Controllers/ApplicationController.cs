@@ -97,13 +97,15 @@ namespace EyeTracker.Controllers
 
         public ActionResult New(int portfolioId)
         {
+            ViewData["analytics"] = "class=\"selected\"";
+
             ViewBag.Screens = new List<Screen>();
             ViewBag.PortfolioId = portfolioId;
             ViewData["TypesList"] = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() });
             ViewBag.PackageLink = "http://mobillify.com";
             ViewBag.PropertyId = "**-******-***";
             ViewBag.CodeSample = "<script type=\"text/javascript\">\nvar _gaq = _gaq || [];_\ngaq.push(['_setAccount', '**-******-***']);";
-            return View("NewEdit",new ApplicationModel());
+            return View(new ApplicationModel());
         }
 
         [HttpPost]
@@ -177,7 +179,8 @@ namespace EyeTracker.Controllers
             else
             {
                 var app = appRes.Value;
-                var model = new ApplicationModel { 
+                var model = new ApplicationEditModel
+                { 
                     Id = app.Id,
                     Description = app.Description,
                     PortfolioId = portfolioId,
@@ -194,7 +197,7 @@ namespace EyeTracker.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ApplicationModel model)
+        public ActionResult Edit(ApplicationEditModel model)
         {
             if (ModelState.IsValid)
             {
@@ -212,13 +215,13 @@ namespace EyeTracker.Controllers
                     }
                     else
                     {
-                        return RedirectToRoute("ApplicationDef");
+                        return Redirect("/Analytics");
                     }
                 }
             }
             else
             {
-                return View("NewEdit", model);
+                return View(model);
             }
         }
 
