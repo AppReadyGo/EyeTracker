@@ -25,7 +25,7 @@ namespace EyeTracker.Core.Services
 
         //OperationResult<Dictionary<DateTime, int>> GetApplicationUsageData(long appId, string pageUri, DateTime fromDate, DateTime toDate);
 
-        OperationResult<DashboardData> GetDashboardData(AnalyticsType type, int id, DateTime fromDate, DateTime toDate);
+        OperationResult<DashboardData> GetDashboardData(int portfolioId, int? applicationId, DateTime fromDate, DateTime toDate);
 
         OperationResult<IEnumerable<PortfolioDetails>> GetCurrentUserPortfolios();
     }
@@ -106,11 +106,11 @@ namespace EyeTracker.Core.Services
             return result;
         }
 
-        public OperationResult<DashboardData> GetDashboardData(AnalyticsType type, int id, DateTime fromDate, DateTime toDate)
+        public OperationResult<DashboardData> GetDashboardData(int portfolioId, int? applicationId, DateTime fromDate, DateTime toDate)
         {
             try
             {
-                return new OperationResult<DashboardData>(repository.GetDashboardData(type, id, fromDate, toDate));
+                return new OperationResult<DashboardData>(repository.GetDashboardData(portfolioId, applicationId, fromDate, toDate));
             }
             catch (Exception exp)
             {

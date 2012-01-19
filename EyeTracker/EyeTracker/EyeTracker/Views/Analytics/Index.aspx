@@ -8,8 +8,7 @@
     <script src="<%: Url.Content("~/Scripts/Analytics.Index.js") %>" type="text/javascript"></script>
     <link href="<%: Url.Content("~/Content/Analytics.Index.css")%>" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
-        var dashboardUrl = '/Analytics/{0}/Dashboard/{1}';
-        var type = { Portfolio:'Portfolio', Application:'Application'};
+        var dashboardUrl = '/Analytics/Dashboard/{0}/{1}';
     </script>
 </asp:Content>
 
@@ -27,12 +26,12 @@
           {%>
         <%foreach (var item in ViewBag.Data)
           {%>
-        <tr class="main" itemid="<%: item.Id %>">
+        <tr class="main" pid="<%: item.Id %>">
             <td class="expand space"></td>
             <td><%: item.Description%></td>
             <td> Visits: <%: item.Visits%></td>
         </tr>
-        <tr class="sub" itemid="<%: item.Id %>">
+        <tr class="sub">
             <td></td>
             <td colspan="2">
             <table>
@@ -41,7 +40,7 @@
                   { %>
                     <%foreach (var app in item.Applications)
                       { %>
-                        <tr itemid="<%: app.Id %>">
+                        <tr pid="<%: item.Id %>" aid="<%: app.Id %>">
                             <td><%: app.Description%></td>
                             <td> Visits: <%: app.Visits%></td>
                         </tr>

@@ -56,7 +56,7 @@ namespace EyeTracker.Controllers
             return View();
         }
 
-        public ActionResult Dashboard(AnalyticsType type, int Id, DateTime? fromDate, DateTime? toDate)
+        public ActionResult Dashboard(int portfolioId, int? applicationId, DateTime? fromDate, DateTime? toDate)
         {
             if (!fromDate.HasValue)
             {
@@ -68,7 +68,7 @@ namespace EyeTracker.Controllers
                 toDate = DateTime.UtcNow;
             }
 
-            var dataResult = analyticsService.GetDashboardData(type, Id, fromDate.Value, toDate.Value);
+            var dataResult = analyticsService.GetDashboardData(portfolioId, applicationId, fromDate.Value, toDate.Value);
             if (dataResult.HasError)
             {
                 return View("Error");
@@ -96,11 +96,9 @@ namespace EyeTracker.Controllers
                 color = "#461D7C"
             });
 
-            ViewBag.Type = type.ToString();
             ViewBag.UsageInitData = new JavaScriptSerializer().Serialize(usageInitData);
-            ViewBag.Id = Id;
             ViewBag.CurrentName = dashboardData.Description;
-            ViewBag.AnalyticsType = type;
+            ViewBag.PortfolioId = portfolioId;
 
             BindFilterData(fromDate.Value, toDate.Value);
 
@@ -109,12 +107,16 @@ namespace EyeTracker.Controllers
                 new KeyValuePair<string, string>("/Analytics","Portfolios")
             };
 
+            /*
+
             if (type == AnalyticsType.Application)
             {
                 var appDashboardData = (ApplicationDashboardData)dashboardData;
                 navigationItems.Add(new KeyValuePair<string, string>(string.Format("/Analytics/{0}/Dashboard/{1}", AnalyticsType.Portfolio, appDashboardData.PortfolioId), appDashboardData.PortfolioDescription));
                 navigationItems.Add(new KeyValuePair<string, string>("/Application", "Applications"));
             }
+            
+            */
             navigationItems.Add(new KeyValuePair<string, string>(null, dashboardData.Description));
 
             ViewData["breadCrumbItems"] = navigationItems;
