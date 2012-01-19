@@ -14,7 +14,7 @@ namespace EyeTracker.Domain.Repository
 
         IEnumerable<ViewHeatMapData> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
 
-        DashboardData GetDashboardData(AnalyticsType type, int id, DateTime fromDate, DateTime toDate);
+        DashboardData GetDashboardData(int portfolioId, int? applicationId, DateTime fromDate, DateTime toDate);
 
         IEnumerable<PortfolioDetails> GetCurrentUserPortfolios(Guid userId);
     }
@@ -61,22 +61,22 @@ namespace EyeTracker.Domain.Repository
             }
         }
 
-        public DashboardData GetDashboardData(AnalyticsType type, int id, DateTime fromDate, DateTime toDate)
+        public DashboardData GetDashboardData(int portfolioId, int? applicationId, DateTime fromDate, DateTime toDate)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
                 DashboardData res;
-                if (type == AnalyticsType.Application)
+                if (applicationId.HasValue)
                 {
                     var dashboard = new ApplicationDashboardData();
-                    var application = session.Get<Application>(id);
+                    var application = session.Get<Application>(applicationId.Value);
 
                     dashboard.Description = application.Description;
                     dashboard.PortfolioId = application.Portfolio.Id;
                     dashboard.PortfolioDescription = application.Portfolio.Description;
 
                     dashboard.ViewsData = session.Query<PageView>()
-                       .Where(pv => pv.Application.Id == id && pv.Date >= fromDate && pv.Date <= toDate)
+                       .Where(pv => pv.Application.Id == applicationId.Value && pv.Date >= fromDate && pv.Date <= toDate)
                        .GroupBy(g => g.Date)
                        .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
                        .ToList().ToDictionary(v => v.Key, v => v.Value);
@@ -85,7 +85,7 @@ namespace EyeTracker.Domain.Repository
                 else
                 {
                     var dashboard = new DashboardData();
-                    var portfolio = session.Get<Portfolio>(id);
+                    var portfolio = session.Get<Portfolio>(portfolioId);
 
                     dashboard.Description = portfolio.Description;
 

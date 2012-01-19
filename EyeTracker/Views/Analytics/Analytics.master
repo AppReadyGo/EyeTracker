@@ -17,17 +17,14 @@
     </div>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="LeftMenu" runat="server">
-    <a href="/Analytics/<%: ViewBag.AnalyticsType %>/Dashboard/<%: ViewBag.Id %>">Dashboard</a>
-    <%if (ViewBag.AnalyticsType == EyeTracker.Domain.Model.AnalyticsType.Application)
-    {%>
-      <a href="/Analytics/FingerPrint/<%: ViewBag.Id %>">Finger Print</a>
-      <a href="/Analytics/EyeTracker/<%: ViewBag.Id %>">Eye Tracker</a>
-    <%} %>
-    <a href="/Analytics/<%: ViewBag.AnalyticsType %>/Usage/<%: ViewBag.Id %>">Usage</a>
-    <a <%--href="/Portfolio/Visitors/<%: ViewBag.Id %>"--%> class="disabled">Visitors</a>
-    <a <%--href="/Portfolio/MapOverlay/<%: ViewBag.Id %>"--%> class="disabled">Map Overlay</a>
-    <a <%--href="/Portfolio/TraficSources/<%: ViewBag.Id %>"--%> class="disabled">Trafic Sources</a>
-    <a <%--href="/Portfolio/ContentOverview/<%: ViewBag.Id %>"--%> class="disabled">Content Overview</a>
+    <a href="/Analytics/Dashboard/<%: ViewBag.PortfolioId %>">Dashboard</a>
+    <a href="/Analytics/FingerPrint/<%: ViewBag.PortfolioId %>">Finger Print</a>
+    <a href="/Analytics/EyeTracker/<%: ViewBag.PortfolioId %>">Eye Tracker</a>
+    <a href="/Analytics/Usage/<%: ViewBag.PortfolioId %>">Usage</a>
+    <a <%--href="/Portfolio/Visitors/<%: ViewBag.PortfolioId %>"--%> class="disabled">Visitors</a>
+    <a <%--href="/Portfolio/MapOverlay/<%: ViewBag.PortfolioId %>"--%> class="disabled">Map Overlay</a>
+    <a <%--href="/Portfolio/TraficSources/<%: ViewBag.PortfolioId %>"--%> class="disabled">Trafic Sources</a>
+    <a <%--href="/Portfolio/ContentOverview/<%: ViewBag.PortfolioId %>"--%> class="disabled">Content Overview</a>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <uc:Filter runat="server" />

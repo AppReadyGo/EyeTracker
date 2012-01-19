@@ -7,8 +7,7 @@
         dateTo: '<%=ViewBag.ToDate.ToString("dd MMM yyyy") %>',
         dateToMin: '<%=ViewBag.FromDate.ToString("dd MMM yyyy") %>',
         dateToMax: '<%=DateTime.UtcNow.ToString("dd MMM yyyy") %>',
-        type: '<%=ViewBag.Type%>',
-        id: <%: ViewBag.Id %>
+        pid: <%: ViewBag.PortfolioId %>
     };
 </script>
 <div class="filter">

@@ -5,7 +5,7 @@
         <ul>
             <%foreach (var item in Model.Items)
               { %>
-            <li><label itemindex="<%: item.Key %>"><input type="checkbox" value="<%: item.Key %>" /> <%: item.Value %></label></li>
+            <li><label itemindex="<%: item.Index %>"><input type="checkbox" value="<%: item.Id %>" /> <%: item.Text %></label></li>
             <%} %>
         </ul>
         <div class="action"><a class="cancel-btn">Cancel</a><a class="apply-btn">Apply</a></div>
@@ -13,7 +13,7 @@
     <ul class="selected">
         <%foreach (var item in Model.SelectedItems)
           { %>
-        <li><a itemid="<%: item.Key %>" itemindex="<%: item.Key %>" class="remove-btn">&nbsp;</a> <%: item.Value %></li>
+        <li><a itemid="<%: item.Id %>" itemindex="<%: item.Index %>" class="remove-btn">&nbsp;</a> <%: item.Text %></li>
         <%} %>
     </ul>
 </div>

@@ -12,11 +12,14 @@ $(document).ready(function () {
         }
     });
     $('tr.main td:not(.expand)').click(function () {
-        var id = $(this).parent().attr('itemid');
-        window.location.href = dashboardUrl.replace('{0}', type.Portfolio).replace('{1}', id);
+        var parent = $(this).parent();
+        var pid = parent.attr('pid');
+        window.location.href = dashboardUrl.replace('{0}', pid).replace('{1}', '');
     });
     $('tr.sub tr').click(function () {
-        var id = $(this).attr('itemid');
-        window.location.href = dashboardUrl.replace('{0}', type.Application).replace('{1}', id); ;
+        var parent = $(this);
+        var pid = parent.attr('pid');
+        var aid = parent.attr('aid');
+        window.location.href = dashboardUrl.replace('{0}', pid).replace('{1}', aid);
     });
 });
