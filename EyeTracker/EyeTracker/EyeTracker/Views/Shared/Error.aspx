@@ -1,11 +1,14 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<System.Web.Mvc.HandleErrorInfo>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/BeforeLogin.Master" Inherits="System.Web.Mvc.ViewPage<System.Web.Mvc.HandleErrorInfo>" %>
 
-<asp:Content ID="errorTitle" ContentPlaceHolderID="TitleContent" runat="server">
+<asp:Content ID="errorTitle" ContentPlaceHolderID="PageTitleContent" runat="server">
     Error
 </asp:Content>
-
+<asp:Content ID="Content1" ContentPlaceHolderID="HeaderContent" runat="server">
+   <link href="<%: Url.Content("~/Content/error.css") %>" rel="stylesheet" type="text/css" />
+</asp:Content>
 <asp:Content ID="errorContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        Sorry, an error occurred while processing your request.
-    </h2>
+<div class="error">
+    Sorry, an error occurred while processing your request.<br />
+    Please contact to administrator
+</div>
 </asp:Content>

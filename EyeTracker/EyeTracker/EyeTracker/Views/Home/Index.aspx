@@ -3,7 +3,7 @@
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
     <script src="<%: Url.Content("~/Scripts/ThridParty/jquery.roundabout.min.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/home.index.js") %>" type="text/javascript"></script>
-    <link href="<%: Url.Content("~/Content/Home.Index.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%: Url.Content("~/Content/home.index.css") %>" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <h2>VISULAZE YOUR VISITORS</h2>

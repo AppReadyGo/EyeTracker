@@ -13,7 +13,7 @@
     <ul class="selected">
         <%foreach (var item in Model.SelectedItems)
           { %>
-        <li><a itemid="<%: item.Id %>" itemindex="<%: item.Index %>" class="remove-btn">&nbsp;</a> <%: item.Text %></li>
+            <li><a itemid="<%: item.Id %>" itemindex="<%: item.Index %>" class="remove-btn">&nbsp;</a> <%: item.Text %></li>
         <%} %>
     </ul>
 </div>
