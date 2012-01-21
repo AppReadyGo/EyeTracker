@@ -35,8 +35,8 @@ namespace EyeTracker.Controllers
             var countriesRes = portfolioService.GetCountries();
             if (!countriesRes.HasError)
             {
-                ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
-                return View(new PortfolioModel());
+                ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
+                return View(new PortfolioModel() { TimeZone = 0 });
             }
             else
             {

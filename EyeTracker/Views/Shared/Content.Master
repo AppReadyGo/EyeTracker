@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
-    <link href="<%: Url.Content("~/Content/Content.Master.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%: Url.Content("~/Content/content.master.css") %>" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="content-wrapper">

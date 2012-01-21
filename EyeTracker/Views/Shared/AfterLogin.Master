@@ -9,7 +9,10 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="header">
         <a class="logo" href="/"><img src="/Content/images/logo.png"></a>
-        <ul class="login-menu"><li><a href="/account/logon">Logout</a></li></ul>
+        <ul class="login-menu">
+            <li>Welcome <b><%: Page.User.Identity.Name %></b>! </li>
+            <li><%: Html.ActionLink("Log Off", "LogOff", "Account") %></li>
+        </ul>
         <ul class="main-menu">
             <li <%= ViewData["Analytics"] %>><span><a href="/">Analytics</a></span></li>
             <li <%= ViewData["MyAccount"] %>><span><a href="/">My Account</a></span></li>

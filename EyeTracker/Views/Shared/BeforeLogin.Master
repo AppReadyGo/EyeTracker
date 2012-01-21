@@ -9,24 +9,22 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="header">
         <a class="logo" href="/"><img src="/Content/images/logo.png"></a>
-        <ul class="login-menu"><li><a href="/account/logon">Login</a></li><li><a href="/account/register">Register</a></li></ul>
+        <ul class="login-menu">
+            <li><a href="/account/logon">Login</a></li>
+            <li><a href="/account/register">Register</a></li>
+        </ul>
         <ul class="main-menu">
             <li <%= ViewData["home"] %>><span><a href="/">Home</a></span></li>
             <li <%= ViewData["Tutorials"] %>><a href="/Tutorials/">Tutorials</a></li>
             <li <%= ViewData["Products"] %>><a href="/Products">Products</a></li>
             <li <%= ViewData["PlanAndPricing"] %>><a href="/PlanAndPricing">Plans and Pricing</a></li>
-            <li <%= ViewData["Contacts"] %>><a href="/Contacts">Contacts</a></li>
         </ul>
     </div>
     <asp:ContentPlaceHolder ID="MainContent" runat="server" />
     <div class="footer">
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/Tutorials/">Tutorials</a></li>
-            <li><a href="/Products">Products</a></li>
-            <li><a href="/PlanAndPricing">Plans and Pricing</a></li>
             <li><a href="/Contacts">Contacts</a></li>
         </ul>
-        <span>&#64; 2011<%= DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "" %> <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></span>
+        <span>&#169; 2011<%= DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "" %> <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></span>
     </div>
 </asp:Content>
