@@ -1,0 +1,1 @@
+<%@ Application Codebehind="Global.asax.cs" Inherits="EyeTracker.API.Global" Language="C#" %>
