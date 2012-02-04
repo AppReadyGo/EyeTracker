@@ -8,6 +8,10 @@ using System.Xml;
 
 namespace EyeTracker.API
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
     public static class APIKeyRepository
     {
         public static bool IsValidAPIKey(string key)
