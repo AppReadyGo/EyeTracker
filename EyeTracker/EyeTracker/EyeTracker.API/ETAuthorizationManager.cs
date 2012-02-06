@@ -12,13 +12,21 @@ using System.Xml.Linq;
 
 namespace EyeTracker.API
 {
-    public class APIKeyAuthorization : ServiceAuthorizationManager
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ETAuthorizationManager : ServiceAuthorizationManager
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operationContext"></param>
+        /// <returns></returns>
         protected override bool CheckAccessCore(OperationContext operationContext)
         {
             string key = GetAPIKey(operationContext);
 
-            if (APIKeyRepository.IsValidAPIKey(key))
+            if (ETKeyRepository.IsValidKey(key))
             {
                 return true;
             }
@@ -30,6 +38,11 @@ namespace EyeTracker.API
             }
         }
 
+        /// <summary>
+        /// extract API key from the message 
+        /// </summary>
+        /// <param name="operationContext"></param>
+        /// <returns></returns>
         public string GetAPIKey(OperationContext operationContext)
         {
             // Get the request message
@@ -45,15 +58,21 @@ namespace EyeTracker.API
             return queryParams[APIKEY];
         }
 
+        /// <summary>
+        /// C
+        /// </summary>
+        /// <param name="operationContext"></param>
+        /// <param name="key"></param>
         private static void CreateErrorReply(OperationContext operationContext, string key)
         {
             // The error message is padded so that IE shows the response by default
             using (var sr = new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + APIErrorHTML))
             {
                 XElement response = XElement.Load(sr);
-                using (Message reply = Message.CreateMessage(MessageVersion.None, null, response))
+                //using (Message reply = Message.CreateMessage(MessageVersion.None, null, response))
+                using (Message reply = Message.CreateMessage(MessageVersion.None, null, ErrorMsg))
                 {
-                    HttpResponseMessageProperty responseProp = new HttpResponseMessageProperty() { StatusCode = HttpStatusCode.Unauthorized, StatusDescription = String.Format("'{0}' is an invalid API key", key) };
+                    HttpResponseMessageProperty responseProp = new HttpResponseMessageProperty() { StatusCode = HttpStatusCode.Unauthorized, StatusDescription = String.Format("'{0}' is an invalid key", key) };
                     responseProp.Headers[HttpResponseHeader.ContentType] = "text/html";
                     reply.Properties[HttpResponseMessageProperty.Name] = responseProp;
                     operationContext.RequestContext.Reply(reply);
@@ -64,6 +83,9 @@ namespace EyeTracker.API
         }
 
         const string APIKEY = "APIKey";
+
+        const string ErrorMsg = "Error";
+
         const string APIErrorHTML = @"
 <html>
 <head>
