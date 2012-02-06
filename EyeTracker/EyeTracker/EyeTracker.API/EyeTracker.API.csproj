@@ -69,7 +69,7 @@
   <ItemGroup>
     <Compile Include="ETAuthorizationManager.cs" />
     <Compile Include="ETKeyRepository.cs" />
-    <Compile Include="Service1.cs" />
+    <Compile Include="ETService.cs" />
     <Compile Include="SampleItem.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
