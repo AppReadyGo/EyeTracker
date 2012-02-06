@@ -15,16 +15,11 @@ namespace EyeTracker.API
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     // NOTE: If the service is renamed, remember to update the global.asax.cs file
-    public class Service1
+    public class ETService
     {
         // TODO: Implement the collection resource that will contain the SampleItem instances
 
-        [WebGet(UriTemplate = "")]
-        public List<SampleItem> GetCollection()
-        {
-            // TODO: Replace the current implementation to return a collection of SampleItem instances
-            return new List<SampleItem>() { new SampleItem() { Id = 1, StringValue = "Hello" } };
-        }
+        
 
         [WebInvoke(UriTemplate = "", Method = "POST")]
         public SampleItem Create(SampleItem instance)
@@ -33,12 +28,7 @@ namespace EyeTracker.API
             throw new NotImplementedException();
         }
 
-        [WebGet(UriTemplate = "{id}")]
-        public SampleItem Get(string id)
-        {
-            // TODO: Return the instance of SampleItem with the given id
-            throw new NotImplementedException();
-        }
+        
 
         [WebInvoke(UriTemplate = "{id}", Method = "PUT")]
         public SampleItem Update(string id, SampleItem instance)
@@ -47,12 +37,33 @@ namespace EyeTracker.API
             throw new NotImplementedException();
         }
 
-        [WebInvoke(UriTemplate = "{id}", Method = "DELETE")]
-        public void Delete(string id)
-        {
-            // TODO: Remove the instance of SampleItem with the given id from the collection
-            throw new NotImplementedException();
-        }
+
+        //PM : this method is not needed for FP
+
+        #region old methods 
+        //[WebInvoke(UriTemplate = "{id}", Method = "DELETE")]
+        //public void Delete(string id)
+        //{
+        //    // TODO: Remove the instance of SampleItem with the given id from the collection
+        //    throw new NotImplementedException();
+        //}
+
+        //[WebGet(UriTemplate = "")]
+        //public List<SampleItem> GetCollection()
+        //{
+        //    // TODO: Replace the current implementation to return a collection of SampleItem instances
+        //    return new List<SampleItem>() { new SampleItem() { Id = 1, StringValue = "Hello" } };
+        //}
+
+
+        //[WebGet(UriTemplate = "{id}")]
+        //public SampleItem Get(string id)
+        //{
+        //    // TODO: Return the instance of SampleItem with the given id
+        //    throw new NotImplementedException();
+        //}
+
+        #endregion oldmethods
 
     }
 }
