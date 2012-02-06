@@ -67,8 +67,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APIKeyAuthorization.cs" />
-    <Compile Include="APIKeyRepository.cs" />
+    <Compile Include="ETAuthorizationManager.cs" />
+    <Compile Include="ETKeyRepository.cs" />
     <Compile Include="Service1.cs" />
     <Compile Include="SampleItem.cs" />
     <Compile Include="Global.asax.cs">

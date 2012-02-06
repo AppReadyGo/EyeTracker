@@ -10,11 +10,17 @@ namespace EyeTracker.API
 {
 
     /// <summary>
-    /// 
+    /// This class provides IsValid
     /// </summary>
-    public static class APIKeyRepository
+    public static class ETKeyRepository
     {
-        public static bool IsValidAPIKey(string key)
+
+        /// <summary>
+        /// Check whether the key is valid - 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static bool IsValidKey(string key)
         {
             // TODO: Implement IsValidAPI Key using your repository
 
