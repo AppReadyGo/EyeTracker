@@ -5,6 +5,10 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Runtime.Serialization.Json;
+using System.IO;
+using EyeTracker.API.BL.Contract;
+using EyeTracker.API.BL;
 
 namespace EyeTracker.API
 {
@@ -21,22 +25,19 @@ namespace EyeTracker.API
 
         
 
-        [WebInvoke(UriTemplate = "", Method = "POST")]
-        public SampleItem Create(SampleItem instance)
-        {
-            // TODO: Add the new instance of SampleItem to the collection
-            throw new NotImplementedException();
+        [WebInvoke(UriTemplate = "", Method = "POST", 
+                    RequestFormat=WebMessageFormat.Json, 
+                    ResponseFormat=WebMessageFormat.Json)]
+        public bool Post(IPackage package)
+        {  
+                //return ParseVisitEvents(mState, package);
+                EventParser.Parse(package);
+                return true;
         }
 
         
 
-        [WebInvoke(UriTemplate = "{id}", Method = "PUT")]
-        public SampleItem Update(string id, SampleItem instance)
-        {
-            // TODO: Update the given instance of SampleItem in the collection
-            throw new NotImplementedException();
-        }
-
+     
 
         //PM : this method is not needed for FP
 
@@ -60,6 +61,13 @@ namespace EyeTracker.API
         //public SampleItem Get(string id)
         //{
         //    // TODO: Return the instance of SampleItem with the given id
+        //    throw new NotImplementedException();
+        //}
+
+        //[WebInvoke(UriTemplate = "{id}", Method = "PUT")]
+        //public SampleItem Update(string id, SampleItem instance)
+        //{
+        //    // TODO: Update the given instance of SampleItem in the collection
         //    throw new NotImplementedException();
         //}
 

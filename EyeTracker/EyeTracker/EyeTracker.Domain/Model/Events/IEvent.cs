@@ -8,6 +8,5 @@ namespace EyeTracker.Domain.Model.Events
     public interface IEvent
     {
 
-        
     }
 }
