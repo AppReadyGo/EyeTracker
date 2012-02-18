@@ -70,9 +70,15 @@ namespace EyeTracker.API
             {
                 XElement response = XElement.Load(sr);
                 //using (Message reply = Message.CreateMessage(MessageVersion.None, null, response))
-                using (Message reply = Message.CreateMessage(MessageVersion.None, null, ErrorMsg))
+                using (Message reply = Message.CreateMessage(MessageVersion.None, null, 
+                    ErrorMsg))
                 {
-                    HttpResponseMessageProperty responseProp = new HttpResponseMessageProperty() { StatusCode = HttpStatusCode.Unauthorized, StatusDescription = String.Format("'{0}' is an invalid key", key) };
+                    HttpResponseMessageProperty responseProp = 
+                        new HttpResponseMessageProperty() 
+                        { 
+                            StatusCode = HttpStatusCode.Unauthorized, 
+                            StatusDescription = String.Format("'{0}' is an invalid key", key) 
+                        };
                     responseProp.Headers[HttpResponseHeader.ContentType] = "text/html";
                     reply.Properties[HttpResponseMessageProperty.Name] = responseProp;
                     operationContext.RequestContext.Reply(reply);
