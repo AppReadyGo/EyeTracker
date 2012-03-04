@@ -10,6 +10,7 @@ using System.Web.Security;
 using EyeTracker.Models;
 using EyeTracker.Core.Services;
 using EyeTracker.DAL.Domain;
+using EyeTracker.Models.Account;
 
 namespace EyeTracker.Controllers
 {

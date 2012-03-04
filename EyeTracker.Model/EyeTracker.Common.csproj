@@ -80,12 +80,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationLogging.cs" />
+    <Compile Include="Commands\CreateContentItemCommand.cs" />
+    <Compile Include="Commands\Extentions.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\RemoveContentItemCommand.cs" />
+    <Compile Include="Commands\UpdateContentItemCommand.cs" />
     <Compile Include="Enumerators.cs" />
     <Compile Include="ErrorNumbers.cs" />
     <Compile Include="Messenger.cs" />
     <Compile Include="ObjectSerializator.cs" />
     <Compile Include="OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\GetKeyContent.cs" />
+    <Compile Include="Queries\GetPageContent.cs" />
+    <Compile Include="Queries\IQuery.cs" />
+    <Compile Include="Queries\PageContentResult.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

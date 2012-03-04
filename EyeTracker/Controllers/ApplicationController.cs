@@ -22,11 +22,14 @@ using EyeTracker.Domain.Model;
 using System.Web.Script.Serialization;
 using EyeTracker.Domain.Model.Events;
 using EyeTracker.Domain;
+using EyeTracker.Controllers.Master;
+using EyeTracker.Model.Pages.Application;
+using EyeTracker.Model.Master;
 
 namespace EyeTracker.Controllers
 {
     [Authorize]
-    public class ApplicationController : Controller
+    public class ApplicationController : AfterLoginController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         
@@ -97,15 +100,8 @@ namespace EyeTracker.Controllers
 
         public ActionResult New(int portfolioId)
         {
-            ViewData["analytics"] = "class=\"selected\"";
-
-            ViewBag.Screens = new List<Screen>();
-            ViewBag.PortfolioId = portfolioId;
-            ViewData["TypesList"] = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() });
-            ViewBag.PackageLink = "http://mobillify.com";
-            ViewBag.PropertyId = "**-******-***";
-            ViewBag.CodeSample = "<script type=\"text/javascript\">\nvar _gaq = _gaq || [];_\ngaq.push(['_setAccount', '**-******-***']);";
-            return View(new ApplicationModel());
+            var viewData = GetViewData(portfolioId);
+            return View(new ApplicationModel { ViewData = viewData }, AfterLoginViewModel.SelectedMenuItem.Analytics);
         }
 
         [HttpPost]
@@ -145,30 +141,6 @@ namespace EyeTracker.Controllers
             return Json(res);
         }
 
-        private static string GetAppKey(ApplicationType type)
-        {
-            string key = "";
-            switch (type)
-            {
-                case ApplicationType.Android:
-                    key = "MA";
-                    break;
-                case ApplicationType.Web:
-                    key = "WP";
-                    break;
-                case ApplicationType.iPhone:
-                    key = "MI";
-                    break;
-                case ApplicationType.WebMobile:
-                    key = "WM";
-                    break;
-                case ApplicationType.WindowsMobile:
-                    key = "MW";
-                    break;
-            }
-            return key;
-        }
-
         public ActionResult Edit(int portfolioId, int appId)
         {
             var appRes = service.Get(appId);
@@ -180,19 +152,14 @@ namespace EyeTracker.Controllers
             {
                 var app = appRes.Value;
                 var model = new ApplicationEditModel
-                { 
+                {
                     Id = app.Id,
                     Description = app.Description,
                     PortfolioId = portfolioId,
                     Type = app.Type
                 };
-                ViewBag.Screens = appRes.Value.Screens;
-                ViewBag.PortfolioId = portfolioId;
-                ViewData["TypesList"] = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() });
-                ViewBag.PackageLink = "http://mobillify.com";
-                ViewBag.PropertyId = string.Format("{0}-{1:000000}-{2:0000}",GetAppKey(app.Type), portfolioId, appId);
-                ViewBag.CodeSample = "<script type=\"text/javascript\">\nvar _gaq = _gaq || [];_\ngaq.push(['_setAccount', '" + ViewBag.PropertyId + "']);";
-                return View("NewEdit", model);
+                model.ViewData = GetViewData(model.PortfolioId);
+                return View(model, AfterLoginViewModel.SelectedMenuItem.Analytics);
             }
         }
 
@@ -221,8 +188,51 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                return View(model);
+                model.ViewData = GetViewData(model.PortfolioId);
+                return View(model, AfterLoginViewModel.SelectedMenuItem.Analytics);
             }
+        }
+
+        private static ApplicationViewModel GetViewData(int portfolioId)
+        {
+            return new ApplicationViewModel
+            {
+                Screens = new List<Screen>(),
+                PortfolioId = portfolioId,
+                TypesList = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() }),
+                PackageLink = "http://mobillify.com",
+                PropertyId = "**-******-***",
+                CodeSample = "<script type=\"text/javascript\">\nvar _gaq = _gaq || [];_\ngaq.push(['_setAccount', '**-******-***']);",
+            };
+        }
+
+
+
+
+
+
+        private static string GetAppKey(ApplicationType type)
+        {
+            string key = "";
+            switch (type)
+            {
+                case ApplicationType.Android:
+                    key = "MA";
+                    break;
+                case ApplicationType.Web:
+                    key = "WP";
+                    break;
+                case ApplicationType.iPhone:
+                    key = "MI";
+                    break;
+                case ApplicationType.WebMobile:
+                    key = "WM";
+                    break;
+                case ApplicationType.WindowsMobile:
+                    key = "MW";
+                    break;
+            }
+            return key;
         }
 
         [HttpPost]

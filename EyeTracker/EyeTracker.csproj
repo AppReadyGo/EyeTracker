@@ -111,6 +111,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Master\AfterLoginController.cs" />
+    <Compile Include="Controllers\Master\AnalyticsController.cs" />
+    <Compile Include="Controllers\Master\BaseMasterController.cs" />
+    <Compile Include="Controllers\Master\BaseSubMasterController.cs" />
+    <Compile Include="Controllers\Master\BeforeLoginController.cs" />
     <Compile Include="Controllers\MIMEAssistant.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\DataController.cs" />
@@ -133,18 +139,33 @@
     <Compile Include="CustomModelBinders\Parsers\JsonScrollParser.cs" />
     <Compile Include="CustomModelBinders\Parsers\JsonViewAreaParser.cs" />
     <Compile Include="Helpers\General.cs" />
-    <Compile Include="Model\ApplicationEditModel.cs" />
-    <Compile Include="Model\PortfolioModel.cs" />
+    <Compile Include="Model\Master\BeforeLoginViewModel.cs" />
+    <Compile Include="Model\Pages\Home\ContentModel.cs" />
+    <Compile Include="Model\Pages\Home\IndexModel.cs" />
+    <Compile Include="Model\ViewModelSubMaterWrapper.cs" />
+    <Compile Include="Model\SubMasterViewModelWrapper.cs" />
+    <Compile Include="Model\Master\AfterLoginViewModel.cs" />
+    <Compile Include="Model\Master\AnalyticsModel.cs" />
+    <Compile Include="Model\Pages\Application\ApplicationEditModel.cs" />
+    <Compile Include="Model\Pages\Analytics\DashboarModel.cs" />
+    <Compile Include="Model\Filter\FilterModel.cs" />
+    <Compile Include="Model\Filter\DateModel.cs" />
+    <Compile Include="Model\Pages\Analytics\IndexViewModel.cs" />
+    <Compile Include="Model\Pages\Application\ApplicationViewModel.cs" />
+    <Compile Include="Model\Pages\Portfolio\PortfolioModel.cs" />
     <Compile Include="CustomModelBinders\JsonPackageModelBinder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HTMLTable.cs" />
-    <Compile Include="Model\AccountModels.cs" />
+    <Compile Include="Model\Pages\Account\AccountModels.cs" />
     <Compile Include="Model\AdminModels.cs" />
-    <Compile Include="Model\ApplicationModel.cs" />
+    <Compile Include="Model\Pages\Application\ApplicationModel.cs" />
+    <Compile Include="Model\Pages\ViewModel.cs" />
     <Compile Include="Model\ScreenDetailsModel.cs" />
-    <Compile Include="Model\SelectorModel.cs" />
+    <Compile Include="Model\Filter\SelectorModel.cs" />
+    <Compile Include="Model\MasterViewModelWrapper.cs" />
+    <Compile Include="Model\ViewModelWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomModelBinders\JsonVisitInfoModelBinder.cs" />
     <Content Include="Content\content.master.css" />
@@ -160,7 +181,9 @@
     <Content Include="Content\images\home.index.shadow.left.png" />
     <Content Include="Content\images\home.index.shadow.right.png" />
     <Content Include="Content\images\selector.arrow.png" />
+    <Content Include="Content\images\sprites.horizontal.12.png" />
     <Content Include="Content\images\traffic.jpg" />
+    <Content Include="Content\images\sprites.elements.29.png" />
     <Content Include="Content\Portfolio.Analytics.master.css" />
     <Content Include="Content\Analytics.Index.css" />
     <Content Include="Content\shared\dashboard.css" />
@@ -190,11 +213,11 @@
     <Compile Include="Windsor\WindsorFactory.cs" />
     <Compile Include="Windsor\WindsorInstaller.cs" />
     <Content Include="Content\application.new.css" />
-    <Content Include="Content\BeforeLogin.css" />
+    <Content Include="Content\beforelogin.master.css" />
     <Content Include="Content\Home.Index.css" />
     <Content Include="Content\images\beforelogn.header.bg.jpg" />
     <Content Include="Content\images\home.index.carousel.access.png" />
-    <Content Include="Content\Main.css" />
+    <Content Include="Content\main.master.css" />
     <Content Include="Content\Portfolio.Dashboard.css" />
     <Content Include="Content\img\remove_icon.gif" />
     <Content Include="Content\img\world_map.jpg" />
@@ -304,10 +327,13 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Scripts\AnalyticsTemplate.js" />
+    <Content Include="Views\Application\Form.ascx" />
+    <Content Include="Views\Analytics\Date.ascx" />
     <Content Include="Views\Analytics\Filter.ascx" />
     <Content Include="Views\Analytics\FingerPrint.aspx" />
     <Content Include="Views\Analytics\EyeTracker.aspx" />
     <Content Include="Views\Analytics\Selector.ascx" />
+    <Content Include="Views\Application\Edit.aspx" />
     <Content Include="Views\Application\New.aspx" />
     <Content Include="Views\Application\Image.aspx" />
     <Content Include="Views\Application\Dashboard.aspx" />
@@ -323,8 +349,9 @@
     <Content Include="Views\Analytics\Usage.aspx" />
     <Content Include="Views\Analytics\Dashboard.aspx" />
     <Content Include="Views\Analytics\Index.aspx" />
+    <Content Include="Views\Portfolio\Edit.aspx" />
+    <Content Include="Views\Portfolio\Form.ascx" />
     <Content Include="Views\Portfolio\New.aspx" />
-    <Content Include="Views\Portfolio\NewEdit.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

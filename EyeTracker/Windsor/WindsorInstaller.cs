@@ -6,7 +6,6 @@ using Castle.Windsor;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using System.Web.Mvc;
-using Castle.Facilities.FactorySupport;
 using EyeTracker.DAL;
 using EyeTracker.Core.Services;
 
@@ -16,7 +15,7 @@ namespace EyeTracker.Windsor
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            // Register all controllers from this assembly
+ /*           // Register all controllers from this assembly
             container.Register(
              AllTypes.FromThisAssembly()
              .BasedOn<Controller>()
@@ -33,7 +32,7 @@ namespace EyeTracker.Windsor
 
             // Respository and Service registrations
             container.Register(Component.For<IAnalyticsService>().ImplementedBy<AnalyticsService>().LifeStyle.PerWebRequest);
-
+*/
 #if JSUNITTEST
 #else
 #endif

@@ -6,7 +6,7 @@ using EyeTracker.DAL;
 using EyeTracker.DAL.Domain;
 using EyeTracker.Domain.Model.Events;
 using EyeTracker.Domain.Model;
-using EyeTracker.Domain.Repository;
+using EyeTracker.Domain.Repositories;
 
 namespace EyeTracker.Tests.FakeData
 {

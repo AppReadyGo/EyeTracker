@@ -2,12 +2,10 @@
 
 .middle-panel{text-align:center;height:501px;background-color:#000;border-bottom:3px solid #fff;border-top:3px solid #fff;}
 
-.content-wrapper{text-align:center;}
-
-.content{padding-left:45px;width:996px; margin:auto;margin-bottom:20px;background:url(images/home.index.shadow.left.png) center left repeat-y;}
-.content > div{padding-right:45px;background:url(images/home.index.shadow.right.png) center right repeat-y;}
-.content > div > div{float:right;width:275px;height:275px;border:1px solid #c5c9c9;margin:10px;background-color:#f5f5f5;padding:10px;}
-.content > div > div h3{color:#572d00;margin:0;font-size:35px;padding-left:40px;font-weight:normal;}
-.content > div > div p{margin: 10px 0px 10px 0px;color:#595959;text-align:left;}
-.content > div > div > div{text-align:right;}
-.content > div > div > div a{color:#e65800;}
+.features{width:100%;background-color:#fff;}
+.features > div{background-color: #F5F5F5;border: 1px solid #C5C9C9;float: right;height: 240px;margin: 24px;
+				padding: 10px;width: 270px;}
+.features > div h3{color:#572d00;margin:0;font-size:35px;padding-left:40px;font-weight:normal;}
+.features > div p{margin: 10px 0px 10px 0px;color:#595959;text-align:left;}
+.features > div > div{text-align:right;}
+.features > div > div a{color:#e65800;}

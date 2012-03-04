@@ -1,5 +1,4 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Analytics.Master" Inherits="System.Web.Mvc.ViewMasterPage"%>
-<%@ Register src="Filter.ascx" tagname="Filter" tagprefix="uc" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Analytics.Master" Inherits="System.Web.Mvc.ViewMasterPage<EyeTracker.Model.SubMasterViewModelWrapper<EyeTracker.Model.Master.AfterLoginViewModel, EyeTracker.Model.Master.AnalyticsModel>>"%>
 <%@ Import Namespace="EyeTracker.Helpers" %>
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
         Portfolio - <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
@@ -13,20 +12,19 @@
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
 </asp:Content>
 <asp:Content ID="TopMenu" ContentPlaceHolderID="TopMenu" runat="server">
-    <div class="bread-crumb"><%= Html.BreadCrumbNavigation((List<KeyValuePair<string, string>>)ViewData["breadCrumbItems"])%>
-    </div>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="LeftMenu" runat="server">
-    <a href="/Analytics/Dashboard/<%: ViewBag.PortfolioId %>">Dashboard</a>
-    <a href="/Analytics/FingerPrint/<%: ViewBag.PortfolioId %>">Finger Print</a>
-    <a href="/Analytics/EyeTracker/<%: ViewBag.PortfolioId %>">Eye Tracker</a>
-    <a href="/Analytics/Usage/<%: ViewBag.PortfolioId %>">Usage</a>
+    <a href="/Analytics">< Portfolios</a>
+    <a href="/Analytics/Dashboard/<%: Model.SubMaster.PortfolioId %>">Dashboard</a>
+    <a href="/Analytics/FingerPrint/<%: Model.SubMaster.PortfolioId %>">Finger Print</a>
+    <a href="/Analytics/EyeTracker/<%: Model.SubMaster.PortfolioId %>">Eye Tracker</a>
+    <a href="/Analytics/Usage/<%: Model.SubMaster.PortfolioId %>">Usage</a>
     <a <%--href="/Portfolio/Visitors/<%: ViewBag.PortfolioId %>"--%> class="disabled">Visitors</a>
     <a <%--href="/Portfolio/MapOverlay/<%: ViewBag.PortfolioId %>"--%> class="disabled">Map Overlay</a>
     <a <%--href="/Portfolio/TraficSources/<%: ViewBag.PortfolioId %>"--%> class="disabled">Trafic Sources</a>
     <a <%--href="/Portfolio/ContentOverview/<%: ViewBag.PortfolioId %>"--%> class="disabled">Content Overview</a>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <uc:Filter runat="server" />
+    <% Html.RenderPartial("Filter", Model.SubMaster.Filter); %>
     <asp:ContentPlaceHolder ID="MainContent" runat="server" />
 </asp:Content>

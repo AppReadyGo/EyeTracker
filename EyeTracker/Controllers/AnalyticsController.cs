@@ -14,11 +14,15 @@ using EyeTracker.Core;
 using EyeTracker.Common;
 using EyeTracker.Domain;
 using System.Collections.ObjectModel;
+using EyeTracker.Model.Filter;
+using EyeTracker.Model.Master;
+using EyeTracker.Model.Pages.Analytics;
+using EyeTracker.Controllers.Master;
 
 namespace EyeTracker.Controllers
 {
     [Authorize]
-    public class AnalyticsController : Controller
+    public class AnalyticsController : Master.AnalyticsController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         private IPortfolioService portfolioService;
@@ -48,12 +52,7 @@ namespace EyeTracker.Controllers
             {
                 return View("Error");
             }
-
-            ViewBag.Count = res.Value.Count();
-            ViewBag.Data = res.Value;
-
-            ViewData["analytics"] = "class=\"selected\"";
-            return View();
+            return View(new IndexViewModel(res.Value), AfterLoginViewModel.SelectedMenuItem.Analytics);
         }
 
         public ActionResult Dashboard(int portfolioId, int? applicationId, DateTime? fromDate, DateTime? toDate)
@@ -96,47 +95,37 @@ namespace EyeTracker.Controllers
                 color = "#461D7C"
             });
 
-            ViewBag.UsageInitData = new JavaScriptSerializer().Serialize(usageInitData);
-            ViewBag.CurrentName = dashboardData.Description;
-            ViewBag.PortfolioId = portfolioId;
-
-            BindFilterData(fromDate.Value, toDate.Value);
-
-            var navigationItems = new List<KeyValuePair<string, string>>() 
+            var filterModel = this.GetFilter(fromDate.Value, toDate.Value);
+            return View(new DashboardModel 
             { 
-                new KeyValuePair<string, string>("/Analytics","Portfolios")
-            };
+                UsageChartData = new JavaScriptSerializer().Serialize(usageInitData), 
+                FilterModel = filterModel 
+            });
+        }
 
-            /*
-
-            if (type == AnalyticsType.Application)
-            {
-                var appDashboardData = (ApplicationDashboardData)dashboardData;
-                navigationItems.Add(new KeyValuePair<string, string>(string.Format("/Analytics/{0}/Dashboard/{1}", AnalyticsType.Portfolio, appDashboardData.PortfolioId), appDashboardData.PortfolioDescription));
-                navigationItems.Add(new KeyValuePair<string, string>("/Application", "Applications"));
-            }
-            
-            */
-            navigationItems.Add(new KeyValuePair<string, string>(null, dashboardData.Description));
-
-            ViewData["breadCrumbItems"] = navigationItems;
-
-            
-
-            ViewData["Applications"] = new SelectorModel
-            {
-                Title = "Add Application",
-                Items = Enumerable.Range(8, 30).Select((num, i) => new SelectorItem { Id = num, Text = "App " + num, Index = i }),
-                SelectedItems = new List<SelectorItem>()
-            };
-            ViewData["ScreenSizes"] = new SelectorModel
-            {
-                Title = "Screen Sizes",
-                Items = Enumerable.Range(8, 30).Select((num, i) => new SelectorItem { Id = num, Text = "App " + num, Index = i }),
-                SelectedItems = new List<SelectorItem>()
-            };
-
-            return View();
+        private FilterModel GetFilter(DateTime fromDate, DateTime toDate)
+        {
+            return new FilterModel
+                        {
+                            Date = new DateModel
+                            {
+                                DateFrom = fromDate,
+                                DateTo = toDate,
+                            },
+                            ShowDateSelector = true,
+                            Applications = new SelectorModel
+                            {
+                                Title = "Add Application",
+                                Items = Enumerable.Range(8, 30).Select((num, i) => new SelectorItem { Id = num, Text = "App " + num, Index = i }),
+                                SelectedItems = new List<SelectorItem>()
+                            },
+                            ScreenSizes = new SelectorModel
+                            {
+                                Title = "Screen Sizes",
+                                Items = Enumerable.Range(8, 30).Select((num, i) => new SelectorItem { Id = num, Text = "App " + num, Index = i }),
+                                SelectedItems = new List<SelectorItem>()
+                            }
+                        };
         }
 
         public ActionResult Usage(int Id)
@@ -155,6 +144,9 @@ namespace EyeTracker.Controllers
             });
             ViewBag.ChartInitData = new JavaScriptSerializer().Serialize(chartInitData);
             ViewBag.PortfolioId = Id;
+
+            ViewData["analytics"] = "class=\"selected\"";
+
             return View();
         }
 
@@ -168,12 +160,6 @@ namespace EyeTracker.Controllers
         {
             ViewData["analytics"] = "class=\"selected\"";
             return View();
-        }
-
-        private void BindFilterData(DateTime fromDate, DateTime toDate)
-        {
-            ViewBag.FromDate = fromDate;
-            ViewBag.ToDate = toDate;
         }
     }
 }

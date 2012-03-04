@@ -43,7 +43,7 @@ $(document).ready(function () {
         showOverlay($('#sample_code'));
     } else {
         $('#overlay').hide();
-        $('#create_lnk').hide();
+        $('#action_pnl').hide();
         $('#Type').attr('disabled', 'disabled');
     }
     $('#Type').change(function () {
@@ -116,14 +116,14 @@ $(document).ready(function () {
         var type = $('#Type').val();
         if (desc.length == 0) {
             $('#Description').addClass('input-validation-error');
-            $('#app_config').prepend('<div class="validation-summary-errors"><span>Account creation was unsuccessful. Please correct the errors and try again.</span></div>');
-            $('#description_error').empty().append('<span class="field-validation-error">The Description field is required.</span>');
-            showOverlay();
+            $('#tbody').prepend('<tr><td colspan="2" class="validation-summary-errors"><span>Account creation was unsuccessful. Please contact to administrator.</span></td></tr>');
+            $('#Description').parent().append('<span class="field-validation-error">The Description field is required.</span>');
+            showOverlay($('#sample_code'));
         }
         else {
             $('#Description').removeClass('input-validation-error');
             $('.validation-summary-errors').remove();
-            $('#description_error').empty();
+            $('.field-validation-error').remove();
             showOverlay($('#sample_code'));
             $.ajax({
                 url: newAppURL,
@@ -153,7 +153,7 @@ $(document).ready(function () {
         if (desc.length == 0) {
             $('#Description').addClass('input-validation-error');
             $('#app_config').prepend('<div class="validation-summary-errors"><span>Account creation was unsuccessful. Please correct the errors and try again.</span></div>');
-            $('#description_error').empty().append('<span class="field-validation-error">The Description field is required.</span>');
+            $('#Description_error').empty().append('<span class="field-validation-error">The Description field is required.</span>');
         } else {
             $('#application_form')[0].submit();
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EyeTracker.Domain.Model;
-using EyeTracker.Domain.Repository;
+using EyeTracker.Domain.Repositories;
 using EyeTracker.Common;
 
 namespace EyeTracker.Core.Services

@@ -9,7 +9,7 @@ using System.Reflection;
 using System.IO;
 using System.Collections;
 using System.Net;
-using EyeTracker.Domain.Repository;
+using EyeTracker.Domain.Repositories;
 using EyeTracker.Domain.Model;
 using EyeTracker.Domain.Common;
 

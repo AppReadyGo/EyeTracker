@@ -5,7 +5,7 @@ using System.Text;
 using EyeTracker.Domain.Model.Events;
 using NHibernate;
 
-namespace EyeTracker.Domain.Repository
+namespace EyeTracker.Domain.Repositories
 {
     /// <summary>
     /// 

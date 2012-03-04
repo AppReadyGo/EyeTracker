@@ -1,4 +1,8 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Home.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Import Namespace="EyeTracker.Model.Pages.Home" %>
+<%@ Page Language="C#" 
+MasterPageFile="~/Views/Shared/Home.Master" 
+Inherits="ViewPage<ViewModelWrapper<BeforeLoginViewModel, IndexModel>>" %>
+
 <asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Home</asp:Content>
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
     <script src="<%: Url.Content("~/Scripts/ThridParty/jquery.roundabout.min.js") %>" type="text/javascript"></script>

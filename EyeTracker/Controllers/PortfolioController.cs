@@ -10,10 +10,13 @@ using EyeTracker.Helpers;
 using EyeTracker.Model;
 using EyeTracker.Common;
 using System.Collections.ObjectModel;
+using EyeTracker.Controllers.Master;
+using EyeTracker.Model.Pages.Portfolio;
+using EyeTracker.Model.Master;
 
 namespace EyeTracker.Controllers
 {
-    public class PortfolioController : Controller
+    public class PortfolioController : AfterLoginController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         private IPortfolioService portfolioService;
@@ -30,13 +33,11 @@ namespace EyeTracker.Controllers
 
         public ActionResult New()
         {
-            ViewData["analytics"] = "class=\"selected\"";
-           
             var countriesRes = portfolioService.GetCountries();
             if (!countriesRes.HasError)
             {
-                ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
-                return View(new PortfolioModel() { TimeZone = 0 });
+                var timeZones = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
+                return View(new PortfolioModel { TimeZone = 0, ViewData = new SelectList(timeZones, "Id", "DisplayName") }, AfterLoginViewModel.SelectedMenuItem.Analytics);
             }
             else
             {
@@ -47,8 +48,6 @@ namespace EyeTracker.Controllers
         [HttpPost]
         public ActionResult New(PortfolioModel model)
         {
-            ViewBag.Title = "New";
-            ViewData["analytics"] = "class=\"selected\"";
             if (ModelState.IsValid)
             {
                 var res = portfolioService.AddPortfolio(model.Description, model.TimeZone);
@@ -66,8 +65,9 @@ namespace EyeTracker.Controllers
                 var countriesRes = portfolioService.GetCountries();
                 if (!countriesRes.HasError)
                 {
-                    ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
-                    return View(new PortfolioModel());
+                    var timeZones = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
+                    model.ViewData = new SelectList(timeZones, "Id", "DisplayName");
+                    return View(model, AfterLoginViewModel.SelectedMenuItem.Analytics);
                 }
                 else
                 {
@@ -77,7 +77,7 @@ namespace EyeTracker.Controllers
         }
 
         public ActionResult Edit(int id)
-        {/*
+        {
             var portfolioRes = portfolioService.Get(id);
             if (portfolioRes.HasError)
             {
@@ -91,36 +91,32 @@ namespace EyeTracker.Controllers
                     Description = portfolioRes.Value.Description,
                     TimeZone = portfolioRes.Value.TimeZone
                 };
-                ViewBag.Title = "Edit";
                 var countriesRes = portfolioService.GetCountries();
                 if (!countriesRes.HasError)
                 {
-                    ViewData["TimeZoneList"] = this.GetTimeZones().Value.Select(curItem => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours });
-                    return View("NewEdit", model);
+                    var timeZones = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
+                    model.ViewData = new SelectList(timeZones, "Id", "DisplayName");
+                    return View(model, AfterLoginViewModel.SelectedMenuItem.Analytics);
                 }
                 else
                 {
                     return View("Error");
                 }
-            }*/
-            return View("Error");
+            }
         }
 
         [HttpPost]
-        public ActionResult Edit(PortfolioModel model)
+        public ActionResult Edit(PortfolioModel viewModel)
         {
-            /*
-            ViewBag.Title = "Edit";
             if (ModelState.IsValid)
             {
-                var res = portfolioService.Update(model.Id, model.Description, model.TimeZone);
-                return RedirectToAction("");
+                var res = portfolioService.Update(viewModel.Id, viewModel.Description, viewModel.TimeZone);
+                return Redirect("/Analytics");
             }
             else
             {
-                return View("NewEdit");
-            }*/
-            return View("Error");
+                return View();
+            }
         }
 
         public ActionResult Remove(int id)

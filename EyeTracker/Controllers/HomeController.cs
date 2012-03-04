@@ -10,21 +10,17 @@ using EyeTracker.DAL.Domain;
 using System.Web.Security;
 using EyeTracker.Core.Services;
 using EyeTracker.Domain.Model;
+using EyeTracker.Model.Pages.Home;
+using EyeTracker.Model.Master;
+using EyeTracker.Common.Queries;
 
 namespace EyeTracker.Controllers
 {
     [HandleError]
-    public class HomeController : Controller
+    public class HomeController : Master.BeforeLoginController
     {
-        IAnalyticsService service;
         public HomeController()
-            : this( new AnalyticsService())
         {
-        }
-
-        public HomeController(IAnalyticsService service)
-        {
-            this.service = service;
         }
 
         public ActionResult Index(long? appId, string pageUri, string clientSize)
@@ -35,26 +31,32 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                ViewData["home"] = "class=\"selected\"";
-                return View();
+                return View(new IndexModel { }, BeforeLoginViewModel.SelectedMenuItem.Home);
             }
         }
 
         public ActionResult PageContent(string urlPart1, string urlPart2, string urlPart3)
         {
-            ViewBag.Title = "Some content title";
-            ViewBag.Content = "Some content";
-            ViewBag.Url = urlPart1;
+            string path = urlPart1;
             if (!string.IsNullOrEmpty(urlPart2))
             {
-                ViewBag.Url += "/" + urlPart2;
+                path += "/" + urlPart2;
             }
             if (!string.IsNullOrEmpty(urlPart3))
             {
-                ViewBag.Url += "/" + urlPart3;
+                path += "/" + urlPart3;
             }
-            ViewData[urlPart1] = "class=\"selected\"";
-            return View();
+
+            var keys = ObjectContainer.Instance.RunQuery(new GetKeyContent(path));
+            if (!keys.Any())
+            {
+                return View("404");
+            }
+            else
+            {
+                var selectedItem = (BeforeLoginViewModel.SelectedMenuItem)Enum.Parse(typeof(BeforeLoginViewModel.SelectedMenuItem), urlPart1, true);
+                return View(new ContentModel { Title = keys["Title"], Content = keys["Content"] }, selectedItem);
+            }
         }
     }
 }
