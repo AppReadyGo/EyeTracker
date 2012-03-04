@@ -8,7 +8,7 @@ using EyeTracker.Model;
 
 namespace EyeTracker.Controllers.Master
 {
-    public class AnalyticsController : AfterLoginController
+    public class AnalyticsMasterController : AfterLoginController
     {//SubMasterViewModelWrapper<AfterLoginViewModel, AnalyticsModel>
         /* 
         protected ActionResult View(object viewModel)
