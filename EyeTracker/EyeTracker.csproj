@@ -169,7 +169,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomModelBinders\JsonVisitInfoModelBinder.cs" />
     <Content Include="Content\content.master.css" />
-    <Content Include="Content\AfterLogin.css" />
+    <Content Include="Content\after.login.master.css" />
     <Content Include="Content\error.css" />
     <Content Include="Content\Home.Master.css" />
     <Content Include="Content\images\beforelogn.header.selected.center.jpg" />
@@ -178,9 +178,11 @@
     <Content Include="Content\images\beforelogn.footer.bg.png" />
     <Content Include="Content\images\expanded_icon.gif" />
     <Content Include="Content\images\expand_icon.gif" />
+    <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\home.index.shadow.left.png" />
     <Content Include="Content\images\home.index.shadow.right.png" />
     <Content Include="Content\images\selector.arrow.png" />
+    <Content Include="Content\images\sprite.10.png" />
     <Content Include="Content\images\sprites.horizontal.12.png" />
     <Content Include="Content\images\traffic.jpg" />
     <Content Include="Content\images\sprites.elements.29.png" />

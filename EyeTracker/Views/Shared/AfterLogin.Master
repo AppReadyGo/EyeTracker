@@ -3,14 +3,14 @@
     <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
-   <link href="<%: Url.Content("~/Content/AfterLogin.css") %>" rel="stylesheet" type="text/css" />
+   <link href="<%: Url.Content("~/Content/after.login.master.css") %>" rel="stylesheet" type="text/css" />
    <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="header">
         <a class="logo" href="/"><img src="/Content/images/logo.png"></a>
         <ul class="login-menu">
-            <li>Welcome <b><%: Page.User.Identity.Name %></b>! </li>
+            <li><%: Page.User.Identity.Name %></li>
             <li><%: Html.ActionLink("Log Off", "LogOff", "Account") %></li>
         </ul>
         <ul class="main-menu">
@@ -23,7 +23,17 @@
         </ul>
     </div>
     <div class="main-content">
-    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        <div class="left-panel">
+            <div class="left-menu">
+                <asp:ContentPlaceHolder ID="LeftMenuContent" runat="server" />
+            </div>
+            <div class="footer">
+                <span>Copyright &#64; 2011<%= DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "" %> <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></span>
+            </div>
+        </div>
+        <div class="right-panel">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div>
     </div>
     <div class="footer">
         <ul>
@@ -33,6 +43,5 @@
             <li><a href="/PlanAndPricing">Plans and Pricing</a></li>
             <li><a href="/Contacts">Contacts</a></li>
         </ul>
-        <span>&#64; 2011<%= DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "" %> <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></span>
     </div>
 </asp:Content>

@@ -3,7 +3,7 @@
 .clears{clear:both;}
 
 .header{border-left: 1px solid #D7D7D0;border-right: 1px solid #D7D7D0;border-top: 1px solid #D7D7D0;height: 120px;
-		position: relative;width: 100%;z-index: 999;}
+		position: relative;width: 100%;z-index: 999;border-bottom:3px solid #f7892f;}
 
 .header .top{height:80px;width:100%;background: url("images/sprites.horizontal.12.png") repeat-x scroll 0 -2530px transparent;}
 .header .top b{height: 5px;width: 5px;display:block;}
@@ -13,19 +13,20 @@
                     float: left;}
 .header .top .clears{margin-bottom:8px;}
 
-.header .logo{width:120px;display:block;height:42px;float:left;}
+.header .logo{display:block;height:42px;float:left;}
+.header .logo img{margin-left:10px;}
 
 .header ul{margin:0;padding:0;}
 .header li{list-style-type:none;display:inline;}
 .header ul li a{text-decoration:none;}
 
 .header .menu{color:#fff;height: 40px;line-height:40px;width: 100%;
-                     background: url("images/sprites.horizontal.12.png") repeat-x scroll 0 -4500px #2192CC;}
+                     background: url("images/beforelogn.header.bg.jpg") repeat-x scroll 0 -42px #95cf63;}
 .header ul.main-menu{font-size:18px;float:left;}
-.header ul.main-menu li{border-left:1px solid #1090D0;display:block;float:left;}
+.header ul.main-menu li{border-left:1px solid #79a847;display:block;float:left;}
 .header ul.main-menu a{color:#fff;padding:0px 21px 0;display:block;}
-.header ul.main-menu li.selected{background-color:#1a7ab0;}
-.header ul.main-menu a:hover{background-color:#1a7ab0;}
+.header ul.main-menu li.selected{background-color:#f7892f;}
+.header ul.main-menu a:hover{background-color:#f7892f;}
 
 .header ul.login-menu{float:right;color:#ffff1f;margin-right:40px;}
 .header ul.login-menu li{padding:10px;}
