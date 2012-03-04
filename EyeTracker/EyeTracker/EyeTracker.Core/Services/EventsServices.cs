@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using EyeTracker.Common;
 using EyeTracker.Domain.Model.Events;
-using EyeTracker.Domain.Repository;
+using EyeTracker.Domain.Repositories;
 
 namespace EyeTracker.Core.Services
 {

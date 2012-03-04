@@ -1,0 +1,48 @@
+﻿
+.main-wrapper{margin: 20px auto;overflow: visible;width: 1024px;}
+.clears{clear:both;}
+
+.header{border-left: 1px solid #D7D7D0;border-right: 1px solid #D7D7D0;border-top: 1px solid #D7D7D0;height: 120px;
+		position: relative;width: 100%;z-index: 999;}
+
+.header .top{height:80px;width:100%;background: url("images/sprites.horizontal.12.png") repeat-x scroll 0 -2530px transparent;}
+.header .top b{height: 5px;width: 5px;display:block;}
+.header .top b.right{background: url("images/sprites.elements.29.png") no-repeat scroll -440px -20px transparent;
+					float: right;}
+.header .top b.left{background: url("images/sprites.elements.29.png") no-repeat scroll -440px 0 transparent;
+                    float: left;}
+.header .top .clears{margin-bottom:8px;}
+
+.header .logo{width:120px;display:block;height:42px;float:left;}
+
+.header ul{margin:0;padding:0;}
+.header li{list-style-type:none;display:inline;}
+.header ul li a{text-decoration:none;}
+
+.header .menu{color:#fff;height: 40px;line-height:40px;width: 100%;
+                     background: url("images/sprites.horizontal.12.png") repeat-x scroll 0 -4500px #2192CC;}
+.header ul.main-menu{font-size:18px;float:left;}
+.header ul.main-menu li{border-left:1px solid #1090D0;display:block;float:left;}
+.header ul.main-menu a{color:#fff;padding:0px 21px 0;display:block;}
+.header ul.main-menu li.selected{background-color:#1a7ab0;}
+.header ul.main-menu a:hover{background-color:#1a7ab0;}
+
+.header ul.login-menu{float:right;color:#ffff1f;margin-right:40px;}
+.header ul.login-menu li{padding:10px;}
+.header ul.login-menu a{color:#ffff1f;}
+.header ul.login-menu a:hover{text-decoration:underline;}
+
+
+.bottom{background-color: #FFFFFF;border-bottom: 1px solid #D8D8D4;height: 7px;margin-bottom:4px;}
+.bottom b{height: 7px;position: relative;width: 7px;display:block;}
+.bottom b.right{background: url("images/sprites.elements.29.png") no-repeat scroll -440px -60px transparent;
+					float: right;}
+.bottom b.left{background: url("images/sprites.elements.29.png") no-repeat scroll -440px -40px transparent;
+				float: left;}
+
+
+.footer{color:#3e5163;width:100%;text-align:center;}
+.footer ul{margin:0;padding:0;display:inline;margin-left:30px;}
+.footer li{list-style-type:none;display:inline;padding:5px;}
+.footer a{color:#3e5163;text-decoration:none;}
+.footer a:hover{text-decoration:underline;}

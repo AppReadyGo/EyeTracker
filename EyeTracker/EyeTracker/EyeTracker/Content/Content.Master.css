@@ -1,5 +1,2 @@
-﻿
-.content-wrapper{text-align:center;}
-
-.content{padding-left:45px;width:996px; margin:auto;margin-bottom:20px;background:url(images/home.index.shadow.left.png) center left repeat-y;}
-.content > div{padding-right:45px;background:url(images/home.index.shadow.right.png) center right repeat-y;min-height:300px;}
+﻿.content{background-color:#fff;padding:10px 25px 10px 25px;}
+.content > div{min-height:300px;}

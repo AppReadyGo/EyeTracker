@@ -7,10 +7,8 @@
     <link href="<%: Url.Content("~/Content/content.master.css") %>" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<div class="content-wrapper">
-    <div class="content"><div>
+<div class="content">
     <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-    </div></div>
 </div>
 </asp:Content>
 

@@ -6,7 +6,7 @@ using NHibernate;
 using EyeTracker.Domain.Model;
 using NHibernate.Linq;
 
-namespace EyeTracker.Domain.Repository
+namespace EyeTracker.Domain.Repositories
 {
     public interface IReportsRepository
     {

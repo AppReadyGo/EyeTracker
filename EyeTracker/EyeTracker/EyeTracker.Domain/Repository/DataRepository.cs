@@ -6,7 +6,7 @@ using EyeTracker.Domain.Model.Events;
 using NHibernate;
 using EyeTracker.Domain.Model;
 
-namespace EyeTracker.Domain.Repository
+namespace EyeTracker.Domain.Repositories
 {
     public interface IDateRepository
     {

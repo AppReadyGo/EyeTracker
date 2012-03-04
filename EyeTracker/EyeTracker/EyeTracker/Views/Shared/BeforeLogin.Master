@@ -1,30 +1,51 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Main.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+﻿<%@ Master Language="C#" 
+MasterPageFile="~/Views/Shared/Main.Master" 
+Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginViewModel>>" %>
+
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
     <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
 </asp:Content>
+
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
-   <link href="<%: Url.Content("~/Content/BeforeLogin.css") %>" rel="stylesheet" type="text/css" />
    <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
+   <link href="<%: Url.Content("~/Content/beforelogin.master.css") %>" rel="stylesheet" type="text/css" />
 </asp:Content>
+
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
+    <div class="main-wrapper">
     <div class="header">
-        <a class="logo" href="/"><img src="/Content/images/logo.png"></a>
-        <ul class="login-menu">
-            <li><a href="/account/logon">Login</a></li>
-            <li><a href="/account/register">Register</a></li>
-        </ul>
-        <ul class="main-menu">
-            <li <%= ViewData["home"] %>><span><a href="/">Home</a></span></li>
-            <li <%= ViewData["Tutorials"] %>><a href="/Tutorials/">Tutorials</a></li>
-            <li <%= ViewData["Products"] %>><a href="/Products">Products</a></li>
-            <li <%= ViewData["PlanAndPricing"] %>><a href="/PlanAndPricing">Plans and Pricing</a></li>
-        </ul>
+        <div class="top">
+            <b class="left"></b>
+            <b class="right"></b>
+            <div class="clears"></div>
+            <div class="logo">
+                <div><a href="/"><img title="Finger" alt="Home" src="/Content/images/logo.png"></a></div>
+            </div>
+        </div>
+        <div class="menu">
+            <ul class="main-menu">
+                <li <%= Model.Master.HomeCssClassAttribute %>><a href="/">Home</a></li>
+                <li <%= Model.Master.TutorialsCssClassAttribute %>><a href="/Tutorials/">Tutorials</a></li>
+                <li <%= Model.Master.ProductsCssClassAttribute %>><a href="/Products">Products</a></li>
+                <li <%= Model.Master.PlanAndPricingCssClassAttribute %>><a href="/PlanAndPricing">Plans and Pricing</a></li>
+            </ul>
+            <ul class="login-menu">
+                <li><a href="/account/logon">Login</a></li>
+                <li><a href="/account/register">Register</a></li>
+            </ul>
+        </div>
     </div>
     <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    <div class="bottom">
+        <b class="left"></b>
+        <b class="right"></b>
+        <div class="clears"></div>
+    </div>
     <div class="footer">
+        <span>Copyright &#169; 2011<%= DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "" %> <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></span>
         <ul>
             <li><a href="/Contacts">Contacts</a></li>
         </ul>
-        <span>&#169; 2011<%= DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "" %> <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></span>
+    </div>
     </div>
 </asp:Content>

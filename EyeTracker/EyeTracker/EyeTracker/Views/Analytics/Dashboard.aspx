@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Analytics.master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="Analytics.master" Inherits="System.Web.Mvc.ViewPage<EyeTracker.Model.ViewModelSubMaterWrapper<EyeTracker.Model.Master.AfterLoginViewModel, EyeTracker.Model.Master.AnalyticsModel, EyeTracker.Model.Pages.Analytics.DashboardModel>>" %>
 
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">Dashboard</asp:Content>
 
@@ -11,10 +11,9 @@
 <link href="<%: Url.Content("~/Content/shared/dashboard.css")%>" rel="stylesheet" type="text/css" />
 <link href="<%: Url.Content("~/Content/Portfolio.Dashboard.css")%>" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
-    var usageChartData = <%= ViewBag.UsageInitData %>;
+    var usageChartData = <%= Model.View.UsageInitData %>;
 </script>
 </asp:Content>
-
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <table class="dashboard">
@@ -43,11 +42,13 @@
         <div class="title"><span>Content Overview</span></div>
         <table>
             <thead><tr><th>Path</th><th>Views</th><th>% Views</th></tr></thead>
+            <tbody>
             <tr><td></td><td></td><td></td></tr>
             <tr><td></td><td></td><td></td></tr>
             <tr><td></td><td></td><td></td></tr>
             <tr><td></td><td></td><td></td></tr>
             <tr><td></td><td></td><td></td></tr>
+            </tbody>
         </table>
         <div class="item"></div>
     </td>

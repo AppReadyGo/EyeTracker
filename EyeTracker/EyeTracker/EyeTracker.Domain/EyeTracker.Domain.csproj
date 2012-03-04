@@ -59,11 +59,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlers\ICommandHandler.cs" />
+    <Compile Include="CommandHandlers\CreateContentItemCommandHandler.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Common\ApplicationDetails.cs" />
     <Compile Include="Common\PortfolioDetails.cs" />
     <Compile Include="Enumirators.cs" />
     <Compile Include="Mapping\AccountProfilerMaping.cs" />
     <Compile Include="Mapping\BackOffice\SystemMembershipMapping.cs" />
+    <Compile Include="Mapping\ContentItemMaping.cs" />
+    <Compile Include="Mapping\ContentPageMaping.cs" />
     <Compile Include="Mapping\ScreenMapping.cs" />
     <Compile Include="Model\AnalyticsType.cs" />
     <Compile Include="Model\BackOffice\SystemMembership.cs" />
@@ -78,6 +83,8 @@
     <Compile Include="Mapping\NameableMapping.cs" />
     <Compile Include="Model\Browser.cs" />
     <Compile Include="Model\ClickHeatMapData.cs" />
+    <Compile Include="Model\ContentItem.cs" />
+    <Compile Include="Model\ContentPage.cs" />
     <Compile Include="Model\Events\IEvent.cs" />
     <Compile Include="Model\Events\ScrollEvent.cs" />
     <Compile Include="Model\Events\SessionInfoEvent.cs" />
@@ -115,6 +122,9 @@
     <Compile Include="Model\ViewPart.cs" />
     <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\GetKeyContentQuery.cs" />
+    <Compile Include="Queries\IQueryHandler.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="Repository\AdminRepository.cs" />
     <Compile Include="Repository\AnalyticsRepository.cs" />
     <Compile Include="Repository\ApplicationRepository.cs" />
@@ -123,7 +133,12 @@
     <Compile Include="Repository\PortfolioRepository.cs" />
     <Compile Include="Repository\ReportsRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EyeTracker.Model\EyeTracker.Common.csproj">
+      <Project>{F5D9FA27-BAAF-4B4B-97F0-0A71F2210009}</Project>
+      <Name>EyeTracker.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

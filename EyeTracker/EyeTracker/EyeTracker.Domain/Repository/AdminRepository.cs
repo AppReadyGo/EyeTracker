@@ -16,7 +16,7 @@ using System.Configuration;
 using EyeTracker.Domain.Model;
 using EyeTracker.Domain.Model.BackOffice;
 
-namespace EyeTracker.Domain.Repository
+namespace EyeTracker.Domain.Repositories
 {
     public interface IAdminRepository
     {

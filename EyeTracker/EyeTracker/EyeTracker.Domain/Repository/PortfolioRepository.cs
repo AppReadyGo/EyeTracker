@@ -7,7 +7,7 @@ using NHibernate;
 using NHibernate.Linq;
 using EyeTracker.Domain.Model.BackOffice;
 
-namespace EyeTracker.Domain.Repository
+namespace EyeTracker.Domain.Repositories
 {
     public interface IPortfolioRepository
     {

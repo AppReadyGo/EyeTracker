@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Main.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Main.Master" Inherits="System.Web.Mvc.ViewMasterPage<EyeTracker.Model.MasterViewModelWrapper<EyeTracker.Model.Master.AfterLoginViewModel>>" %>
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
     <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
 </asp:Content>
@@ -14,12 +14,12 @@
             <li><%: Html.ActionLink("Log Off", "LogOff", "Account") %></li>
         </ul>
         <ul class="main-menu">
-            <li <%= ViewData["Analytics"] %>><span><a href="/">Analytics</a></span></li>
-            <li <%= ViewData["MyAccount"] %>><span><a href="/">My Account</a></span></li>
-            <li <%= ViewData["Tutorials"] %>><a href="/Tutorials/">Tutorials</a></li>
-            <li <%= ViewData["Products"] %>><a href="/Products">Products</a></li>
-            <li <%= ViewData["PlanAndPricing"] %>><a href="/PlanAndPricing">Plans and Pricing</a></li>
-            <li <%= ViewData["Contacts"] %>><a href="/Contacts">Contacts</a></li>
+            <li <%= Model.Master.AnalyticsCssClassAttribute %>><span><a href="/">Analytics</a></span></li>
+            <li <%= Model.Master.MyAccountCssClassAttribute %>><span><a href="/">My Account</a></span></li>
+            <li <%= Model.Master.TutorialsCssClassAttribute %>><a href="/Tutorials/">Tutorials</a></li>
+            <li <%= Model.Master.ProductsCssClassAttribute %>><a href="/Products">Products</a></li>
+            <li <%= Model.Master.PlanAndPricingCssClassAttribute %>><a href="/PlanAndPricing">Plans and Pricing</a></li>
+            <li <%= Model.Master.ContactsCssClassAttribute %>><a href="/Contacts">Contacts</a></li>
         </ul>
     </div>
     <div class="main-content">
