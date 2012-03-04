@@ -1,10 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/AfterLogin.Master" Inherits="System.Web.Mvc.ViewPage<EyeTracker.Model.ViewModelWrapper<EyeTracker.Model.Master.AfterLoginViewModel,EyeTracker.Model.Pages.Analytics.IndexViewModel>>" %>
-<%@ Import Namespace="EyeTracker.Helpers" %>
+﻿<%@ Import Namespace="EyeTracker.Helpers" %>
+<%@ Page Title="" Language="C#" 
+MasterPageFile="~/Views/Shared/AfterLogin.Master" 
+Inherits="ViewPage<ViewModelWrapper<AfterLoginViewModel,EyeTracker.Model.Pages.Analytics.IndexViewModel>>" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="PageTitleContent" runat="server">Portfolios</asp:Content>
+<asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Portfolios</asp:Content>
 
 
-<asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
+<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
     <script src="<%: Url.Content("~/Scripts/Analytics.Index.js") %>" type="text/javascript"></script>
     <link href="<%: Url.Content("~/Content/Analytics.Index.css")%>" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
@@ -12,11 +14,44 @@
     </script>
 </asp:Content>
 
+<asp:Content ID="LeftMenuContent" ContentPlaceHolderID="LeftMenuContent" runat="server">
+    <ul>
+        <li><a class="active">Portfolios</a></li>
+    </ul>
+</asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <h3 class="title">Portfolios</h3>
+    <div class="actions">
+        <a class="button" href="Portfolio/New"><span class="icon"></span>Add Portfolio</a>
+    </div>
+    <div class="table-header">
+        <div title="Status" class="center" style="width:10%;">Status</div>
+        <div title="Description" style="width:56%;">Description</div>
+        <div title="Visits" style="width:20%;">Visits</div>
+        <div title="Properties" class="center" style="width:10%;">Properties</div>
+    </div>
+    <div class="table" style="height: 364px;">
+        <ul class="computerdata detail" id="target">
+            <li class="row">
+                <div style="width:10%;" class="center">
+                    <div class="status-ok"></div>
+                </div>
+                <div style="width:56%;">
+                    Some description
+                </div>
+                <div style="width:20%;">
+                    20
+                </div>
+                <div style="width:10%;" class="center">
+                    <a href="">
+                    <div class="properties"></div>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
     <table>
-        <caption><a href="Portfolio/New">New Portfolio</a></caption>
         <tbody>
         <%if (Model.View.PortfoliosCount == 0)
           {%>
