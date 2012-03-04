@@ -11,6 +11,8 @@ using EyeTracker.Models;
 using EyeTracker.Core.Services;
 using EyeTracker.DAL.Domain;
 using EyeTracker.Models.Account;
+using EyeTracker.Model.Master;
+using EyeTracker.Model;
 
 namespace EyeTracker.Controllers
 {
@@ -46,7 +48,7 @@ namespace EyeTracker.Controllers
 
         public ActionResult LogOn()
         {
-            return View();
+            return View(new ViewModelWrapper<BeforeLoginViewModel, LogOnModel>(new BeforeLoginViewModel(), new LogOnModel()));
         }
 
         [HttpPost]
@@ -94,7 +96,7 @@ namespace EyeTracker.Controllers
         public ActionResult Register()
         {
             ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-            return View();
+            return View(new ViewModelWrapper<BeforeLoginViewModel, RegisterModel>(new BeforeLoginViewModel(), new RegisterModel()));
         }
 
         [HttpPost]

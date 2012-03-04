@@ -1,41 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Content.Master" Inherits="System.Web.Mvc.ViewPage<EyeTracker.Models.RegisterModel>" %>
+﻿<%@ Page Title="" Language="C#" 
+MasterPageFile="~/Views/Shared/Content.Master" 
+Inherits="ViewPage<ViewModelWrapper<BeforeLoginViewModel, EyeTracker.Models.Account.RegisterModel>>" %>
 <asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Log On</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeaderContent" runat="server">
     <link href="<%: Url.Content("~/Content/account.css") %>" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <div>
-<% using (Html.BeginForm()) { %>
-    <%: Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.") %>
-    <h3>Account Information</h3>
-    <p>Passwords are required to be a minimum of <%: ViewData["PasswordLength"] %> characters in length.</p>
-                                
-    <div class="editor-label">
-        <%: Html.LabelFor(m => m.Email) %>
-    </div>
-    <div class="editor-field">
-        <%: Html.TextBoxFor(m => m.Email, new { autocomplete="off" })%>
-        <%: Html.ValidationMessageFor(m => m.Email) %>
-    </div>
-                
-    <div class="editor-label">
-        <%: Html.LabelFor(m => m.Password) %>
-    </div>
-    <div class="editor-field">
-        <%: Html.PasswordFor(m => m.Password, new { autocomplete = "off" })%>
-        <%: Html.ValidationMessageFor(m => m.Password) %>
-    </div>
-                
-    <div class="editor-label">
-        <%: Html.LabelFor(m => m.ConfirmPassword) %>
-    </div>
-    <div class="editor-field">
-        <%: Html.PasswordFor(m => m.ConfirmPassword, new { autocomplete = "off" })%>
-        <%: Html.ValidationMessageFor(m => m.ConfirmPassword) %>
-    </div>               
-    <p>
-        <input type="submit" value="Register" />
-    </p>
-<% } %>
+<% Html.RenderPartial("RegisterForm", Model.View); %>
 </div>
 </asp:Content>
