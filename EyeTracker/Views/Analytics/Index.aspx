@@ -16,7 +16,15 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginViewModel,EyeTracker.Model.Pages.A
 
 <asp:Content ID="LeftMenuContent" ContentPlaceHolderID="LeftMenuContent" runat="server">
     <ul>
-        <li><a class="active">Portfolios</a></li>
+        <li class="active"><span></span><a>Portfolios</a></li>
+        <li><span></span><a href="/Analytics/Dashboard/1">Dashboard</a></li>
+        <li><span></span><a href="/Analytics/FingerPrint/1">Finger Print</a></li>
+        <li><span></span><a href="/Analytics/EyeTracker/1">Eye Tracker</a></li>
+        <li><span></span><a href="/Analytics/Usage/1">Usage</a></li>
+        <li class="disabled"><span></span><a <%--href="/Portfolio/Visitors/1"--%>>Visitors</a></li>
+        <li class="disabled"><span></span><a <%--href="/Portfolio/MapOverlay/1"--%>>Map Overlay</a></li>
+        <li class="disabled"><span></span><a <%--href="/Portfolio/TraficSources/1"--%>>Trafic Sources</a></li>
+        <li class="disabled"><span></span><a <%--href="/Portfolio/ContentOverview/1"--%>>Content Overview</a></li>
     </ul>
 </asp:Content>
 
@@ -53,12 +61,6 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginViewModel,EyeTracker.Model.Pages.A
     </div>
     <table>
         <tbody>
-        <%if (Model.View.PortfoliosCount == 0)
-          {%>
-           <tr><td>No Portfolios</td></tr>
-        <%}
-          else
-          {%>
         <%foreach (var item in Model.View.Portfolios)
           {%>
         <tr class="main" pid="<%: item.Id %>">
@@ -91,7 +93,6 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginViewModel,EyeTracker.Model.Pages.A
             </table>
             </td>
         </tr>
-        <%} %>
         <%} %>
         </tbody>
     </table>

@@ -35,13 +35,4 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div>
     </div>
-    <div class="footer">
-        <ul>
-            <li><a href="/">Dashboard</a></li>
-            <li><a href="/Tutorials/">Tutorials</a></li>
-            <li><a href="/Products">Products</a></li>
-            <li><a href="/PlanAndPricing">Plans and Pricing</a></li>
-            <li><a href="/Contacts">Contacts</a></li>
-        </ul>
-    </div>
 </asp:Content>
