@@ -113,7 +113,7 @@
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\Master\AfterLoginController.cs" />
-    <Compile Include="Controllers\Master\AnalyticsController.cs" />
+    <Compile Include="Controllers\Master\AnalyticsMasterController.cs" />
     <Compile Include="Controllers\Master\BaseMasterController.cs" />
     <Compile Include="Controllers\Master\BaseSubMasterController.cs" />
     <Compile Include="Controllers\Master\BeforeLoginController.cs" />

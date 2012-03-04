@@ -22,7 +22,7 @@ using EyeTracker.Controllers.Master;
 namespace EyeTracker.Controllers
 {
     [Authorize]
-    public class AnalyticsController : Master.AnalyticsController
+    public class AnalyticsController : Master.AnalyticsMasterController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         private IPortfolioService portfolioService;
