@@ -48,7 +48,7 @@ namespace EyeTracker.Controllers
 
         public ActionResult LogOn()
         {
-            return View(new ViewModelWrapper<BeforeLoginViewModel, LogOnModel>(new BeforeLoginViewModel(), new LogOnModel()));
+            return View(new ViewModelWrapper<BeforeLoginMasterModel, LogOnModel>(new BeforeLoginMasterModel(), new LogOnModel()));
         }
 
         [HttpPost]
@@ -96,7 +96,7 @@ namespace EyeTracker.Controllers
         public ActionResult Register()
         {
             ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-            return View(new ViewModelWrapper<BeforeLoginViewModel, RegisterModel>(new BeforeLoginViewModel(), new RegisterModel()));
+            return View(new ViewModelWrapper<BeforeLoginMasterModel, RegisterModel>(new BeforeLoginMasterModel(), new RegisterModel()));
         }
 
         [HttpPost]
@@ -121,6 +121,7 @@ namespace EyeTracker.Controllers
                     //    MembershipService.DeleteUser(model.UserName);
                     //    ModelState.AddModelError("","Error to register, please contact to support.");
                     //}
+                    FormsService.SignOut();
                     return RedirectToAction("Index", "Home");
                 }
                 else

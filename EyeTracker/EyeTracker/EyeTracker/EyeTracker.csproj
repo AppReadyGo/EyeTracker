@@ -139,13 +139,11 @@
     <Compile Include="CustomModelBinders\Parsers\JsonScrollParser.cs" />
     <Compile Include="CustomModelBinders\Parsers\JsonViewAreaParser.cs" />
     <Compile Include="Helpers\General.cs" />
-    <Compile Include="Model\Master\BeforeLoginViewModel.cs" />
+    <Compile Include="Model\Master\BeforeLoginMasterModel.cs" />
     <Compile Include="Model\Pages\Home\ContentModel.cs" />
     <Compile Include="Model\Pages\Home\IndexModel.cs" />
-    <Compile Include="Model\ViewModelSubMaterWrapper.cs" />
-    <Compile Include="Model\SubMasterViewModelWrapper.cs" />
-    <Compile Include="Model\Master\AfterLoginViewModel.cs" />
-    <Compile Include="Model\Master\AnalyticsModel.cs" />
+    <Compile Include="Model\Master\AfterLoginMasterModel.cs" />
+    <Compile Include="Model\Master\AnalyticsMasterModel.cs" />
     <Compile Include="Model\Pages\Application\ApplicationEditModel.cs" />
     <Compile Include="Model\Pages\Analytics\DashboarModel.cs" />
     <Compile Include="Model\Filter\FilterModel.cs" />
@@ -178,7 +176,8 @@
     <Content Include="Content\images\beforelogn.footer.bg.png" />
     <Content Include="Content\images\expanded_icon.gif" />
     <Content Include="Content\images\expand_icon.gif" />
-    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logo_60.png" />
+    <Content Include="Content\images\logo_40.png" />
     <Content Include="Content\images\home.index.shadow.left.png" />
     <Content Include="Content\images\home.index.shadow.right.png" />
     <Content Include="Content\images\selector.arrow.png" />

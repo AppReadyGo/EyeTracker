@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Main.Master" Inherits="System.Web.Mvc.ViewMasterPage<EyeTracker.Model.MasterViewModelWrapper<EyeTracker.Model.Master.AfterLoginViewModel>>" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Main.Master" Inherits="System.Web.Mvc.ViewMasterPage<EyeTracker.Model.MasterViewModelWrapper<EyeTracker.Model.Master.AfterLoginMasterModel>>" %>
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
     <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
 </asp:Content>
@@ -8,7 +8,7 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="header">
-        <a class="logo" href="/"><img src="/Content/images/logo.png"></a>
+        <a class="logo" href="/"><img src="/Content/images/logo_40.png"></a>
         <ul class="login-menu">
             <li><%: Page.User.Identity.Name %></li>
             <li><%: Html.ActionLink("Log Off", "LogOff", "Account") %></li>

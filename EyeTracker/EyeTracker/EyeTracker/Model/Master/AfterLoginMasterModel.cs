@@ -5,7 +5,7 @@ using System.Web;
 
 namespace EyeTracker.Model.Master
 {
-    public class AfterLoginViewModel
+    public class AfterLoginMasterModel
     {
         public SelectedMenuItem SelectedItem { get; private set; }
         public string AnalyticsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Analytics ? "class=\"selected\"" : string.Empty; } }
@@ -15,11 +15,11 @@ namespace EyeTracker.Model.Master
         public string PlanAndPricingCssClassAttribute { get { return SelectedItem == SelectedMenuItem.PlanAndPricing ? "class=\"selected\"" : string.Empty; } }
         public string ContactsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Contacts ? "class=\"selected\"" : string.Empty; } }
 
-        public AfterLoginViewModel()
+        public AfterLoginMasterModel()
         {
         }
 
-        public AfterLoginViewModel(SelectedMenuItem selectedItem)
+        public AfterLoginMasterModel(SelectedMenuItem selectedItem)
         {
             this.SelectedItem = selectedItem;
         }

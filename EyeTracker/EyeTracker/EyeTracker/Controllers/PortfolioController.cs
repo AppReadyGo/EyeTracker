@@ -16,7 +16,7 @@ using EyeTracker.Model.Master;
 
 namespace EyeTracker.Controllers
 {
-    public class PortfolioController : AfterLoginController
+    public class PortfolioController : Master.AnalyticsMasterController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         private IPortfolioService portfolioService;
@@ -37,7 +37,10 @@ namespace EyeTracker.Controllers
             if (!countriesRes.HasError)
             {
                 var timeZones = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
-                return View(new PortfolioModel { TimeZone = 0, ViewData = new SelectList(timeZones, "Id", "DisplayName") }, AfterLoginViewModel.SelectedMenuItem.Analytics);
+                return View(0,
+                    new PortfolioModel { TimeZone = 0, ViewData = new SelectList(timeZones, "Id", "DisplayName") }, 
+                    AnalyticsMasterModel.MenuItem.Portfolios, 
+                    AfterLoginMasterModel.SelectedMenuItem.Analytics);
             }
             else
             {
@@ -67,7 +70,10 @@ namespace EyeTracker.Controllers
                 {
                     var timeZones = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
                     model.ViewData = new SelectList(timeZones, "Id", "DisplayName");
-                    return View(model, AfterLoginViewModel.SelectedMenuItem.Analytics);
+                    return View(0,
+                        model,
+                        AnalyticsMasterModel.MenuItem.Portfolios,
+                        AfterLoginMasterModel.SelectedMenuItem.Analytics);
                 }
                 else
                 {
@@ -96,7 +102,7 @@ namespace EyeTracker.Controllers
                 {
                     var timeZones = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
                     model.ViewData = new SelectList(timeZones, "Id", "DisplayName");
-                    return View(model, AfterLoginViewModel.SelectedMenuItem.Analytics);
+                    return View(model, AfterLoginMasterModel.SelectedMenuItem.Analytics);
                 }
                 else
                 {

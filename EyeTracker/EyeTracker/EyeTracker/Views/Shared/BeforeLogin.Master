@@ -1,6 +1,6 @@
 ﻿<%@ Master Language="C#" 
 MasterPageFile="~/Views/Shared/Main.Master" 
-Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginViewModel>>" %>
+Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
 
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
     <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
@@ -19,18 +19,18 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginViewModel>>" %>
             <b class="right"></b>
             <div class="clears"></div>
             <div class="logo">
-                <div><a href="/"><img title="Finger" alt="Home" src="/Content/images/logo.png"></a></div>
+                <div><a href="/"><img title="Finger" alt="Home" src="/Content/images/logo_60.png"></a></div>
             </div>
         </div>
         <div class="menu">
             <ul class="main-menu">
-                <li <%= Model.Master.HomeCssClassAttribute %>><a href="/">Home</a></li>
-                <li <%= Model.Master.TutorialsCssClassAttribute %>><a href="/Tutorials/">Tutorials</a></li>
-                <li <%= Model.Master.ProductsCssClassAttribute %>><a href="/Products">Products</a></li>
-                <li <%= Model.Master.PlanAndPricingCssClassAttribute %>><a href="/PlanAndPricing">Plans and Pricing</a></li>
+                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Home) %>"><a href="/">Home</a></li>
+                <li class="disabled <%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Tutorials) %>"><a <%--href="/Tutorials/"--%>>Tutorials</a></li>
+                <li class="disabled <%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Products) %>"><a <%--href="/Products"--%>>Products</a></li>
+                <li class="disabled <%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing) %>"><a <%--href="/PlanAndPricing"--%>>Plans and Pricing</a></li>
             </ul>
             <ul class="login-menu">
-                <li><a href="/account/logon">Login</a></li>
+                <li class="disabled"><a <%--href="/account/logon"--%>>Login</a></li>
                 <li><a href="/account/register">Register</a></li>
             </ul>
         </div>

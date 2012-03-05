@@ -52,7 +52,7 @@ namespace EyeTracker.Controllers
             {
                 return View("Error");
             }
-            return View(new IndexViewModel(res.Value), AfterLoginViewModel.SelectedMenuItem.Analytics);
+            return View(0, new IndexViewModel(res.Value), AnalyticsMasterModel.MenuItem.Portfolios, AfterLoginMasterModel.SelectedMenuItem.Analytics);
         }
 
         public ActionResult Dashboard(int portfolioId, int? applicationId, DateTime? fromDate, DateTime? toDate)
