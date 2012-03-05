@@ -3,8 +3,8 @@
 .actions a.button{min-width: 0; padding:5px 8px 5px 29px;-moz-border-bottom-colors: none;
 					-moz-border-image: none;-moz-border-left-colors: none;-moz-border-right-colors: none;
 					-moz-border-top-colors: none;
-					background: -moz-linear-gradient(center top , #71B9E1, #57A6D1) repeat scroll 0 0 transparent;
-					border-color: #57A6D1 #4999BB #4585AB;border-radius: 3px 3px 3px 3px;border-style: solid;
+					background: -moz-linear-gradient(center top , #fcde7a, #f7892f) repeat scroll 0 0 transparent;
+					border-color: #f75d2e #f76b2e #f75d2e;border-radius: 3px 3px 3px 3px;border-style: solid;
 					border-width: 1px;color: white;cursor: pointer;font: bold 12px/21px arial;height: 24px;
 					margin: 0;outline: medium none;overflow: visible;text-align: center;white-space: nowrap;}
 					
@@ -18,8 +18,15 @@
 .table ul li > div{float:left;padding:0 4px;overflow:hidden;height:24px;line-height:24px;border-bottom:1px solid #F0F0F0;}
 .table ul li:hover > div{float:left;background-color: #F0F0F0;padding:0 4px;overflow:hidden;height:24px;line-height:24px;}
 .table ul li > div.center{text-align:center;}
+.table ul li > div div.expand{margin:4px auto auto;cursor:pointer;width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -319px -102px transparent;}
+.table ul li > div div.disabled{background-position:-319px -122px;cursor:default;}
+.table ul li.expanded > div div.expand{background-position:-338px -102px;}
+.table ul li.expanded > div{border-bottom:1px dashed #F0F0F0;}
 .table ul li > div div.status-ok{margin:4px auto auto; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -321px -41px transparent;}
-.table ul li > div div.properties{margin:4px auto auto; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -301px -1px transparent;}
+.table ul li > div div.properties{display:inline-block;margin:4px 3px 4px 0px; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -301px -1px transparent;}
+.table ul li > div div.new-app{display:inline-block;margin:4px 0px 4px 3px; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -23px -1px transparent;}
+.table ul li.app{display:none;}
+.table ul li > div.nav{cursor:pointer;}
 
 table {width:100%;}
 xtable caption{border-bottom:2px solid #CCC;text-align:left;margin-bottom:25px;}

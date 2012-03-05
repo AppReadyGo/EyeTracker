@@ -21,4 +21,17 @@ namespace EyeTracker.Model
         /// <value>The view model.</value>
         public TViewModel View { get; set; }
     }
+
+    public class ViewModelWrapper<TMasterModel, TSubMaster, TViewModel> : MasterViewModelWrapper<TMasterModel, TSubMaster>
+    {
+        public ViewModelWrapper() { }
+
+        public ViewModelWrapper(TMasterModel masterModel, TSubMaster subMasterModel, TViewModel viewModel)
+            : base(masterModel, subMasterModel)
+        {
+            View = viewModel;
+        }
+
+        public TViewModel View { get; set; }
+    }
 }

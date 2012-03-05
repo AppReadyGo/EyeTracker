@@ -9,7 +9,16 @@ using EyeTracker.Model;
 namespace EyeTracker.Controllers.Master
 {
     public class AnalyticsMasterController : AfterLoginController
-    {//SubMasterViewModelWrapper<AfterLoginViewModel, AnalyticsModel>
+    {
+        protected virtual ActionResult View<TViewModel>(int portfolioId, TViewModel viewModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, AfterLoginMasterModel.SelectedMenuItem selectedItem)
+        {
+            var model = new ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel, TViewModel>(GetModel(selectedItem), new AnalyticsMasterModel(portfolioId, leftMenuSelectedItem), viewModel);
+
+            return base.View(model);
+        }
+
+        
+        //SubMasterViewModelWrapper<AfterLoginViewModel, AnalyticsModel>
         /* 
         protected ActionResult View(object viewModel)
         {

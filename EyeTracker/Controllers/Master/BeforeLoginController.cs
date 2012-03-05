@@ -10,14 +10,14 @@ namespace EyeTracker.Controllers.Master
 {
     public class BeforeLoginController : Controller
     {
-        protected virtual BeforeLoginViewModel GetModel(BeforeLoginViewModel.SelectedMenuItem selectedItem)
+        protected virtual BeforeLoginMasterModel GetModel(BeforeLoginMasterModel.MenuItem selectedItem)
         {
-            return new BeforeLoginViewModel(selectedItem);
+            return new BeforeLoginMasterModel(selectedItem);
         }
 
-        protected virtual ActionResult View<TViewModel>(TViewModel viewModel, BeforeLoginViewModel.SelectedMenuItem selectedItem)
+        protected virtual ActionResult View<TViewModel>(TViewModel viewModel, BeforeLoginMasterModel.MenuItem selectedItem)
         {
-            var model = new ViewModelWrapper<BeforeLoginViewModel, TViewModel>(GetModel(selectedItem), viewModel);
+            var model = new ViewModelWrapper<BeforeLoginMasterModel, TViewModel>(GetModel(selectedItem), viewModel);
 
             return base.View(model);
         }

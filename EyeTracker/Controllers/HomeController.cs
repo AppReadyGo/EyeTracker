@@ -31,7 +31,7 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                return View(new IndexModel { }, BeforeLoginViewModel.SelectedMenuItem.Home);
+                return View(new IndexModel { }, BeforeLoginMasterModel.MenuItem.Home);
             }
         }
 
@@ -54,7 +54,7 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                var selectedItem = (BeforeLoginViewModel.SelectedMenuItem)Enum.Parse(typeof(BeforeLoginViewModel.SelectedMenuItem), urlPart1, true);
+                var selectedItem = (BeforeLoginMasterModel.MenuItem)Enum.Parse(typeof(BeforeLoginMasterModel.MenuItem), urlPart1, true);
                 return View(new ContentModel { Title = keys["Title"], Content = keys["Content"] }, selectedItem);
             }
         }

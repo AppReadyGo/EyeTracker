@@ -36,11 +36,11 @@
 .left-panel .left-menu ul li:first-child{border-bottom:1px solid #fff;}
 .left-panel .left-menu ul li a{text-decoration:none;display: block;font-weight: bold;height: 30px;cursor:pointer;
 								line-height: 29px;outline: 0 none;padding: 0 19px 0 34px;position: relative;
-								color:#F7892F;}
+								color:#000;}
 .left-panel .left-menu ul li span{display:block;background:url("images/sprite.10.png") no-repeat scroll -327px -106px transparent;
                                   float:right;width:10px;height:10px;margin-top:10px;}
-.left-panel .left-menu ul li a:hover{color: #000;}
-.left-panel .left-menu ul li.active a{background-color: #F6F6F6; border-radius: 3px 3px 3px 3px;color: #000;}
+.left-panel .left-menu ul li a:hover{color: #F7892F;}
+.left-panel .left-menu ul li.active a{background-color: #F6F6F6; border-radius: 3px 3px 3px 3px;color: #F7892F;}
 .left-panel .left-menu ul li.active span{background:none;}
 .left-panel .left-menu ul li.disabled a{color: #E8E8E8;cursor:default;}
 .left-panel .left-menu ul li.disabled a:hover{color: #E8E8E8;}

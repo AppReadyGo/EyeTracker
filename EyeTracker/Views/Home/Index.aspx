@@ -1,7 +1,7 @@
 ﻿<%@ Import Namespace="EyeTracker.Model.Pages.Home" %>
 <%@ Page Language="C#" 
 MasterPageFile="~/Views/Shared/Home.Master" 
-Inherits="ViewPage<ViewModelWrapper<BeforeLoginViewModel, IndexModel>>" %>
+Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
 
 <asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Home</asp:Content>
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
@@ -20,7 +20,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginViewModel, IndexModel>>" %>
 		<li><img src="/Content/images/traffic.jpg" /></li>
 	</ul>
 </div>
-<a href="/register" class="btn-access">ACCESS ANALITYCS</a>
+<a href="/Account/Register" class="btn-access">ACCESS ANALITYCS</a>
 </asp:Content>
 
 

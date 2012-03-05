@@ -1,22 +1,24 @@
 ﻿
 $(document).ready(function () {
-
-    $('td.expand').click(function () {
-        var sub = $(this).parent().next();
-        if (sub.is(':visible')) {
-            sub.hide();
-            $(this).removeClass('expanded');
-        } else {
-            sub.show();
-            $(this).addClass('expanded');
+    $('div.expand').click(function () {
+        if (!$(this).hasClass('disabled')) {
+            var li = $(this).parent().parent();
+            var sub = $('.portfolio-'+li.attr('pid'));
+            if (sub.is(':visible')) {
+                sub.hide();
+                li.removeClass('expanded');
+            } else {
+                sub.show();
+                li.addClass('expanded');
+            }
         }
     });
-    $('tr.main td:not(.expand)').click(function () {
+    $('.table ul li.portfolio > div.nav').click(function () {
         var parent = $(this).parent();
         var pid = parent.attr('pid');
         window.location.href = dashboardUrl.replace('{0}', pid).replace('{1}', '');
     });
-    $('tr.sub tr').click(function () {
+    $('.table ul li.app > div.nav').click(function () {
         var parent = $(this);
         var pid = parent.attr('pid');
         var aid = parent.attr('aid');

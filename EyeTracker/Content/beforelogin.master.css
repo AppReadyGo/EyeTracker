@@ -27,11 +27,15 @@
 .header ul.main-menu a{color:#fff;padding:0px 21px 0;display:block;}
 .header ul.main-menu li.selected{background-color:#f7892f;}
 .header ul.main-menu a:hover{background-color:#f7892f;}
+.header ul.main-menu li.disabled a{background-color:transparent;color:#ccc;}
+.header ul.main-menu li.disabled a:hover{background-color:transparent;}
 
 .header ul.login-menu{float:right;color:#ffff1f;margin-right:40px;}
 .header ul.login-menu li{padding:10px;}
 .header ul.login-menu a{color:#ffff1f;}
 .header ul.login-menu a:hover{text-decoration:underline;}
+.header ul.login-menu li.disabled a{color:#ccc;}
+.header ul.login-menu li.disabled a:hover{text-decoration:none;}
 
 
 .bottom{background-color: #FFFFFF;border-bottom: 1px solid #D8D8D4;height: 7px;margin-bottom:4px;}
