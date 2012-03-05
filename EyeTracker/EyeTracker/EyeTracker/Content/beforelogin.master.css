@@ -14,7 +14,7 @@
 .header .top .clears{margin-bottom:8px;}
 
 .header .logo{display:block;height:42px;float:left;}
-.header .logo img{margin-left:10px;}
+.header .logo img{margin-left:10px;border:0px;}
 
 .header ul{margin:0;padding:0;}
 .header li{list-style-type:none;display:inline;}
