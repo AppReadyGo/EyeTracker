@@ -96,11 +96,13 @@ namespace EyeTracker.Controllers
             });
 
             var filterModel = this.GetFilter(fromDate.Value, toDate.Value);
-            return View(new DashboardModel 
-            { 
-                UsageChartData = new JavaScriptSerializer().Serialize(usageInitData), 
-                FilterModel = filterModel 
-            });
+            return View(portfolioId, new DashboardModel 
+                        { 
+                            UsageChartData = new JavaScriptSerializer().Serialize(usageInitData), 
+                            FilterModel = filterModel 
+                        },
+                        AnalyticsMasterModel.MenuItem.Dashboard, 
+                        AfterLoginMasterModel.SelectedMenuItem.Analytics);
         }
 
         private FilterModel GetFilter(DateTime fromDate, DateTime toDate)

@@ -7,10 +7,9 @@
         dateTo: '<%=Model.DateTo.ToString("dd MMM yyyy") %>',
         dateToMin: '<%=Model.DateFrom.ToString("dd MMM yyyy") %>',
         dateToMax: '<%=DateTime.UtcNow.ToString("dd MMM yyyy") %>',
-        pid: <%: Model.PortfolioId %>
     };
 </script>
-<a id="date_btn"><%= Model.DateFrom.ToString("dd MMM yyyy")%> - <%= Model.DateTo.ToString("dd MMM yyyy")%></a>
+<a class="date-btn"><%= Model.DateFrom.ToString("dd MMM yyyy")%> - <%= Model.DateTo.ToString("dd MMM yyyy")%></a>
 <div id="date_panel" class="date-panel">
     <div id="datepicker_to"></div><div id="datepicker_from"></div>
     <div class="actions"><a id="cance_btn">Cancel</a><a id="apply_btn">Apply</a></div>

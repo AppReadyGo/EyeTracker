@@ -101,7 +101,7 @@ namespace EyeTracker.Controllers
         public ActionResult New(int portfolioId)
         {
             var viewData = GetViewData(portfolioId);
-            return View(new ApplicationModel { ViewData = viewData }, AfterLoginMasterModel.SelectedMenuItem.Analytics);
+            return View(portfolioId, new ApplicationModel { ViewData = viewData }, AnalyticsMasterModel.MenuItem.Portfolios, AfterLoginMasterModel.SelectedMenuItem.Analytics);
         }
 
         [HttpPost]
@@ -159,7 +159,7 @@ namespace EyeTracker.Controllers
                     Type = app.Type
                 };
                 model.ViewData = GetViewData(model.PortfolioId);
-                return View(model, AfterLoginMasterModel.SelectedMenuItem.Analytics);
+                return View(portfolioId, model, AnalyticsMasterModel.MenuItem.Portfolios, AfterLoginMasterModel.SelectedMenuItem.Analytics);
             }
         }
 
@@ -189,7 +189,7 @@ namespace EyeTracker.Controllers
             else
             {
                 model.ViewData = GetViewData(model.PortfolioId);
-                return View(model, AfterLoginMasterModel.SelectedMenuItem.Analytics);
+                return View(model.PortfolioId, model, AnalyticsMasterModel.MenuItem.Portfolios, AfterLoginMasterModel.SelectedMenuItem.Analytics);
             }
         }
 

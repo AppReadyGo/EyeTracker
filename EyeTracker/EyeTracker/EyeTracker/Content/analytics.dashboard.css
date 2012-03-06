@@ -1,6 +1,10 @@
-﻿
-.dashboard td{vertical-align:top;padding:0 10px 20px 10px;}
+﻿.dashboard td{vertical-align:top;padding:0 0px 20px 0px;}
 .dashboard .title{border-bottom:1px solid #666; margin-bottom:10px;}
 .dashboard .title span{line-height:23px;color:#fff;
                        background-color:#666;border:1px solid #666;border-bottom-width:2px;
                        border-radius:2px 2px 0px 0px;padding:2px 5px 2px 5px;}
+
+
+table.dashboard{}
+table.dashboard div.item{height:437px;}
+table.dashboard p{margin:0;}

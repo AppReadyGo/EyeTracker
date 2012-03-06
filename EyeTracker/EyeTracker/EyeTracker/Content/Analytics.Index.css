@@ -1,12 +1,4 @@
 ﻿
-.actions a{text-decoration:none;}
-.actions a.button{min-width: 0; padding:5px 8px 5px 29px;-moz-border-bottom-colors: none;
-					-moz-border-image: none;-moz-border-left-colors: none;-moz-border-right-colors: none;
-					-moz-border-top-colors: none;
-					background: -moz-linear-gradient(center top , #fcde7a, #f7892f) repeat scroll 0 0 transparent;
-					border-color: #f75d2e #f76b2e #f75d2e;border-radius: 3px 3px 3px 3px;border-style: solid;
-					border-width: 1px;color: white;cursor: pointer;font: bold 12px/21px arial;height: 24px;
-					margin: 0;outline: medium none;overflow: visible;text-align: center;white-space: nowrap;}
 					
 .table-header{width:100%;margin-top:15px;}
 .table-header div{float:left;background-color: #F0F0F0;padding:0 4px;overflow:hidden;height:24px;line-height:24px;}
