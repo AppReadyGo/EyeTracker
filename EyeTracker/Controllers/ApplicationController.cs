@@ -29,7 +29,7 @@ using EyeTracker.Model.Master;
 namespace EyeTracker.Controllers
 {
     [Authorize]
-    public class ApplicationController : AfterLoginController
+    public class ApplicationController : Master.AnalyticsMasterController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         

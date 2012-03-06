@@ -1,6 +1,6 @@
 ﻿<%@ Import Namespace="EyeTracker.Model.Pages.Portfolio" %>
 <%@ Page Title="" Language="C#" 
-MasterPageFile="~/Views/Shared/AfterLogin.Master" 
+MasterPageFile="~/Views/Shared/Analytics.Master" 
 Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel, PortfolioModel>>" %>
 
 <asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Create Portfolio</asp:Content>
