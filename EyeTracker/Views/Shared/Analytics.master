@@ -6,13 +6,13 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel, Analytics
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
-        <link href="<%: Url.Content("~/Content/Analytics.Master.css")%>" rel="stylesheet" type="text/css" />
+        <link href="<%: Url.Content("~/Content/analytics.master.css")%>" rel="stylesheet" type="text/css" />
         <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
 </asp:Content>
 
 <asp:Content ID="LeftMenuContent" ContentPlaceHolderID="LeftMenuContent" runat="server">
     <ul>
-        <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.Portfolios) %>"><span></span><a>Portfolios</a></li>
+        <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.Portfolios) %>"><span></span><a href="/Analytics/">Portfolios</a></li>
         <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.Dashboard) %>"><span></span><a href="/Analytics/Dashboard/<%: Model.SubMaster.PortfolioId %>">Dashboard</a></li>
         <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.FingerPrint) %>"><span></span><a href="/Analytics/FingerPrint/<%: Model.SubMaster.PortfolioId %>">Finger Print</a></li>
         <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.EyeTracker) %>"><span></span><a href="/Analytics/EyeTracker/<%: Model.SubMaster.PortfolioId %>">Eye Tracker</a></li>

@@ -17,7 +17,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <h3 class="title">Portfolios</h3>
     <div class="actions">
-        <a class="button" href="Portfolio/New"><span class="icon"></span>Add Portfolio</a>
+        <a class="button" href="/Portfolio/New"><span class="icon"></span>Add Portfolio</a>
     </div>
     <div class="table-header">
         <div style="width:5%;"></div>

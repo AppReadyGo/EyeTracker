@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" 
 MasterPageFile="~/Views/Shared/Analytics.Master" 
-Inherits="ViewPage<ViewModelWrapper<AfterLoginViewModel, AnalyticsMasterModel, EyeTracker.Model.Pages.Application.ApplicationModel>>" %>
+Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel, EyeTracker.Model.Pages.Application.ApplicationModel>>" %>
 
 <asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Create Application</asp:Content>
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">

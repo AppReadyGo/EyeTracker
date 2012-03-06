@@ -1,8 +1,5 @@
 ﻿
-
-
 $(document).ready(function () {
-
     var placeholder = $("#usage_charts_place_holder");
     var plot = $.plot(placeholder, usageChartData, {
         xaxis: { mode: "time", timeformat: '%d %b %y' },

@@ -8,6 +8,7 @@ using EyeTracker.Model;
 
 namespace EyeTracker.Controllers.Master
 {
+    [Authorize]
     public class AfterLoginController : Controller
     {
         protected virtual AfterLoginMasterModel GetModel(AfterLoginMasterModel.SelectedMenuItem selectedItem)

@@ -187,7 +187,7 @@
     <Content Include="Content\images\sprites.elements.29.png" />
     <Content Include="Content\Portfolio.Analytics.master.css" />
     <Content Include="Content\Analytics.Index.css" />
-    <Content Include="Content\shared\dashboard.css" />
+    <Content Include="Content\shared\filter.css" />
     <Content Include="Content\themes\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
     <Content Include="Content\themes\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
     <Content Include="Content\themes\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
@@ -205,7 +205,8 @@
     <Content Include="Content\themes\cupertino\jquery-ui.css" />
     <Content Include="Scripts\Analytics.Index.js" />
     <Content Include="Scripts\analytics.selector.js" />
-    <Content Include="Scripts\portfolio.analytics.master.js" />
+    <Content Include="Scripts\analytics.master.js" />
+    <Content Include="Scripts\filter.js" />
     <Content Include="Scripts\date.picker.js" />
     <Content Include="Scripts\home.index.js" />
     <Content Include="Scripts\ThridParty\jquery-ui.min.js" />
@@ -219,7 +220,7 @@
     <Content Include="Content\images\beforelogn.header.bg.jpg" />
     <Content Include="Content\images\home.index.carousel.access.png" />
     <Content Include="Content\main.master.css" />
-    <Content Include="Content\Portfolio.Dashboard.css" />
+    <Content Include="Content\analytics.dashboard.css" />
     <Content Include="Content\img\remove_icon.gif" />
     <Content Include="Content\img\world_map.jpg" />
     <Content Include="Content\Analytics.Master.css" />
@@ -246,7 +247,7 @@
     <Content Include="Scripts\application.new.js" />
     <Content Include="Scripts\ApplicationDashboard.js" />
     <Content Include="Scripts\ApplicationUsage.js" />
-    <Content Include="Scripts\PortfolioDashboard.js" />
+    <Content Include="Scripts\analytics.dashboard.js" />
     <Content Include="Scripts\PortfolioUsage.js" />
     <Content Include="Scripts\Tests\TDD\AnalyticsTemplateTest.js" />
     <Content Include="Scripts\Tests\TDD\QUnitTest.htm" />
