@@ -24,9 +24,6 @@ function beforeShow(input, inst) {
 }
 
 $(function () {
-    $('.date-btn').click(function () {
-        $('#date_panel').show();
-    });
     $("#datepicker_from").datepicker({
         defaultDate: analytics.dateFrom,
         dateFormat: 'dd M yy',
