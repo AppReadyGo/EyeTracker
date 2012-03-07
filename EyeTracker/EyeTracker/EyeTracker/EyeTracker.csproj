@@ -340,7 +340,6 @@
     <Content Include="Views\Application\Edit.aspx" />
     <Content Include="Views\Application\New.aspx" />
     <Content Include="Views\Application\Image.aspx" />
-    <Content Include="Views\Application\Dashboard.aspx" />
     <Content Include="Views\Account\Details.aspx" />
     <Content Include="Views\Application\Index.aspx" />
     <Content Include="Views\Application\NewEdit.aspx" />

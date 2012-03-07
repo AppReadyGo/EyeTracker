@@ -1,5 +1,6 @@
 ﻿
 .filter{margin-bottom:10px;}
+.filter a{cursor:pointer;}
 .filter .title{background: -moz-linear-gradient(center top , #FBFBFB, #EEEEEE) repeat scroll 0 0 transparent;
                border-color: #E8E8E8 #E8E8E8 #CCCCCC;border-radius: 4px 4px 4px 4px;border-style: solid;
                border-width: 1px;color: #444444;cursor: auto;line-height: normal;margin: 0 0 1px;min-width: 770px;
@@ -7,12 +8,10 @@
 .filter .title ul{height: 25px;list-style: none outside none;margin:0;padding:0;}
 .filter .title li{display:inline;margin-right:5px;}
 .filter .title select{margin-right:5px;}
-.filter .body{border: 1px solid #C8C8C8;border-radius: 4px 4px 4px 4px;padding: 10px 10px 4px;}
-
-
+.filter .body{border: 1px solid #C8C8C8;border-radius: 4px 4px 4px 4px;padding: 10px 10px 4px;font-size:10px;}
+.filter .body .cancel-btn{float:right;display:block;width:10px;height:10px;
+                          background:url("../images/sprite.10.png") no-repeat scroll -345px -84px transparent;}
 .date-btn{cursor:pointer;}
-.date-panel{font-family:"Trebuchet MS","Helvetica","Arial","Verdana","sans-serif";font-size:10px;background-color:#F5F5F5;
-            border:1px solid #BBB;padding:10px;z-index:1;position:absolute;margin-top:4px;display:none;}
 .date-panel > div{float:right;}
 .date-panel > div.actions{clear:both;margin-top:5px;}
 .date-panel > div.actions a{color:#2779AA;cursor:pointer;font-weight:bold;}
