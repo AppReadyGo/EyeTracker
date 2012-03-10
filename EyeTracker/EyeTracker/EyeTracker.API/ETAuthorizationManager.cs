@@ -71,7 +71,7 @@ namespace EyeTracker.API
                 XElement response = XElement.Load(sr);
                 //using (Message reply = Message.CreateMessage(MessageVersion.None, null, response))
                 using (Message reply = Message.CreateMessage(MessageVersion.None, null, 
-                    ErrorMsg))
+                    response))
                 {
                     HttpResponseMessageProperty responseProp = 
                         new HttpResponseMessageProperty() 
