@@ -9,6 +9,7 @@ using EyeTracker;
 using EyeTracker.Controllers;
 using EyeTracker.Models;
 using EyeTracker.Core.Services;
+using EyeTracker.Models.Account;
 
 namespace EyeTracker.Tests.Controllers
 {

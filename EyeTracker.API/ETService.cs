@@ -23,19 +23,20 @@ namespace EyeTracker.API
     {
         // TODO: Implement the collection resource that will contain the SampleItem instances
 
-        
-
-        [WebInvoke(UriTemplate = "", Method = "POST", 
-                    RequestFormat=WebMessageFormat.Json, 
-                    ResponseFormat=WebMessageFormat.Json)]
-        public bool Post(IPackage package)
+        [WebGet(UriTemplate = "")]
+        public bool Post()
         {  
-                //return ParseVisitEvents(mState, package);
-                EventParser.Parse(package);
-                return true;
+            //return ParseVisitEvents(mState, package);
+            //return (bool)EventParser.Parse(package); 
+            return true;
         }
 
-        
+        [WebInvoke(UriTemplate = "{id}", Method = "PUT")]
+        public bool Update(string id, IPackage instance)
+        {
+            // TODO: Update the given instance of SampleItem in the collection
+            throw new NotImplementedException();
+        }
 
      
 
