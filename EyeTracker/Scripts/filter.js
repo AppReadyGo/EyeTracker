@@ -1,13 +1,14 @@
 ﻿
 function onSelect(selectedDate) {
-    var option = this.id == "date_from" ? "minDate" : "maxDate",
+    $('#preset_range').val('custom');
+    var option = this.id == "datepicker_from" ? "minDate" : "maxDate",
 					instance = $(this).data("datepicker"),
 					date = $.datepicker.parseDate(
 						instance.settings.dateFormat ||
 						$.datepicker._defaults.dateFormat,
 						selectedDate, instance.settings);
     $('#date_from_lnk,#datepicker_from').not(this).datepicker("option", option, date);
-    if (this.id == "date_from") {
+    if (this.id == "datepicker_from") {
         $('#date_from_lnk').text(selectedDate);
         $('#date_from').val(selectedDate);
     } else {
@@ -24,6 +25,39 @@ function beforeShow(input, inst) {
 }
 
 $(function () {
+    $('#preset_range').change(function () {
+        var val = $(this).val();
+        var dFrom, dTo;
+        if (val == 'custom') {
+            return;
+        }
+        if (val == 'today') {
+            dFrom = new Date();
+            dTo = dFrom;
+        } else if (val == 'yesterday') {
+            dFrom = new Date();
+            dFrom.setDate(dFrom.getDate() - 1);
+            dTo = dFrom;
+        } else if (val == 'lastweek') {
+            dFrom = new Date();
+            dFrom.setDate(dFrom.getDate() - 7);
+            dTo = new Date();
+        } else if (val == 'lastmonth') {
+            dFrom = new Date();
+            dFrom.setMonth(dFrom.getMonth() - 1);
+            dTo = new Date();
+        }
+
+        var strFrom = $.datepicker.formatDate('dd M yy', dFrom);
+        var strTo = $.datepicker.formatDate('dd M yy', dTo);
+        $('#datepicker_from').datepicker("setDate", dFrom);
+        $('#datepicker_to').datepicker("setDate", dTo);
+
+        $('#date_from_lnk').text(strFrom);
+        $('#date_from').val(strFrom);
+        $('#date_to_lnk').text(strTo);
+        $('#date_to').val(strTo);
+    });
     $("#datepicker_from").datepicker({
         defaultDate: analytics.dateFrom,
         dateFormat: 'dd M yy',

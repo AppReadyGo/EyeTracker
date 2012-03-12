@@ -12,7 +12,6 @@
 .filter .body .cancel-btn{float:right;display:block;width:10px;height:10px;
                           background:url("../images/sprite.10.png") no-repeat scroll -345px -84px transparent;}
 .date-btn{cursor:pointer;}
-.date-panel > div{float:right;}
-.date-panel > div.actions{clear:both;margin-top:5px;}
-.date-panel > div.actions a{color:#2779AA;cursor:pointer;font-weight:bold;}
-.date-panel > div.actions a:hover{color:#2779AA;text-decoration:underline;}
+.filter .body .hasDatepicker{float:left;margin-right:10px;}
+.filter .body .input-wrapper{margin-top:10px;}
+.filter .body input{width:80px;}
