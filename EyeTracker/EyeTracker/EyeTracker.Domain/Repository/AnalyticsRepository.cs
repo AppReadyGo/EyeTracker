@@ -14,7 +14,7 @@ namespace EyeTracker.Domain.Repositories
 
         IEnumerable<ViewHeatMapData> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
 
-        DashboardData GetDashboardData(int portfolioId, int? applicationId, DateTime fromDate, DateTime toDate);
+        DashboardData GetDashboardData(Guid userId, int portfolioId, int? applicationId, DateTime fromDate, DateTime toDate);
 
         IEnumerable<PortfolioDetails> GetCurrentUserPortfolios(Guid userId);
     }
@@ -61,10 +61,11 @@ namespace EyeTracker.Domain.Repositories
             }
         }
 
-        public DashboardData GetDashboardData(int portfolioId, int? applicationId, DateTime fromDate, DateTime toDate)
+        public DashboardData GetDashboardData(Guid userId, int portfolioId, int? applicationId, DateTime fromDate, DateTime toDate)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
+                applicationId = !applicationId.HasValue || applicationId.Value == 0 ? null : applicationId;
                 DashboardData res;
                 if (applicationId.HasValue)
                 {
@@ -98,6 +99,8 @@ namespace EyeTracker.Domain.Repositories
                         .ToList().ToDictionary(v => v.Key, v => v.Value);
                     res = dashboard;
                 }
+
+                res.Portfolios = GetCurrentUserPortfolios(userId);
 
                 return res;
             }

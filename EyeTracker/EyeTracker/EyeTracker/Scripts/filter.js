@@ -53,10 +53,18 @@ $(function () {
         $('#datepicker_from').datepicker("setDate", dFrom);
         $('#datepicker_to').datepicker("setDate", dTo);
 
-        $('#date_from_lnk').text(strFrom);
+        // $('#date_from_lnk').text(strFrom);
         $('#date_from').val(strFrom);
-        $('#date_to_lnk').text(strTo);
+        // $('#date_to_lnk').text(strTo);
         $('#date_to').val(strTo);
+    });
+    $('#date_from').change(function () {
+        var date = Date.parse($(this).val());
+        if (isNaN(date)) {
+            $(this).addClass("error");
+        } else {
+            $(this).removeClass("error");
+        }
     });
     $("#datepicker_from").datepicker({
         defaultDate: analytics.dateFrom,
