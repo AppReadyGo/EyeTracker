@@ -7,15 +7,30 @@
         dateTo: '<%=Model.Date.DateTo.ToString("dd MMM yyyy") %>',
         dateToMin: '<%=Model.Date.DateFrom.ToString("dd MMM yyyy") %>',
         dateToMax: '<%=DateTime.UtcNow.ToString("dd MMM yyyy") %>',
+        pApps: <%=Model.PortfoliosData %>
     };
+    $(document).ready(function(){
+        $('#portfolioId').change(function(){
+            var id = $(this).val();
+            $('#applicationId').empty();
+            $('#applicationId').append('<option value="0">All Applications</option>');
+            var apps = analytics.pApps[id];
+            for(var i=0;i<apps.length;i++){
+                $('#applicationId').append('<option value="'+apps[i].id+'">'+apps[i].desc+'</option>');
+            } 
+        });
+        $('#portfolioId').change();
+        $('#applicationId').val(<%=Model.AppId %>);
+    });
 </script>
+<form id="filter_form" action="/Analytics/<%: Model.FormAction %>" method="post">
 <div class="filter">
     <div class="title">
         <ul>
             <li><span>Portfolios:</span></li>
-            <li><select id="ddlPortfolios" name="ddlPortfolios"><option>Portfolio 1</option></select></li>
+            <li><%= Html.DropDownList("portfolioId", Model.Portfolios) %></li>
             <li><span>Report:</span></li>
-            <li><select id="ddlApplications" name="ddlApplications"><option>All applications</option></select></li>
+            <li><select id="applicationId" name="applicationId"><option value="0">All applications</option></select></li>
             <li><a class="date-btn" id="date_from_lnk"><%= Model.Date.DateFrom.ToString("dd MMM yyyy")%></a> - <a class="date-btn" id="date_to_lnk"><%= Model.Date.DateTo.ToString("dd MMM yyyy")%></a></li>
             <li><a class="button"><span class="icon"></span>Filter</a></li>
             <li><a class="button"><span class="icon"></span>Refresh</a></li>
@@ -37,12 +52,12 @@
                     </select></label>
                 </div>
                 <div class="input-wrapper">
-                <input id="date_from" value="<%= Model.Date.DateFrom.ToString("dd MMM yyyy")%>" /> - <input id="date_to" value="<%= Model.Date.DateTo.ToString("dd MMM yyyy")%>"/>
+                <input id="date_from" name="fromDate" value="<%= Model.Date.DateFrom.ToString("dd MMM yyyy")%>" /> - <input id="date_to" name="toDate" value="<%= Model.Date.DateTo.ToString("dd MMM yyyy")%>"/>
                 </div>
             </fieldset>
 
         </div>
-        <div class="actions"><a id="apply_btn">Apply</a></div>
+        <div class="actions"><a class="button" onclick="javascript:$('#filter_form').submit()">Apply</a></div>
     </div>
 <%--    <%
     if (Model.ShowDateSelector)
@@ -64,4 +79,6 @@
     <!--2. Fingerprint: Application (All), screen size (All), path (All), language (All), OS (All), location (All)  -->
     <!--3. Eyetracker: Application (All), screen size (All), path (All), language (All), OS (All), location (All)  -->
 </div>
+</form>
+
 

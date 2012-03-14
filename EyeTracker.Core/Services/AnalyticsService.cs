@@ -110,7 +110,12 @@ namespace EyeTracker.Core.Services
         {
             try
             {
-                return new OperationResult<DashboardData>(repository.GetDashboardData(portfolioId, applicationId, fromDate, toDate));
+                var userRes = membershipService.GetCurrentUserId();
+                if (userRes.HasError)
+                {
+                    return new OperationResult<DashboardData>(userRes);
+                }
+                return new OperationResult<DashboardData>(repository.GetDashboardData(userRes.Value, portfolioId, applicationId, fromDate, toDate));
             }
             catch (Exception exp)
             {

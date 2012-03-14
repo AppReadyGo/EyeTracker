@@ -18,6 +18,7 @@ using EyeTracker.Model.Filter;
 using EyeTracker.Model.Master;
 using EyeTracker.Model.Pages.Analytics;
 using EyeTracker.Controllers.Master;
+using EyeTracker.Domain.Common;
 
 namespace EyeTracker.Controllers
 {
@@ -95,39 +96,46 @@ namespace EyeTracker.Controllers
                 color = "#461D7C"
             });
 
-            var filterModel = this.GetFilter(fromDate.Value, toDate.Value);
+            var filterModel = this.GetFilter("Dashboard/"+portfolioId, fromDate.Value, toDate.Value, dashboardData.Portfolios);
+            filterModel.PortfolioId = portfolioId;
+            filterModel.AppId = applicationId.HasValue ? applicationId.Value : 0;
             return View(portfolioId, new DashboardModel 
                         { 
                             UsageChartData = new JavaScriptSerializer().Serialize(usageInitData), 
-                            FilterModel = filterModel 
+                            FilterModel = filterModel
                         },
                         AnalyticsMasterModel.MenuItem.Dashboard, 
                         AfterLoginMasterModel.SelectedMenuItem.Analytics);
         }
 
-        private FilterModel GetFilter(DateTime fromDate, DateTime toDate)
+        private FilterModel GetFilter(string action, DateTime fromDate, DateTime toDate, IEnumerable<PortfolioDetails> portfolios)
         {
+            var js = new JavaScriptSerializer();
             return new FilterModel
-                        {
-                            Date = new DateModel
-                            {
-                                DateFrom = fromDate,
-                                DateTo = toDate,
-                            },
-                            ShowDateSelector = true,
-                            Applications = new SelectorModel
-                            {
-                                Title = "Add Application",
-                                Items = Enumerable.Range(8, 30).Select((num, i) => new SelectorItem { Id = num, Text = "App " + num, Index = i }),
-                                SelectedItems = new List<SelectorItem>()
-                            },
-                            ScreenSizes = new SelectorModel
-                            {
-                                Title = "Screen Sizes",
-                                Items = Enumerable.Range(8, 30).Select((num, i) => new SelectorItem { Id = num, Text = "App " + num, Index = i }),
-                                SelectedItems = new List<SelectorItem>()
-                            }
-                        };
+            {
+                PortfoliosData = string.Format("{{{0}}}", string.Join(",", portfolios.Select(p => string.Format("{0}:{1}", p.Id, js.Serialize(p.Applications.Select(a => new { id = a.Id, desc = a.Description })))))),
+                //PortfoliosData = js.Serialize(portfolios.Select(p => new { id = p.Id, apps = p.Applications.Select(a => new { id = a.Id, desc = a.Description }) })),
+                Portfolios = portfolios.Select(p => new SelectListItem() { Text = p.Description, Value = p.Id.ToString() }),
+                FormAction = action,
+                Date = new DateModel
+                {
+                    DateFrom = fromDate,
+                    DateTo = toDate,
+                },
+                ShowDateSelector = true,
+                Applications = new SelectorModel
+                {
+                    Title = "Add Application",
+                    Items = Enumerable.Range(8, 30).Select((num, i) => new SelectorItem { Id = num, Text = "App " + num, Index = i }),
+                    SelectedItems = new List<SelectorItem>()
+                },
+                ScreenSizes = new SelectorModel
+                {
+                    Title = "Screen Sizes",
+                    Items = Enumerable.Range(8, 30).Select((num, i) => new SelectorItem { Id = num, Text = "App " + num, Index = i }),
+                    SelectedItems = new List<SelectorItem>()
+                }
+            };
         }
 
         public ActionResult Usage(int Id)
