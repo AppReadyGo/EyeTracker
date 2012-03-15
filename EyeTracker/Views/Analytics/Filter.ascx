@@ -7,7 +7,8 @@
         dateTo: '<%=Model.Date.DateTo.ToString("dd MMM yyyy") %>',
         dateToMin: '<%=Model.Date.DateFrom.ToString("dd MMM yyyy") %>',
         dateToMax: '<%=DateTime.UtcNow.ToString("dd MMM yyyy") %>',
-        pApps: <%=Model.PortfoliosData %>
+        pApps: <%=Model.PortfoliosData %>,
+        action: '<%= Model.FormAction %>'
     };
     $(document).ready(function(){
         $('#portfolioId').change(function(){
@@ -23,7 +24,6 @@
         $('#applicationId').val(<%=Model.AppId %>);
     });
 </script>
-<form id="filter_form" action="/Analytics/<%: Model.FormAction %>" method="post">
 <div class="filter">
     <div class="title">
         <ul>
@@ -36,7 +36,7 @@
             <li><a class="button"><span class="icon"></span>Refresh</a></li>
         </ul>
     </div>
-    <div class="body"><a id="cancel_btn" class="cancel-btn"></a>
+    <div class="body" id="filter_body"><a id="cancel_btn" class="cancel-btn"></a>
         <div>
             <fieldset>
                 <legend>Date range</legend>
@@ -57,28 +57,13 @@
             </fieldset>
 
         </div>
-        <div class="actions"><a class="button" onclick="javascript:$('#filter_form').submit()">Apply</a></div>
+        <div class="actions"><a class="button" id="apply_btn">Apply</a></div>
     </div>
-<%--    <%
-    if (Model.ShowDateSelector)
-    {
-        Html.RenderPartial("Date", Model.Date);
-    }
-    if (Model.ShowApplicationsSelector)
-    {
-        Html.RenderPartial("Selector", Model.Applications);
-    }
-    if (Model.ShowScreenSizesSelector)
-    {
-        Html.RenderPartial("Selector", Model.ScreenSizes);
-    } 
-    %>--%>
 <%--    <% Html.RenderPartial("Selector", ViewData["Pathes"]); %>
     <% Html.RenderPartial("Selector", ViewData["Languages"]); %>
 --%>    <!--1. Usage: Application (All), screen size (All), path (All), language (All), OS (All), location (All)  -->
     <!--2. Fingerprint: Application (All), screen size (All), path (All), language (All), OS (All), location (All)  -->
     <!--3. Eyetracker: Application (All), screen size (All), path (All), language (All), OS (All), location (All)  -->
 </div>
-</form>
 
 

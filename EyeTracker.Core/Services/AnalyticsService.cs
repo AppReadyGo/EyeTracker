@@ -21,10 +21,6 @@ namespace EyeTracker.Core.Services
 
         OperationResult<IEnumerable<ViewHeatMapData>> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
 
-        //OperationResult<Dictionary<DateTime, int>> GetPortfolioUsageData(long portfolioId, string pageUri, DateTime fromDate, DateTime toDate);
-
-        //OperationResult<Dictionary<DateTime, int>> GetApplicationUsageData(long appId, string pageUri, DateTime fromDate, DateTime toDate);
-
         OperationResult<DashboardData> GetDashboardData(int portfolioId, int? applicationId, DateTime fromDate, DateTime toDate);
 
         OperationResult<IEnumerable<PortfolioDetails>> GetCurrentUserPortfolios();
