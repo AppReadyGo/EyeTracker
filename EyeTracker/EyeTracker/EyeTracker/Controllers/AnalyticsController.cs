@@ -33,11 +33,20 @@ namespace EyeTracker.Controllers
         private IAnalyticsService analyticsService;
 
         public AnalyticsController()
-            : this(new PortfolioService(), new ApplicationService(), new AnalyticsService(), new AccountService(), new ReportsService())
+            : this(new PortfolioService(), 
+            new ApplicationService(), 
+            new AnalyticsService(), 
+            new AccountService(), 
+            new ReportsService())
         {
         }
 
-        public AnalyticsController(IPortfolioService portfolioService, IApplicationService applicationService, IAnalyticsService analyticsService, IAccountService accountService, IReportsService reportService)
+        public AnalyticsController(
+            IPortfolioService portfolioService, 
+            IApplicationService applicationService, 
+            IAnalyticsService analyticsService, 
+            IAccountService accountService, 
+            IReportsService reportService)
         {
             this.portfolioService = portfolioService;
             this.accountService = accountService;
@@ -53,10 +62,10 @@ namespace EyeTracker.Controllers
             {
                 return View("Error");
             }
-            return View(0, new IndexViewModel(res.Value), AnalyticsMasterModel.MenuItem.Portfolios, AfterLoginMasterModel.SelectedMenuItem.Analytics);
+            return View(new IndexViewModel(res.Value), AnalyticsMasterModel.MenuItem.Portfolios, string.Empty, AfterLoginMasterModel.SelectedMenuItem.Analytics);
         }
 
-        public ActionResult Dashboard(int portfolioId, int? applicationId, DateTime? fromDate, DateTime? toDate)
+        public ActionResult Dashboard(int portfolioId, int? applicationId, DateTime? fromDate, DateTime? toDate, string screenSize, string path, string language, string os, string location)
         {
             if (!fromDate.HasValue)
             {
@@ -68,11 +77,14 @@ namespace EyeTracker.Controllers
                 toDate = DateTime.UtcNow;
             }
 
+            int appId = applicationId.HasValue ? applicationId.Value : 0;
+
             var dataResult = analyticsService.GetDashboardData(portfolioId, applicationId, fromDate.Value, toDate.Value);
             if (dataResult.HasError)
             {
                 return View("Error");
             }
+
             var dashboardData = dataResult.Value;
 
             var data = new List<object[]>();
@@ -96,15 +108,16 @@ namespace EyeTracker.Controllers
                 color = "#461D7C"
             });
 
-            var filterModel = this.GetFilter("Dashboard/"+portfolioId, fromDate.Value, toDate.Value, dashboardData.Portfolios);
+            var filterModel = this.GetFilter("Dashboard", fromDate.Value, toDate.Value, dashboardData.Portfolios);
             filterModel.PortfolioId = portfolioId;
-            filterModel.AppId = applicationId.HasValue ? applicationId.Value : 0;
-            return View(portfolioId, new DashboardModel 
+            filterModel.AppId = appId;
+            return View(new DashboardModel 
                         { 
                             UsageChartData = new JavaScriptSerializer().Serialize(usageInitData), 
                             FilterModel = filterModel
                         },
-                        AnalyticsMasterModel.MenuItem.Dashboard, 
+                        AnalyticsMasterModel.MenuItem.Dashboard,
+                        string.Join("/", new string[] { portfolioId.ToString(), filterModel.AppId.ToString(), fromDate.Value.ToString("dd-MMM-yyyy"), toDate.Value.ToString("dd-MMM-yyyy") }),
                         AfterLoginMasterModel.SelectedMenuItem.Analytics);
         }
 
@@ -114,7 +127,6 @@ namespace EyeTracker.Controllers
             return new FilterModel
             {
                 PortfoliosData = string.Format("{{{0}}}", string.Join(",", portfolios.Select(p => string.Format("{0}:{1}", p.Id, js.Serialize(p.Applications.Select(a => new { id = a.Id, desc = a.Description })))))),
-                //PortfoliosData = js.Serialize(portfolios.Select(p => new { id = p.Id, apps = p.Applications.Select(a => new { id = a.Id, desc = a.Description }) })),
                 Portfolios = portfolios.Select(p => new SelectListItem() { Text = p.Description, Value = p.Id.ToString() }),
                 FormAction = action,
                 Date = new DateModel
@@ -138,37 +150,105 @@ namespace EyeTracker.Controllers
             };
         }
 
-        public ActionResult Usage(int Id)
+        public ActionResult Usage(int portfolioId, int? applicationId, DateTime? fromDate, DateTime? toDate)
         {
-            var reportRes = reportService.GetVisitsData(DateTime.UtcNow.AddDays(-30), DateTime.UtcNow, Id, null, DataGrouping.Day);
+            if (!fromDate.HasValue)
+            {
+                fromDate = DateTime.UtcNow.AddDays(-30);
+            }
+
+            if (!toDate.HasValue)
+            {
+                toDate = DateTime.UtcNow;
+            }
+
+            int appId = applicationId.HasValue ? applicationId.Value : 0;
+
+            var reportRes = reportService.GetVisitsData(DateTime.UtcNow.AddDays(-30), DateTime.UtcNow, portfolioId, null, DataGrouping.Day);
             if (reportRes.HasError)
             {
                 return View("Error");
             }
-            //Fill chart data
-            var chartInitData = new List<object>();
-            chartInitData.Add(new
+            var usageData = reportRes.Value;
+
+            var data = new List<object[]>();
+            int diffDays = (toDate.Value - fromDate.Value).Days;
+            for (int i = 0; i < diffDays; i++)
             {
-                data = reportRes.Value.OrderBy(curItem => curItem.Key).Select(curItem => new object[] { curItem.Key.MilliTimeStamp(), curItem.Value }),
+                int count = 0;
+                var curDate = fromDate.Value.AddDays(i);
+                if (usageData.ContainsKey(curDate))
+                {
+                    count = usageData[curDate];
+                }
+                data.Add(new object[] { curDate.MilliTimeStamp(), count });
+            }
+
+            //Fill chart data
+            var usageInitData = new List<object>();
+            usageInitData.Add(new
+            {
+                data = data,
                 color = "#461D7C"
             });
-            ViewBag.ChartInitData = new JavaScriptSerializer().Serialize(chartInitData);
-            ViewBag.PortfolioId = Id;
 
-            ViewData["analytics"] = "class=\"selected\"";
+            var filterModel = this.GetFilter("Dashboard", fromDate.Value, toDate.Value, null/*usageData.Portfolios*/);
+            filterModel.PortfolioId = portfolioId;
+            filterModel.AppId = appId;
+            return View(new DashboardModel
+                        {
+                            UsageChartData = new JavaScriptSerializer().Serialize(usageInitData),
+                            FilterModel = filterModel
+                        },
+                        AnalyticsMasterModel.MenuItem.Dashboard,
+                        string.Join("/", new string[] { portfolioId.ToString(), filterModel.AppId.ToString(), fromDate.Value.ToString("dd-MMM-yyyy"), toDate.Value.ToString("dd-MMM-yyyy") }),
+                        AfterLoginMasterModel.SelectedMenuItem.Analytics);
+        }
 
+        public ActionResult FingerPrint(int portfolioId, int? applicationId, DateTime? fromDate, DateTime? toDate)
+        {
+            if (!fromDate.HasValue)
+            {
+                fromDate = DateTime.UtcNow.AddDays(-30);
+            }
+
+            if (!toDate.HasValue)
+            {
+                toDate = DateTime.UtcNow;
+            }
+ 
+            int appId = applicationId.HasValue ? applicationId.Value : 0;
+
+            /*
+            var dataResult = analyticsService.GetClickHeatMapData(portfolioId, applicationId, fromDate.Value, toDate.Value);
+            if (dataResult.HasError)
+            {
+                return View("Error");
+            }
+            */
             return View();
         }
 
-        public ActionResult FingerPrint(int id)
+        public ActionResult EyeTracker(int portfolioId, int? applicationId, DateTime? fromDate, DateTime? toDate)
         {
-            ViewData["analytics"] = "class=\"selected\"";
-            return View();
-        }
+            if (!fromDate.HasValue)
+            {
+                fromDate = DateTime.UtcNow.AddDays(-30);
+            }
 
-        public ActionResult EyeTracker(int id)
-        {
-            ViewData["analytics"] = "class=\"selected\"";
+            if (!toDate.HasValue)
+            {
+                toDate = DateTime.UtcNow;
+            }
+
+            int appId = applicationId.HasValue ? applicationId.Value : 0;
+            /*
+            var dataResult = analyticsService.GetEyeTrackerData(portfolioId, applicationId, fromDate.Value, toDate.Value);
+            if (dataResult.HasError)
+            {
+                return View("Error");
+            }
+            */
             return View();
         }
     }

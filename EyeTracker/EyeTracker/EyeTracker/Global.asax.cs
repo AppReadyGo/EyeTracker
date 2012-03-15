@@ -96,8 +96,8 @@ namespace EyeTracker
 
             routes.MapRoute(
                 "AnalyticsData",
-                "Analytics/{action}/{portfolioId}/{applicationId}/{fromDate}/{toDate}",
-                new { controller = "Analytics", action = "Dashboard", applicationId = UrlParameter.Optional, fromDate = UrlParameter.Optional, toDate = UrlParameter.Optional }
+                "Analytics/{action}/{portfolioId}/{applicationId}/{fromDate}/{toDate}/{screenSize}/{path}/{language}/{os}/{location}",
+                new { controller = "Analytics", action = "Dashboard", applicationId = UrlParameter.Optional, fromDate = UrlParameter.Optional, toDate = UrlParameter.Optional, screenSize = UrlParameter.Optional, path = UrlParameter.Optional, language = UrlParameter.Optional, os = UrlParameter.Optional, location = UrlParameter.Optional }
             );
 
             routes.MapRoute(

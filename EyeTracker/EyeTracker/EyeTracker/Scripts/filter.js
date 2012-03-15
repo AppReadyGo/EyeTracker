@@ -85,8 +85,14 @@ $(function () {
     $('#apply_btn').click(function () {
         var from = $("#datepicker_from").datepicker("getDate");
         var to = $("#datepicker_to").datepicker("getDate");
-        $('#date_btn').text($.datepicker.formatDate('dd M yy', from) + ' - ' + $.datepicker.formatDate('dd M yy', to));
-        $('#date_panel').hide();
-        document.location.href = '/Analytics/' + analytics.type + '/Dashboard/' + analytics.id + '/' + $.datepicker.formatDate('dd-M-yy', from) + '/' + $.datepicker.formatDate('dd-M-yy', to)
+        var portfolio = $('#portfolioId').val();
+        var application = $('#applicationId').val();
+        document.location.href = '/Analytics/' + analytics.action + '/' + portfolio + '/' + application + '/' + $.datepicker.formatDate('dd-M-yy', from) + '/' + $.datepicker.formatDate('dd-M-yy', to)
+    });
+    $('#cancel_btn').click(function () {
+        $('#filter_body').hide();
+    });
+    $('#date_from_lnk,#date_to_lnk').click(function () {
+        $('#filter_body').show();
     });
 });
