@@ -30,7 +30,7 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
                 <li class="disabled <%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing) %>"><a <%--href="/PlanAndPricing"--%>>Plans and Pricing</a></li>
             </ul>
             <ul class="login-menu">
-                <li class="disabled"><a <%--href="/account/logon"--%>>Login</a></li>
+                <li><a href="/account/logon">Login</a></li>
                 <li><a href="/account/register">Register</a></li>
             </ul>
         </div>
