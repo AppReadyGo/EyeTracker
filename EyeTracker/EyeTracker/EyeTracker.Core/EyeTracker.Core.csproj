@@ -93,6 +93,7 @@
     <Compile Include="Extentions.cs" />
     <Compile Include="HeatMapImage.cs" />
     <Compile Include="ObjectContainer.cs" />
+    <Compile Include="SecurityContext.cs" />
     <Compile Include="Services\AccountMembershipService.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\AdminService.cs" />
@@ -106,7 +107,6 @@
     <Compile Include="Services\EventsServices.cs" />
     <Compile Include="Services\FormsAuthenticationService.cs" />
     <Compile Include="Services\PortfolioService.cs" />
-    <Compile Include="Services\ReportsService.cs" />
     <Compile Include="Services\ReportsServices.cs" />
     <Compile Include="WcfService\AnalyticsHandler.cs" />
     <Compile Include="WcfService\AnalyticsService.cs" />

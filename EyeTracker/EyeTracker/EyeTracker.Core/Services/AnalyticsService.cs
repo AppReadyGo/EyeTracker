@@ -21,9 +21,7 @@ namespace EyeTracker.Core.Services
 
         OperationResult<IEnumerable<ViewHeatMapData>> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
 
-        OperationResult<DashboardData> GetDashboardData(int portfolioId, int? applicationId, DateTime fromDate, DateTime toDate);
-
-        OperationResult<IEnumerable<PortfolioDetails>> GetCurrentUserPortfolios();
+        OperationResult<IEnumerable<PortfolioDetails>> GetAllPortfolios();
     }
 
     public class AnalyticsService : IAnalyticsService
@@ -102,24 +100,7 @@ namespace EyeTracker.Core.Services
             return result;
         }
 
-        public OperationResult<DashboardData> GetDashboardData(int portfolioId, int? applicationId, DateTime fromDate, DateTime toDate)
-        {
-            try
-            {
-                var userRes = membershipService.GetCurrentUserId();
-                if (userRes.HasError)
-                {
-                    return new OperationResult<DashboardData>(userRes);
-                }
-                return new OperationResult<DashboardData>(repository.GetDashboardData(userRes.Value, portfolioId, applicationId, fromDate, toDate));
-            }
-            catch (Exception exp)
-            {
-                return new OperationResult<DashboardData>(exp);
-            }
-        }
-
-        public OperationResult<IEnumerable<PortfolioDetails>> GetCurrentUserPortfolios()
+        public OperationResult<IEnumerable<PortfolioDetails>> GetAllPortfolios()
         {
             try
             {
@@ -128,7 +109,7 @@ namespace EyeTracker.Core.Services
                 {
                     return new OperationResult<IEnumerable<PortfolioDetails>>(userRes);
                 }
-                return new OperationResult<IEnumerable<PortfolioDetails>>(repository.GetCurrentUserPortfolios(userRes.Value));
+                return new OperationResult<IEnumerable<PortfolioDetails>>(repository.GetAllPortfolios(userRes.Value));
             }
             catch (Exception exp)
             {

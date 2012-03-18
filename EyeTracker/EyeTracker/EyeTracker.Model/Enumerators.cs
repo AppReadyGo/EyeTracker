@@ -12,4 +12,12 @@ namespace EyeTracker.Common
         Error
     }
 
+    public enum DataGrouping
+    {
+        Minute,
+        Hour,
+        Day,
+        Month,
+        Year
+    }
 }

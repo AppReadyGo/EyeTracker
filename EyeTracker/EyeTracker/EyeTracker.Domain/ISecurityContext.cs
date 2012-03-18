@@ -5,5 +5,8 @@ using System.Text;
 
 namespace EyeTracker.Domain
 {
-
+    public interface ISecurityContext
+    {
+         Guid UserId { get; }
+    }
 }

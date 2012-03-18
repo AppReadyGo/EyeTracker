@@ -18,6 +18,7 @@ using NHibernate.Driver;
 using NHibernate.Dialect;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using EyeTracker.Core.Services;
 
 namespace EyeTracker.Core
 {
@@ -83,6 +84,8 @@ namespace EyeTracker.Core
                 }
             }
             container.Register(Component.For<IRepository>().ImplementedBy<Repository>());
+            container.Register(Component.For<ISecurityContext>().ImplementedBy<SecurityContext>());
+            container.Register(Component.For<IMembershipService>().ImplementedBy<AccountMembershipService>());
 
             this.repository = container.Resolve<IRepository>();
         }
@@ -116,7 +119,8 @@ namespace EyeTracker.Core
 #if DEBUG
                 c.LogSqlInConsole = true;
                 c.LogFormattedSql = true;
-                c.SchemaAction = SchemaAutoAction.Create;
+                //c.SchemaAction = SchemaAutoAction.Create;
+                c.SchemaAction = SchemaAutoAction.Validate;
 #else
                 c.SchemaAction = SchemaAutoAction.Validate;
 #endif
