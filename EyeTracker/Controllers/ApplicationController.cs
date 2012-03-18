@@ -36,25 +36,21 @@ namespace EyeTracker.Controllers
         private IApplicationService service;
         private IPortfolioService portfolioService;
         private IAnalyticsService analyticsService;
-        private IReportsService reportService;
 
         public ApplicationController()
             : this(new ApplicationService(), 
             new PortfolioService(), 
-            new AnalyticsService(), 
-            new ReportsService())
+            new AnalyticsService())
         {
         }
 
         public ApplicationController(IApplicationService service, 
             IPortfolioService portfolioService, 
-            IAnalyticsService analyticsService, 
-            IReportsService reportService)
+            IAnalyticsService analyticsService)
         {
             this.service = service;
             this.portfolioService = portfolioService;
             this.analyticsService = analyticsService;
-            this.reportService = reportService;
         }
 
         public ActionResult Index(int portfolioId)
@@ -320,26 +316,6 @@ namespace EyeTracker.Controllers
             return View();
         }
 
-        public ActionResult Usage(int portfolioId, int appId)
-        {
-            var reportRes = reportService.GetVisitsData(DateTime.UtcNow.AddDays(-30), DateTime.UtcNow, null, appId, DataGrouping.Day);
-            if (reportRes.HasError)
-            {
-                return View("Error");
-            }
-            //Fill chart data
-            var chartInitData = new List<object>();
-            chartInitData.Add(new
-            {
-                data = reportRes.Value.OrderBy(curItem => curItem.Key).Select(curItem => new object[] { curItem.Key.MilliTimeStamp(), curItem.Value }),
-                color = "#461D7C"
-            });
-            ViewBag.ChartInitData = new JavaScriptSerializer().Serialize(chartInitData);
-            ViewBag.PortfolioId = portfolioId;
-            ViewBag.ApplicationId = appId;
-            return View();
-        }
-
         public ActionResult EyeTracker(int portfolioId, int appId)
         {
             ViewBag.PortfolioId = portfolioId;
@@ -396,64 +372,6 @@ namespace EyeTracker.Controllers
                 }
                 return View("Image");
             }
-        }
-
-        public FileResult ClickHeatMapImage(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate, bool preview)
-        {
-            byte[] imageData = null;
-            var opResult = analyticsService.GetClickHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
-            if (!opResult.HasError)
-            {
-                Image bgImg = GetBackgroundImage(appId, clientWidth, clientHeight);
-                Image image = HeatMapImage_.CreateClickHeatMap(opResult.Value, clientWidth, clientHeight, bgImg);
-                using (MemoryStream mStream = new MemoryStream())
-                {
-                    image.Save(mStream, ImageFormat.Png);
-                    imageData = mStream.ToArray();
-                }
-                image.Dispose();
-
-            }
-            if (imageData == null)
-            {
-                throw new HttpException(404, "Not found");
-            }
-            else
-            {
-                return base.File(imageData, "Image/png");
-            }
-        }
-
-        public FileResult ViewHeatMapImage(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate, bool preview)
-        {
-            byte[] imageData = null;
-            var opResult = analyticsService.GetViewHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
-            if (!opResult.HasError)
-            {
-                Image bgImg = GetBackgroundImage(appId, clientWidth, clientHeight);
-                Image image = HeatMapImage_.CreateViewHeatMap(opResult.Value, clientWidth, clientHeight, bgImg);
-                using (MemoryStream mStream = new MemoryStream())
-                {
-                    image.Save(mStream, ImageFormat.Png);
-                    imageData = mStream.ToArray();
-                }
-            }
-            if (imageData == null)
-            {
-                throw new HttpException(404, "Not found");
-            }
-            else
-            {
-                return base.File(imageData, "Image/png");
-            }
-        }
-
-        private Image GetBackgroundImage(long appId, int clientWidth, int clientHeight)
-        {
-            string bgPath = Path.Combine(Server.MapPath("/Users_Resources/Screens"), string.Format("{0}.{1}.{2}.png", appId, clientWidth, clientHeight));
-            Image bgImg = null;
-            if (System.IO.File.Exists(bgPath)) bgImg = Image.FromFile(bgPath);
-            return bgImg;
         }
     }
 }

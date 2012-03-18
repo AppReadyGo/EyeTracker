@@ -14,9 +14,7 @@ namespace EyeTracker.Domain.Repositories
 
         IEnumerable<ViewHeatMapData> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
 
-        DashboardData GetDashboardData(Guid userId, int portfolioId, int? applicationId, DateTime fromDate, DateTime toDate);
-
-        IEnumerable<PortfolioDetails> GetCurrentUserPortfolios(Guid userId);
+        IEnumerable<PortfolioDetails> GetAllPortfolios(Guid userId);
     }
     
     public class AnalyticsRepository : IAnalyticsRepository
@@ -61,52 +59,7 @@ namespace EyeTracker.Domain.Repositories
             }
         }
 
-        public DashboardData GetDashboardData(Guid userId, int portfolioId, int? applicationId, DateTime fromDate, DateTime toDate)
-        {
-            using (ISession session = NHibernateHelper.OpenSession())
-            {
-                applicationId = !applicationId.HasValue || applicationId.Value == 0 ? null : applicationId;
-                DashboardData res;
-                if (applicationId.HasValue)
-                {
-                    var dashboard = new ApplicationDashboardData();
-                    var application = session.Get<Application>(applicationId.Value);
-
-                    dashboard.Description = application.Description;
-                    dashboard.PortfolioId = application.Portfolio.Id;
-                    dashboard.PortfolioDescription = application.Portfolio.Description;
-
-                    dashboard.ViewsData = session.Query<PageView>()
-                       .Where(pv => pv.Application.Id == applicationId.Value && pv.Date >= fromDate && pv.Date <= toDate)
-                       .GroupBy(g => g.Date)
-                       .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
-                       .ToList().ToDictionary(v => v.Key, v => v.Value);
-                    res = dashboard;
-                }
-                else
-                {
-                    var dashboard = new DashboardData();
-                    var portfolio = session.Get<Portfolio>(portfolioId);
-
-                    dashboard.Description = portfolio.Description;
-
-                    IEnumerable<int> appIds = portfolio.Applications.Select(a => a.Id).ToArray();
-
-                    dashboard.ViewsData = session.Query<PageView>()
-                        .Where(pv => appIds.Contains(pv.Application.Id) && pv.Date >= fromDate && pv.Date <= toDate)
-                        .GroupBy(g => g.Date)
-                        .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
-                        .ToList().ToDictionary(v => v.Key, v => v.Value);
-                    res = dashboard;
-                }
-
-                res.Portfolios = GetCurrentUserPortfolios(userId);
-
-                return res;
-            }
-        }
-
-        public IEnumerable<PortfolioDetails> GetCurrentUserPortfolios(Guid userId)
+        public IEnumerable<PortfolioDetails> GetAllPortfolios(Guid userId)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {

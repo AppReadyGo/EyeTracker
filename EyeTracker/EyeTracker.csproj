@@ -140,12 +140,13 @@
     <Compile Include="CustomModelBinders\Parsers\JsonViewAreaParser.cs" />
     <Compile Include="Helpers\General.cs" />
     <Compile Include="Model\Master\BeforeLoginMasterModel.cs" />
+    <Compile Include="Model\Pages\Analytics\UsageModel.cs" />
     <Compile Include="Model\Pages\Home\ContentModel.cs" />
     <Compile Include="Model\Pages\Home\IndexModel.cs" />
     <Compile Include="Model\Master\AfterLoginMasterModel.cs" />
     <Compile Include="Model\Master\AnalyticsMasterModel.cs" />
     <Compile Include="Model\Pages\Application\ApplicationEditModel.cs" />
-    <Compile Include="Model\Pages\Analytics\DashboarModel.cs" />
+    <Compile Include="Model\Pages\Analytics\DashboardModel.cs" />
     <Compile Include="Model\Filter\FilterModel.cs" />
     <Compile Include="Model\Filter\DateModel.cs" />
     <Compile Include="Model\Pages\Analytics\IndexViewModel.cs" />

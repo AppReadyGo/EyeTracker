@@ -84,7 +84,7 @@ namespace EyeTracker.Tests.FakeData
         #region IAnalyticsRepository Members
 
 
-        public IEnumerable<Domain.Common.PortfolioDetails> GetCurrentUserPortfolios(Guid userId)
+        public IEnumerable<Domain.Common.PortfolioDetails> GetAllPortfolios(Guid userId)
         {
             throw new NotImplementedException();
         }

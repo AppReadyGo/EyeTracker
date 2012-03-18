@@ -65,6 +65,7 @@
     <Compile Include="Common\ApplicationDetails.cs" />
     <Compile Include="Common\PortfolioDetails.cs" />
     <Compile Include="Enumirators.cs" />
+    <Compile Include="ISecurityContext.cs" />
     <Compile Include="Mapping\AccountProfilerMaping.cs" />
     <Compile Include="Mapping\BackOffice\SystemMembershipMapping.cs" />
     <Compile Include="Mapping\ContentItemMaping.cs" />
@@ -88,7 +89,6 @@
     <Compile Include="Model\Events\IEvent.cs" />
     <Compile Include="Model\Events\ScrollEvent.cs" />
     <Compile Include="Model\Events\SessionInfoEvent.cs" />
-    <Compile Include="Model\DashboardData.cs" />
     <Compile Include="Model\EyeTrackerData.cs" />
     <Compile Include="Model\OperationSystem.cs" />
     <Compile Include="Mapping\PageViewMaping.cs" />
@@ -122,6 +122,10 @@
     <Compile Include="Model\ViewPart.cs" />
     <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\Analytics\FingerPrintViewDataQuery.cs" />
+    <Compile Include="Queries\Analytics\DashboardViewDataQuery.cs" />
+    <Compile Include="Queries\Analytics\FilterQuery.cs" />
+    <Compile Include="Queries\Analytics\UsageViewDataQuery.cs" />
     <Compile Include="Queries\GetKeyContentQuery.cs" />
     <Compile Include="Queries\IQueryHandler.cs" />
     <Compile Include="Repository.cs" />
@@ -131,7 +135,6 @@
     <Compile Include="Repository\DataRepository.cs" />
     <Compile Include="Repository\EventsRepository.cs" />
     <Compile Include="Repository\PortfolioRepository.cs" />
-    <Compile Include="Repository\ReportsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EyeTracker.Model\EyeTracker.Common.csproj">
