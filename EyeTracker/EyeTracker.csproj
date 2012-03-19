@@ -204,6 +204,9 @@
     <Content Include="Content\themes\cupertino\images\ui-icons_72a7cf_256x240.png" />
     <Content Include="Content\themes\cupertino\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\themes\cupertino\jquery-ui.css" />
+    <Content Include="Resources\eye_track.jpg" />
+    <Content Include="Resources\play_back.jpg" />
+    <Content Include="Resources\touch_map.jpg" />
     <Content Include="Scripts\Analytics.Index.js" />
     <Content Include="Scripts\analytics.selector.js" />
     <Content Include="Scripts\analytics.master.js" />
