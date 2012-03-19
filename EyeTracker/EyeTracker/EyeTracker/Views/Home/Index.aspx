@@ -14,10 +14,24 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
 <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to manage your business...</h3>
 <div>
 	<ul class="roundabout">
-		<li><img src="/Content/images/traffic.jpg" /></li>
-		<li><img src="/Content/images/traffic.jpg" /></li>
-		<li><img src="/Content/images/traffic.jpg" /></li>
-		<li><img src="/Content/images/traffic.jpg" /></li>
+		<li>
+            <div>
+            <img src="/Resources/eye_track.jpg"/>
+            <h3>Eye tracker</h3>
+            </div>
+        </li>
+		<li>
+            <div>
+            <img src="/Resources/play_back.jpg" />
+            <h3>Play Back</h3>
+            </div>
+        </li>
+		<li>
+            <div>
+             <img src="/Resources/touch_map.jpg"/>
+           <h3>Touch Map</h3>
+            </div>
+        </li>
 	</ul>
 </div>
 <a href="/Account/Register" class="btn-access">ACCESS ANALITYCS</a>

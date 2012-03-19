@@ -10,3 +10,8 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
+INSERT INTO Content ([Key], [SubKey], [Value])
+VALUES ('Home','Carusel First Item', ''),
+		('Home','Carusel Second Item', ''),
+		('Home','Carusel Thrid Item', '')
+

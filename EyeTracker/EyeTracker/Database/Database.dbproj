@@ -523,9 +523,4 @@
       <SubType>Code</SubType>
     </Build>
   </ItemGroup>
-  <ItemGroup>
-    <NotInBuild Include="ClickData.dgen">
-      <SubType>NotInBuild</SubType>
-    </NotInBuild>
-  </ItemGroup>
 </Project>

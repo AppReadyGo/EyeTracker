@@ -6,8 +6,10 @@
 .content > div > div > div a{color:#e65800;}
 
 .middle-panel h2{color:#eb9c57;margin:0;margin-top:20px;}
-.middle-panel h3{color:#fff;margin:0;}
+.middle-panel > h3{color:#fff;margin:0;}
 .middle-panel .btn-access{color:#fff; text-decoration:none;background:url(images/home.index.carousel.access.png) center center;padding:28px 45px 19px 47px;font-weight:bold;}
 .middle-panel .roundabout {list-style: none;width: 550px;margin: 0 auto;margin-top:170px;margin-bottom:170px;}
-.middle-panel .roundabout img{width:100%;}
-.middle-panel div{height:194px;}
+.middle-panel .roundabout li{height:250px;background-color:#F5F5F5;width: 450px;padding:10px;cursor:pointer;border:1px solid #C5C9C9;color:#572D00;}
+.middle-panel .roundabout li img{height:17em;float:left;}
+.middle-panel .roundabout li h3{font-size:3em;font-weight:normal;margin:0px;padding-top:1.5em;}
+.middle-panel > div{height:194px;}
