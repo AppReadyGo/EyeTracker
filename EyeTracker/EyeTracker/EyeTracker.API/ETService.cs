@@ -28,7 +28,60 @@ namespace EyeTracker.API
         {  
             //return ParseVisitEvents(mState, package);
             //return (bool)EventParser.Parse(package); 
+            JsonPackage objPackage = GetPackage();
             return true;
+        }
+
+        private JsonPackage GetPackage()
+        {
+            JsonPackage objJP = new JsonPackage();
+            objJP.ClientKey = "123";
+            objJP.ScreenHeight = 1280;
+            objJP.ScreenWidth = 600;
+            objJP.SessionsInfo = new JsonSessionInfo[1];
+            objJP.SessionsInfo[0] = new JsonSessionInfo();
+            objJP.SessionsInfo[0].ClientHeight = 1000;
+            objJP.SessionsInfo[0].ClientWidth = 500;
+            objJP.SessionsInfo[0].PageUri = "myPageUri";
+            objJP.SessionsInfo[0].SessionStartDate = DateTime.Now.AddSeconds(-30).ToString();
+            objJP.SessionsInfo[0].SessionCloseDate = DateTime.Now.ToString();
+            objJP.SessionsInfo[0].ScrollDetails = GetScrollDetails();
+            objJP.SessionsInfo[0].TouchDetails = GetTouchDetails();
+
+            return objJP;
+        }
+
+        private JsonTouchDetails[] GetTouchDetails()
+        {
+            var colTouchDeatils = new JsonTouchDetails[]
+            {
+                GetTouchDetail()
+            };
+            return colTouchDeatils;
+        }
+
+        private JsonTouchDetails GetTouchDetail()
+        {
+            Random r = new Random();
+            JsonTouchDetails objTD = new JsonTouchDetails();
+            objTD.ClientX = r.Next(0, 600);
+            objTD.ClientY = r.Next(0, 1280);
+            objTD.Date = DateTime.Now.AddSeconds(-r.Next(0, 30)).ToString();
+            objTD.Press = r.Next(1, 100);
+            return objTD;
+        }
+
+        private JsonScrollDetails[] GetScrollDetails()
+        {
+            JsonScrollDetails objScrollDetails = new JsonScrollDetails();
+            objScrollDetails.StartTouchData = GetTouchDetail();
+            objScrollDetails.CloseTouchData = GetTouchDetail();
+
+            var colScrollDetails = new JsonScrollDetails[]
+            {
+                objScrollDetails
+            };
+            return colScrollDetails;
         }
 
         [WebInvoke(UriTemplate = "{id}", Method = "PUT")]
