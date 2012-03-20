@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="ViewUserControl<EyeTracker.Models.Account.RegisterModel>" %>
 <% using (Html.BeginForm()) { %>
-    <%: Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.") %>
     <h3>Account Information</h3>
     <p>Passwords are required to be a minimum of <%: ViewData["PasswordLength"] %> characters in length.</p>
                                 
@@ -27,6 +26,7 @@
         <%: Html.PasswordFor(m => m.ConfirmPassword, new { autocomplete = "off" })%>
         <%: Html.ValidationMessageFor(m => m.ConfirmPassword) %>
     </div>               
+    <%: Html.ValidationSummary(true) %>
     <p>
         <input type="submit" value="Register" />
     </p>
