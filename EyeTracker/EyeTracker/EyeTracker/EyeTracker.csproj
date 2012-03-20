@@ -351,8 +351,6 @@
     <Content Include="Views\Application\Usage.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\PageContent.aspx" />
-    <Content Include="Views\Home\Index___.aspx" />
-    <Content Include="Views\Home\Index_.aspx" />
     <Content Include="Views\Analytics\Usage.aspx" />
     <Content Include="Views\Analytics\Dashboard.aspx" />
     <Content Include="Views\Analytics\Index.aspx" />
@@ -386,7 +384,6 @@
     <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Account\Register.aspx" />
-    <Content Include="Views\Home\Index__.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\LogOnUserControl_.ascx" />
     <Content Include="Views\Shared\Site.Master" />

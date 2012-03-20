@@ -10,3 +10,9 @@
 form{width:312px;margin:auto;text-align:left;}
 
 input[type=text],input[type=password]{border: 1px solid #CCCCCC;padding:5px;font-size:17px;width:300px;}
+
+.editor-field{margin-bottom:10px;}
+.editor-field .field-validation-error{color:#ff0000;font-size:12px;}
+.validation-summary-errors{color:#ff0000;font-size:12px;}
+.validation-summary-errors  ul{margin:10px 0 0 0;padding:0;}
+.validation-summary-errors ul li{list-style-type:none;}

@@ -132,7 +132,7 @@ namespace EyeTracker.Controllers
 
             // If we got this far, something failed, redisplay form
             ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-            return View(model);
+            return View(new ViewModelWrapper<BeforeLoginMasterModel, RegisterModel>(new BeforeLoginMasterModel(), model));
         }
 
         // **************************************
