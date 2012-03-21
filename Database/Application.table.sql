@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Application] (
     [Id]          INT            IDENTITY (1, 1) NOT NULL,
-    [Description] NVARCHAR (225) NOT NULL,
+    [Description] NVARCHAR (225) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     [CreateDate]  DATETIME       NOT NULL,
     [Type]        INT            NOT NULL,
     [PortfolioId] INT            NOT NULL,

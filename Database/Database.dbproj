@@ -54,91 +54,7 @@
   <!--Import the settings-->
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\TeamData\Microsoft.Data.Schema.SqlTasks.targets" />
   <ItemGroup>
-    <Folder Include="Scripts" />
-    <Folder Include="Scripts\Pre-Deployment" />
-    <Folder Include="Scripts\Post-Deployment" />
-    <Folder Include="Data Generation Plans" />
-    <Folder Include="Schema Comparisons" />
     <Folder Include="Properties\" />
-    <Folder Include="Schema Objects\" />
-    <Folder Include="Schema Objects\Schemas\" />
-    <Folder Include="Schema Objects\Schemas\dbo\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Defaults\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Functions\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Rules\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Data Types\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Types CLR\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Table Types\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\XML Schema Collections\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Service Broker\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Service Broker\Queues\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Synonyms\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Tables\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Tables\Constraints\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Tables\Indexes\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Tables\Keys\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Tables\Triggers\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Tables\Statistics\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Views\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Views\Indexes\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Views\Triggers\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Views\Statistics\" />
-    <Folder Include="Schema Objects\Database Level Objects\" />
-    <Folder Include="Schema Objects\Database Level Objects\Assemblies\" />
-    <Folder Include="Schema Objects\Database Level Objects\Database Triggers\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Schemas\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Users\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Certificates\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Asymmetric Keys\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Master Keys\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Signatures\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Symmetric Keys\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Database Encryption Keys\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Database Audit Specification\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Roles\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Roles\Application Roles\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Roles\Database Roles\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Broker Priorities\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Contracts\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Event Notifications\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Message Types\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Remote Service Binding\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Routes\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Services\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\Full Text Stoplists\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\Filegroups\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\Files\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\Full Text Catalogs\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\Partition Functions\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\Partition Schemes\" />
-    <Folder Include="Schema Objects\Schemas\Utils\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Defaults\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Functions\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Rules\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Stored Procedures\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Types\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Types\User Defined Data Types\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Types\User Defined Types CLR\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Types\User Defined Table Types\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Types\XML Schema Collections\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Synonyms\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Tables\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Tables\Constraints\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Tables\Indexes\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Tables\Keys\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Tables\Triggers\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Tables\Statistics\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Views\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Views\Indexes\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Views\Triggers\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Views\Statistics\" />
   </ItemGroup>
   <ItemGroup>
     <PropertiesFile Include="Properties\Database.sqlsettings">
@@ -150,376 +66,370 @@
     <Build Include="Properties\Database.sqlpermissions">
       <ModelBuilderType>Permissions</ModelBuilderType>
     </Build>
-    <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql">
-      <SubType>Code</SubType>
-    </PreDeploy>
-    <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql">
-      <SubType>Code</SubType>
-    </PostDeploy>
   </ItemGroup>
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Schema Objects\Database Level Objects\Storage\Files\EyeTracker_1_log.sqlfile.sql">
+    <Build Include="FK6AF3367D1CF53E7.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Database Level Objects\Storage\Files\EyeTracker_1.sqlfile.sql">
+    <Build Include="FK5DAF59DA9DB60BE.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK5DAF59DA9DB60BE.fkey.sql">
+    <Build Include="FK5DAF59DAD1970229.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK5DAF59DAD1970229.fkey.sql">
+    <Build Include="FK5DAF59DAAF84173A.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK5DAF59DAAF84173A.fkey.sql">
+    <Build Include="FK5DAF59DA6C1A54A6.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK5DAF59DA6C1A54A6.fkey.sql">
+    <Build Include="FK5DAF59DAC633B88.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK5DAF59DAC633B88.fkey.sql">
+    <Build Include="FK49650677F9D3FC1C.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK49650677F9D3FC1C.fkey.sql">
+    <Build Include="FKBEF9D818C633B88.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK4AD899C9F9D3FC1C.fkey.sql">
+    <Build Include="FK4AD899C9F9D3FC1C.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FKBEF9D818C633B88.fkey.sql">
+    <Build Include="aspnet_Applications_Index.index.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK6AF3367D1CF53E7.fkey.sql">
+    <Build Include="aspnet_Users_Index.index.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_Applications_Index.index.sql">
+    <Build Include="aspnet_Users_Index2.index.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_Users_Index.index.sql">
+    <Build Include="aspnet_Paths_index.index.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_Users_Index2.index.sql">
+    <Build Include="aspnet_Roles_index1.index.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_Paths_index.index.sql">
+    <Build Include="aspnet_Membership_index.index.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_Roles_index1.index.sql">
+    <Build Include="aspnet_PersonalizationPerUser_index1.index.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_Membership_index.index.sql">
+    <Build Include="aspnet_PersonalizationPerUser_ncindex2.index.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_PersonalizationPerUser_index1.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_PersonalizationPerUser_ncindex2.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_FindUsersByName.proc.sql">
+    <Build Include="aspnet_Membership_FindUsersByName.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_FindUsersByEmail.proc.sql">
+    <Build Include="aspnet_Membership_FindUsersByEmail.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_CreateUser.proc.sql">
+    <Build Include="aspnet_Membership_CreateUser.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_ChangePasswordQuestionAndAnswer.proc.sql">
+    <Build Include="aspnet_Membership_ChangePasswordQuestionAndAnswer.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_WebEvent_LogEvent.proc.sql">
+    <Build Include="aspnet_WebEvent_LogEvent.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_AnyDataInTables.proc.sql">
+    <Build Include="aspnet_AnyDataInTables.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Profile_DeleteInactiveProfiles.proc.sql">
+    <Build Include="aspnet_Profile_DeleteInactiveProfiles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_UsersInRoles_RemoveUsersFromRoles.proc.sql">
+    <Build Include="aspnet_UsersInRoles_RemoveUsersFromRoles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_UsersInRoles_IsUserInRole.proc.sql">
+    <Build Include="aspnet_UsersInRoles_IsUserInRole.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_UsersInRoles_GetUsersInRoles.proc.sql">
+    <Build Include="aspnet_UsersInRoles_GetUsersInRoles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_RegisterSchemaVersion.proc.sql">
+    <Build Include="aspnet_RegisterSchemaVersion.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_UsersInRoles_GetRolesForUser.proc.sql">
+    <Build Include="aspnet_UsersInRoles_GetRolesForUser.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_CheckSchemaVersion.proc.sql">
+    <Build Include="aspnet_CheckSchemaVersion.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_UsersInRoles_FindUsersInRole.proc.sql">
+    <Build Include="aspnet_UsersInRoles_FindUsersInRole.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Applications_CreateApplication.proc.sql">
+    <Build Include="aspnet_Applications_CreateApplication.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_UsersInRoles_AddUsersToRoles.proc.sql">
+    <Build Include="aspnet_UsersInRoles_AddUsersToRoles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Users_CreateUser.proc.sql">
+    <Build Include="aspnet_Users_CreateUser.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Users_DeleteUser.proc.sql">
+    <Build Include="aspnet_Users_DeleteUser.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Roles_RoleExists.proc.sql">
+    <Build Include="aspnet_Roles_RoleExists.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Roles_DeleteRole.proc.sql">
+    <Build Include="aspnet_Roles_DeleteRole.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Roles_GetAllRoles.proc.sql">
+    <Build Include="aspnet_Roles_GetAllRoles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Profile_SetProperties.proc.sql">
+    <Build Include="aspnet_Profile_SetProperties.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Profile_GetProperties.proc.sql">
+    <Build Include="aspnet_Profile_GetProperties.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Profile_GetProfiles.proc.sql">
+    <Build Include="aspnet_Profile_GetProfiles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Profile_GetNumberOfInactiveProfiles.proc.sql">
+    <Build Include="aspnet_Profile_GetNumberOfInactiveProfiles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Profile_DeleteProfiles.proc.sql">
+    <Build Include="aspnet_Profile_DeleteProfiles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Roles_CreateRole.proc.sql">
+    <Build Include="aspnet_Roles_CreateRole.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Paths_CreatePath.proc.sql">
+    <Build Include="aspnet_Paths_CreatePath.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\Utils\Programmability\Stored Procedures\CreateBinaryInserts.proc.sql">
+    <Build Include="CreateBinaryInserts.proc.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_PersonalizationPerUser_SetPageSettings.proc.sql">
-      <SubType>Code</SubType>
-      <QuotedIdentifier>Off</QuotedIdentifier>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_PersonalizationPerUser_ResetPageSettings.proc.sql">
+    <Build Include="aspnet_PersonalizationPerUser_SetPageSettings.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_PersonalizationPerUser_GetPageSettings.proc.sql">
+    <Build Include="aspnet_PersonalizationPerUser_ResetPageSettings.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_PersonalizationAllUsers_SetPageSettings.proc.sql">
+    <Build Include="aspnet_PersonalizationPerUser_GetPageSettings.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_PersonalizationAllUsers_ResetPageSettings.proc.sql">
+    <Build Include="aspnet_PersonalizationAllUsers_SetPageSettings.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_PersonalizationAllUsers_GetPageSettings.proc.sql">
+    <Build Include="aspnet_PersonalizationAllUsers_ResetPageSettings.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Setup_RestorePermissions.proc.sql">
+    <Build Include="aspnet_PersonalizationAllUsers_GetPageSettings.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Setup_RemoveAllRoleMembers.proc.sql">
+    <Build Include="aspnet_Setup_RestorePermissions.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_PersonalizationAdministration_ResetUserState.proc.sql">
+    <Build Include="aspnet_Setup_RemoveAllRoleMembers.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_PersonalizationAdministration_ResetSharedState.proc.sql">
+    <Build Include="aspnet_PersonalizationAdministration_ResetUserState.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_PersonalizationAdministration_GetCountOfState.proc.sql">
+    <Build Include="aspnet_PersonalizationAdministration_ResetSharedState.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_PersonalizationAdministration_FindState.proc.sql">
+    <Build Include="aspnet_PersonalizationAdministration_GetCountOfState.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_PersonalizationAdministration_DeleteAllState.proc.sql">
+    <Build Include="aspnet_PersonalizationAdministration_FindState.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_UpdateUserInfo.proc.sql">
+    <Build Include="aspnet_PersonalizationAdministration_DeleteAllState.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_UpdateUser.proc.sql">
+    <Build Include="aspnet_Membership_UpdateUserInfo.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_UnlockUser.proc.sql">
+    <Build Include="aspnet_Membership_UpdateUser.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_SetPassword.proc.sql">
+    <Build Include="aspnet_Membership_UnlockUser.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_ResetPassword.proc.sql">
+    <Build Include="aspnet_Membership_SetPassword.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_GetUserByUserId.proc.sql">
+    <Build Include="aspnet_Membership_ResetPassword.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_GetUserByName.proc.sql">
+    <Build Include="aspnet_Membership_GetUserByUserId.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_GetUserByEmail.proc.sql">
+    <Build Include="aspnet_Membership_GetUserByName.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_GetPasswordWithFormat.proc.sql">
+    <Build Include="aspnet_Membership_GetUserByEmail.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_GetPassword.proc.sql">
+    <Build Include="aspnet_Membership_GetPasswordWithFormat.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_UnRegisterSchemaVersion.proc.sql">
+    <Build Include="aspnet_Membership_GetPassword.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_GetNumberOfUsersOnline.proc.sql">
+    <Build Include="aspnet_UnRegisterSchemaVersion.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Personalization_GetApplicationId.proc.sql">
+    <Build Include="aspnet_Membership_GetNumberOfUsersOnline.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_GetAllUsers.proc.sql">
+    <Build Include="aspnet_Personalization_GetApplicationId.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Browser.table.sql">
+    <Build Include="aspnet_Membership_GetAllUsers.proc.sql">
+      <SubType>Code</SubType>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="Application.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_UsersInRoles.table.sql">
+    <Build Include="ContentPages.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\VisitEvent.table.sql">
+    <Build Include="Content.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\PageView.table.sql">
+    <Build Include="Browser.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\OperationSystem.table.sql">
+    <Build Include="aspnet_UsersInRoles.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Click.table.sql">
+    <Build Include="VisitEvent.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Countries.table.sql">
+    <Build Include="PageView.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Language.table.sql">
+    <Build Include="OperationSystem.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\AccountProfiler.table.sql">
+    <Build Include="Click.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\ViewPart.table.sql">
+    <Build Include="Countries.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\ViewPartEvent.table.sql">
+    <Build Include="Language.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\ClickEvent.table.sql">
+    <Build Include="Screen.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Screen.table.sql">
+    <Build Include="AccountProfiler.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_SchemaVersions.table.sql">
+    <Build Include="ViewPart.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_WebEvent_Events.table.sql">
+    <Build Include="ViewPartEvent.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_Applications.table.sql">
+    <Build Include="aspnet_SchemaVersions.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_Users.table.sql">
+    <Build Include="ClickEvent.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_Paths.table.sql">
+    <Build Include="aspnet_WebEvent_Events.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_Roles.table.sql">
+    <Build Include="aspnet_Applications.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_Membership.table.sql">
+    <Build Include="aspnet_Users.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_PersonalizationAllUsers.table.sql">
+    <Build Include="aspnet_Paths.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_PersonalizationPerUser.table.sql">
+    <Build Include="aspnet_Roles.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_Profile.table.sql">
+    <Build Include="aspnet_Membership.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Portfolio.table.sql">
+    <Build Include="aspnet_PersonalizationAllUsers.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Application.table.sql">
+    <Build Include="aspnet_PersonalizationPerUser.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Database Level Objects\Service Broker\Routes\AutoCreatedLocal.route.sql">
+    <Build Include="aspnet_Profile.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\Utils.schema.sql">
+    <Build Include="Portfolio.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="AutoCreatedLocal.route.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Utils.schema.sql">
       <SubType>Code</SubType>
     </Build>
   </ItemGroup>
