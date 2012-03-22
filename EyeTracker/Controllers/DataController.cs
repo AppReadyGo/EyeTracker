@@ -65,7 +65,7 @@ namespace EyeTracker.Controllers
         [HttpPost]
         public JsonResult Package(PackageEvent packageEvent)
         {
-            log.WriteInformation("-->Package(clicks:{0}, parts:{1})", packageEvent.clicks.Count, packageEvent.parts.Count);
+            //log.WriteInformation("-->Package(clicks:{0}, parts:{1})", packageEvent.clicks.Count, packageEvent.parts.Count);
             OperationResult res = null;
             try
             {
@@ -73,16 +73,16 @@ namespace EyeTracker.Controllers
 #if JSUNITTEST
                 var curRes = new OperationResult();
 #else
-                var curRes = eventsServices.AddClickEvents(packageEvent.clicks);
+                //var curRes = eventsServices.AddClickEvents(packageEvent.clicks);
 #endif
-                if (curRes.HasError) res = curRes;
+                //if (curRes.HasError) res = curRes;
 
 #if JSUNITTEST
                 curRes = new OperationResult();
 #else
-                curRes = eventsServices.AddViewPartEvents(packageEvent.parts);
+                //curRes = eventsServices.AddViewPartEvents(packageEvent.parts);
 #endif
-                if (curRes.HasError) res = curRes;
+                //if (curRes.HasError) res = curRes;
 
                 Response.AddHeader("Access-Control-Allow-Origin", "*");
             }
