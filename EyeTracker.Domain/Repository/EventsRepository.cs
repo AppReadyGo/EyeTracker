@@ -17,6 +17,8 @@ namespace EyeTracker.Domain.Repositories
         void AddViewPartEvents(IEnumerable<ViewPartEvent> viewPartEvent);
 
         void AddClickEvents(IEnumerable<ClickEvent> clickEvent);
+
+        void AddPackageEvent(PackageEvent packageEvent);
     }
 
 
@@ -63,6 +65,19 @@ namespace EyeTracker.Domain.Repositories
                     {
                         session.Save(curEvent);
                     }
+                    transaction.Commit();
+                }
+            }
+        }
+
+
+        public void AddPackageEvent(PackageEvent packageEvent)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    object objResult = session.Save(packageEvent);
                     transaction.Commit();
                 }
             }
