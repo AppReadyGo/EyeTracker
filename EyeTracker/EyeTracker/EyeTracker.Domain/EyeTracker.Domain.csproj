@@ -70,6 +70,9 @@
     <Compile Include="Mapping\BackOffice\SystemMembershipMapping.cs" />
     <Compile Include="Mapping\ContentItemMaping.cs" />
     <Compile Include="Mapping\ContentPageMaping.cs" />
+    <Compile Include="Mapping\Events\PackageEventMapping.cs" />
+    <Compile Include="Mapping\Events\ScrollEventMapping.cs" />
+    <Compile Include="Mapping\Events\SessionInfoEventMapping.cs" />
     <Compile Include="Mapping\ScreenMapping.cs" />
     <Compile Include="Model\AnalyticsType.cs" />
     <Compile Include="Model\BackOffice\SystemMembership.cs" />
