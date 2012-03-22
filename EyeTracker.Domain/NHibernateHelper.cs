@@ -27,6 +27,7 @@ namespace EyeTracker.Domain
             {
                 if (_sessionFactory == null)
                 {
+
                     DatabaseSettings dbSettings = (DatabaseSettings)ConfigurationManager.GetSection("dataConfiguration");
                     _sessionFactory = BuildSessionFactory(typeof(NHibernateHelper), ConfigurationManager.ConnectionStrings[dbSettings.DefaultDatabase].ToString());
                 }
