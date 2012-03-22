@@ -66,80 +66,81 @@ namespace EyeTracker.CustomModelBinders
 
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
-            JsonPackage package = null;
-            PackageEvent packageEvent = new PackageEvent() { clicks = new List<ClickEvent>(), parts = new List<ViewPartEvent>() };
-            ModelStateDictionary mState = bindingContext.ModelState;
-            string json = HttpUtility.UrlDecode(controllerContext.HttpContext.Request.Form.ToString());
-            try
-            {
-                IAnalyticsService service = WindsorFactory.Resolve<IAnalyticsService>();
+            //JsonPackage package = null;
+            //PackageEvent packageEvent = new PackageEvent() { clicks = new List<ClickEvent>(), parts = new List<ViewPartEvent>() };
+            //ModelStateDictionary mState = bindingContext.ModelState;
+            //string json = HttpUtility.UrlDecode(controllerContext.HttpContext.Request.Form.ToString());
+            //try
+            //{
+            //    IAnalyticsService service = WindsorFactory.Resolve<IAnalyticsService>();
 
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(JsonPackage));
-                MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(json));
-                package = serializer.ReadObject(ms) as JsonPackage;
+            //    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(JsonPackage));
+            //    MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(json));
+            //    package = serializer.ReadObject(ms) as JsonPackage;
 
-                DateTime date;
-                foreach (var curClick in package.Clicks)
-                {
-                    //Get date
-                    if (!DateTime.TryParse(curClick.StrDate, out date))
-                    {
-                        mState.Add("Click.StrDate(d)", new ModelState { });
-                        mState.AddModelError("Click.StrDate(d)", "Wrong format must be: DDD, dd MMM yyyy HH:mm:ss GMT");
-                    }
-                    if (mState.IsValid)
-                    {
-                        packageEvent.clicks.Add(new ClickEvent()
-                        {
-                            Date = date,
-                            VisitInfoId = package.VisitId,
-                            ClientX = curClick.ClientX,
-                            ClientY = curClick.ClientY
-                        });
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
+            //    DateTime date;
+            //    foreach (var curClick in package.Clicks)
+            //    {
+            //        //Get date
+            //        if (!DateTime.TryParse(curClick.StrDate, out date))
+            //        {
+            //            mState.Add("Click.StrDate(d)", new ModelState { });
+            //            mState.AddModelError("Click.StrDate(d)", "Wrong format must be: DDD, dd MMM yyyy HH:mm:ss GMT");
+            //        }
+            //        if (mState.IsValid)
+            //        {
+            //            packageEvent.clicks.Add(new ClickEvent()
+            //            {
+            //                Date = date,
+            //                VisitInfoId = package.VisitId,
+            //                ClientX = curClick.ClientX,
+            //                ClientY = curClick.ClientY
+            //            });
+            //        }
+            //        else
+            //        {
+            //            break;
+            //        }
+            //    }
 
-                DateTime toDate;
-                foreach (var curPart in package.ViewParts)
-                {
-                    //Get date
-                    if (!DateTime.TryParse(curPart.StrStartDate, out date))
-                    {
-                        mState.Add("ViewPart(vpd).StrStartDate(sd)", new ModelState { });
-                        mState.AddModelError("ViewPart(vpd).StrStartDate(sd)", "Wrong format must be: DDD, dd MMM yyyy HH:mm:ss GMT");
-                    }
-                    if (!DateTime.TryParse(curPart.StrFinishDate, out toDate))
-                    {
-                        mState.Add("ViewPart(vpd).StrFinishDate(fd)", new ModelState { });
-                        mState.AddModelError("ViewPart(vpd).StrFinishDate(fd)", "Wrong format must be: DDD, dd MMM yyyy HH:mm:ss GMT");
-                    }
-                    if (mState.IsValid)
-                    {
-                        packageEvent.parts.Add(new ViewPartEvent()
-                        {
-                            Date = date,
-                            VisitInfoId = package.VisitId,
-                            TimeSpan = (int)(toDate - date).TotalSeconds,
-                            ScrollLeft = curPart.ScrollLeft,
-                            ScrollTop = curPart.ScrollTop
-                        });
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-            catch (Exception exp)
-            {
-                Guid guid = log.WriteError(exp, "JsonPackageModelBinder Error, json:{0}", json);
-                mState.AddModelError("GeneralError", "Please contact to customer service: customerservice@mobillify.com, error guid:" + guid.ToString());
-            }
-            return packageEvent;
+            //    DateTime toDate;
+            //    foreach (var curPart in package.ViewParts)
+            //    {
+            //        //Get date
+            //        if (!DateTime.TryParse(curPart.StrStartDate, out date))
+            //        {
+            //            mState.Add("ViewPart(vpd).StrStartDate(sd)", new ModelState { });
+            //            mState.AddModelError("ViewPart(vpd).StrStartDate(sd)", "Wrong format must be: DDD, dd MMM yyyy HH:mm:ss GMT");
+            //        }
+            //        if (!DateTime.TryParse(curPart.StrFinishDate, out toDate))
+            //        {
+            //            mState.Add("ViewPart(vpd).StrFinishDate(fd)", new ModelState { });
+            //            mState.AddModelError("ViewPart(vpd).StrFinishDate(fd)", "Wrong format must be: DDD, dd MMM yyyy HH:mm:ss GMT");
+            //        }
+            //        if (mState.IsValid)
+            //        {
+            //            packageEvent.parts.Add(new ViewPartEvent()
+            //            {
+            //                Date = date,
+            //                VisitInfoId = package.VisitId,
+            //                TimeSpan = (int)(toDate - date).TotalSeconds,
+            //                ScrollLeft = curPart.ScrollLeft,
+            //                ScrollTop = curPart.ScrollTop
+            //            });
+            //        }
+            //        else
+            //        {
+            //            break;
+            //        }
+            //    }
+            //}
+            //catch (Exception exp)
+            //{
+            //    Guid guid = log.WriteError(exp, "JsonPackageModelBinder Error, json:{0}", json);
+            //    mState.AddModelError("GeneralError", "Please contact to customer service: customerservice@mobillify.com, error guid:" + guid.ToString());
+            //}
+            //return packageEvent;
+            return null;
         }
     }
 }
