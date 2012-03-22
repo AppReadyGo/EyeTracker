@@ -9,6 +9,9 @@ using System.Runtime.Serialization.Json;
 using System.IO;
 using EyeTracker.API.BL.Contract;
 using EyeTracker.API.BL;
+using EyeTracker.Core.Services;
+using EyeTracker.Domain.Model.Events;
+using EyeTracker.Common;
 
 namespace EyeTracker.API
 {
@@ -29,7 +32,10 @@ namespace EyeTracker.API
             //return ParseVisitEvents(mState, package);
             //return (bool)EventParser.Parse(package); 
             JsonPackage objPackage = GetPackage();
-            return true;
+            PackageEvent objParserResult = EventParser.Parse(objPackage) as PackageEvent;
+            EventsServices objEventSvc = new EventsServices();
+            OperationResult objSaveResult = objEventSvc.HandlePackageEvent(objParserResult);
+            return !objSaveResult.HasError;
         }
 
         private JsonPackage GetPackage()
@@ -45,8 +51,8 @@ namespace EyeTracker.API
             objJP.SessionsInfo[0].PageUri = "myPageUri";
             objJP.SessionsInfo[0].SessionStartDate = DateTime.Now.AddSeconds(-30).ToString();
             objJP.SessionsInfo[0].SessionCloseDate = DateTime.Now.ToString();
-            objJP.SessionsInfo[0].ScrollDetails = GetScrollDetails();
             objJP.SessionsInfo[0].TouchDetails = GetTouchDetails();
+            objJP.SessionsInfo[0].ScrollDetails = GetScrollDetails(objJP.SessionsInfo[0].TouchDetails[0], objJP.SessionsInfo[0].TouchDetails[1]);
 
             return objJP;
         }
@@ -55,6 +61,7 @@ namespace EyeTracker.API
         {
             var colTouchDeatils = new JsonTouchDetails[]
             {
+                GetTouchDetail(),
                 GetTouchDetail()
             };
             return colTouchDeatils;
@@ -71,11 +78,11 @@ namespace EyeTracker.API
             return objTD;
         }
 
-        private JsonScrollDetails[] GetScrollDetails()
+        private JsonScrollDetails[] GetScrollDetails(JsonTouchDetails p_objStartTouch, JsonTouchDetails p_objEndTouch)
         {
             JsonScrollDetails objScrollDetails = new JsonScrollDetails();
-            objScrollDetails.StartTouchData = GetTouchDetail();
-            objScrollDetails.CloseTouchData = GetTouchDetail();
+            objScrollDetails.StartTouchData = p_objStartTouch;
+            objScrollDetails.CloseTouchData =p_objEndTouch;
 
             var colScrollDetails = new JsonScrollDetails[]
             {
