@@ -84,6 +84,10 @@ namespace EyeTracker.API.BL.Parsers
         /// <returns></returns>
         private List<E> ParseData<P,E>(P[] details) where P : IPackage  where E : class
         {
+            if (details == null || details.Length == 0)
+            {
+                return null;
+            }
             var info = new List<E>();
 
             foreach (var item in details)
