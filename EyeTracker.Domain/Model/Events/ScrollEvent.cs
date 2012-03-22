@@ -11,6 +11,8 @@ namespace EyeTracker.Domain.Model.Events
     /// </summary>
     public class ScrollEvent : IEvent
     {
+        public virtual long Id { get; set; }
+
         /// <summary>
         /// Start scrolling property
         /// </summary>
@@ -20,5 +22,7 @@ namespace EyeTracker.Domain.Model.Events
         /// Finish scrolling property
         /// </summary>
         public virtual ClickEvent LastTouch { get; set; }
+
+        public virtual SessionInfoEvent SessionInfoEvent { get; set; }
     }
 }

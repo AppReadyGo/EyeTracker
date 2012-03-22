@@ -18,5 +18,7 @@ namespace EyeTracker.Domain.Model.Events
         public virtual long VisitInfoId { get; set; }
 
         public virtual int Press { get; set; }
+
+        public virtual SessionInfoEvent SessionInfoEvent { get; set; }
     }
 }

@@ -18,6 +18,12 @@ namespace EyeTracker.Domain.Model.Events
             Scrolls = new List<ScrollEvent>();
             ScreenViewParts = new List<ViewPartEvent>();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual long Id { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -41,15 +47,16 @@ namespace EyeTracker.Domain.Model.Events
         /// <summary>
         /// Click/Touches 
         /// </summary>
-        public virtual List<ClickEvent> Clicks { get; set; }
+        public virtual IList<ClickEvent> Clicks { get; set; }
         /// <summary>
         /// Scrolls for this session
         /// </summary>
-        public virtual List<ScrollEvent> Scrolls { get; set; }
+        public virtual IList<ScrollEvent> Scrolls { get; set; }
         /// <summary>
         /// Parts on the main view data 
         /// </summary>
-        public virtual List<ViewPartEvent> ScreenViewParts { get; set; }
+        public virtual IList<ViewPartEvent> ScreenViewParts { get; set; }
 
+        public virtual PackageEvent PackageEvent { get; set; }
     }
 }

@@ -14,10 +14,16 @@ namespace EyeTracker.Domain.Model.Events
     {
         public PackageEvent()
         {
-            clicks = new List<ClickEvent>();
-            parts = new List<ViewPartEvent>();
+            //clicks = new List<ClickEvent>();
+            //parts = new List<ViewPartEvent>();
             Sessions = new List<SessionInfoEvent>();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual long Id { get; set; }
+
         /// <summary>
         /// CID - application ID 
         /// </summary>
@@ -34,9 +40,10 @@ namespace EyeTracker.Domain.Model.Events
         /// <summary>
         /// 
         /// </summary>
-        public virtual List<SessionInfoEvent> Sessions { get; set; }
+        public virtual IList<SessionInfoEvent> Sessions { get; set; }
 
-        public List<ClickEvent> clicks { get; set; }
-        public List<ViewPartEvent> parts { get; set; }
+        //todo:remove
+        //public List<ClickEvent> clicks { get; set; }
+        //public List<ViewPartEvent> parts { get; set; }
     }
 }

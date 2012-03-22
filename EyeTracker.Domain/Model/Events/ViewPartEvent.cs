@@ -23,5 +23,7 @@ namespace EyeTracker.Domain.Model.Events
         
         //[System.Obsolete("don`t use this property", true)]
         public virtual long VisitInfoId { get; set; }
+
+        public virtual SessionInfoEvent SessionInfoEvent { get; set; }
     }
 }
