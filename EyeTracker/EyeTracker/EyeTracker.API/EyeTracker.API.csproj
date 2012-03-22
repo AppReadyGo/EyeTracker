@@ -13,6 +13,7 @@
     <RootNamespace>EyeTracker.API</RootNamespace>
     <AssemblyName>EyeTracker.API</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -79,6 +80,18 @@
     <ProjectReference Include="..\EyeTracker.API.BL\EyeTracker.API.BL.csproj">
       <Project>{7DA3577D-A8EE-481E-9725-D15637E9C121}</Project>
       <Name>EyeTracker.API.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyeTracker.Core\EyeTracker.Core.csproj">
+      <Project>{28075AB1-E262-4FBC-846C-BF11A6E5FE41}</Project>
+      <Name>EyeTracker.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyeTracker.Domain\EyeTracker.Domain.csproj">
+      <Project>{6225C68F-4446-41B2-B774-316A5F04001A}</Project>
+      <Name>EyeTracker.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EyeTracker.Model\EyeTracker.Common.csproj">
+      <Project>{F5D9FA27-BAAF-4B4B-97F0-0A71F2210009}</Project>
+      <Name>EyeTracker.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
