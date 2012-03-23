@@ -12,6 +12,7 @@ using EyeTracker.API.BL;
 using EyeTracker.Core.Services;
 using EyeTracker.Domain.Model.Events;
 using EyeTracker.Common;
+using System.Threading;
 
 namespace EyeTracker.API
 {
@@ -52,7 +53,7 @@ namespace EyeTracker.API
             objJP.SessionsInfo[0].SessionStartDate = DateTime.Now.AddSeconds(-30).ToString();
             objJP.SessionsInfo[0].SessionCloseDate = DateTime.Now.ToString();
             objJP.SessionsInfo[0].TouchDetails = GetTouchDetails();
-            objJP.SessionsInfo[0].ScrollDetails = GetScrollDetails(objJP.SessionsInfo[0].TouchDetails[0], objJP.SessionsInfo[0].TouchDetails[1]);
+            objJP.SessionsInfo[0].ScrollDetails = GetScrollDetails(objJP.SessionsInfo[0].TouchDetails[0], objJP.SessionsInfo[0].TouchDetails[2]);
 
             return objJP;
         }
@@ -61,6 +62,7 @@ namespace EyeTracker.API
         {
             var colTouchDeatils = new JsonTouchDetails[]
             {
+                GetTouchDetail(),
                 GetTouchDetail(),
                 GetTouchDetail()
             };
@@ -73,7 +75,8 @@ namespace EyeTracker.API
             JsonTouchDetails objTD = new JsonTouchDetails();
             objTD.ClientX = r.Next(0, 600);
             objTD.ClientY = r.Next(0, 1280);
-            objTD.Date = DateTime.Now.AddSeconds(-r.Next(0, 30)).ToString();
+            objTD.Date = DateTime.Now.AddSeconds(-10).ToString();   //(-r.Next(0, 30)).ToString();
+            Thread.Sleep(1000);
             objTD.Press = r.Next(1, 100);
             return objTD;
         }
