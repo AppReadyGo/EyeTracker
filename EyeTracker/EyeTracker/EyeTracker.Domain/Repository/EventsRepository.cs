@@ -33,6 +33,7 @@ namespace EyeTracker.Domain.Repositories
             {
                 using (ITransaction transaction = session.BeginTransaction())
                 {
+
                     session.Save(visitEvent);
                     transaction.Commit();
                     return visitEvent.Id;
@@ -77,7 +78,24 @@ namespace EyeTracker.Domain.Repositories
             {
                 using (ITransaction transaction = session.BeginTransaction())
                 {
-                    object objResult = session.Save(packageEvent);
+                    //////here
+                    //foreach (var sessionEvent in packageEvent.Sessions)
+                    //{
+                    //    //AddClickEvents(sessionEvent.Clicks, false);
+                    //    foreach (var clickEvent in sessionEvent.Clicks)
+                    //    {
+                    //        if (clickEvent.ScrollEvent != null)
+                    //        {
+                    //            var scrollEvent = clickEvent.ScrollEvent;
+                    //            clickEvent.ScrollEvent = null;
+                    //            session.SaveOrUpdate(clickEvent);
+                    //            clickEvent.ScrollEvent = scrollEvent;
+                    //        }
+
+                    //    }
+                    //}
+                    //object objResult = 
+                    session.SaveOrUpdate(packageEvent);
                     transaction.Commit();
                 }
             }
