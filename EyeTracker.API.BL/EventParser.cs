@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using EyeTracker.API.BL.Contract;
 using EyeTracker.API.BL.Parsers;
+using EyeTracker.Domain.Model.Events;
 
 namespace EyeTracker.API.BL
 {
@@ -19,8 +20,8 @@ namespace EyeTracker.API.BL
         /// <summary>
         /// TODO : move this dictionary to configuration 
         /// </summary>
-        private static Dictionary<Type, Func<IPackage, object>> m_parser =
-            new Dictionary<Type, Func<IPackage, object>>();
+        private static Dictionary<Type, Func<IPackage, IEvent, object>> m_parser =
+            new Dictionary<Type, Func<IPackage, IEvent, object>>();
 
        
 
@@ -29,9 +30,9 @@ namespace EyeTracker.API.BL
         /// </summary>
         /// <param name="package"></param>
         /// <returns></returns>
-        public static object Parse(IPackage package)
+        public static object Parse(IPackage package, IEvent parentEvent = null)
         {
-            return m_parser[package.GetType()].Invoke(package);
+            return m_parser[package.GetType()].Invoke(package, parentEvent);
         }
 
       
