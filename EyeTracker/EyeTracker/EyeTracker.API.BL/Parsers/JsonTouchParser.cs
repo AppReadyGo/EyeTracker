@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using EyeTracker.Domain.Model.Events;
 using System;
+using System.Linq;
 using EyeTracker.API.BL.Contract;
 namespace EyeTracker.API.BL.Parsers
 {
@@ -13,7 +14,7 @@ namespace EyeTracker.API.BL.Parsers
     {
         #region IParser Members
 
-        public object ParseToEvent(IPackage package)
+        public object ParseToEvent(IPackage package, IEvent parentEvent)
         {
 
             JsonTouchDetails jTouch = (JsonTouchDetails)package;
@@ -24,13 +25,25 @@ namespace EyeTracker.API.BL.Parsers
                 //mState.AddModelError("Date(d)", "Wrong format must be: DDD, dd MMM yyyy HH:mm:ss GMT");
             }
 
+            ClickEvent click = parentEvent is ScrollEvent
+                ? (parentEvent as ScrollEvent).SessionInfoEvent.Clicks.FirstOrDefault(c => c.Date == date) 
+                : null;
+            
             //TODO : Yura : ask if wee nedd to check the state
-            var click = new ClickEvent
+            if (click == null)
             {
-                ClientX = jTouch.ClientX,
-                ClientY = jTouch.ClientY,
-                Date = date
-            };
+                click = new ClickEvent
+                {
+                    ClientX = jTouch.ClientX,
+                    ClientY = jTouch.ClientY,
+                    Date = date,
+                    SessionInfoEvent = parentEvent as SessionInfoEvent
+                };
+            }
+            else
+            {
+                click.ScrollEvent = parentEvent as ScrollEvent;
+            }
             return click;
              
         }

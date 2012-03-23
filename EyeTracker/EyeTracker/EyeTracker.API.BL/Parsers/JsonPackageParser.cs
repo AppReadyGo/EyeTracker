@@ -21,7 +21,7 @@ namespace EyeTracker.API.BL.Parsers
         /// <param name="mState"></param>
         /// <param name="package"></param>
         /// <returns></returns>
-        public object ParseToEvent(IPackage package)
+        public object ParseToEvent(IPackage package, IEvent parentEvent)
         {
             JsonPackage jPackage = (JsonPackage)package;
             PackageEvent packageEvent = new PackageEvent
@@ -58,18 +58,23 @@ namespace EyeTracker.API.BL.Parsers
 
                 var sessionEvent = new SessionInfoEvent
                 {
+                    PackageEvent = packageEvent,
                     CloseDate = closeDate,
                     StartDate = startDate,
                     ClientHeight = session.ClientHeight,
                     ClientWidth = session.ClientWidth,
-                    Path = session.PageUri,
-                    Clicks          = ParseData<JsonTouchDetails, ClickEvent> 
-                                            (session.TouchDetails),
-                    ScreenViewParts = ParseData<JsonViewAreaDetails, ViewPartEvent> 
-                                            (session.ViewAreaDetails),
-                    Scrolls         = ParseData<JsonScrollDetails, ScrollEvent> 
-                                            (session.ScrollDetails)
-                };       
+                    Path = session.PageUri
+                    //Clicks          = ParseData<JsonTouchDetails, ClickEvent> 
+                    //                        (session.TouchDetails),
+                    //ScreenViewParts = ParseData<JsonViewAreaDetails, ViewPartEvent> 
+                    //                        (session.ViewAreaDetails),
+                    //Scrolls         = ParseData<JsonScrollDetails, ScrollEvent> 
+                    //                        (session.ScrollDetails),
+                };
+
+                sessionEvent.Clicks = ParseData<JsonTouchDetails, ClickEvent, SessionInfoEvent>(session.TouchDetails, sessionEvent);
+                sessionEvent.ScreenViewParts =  ParseData<JsonViewAreaDetails, ViewPartEvent, SessionInfoEvent> (session.ViewAreaDetails, sessionEvent);
+                sessionEvent.Scrolls = ParseData<JsonScrollDetails, ScrollEvent, SessionInfoEvent>(session.ScrollDetails, sessionEvent);
                 packageEvent.Sessions.Add(sessionEvent); 
             }
 
@@ -82,7 +87,7 @@ namespace EyeTracker.API.BL.Parsers
         /// <param name="mSate"></param>
         /// <param name="details"></param>
         /// <returns></returns>
-        private List<E> ParseData<P,E>(P[] details) where P : IPackage  where E : class
+        private List<E> ParseData<P,E,K>(P[] details, K parentEvent) where P : IPackage  where E : class where K:IEvent
         {
             if (details == null || details.Length == 0)
             {
@@ -92,7 +97,7 @@ namespace EyeTracker.API.BL.Parsers
 
             foreach (var item in details)
             {
-                var data = (E)EventParser.Parse(item);
+                var data = (E)EventParser.Parse(item, parentEvent);
 
                 if (data != null)
                 {
