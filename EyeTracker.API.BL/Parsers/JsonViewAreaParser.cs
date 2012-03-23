@@ -1,4 +1,5 @@
 ﻿using EyeTracker.API.BL.Contract;
+using EyeTracker.Domain.Model.Events;
 namespace EyeTracker.API.BL.Parsers
 {
 
@@ -10,7 +11,7 @@ namespace EyeTracker.API.BL.Parsers
     {
         #region IParser Members
 
-        public object ParseToEvent(IPackage package)
+        public object ParseToEvent(IPackage package, IEvent parentEvent)
         {
             throw new System.NotImplementedException();
         }

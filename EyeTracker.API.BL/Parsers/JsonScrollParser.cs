@@ -14,7 +14,7 @@ namespace EyeTracker.API.BL.Parsers
         private static readonly ApplicationLogging m_objLog = new ApplicationLogging(typeof(JsonScrollParser));
         #region IParser Members
 
-        public object ParseToEvent(IPackage package)
+        public object ParseToEvent(IPackage package, IEvent parentEvent)
         {
             JsonScrollDetails jScroll = package as JsonScrollDetails;
             if (jScroll == null)
@@ -24,11 +24,12 @@ namespace EyeTracker.API.BL.Parsers
             }
             try
             {
-                return new ScrollEvent()
-            {
-                FirstTouch  = EventParser.Parse(jScroll.StartTouchData) as ClickEvent,
-                LastTouch = EventParser.Parse(jScroll.CloseTouchData) as ClickEvent             
-            };
+                ScrollEvent objScrollEvent = new ScrollEvent();
+                objScrollEvent.SessionInfoEvent = parentEvent as SessionInfoEvent;
+                objScrollEvent.FirstTouch = EventParser.Parse(jScroll.StartTouchData, objScrollEvent) as ClickEvent;
+                objScrollEvent.LastTouch = EventParser.Parse(jScroll.CloseTouchData, objScrollEvent) as ClickEvent;
+                
+                return objScrollEvent;
             }
             catch (Exception ex)
             {
