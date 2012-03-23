@@ -113,7 +113,7 @@ namespace EyeTracker.Core.Services
         {
             try
             {
-                //here
+                
                 eventRepository.AddPackageEvent(packageEvent);
             }
             catch (Exception exp)
