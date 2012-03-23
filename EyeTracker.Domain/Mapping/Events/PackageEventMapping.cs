@@ -23,9 +23,9 @@ namespace EyeTracker.Domain.Mapping
             Property(p => p.ScreenHeight, map => map.NotNullable(true));
             Bag(p => p.Sessions, map =>
             {
+                map.Cascade(Cascade.All);
                 map.Key(k => k.Column("PackageEventId"));
                 map.Lazy(CollectionLazy.Lazy);
-                map.Cascade(Cascade.All);
             }, prop => prop.OneToMany());
         }
     }

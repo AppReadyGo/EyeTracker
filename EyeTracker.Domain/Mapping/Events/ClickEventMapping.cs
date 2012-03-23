@@ -21,9 +21,15 @@ namespace EyeTracker.Domain.Mapping
             Property(p => p.VisitInfoId, map => map.NotNullable(true));
             ManyToOne(p => p.SessionInfoEvent, map =>
             {
-                map.NotNullable(false);
-                map.Column("SessionInfoEventId");
                 map.Cascade(Cascade.All);
+                map.NotNullable(true);
+                map.Column("SessionInfoEventId");
+            });
+            ManyToOne(p => p.ScrollEvent, map =>
+            {
+                map.Cascade(Cascade.None);  //!!
+                map.NotNullable(false);
+                map.Column("ScrollEventId");
             });
         }
     }

@@ -17,7 +17,6 @@ namespace EyeTracker.Domain.Mapping.Events
             {
                 map.Cascade(Cascade.All);
                 map.NotNullable(true);
-                //map.Lazy(LazyRelation.NoLazy);
                 map.Column("FirstTouchId");
             });
             ManyToOne(p => p.LastTouch, map =>
@@ -26,6 +25,8 @@ namespace EyeTracker.Domain.Mapping.Events
                 map.NotNullable(true);
                 map.Column("LastTouchId");
             });
+            //Property(p => p.FirstTouchId, map => map.NotNullable(true));
+            //Property(p => p.LastTouchId, map => map.NotNullable(true));
             ManyToOne(p => p.SessionInfoEvent, map =>
             {
                 map.Cascade(Cascade.All);

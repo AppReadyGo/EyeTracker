@@ -24,29 +24,29 @@ namespace EyeTracker.Domain.Mapping.Events
             Property(p => p.CloseDate, map => map.NotNullable(true));
             Bag(p => p.Clicks, map =>
             {
+                map.Cascade(Cascade.All);
                 map.Key(k => k.Column("SessionInfoEventId"));
                 map.Lazy(CollectionLazy.Lazy);
-                map.Cascade(Cascade.All);
             }, prop => prop.OneToMany());
             Bag(p => p.Scrolls, map =>
             {
+                map.Cascade(Cascade.All); //!!
                 map.Key(k => k.Column("SessionInfoEventId"));
                 map.Lazy(CollectionLazy.Lazy);
-                map.Cascade(Cascade.All);
             }, prop => prop.OneToMany());
             Bag(p => p.ScreenViewParts, map =>
             {
+                map.Cascade(Cascade.All);
                 map.Key(k => k.Column("SessionInfoEventId"));
                 map.Lazy(CollectionLazy.Lazy);
-                map.Cascade(Cascade.All);
             }, prop => prop.OneToMany());
 
             ManyToOne(p => p.PackageEvent, map =>
             {
-                
-                map.NotNullable(false);
-                map.Column("PackageEventId");
                 map.Cascade(Cascade.All);
+                map.NotNullable(true);
+                map.Column("PackageEventId");
+                
             });
         }
 
