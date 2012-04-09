@@ -27,7 +27,7 @@ namespace EyeTracker.API
     {
         // TODO: Implement the collection resource that will contain the SampleItem instances
 
-        [WebGet(UriTemplate = "")]
+        [WebGet(UriTemplate = "Post")]
         public bool Post()
         {  
             //return ParseVisitEvents(mState, package);
@@ -94,7 +94,7 @@ namespace EyeTracker.API
             return colScrollDetails;
         }
 
-        [WebInvoke(UriTemplate = "{id}", Method = "PUT")]
+        [WebInvoke(UriTemplate = "Update/{id}", Method = "PUT")]
         public bool Update(string id, IPackage instance)
         {
             // TODO: Update the given instance of SampleItem in the collection
