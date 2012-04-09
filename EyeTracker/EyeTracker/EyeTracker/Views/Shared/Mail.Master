@@ -1,0 +1,23 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Finger - <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" /></title>
+    <script type="text/javascript">
+    /*
+    var _mfyaq = _mfyaq || {};
+    _mfyaq.key = 'WP-000004-0013';
+
+    (function () {
+        var mfyaq = document.createElement('script'); mfyaq.type = 'text/javascript'; mfyaq.async = true;
+        mfyaq.src = ('https:' == document.location.protocol ? 'https://ssl' : ('//www' == document.location ? 'http://www' : 'http://'))
+        mfyaq.src += 'localhost:1058/Analytics/analytics.js';
+        var scr = document.getElementsByTagName('script')[0]; scr.parentNode.insertBefore(mfyaq, scr);
+    })();
+    */
+    </script>
+    </head>
+<body>
+<asp:ContentPlaceHolder ID="MainContent" runat="server" />
+</body>
+</html>

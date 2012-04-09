@@ -55,6 +55,9 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\TeamData\Microsoft.Data.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties\" />
+    <Folder Include="Membership" />
+    <Folder Include="Scripts" />
+    <Folder Include="Domain" />
   </ItemGroup>
   <ItemGroup>
     <PropertiesFile Include="Properties\Database.sqlsettings">
@@ -71,366 +74,371 @@
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="FK6AF3367D1CF53E7.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="FK5DAF59DA9DB60BE.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="FK5DAF59DAD1970229.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="FK5DAF59DAAF84173A.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="FK5DAF59DA6C1A54A6.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="FK5DAF59DAC633B88.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="FK49650677F9D3FC1C.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="FKBEF9D818C633B88.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="FK4AD899C9F9D3FC1C.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="aspnet_Applications_Index.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="aspnet_Users_Index.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="aspnet_Users_Index2.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="aspnet_Paths_index.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="aspnet_Roles_index1.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="aspnet_Membership_index.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="aspnet_PersonalizationPerUser_index1.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="aspnet_PersonalizationPerUser_ncindex2.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="aspnet_Membership_FindUsersByName.proc.sql">
+    <Build Include="Membership\aspnet_AnyDataInTables.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_FindUsersByEmail.proc.sql">
+    <Build Include="Membership\aspnet_WebEvent_LogEvent.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_CreateUser.proc.sql">
+    <Build Include="Membership\aspnet_Applications.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_Applications_CreateApplication.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_ChangePasswordQuestionAndAnswer.proc.sql">
+    <Build Include="Membership\aspnet_Applications_Index.index.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_CheckSchemaVersion.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_WebEvent_LogEvent.proc.sql">
+    <Build Include="Membership\aspnet_Membership.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_Membership_ChangePasswordQuestionAndAnswer.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_AnyDataInTables.proc.sql">
+    <Build Include="Membership\aspnet_Membership_CreateUser.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Profile_DeleteInactiveProfiles.proc.sql">
+    <Build Include="Membership\aspnet_Membership_FindUsersByEmail.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_UsersInRoles_RemoveUsersFromRoles.proc.sql">
+    <Build Include="Membership\aspnet_Membership_FindUsersByName.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_UsersInRoles_IsUserInRole.proc.sql">
+    <Build Include="Membership\aspnet_Membership_GetAllUsers.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_UsersInRoles_GetUsersInRoles.proc.sql">
+    <Build Include="Membership\aspnet_Membership_GetNumberOfUsersOnline.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_RegisterSchemaVersion.proc.sql">
+    <Build Include="Membership\aspnet_Membership_GetPassword.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_UsersInRoles_GetRolesForUser.proc.sql">
+    <Build Include="Membership\aspnet_Membership_GetPasswordWithFormat.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_CheckSchemaVersion.proc.sql">
+    <Build Include="Membership\aspnet_Membership_GetUserByEmail.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_UsersInRoles_FindUsersInRole.proc.sql">
+    <Build Include="Membership\aspnet_Membership_GetUserByName.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Applications_CreateApplication.proc.sql">
+    <Build Include="Membership\aspnet_Membership_GetUserByUserId.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_UsersInRoles_AddUsersToRoles.proc.sql">
+    <Build Include="Membership\aspnet_Membership_index.index.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_Membership_ResetPassword.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Users_CreateUser.proc.sql">
+    <Build Include="Membership\aspnet_Membership_SetPassword.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Users_DeleteUser.proc.sql">
+    <Build Include="Membership\aspnet_Membership_UnlockUser.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Roles_RoleExists.proc.sql">
+    <Build Include="Membership\aspnet_Membership_UpdateUser.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Roles_DeleteRole.proc.sql">
+    <Build Include="Membership\aspnet_Membership_UpdateUserInfo.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Roles_GetAllRoles.proc.sql">
+    <Build Include="Membership\aspnet_Paths.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_Paths_CreatePath.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Profile_SetProperties.proc.sql">
+    <Build Include="Membership\aspnet_Paths_index.index.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_Personalization_GetApplicationId.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Profile_GetProperties.proc.sql">
+    <Build Include="Membership\aspnet_PersonalizationAdministration_DeleteAllState.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Profile_GetProfiles.proc.sql">
+    <Build Include="Membership\aspnet_PersonalizationAdministration_FindState.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Profile_GetNumberOfInactiveProfiles.proc.sql">
+    <Build Include="Membership\aspnet_PersonalizationAdministration_GetCountOfState.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Profile_DeleteProfiles.proc.sql">
+    <Build Include="Membership\aspnet_PersonalizationAdministration_ResetSharedState.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Roles_CreateRole.proc.sql">
+    <Build Include="Membership\aspnet_PersonalizationAdministration_ResetUserState.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Paths_CreatePath.proc.sql">
+    <Build Include="Membership\aspnet_PersonalizationAllUsers.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_PersonalizationAllUsers_GetPageSettings.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="CreateBinaryInserts.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="aspnet_PersonalizationPerUser_SetPageSettings.proc.sql">
+    <Build Include="Membership\aspnet_PersonalizationAllUsers_ResetPageSettings.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_PersonalizationPerUser_ResetPageSettings.proc.sql">
+    <Build Include="Membership\aspnet_PersonalizationAllUsers_SetPageSettings.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_PersonalizationPerUser_GetPageSettings.proc.sql">
+    <Build Include="Membership\aspnet_PersonalizationPerUser.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_PersonalizationPerUser_GetPageSettings.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_PersonalizationAllUsers_SetPageSettings.proc.sql">
+    <Build Include="Membership\aspnet_PersonalizationPerUser_index1.index.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_PersonalizationPerUser_ncindex2.index.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_PersonalizationPerUser_ResetPageSettings.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_PersonalizationAllUsers_ResetPageSettings.proc.sql">
+    <Build Include="Membership\aspnet_PersonalizationPerUser_SetPageSettings.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_PersonalizationAllUsers_GetPageSettings.proc.sql">
+    <Build Include="Membership\aspnet_Profile.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_Profile_DeleteInactiveProfiles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Setup_RestorePermissions.proc.sql">
+    <Build Include="Membership\aspnet_Profile_DeleteProfiles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Setup_RemoveAllRoleMembers.proc.sql">
+    <Build Include="Membership\aspnet_Profile_GetNumberOfInactiveProfiles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_PersonalizationAdministration_ResetUserState.proc.sql">
+    <Build Include="Membership\aspnet_Profile_GetProfiles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_PersonalizationAdministration_ResetSharedState.proc.sql">
+    <Build Include="Membership\aspnet_Profile_GetProperties.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_PersonalizationAdministration_GetCountOfState.proc.sql">
+    <Build Include="Membership\aspnet_Profile_SetProperties.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_PersonalizationAdministration_FindState.proc.sql">
+    <Build Include="Membership\aspnet_RegisterSchemaVersion.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_PersonalizationAdministration_DeleteAllState.proc.sql">
+    <Build Include="Membership\aspnet_Roles.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_Roles_CreateRole.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_UpdateUserInfo.proc.sql">
+    <Build Include="Membership\aspnet_Roles_DeleteRole.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_UpdateUser.proc.sql">
+    <Build Include="Membership\aspnet_Roles_GetAllRoles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_UnlockUser.proc.sql">
+    <Build Include="Membership\aspnet_Roles_index1.index.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_Roles_RoleExists.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_SetPassword.proc.sql">
+    <Build Include="Membership\aspnet_SchemaVersions.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_Setup_RemoveAllRoleMembers.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_ResetPassword.proc.sql">
+    <Build Include="Membership\aspnet_Setup_RestorePermissions.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_GetUserByUserId.proc.sql">
+    <Build Include="Membership\aspnet_UnRegisterSchemaVersion.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_GetUserByName.proc.sql">
+    <Build Include="Membership\aspnet_Users.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_Users_CreateUser.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_GetUserByEmail.proc.sql">
+    <Build Include="Membership\aspnet_Users_DeleteUser.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_GetPasswordWithFormat.proc.sql">
+    <Build Include="Membership\aspnet_Users_Index.index.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_Users_Index2.index.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_UsersInRoles.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Membership\aspnet_UsersInRoles_AddUsersToRoles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_GetPassword.proc.sql">
+    <Build Include="Membership\aspnet_UsersInRoles_FindUsersInRole.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_UnRegisterSchemaVersion.proc.sql">
+    <Build Include="Membership\aspnet_UsersInRoles_GetRolesForUser.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_GetNumberOfUsersOnline.proc.sql">
+    <Build Include="Membership\aspnet_UsersInRoles_GetUsersInRoles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Personalization_GetApplicationId.proc.sql">
+    <Build Include="Membership\aspnet_UsersInRoles_IsUserInRole.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="aspnet_Membership_GetAllUsers.proc.sql">
+    <Build Include="Membership\aspnet_UsersInRoles_RemoveUsersFromRoles.proc.sql">
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Application.table.sql">
+    <Build Include="Membership\aspnet_WebEvent_Events.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="ContentPages.table.sql">
+    <Build Include="Domain\AccountProfiler.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Content.table.sql">
+    <Build Include="Domain\VisitEvent.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Browser.table.sql">
+    <Build Include="Domain\Application.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="aspnet_UsersInRoles.table.sql">
+    <Build Include="Domain\AutoCreatedLocal.route.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="VisitEvent.table.sql">
+    <Build Include="Domain\Browser.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="PageView.table.sql">
+    <Build Include="Domain\Click.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="OperationSystem.table.sql">
+    <Build Include="Domain\ClickEvent.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Click.table.sql">
+    <Build Include="Domain\Content.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Countries.table.sql">
+    <Build Include="Domain\ContentPages.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Language.table.sql">
+    <Build Include="Domain\Countries.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Screen.table.sql">
+    <Build Include="Domain\CreateBinaryInserts.proc.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="AccountProfiler.table.sql">
+    <Build Include="Domain\FK49650677F9D3FC1C.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="ViewPart.table.sql">
+    <Build Include="Domain\FK4AD899C9F9D3FC1C.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="ViewPartEvent.table.sql">
+    <Build Include="Domain\FK5DAF59DA6C1A54A6.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="aspnet_SchemaVersions.table.sql">
+    <Build Include="Domain\FK5DAF59DA9DB60BE.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="ClickEvent.table.sql">
+    <Build Include="Domain\FK5DAF59DAAF84173A.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="aspnet_WebEvent_Events.table.sql">
+    <Build Include="Domain\FK5DAF59DAC633B88.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="aspnet_Applications.table.sql">
+    <Build Include="Domain\FK5DAF59DAD1970229.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="aspnet_Users.table.sql">
+    <Build Include="Domain\FK6AF3367D1CF53E7.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="aspnet_Paths.table.sql">
+    <Build Include="Domain\FKBEF9D818C633B88.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="aspnet_Roles.table.sql">
+    <Build Include="Domain\Language.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="aspnet_Membership.table.sql">
+    <Build Include="Domain\OperationSystem.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="aspnet_PersonalizationAllUsers.table.sql">
+    <Build Include="Domain\PageView.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="aspnet_PersonalizationPerUser.table.sql">
+    <Build Include="Domain\Portfolio.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="aspnet_Profile.table.sql">
+    <Build Include="Domain\Screen.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Portfolio.table.sql">
+    <Build Include="Domain\Utils.schema.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="AutoCreatedLocal.route.sql">
+    <Build Include="Domain\ViewPart.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Utils.schema.sql">
+    <Build Include="Domain\ViewPartEvent.table.sql">
       <SubType>Code</SubType>
     </Build>
+  </ItemGroup>
+  <ItemGroup>
+    <NotInBuild Include="Scripts\Content.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
   </ItemGroup>
 </Project>

@@ -1,9 +1,9 @@
 ﻿
 
-.middle-panel{text-align:center;height:501px;background-color:#000;border-bottom:3px solid #fff;border-top:3px solid #fff;}
+.middle-panel{text-align:center;height:490px;background-color:#000;border-bottom:3px solid #fff;border-top:3px solid #fff;}
 
 .features{width:100%;background-color:#fff;}
-.features > div{background-color: #F5F5F5;border: 1px solid #C5C9C9;float: right;height: 240px;margin: 24px;
+.features > div{background-color: #F5F5F5;border: 1px solid #C5C9C9;float: right;height: 134px;margin: 24px;
 				padding: 10px;width: 270px;}
 .features > div h3{color:#572d00;margin:0;font-size:35px;padding-left:40px;font-weight:normal;}
 .features > div p{margin: 10px 0px 10px 0px;color:#595959;text-align:left;}

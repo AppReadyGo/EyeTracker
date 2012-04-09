@@ -112,6 +112,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\MailGenerator.cs" />
     <Compile Include="Controllers\Master\AfterLoginController.cs" />
     <Compile Include="Controllers\Master\AnalyticsMasterController.cs" />
     <Compile Include="Controllers\Master\BaseMasterController.cs" />
@@ -121,7 +122,6 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HomeController_.cs" />
     <Compile Include="Controllers\CustomExceptions.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="CustomModelBinders\EventParser.cs" />
@@ -142,6 +142,9 @@
     <Compile Include="Model\Master\BeforeLoginMasterModel.cs" />
     <Compile Include="Model\Pages\Analytics\UsageModel.cs" />
     <Compile Include="Model\Pages\Home\ContentModel.cs" />
+    <Compile Include="Model\Pages\Home\Mails\BasicMailContentModel.cs" />
+    <Compile Include="Model\Pages\Home\Mails\MailContentModel.cs" />
+    <Compile Include="Model\Pages\Home\PricingModel.cs" />
     <Compile Include="Model\Pages\Home\IndexModel.cs" />
     <Compile Include="Model\Master\AfterLoginMasterModel.cs" />
     <Compile Include="Model\Master\AnalyticsMasterModel.cs" />
@@ -169,6 +172,7 @@
     <Compile Include="CustomModelBinders\JsonVisitInfoModelBinder.cs" />
     <Content Include="Content\content.master.css" />
     <Content Include="Content\after.login.master.css" />
+    <Content Include="Content\home.pricing.css" />
     <Content Include="Content\error.css" />
     <Content Include="Content\Home.Master.css" />
     <Content Include="Content\images\beforelogn.header.selected.center.jpg" />
@@ -242,7 +246,6 @@
     <Content Include="Content\img\title.png" />
     <Content Include="Content\Profile.New.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\Site__.css" />
     <Content Include="Content\Table.css" />
     <Content Include="Content\TableChart.css" />
     <Content Include="Content\Tests\qunit.css" />
@@ -349,15 +352,19 @@
     <Content Include="Views\Application\NewEdit.aspx" />
     <Content Include="Views\Application\ScreenDetails.aspx" />
     <Content Include="Views\Application\Usage.aspx" />
+    <Content Include="Views\Home\PlayGround.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\PageContent.aspx" />
     <Content Include="Views\Analytics\Usage.aspx" />
     <Content Include="Views\Analytics\Dashboard.aspx" />
     <Content Include="Views\Analytics\Index.aspx" />
+    <Content Include="Views\Home\Pricing.aspx" />
+    <Content Include="Views\Home\Mails\Basic.aspx" />
     <Content Include="Views\Portfolio\Edit.aspx" />
     <Content Include="Views\Portfolio\Form.ascx" />
     <Content Include="Views\Portfolio\New.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
+    <Content Include="Views\Shared\404.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -367,7 +374,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site_.css" />
     <Content Include="Scripts\ThridParty\jquery-1.4.1.js" />
     <Content Include="Scripts\ThridParty\jquery-1.4.1.min.js" />
     <Content Include="Scripts\ThridParty\jquery-1.4.1-vsdoc.js" />
@@ -398,6 +404,7 @@
     <Content Include="Views\Shared\Home.Master" />
     <Content Include="Views\Shared\Content.Master" />
     <Content Include="Views\Shared\AfterLogin.Master" />
+    <Content Include="Views\Shared\Mail.Master" />
     <None Include="Views\Shared\Site_.Master" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\TopMenu.Master" />

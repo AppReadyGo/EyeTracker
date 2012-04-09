@@ -18,7 +18,7 @@ namespace EyeTracker.Common
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
 
-        public static void SendEmail(string from, List<string> toList, string subject, string body)
+        public static void SendEmail(string from, IEnumerable<string> toList, string subject, string body)
         {
             try
             {
