@@ -122,7 +122,15 @@ namespace EyeTracker.Controllers
                     //    ModelState.AddModelError("","Error to register, please contact to support.");
                     //}
                     FormsService.SignOut();
-                    return RedirectToAction("Index", "Home");
+                    try
+                    {
+                        var mailer = new MailGenerator(this.ControllerContext, "Thank-you", null, null);
+                        mailer.Send(new string[] { model.Email });
+                    }
+                    catch
+                    {
+                    }
+                    return Redirect("/thank-you");
                 }
                 else
                 {

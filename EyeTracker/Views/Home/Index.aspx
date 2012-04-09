@@ -18,23 +18,26 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
             <div>
             <img src="/Resources/eye_track.jpg"/>
             <h3>Eye tracker</h3>
+            <h4>Know what people look at!</h4>
             </div>
         </li>
 		<li>
             <div>
             <img src="/Resources/play_back.jpg" />
             <h3>Play Back</h3>
+            <h4>Rewind any session!</h4>
             </div>
         </li>
 		<li>
             <div>
-             <img src="/Resources/touch_map.jpg"/>
-           <h3>Touch Map</h3>
+            <img src="/Resources/touch_map.jpg"/>
+            <h3>Touch Map</h3>
+            <h4>Get to see every touch!</h4>
             </div>
         </li>
 	</ul>
 </div>
-<a href="/Account/Register" class="btn-access">ACCESS ANALITYCS</a>
+<a href="/Account/Register" class="btn-access">REGISTER</a>
 </asp:Content>
 
 

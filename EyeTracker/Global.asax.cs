@@ -107,6 +107,22 @@ namespace EyeTracker
             );
 
             routes.MapRoute(
+                "PlanAndPricing",
+                "PlanAndPricing",
+                new { controller = "Home", action = "Pricing" });
+
+            routes.MapRoute(
+                "HomeRoute",
+                "Home/{action}",
+                new { controller = "Home", action = "Index" });
+
+            routes.MapRoute(
+                "Mails",
+                "Mails/{urlPart1}/{urlPart2}/{urlPart3}/{isMail}",
+                new { controller = "Home", action = "MailContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional, isMail = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 "Content", 
                 "{urlPart1}/{urlPart2}/{urlPart3}/", 
                 new { controller = "Home", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional }

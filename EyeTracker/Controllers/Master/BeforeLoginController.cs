@@ -21,5 +21,12 @@ namespace EyeTracker.Controllers.Master
 
             return base.View(model);
         }
+
+        protected virtual ActionResult View<TViewModel>(string viewName, TViewModel viewModel, BeforeLoginMasterModel.MenuItem selectedItem)
+        {
+            var model = new ViewModelWrapper<BeforeLoginMasterModel, TViewModel>(GetModel(selectedItem), viewModel);
+
+            return base.View(viewName, model);
+        }
     }
 }

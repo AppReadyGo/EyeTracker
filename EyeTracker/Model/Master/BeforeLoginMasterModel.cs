@@ -28,7 +28,8 @@ namespace EyeTracker.Model.Master
             Home,
             Tutorials,
             Products,
-            PlanAndPricing
+            PlanAndPricing,
+            None
         }
     }
 }
