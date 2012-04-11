@@ -39,6 +39,13 @@ namespace EyeTracker.API
             return !objSaveResult.HasError;
         }
 
+        [WebInvoke(UriTemplate = "Update/{id}/{instance}", Method = "PUT")]
+        public bool Update(string id, IPackage instance)
+        {
+            // TODO: Update the given instance of SampleItem in the collection
+            throw new NotImplementedException();
+        }
+
         private JsonPackage GetPackage()
         {
             JsonPackage objJP = new JsonPackage();
@@ -94,12 +101,7 @@ namespace EyeTracker.API
             return colScrollDetails;
         }
 
-        [WebInvoke(UriTemplate = "Update/{id}", Method = "PUT")]
-        public bool Update(string id, IPackage instance)
-        {
-            // TODO: Update the given instance of SampleItem in the collection
-            throw new NotImplementedException();
-        }
+
 
      
 
