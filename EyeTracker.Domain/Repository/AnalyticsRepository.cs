@@ -51,7 +51,8 @@ namespace EyeTracker.Domain.Repositories
                                 p.Date <= toDate)
                     .Select(p => p)
                     .ToList()
-                    .SelectMany(p => p.ViewParts.Select(vp => new { X = vp.X, Y = vp.Y, ScreenWidth = p.ClientWidth, ScreenHeight = p.ScreenHeight, Date = vp.Date }))
+                    //.SelectMany(p => p.ViewParts.Select(vp => new { X = vp.X, Y = vp.Y, ScreenWidth = p.ClientWidth, ScreenHeight = p.ScreenHeight, StartDate = vp.StartDate, FinishDate = vp.FinishDate, Orientation = vp.Orientation }))
+                    .SelectMany(p => p.ViewParts.Select(vp => new { X = vp.ScrollLeft, Y = vp.ScrollTop, ScreenWidth = p.ClientWidth, ScreenHeight = p.ScreenHeight, StartDate = vp.StartDate, FinishDate = vp.FinishDate, Orientation = vp.Orientation }))
                     .GroupBy(c => c)
                     .Select(c => new ViewHeatMapData { ScrollLeft = c.Key.X, ScrollTop = c.Key.Y, ScreenHeight = c.Key.ScreenHeight, ScreenWidth = c.Key.ScreenWidth, TimeSpan = c.Count() })
                     .ToList();

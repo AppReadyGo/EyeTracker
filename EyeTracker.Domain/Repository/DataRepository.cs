@@ -102,15 +102,18 @@ namespace EyeTracker.Domain.Repositories
                 {
                     foreach (var curPart in viewPartEvents)
                     {
-                        var pageView = session.Get<PageView>(curPart.VisitInfoId);
-                        var viewPart = new ViewPart
-                        {
-                            Date = curPart.Date,
-                            X = curPart.ScrollLeft,
-                            Y = curPart.ScrollTop,
-                            PageView = pageView
-                        };
-                        session.Save(viewPart);
+                        //var pageView = session.Get<PageView>(curPart.VisitInfoId);
+                        //var viewPart = new ViewPart
+                        //{
+                        //    StartDate = curPart.StartDate,
+                        //    FinishDate = curPart.FinishDate,
+                        //    X = curPart.ScrollLeft,
+                        //    Y = curPart.ScrollTop,
+                        //    Orientation = curPart.Orientation,
+                        //    PageView = pageView
+                        //};
+                        //session.Save(viewPart);
+                        session.Save(curPart);
                     }
                     transaction.Commit();
                 }
