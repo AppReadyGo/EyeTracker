@@ -27,7 +27,7 @@ namespace EyeTracker.API
     {
         // TODO: Implement the collection resource that will contain the SampleItem instances
 
-        [WebGet(UriTemplate = "Post")]
+        [WebGet(UriTemplate = "")]
         public bool Post()
         {  
             //return ParseVisitEvents(mState, package);
@@ -61,8 +61,36 @@ namespace EyeTracker.API
             objJP.SessionsInfo[0].SessionCloseDate = DateTime.Now.ToString();
             objJP.SessionsInfo[0].TouchDetails = GetTouchDetails();
             objJP.SessionsInfo[0].ScrollDetails = GetScrollDetails(objJP.SessionsInfo[0].TouchDetails[0], objJP.SessionsInfo[0].TouchDetails[2]);
+            objJP.SessionsInfo[0].ViewAreaDetails = GetViewAreaDetails();
 
             return objJP;
+        }
+
+        private JsonViewAreaDetails[] GetViewAreaDetails()
+        {
+            var colViewAreaDetails = new JsonViewAreaDetails[]
+            {
+                GetViewAreaDetail(),
+                GetViewAreaDetail(),
+                GetViewAreaDetail()
+            };
+            return colViewAreaDetails;
+
+        }
+
+        private JsonViewAreaDetails GetViewAreaDetail()
+        {
+            Random r = new Random();
+            var objViewAreaDetail = new JsonViewAreaDetails();
+            objViewAreaDetail.CoordX = r.Next(0, 600);
+            objViewAreaDetail.CoordY = r.Next(0, 1280);
+            objViewAreaDetail.StartDate = DateTime.Now.AddSeconds(-10).ToString();
+            objViewAreaDetail.FinishDate = DateTime.Now.AddSeconds(-9).ToString();
+            objViewAreaDetail.Orientation = 7;
+
+            Thread.Sleep(1000);
+
+            return objViewAreaDetail;
         }
 
         private JsonTouchDetails[] GetTouchDetails()
@@ -101,6 +129,15 @@ namespace EyeTracker.API
             return colScrollDetails;
         }
 
+<<<<<<< .mine
+        //[WebInvoke(UriTemplate = "Update/{id}", Method = "PUT")]
+        //public bool Update(string id, IPackage instance)
+        //{
+        //    // TODO: Update the given instance of SampleItem in the collection
+        //    throw new NotImplementedException();
+        //}
+=======
+>>>>>>> .r513
 
 
      
