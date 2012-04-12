@@ -59,12 +59,12 @@ namespace EyeTracker.Domain.Mapping
                 map.Lazy(CollectionLazy.Lazy);
                 map.Cascade(Cascade.All);
             }, prop => prop.OneToMany());
-            Bag(p => p.ViewParts, map =>
-            {
-                map.Key(k => k.Column("PageViewId"));
-                map.Lazy(CollectionLazy.Lazy);
-                map.Cascade(Cascade.All);
-            }, prop => prop.OneToMany());
+            //Bag(p => p.ViewParts, map =>
+            //{
+            //    map.Key(k => k.Column("PageViewId"));
+            //    map.Lazy(CollectionLazy.Lazy);
+            //    map.Cascade(Cascade.All);
+            //}, prop => prop.OneToMany());
         }
     }
 }
