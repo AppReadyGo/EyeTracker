@@ -19,8 +19,12 @@ namespace EyeTracker.Domain.Model.Events
 
         public virtual long TimeSpan { get; set; }
 
-        public virtual DateTime Date { get; set; }
-        
+        public virtual DateTime StartDate { get; set; }
+
+        public virtual DateTime FinishDate { get; set; }
+
+        public virtual int Orientation { get; set; }
+
         //[System.Obsolete("don`t use this property", true)]
         public virtual long VisitInfoId { get; set; }
 
