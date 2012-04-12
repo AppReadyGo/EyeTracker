@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using EyeTracker.Domain.Model.Events;
 
 namespace EyeTracker.Domain.Model
 {
@@ -39,6 +40,7 @@ namespace EyeTracker.Domain.Model
 
         public virtual IList<Click> Clicks { get; set; }
 
-        public virtual IList<ViewPart> ViewParts { get; set; }
+        //public virtual IList<ViewPart> ViewParts { get; set; }
+        public virtual IList<ViewPartEvent> ViewParts { get; set; }
     }
 }
