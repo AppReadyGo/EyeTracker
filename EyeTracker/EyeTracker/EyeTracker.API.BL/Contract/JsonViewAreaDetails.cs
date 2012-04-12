@@ -23,6 +23,9 @@ namespace EyeTracker.API.BL.Contract
         [DataMember(Name="fd")]
         public string FinishDate { get; set; }
 
+        [DataMember(Name="o")]
+        public int Orientation { get; set; }
+
         #region IPackage Members
 
         public string Indent
