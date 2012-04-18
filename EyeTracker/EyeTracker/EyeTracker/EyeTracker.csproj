@@ -209,6 +209,7 @@
     <Content Include="Content\themes\cupertino\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\themes\cupertino\jquery-ui.css" />
     <Content Include="Html\EyeTrack.htm" />
+    <Content Include="Html\FingerPrint.htm" />
     <Content Include="Html\Images\EyeTrack1.jpg" />
     <Content Include="Html\Images\EyeTrack2.jpg" />
     <Content Include="Html\Images\play_back1.jpg" />
