@@ -129,15 +129,15 @@ namespace EyeTracker.API
             return colScrollDetails;
         }
 
-<<<<<<< .mine
+//<<<<<<< .mine
         //[WebInvoke(UriTemplate = "Update/{id}", Method = "PUT")]
         //public bool Update(string id, IPackage instance)
         //{
         //    // TODO: Update the given instance of SampleItem in the collection
         //    throw new NotImplementedException();
         //}
-=======
->>>>>>> .r513
+//=======
+//>>>>>>> .r513
 
 
      
