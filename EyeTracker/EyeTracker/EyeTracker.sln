@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker.API.BL", "EyeTra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker.Static", "EyeTracker.Static\EyeTracker.Static.csproj", "{50B3F42B-288E-4133-9DD1-0DC0B9D2081A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tester", "Tester", "{F08B7183-1513-473B-B6C0-067A69D9267F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker.Service.Tester", "EyeTracker.Service.Tester\EyeTracker.Service.Tester.csproj", "{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -227,8 +231,26 @@ Global
 		{50B3F42B-288E-4133-9DD1-0DC0B9D2081A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{50B3F42B-288E-4133-9DD1-0DC0B9D2081A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{50B3F42B-288E-4133-9DD1-0DC0B9D2081A}.Release|x86.ActiveCfg = Release|Any CPU
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.Debug|x86.ActiveCfg = Debug|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.Debug|x86.Build.0 = Debug|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.JsUnitTest|Any CPU.ActiveCfg = Release|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.JsUnitTest|Mixed Platforms.ActiveCfg = Release|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.JsUnitTest|Mixed Platforms.Build.0 = Release|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.JsUnitTest|x86.ActiveCfg = Release|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.JsUnitTest|x86.Build.0 = Release|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.Release|Any CPU.ActiveCfg = Release|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.Release|Mixed Platforms.Build.0 = Release|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.Release|x86.ActiveCfg = Release|x86
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A717CC4F-04CD-4ED2-B2EB-0BE511C5A0D3} = {F08B7183-1513-473B-B6C0-067A69D9267F}
 	EndGlobalSection
 EndGlobal
