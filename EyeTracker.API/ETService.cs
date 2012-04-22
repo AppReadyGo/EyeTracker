@@ -27,8 +27,8 @@ namespace EyeTracker.API
     {
         // TODO: Implement the collection resource that will contain the SampleItem instances
 
-        [WebGet(UriTemplate = "")]
-        public bool Post()
+        [WebGet(UriTemplate = "GetStatus")]
+        public bool GetStatus()
         {  
             //return ParseVisitEvents(mState, package);
             //return (bool)EventParser.Parse(package); 
@@ -39,13 +39,16 @@ namespace EyeTracker.API
             return !objSaveResult.HasError;
         }
 
-        [WebInvoke(UriTemplate = "Update/{id}/{instance}", Method = "PUT")]
-        public bool Update(string id, IPackage instance)
+        [WebInvoke(UriTemplate = "SubmitPackage/{appId}/{instance}", Method = "POST", RequestFormat = WebMessageFormat.Json)]
+        public bool SubmitPackage(string appId, string instance)
         {
             // TODO: Update the given instance of SampleItem in the collection
-            throw new NotImplementedException();
+            Console.WriteLine("SubmitPackage");
+            return true;
+            
         }
 
+        #region temp 
         private JsonPackage GetPackage()
         {
             JsonPackage objJP = new JsonPackage();
@@ -176,5 +179,6 @@ namespace EyeTracker.API
 
         #endregion oldmethods
 
+        #endregion temp 
     }
 }

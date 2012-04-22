@@ -37,8 +37,43 @@ namespace EyeTracker.Service.Tester
         {
             try
             {
+
                 //Create the REST request.
-                var url = ConfigurationSettings.AppSettings["basicUrl"];
+                string url1 = "http://localhost:2557/ETService/";
+                //string requestUrl = string.Format("{0}/GetPhotos", url);
+
+                var service1 = "SubmitPackage/";
+
+                MemoryStream streamQ1 = new MemoryStream();
+                DataContractJsonSerializer serializer1 = new DataContractJsonSerializer(typeof(String));
+                serializer1.WriteObject(streamQ1, "hello");
+
+                MemoryStream streamQ2 = new MemoryStream();
+                DataContractJsonSerializer serializer2 = new DataContractJsonSerializer(typeof(String));
+                serializer1.WriteObject(streamQ2, "hello3");
+
+                string json1 = Encoding.Unicode.GetString(streamQ1.ToArray());
+                string json2 = Encoding.Unicode.GetString(streamQ2.ToArray());
+
+                string requestUrl1 = string.Format("{0}{1}{2}/{3}", url1, service1,json2, json1);
+
+                WebRequest request1 = WebRequest.Create(requestUrl1);
+                request1.Method = "POST";
+                request1.ContentType = "application/json";
+
+                // Get response  
+                using (HttpWebResponse response1 = request1.GetResponse() as HttpWebResponse)
+                {
+                    using (Stream stream1 = response1.GetResponseStream())
+                    {
+                        DataContractJsonSerializer dcs1 = new DataContractJsonSerializer(typeof(bool));
+                        bool result = (bool)dcs1.ReadObject(stream1);
+                    }
+                }
+
+
+                //Create the REST request.
+                var url = ConfigurationSettings.AppSettings["baseUrl"];
                 //string requestUrl = string.Format("{0}/GetPhotos", url);
 
                 var service = ConfigurationSettings.AppSettings["submitService"];
@@ -47,10 +82,13 @@ namespace EyeTracker.Service.Tester
 
                 string package = Serialize<JsonPackage>(mc);
 
-                string requestUrl = string.Format("{0}{1}{2}", url, service, package);
+                //string requestUrl = string.Format("{0}{1}{2}/{3}", url, service, package);
+                string requestUrl = string.Format("{0}{1}{2}/{3}", url, service, json1, package);
+
 
                 WebRequest request = WebRequest.Create(requestUrl);
-                request.Method = "PUT";
+                request.ContentLength = requestUrl.Length;
+                request.Method = "POST";
                 request.ContentType = "application/json";
 
                 // Get response  
@@ -75,7 +113,7 @@ namespace EyeTracker.Service.Tester
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());
             MemoryStream ms = new MemoryStream();
             serializer.WriteObject(ms, obj);
-            string retVal = Encoding.UTF8.GetString(ms.ToArray());
+            string retVal = Encoding.Unicode.GetString(ms.ToArray());
             return retVal;
         }
 
@@ -121,8 +159,6 @@ namespace EyeTracker.Service.Tester
             objViewAreaDetail.FinishDate = DateTime.Now.AddSeconds(-9).ToString();
             objViewAreaDetail.Orientation = 7;
 
-            Thread.Sleep(1000);
-
             return objViewAreaDetail;
         }
 
@@ -143,8 +179,7 @@ namespace EyeTracker.Service.Tester
             JsonTouchDetails objTD = new JsonTouchDetails();
             objTD.ClientX = r.Next(0, 600);
             objTD.ClientY = r.Next(0, 1280);
-            objTD.Date = DateTime.Now.AddSeconds(-10).ToString();   //(-r.Next(0, 30)).ToString();
-            Thread.Sleep(1000);
+            objTD.Date = DateTime.Now.AddSeconds(10).ToString();   //(-r.Next(0, 30)).ToString();
             objTD.Press = r.Next(1, 100);
             return objTD;
         }
@@ -162,6 +197,11 @@ namespace EyeTracker.Service.Tester
             return colScrollDetails;
         }
         #endregion code
+
+        private void btn_single_point_Click(object sender, RoutedEventArgs e)
+        {
+            GetStatus();
+        }
 
     }
 
