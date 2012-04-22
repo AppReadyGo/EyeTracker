@@ -39,8 +39,8 @@ namespace EyeTracker.API
             return !objSaveResult.HasError;
         }
 
-        [WebInvoke(UriTemplate = "SubmitPackage/{appId}/{instance}", Method = "POST", RequestFormat = WebMessageFormat.Json)]
-        public bool SubmitPackage(string appId, string instance)
+        [WebInvoke(UriTemplate = "SubmitPackage", Method = "POST", RequestFormat = WebMessageFormat.Json)]
+        public bool SubmitPackage(string instance)
         {
             // TODO: Update the given instance of SampleItem in the collection
             Console.WriteLine("SubmitPackage");
