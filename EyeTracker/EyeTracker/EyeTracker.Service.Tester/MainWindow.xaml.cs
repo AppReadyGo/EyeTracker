@@ -87,7 +87,6 @@ namespace EyeTracker.Service.Tester
 
 
                 WebRequest request = WebRequest.Create(requestUrl);
-                request.ContentLength = requestUrl.Length;
                 request.Method = "POST";
                 request.ContentType = "application/json";
 
