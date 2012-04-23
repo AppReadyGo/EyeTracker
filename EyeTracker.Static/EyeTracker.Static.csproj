@@ -57,6 +57,7 @@
     <Content Include="Html\Images\EyeTrack2.jpg" />
     <Content Include="Html\Images\play_back1.jpg" />
     <Content Include="Html\Images\TouchMap1.jpg" />
+    <Content Include="Html\PlayBack.htm" />
     <Content Include="Html\TouchMap.htm" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
