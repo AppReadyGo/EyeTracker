@@ -43,6 +43,17 @@ namespace EyeTracker.API
         public bool SubmitPackage(string instance)
         {
             // TODO: Update the given instance of SampleItem in the collection
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(JsonPackage));
+            MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(instance));
+            var package = serializer.ReadObject(ms) as JsonPackage;
+
+
+            if (package == null)
+            {
+                Console.WriteLine("PROBLEMMMMMMMMM");
+                return false;
+            }
+
             Console.WriteLine("SubmitPackage");
             return true;
             
