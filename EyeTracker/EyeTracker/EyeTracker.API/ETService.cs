@@ -43,20 +43,43 @@ namespace EyeTracker.API
         public bool SubmitPackage(string instance)
         {
             // TODO: Update the given instance of SampleItem in the collection
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(JsonPackage));
-            MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(instance));
-            var package = serializer.ReadObject(ms) as JsonPackage;
+            //DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(JsonPackage));
+            
+            Console.WriteLine("SubmitPackage");
 
-
-            if (package == null)
+            try
             {
-                Console.WriteLine("PROBLEMMMMMMMMM");
+                //MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(instance));
+                //var strPackage = serializer.ReadObject(ms) as JsonPackage;
+
+                //var package = serializer.ReadObject(ms) as JsonPackage;
+                JsonPackage package = Deserialize<JsonPackage>(instance);
+                if (package == null)
+                {
+                    Console.WriteLine("PROBLEMMMMMMMMM");
+                    return false;
+                }
+
+                PackageEvent objParserResult = EventParser.Parse(package) as PackageEvent;
+                EventsServices objEventSvc = new EventsServices();
+                OperationResult objSaveResult = objEventSvc.HandlePackageEvent(objParserResult);
+                return !objSaveResult.HasError;
+            }
+            catch (Exception ex)
+            {
+                //EyeTracker.Common.Logger.ApplicationLogging.WriteError(this.GetType(), ex, "Error in SubmitPackage");
                 return false;
             }
+        }
 
-            Console.WriteLine("SubmitPackage");
-            return true;
-            
+        private static T Deserialize<T>(string p_strObject) where T: class
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
+            byte[] bytes = Encoding.UTF8.GetBytes(p_strObject);
+            MemoryStream ms = new MemoryStream(bytes);
+            object obj = serializer.ReadObject(ms);
+
+            return obj as T;
         }
 
         #region temp 
