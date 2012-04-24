@@ -82,19 +82,21 @@ namespace EyeTracker.Service.Tester
 
                 string package = Serialize<JsonPackage>(mc);
                 //string package = "hello world";
-
+                //MessageBox.Show(package);
+                textBlock1.Text = package;
                 MemoryStream streamQ2 = new MemoryStream();
                 DataContractJsonSerializer serializer2 = new DataContractJsonSerializer(typeof(String));
                 serializer2.WriteObject(streamQ2, package);
-
-                string requestUrl = string.Format("{0}{1}", url, service);
+                var arrayBytes = streamQ2.ToArray();
+                //var arrayBytes = Serialize<JsonPackage>(mc);
                 
+                string requestUrl = string.Format("{0}{1}", url, service);
                 WebRequest request = WebRequest.Create(requestUrl);
                 request.Method = "POST";
                 request.ContentType = "application/json";
-                request.ContentLength = streamQ2.ToArray().Length;
+                request.ContentLength = arrayBytes.Length;
 
-                request.GetRequestStream().Write(streamQ2.ToArray(), 0, streamQ2.ToArray().Length);
+                request.GetRequestStream().Write(arrayBytes, 0, arrayBytes.Length);
                 request.GetRequestStream().Close();
 
                 // Get response  
@@ -114,12 +116,20 @@ namespace EyeTracker.Service.Tester
 
         }
 
+        //private static byte[] Serialize<T>(T obj)
+        //{
+        //    DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());
+        //    MemoryStream ms = new MemoryStream();
+        //    serializer.WriteObject(ms, obj);
+        //    return ms.ToArray();
+        //}
+
         private static string Serialize<T>(T obj)
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());
             MemoryStream ms = new MemoryStream();
             serializer.WriteObject(ms, obj);
-            string retVal = Encoding.Unicode.GetString(ms.ToArray());
+            string retVal = Encoding.UTF8.GetString(ms.ToArray());
             return retVal;
         }
 
