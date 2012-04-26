@@ -50,7 +50,7 @@ namespace EyeTracker.API
                 JsonPackage package = Deserialize<JsonPackage>(instance);
                 if (package == null)
                 {
-                    ApplicationLogging.WriteError(this.GetType(), "SubmitPackage : problem with JsonPackage", );
+                    ApplicationLogging.WriteError(this.GetType(), "SubmitPackage : problem with JsonPackage");
                     return false;
                 }
 
