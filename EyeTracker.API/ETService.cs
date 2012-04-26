@@ -13,6 +13,7 @@ using EyeTracker.Core.Services;
 using EyeTracker.Domain.Model.Events;
 using EyeTracker.Common;
 using System.Threading;
+using EyeTracker.Common.Logger;
 
 namespace EyeTracker.API
 {
@@ -25,38 +26,31 @@ namespace EyeTracker.API
     // NOTE: If the service is renamed, remember to update the global.asax.cs file
     public class ETService
     {
-        // TODO: Implement the collection resource that will contain the SampleItem instances
-
-        [WebGet(UriTemplate = "GetStatus")]
+          /// <summary>
+          /// Check service status 
+          /// </summary>
+          /// <returns></returns>
+        [WebGet(UriTemplate = "status")]
         public bool GetStatus()
-        {  
-            //return ParseVisitEvents(mState, package);
-            //return (bool)EventParser.Parse(package); 
-            JsonPackage objPackage = GetPackage();
-            PackageEvent objParserResult = EventParser.Parse(objPackage) as PackageEvent;
-            EventsServices objEventSvc = new EventsServices();
-            OperationResult objSaveResult = objEventSvc.HandlePackageEvent(objParserResult);
-            return !objSaveResult.HasError;
+        {
+            return true;
         }
 
-        [WebInvoke(UriTemplate = "SubmitPackage", Method = "POST", RequestFormat = WebMessageFormat.Json)]
-        public bool SubmitPackage(string instance)
-        {
-            // TODO: Update the given instance of SampleItem in the collection
-            //DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(JsonPackage));
-            
-            Console.WriteLine("SubmitPackage");
 
+        /// <summary>
+        /// Submit Json Package
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <returns></returns>
+        [WebInvoke(UriTemplate = "submit", Method = "POST", RequestFormat = WebMessageFormat.Json)]
+        public bool SubmitPackage(string instance)
+        {      
             try
             {
-                //MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(instance));
-                //var strPackage = serializer.ReadObject(ms) as JsonPackage;
-
-                //var package = serializer.ReadObject(ms) as JsonPackage;
                 JsonPackage package = Deserialize<JsonPackage>(instance);
                 if (package == null)
                 {
-                    Console.WriteLine("PROBLEMMMMMMMMM");
+                    ApplicationLogging.WriteError(this.GetType(), "SubmitPackage : problem with JsonPackage", );
                     return false;
                 }
 
@@ -67,7 +61,7 @@ namespace EyeTracker.API
             }
             catch (Exception ex)
             {
-                //EyeTracker.Common.Logger.ApplicationLogging.WriteError(this.GetType(), ex, "Error in SubmitPackage");
+                ApplicationLogging.WriteError(this.GetType(), ex, "Error in SubmitPackage");
                 return false;
             }
         }
