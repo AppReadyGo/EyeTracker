@@ -37,9 +37,8 @@ namespace EyeTracker.Service.Tester
         {
             try
             {
-
                 //Create the REST request.
-                var url = ConfigurationSettings.AppSettings["baseUrl"];
+                var url = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
 
                 var service = ConfigurationSettings.AppSettings["submitService"];
 
@@ -80,14 +79,6 @@ namespace EyeTracker.Service.Tester
             }
 
         }
-
-        //private static byte[] Serialize<T>(T obj)
-        //{
-        //    DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());
-        //    MemoryStream ms = new MemoryStream();
-        //    serializer.WriteObject(ms, obj);
-        //    return ms.ToArray();
-        //}
 
         private static string Serialize<T>(T obj)
         {
