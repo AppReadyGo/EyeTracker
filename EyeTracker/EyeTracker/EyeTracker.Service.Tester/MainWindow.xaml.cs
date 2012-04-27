@@ -38,43 +38,8 @@ namespace EyeTracker.Service.Tester
             try
             {
 
-                ////Create the REST request.
-                //string url1 = "http://localhost:2557/ETService/";
-                ////string requestUrl = string.Format("{0}/GetPhotos", url);
-
-                //var service1 = "SubmitPackage/";
-
-                //MemoryStream streamQ1 = new MemoryStream();
-                //DataContractJsonSerializer serializer1 = new DataContractJsonSerializer(typeof(String));
-                //serializer1.WriteObject(streamQ1, "hello");
-
-                //MemoryStream streamQ2 = new MemoryStream();
-                //DataContractJsonSerializer serializer2 = new DataContractJsonSerializer(typeof(String));
-                //serializer1.WriteObject(streamQ2, "hello3");
-
-                //string json1 = Encoding.Unicode.GetString(streamQ1.ToArray());
-                //string json2 = Encoding.Unicode.GetString(streamQ2.ToArray());
-
-                //string requestUrl1 = string.Format("{0}{1}{2}/{3}", url1, service1,json2, json1);
-
-                //WebRequest request1 = WebRequest.Create(requestUrl1);
-                //request1.Method = "POST";
-                //request1.ContentType = "application/json";
-
-                //// Get response  
-                //using (HttpWebResponse response1 = request1.GetResponse() as HttpWebResponse)
-                //{
-                //    using (Stream stream1 = response1.GetResponseStream())
-                //    {
-                //        DataContractJsonSerializer dcs1 = new DataContractJsonSerializer(typeof(bool));
-                //        bool result = (bool)dcs1.ReadObject(stream1);
-                //    }
-                //}
-
-
                 //Create the REST request.
                 var url = ConfigurationSettings.AppSettings["baseUrl"];
-                //string requestUrl = string.Format("{0}/GetPhotos", url);
 
                 var service = ConfigurationSettings.AppSettings["submitService"];
 
