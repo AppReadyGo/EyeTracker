@@ -68,6 +68,7 @@ namespace EyeTracker.API
                 PackageEvent objParserResult = EventParser.Parse(package) as PackageEvent;
                 EventsServices objEventSvc = new EventsServices();
                 OperationResult objSaveResult = objEventSvc.HandlePackageEvent(objParserResult);
+                log.WriteVerbose("return result is " + !objSaveResult.HasError);
                 return !objSaveResult.HasError;
             }
             catch (Exception ex)
