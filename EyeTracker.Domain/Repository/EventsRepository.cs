@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using EyeTracker.Domain.Model.Events;
 using NHibernate;
+using EyeTracker.Common.Logger;
+using System.Reflection;
 
 namespace EyeTracker.Domain.Repositories
 {
@@ -27,6 +29,8 @@ namespace EyeTracker.Domain.Repositories
     /// </summary>
     public class EventsRepository : IEventsRepository
     {
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
         public long AddVisitEvent(VisitEvent visitEvent)
         {
             using (ISession session = NHibernateHelper.OpenSession())
@@ -74,30 +78,37 @@ namespace EyeTracker.Domain.Repositories
 
         public void AddPackageEvent(PackageEvent packageEvent)
         {
-            using (ISession session = NHibernateHelper.OpenSession())
+            try
             {
-                using (ITransaction transaction = session.BeginTransaction())
+                using (ISession session = NHibernateHelper.OpenSession())
                 {
-                    //////here
-                    //foreach (var sessionEvent in packageEvent.Sessions)
-                    //{
-                    //    //AddClickEvents(sessionEvent.Clicks, false);
-                    //    foreach (var clickEvent in sessionEvent.Clicks)
-                    //    {
-                    //        if (clickEvent.ScrollEvent != null)
-                    //        {
-                    //            var scrollEvent = clickEvent.ScrollEvent;
-                    //            clickEvent.ScrollEvent = null;
-                    //            session.SaveOrUpdate(clickEvent);
-                    //            clickEvent.ScrollEvent = scrollEvent;
-                    //        }
+                    using (ITransaction transaction = session.BeginTransaction())
+                    {
+                        //////here
+                        //foreach (var sessionEvent in packageEvent.Sessions)
+                        //{
+                        //    //AddClickEvents(sessionEvent.Clicks, false);
+                        //    foreach (var clickEvent in sessionEvent.Clicks)
+                        //    {
+                        //        if (clickEvent.ScrollEvent != null)
+                        //        {
+                        //            var scrollEvent = clickEvent.ScrollEvent;
+                        //            clickEvent.ScrollEvent = null;
+                        //            session.SaveOrUpdate(clickEvent);
+                        //            clickEvent.ScrollEvent = scrollEvent;
+                        //        }
 
-                    //    }
-                    //}
-                    //object objResult = 
-                    session.SaveOrUpdate(packageEvent);
-                    transaction.Commit();
+                        //    }
+                        //}
+                        //object objResult = 
+                        session.SaveOrUpdate(packageEvent);
+                        transaction.Commit();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                log.WriteError(ex, "Error saving PackageEvent");
             }
         }
     }

@@ -36,6 +36,12 @@ namespace EyeTracker.API.BL.Contract
         [DataMember(Name = "p")]
         public int Press { get; set; }
 
+        /// <summary>
+        /// screen orientation
+        /// </summary>
+        [DataMember(Name = "o")]
+        public int Orientation { get; set; }
+
         #region IPackage Members
 
         public string Indent

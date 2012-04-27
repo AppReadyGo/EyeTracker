@@ -5,6 +5,8 @@ using System.Web;
 using EyeTracker.API.BL.Contract;
 using EyeTracker.API.BL.Parsers;
 using EyeTracker.Domain.Model.Events;
+using EyeTracker.Common.Logger;
+using System.Reflection;
 
 namespace EyeTracker.API.BL
 {
@@ -16,6 +18,8 @@ namespace EyeTracker.API.BL
     /// <typeparam name="E">Event</typeparam>
     public  class EventParser
     {
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
 
         /// <summary>
         /// TODO : move this dictionary to configuration 
@@ -32,7 +36,20 @@ namespace EyeTracker.API.BL
         /// <returns></returns>
         public static object Parse(IPackage package, IEvent parentEvent = null)
         {
-            return m_parser[package.GetType()].Invoke(package, parentEvent);
+            try
+            {
+                if (package == null)
+                {
+                    log.WriteError("EventParser::Parse got empty param 'package'");
+                    return null;
+                }
+                return m_parser[package.GetType()].Invoke(package, parentEvent);
+            }
+            catch (Exception ex)
+            {
+                log.WriteError(ex, "Error in EventParser::Parse");
+                return null;
+            }
         }
 
       

@@ -5,6 +5,8 @@ using System.Text;
 using EyeTracker.Common;
 using EyeTracker.Domain.Model.Events;
 using EyeTracker.Domain.Repositories;
+using EyeTracker.Common.Logger;
+using System.Reflection;
 
 namespace EyeTracker.Core.Services
 {
@@ -46,6 +48,8 @@ namespace EyeTracker.Core.Services
 
     public class EventsServices : IEventsServices
     {
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
         private IEventsRepository eventRepository = null;
         private IDateRepository dataRepository = null;
 
@@ -111,17 +115,18 @@ namespace EyeTracker.Core.Services
 
         public OperationResult HandlePackageEvent(PackageEvent packageEvent)
         {
+            OperationResult opResult = null;
             try
             {
-                
                 eventRepository.AddPackageEvent(packageEvent);
+                opResult = new OperationResult();
             }
-            catch (Exception exp)
+            catch (Exception ex)
             {
-                exp.ToString();
+                log.WriteError(ex, "Error saving package event");
+                opResult = new OperationResult(ex);
             }
-            //always return OK
-            return new OperationResult();
+            return opResult;
         }
 
         #region IEventsServices Members

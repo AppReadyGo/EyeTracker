@@ -162,6 +162,7 @@ namespace EyeTracker.Service.Tester
             objTD.ClientY = r.Next(0, 1280);
             objTD.Date = DateTime.Now.AddSeconds(10).ToString();   //(-r.Next(0, 30)).ToString();
             objTD.Press = r.Next(1, 100);
+            objTD.Orientation = 7;
             return objTD;
         }
 
