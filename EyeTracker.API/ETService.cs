@@ -15,6 +15,7 @@ using EyeTracker.Common;
 using System.Threading;
 using EyeTracker.Common.Logger;
 using System.Reflection;
+using System.ComponentModel;
 
 namespace EyeTracker.API
 {
@@ -34,6 +35,7 @@ namespace EyeTracker.API
           /// </summary>
           /// <returns></returns>
         [WebGet(UriTemplate = "status")]
+        [Description("Test method")]
         public bool GetStatus()
         {
             return true;
@@ -46,6 +48,7 @@ namespace EyeTracker.API
         /// <param name="instance"></param>
         /// <returns></returns>
         [WebInvoke(UriTemplate = "submit", Method = "POST", RequestFormat = WebMessageFormat.Json)]
+        [Description("Receives the package and stores it in DB")]
         public bool SubmitPackage(string instance)
         {      
             try
