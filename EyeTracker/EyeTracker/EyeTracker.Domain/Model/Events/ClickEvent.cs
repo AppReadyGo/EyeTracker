@@ -19,6 +19,8 @@ namespace EyeTracker.Domain.Model.Events
 
         public virtual int Press { get; set; }
 
+        public virtual int Orientation { get; set; }
+
         public virtual SessionInfoEvent SessionInfoEvent { get; set; }
 
         public virtual ScrollEvent ScrollEvent { get; set; }

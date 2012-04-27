@@ -14,6 +14,7 @@ using EyeTracker.Domain.Model.Events;
 using EyeTracker.Common;
 using System.Threading;
 using EyeTracker.Common.Logger;
+using System.Reflection;
 
 namespace EyeTracker.API
 {
@@ -26,6 +27,8 @@ namespace EyeTracker.API
     // NOTE: If the service is renamed, remember to update the global.asax.cs file
     public class ETService
     {
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
           /// <summary>
           /// Check service status 
           /// </summary>
@@ -47,10 +50,18 @@ namespace EyeTracker.API
         {      
             try
             {
+                if (String.IsNullOrWhiteSpace(instance))
+                {
+                    log.WriteWarning("SubmitPackage got empty string");
+                    return false;
+                }
+ 
                 JsonPackage package = Deserialize<JsonPackage>(instance);
                 if (package == null)
                 {
-                    ApplicationLogging.WriteError(this.GetType(), "SubmitPackage : problem with JsonPackage");
+                    //Console.WriteLine("PROBLEMMMMMMMMM");
+                    log.WriteError("SubmitPackage got smth that can't be deserialized");
+                    //ApplicationLogging.WriteError(this.GetType(), "SubmitPackage : problem with JsonPackage");
                     return false;
                 }
 
@@ -61,7 +72,7 @@ namespace EyeTracker.API
             }
             catch (Exception ex)
             {
-                ApplicationLogging.WriteError(this.GetType(), ex, "Error in SubmitPackage");
+                log.WriteError(ex, "Error in SubmitPackage");
                 return false;
             }
         }
@@ -144,6 +155,7 @@ namespace EyeTracker.API
             objTD.Date = DateTime.Now.AddSeconds(-10).ToString();   //(-r.Next(0, 30)).ToString();
             Thread.Sleep(1000);
             objTD.Press = r.Next(1, 100);
+            objTD.Orientation = 7;
             return objTD;
         }
 

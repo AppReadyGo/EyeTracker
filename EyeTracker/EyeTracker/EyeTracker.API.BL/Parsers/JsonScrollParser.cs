@@ -2,6 +2,7 @@
 using EyeTracker.Domain.Model.Events;
 using System;
 using EyeTracker.Common.Logger;
+using System.Reflection;
 namespace EyeTracker.API.BL.Parsers
 {
 
@@ -11,7 +12,7 @@ namespace EyeTracker.API.BL.Parsers
     /// </summary>
     public class JsonScrollParser : IParser
     {
-        private static readonly ApplicationLogging m_objLog = new ApplicationLogging(typeof(JsonScrollParser));
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         #region IParser Members
 
         public object ParseToEvent(IPackage package, IEvent parentEvent)
@@ -19,7 +20,7 @@ namespace EyeTracker.API.BL.Parsers
             JsonScrollDetails jScroll = package as JsonScrollDetails;
             if (jScroll == null)
             {
-                //todo: log?
+                log.WriteError("JsonScrollParser::ParseToEvent got wrong argument type for 'package'");
                 return null;
             }
             try
@@ -33,7 +34,7 @@ namespace EyeTracker.API.BL.Parsers
             }
             catch (Exception ex)
             {
-                m_objLog.WriteError(ex, "Error parsing JsonScrollDetails to ScrollEvent");
+                log.WriteError(ex, "Error parsing JsonScrollDetails to ScrollEvent");
                 return null;
             }
         }
