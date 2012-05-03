@@ -91,6 +91,7 @@
     <Compile Include="ObjectSerializator.cs" />
     <Compile Include="OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\Analytics\FilterQuery.cs" />
     <Compile Include="Queries\Analytics\PortfoliosDataResult.cs" />
     <Compile Include="Queries\Analytics\QueryResults\ApplicationResult.cs" />
     <Compile Include="Queries\Analytics\FingerPrintViewDataQuery.cs" />

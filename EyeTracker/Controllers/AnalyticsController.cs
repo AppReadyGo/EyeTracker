@@ -185,7 +185,7 @@ namespace EyeTracker.Controllers
             string[] splitedScreenSize = string.IsNullOrEmpty(filter.ss) ? null : filter.ss.Split(new char[] { 'X' });
             int? sw = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[0]);
             int? sh = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[1]);
-            var usageViewData = ObjectContainer.Instance.RunQuery(new FingerPrintViewDataQuery(
+            var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
                                 filter.fd.Value,
                                 filter.td.Value,
                                 filter.pid,
@@ -196,26 +196,9 @@ namespace EyeTracker.Controllers
                                 null,
                                 null,
                                 null,
-                                null,
-                                DataGrouping.Day));
-            
-            //if (filter.aid.HasValue && !string.IsNullOrEmpty(filter.ss) && !string.IsNullOrEmpty(filter.p))
-            //{
-            //    imageUrl = string.Format("/Application/ClickHeatMapImage/{0}/?aId={0}&p={1}&sw={2}&sh={3}&fd={4}&td={5}&preview=true",
-            //                        filter.aid,
-            //                        HttpUtility.UrlEncode(filter.p),
-            //                        sw,
-            //                        sh,
-            //                        HttpUtility.UrlEncode(filter.fd.Value.ToString("HH:mm dd-MMM-yyyy")),
-            //                        HttpUtility.UrlEncode(filter.td.Value.ToString("HH:mm dd-MMM-yyyy")));
-            //}
+                                null));
 
-            var model = new FingerPrintModel 
-            {
-                //ImageUrl = imageUrl
-            };
-
-            return View(model, AnalyticsMasterModel.MenuItem.FingerPrint, usageViewData, filter);
+            return View(new FilterModel(), AnalyticsMasterModel.MenuItem.FingerPrint, filterData, filter);
         }
 
         public ActionResult EyeTracker(FilterParametersModel filter)
@@ -225,7 +208,7 @@ namespace EyeTracker.Controllers
             string[] splitedScreenSize = string.IsNullOrEmpty(filter.ss) ? null : filter.ss.Split(new char[] { 'X' });
             int? sw = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[0]);
             int? sh = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[1]);
-            var usageViewData = ObjectContainer.Instance.RunQuery(new FingerPrintViewDataQuery(
+            var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
                                 filter.fd.Value,
                                 filter.td.Value,
                                 filter.pid,
@@ -236,21 +219,9 @@ namespace EyeTracker.Controllers
                                 null,
                                 null,
                                 null,
-                                null,
-                                DataGrouping.Day));
-            /*
-            var dataResult = analyticsService.GetEyeTrackerData(portfolioId, applicationId, fromDate.Value, toDate.Value);
-            if (dataResult.HasError)
-            {
-                return View("Error");
-            }
-            */
-            var model = new FingerPrintModel
-            {
-                //ImageUrl = imageUrl
-            };
+                                null));
 
-            return View(model, AnalyticsMasterModel.MenuItem.EyeTracker, usageViewData, filter);
+            return View(new FilterModel(), AnalyticsMasterModel.MenuItem.EyeTracker, filterData, filter);
         }
 
 

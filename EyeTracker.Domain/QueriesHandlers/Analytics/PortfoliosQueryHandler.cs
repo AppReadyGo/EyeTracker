@@ -11,7 +11,7 @@ using EyeTracker.Common.Queries.Analytics.QueryResults;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {
-    public class PortfoliosQueryHandler : FilterQuery, IQueryHandler<PortfoliosQuery, PortfoliosDataResult>
+    public class PortfoliosQueryHandler : FilterBaseQueryHandler, IQueryHandler<PortfoliosQuery, PortfoliosDataResult>
     {
         private IRepository repository;
         private ISecurityContext securityContext;

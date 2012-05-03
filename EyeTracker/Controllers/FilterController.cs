@@ -33,7 +33,7 @@ namespace EyeTracker.Controllers
                 var parts = new List<string>(){string.Format("pid={0}",filter.PortfolioId)};
                 if (filter.AppId != 0) parts.Add(string.Format("aid={0}", filter.AppId));
                 if (!string.IsNullOrEmpty(filter.ScreenSize)) parts.Add(string.Format("ss={0}", filter.ScreenSize));
-                if (!string.IsNullOrEmpty(filter.Path)) parts.Add(string.Format("p={0}", filter.Path));
+                if (!string.IsNullOrEmpty(filter.Path)) parts.Add(string.Format("p={0}", HttpUtility.UrlEncode(filter.Path)));
                 parts.Add(string.Format("fd={0}", filter.DateFrom.ToString("dd-MMM-yyyy")));
                 parts.Add(string.Format("td={0}", filter.DateTo.ToString("dd-MMM-yyyy")));
                 return "?" + string.Join("&", parts.ToArray());
