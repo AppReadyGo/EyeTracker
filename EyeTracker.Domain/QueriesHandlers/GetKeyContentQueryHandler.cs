@@ -11,16 +11,16 @@ using NHibernate;
 
 namespace EyeTracker.Domain.Queries
 {
-    public class GetKeyContentQuery : IQueryHandler<GetKeyContent, Dictionary<string, string>>
+    public class GetKeyContentQueryHandler : IQueryHandler<GetKeyContentQuery, Dictionary<string, string>>
     {
         private IRepository repository;
 
-        public GetKeyContentQuery(IRepository repository)
+        public GetKeyContentQueryHandler(IRepository repository)
         {
             this.repository = repository;
         }
 
-        public Dictionary<string, string> Run(ISession session, GetKeyContent query)
+        public Dictionary<string, string> Run(ISession session, GetKeyContentQuery query)
         {
             return session.Query<ContentItem>()
                     .Where(c => c.Key == query.Key)

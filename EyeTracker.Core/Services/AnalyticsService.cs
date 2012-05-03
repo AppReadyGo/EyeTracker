@@ -17,9 +17,9 @@ namespace EyeTracker.Core.Services
 {
     public interface IAnalyticsService
     {
-        OperationResult<IEnumerable<ClickHeatMapData>> GetClickHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
+        OperationResult<IEnumerable<ClickHeatMapData>> GetClickHeatMapData(int appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
 
-        OperationResult<IEnumerable<ViewHeatMapData>> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
+        OperationResult<IEnumerable<ViewHeatMapData>> GetViewHeatMapData(int appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
 
         OperationResult<IEnumerable<PortfolioDetails>> GetAllPortfolios();
     }
@@ -41,7 +41,7 @@ namespace EyeTracker.Core.Services
             this.membershipService = membershipService;
         }
 
-        public OperationResult<IEnumerable<ClickHeatMapData>> GetClickHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
+        public OperationResult<IEnumerable<ClickHeatMapData>> GetClickHeatMapData(int appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
         {
             OperationResult<IEnumerable<ClickHeatMapData>> result = null;
             try
@@ -71,7 +71,7 @@ namespace EyeTracker.Core.Services
             return result;
         }
 
-        public OperationResult<IEnumerable<ViewHeatMapData>> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
+        public OperationResult<IEnumerable<ViewHeatMapData>> GetViewHeatMapData(int appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
         {
             OperationResult<IEnumerable<ViewHeatMapData>> result = null;
             try

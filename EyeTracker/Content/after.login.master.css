@@ -56,4 +56,6 @@ a.button{min-width: 0; padding:5px 8px 5px 8px;-moz-border-bottom-colors: none;
 					border-color: #f75d2e #f76b2e #f75d2e;border-radius: 3px 3px 3px 3px;border-style: solid;
 					border-width: 1px;color: white;cursor: pointer;font: bold 12px/21px arial;height: 24px;
 					margin: 0;outline: medium none;overflow: visible;text-align: center;white-space: nowrap;}
+a.link{cursor:pointer;color:#f75d2e;}
+a.link:hover{text-decoration:underline;}
 

@@ -29,7 +29,7 @@ using EyeTracker.Model.Master;
 namespace EyeTracker.Controllers
 {
     [Authorize]
-    public class ApplicationController : Master.AnalyticsMasterController
+    public class ApplicationController : FilterController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         
@@ -51,6 +51,11 @@ namespace EyeTracker.Controllers
             this.service = service;
             this.portfolioService = portfolioService;
             this.analyticsService = analyticsService;
+        }
+
+        public override AfterLoginMasterModel.SelectedMenuItem SelectedMenuItem
+        {
+            get { return AfterLoginMasterModel.SelectedMenuItem.Analytics; }
         }
 
         public ActionResult Index(int portfolioId)
@@ -97,10 +102,7 @@ namespace EyeTracker.Controllers
         public ActionResult New(int portfolioId)
         {
             var viewData = GetViewData(portfolioId);
-            return View(new ApplicationModel { ViewData = viewData }, 
-                        AnalyticsMasterModel.MenuItem.Portfolios,
-                        string.Empty,
-                        AfterLoginMasterModel.SelectedMenuItem.Analytics);
+            return View(new ApplicationModel { ViewData = viewData }, AnalyticsMasterModel.MenuItem.Portfolios, null, null);
         }
 
         [HttpPost]
@@ -158,10 +160,8 @@ namespace EyeTracker.Controllers
                     Type = app.Type
                 };
                 model.ViewData = GetViewData(model.PortfolioId);
-                return View(model, 
-                            AnalyticsMasterModel.MenuItem.Portfolios, 
-                            string.Empty,
-                            AfterLoginMasterModel.SelectedMenuItem.Analytics);
+
+                return View(model, AnalyticsMasterModel.MenuItem.Portfolios, null, null);
             }
         }
 
@@ -191,10 +191,7 @@ namespace EyeTracker.Controllers
             else
             {
                 model.ViewData = GetViewData(model.PortfolioId);
-                return View(model, 
-                            AnalyticsMasterModel.MenuItem.Portfolios, 
-                            string.Empty,
-                            AfterLoginMasterModel.SelectedMenuItem.Analytics);
+                return View(model, AnalyticsMasterModel.MenuItem.Portfolios, null, null);
             }
         }
 

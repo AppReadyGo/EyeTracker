@@ -19,7 +19,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<% Html.RenderPartial("Filter", Model.View.FilterModel); %>
+<% Html.RenderPartial("Filter", Model.View); %>
 <div class="charts">
     <div id="charts_place_holder" style="height:300px;"></div>
 </div>

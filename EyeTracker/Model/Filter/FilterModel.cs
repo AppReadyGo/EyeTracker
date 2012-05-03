@@ -16,8 +16,8 @@ namespace EyeTracker.Model.Filter
         public bool ShowPathesSelector { get; set; }
 
         public DateModel Date { get; set; }
-        public SelectorModel Applications { get; set; }
-        public SelectorModel ScreenSizes { get; set; }
+        public IEnumerable<SelectListItem> Applications { get; set; }
+        public IEnumerable<SelectListItem> ScreenSizes { get; set; }
 
         public string FormAction { get; set; }
 
@@ -26,5 +26,23 @@ namespace EyeTracker.Model.Filter
         public IEnumerable<SelectListItem> Portfolios { get; set; }
 
         public int AppId { get; set; }
+
+        public string PortfolioName { get; set; }
+
+        public string ApplicationName { get; set; }
+
+        public string ApplicationsData { get; set; }
+
+        public string ScreenSize { get; set; }
+
+        public string Path { get; set; }
+
+        public bool NoData { get; set; }
+
+        public IEnumerable<SelectListItem> Pathes { get; set; }
+
+        public DateTime DateFrom { get; set; }
+
+        public DateTime DateTo { get; set; }
     }
 }

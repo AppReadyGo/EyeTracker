@@ -1,4 +1,5 @@
-﻿<%@ Master Language="C#" 
+﻿<%@ Import Namespace="EyeTracker.Helpers" %>
+<%@ Master Language="C#" 
 MasterPageFile="~/Views/Shared/AfterLogin.Master" 
 Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel>>"%>
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
@@ -13,14 +14,14 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel, Analytics
 <asp:Content ID="LeftMenuContent" ContentPlaceHolderID="LeftMenuContent" runat="server">
     <ul>
         <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.Portfolios) %>"><span></span><a href="/Analytics/">Portfolios</a></li>
-        <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.Dashboard) %>"><span></span><a href="/Analytics/Dashboard/<%: Model.SubMaster.FilterUrlPart %>">Dashboard</a></li>
-        <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.FingerPrint) %>"><span></span><a href="/Analytics/FingerPrint/<%: Model.SubMaster.FilterUrlPart %>">Finger Print</a></li>
-        <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.EyeTracker) %>"><span></span><a href="/Analytics/EyeTracker/<%: Model.SubMaster.FilterUrlPart %>">Eye Tracker</a></li>
-        <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.Usage) %>"><span></span><a href="/Analytics/Usage/<%: Model.SubMaster.FilterUrlPart %>">Usage</a></li>
-        <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.Visitors) %> disabled"><span></span><a <%--href="/Portfolio/Visitors/<%: Model.SubMaster.FilterUrlPart %>"--%>>Visitors</a></li>
-        <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.MapOverlay) %> disabled"><span></span><a <%--href="/Portfolio/MapOverlay/<%: Model.SubMaster.FilterUrlPart %>"--%>>Map Overlay</a></li>
-        <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.TraficSources) %> disabled"><span></span><a <%--href="/Portfolio/TraficSources/<%: Model.SubMaster.FilterUrlPart %>"--%>>Trafic Sources</a></li>
-        <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.ContentOverview) %> disabled"><span></span><a <%--href="/Portfolio/ContentOverview/<%: Model.SubMaster.FilterUrlPart %>"--%>>Content Overview</a></li>
+        <%= Html.MenuItem("Dashboard", "/Analytics/Dashboard/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.Dashboard, Model.SubMaster.IsMenuDisabled) %>
+        <%= Html.MenuItem("Finger Print", "/Analytics/FingerPrint/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.FingerPrint, Model.SubMaster.IsMenuDisabled)%>
+        <%= Html.MenuItem("Eye Tracker", "/Analytics/EyeTracker/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.EyeTracker, Model.SubMaster.IsMenuDisabled)%>
+        <%= Html.MenuItem("Usage", "/Analytics/Usage/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.Usage, Model.SubMaster.IsMenuDisabled)%>
+        <%= Html.MenuItem("Visitors", "/Analytics/Visitors/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.Visitors, true)%>
+        <%= Html.MenuItem("Map Overlay", "/Analytics/MapOverlay/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.MapOverlay, true)%>
+        <%= Html.MenuItem("Trafic Sources", "/Analytics/TraficSources/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.TraficSources, true)%>
+        <%= Html.MenuItem("Content Overview", "/Analytics/ContentOverview/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.ContentOverview, true)%>
     </ul>
 </asp:Content>
 

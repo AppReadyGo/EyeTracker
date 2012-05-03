@@ -5,10 +5,11 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Web.Mvc;
+using EyeTracker.Model.Filter;
 
 namespace EyeTracker.Model.Pages.Portfolio
 {
-    public class PortfolioModel : ViewModel<SelectList>
+    public class PortfolioModel : FilterModel//ViewModel<SelectList>
     {
         public virtual int Id { get; set; }
 
@@ -20,5 +21,7 @@ namespace EyeTracker.Model.Pages.Portfolio
         [Required]
         [DisplayName("Time Zone")]
         public int TimeZone { get; set; }
+
+        public SelectList ViewData { get; set; }
     }
 }

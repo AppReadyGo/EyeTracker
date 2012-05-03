@@ -109,7 +109,7 @@ namespace EyeTracker.Controllers
                 path += "/" + urlPart3;
             }
 
-            var keys = ObjectContainer.Instance.RunQuery(new GetKeyContent(path.ToLower()));
+            var keys = ObjectContainer.Instance.RunQuery(new GetKeyContentQuery(path.ToLower()));
             if (!keys.Any())
             {
                 return View("404", new PricingModel { }, BeforeLoginMasterModel.MenuItem.None);

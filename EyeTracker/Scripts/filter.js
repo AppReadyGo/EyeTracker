@@ -87,7 +87,10 @@ $(function () {
         var to = $("#datepicker_to").datepicker("getDate");
         var portfolio = $('#portfolioId').val();
         var application = $('#applicationId').val();
-        document.location.href = '/Analytics/' + analytics.action + '/' + portfolio + '/' + application + '/' + $.datepicker.formatDate('dd-M-yy', from) + '/' + $.datepicker.formatDate('dd-M-yy', to)
+        var url = '/Analytics/' + analytics.action + '/?pid=' + portfolio + '&fd=' + $.datepicker.formatDate('dd-M-yy', from) + 'td=' + $.datepicker.formatDate('dd-M-yy', to);
+        if (application != 0) url += '&aid=' + application;
+
+        document.location.href = url;
     });
     $('#cancel_btn').click(function () {
         $('#filter_body').hide();

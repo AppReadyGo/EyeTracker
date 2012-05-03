@@ -21,6 +21,17 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
             <div class="logo">
                 <div><a href="/"><img title="Finger" alt="Home" src="/Content/images/logo_60.png"></a></div>
             </div>
+            <!-- AddThis Button BEGIN -->
+            <div class="social addthis_toolbox addthis_default_style ">
+            <a class="addthis_button_preferred_1"></a>
+            <a class="addthis_button_preferred_2"></a>
+            <a class="addthis_button_preferred_3"></a>
+            <a class="addthis_button_preferred_4"></a>
+            <a class="addthis_button_compact"></a>
+            <a class="addthis_counter addthis_bubble_style"></a>
+            </div>
+            <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4f9fc39f532649c9"></script>
+            <!-- AddThis Button END -->
         </div>
         <div class="menu">
             <ul class="main-menu">

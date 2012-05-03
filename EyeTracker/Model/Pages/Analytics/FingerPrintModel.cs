@@ -6,8 +6,8 @@ using EyeTracker.Model.Filter;
 
 namespace EyeTracker.Model.Pages.Analytics
 {
-    public class DashboardModel : FilterModel
+    public class FingerPrintModel : FilterModel
     {
-        public string UsageChartData { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

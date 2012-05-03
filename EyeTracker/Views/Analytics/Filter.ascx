@@ -1,11 +1,11 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<EyeTracker.Model.Filter.FilterModel>" %>
 <script type="text/javascript">
     var analytics = {
-        dateFrom: '<%=Model.Date.DateFrom.ToString("dd MMM yyyy") %>',
+        dateFrom: '<%=Model.DateFrom.ToString("dd MMM yyyy") %>',
         dateFromMin: '<%=DateTime.UtcNow.AddYears(-20).ToString("dd MMM yyyy") %>',
-        dateFromMax: '<%=Model.Date.DateTo.ToString("dd MMM yyyy") %>',
-        dateTo: '<%=Model.Date.DateTo.ToString("dd MMM yyyy") %>',
-        dateToMin: '<%=Model.Date.DateFrom.ToString("dd MMM yyyy") %>',
+        dateFromMax: '<%=Model.DateTo.ToString("dd MMM yyyy") %>',
+        dateTo: '<%=Model.DateTo.ToString("dd MMM yyyy") %>',
+        dateToMin: '<%=Model.DateFrom.ToString("dd MMM yyyy") %>',
         dateToMax: '<%=DateTime.UtcNow.ToString("dd MMM yyyy") %>',
         pApps: <%=Model.PortfoliosData %>,
         action: '<%= Model.FormAction %>'
@@ -27,19 +27,18 @@
 <div class="filter">
     <div class="title">
         <ul>
-            <li><span>Portfolios:</span></li>
-            <li><%= Html.DropDownList("portfolioId", Model.Portfolios) %></li>
-            <li><span>Report:</span></li>
-            <li><select id="applicationId" name="applicationId"><option value="0">All applications</option></select></li>
-            <li><a class="date-btn" id="date_from_lnk"><%= Model.Date.DateFrom.ToString("dd MMM yyyy")%></a> - <a class="date-btn" id="date_to_lnk"><%= Model.Date.DateTo.ToString("dd MMM yyyy")%></a></li>
+            <li>Portfolio:</li>
+            <li><%: Model.PortfolioName%></li>
+            <li>Application:</li>
+            <li><%: Model.ApplicationName%></li>
+            <li><a class="date-btn" id="date_from_lnk"><%= Model.DateFrom.ToString("dd MMM yyyy")%></a> - <a class="date-btn" id="date_to_lnk"><%= Model.DateTo.ToString("dd MMM yyyy")%></a></li>
             <li><a class="button"><span class="icon"></span>Filter</a></li>
-            <li><a class="button"><span class="icon"></span>Refresh</a></li>
         </ul>
     </div>
     <div class="body" id="filter_body"><a id="cancel_btn" class="cancel-btn"></a>
-        <div>
-            <fieldset>
-                <legend>Date range</legend>
+        <div id="date_range">
+            <div>
+                <h3>Date range</h3>
                 <span id="datepicker_from"></span>
                 <span id="datepicker_to"></span>
                 <div>
@@ -52,12 +51,24 @@
                     </select></label>
                 </div>
                 <div class="input-wrapper">
-                <input id="date_from" name="fromDate" value="<%= Model.Date.DateFrom.ToString("dd MMM yyyy")%>" /> - <input id="date_to" name="toDate" value="<%= Model.Date.DateTo.ToString("dd MMM yyyy")%>"/>
+                <input id="date_from" name="fromDate" value="<%= Model.DateFrom.ToString("dd MMM yyyy")%>" /> - <input id="date_to" name="toDate" value="<%= Model.DateTo.ToString("dd MMM yyyy")%>"/>
                 </div>
-            </fieldset>
-
+            </div>
         </div>
-        <div class="actions"><a class="button" id="apply_btn">Apply</a></div>
+        <div id="advanced_filter">
+            <div>
+                <h3>Filter</h3>
+                <label>Portfolios: <%= Html.DropDownList("portfolioId", Model.Portfolios) %></label>
+                <label>Applications: <%= Html.DropDownList("applicationId", Model.Applications) %></label>
+                <label>Screen size <%= Html.DropDownList("screenSize", Model.ScreenSizes) %></label>
+                <label>Path <%= Html.DropDownList("path", Model.Pathes) %></label>
+                <label>OS <select></select></label>
+                <label>Language <select></select></label>
+                <label>Country <select></select></label>
+                <label>City <select></select></label>
+            </div>
+            <div class="actions"><a class="button" id="apply_btn">Apply</a><a class="link" id="cancel_button">cancel</a></div>
+        </div>
     </div>
 <%--    <% Html.RenderPartial("Selector", ViewData["Pathes"]); %>
     <% Html.RenderPartial("Selector", ViewData["Languages"]); %>

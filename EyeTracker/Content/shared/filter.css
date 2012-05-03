@@ -8,12 +8,14 @@
 .filter .title ul{height: 25px;list-style: none outside none;margin:0;padding:0;}
 .filter .title li{display:inline;margin-right:5px;}
 .filter .title select{margin-right:5px;}
-.filter .body{border: 1px solid #C8C8C8;border-radius: 4px 4px 4px 4px;padding: 10px 10px 4px;font-size:10px;
-              width:618px;position:absolute;display:none;z-index:1;background-color:#fff;}
+.filter .body{border: 1px solid #C8C8C8;border-radius: 4px 4px 4px 4px;padding: 10px;font-size:12px;
+              width:590px;position:absolute;display:none;z-index:1;background-color:#fff;text-align:right;}
 .filter .body .cancel-btn{float:right;display:block;width:10px;height:10px;margin-right:-6px;margin-top:-6px;
                           background:url("../images/sprite.10.png") no-repeat scroll -345px -84px transparent;}
+ .filter .body h3{margin-top:0px;text-align:left;}
 .date-btn{cursor:pointer;}
-.filter .body .hasDatepicker{float:left;margin-right:10px;}
+.filter .body .hasDatepicker{float:left;margin-right:10px;font-size:10px;}
 .filter .body .input-wrapper{margin-top:10px;}
 .filter .body input{width:80px;}
-.filter .body .actions{margin-top:10px;text-align:right;margin-bottom:10px;}
+.filter .body .actions{margin-top:87px;text-align:right;}
+.filter .body .actions .button{margin-right:10px;}

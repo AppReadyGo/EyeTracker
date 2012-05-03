@@ -11,31 +11,31 @@ using EyeTracker.Common.Queries.Analytics.QueryResults;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {
-    public class UsageViewDataQuery : FilterQuery, IQueryHandler<UsageViewData, UsageViewDataResult>
+    public class UsageViewDataQueryHandler : FilterQuery, IQueryHandler<UsageViewDataQuery, UsageViewDataResult>
     {
         private IRepository repository;
         private ISecurityContext securityContext;
 
-        public UsageViewDataQuery(IRepository repository, ISecurityContext securityContext)
+        public UsageViewDataQueryHandler(IRepository repository, ISecurityContext securityContext)
         {
             this.repository = repository;
             this.securityContext = securityContext;
         }
 
-        public UsageViewDataResult Run(ISession session, UsageViewData parameters)
+        public UsageViewDataResult Run(ISession session, UsageViewDataQuery query)
         {
-            var query = session.Query<PageView>();
-            if (parameters.ApplicationId.HasValue)
+            var pageViewQuery = session.Query<PageView>();
+            if (query.ApplicationId.HasValue)
             {
-                query = query.Where(pv => pv.Application.Id == parameters.ApplicationId.Value);
+                pageViewQuery = pageViewQuery.Where(pv => pv.Application.Id == query.ApplicationId.Value);
             }
-            else if (parameters.PortfolioId.HasValue)
+            else if (query.PortfolioId.HasValue)
             {
-                query = query.Where(pv => pv.Application.Portfolio.Id == parameters.PortfolioId.Value);
+                pageViewQuery = pageViewQuery.Where(pv => pv.Application.Portfolio.Id == query.PortfolioId.Value);
             }
-            var pageViews = query.Where(pv => pv.Date >= parameters.From && pv.Date <= parameters.To.Date).ToList();
+            var pageViews = pageViewQuery.Where(pv => pv.Date >= query.From && pv.Date <= query.To.Date).ToList();
             Dictionary<DateTime, int> result = null;
-            switch (parameters.DataGrouping)
+            switch (query.DataGrouping)
             {
                 case DataGrouping.Minute:
                     result = pageViews.GroupBy(g => new DateTime(g.Date.Year, g.Date.Month, g.Date.Day, g.Date.Hour, g.Date.Minute, 0)).ToDictionary(k => k.Key, v => v.Count());

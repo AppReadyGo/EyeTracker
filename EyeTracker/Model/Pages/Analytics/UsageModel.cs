@@ -6,10 +6,8 @@ using EyeTracker.Model.Filter;
 
 namespace EyeTracker.Model.Pages.Analytics
 {
-    public class UsageModel
+    public class UsageModel : FilterModel
     {
         public string UsageChartData { get; set; }
-
-        public FilterModel FilterModel { get; set; }
     }
 }

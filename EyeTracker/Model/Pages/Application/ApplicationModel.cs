@@ -6,10 +6,11 @@ using EyeTracker.Domain.Model.BackOffice;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using EyeTracker.Domain.Model;
+using EyeTracker.Model.Filter;
 
 namespace EyeTracker.Model.Pages.Application
 {
-    public class ApplicationModel : ViewModel<ApplicationViewModel>
+    public class ApplicationModel : FilterModel//ViewModel<ApplicationViewModel>
     {
         public int Id { get; set; }
 
@@ -24,5 +25,7 @@ namespace EyeTracker.Model.Pages.Application
         [Required]
         [DisplayName("Type")]
         public ApplicationType Type { get; set; }
+
+        public ApplicationViewModel ViewData { get; set; }
     }
 }

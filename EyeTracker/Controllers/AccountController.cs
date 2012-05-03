@@ -42,10 +42,6 @@ namespace EyeTracker.Controllers
             base.Initialize(requestContext);
         }
 
-        // **************************************
-        // URL: /Account/LogOn
-        // **************************************
-
         public ActionResult LogOn()
         {
             return View(new ViewModelWrapper<BeforeLoginMasterModel, LogOnModel>(new BeforeLoginMasterModel(), new LogOnModel()));
@@ -75,7 +71,7 @@ namespace EyeTracker.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(new ViewModelWrapper<BeforeLoginMasterModel, LogOnModel>(new BeforeLoginMasterModel(), model));
         }
 
         // **************************************
@@ -114,23 +110,24 @@ namespace EyeTracker.Controllers
                     FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
 
                     //Add account information to database
-                    //var res = acountService.Add(new AccountInfo() { TimeZone = model.TimeZone });
+                    //var res = acountService.Add(new AccountInfo()/* { TimeZone = model.TimeZone }*/);
                     //if (res.HasError)
                     //{
                     //    FormsService.SignOut();
                     //    MembershipService.DeleteUser(model.UserName);
-                    //    ModelState.AddModelError("","Error to register, please contact to support.");
+                    //    ModelState.AddModelError("", "Error to register, please contact to support.");
                     //}
-                    FormsService.SignOut();
-                    try
-                    {
-                        var mailer = new MailGenerator(this.ControllerContext, "Thank-you", null, null);
-                        mailer.Send(new string[] { model.Email });
-                    }
-                    catch
-                    {
-                    }
-                    return Redirect("/thank-you");
+                    //FormsService.SignOut();
+                    //try
+                    //{
+                    //    var mailer = new MailGenerator(this.ControllerContext, "Thank-you", null, null);
+                    //    mailer.Send(new string[] { model.Email });
+                    //}
+                    //catch
+                    //{
+                    //}
+                    //return Redirect("/thank-you");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

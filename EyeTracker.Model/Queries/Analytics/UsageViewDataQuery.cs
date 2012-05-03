@@ -6,7 +6,7 @@ using EyeTracker.Common.Queries.Analytics.QueryResults;
 
 namespace EyeTracker.Common.Queries.Analytics
 {
-    public class DashboardViewData : IQuery<DashboardViewDataResult>
+    public class UsageViewDataQuery : IQuery<UsageViewDataResult>
     {
         public DateTime From { get; private set; }
         public DateTime To { get; private set; }
@@ -21,11 +21,11 @@ namespace EyeTracker.Common.Queries.Analytics
         public string Country { get; private set; }
         public string City { get; private set; }
 
-        public DashboardViewData(
-            DateTime from,
-            DateTime to,
-            int? portfolioId,
-            int? applicationId,
+        public UsageViewDataQuery(
+            DateTime from, 
+            DateTime to, 
+            int? portfolioId, 
+            int? applicationId, 
             int? screenHeight,
             int? screenWidth,
             string path,

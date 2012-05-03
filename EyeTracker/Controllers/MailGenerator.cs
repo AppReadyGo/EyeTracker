@@ -74,7 +74,7 @@ namespace EyeTracker.Controllers
             }
 
             BasicMailContentModel model = null;
-            var keys = ObjectContainer.Instance.RunQuery(new GetKeyContent(path.ToLower()));
+            var keys = ObjectContainer.Instance.RunQuery(new GetKeyContentQuery(path.ToLower()));
             if (keys.Any())
             {
                 string rootUrl = string.Format("{0}://{1}", controllerContext.HttpContext.Request.Url.Scheme, controllerContext.HttpContext.Request.Url.Authority);

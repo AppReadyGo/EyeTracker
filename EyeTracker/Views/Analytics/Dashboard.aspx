@@ -21,7 +21,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<% Html.RenderPartial("Filter", Model.View.FilterModel); %>
+<% Html.RenderPartial("Filter", Model.View); %>
 <table class="dashboard">
 <tr>
     <td colspan="2">

@@ -8,7 +8,7 @@ using EyeTracker.Model;
 
 namespace EyeTracker.Controllers.Master
 {
-    public class AnalyticsMasterController : AfterLoginController
+    public abstract class AnalyticsMasterController : AfterLoginController
     {
         protected virtual ActionResult View<TViewModel>(TViewModel viewModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, string filterUrlPart, AfterLoginMasterModel.SelectedMenuItem selectedItem)
         {
@@ -17,6 +17,10 @@ namespace EyeTracker.Controllers.Master
             return base.View(model);
         }
 
+        protected virtual ActionResult View<TViewModel>(TViewModel viewModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, string filterUrlPart)
+        {
+            return View(new AnalyticsMasterModel(leftMenuSelectedItem, filterUrlPart), viewModel);
+        }
         
         //SubMasterViewModelWrapper<AfterLoginViewModel, AnalyticsModel>
         /* 

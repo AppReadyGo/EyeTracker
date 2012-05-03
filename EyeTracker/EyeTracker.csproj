@@ -112,6 +112,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\MailGenerator.cs" />
     <Compile Include="Controllers\Master\AfterLoginController.cs" />
     <Compile Include="Controllers\Master\AnalyticsMasterController.cs" />
@@ -140,6 +141,8 @@
     <Compile Include="CustomModelBinders\Parsers\JsonViewAreaParser.cs" />
     <Compile Include="Helpers\General.cs" />
     <Compile Include="Model\Master\BeforeLoginMasterModel.cs" />
+    <Compile Include="Model\Pages\Analytics\FilterParametersModel.cs" />
+    <Compile Include="Model\Pages\Analytics\FingerPrintModel.cs" />
     <Compile Include="Model\Pages\Analytics\UsageModel.cs" />
     <Compile Include="Model\Pages\Home\ContentModel.cs" />
     <Compile Include="Model\Pages\Home\Mails\BasicMailContentModel.cs" />

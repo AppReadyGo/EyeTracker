@@ -9,9 +9,6 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
     <script src="<%: Url.Content("~/Scripts/Analytics.Index.js") %>" type="text/javascript"></script>
     <link href="<%: Url.Content("~/Content/Analytics.Index.css")%>" rel="stylesheet" type="text/css" />
-    <script type="text/javascript">
-        var dashboardUrl = '/Analytics/Dashboard/{0}/{1}';
-    </script>
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -23,14 +20,14 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
         <div style="width:5%;"></div>
         <div title="Status" class="center" style="width:10%;">Status</div>
         <div title="Description" style="width:50%;">Description</div>
-        <div title="Visits" style="width:20%;">Visits</div>
+        <div title="Visits" style="width:20%;">Activity</div>
         <div title="Properties" class="center" style="width:10%;">Properties</div>
     </div>
     <div class="table" style="height: 364px;">
         <ul class="computerdata detail" id="target">
-        <%foreach (var item in Model.View.Portfolios)
+        <%foreach (var item in Model.View.Portfolios1)
           {%>
-            <li class="row portfolio" pid="<%: item.Id %>">
+            <li class="row portfolio" url="/Analytics/Dashboard/?pid=<%: item.Id %>" pid="<%: item.Id %>">
                 <div style="width:5%;" class="center">
                     <div class="expand<%: item.Applications.Any() ? "" : " disabled" %>"></div>
                 </div>
@@ -41,7 +38,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
                     <%: item.Description%>
                 </div>
                 <div style="width:20%;">
-                    <%: item.Visits%>
+                    <%:item.Visits%>
                 </div>
                 <div style="width:10%;" class="center">
                     <a href="Portfolio/Edit/<%: item.Id%>" title="edit">
@@ -56,7 +53,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
                 { 
                    foreach (var app in item.Applications)
                     { %>
-                    <li class="row app portfolio-<%: item.Id %>" pid="<%: item.Id %>" aid="<%: app.Id %>">
+                    <li class="row app portfolio-<%: item.Id %>" url="/Analytics/Dashboard/?pid=<%: item.Id %>&aid=<%: app.Id %>">
                         <div style="width:5%;" class="center">
                         </div>
                         <div style="width:10%;" class="center">
@@ -66,7 +63,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
                             <%: app.Description%>
                         </div>
                         <div style="width:20%;">
-                            <%: app.Visits%>
+                            <%: app.Visits %>
                         </div>
                         <div style="width:10%;" class="center">
                             <a href="Application/Edit/<%: item.Id%>/<%: app.Id%>" title="edit">

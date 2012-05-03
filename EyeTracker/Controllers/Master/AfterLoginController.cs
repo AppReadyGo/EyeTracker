@@ -9,16 +9,25 @@ using EyeTracker.Model;
 namespace EyeTracker.Controllers.Master
 {
     [Authorize]
-    public class AfterLoginController : Controller
+    public abstract class AfterLoginController : Controller
     {
+        public abstract AfterLoginMasterModel.SelectedMenuItem SelectedMenuItem { get; }
+
         protected virtual AfterLoginMasterModel GetModel(AfterLoginMasterModel.SelectedMenuItem selectedItem)
         {
             return new AfterLoginMasterModel(selectedItem);
         }
 
-        protected virtual ActionResult View<TViewModel>(TViewModel viewModel, AfterLoginMasterModel.SelectedMenuItem selectedItem)
+        protected virtual ActionResult View<TViewModel>(TViewModel viewModel)
         {
-            var model = new ViewModelWrapper<AfterLoginMasterModel, TViewModel>(GetModel(selectedItem), viewModel);
+            var model = new ViewModelWrapper<AfterLoginMasterModel, TViewModel>(GetModel(SelectedMenuItem), viewModel);
+
+            return base.View(model);
+        }
+
+        protected virtual ActionResult View<TTemplateModel, TViewModel>(TTemplateModel templateModel, TViewModel viewModel)
+        {
+            var model = new ViewModelWrapper<AfterLoginMasterModel, TTemplateModel, TViewModel>(GetModel(SelectedMenuItem), templateModel, viewModel);
 
             return base.View(model);
         }
