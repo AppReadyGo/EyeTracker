@@ -11,7 +11,7 @@ using EyeTracker.Common.Queries.Analytics.QueryResults;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {
-    public class UsageViewDataQueryHandler : FilterQuery, IQueryHandler<UsageViewDataQuery, UsageViewDataResult>
+    public class UsageViewDataQueryHandler : FilterBaseQueryHandler, IQueryHandler<UsageViewDataQuery, UsageViewDataResult>
     {
         private IRepository repository;
         private ISecurityContext securityContext;

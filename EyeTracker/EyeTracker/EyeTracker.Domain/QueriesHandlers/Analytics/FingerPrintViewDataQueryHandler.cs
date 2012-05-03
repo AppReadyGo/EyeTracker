@@ -11,7 +11,7 @@ using EyeTracker.Common.Queries.Analytics.QueryResults;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {
-    public class FingerPrintViewDataQueryHandler : FilterQuery, IQueryHandler<FingerPrintViewDataQuery, FingerPrintViewDataResult>
+    public class FingerPrintViewDataQueryHandler : FilterBaseQueryHandler, IQueryHandler<FingerPrintViewDataQuery, FingerPrintViewDataResult>
     {
         private IRepository repository;
         private ISecurityContext securityContext;
