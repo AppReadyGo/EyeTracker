@@ -25,11 +25,12 @@ using EyeTracker.Models;
 using System.IO;
 using System.Drawing.Imaging;
 using EyeTracker.Common.Queries.Analytics.QueryResults;
+using EyeTracker.Common.Queries;
 
 namespace EyeTracker.Controllers
 {
     [Authorize]
-    public class AnalyticsController : Master.AnalyticsMasterController
+    public class AnalyticsController : FilterController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         private IPortfolioService portfolioService;
@@ -57,48 +58,56 @@ namespace EyeTracker.Controllers
             this.analyticsService = analyticsService;
         }
 
-        public ActionResult Index()
+        public override AfterLoginMasterModel.SelectedMenuItem SelectedMenuItem
         {
-            var res = analyticsService.GetAllPortfolios();
-            if (res.HasError)
-            {
-                return View("Error");
-            }
-            return View(new IndexViewModel(res.Value), AnalyticsMasterModel.MenuItem.Portfolios, string.Empty, AfterLoginMasterModel.SelectedMenuItem.Analytics);
+            get { return AfterLoginMasterModel.SelectedMenuItem.Analytics; }
         }
 
-        public ActionResult Dashboard(int portfolioId, int? applicationId, DateTime? fromDate, DateTime? toDate, string screenSize, string path, string language, string os, string location)
+        public ActionResult Index()
         {
-            if (!fromDate.HasValue)
+            var portfolioData = ObjectContainer.Instance.RunQuery(new PortfoliosQuery());
+            FilterParametersModel filter = null;
+            if(portfolioData.Portfolios1.Any())
             {
-                fromDate = DateTime.UtcNow.AddDays(-30);
+                var portfolio = portfolioData.Portfolios1.First();
+                filter = new FilterParametersModel
+                {
+                    pid = portfolio.Id
+                };
+                filter.Validate();
             }
+            return View(new IndexViewModel(portfolioData.Portfolios1), AnalyticsMasterModel.MenuItem.Portfolios, portfolioData, filter);
+        }
 
-            if (!toDate.HasValue)
-            {
-                toDate = DateTime.UtcNow;
-            }
+        public ActionResult Dashboard(FilterParametersModel filter)
+        {
+            filter.Validate();
 
-            var dashboardViewData = ObjectContainer.Instance.RunQuery(new DashboardViewData(fromDate.Value,
-                                                                                        toDate.Value,
-                                                                                        portfolioId,
-                                                                                        applicationId,
-                                                                                        null,
-                                                                                        null,
-                                                                                        null,
-                                                                                        null,
-                                                                                        null,
-                                                                                        null,
-                                                                                        null,
-                                                                                        DataGrouping.Day));
+            string[] splitedScreenSize = string.IsNullOrEmpty(filter.ss) ? null : filter.ss.Split(new char[] { 'X' });
+            int? sw = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[0]);
+            int? sh = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[1]);
+
+            var dashboardViewData = ObjectContainer.Instance.RunQuery(
+                new DashboardViewDataQuery(filter.fd.Value,
+                                    filter.td.Value,
+                                    filter.pid,
+                                    filter.aid,
+                                    sh,
+                                    sw,
+                                    filter.p,
+                                    filter.l,
+                                    filter.os,
+                                    filter.c,
+                                    filter.ct,
+                                    DataGrouping.Day));
 
             //Grouping data by day. To show on graph all days from start till end.
             var visitsData = new List<object[]>();
-            int diffDays = (toDate.Value - fromDate.Value).Days;
+            int diffDays = (filter.td.Value - filter.fd.Value).Days;
             for (int i = 0; i < diffDays; i++)
             {
                 int count = 0;
-                var curDate = fromDate.Value.AddDays(i);
+                var curDate = filter.fd.Value.AddDays(i);
                 if (dashboardViewData.Data.ContainsKey(curDate))
                 {
                     count = dashboardViewData.Data[curDate];
@@ -114,39 +123,23 @@ namespace EyeTracker.Controllers
                 color = "#461D7C"
             });
 
-            var filterModel = this.GetFilter("Dashboard", fromDate.Value, toDate.Value, dashboardViewData.Portfolios);
-
-            filterModel.PortfolioId = portfolioId;
-            filterModel.AppId = applicationId.HasValue ? applicationId.Value : 0;
-
             var dashboardModel = new DashboardModel
-                                {
-                                    UsageChartData = new JavaScriptSerializer().Serialize(usageInitData),
-                                    FilterModel = filterModel
-                                };
+            {
+                UsageChartData = new JavaScriptSerializer().Serialize(usageInitData),
+            };
 
-            var leftMenuPath = string.Join("/", new string[] { portfolioId.ToString(), filterModel.AppId.ToString(), fromDate.Value.ToString("dd-MMM-yyyy"), toDate.Value.ToString("dd-MMM-yyyy") });
-
-            return View(dashboardModel, AnalyticsMasterModel.MenuItem.Dashboard, leftMenuPath, AfterLoginMasterModel.SelectedMenuItem.Analytics);
+            return View(dashboardModel, AnalyticsMasterModel.MenuItem.Dashboard, dashboardViewData, filter);
         }
 
-        public ActionResult Usage(int portfolioId, int? applicationId, DateTime? fromDate, DateTime? toDate)
+        public ActionResult Usage(FilterParametersModel filter)
         {
-            if (!fromDate.HasValue)
-            {
-                fromDate = DateTime.UtcNow.AddDays(-30);
-            }
+            filter.Validate();
 
-            if (!toDate.HasValue)
-            {
-                toDate = DateTime.UtcNow;
-            }
-
-            var query = new UsageViewData(
-                fromDate.Value,
-                toDate.Value,
-                portfolioId,
-                applicationId,
+            var query = new UsageViewDataQuery(
+                filter.fd.Value,
+                filter.td.Value,
+                filter.pid,
+                filter.aid,
                 null,
                 null,
                 null,
@@ -160,11 +153,11 @@ namespace EyeTracker.Controllers
 
             //Grouping data by day. To show on graph all days from start till end.
             var data = new List<object[]>();
-            int diffDays = (toDate.Value - fromDate.Value).Days;
+            int diffDays = (filter.td.Value - filter.fd.Value).Days;
             for (int i = 0; i < diffDays; i++)
             {
                 int count = 0;
-                var curDate = fromDate.Value.AddDays(i);
+                var curDate = filter.fd.Value.AddDays(i);
                 if (usageViewData.Data.ContainsKey(curDate))
                 {
                     count = usageViewData.Data[curDate];
@@ -180,77 +173,71 @@ namespace EyeTracker.Controllers
                 color = "#461D7C"
             });
 
-            var filterModel = this.GetFilter("Usage", fromDate.Value, toDate.Value, usageViewData.Portfolios);
-            filterModel.PortfolioId = portfolioId;
-            filterModel.AppId = applicationId.HasValue ? applicationId.Value : 0;
-            return View(new UsageModel
-                        {
-                            UsageChartData = new JavaScriptSerializer().Serialize(usageInitData),
-                            FilterModel = filterModel
-                        },
-                        AnalyticsMasterModel.MenuItem.Usage,
-                        string.Join("/", new string[] { portfolioId.ToString(), filterModel.AppId.ToString(), fromDate.Value.ToString("dd-MMM-yyyy"), toDate.Value.ToString("dd-MMM-yyyy") }),
-                        AfterLoginMasterModel.SelectedMenuItem.Analytics);
+            var model = new UsageModel { UsageChartData = new JavaScriptSerializer().Serialize(usageInitData) };
+
+            return View(model, AnalyticsMasterModel.MenuItem.Usage, usageViewData, filter);
         }
 
-        public ActionResult FingerPrint(int portfolioId, int? applicationId, DateTime? fromDate, DateTime? toDate)
+        public ActionResult FingerPrint(FilterParametersModel filter)
         {
-            if (!fromDate.HasValue)
+            filter.Validate();
+
+            string[] splitedScreenSize = string.IsNullOrEmpty(filter.ss) ? null : filter.ss.Split(new char[] { 'X' });
+            int? sw = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[0]);
+            int? sh = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[1]);
+            var usageViewData = ObjectContainer.Instance.RunQuery(new FingerPrintViewDataQuery(
+                                filter.fd.Value,
+                                filter.td.Value,
+                                filter.pid,
+                                filter.aid,
+                                sh,
+                                sw,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                DataGrouping.Day));
+            
+            //if (filter.aid.HasValue && !string.IsNullOrEmpty(filter.ss) && !string.IsNullOrEmpty(filter.p))
+            //{
+            //    imageUrl = string.Format("/Application/ClickHeatMapImage/{0}/?aId={0}&p={1}&sw={2}&sh={3}&fd={4}&td={5}&preview=true",
+            //                        filter.aid,
+            //                        HttpUtility.UrlEncode(filter.p),
+            //                        sw,
+            //                        sh,
+            //                        HttpUtility.UrlEncode(filter.fd.Value.ToString("HH:mm dd-MMM-yyyy")),
+            //                        HttpUtility.UrlEncode(filter.td.Value.ToString("HH:mm dd-MMM-yyyy")));
+            //}
+
+            var model = new FingerPrintModel 
             {
-                fromDate = DateTime.UtcNow.AddDays(-30);
-            }
+                //ImageUrl = imageUrl
+            };
 
-            if (!toDate.HasValue)
-            {
-                toDate = DateTime.UtcNow;
-            }
-
-            int appId = applicationId.HasValue ? applicationId.Value : 0;
-
-            var query = new FingerPrintViewData(
-                fromDate.Value,
-                toDate.Value,
-                portfolioId,
-                applicationId,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                DataGrouping.Day);
-
-            /*
-            var res = service.GetEyeTrackerData(appId, fromDate, toDate);
-            ViewData["ScreenSizes"] = new List<SelectListItem>(res.Value.ScreenSizes.Select(s => new SelectListItem { Text = string.Format("{0} X {1}", s.Width, s.Height), Value = string.Format("{0}X{1}", s.Width, s.Height) }));
-            ViewData["PageUris"] = new List<SelectListItem>(res.Value.PageUris.Select(s => new SelectListItem { Text = s, Value = s }));
-            ViewBag.EyeTrackerImageUrl = string.Format("/Application/ClickHeatMapImage/{0}/?appId={0}&pageUri={1}&clientWidth={2}&clientHeight={3}&fromDate={4}&toDate={5}&preview=true", appId, HttpUtility.UrlEncode(res.Value.PageUris.First()), res.Value.ScreenSizes.First().Width, res.Value.ScreenSizes.First().Height, HttpUtility.UrlEncode(fromDate.ToString("HH:mm dd-MMM-yyyy")), HttpUtility.UrlEncode(toDate.ToString("HH:mm dd-MMM-yyyy")));
-
-
-
-            var dataResult = analyticsService.GetClickHeatMapData(portfolioId, applicationId, fromDate.Value, toDate.Value);
-            if (dataResult.HasError)
-            {
-                return View("Error");
-            }
-            */
-            return View();
+            return View(model, AnalyticsMasterModel.MenuItem.FingerPrint, usageViewData, filter);
         }
 
-        public ActionResult EyeTracker(int portfolioId, int? applicationId, DateTime? fromDate, DateTime? toDate)
+        public ActionResult EyeTracker(FilterParametersModel filter)
         {
-            if (!fromDate.HasValue)
-            {
-                fromDate = DateTime.UtcNow.AddDays(-30);
-            }
+            filter.Validate();
 
-            if (!toDate.HasValue)
-            {
-                toDate = DateTime.UtcNow;
-            }
-
-            int appId = applicationId.HasValue ? applicationId.Value : 0;
+            string[] splitedScreenSize = string.IsNullOrEmpty(filter.ss) ? null : filter.ss.Split(new char[] { 'X' });
+            int? sw = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[0]);
+            int? sh = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[1]);
+            var usageViewData = ObjectContainer.Instance.RunQuery(new FingerPrintViewDataQuery(
+                                filter.fd.Value,
+                                filter.td.Value,
+                                filter.pid,
+                                filter.aid,
+                                sh,
+                                sw,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                DataGrouping.Day));
             /*
             var dataResult = analyticsService.GetEyeTrackerData(portfolioId, applicationId, fromDate.Value, toDate.Value);
             if (dataResult.HasError)
@@ -258,47 +245,26 @@ namespace EyeTracker.Controllers
                 return View("Error");
             }
             */
-            return View();
-        }
-
-        private FilterModel GetFilter(string action, DateTime fromDate, DateTime toDate, IEnumerable<PortfolioResult> portfolios)
-        {
-            var js = new JavaScriptSerializer();
-            return new FilterModel
+            var model = new FingerPrintModel
             {
-                PortfoliosData = string.Format("{{{0}}}", string.Join(",", portfolios.Select(p => string.Format("{0}:{1}", p.Id, js.Serialize(p.Applications.Select(a => new { id = a.Id, desc = a.Description })))))),
-                Portfolios = portfolios.Select(p => new SelectListItem() { Text = p.Description, Value = p.Id.ToString() }),
-                FormAction = action,
-                Date = new DateModel
-                {
-                    DateFrom = fromDate,
-                    DateTo = toDate,
-                },
-                ShowDateSelector = true,
-                Applications = new SelectorModel
-                {
-                    Title = "Add Application",
-                    Items = Enumerable.Range(8, 30).Select((num, i) => new SelectorItem { Id = num, Text = "App " + num, Index = i }),
-                    SelectedItems = new List<SelectorItem>()
-                },
-                ScreenSizes = new SelectorModel
-                {
-                    Title = "Screen Sizes",
-                    Items = Enumerable.Range(8, 30).Select((num, i) => new SelectorItem { Id = num, Text = "App " + num, Index = i }),
-                    SelectedItems = new List<SelectorItem>()
-                }
+                //ImageUrl = imageUrl
             };
+
+            return View(model, AnalyticsMasterModel.MenuItem.EyeTracker, usageViewData, filter);
         }
 
 
-        public FileResult ClickHeatMapImage(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate, bool preview)
+        public FileResult ClickHeatMapImage(FilterParametersModel filter)
         {
+            string[] splitedScreenSize = filter.ss.Split(new char[] { 'X' });
+            int sw = int.Parse(splitedScreenSize[0]);
+            int sh = int.Parse(splitedScreenSize[1]);
             byte[] imageData = null;
-            var opResult = analyticsService.GetClickHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
+            var opResult = analyticsService.GetClickHeatMapData(filter.aid.Value, filter.p, sw, sh, filter.fd.Value, filter.td.Value);
             if (!opResult.HasError)
             {
-                Image bgImg = GetBackgroundImage(appId, clientWidth, clientHeight);
-                Image image = HeatMapImage_.CreateClickHeatMap(opResult.Value, clientWidth, clientHeight, bgImg);
+                Image bgImg = GetBackgroundImage(filter.aid.Value, sw, sh);
+                Image image = HeatMapImage_.CreateClickHeatMap(opResult.Value, sw, sh, bgImg);
                 using (MemoryStream mStream = new MemoryStream())
                 {
                     image.Save(mStream, ImageFormat.Png);
@@ -317,14 +283,17 @@ namespace EyeTracker.Controllers
             }
         }
 
-        public FileResult ViewHeatMapImage(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate, bool preview)
+        public FileResult ViewHeatMapImage(FilterParametersModel filter)
         {
+            string[] splitedScreenSize = filter.ss.Split(new char[] { 'X' });
+            int sw = int.Parse(splitedScreenSize[0]);
+            int sh = int.Parse(splitedScreenSize[1]);
             byte[] imageData = null;
-            var opResult = analyticsService.GetViewHeatMapData(appId, pageUri, clientWidth, clientHeight, fromDate, toDate);
+            var opResult = analyticsService.GetViewHeatMapData(filter.aid.Value, filter.p, sw, sh, filter.fd.Value, filter.td.Value);
             if (!opResult.HasError)
             {
-                Image bgImg = GetBackgroundImage(appId, clientWidth, clientHeight);
-                Image image = HeatMapImage_.CreateViewHeatMap(opResult.Value, clientWidth, clientHeight, bgImg);
+                Image bgImg = GetBackgroundImage(filter.aid.Value, sw, sh);
+                Image image = HeatMapImage_.CreateViewHeatMap(opResult.Value, sw, sh, bgImg);
                 using (MemoryStream mStream = new MemoryStream())
                 {
                     image.Save(mStream, ImageFormat.Png);

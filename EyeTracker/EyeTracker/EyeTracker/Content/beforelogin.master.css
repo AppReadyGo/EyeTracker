@@ -16,6 +16,8 @@
 .header .logo{display:block;height:42px;float:left;}
 .header .logo img{margin-left:10px;border:0px;}
 
+.social {float: right;margin-right: 4px;margin-top: 50px;width:150px;}
+
 .header ul{margin:0;padding:0;}
 .header li{list-style-type:none;display:inline;}
 .header ul li a{text-decoration:none;}

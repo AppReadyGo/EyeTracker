@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Text;
+using EyeTracker.Model.Master;
 
 namespace EyeTracker.Helpers
 {
@@ -24,6 +25,20 @@ namespace EyeTracker.Helpers
                 }
             }
             return sb.ToString();
+        }
+
+        public static string MenuItem(this HtmlHelper helper, string title, string baseUrl, string filterUrlPart, bool isSelected, bool isDisabled)
+        {
+            string href = string.Format("href=\"{0}{1}\"", baseUrl, filterUrlPart);
+            var classes = new List<string>();
+            if (isSelected) classes.Add("active");
+            if (isDisabled)
+            {
+                href = string.Empty;
+                classes.Add("disabled");
+            }
+
+            return string.Format("<li class=\"{0}\"><span></span><a {1}>{2}</a></li>", string.Join(" ", classes.ToArray()), href, title);
         }
     }
 }

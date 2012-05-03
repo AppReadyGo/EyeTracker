@@ -5,11 +5,11 @@ using System.Text;
 
 namespace EyeTracker.Common.Queries
 {
-    public class GetKeyContent : IQuery<Dictionary<string,string>>
+    public class GetKeyContentQuery : IQuery<Dictionary<string,string>>
     {
         public string Key { get; set; }
 
-        public GetKeyContent(string key)
+        public GetKeyContentQuery(string key)
         {
             this.Key = key;
         }

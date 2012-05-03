@@ -13,6 +13,8 @@ namespace EyeTracker.Model.Master
         public MenuItem SelectedItem { get; set; }
         public string FilterUrlPart { get; set; }
 
+        public bool IsMenuDisabled { get { return string.IsNullOrEmpty(this.FilterUrlPart); } }
+
         public AnalyticsMasterModel(MenuItem selectedItem, string filterUrlPart)
         {
             this.SelectedItem = selectedItem;
