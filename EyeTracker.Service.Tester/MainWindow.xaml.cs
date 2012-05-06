@@ -28,27 +28,21 @@ namespace EyeTracker.Service.Tester
         public MainWindow()
         {
             InitializeComponent();
-
-            MyUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
-            MyService = ConfigurationSettings.AppSettings["submitService"];
+ 
+            SubmitService = ConfigurationSettings.AppSettings["submitService"];
+            StatusService = ConfigurationSettings.AppSettings["checkStatus"];
         }
 
-        const int SCREEN_HEIGHT = 960;
-        const int SCREEN_WIDTH = 640;
-
-        public string MyUrl { get; set; }
-        public string MyService { get; set; }
-
-        #region code
-
-        private void GetStatus()
+        /// <summary>
+        /// Send sigle package to service
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_single_point_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //Create the REST request.
-                //var url = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
-
-                //var service = ConfigurationSettings.AppSettings["submitService"];
+                ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
 
                 var mc = GetShortPackage();
 
@@ -56,11 +50,95 @@ namespace EyeTracker.Service.Tester
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Errore while retrieving photos: " + ex.Message, "ETService", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
 
+                MessageBox.Show("Error while sending single package: " + ex.Message, "ETService", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
+        /// <summary>
+        /// Send large chung of data to ET service 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_large_chunk_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
+
+                var mc = GetLongPackage(100);
+
+                SendRequest(mc);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while sending large package: " + ex.Message, "ETService", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
+        /// check status 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_Check_status(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
+
+                CheckStatus();
+            }
+            catch (Exception ex)
+            {
+                
+                 MessageBox.Show("Error while checking status: " + ex.Message, "ETService", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
+      
+
+        #region code
+
+        /// <summary>
+        /// CheckStatus service on ETService 
+        /// 1. create WebClient
+        /// 2. Get WebResponse 
+        /// </summary>
+        /// <returns></returns>
+        private string CheckStatus()
+        {
+            //1.
+            var request = (HttpWebRequest)WebRequest.Create(string.Format("{0}{1}", ServiceUrl, StatusService)); 
+  
+            //2.
+            using ( var response = (HttpWebResponse) request.GetResponse( ) )  
+            {  
+                var responseValue = string.Empty;  
+  
+                if ( response.StatusCode != HttpStatusCode.OK )  
+                {  
+                    string message = String.Format( "Status failed. Received HTTP {0}", response.StatusCode );  
+                    MessageBox.Show(message, "ETService", MessageBoxButton.OK, MessageBoxImage.Error);
+                }  
+  
+                // grab the response  
+                using ( var responseStream = response.GetResponseStream() )  
+                {  
+                    using ( var reader = new StreamReader( responseStream ) )  
+                    {  
+                        responseValue = reader.ReadToEnd();  
+                    }  
+                }  
+                return responseValue;  
+            }  
+ 
+        }
+
+
+ 
         private void SendRequest(JsonPackage mc)
         {
             string package = Serialize<JsonPackage>(mc);
@@ -72,7 +150,7 @@ namespace EyeTracker.Service.Tester
             var arrayBytes = streamQ2.ToArray();
             
 
-            string requestUrl = string.Format("{0}{1}", MyUrl, MyService);
+            string requestUrl = string.Format("{0}{1}", ServiceUrl, SubmitService);
             WebRequest request = WebRequest.Create(requestUrl);
             request.Method = "POST";
             request.ContentType = "application/json";
@@ -101,13 +179,20 @@ namespace EyeTracker.Service.Tester
             return retVal;
         }
 
-        private JsonPackage GetLongPackage()
+        #endregion code
+
+     
+
+
+        #region DATA
+
+        private JsonPackage GetLongPackage(int size)
         {
             JsonPackage objJP = new JsonPackage();
             objJP.ClientKey = "123";
             objJP.ScreenHeight = SCREEN_HEIGHT;
             objJP.ScreenWidth = SCREEN_WIDTH;
-            objJP.SessionsInfo = GetSessionInfo(100);
+            objJP.SessionsInfo = GetSessionInfo(size);
 
             return objJP;
         }
@@ -153,7 +238,7 @@ namespace EyeTracker.Service.Tester
                 dtEnd = DateTime.Now.AddSeconds(-200 + i + 2);
 
                 colSessions[i].SessionStartDate = dtStart.ToString();
-                
+
                 colSessions[i].TouchDetails = GetTouchDetails(dtStart, dtEnd);
                 colSessions[i].ScrollDetails = GetScrollDetails(colSessions[i].TouchDetails[0], colSessions[i].TouchDetails[2]);
                 colSessions[i].ViewAreaDetails = GetViewAreaDetails(dtStart, dtEnd);
@@ -226,26 +311,34 @@ namespace EyeTracker.Service.Tester
             };
             return colScrollDetails;
         }
-        #endregion code
+        #endregion DATA
 
-        private void btn_single_point_Click(object sender, RoutedEventArgs e)
+        #region Private memebers 
+        const int SCREEN_HEIGHT = 960;
+        const int SCREEN_WIDTH = 640;
+
+        /// <summary>
+        /// Hold Service URL
+        /// </summary>
+        private string ServiceUrl { get; set; }
+
+        /// <summary>
+        /// Holds Submit service name
+        /// </summary>
+        private string SubmitService { get; set; }
+
+        /// <summary>
+        /// Check status service 
+        /// </summary>
+        private string StatusService { get; set; }
+        #endregion Private members 
+
+        private void button2_Click_1(object sender, RoutedEventArgs e)
         {
-            GetStatus();
+
         }
 
-        private void btn_large_chunk_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var mc = GetLongPackage();
-
-                SendRequest(mc);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error while sending package: " + ex.Message, "ETService", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+       
 
     }
 
