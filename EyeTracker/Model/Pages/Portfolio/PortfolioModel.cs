@@ -9,7 +9,7 @@ using EyeTracker.Model.Filter;
 
 namespace EyeTracker.Model.Pages.Portfolio
 {
-    public class PortfolioModel : FilterModel//ViewModel<SelectList>
+    public class PortfolioModel : FilterModel
     {
         public virtual int Id { get; set; }
 

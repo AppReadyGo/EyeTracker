@@ -17,6 +17,7 @@ using EyeTracker.Common.Queries.Analytics.QueryResults;
 
 namespace EyeTracker.Controllers
 {
+    [Authorize]
     public class PortfolioController : FilterController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
@@ -45,7 +46,8 @@ namespace EyeTracker.Controllers
             {
                 var timeZones = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
 
-                return View(new PortfolioModel { TimeZone = 0, ViewData = new SelectList(timeZones, "Id", "DisplayName") }, AnalyticsMasterModel.MenuItem.Portfolios, null, null);
+                return View(new PortfolioModel { TimeZone = 0, ViewData = new SelectList(timeZones, "Id", "DisplayName") }, 
+                            AnalyticsMasterModel.MenuItem.Portfolios, new FilterDataResult(), null);
             }
             else
             {
@@ -76,7 +78,7 @@ namespace EyeTracker.Controllers
                     var timeZones = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
                     model.ViewData = new SelectList(timeZones, "Id", "DisplayName");
 
-                    return View(model, AnalyticsMasterModel.MenuItem.Portfolios, null, null);
+                    return View(model, AnalyticsMasterModel.MenuItem.Portfolios, new FilterDataResult(), null);
                 }
                 else
                 {

@@ -26,16 +26,18 @@
 </script>
 <div class="filter">
     <div class="title">
-        <ul>
-            <li>Portfolio:</li>
-            <li><%: Model.PortfolioName%></li>
-            <li>Application:</li>
-            <li><%: Model.ApplicationName%></li>
-            <li><a class="date-btn" id="date_from_lnk"><%= Model.DateFrom.ToString("dd MMM yyyy")%></a> - <a class="date-btn" id="date_to_lnk"><%= Model.DateTo.ToString("dd MMM yyyy")%></a></li>
-            <li><a class="button"><span class="icon"></span>Filter</a></li>
-        </ul>
+        <a id="filter_title">
+            <ul>
+                <li>Portfolio:</li>
+                <li><%: Model.PortfolioName%></li>
+                <li>Application:</li>
+                <li><%: Model.ApplicationName%></li>
+                <li><%= Model.DateFrom.ToString("dd MMM yyyy")%> - <%= Model.DateTo.ToString("dd MMM yyyy")%></li>
+                <li><span class="button"><span class="icon"></span>Filter</span></li>
+            </ul>
+        </a>
     </div>
-    <div class="body" id="filter_body"><a id="cancel_btn" class="cancel-btn"></a>
+    <div class="body" id="filter_body"><a id="close_btn" class="cancel-btn"></a>
         <div id="date_range">
             <div>
                 <h3>Date range</h3>
@@ -58,16 +60,16 @@
         <div id="advanced_filter">
             <div>
                 <h3>Filter</h3>
-                <label>Portfolios: <%= Html.DropDownList("portfolioId", Model.Portfolios) %></label>
-                <label>Applications: <%= Html.DropDownList("applicationId", Model.Applications) %></label>
+                <label>Portfolio: <%= Html.DropDownList("portfolioId", Model.Portfolios) %></label>
+                <label>Application: <%= Html.DropDownList("applicationId", Model.Applications) %></label>
                 <label>Screen size <%= Html.DropDownList("screenSize", Model.ScreenSizes) %></label>
                 <label>Path <%= Html.DropDownList("path", Model.Pathes) %></label>
-                <label>OS <select></select></label>
-                <label>Language <select></select></label>
-                <label>Country <select></select></label>
-                <label>City <select></select></label>
+                <label>OS <select><option>All</option></select></label>
+                <label>Language <select><option>All</option></select></label>
+                <label>Country <select><option>All</option></select></label>
+                <label>City <select><option>All</option></select></label>
             </div>
-            <div class="actions"><a class="button" id="apply_btn">Apply</a><a class="link" id="cancel_button">cancel</a></div>
+            <div class="actions"><a class="button" id="apply_btn">Apply</a><a class="link" id="cancel_btn">cancel</a></div>
         </div>
     </div>
 <%--    <% Html.RenderPartial("Selector", ViewData["Pathes"]); %>
