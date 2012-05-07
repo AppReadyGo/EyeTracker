@@ -92,10 +92,10 @@ $(function () {
 
         document.location.href = url;
     });
-    $('#cancel_btn').click(function () {
+    $('#close_btn,#cancel_btn').click(function () {
         $('#filter_body').hide();
     });
-    $('#date_from_lnk,#date_to_lnk').click(function () {
+    $('#filter_title').click(function () {
         $('#filter_body').show();
     });
 });

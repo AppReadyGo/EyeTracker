@@ -19,3 +19,6 @@
 .filter .body input{width:80px;}
 .filter .body .actions{margin-top:87px;text-align:right;}
 .filter .body .actions .button{margin-right:10px;}
+
+.filter .body #advanced_filter{clear:both;padding-top:14px;text-align:left;}
+.filter .body #advanced_filter label{line-height:30px;margin-right:5px;white-space:nowrap;}
