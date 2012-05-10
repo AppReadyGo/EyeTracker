@@ -46,6 +46,7 @@
     <Compile Include="Contract\JsonPackage.cs" />
     <Compile Include="Contract\JsonScrollDetails.cs" />
     <Compile Include="Contract\JsonSessionInfo.cs" />
+    <Compile Include="Contract\JsonSystemInfo.cs" />
     <Compile Include="Contract\JsonTouchDetails.cs" />
     <Compile Include="Contract\JsonViewAreaDetails.cs" />
     <Compile Include="EventParser.cs" />
