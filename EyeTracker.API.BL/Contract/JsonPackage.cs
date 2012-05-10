@@ -30,7 +30,7 @@ namespace EyeTracker.API.BL.Contract
         [DataMember(Name = "sw")]
         public int ScreenWidth { get; set; }
 
-        [DataMember(Name = "sd")]
+        [DataMember(Name = "ssd")]
         public JsonSessionInfo[] SessionsInfo { get; set; }
 
         #region IPackage Members
