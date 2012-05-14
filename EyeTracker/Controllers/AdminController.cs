@@ -24,7 +24,7 @@ namespace EyeTracker.Controllers
         
         public override Model.Master.AfterLoginMasterModel.SelectedMenuItem SelectedMenuItem
         {
-            get { return Model.Master.AfterLoginMasterModel.SelectedMenuItem.Analytics; }
+            get { return Model.Master.AfterLoginMasterModel.SelectedMenuItem.Administrator; }
         }
 
         IAdminService adminService;
@@ -40,7 +40,7 @@ namespace EyeTracker.Controllers
 
         public ActionResult Index()
         {
-            return View(new AdminModel());
+            return RedirectToAction("Logs");
         }
 
         public ActionResult Elmah(string query)
@@ -98,8 +98,6 @@ namespace EyeTracker.Controllers
 
         public ActionResult Logs()
         {
-            log.WriteInformation("--> Logs");
-
             var result = ObjectContainer.Instance.RunQuery(new LogDataQuery());
 
             ViewBag.Logs = string.Join("\n", result.Log.Select(a => a.ToString()));
@@ -109,7 +107,6 @@ namespace EyeTracker.Controllers
             var severities = result.Severities.OrderBy(s => s).Select(s => new SelectListItem { Text = s, Value = s }).ToList();
             severities.Insert(0, new SelectListItem { Text = "All", Value = string.Empty, Selected = true });
             ViewBag.Severities = severities;
-            log.WriteInformation("Logs-->");
             
             return View(new LogsModel());
         }

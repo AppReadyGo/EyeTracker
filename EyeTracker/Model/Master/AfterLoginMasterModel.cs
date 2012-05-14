@@ -14,6 +14,7 @@ namespace EyeTracker.Model.Master
         public string ProductsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Products ? "class=\"selected\"" : string.Empty; } }
         public string PlanAndPricingCssClassAttribute { get { return SelectedItem == SelectedMenuItem.PlanAndPricing ? "class=\"selected\"" : string.Empty; } }
         public string ContactsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Contacts ? "class=\"selected\"" : string.Empty; } }
+        public string AdministratorCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Administrator ? "class=\"selected\"" : string.Empty; } }
 
         public AfterLoginMasterModel()
         {
@@ -31,7 +32,10 @@ namespace EyeTracker.Model.Master
             Tutorials,
             Products,
             PlanAndPricing,
-            Contacts
+            Contacts,
+            Administrator
         }
+
+        public bool IsAdmin { get; set; }
     }
 }
