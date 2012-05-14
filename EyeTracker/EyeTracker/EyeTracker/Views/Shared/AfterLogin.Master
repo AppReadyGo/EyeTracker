@@ -20,6 +20,9 @@
             <li <%= Model.Master.ProductsCssClassAttribute %>><a href="/Products">Products</a></li>
             <li <%= Model.Master.PlanAndPricingCssClassAttribute %>><a href="/PlanAndPricing">Plans and Pricing</a></li>
             <li <%= Model.Master.ContactsCssClassAttribute %>><a href="/Contacts">Contacts</a></li>
+            <%if(Model.Master.IsAdmin){ %>
+            <li <%= Model.Master.AdministratorCssClassAttribute %>><a href="/Admin">Administrator</a></li>
+            <%} %>
         </ul>
     </div>
     <div class="main-content">

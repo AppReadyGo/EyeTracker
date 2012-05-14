@@ -15,13 +15,15 @@ namespace EyeTracker.Controllers.Master
 
         protected virtual AfterLoginMasterModel GetModel(AfterLoginMasterModel.SelectedMenuItem selectedItem)
         {
-            return new AfterLoginMasterModel(selectedItem);
+            var model = new AfterLoginMasterModel(selectedItem);
+            model.IsAdmin = true;
+            return model;
         }
 
         protected virtual ActionResult View<TViewModel>(TViewModel viewModel)
         {
             var model = new ViewModelWrapper<AfterLoginMasterModel, TViewModel>(GetModel(SelectedMenuItem), viewModel);
-
+          
             return base.View(model);
         }
 
