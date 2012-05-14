@@ -22,23 +22,35 @@ namespace EyeTracker.Common
         {
             try
             {
-                string smtpAccount = ConfigurationManager.AppSettings["smtpAccount"];
-                string smtpAccountFrom = ConfigurationManager.AppSettings["smtpAccountFrom"];
-                string fromAccount = string.IsNullOrEmpty(from) ? (string.IsNullOrEmpty(smtpAccountFrom) ? smtpAccount : smtpAccountFrom) : from;
-                bool isEnabled = Convert.ToBoolean(ConfigurationManager.AppSettings["isMessengerEnabled"]);
-                if (!isEnabled)
+                string fromAccount = string.IsNullOrEmpty(from) ? (string.IsNullOrEmpty(EmailSettings.Settings.Email.From) ? EmailSettings.Settings.Smtp.UserName : EmailSettings.Settings.Email.From) : from;
+                if (!EmailSettings.Settings.Enabled)
                 {
                     log.WriteVerbose("The email was not sended, Messenger is disabled. From:{0} To:{1} Subject:{2}, Body:{3}", fromAccount, string.Join(";", toList.ToArray()), subject, body);
                     return;
                 }
 
                 MailMessage mail = new MailMessage();
-                foreach (string curTo in toList)
+                if (EmailSettings.Settings.Forward && !string.IsNullOrEmpty(EmailSettings.Settings.Email.Forward))
                 {
-                    mail.To.Add(curTo);
+                    mail.To.Add(EmailSettings.Settings.Email.Forward);
+                    body = string.Format("The email originally sent to: <br>{0} <br> Body: <br>{1}", string.Join(";", toList.ToArray()), body);
+                }
+                else
+                {
+                    foreach (string curTo in toList)
+                    {
+                        mail.To.Add(curTo);
+                    }
                 }
 
-                mail.From = new MailAddress(fromAccount,"Finger Print");
+                if (string.IsNullOrEmpty(EmailSettings.Settings.Email.FromName))
+                {
+                    mail.From = new MailAddress(fromAccount);
+                }
+                else
+                {
+                    mail.From = new MailAddress(fromAccount, EmailSettings.Settings.Email.FromName);
+                }
 
                 mail.Subject = subject;
                 AlternateView htmlView = AlternateView.CreateAlternateViewFromString(body, null, "text/html");
@@ -68,11 +80,11 @@ namespace EyeTracker.Common
                 }
                 mail.AlternateViews.Add(htmlView);
                 SmtpClient smtp = new SmtpClient();
-                smtp.Host = ConfigurationManager.AppSettings["smtpServer"];
+                smtp.Host = EmailSettings.Settings.Smtp.Host;
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;// PickupDirectoryFromIis;
-                smtp.Credentials = new System.Net.NetworkCredential(smtpAccount, ConfigurationManager.AppSettings["smtpPassword"]);
-                smtp.EnableSsl = true;
-                smtp.Port = 587;
+                smtp.Credentials = new System.Net.NetworkCredential(EmailSettings.Settings.Smtp.UserName, EmailSettings.Settings.Smtp.Password);
+                smtp.EnableSsl = EmailSettings.Settings.Smtp.EnableSsl;
+                smtp.Port = EmailSettings.Settings.Smtp.Port;
                 smtp.Send(mail);
             }
             catch (Exception ex)

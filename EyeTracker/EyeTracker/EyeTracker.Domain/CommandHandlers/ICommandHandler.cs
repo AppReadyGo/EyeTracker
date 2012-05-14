@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using NHibernate;
 
 namespace EyeTracker.Domain.CommandHandlers
 {
-    public interface ICommandHandler<TCommand>
+    public interface ICommandHandler<TCommand, TResult>
     {
-        void Execute(TCommand cmd);
+        TResult Execute(ISession session, TCommand cmd);
     }
 }

@@ -203,6 +203,7 @@ namespace EyeTracker.Controllers
 
         public ActionResult EyeTracker(FilterParametersModel filter)
         {
+            var s = EmailSettings.Settings.Forward;
             filter.Validate();
 
             string[] splitedScreenSize = string.IsNullOrEmpty(filter.ss) ? null : filter.ss.Split(new char[] { 'X' });

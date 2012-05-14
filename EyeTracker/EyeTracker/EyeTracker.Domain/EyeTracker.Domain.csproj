@@ -60,14 +60,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlers\Admin\ClearLogCommandHandler.cs" />
     <Compile Include="CommandHandlers\ICommandHandler.cs" />
     <Compile Include="CommandHandlers\CreateContentItemCommandHandler.cs" />
+    <Compile Include="CommandHandlers\StoredProcedureCommandHandler.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Common\ApplicationDetails.cs" />
     <Compile Include="Common\PortfolioDetails.cs" />
     <Compile Include="Enumirators.cs" />
     <Compile Include="ISecurityContext.cs" />
     <Compile Include="Mapping\AccountProfilerMaping.cs" />
+    <Compile Include="Mapping\BackOffice\CategoryMapping.cs" />
+    <Compile Include="Mapping\BackOffice\Log.cs" />
     <Compile Include="Mapping\BackOffice\SystemMembershipMapping.cs" />
     <Compile Include="Mapping\ContentItemMaping.cs" />
     <Compile Include="Mapping\ContentPageMaping.cs" />
@@ -76,6 +80,8 @@
     <Compile Include="Mapping\Events\SessionInfoEventMapping.cs" />
     <Compile Include="Mapping\ScreenMapping.cs" />
     <Compile Include="Model\AnalyticsType.cs" />
+    <Compile Include="Model\BackOffice\Category.cs" />
+    <Compile Include="Model\BackOffice\Log.cs" />
     <Compile Include="Model\BackOffice\SystemMembership.cs" />
     <Compile Include="Mapping\ClickMaping.cs" />
     <Compile Include="Mapping\BrowserMapping.cs" />
@@ -126,6 +132,7 @@
     <Compile Include="Model\ViewPart.cs" />
     <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueriesHandlers\Admin\LogQueryHadler.cs" />
     <Compile Include="QueriesHandlers\Analytics\FilterQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\PortfoliosQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\FingerPrintViewDataQueryHandler.cs" />
