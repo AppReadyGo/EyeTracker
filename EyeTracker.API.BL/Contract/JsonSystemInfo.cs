@@ -51,8 +51,8 @@ namespace EyeTracker.API.BL.Contract
         [DataMember(Name = "opn")]
         public string OperatorName { get; set; }
 
-        [DataMember(Name = "brn")]
-        public string BrandName { get; set; }
+        //[DataMember(Name = "brn")]
+        //public string BrandName { get; set; }
 
         [DataMember(Name = "skdi")]
         public string SdkIdentName { get; set; }

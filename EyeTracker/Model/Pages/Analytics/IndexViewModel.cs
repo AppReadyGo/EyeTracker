@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using EyeTracker.Domain.Common;
 using EyeTracker.Model.Filter;
-using EyeTracker.Common.Queries.Analytics.QueryResults;
+using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 
 namespace EyeTracker.Model.Pages.Analytics
 {

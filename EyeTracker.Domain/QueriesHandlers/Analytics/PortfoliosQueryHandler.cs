@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using EyeTracker.Common.Queries.Analytics;
-using NHibernate.Linq;
-using NHibernate;
+using EyeTracker.Common.QueryResults.Analytics;
+using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 using EyeTracker.Domain.Model;
-using EyeTracker.Common;
-using EyeTracker.Common.Queries.Analytics.QueryResults;
+using NHibernate;
+using NHibernate.Linq;
+using EyeTracker.Common.Commands;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {
@@ -25,7 +23,7 @@ namespace EyeTracker.Domain.Queries.Analytics
         public PortfoliosDataResult Run(ISession session, PortfoliosQuery query)
         {
             var portfolios = session.Query<Portfolio>()
-                        .Where(p => p.User.Id == securityContext.UserId)
+                        .Where(p => p.User.Id == securityContext.CurrentUser.Id)
                         .Select(p => new PortfolioResult
                         {
                             Id = p.Id,
@@ -34,7 +32,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                         .ToArray();
 
             var applications = session.Query<Application>()
-                                .Where(a => a.Portfolio.User.Id == securityContext.UserId)
+                                .Where(a => a.Portfolio.User.Id == securityContext.CurrentUser.Id)
                                 .Select(a => new
                                 {
                                     PortfolioId = a.Portfolio.Id,
@@ -44,7 +42,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                                 .ToArray();
 
             var visits = session.Query<PageView>()
-                                .Where(p => p.Application.Portfolio.User.Id == securityContext.UserId)
+                                .Where(p => p.Application.Portfolio.User.Id == securityContext.CurrentUser.Id)
                                 .GroupBy(p => p.Application.Id)
                                 .Select(g => new
                                 {
@@ -64,7 +62,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                 portfolio.Visits = portfolio.Applications.Sum(a => a.Visits);
             }
 
-            var viewDataResult = GetResult<PortfoliosDataResult>(session, securityContext.UserId);
+            var viewDataResult = GetResult<PortfoliosDataResult>(session, securityContext.CurrentUser.Id);
             viewDataResult.Portfolios1 = portfolios;
             return viewDataResult;
         }

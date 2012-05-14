@@ -7,7 +7,7 @@ using EyeTracker.Common.Queries.Analytics;
 using NHibernate;
 using NHibernate.Linq;
 using EyeTracker.Domain.Model;
-using EyeTracker.Common.Queries.Analytics.QueryResults;
+using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {

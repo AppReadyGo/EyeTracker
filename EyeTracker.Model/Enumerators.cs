@@ -20,4 +20,16 @@ namespace EyeTracker.Common
         Month,
         Year
     }
+
+    public enum ErrorCode
+    {
+        WrongNameParameter,
+        WrongImportData,
+        WrongEmail,
+        WrongPassword,
+        EmailExists,
+        TagExists,
+        WrongCollection,
+        WrongParameter
+    }
 }

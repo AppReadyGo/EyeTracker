@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using EyeTracker.Domain.Model;
 using EyeTracker.Common.Commands;
+using NHibernate;
 
 namespace EyeTracker.Domain.CommandHandlers
 {
-    public class CreateContentItemCommandHandler : ICommandHandler<CreateContentItemCommand>
+    public class CreateContentItemCommandHandler : ICommandHandler<CreateContentItemCommand, int>
     {
         private IRepository repository;
 
@@ -16,11 +17,11 @@ namespace EyeTracker.Domain.CommandHandlers
             this.repository = repository;
         }   
 
-        public void Execute(CreateContentItemCommand cmd)
+        public int Execute(ISession session, CreateContentItemCommand cmd)
         {
             var item = new ContentItem(cmd.Key, cmd.SubKey, cmd.Value);
             this.repository.Add(item);
+            return item.Id;
         }
-
     }
 }

@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
-using EyeTracker.Core.Services;
-using EyeTracker.Model;
-using EyeTracker.Domain.Model;
-using EyeTracker.Domain.Model.BackOffice;
-using EyeTracker.Controllers.Master;
-using EyeTracker.Model.Pages.Admin;
+using EyeTracker.Common.Commands.Admin;
 using EyeTracker.Common.Logger;
-using System.Reflection;
+using EyeTracker.Common.Queries.Admin;
+using EyeTracker.Controllers.Master;
 using EyeTracker.Core;
+using EyeTracker.Core.Services;
+using EyeTracker.Domain.Model.BackOffice;
+using EyeTracker.Model;
+using EyeTracker.Model.Pages.Admin;
+using EyeTracker.Model.Master;
 
 namespace EyeTracker.Controllers
 {
@@ -108,7 +110,8 @@ namespace EyeTracker.Controllers
             severities.Insert(0, new SelectListItem { Text = "All", Value = string.Empty, Selected = true });
             ViewBag.Severities = severities;
             log.WriteInformation("Logs-->");
-            return View();
+            
+            return View(new LogsModel());
         }
 
         public ActionResult ClearLogs()

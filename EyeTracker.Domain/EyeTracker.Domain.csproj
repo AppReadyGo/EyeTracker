@@ -68,7 +68,6 @@
     <Compile Include="Common\ApplicationDetails.cs" />
     <Compile Include="Common\PortfolioDetails.cs" />
     <Compile Include="Enumirators.cs" />
-    <Compile Include="ISecurityContext.cs" />
     <Compile Include="Mapping\AccountProfilerMaping.cs" />
     <Compile Include="Mapping\BackOffice\CategoryMapping.cs" />
     <Compile Include="Mapping\BackOffice\Log.cs" />

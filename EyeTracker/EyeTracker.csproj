@@ -343,6 +343,7 @@
     <Content Include="Scripts\AnalyticsTemplate.js" />
     <Content Include="Views\Account\RegisterForm.ascx" />
     <Content Include="Views\Account\LogOnForm.ascx" />
+    <Content Include="Views\Admin\Logs.aspx" />
     <Content Include="Views\Application\Form.ascx" />
     <Content Include="Views\Analytics\Date.ascx" />
     <Content Include="Views\Analytics\Filter.ascx" />

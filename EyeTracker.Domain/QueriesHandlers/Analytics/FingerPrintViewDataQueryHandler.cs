@@ -7,7 +7,8 @@ using NHibernate.Linq;
 using NHibernate;
 using EyeTracker.Domain.Model;
 using EyeTracker.Common;
-using EyeTracker.Common.Queries.Analytics.QueryResults;
+using EyeTracker.Common.QueryResults.Analytics.QueryResults;
+using EyeTracker.Common.Commands;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {
@@ -24,7 +25,7 @@ namespace EyeTracker.Domain.Queries.Analytics
 
         public FingerPrintViewDataResult Run(ISession session, FingerPrintViewDataQuery query)
         {
-            return GetResult<FingerPrintViewDataResult>(session, securityContext.UserId);
+            return GetResult<FingerPrintViewDataResult>(session, securityContext.CurrentUser.Id);
         }
     }
 }

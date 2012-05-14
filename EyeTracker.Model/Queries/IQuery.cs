@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EyeTracker.Domain
+namespace EyeTracker.Common.Queries
 {
-    public interface ISecurityContext
+    public class IQuery<TResult>
     {
-         Guid UserId { get; }
     }
 }

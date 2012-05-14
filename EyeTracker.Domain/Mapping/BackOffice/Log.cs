@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NHibernate.Mapping.ByCode.Conformist;
+﻿using EyeTracker.Domain.Model.BackOffice;
 using NHibernate.Mapping.ByCode;
+using NHibernate.Mapping.ByCode.Conformist;
 
 namespace EyeTracker.Domain.Mapping.BackOffice
 {
@@ -11,6 +8,7 @@ namespace EyeTracker.Domain.Mapping.BackOffice
     {
         public LogMapping()
         {
+            Schema("log");
             Table("Log");
             Id(x => x.Id, map => { map.Column("ID"); map.Generator(Generators.Identity); });
             Property(x => x.EventID, map => { map.NotNullable(false); });
@@ -30,6 +28,7 @@ namespace EyeTracker.Domain.Mapping.BackOffice
                x => x.Categories,
                map =>
                {
+                   map.Schema("log");
                    map.Table("CategoryLog");
                    map.Access(Accessor.Field);
                    map.Key(x => x.Column("LogID"));
