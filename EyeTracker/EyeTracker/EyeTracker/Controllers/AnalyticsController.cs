@@ -24,7 +24,6 @@ using System.Drawing;
 using EyeTracker.Models;
 using System.IO;
 using System.Drawing.Imaging;
-using EyeTracker.Common.Queries.Analytics.QueryResults;
 using EyeTracker.Common.Queries;
 
 namespace EyeTracker.Controllers
@@ -33,6 +32,7 @@ namespace EyeTracker.Controllers
     public class AnalyticsController : FilterController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+        
         private IPortfolioService portfolioService;
         private IAccountService accountService;
         private IApplicationService applicationService;
@@ -81,6 +81,8 @@ namespace EyeTracker.Controllers
 
         public ActionResult Dashboard(FilterParametersModel filter)
         {
+            log.WriteInformation("Dashboard");
+
             filter.Validate();
 
             string[] splitedScreenSize = string.IsNullOrEmpty(filter.ss) ? null : filter.ss.Split(new char[] { 'X' });

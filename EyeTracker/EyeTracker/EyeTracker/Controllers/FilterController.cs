@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using EyeTracker.Model.Master;
 using EyeTracker.Model.Filter;
 using System.Web.Script.Serialization;
-using EyeTracker.Common.Queries.Analytics.QueryResults;
 using EyeTracker.Model.Pages.Analytics;
 using EyeTracker.Model;
+using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 
 namespace EyeTracker.Controllers
 {

@@ -19,10 +19,17 @@ using NHibernate.Dialect;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using EyeTracker.Core.Services;
+using EyeTracker.Common;
 
 namespace EyeTracker.Core
 {
-    public class ObjectContainer
+    public interface IObjectContainer
+    {
+        TResult RunQuery<TResult>(IQuery<TResult> query);
+        CommandResult<TResult> Dispatch<TResult>(ICommand<TResult> command);
+    }
+
+    public class ObjectContainer : IObjectContainer
     {
         private static readonly object locker = new object();
         private static ObjectContainer instance = null;
@@ -56,8 +63,7 @@ namespace EyeTracker.Core
             var dbSettings = (DatabaseSettings)ConfigurationManager.GetSection("dataConfiguration");
             this.sessionFactory = BuildSessionFactory(typeof(NHibernateHelper), ConfigurationManager.ConnectionStrings[dbSettings.DefaultDatabase].ToString());
 
-            // Add commands to container
-            var parentCommandHandler = typeof(ICommandHandler<>);
+            var parentCommandHandler = typeof(ICommandHandler<,>);
             foreach (var type in parentCommandHandler.Assembly.GetTypes())
             {
                 if (type.IsClass)
@@ -70,7 +76,6 @@ namespace EyeTracker.Core
                 }
             }
 
-            // Add queries to container
             var parentQueryHandler = typeof(IQueryHandler<,>);
             foreach (var type in parentQueryHandler.Assembly.GetTypes())
             {
@@ -85,14 +90,14 @@ namespace EyeTracker.Core
             }
             container.Register(Component.For<IRepository>().ImplementedBy<Repository>());
             container.Register(Component.For<ISecurityContext>().ImplementedBy<SecurityContext>());
-            container.Register(Component.For<IMembershipService>().ImplementedBy<AccountMembershipService>());
+            container.Register(Component.For<IValidationContext>().ImplementedBy<ValidationContext>());
 
             this.repository = container.Resolve<IRepository>();
         }
 
-        private ICommandHandler<TCommand> GetCommandHandler<TCommand>(TCommand command)
+        private ICommandHandler<TCommand, TResult> GetCommandHandler<TCommand, TResult>(ICommand<TResult> command)
         {
-            return container.Resolve<ICommandHandler<TCommand>>();
+            return container.Resolve<ICommandHandler<TCommand, TResult>>();
         }
 
         private ISession OpenSession()
@@ -155,16 +160,32 @@ namespace EyeTracker.Core
             }
         }
 
-        public void ExecuteCommand<TCommand>(TCommand command)
-            where TCommand : ICommand
+        public CommandResult<TResult> Dispatch<TResult>(ICommand<TResult> command)
         {
-            var handler = GetCommandHandler(command);
-            //TODO: add auditing, open session, open transaction
-            var validationResult = command.Validate();
-            if (!validationResult.Any())
+            Type handlerTypeBluprint = typeof(ICommandHandler<,>);
+            Type[] typeArgs = { command.GetType(), typeof(TResult) };
+            var obj = container.Resolve(handlerTypeBluprint.MakeGenericType(typeArgs));
+            MethodInfo method = obj.GetType().GetMethod("Execute");
+            using (ISession session = sessionFactory.OpenSession())
             {
-                handler.Execute(command);
+                var commandResult = new CommandResult<TResult>();
+                using (ITransaction dbTrans = session.BeginTransaction())
+                {
+                    commandResult.Validation = command.ValidatePermissions(container.Resolve<ISecurityContext>()).ToList();
+                    commandResult.Validation.Union(command.Validate(container.Resolve<IValidationContext>()));
+                    if (!commandResult.Validation.Any())
+                    {
+                        commandResult.Result = (TResult)method.Invoke(obj, new object[] { session, command });
+                        dbTrans.Commit();
+                    }
+                    else
+                    {
+                        dbTrans.Rollback();
+                    }
+                }
+                return commandResult;
             }
+            //TODO: Events
         }
     }
 }

@@ -8,6 +8,7 @@ namespace EyeTracker.Domain.Mapping.BackOffice
     {
         public CategoryMapping()
         {
+            Schema("log");
             Table("Category");
             Id(x => x.Id, map => { map.Column("ID"); map.Generator(Generators.Identity); });
             Property(x => x.Name, map => { map.Length(64); map.NotNullable(false); });

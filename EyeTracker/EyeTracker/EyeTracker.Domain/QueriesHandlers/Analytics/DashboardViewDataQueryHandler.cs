@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using EyeTracker.Common.Queries.Analytics;
-using NHibernate.Linq;
-using NHibernate;
+using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 using EyeTracker.Domain.Model;
-using EyeTracker.Common;
-using EyeTracker.Common.Queries.Analytics.QueryResults;
+using NHibernate;
+using NHibernate.Linq;
+using EyeTracker.Common.Commands;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {
@@ -26,7 +25,7 @@ namespace EyeTracker.Domain.Queries.Analytics
         {
             int? applicationId = !query.ApplicationId.HasValue || query.ApplicationId.Value == 0 ? null : query.ApplicationId;
 
-            var res = GetResult<DashboardViewDataResult>(session, securityContext.UserId);
+            var res = GetResult<DashboardViewDataResult>(session, securityContext.CurrentUser.Id);
             if (applicationId.HasValue)
             {
                 res.Data = session.Query<PageView>()

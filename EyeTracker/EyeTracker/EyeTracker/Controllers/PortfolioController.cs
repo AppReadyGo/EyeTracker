@@ -13,7 +13,7 @@ using System.Collections.ObjectModel;
 using EyeTracker.Controllers.Master;
 using EyeTracker.Model.Pages.Portfolio;
 using EyeTracker.Model.Master;
-using EyeTracker.Common.Queries.Analytics.QueryResults;
+using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 
 namespace EyeTracker.Controllers
 {

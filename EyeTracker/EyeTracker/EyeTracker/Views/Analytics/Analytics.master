@@ -1,4 +1,6 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Analytics.Master" Inherits="System.Web.Mvc.ViewMasterPage<EyeTracker.Model.SubMasterViewModelWrapper<EyeTracker.Model.Master.AfterLoginViewModel, EyeTracker.Model.Master.AnalyticsModel>>"%>
+﻿<%@ Master Language="C#" 
+MasterPageFile="~/Views/Shared/Analytics.Master" 
+Inherits="System.Web.Mvc.ViewMasterPage<EyeTracker.Model.SubMasterViewModelWrapper<EyeTracker.Model.Master.AfterLoginViewModel, EyeTracker.Model.Master.AnalyticsModel>>"%>
 <%@ Import Namespace="EyeTracker.Helpers" %>
 
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
