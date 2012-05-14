@@ -141,6 +141,8 @@
     <Compile Include="CustomModelBinders\Parsers\JsonViewAreaParser.cs" />
     <Compile Include="Helpers\General.cs" />
     <Compile Include="Model\Master\BeforeLoginMasterModel.cs" />
+    <Compile Include="Model\Pages\Admin\AdminModel.cs" />
+    <Compile Include="Model\Pages\Admin\LogsModel.cs" />
     <Compile Include="Model\Pages\Analytics\FilterParametersModel.cs" />
     <Compile Include="Model\Pages\Analytics\FingerPrintModel.cs" />
     <Compile Include="Model\Pages\Analytics\UsageModel.cs" />
@@ -408,6 +410,7 @@
     <Content Include="Views\Shared\Content.Master" />
     <Content Include="Views\Shared\AfterLogin.Master" />
     <Content Include="Views\Shared\Mail.Master" />
+    <Content Include="Views\Admin\Logs.cshtml" />
     <None Include="Views\Shared\Site_.Master" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\TopMenu.Master" />

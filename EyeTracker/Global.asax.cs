@@ -41,6 +41,12 @@ namespace EyeTracker
             );
 
             routes.MapRoute(
+                "Admin",
+                "Admin/{action}",
+                new { action = "Index", controller = "Admin" }
+            );
+
+            routes.MapRoute(
                 "Admin_elmah",
                 "Admin/Elmah/{query}",
                 new { action = "Elmah", controller = "Admin", query = UrlParameter.Optional }

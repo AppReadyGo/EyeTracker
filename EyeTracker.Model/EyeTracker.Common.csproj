@@ -80,34 +80,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationLogging.cs" />
-    <Compile Include="Commands\CreateContentItemCommand.cs" />
-    <Compile Include="Commands\Extentions.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\RemoveContentItemCommand.cs" />
-    <Compile Include="Commands\UpdateContentItemCommand.cs" />
     <Compile Include="Enumerators.cs" />
     <Compile Include="ErrorNumbers.cs" />
+    <Compile Include="MailSettings.cs" />
     <Compile Include="Messenger.cs" />
     <Compile Include="ObjectSerializator.cs" />
     <Compile Include="OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queries\Analytics\FilterQuery.cs" />
-    <Compile Include="Queries\Analytics\PortfoliosDataResult.cs" />
-    <Compile Include="Queries\Analytics\QueryResults\ApplicationResult.cs" />
-    <Compile Include="Queries\Analytics\FingerPrintViewDataQuery.cs" />
-    <Compile Include="Queries\Analytics\DashboardViewDataQuery.cs" />
-    <Compile Include="Queries\Analytics\QueryResults\DashboardViewDataResult.cs" />
-    <Compile Include="Queries\Analytics\QueryResults\FilterDataResult.cs" />
-    <Compile Include="Queries\Analytics\QueryResults\FingerPrintViewDataResult.cs" />
-    <Compile Include="Queries\Analytics\QueryResults\IdNameResult.cs" />
-    <Compile Include="Queries\Analytics\QueryResults\PortfolioResult.cs" />
-    <Compile Include="Queries\Analytics\UsageViewDataQuery.cs" />
-    <Compile Include="Queries\Analytics\QueryResults\UsageViewDataResult.cs" />
-    <Compile Include="Queries\GetKeyContentQuery.cs" />
-    <Compile Include="Queries\GetPageContent.cs" />
-    <Compile Include="Queries\IQuery.cs" />
-    <Compile Include="Queries\PageContentResult.cs" />
-    <Compile Include="Queries\Analytics\PortfoliosQuery.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
