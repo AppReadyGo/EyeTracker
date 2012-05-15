@@ -104,9 +104,11 @@
     <Compile Include="HeatMapImage_.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ActivityTrackingService.cs" />
+    <Compile Include="Services\DataRepositoryServices.cs" />
     <Compile Include="Services\EventsServices.cs" />
     <Compile Include="Services\FormsAuthenticationService.cs" />
     <Compile Include="Services\PortfolioService.cs" />
+    <Compile Include="Services\ReflectionServices.cs" />
     <Compile Include="Services\ReportsServices.cs" />
     <Compile Include="WcfService\AnalyticsHandler.cs" />
     <Compile Include="WcfService\AnalyticsService.cs" />
