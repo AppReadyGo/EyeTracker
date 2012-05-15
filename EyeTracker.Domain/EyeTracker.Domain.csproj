@@ -95,7 +95,6 @@
     <Compile Include="Model\ClickHeatMapData.cs" />
     <Compile Include="Model\ContentItem.cs" />
     <Compile Include="Model\ContentPage.cs" />
-    <Compile Include="Model\Events\IEvent.cs" />
     <Compile Include="Model\Events\ScrollEvent.cs" />
     <Compile Include="Model\Events\SessionInfoEvent.cs" />
     <Compile Include="Model\EyeTrackerData.cs" />

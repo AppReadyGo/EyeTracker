@@ -5,18 +5,27 @@ using System.Text;
 using EyeTracker.Domain.Model.Events;
 using NHibernate;
 using EyeTracker.Domain.Model;
+using EyeTracker.Common.Interfaces;
+using EyeTracker.Common.Logger;
+using System.Reflection;
+using System.Diagnostics.Contracts;
+using EyeTracker.Common;
 
 namespace EyeTracker.Domain.Repositories
 {
-    public interface IDateRepository
-    {
-        void ParseVisitEvent(VisitEvent visitEvent, string countryName, string city);
-        void ParseViewPartEvents(IEnumerable<ViewPartEvent> viewPartEvent);
-        void ParseClickEvents(IEnumerable<ClickEvent> clickEvent);
-    }
+    //public interface IDataRepository
+    //{
+    //    void ParseVisitEvent(VisitEvent visitEvent, string countryName, string city);
+    //    void ParseViewPartEvents(IEnumerable<ViewPartEvent> viewPartEvent);
+    //    void ParseClickEvents(IEnumerable<ClickEvent> clickEvent);
 
-    public class DataRepository : IDateRepository
+    //    void AddPackageEvent(PackageEvent packageEvent);
+    //}
+
+    public class DataRepository : IDataRepository
     {
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
         public void ParseVisitEvent(VisitEvent visitEvent, string country, string city)
         {
             using (ISession session = NHibernateHelper.OpenSession())
@@ -140,6 +149,26 @@ namespace EyeTracker.Domain.Repositories
                     }
                     transaction.Commit();
                 }
+            }
+        }
+
+        public void AddPackageEvent(IPackageEvent packageEvent)
+        {
+            Contract.Requires<ArgumentException>(packageEvent is PackageEvent);
+            try
+            {
+                using (ISession session = NHibernateHelper.OpenSession())
+                {
+                    using (ITransaction transaction = session.BeginTransaction())
+                    {
+                        session.SaveOrUpdate(packageEvent as PackageEvent);
+                        transaction.Commit();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.WriteError(ex, "Error saving PackageEvent");
             }
         }
     }

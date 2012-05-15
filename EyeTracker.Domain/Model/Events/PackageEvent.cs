@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Runtime.Serialization;
+using EyeTracker.Common.Interfaces;
 
 namespace EyeTracker.Domain.Model.Events
 {
@@ -10,7 +11,7 @@ namespace EyeTracker.Domain.Model.Events
     /// The class is just for serialisation
     /// </summary>
     [DataContract]
-    public class PackageEvent : IEvent
+    public class PackageEvent : IPackageEvent
     {
         public PackageEvent()
         {

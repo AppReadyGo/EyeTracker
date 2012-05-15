@@ -6,13 +6,15 @@ using EyeTracker.Domain.Model.Events;
 using NHibernate;
 using EyeTracker.Common.Logger;
 using System.Reflection;
+using EyeTracker.Common.Interfaces;
+using System.Diagnostics.Contracts;
 
 namespace EyeTracker.Domain.Repositories
 {
     /// <summary>
     /// 
     /// </summary>
-    public interface IEventsRepository
+    public interface IEventsRepository : IStoreRepository
     {
         long AddVisitEvent(VisitEvent visitEvent);
 
@@ -20,7 +22,7 @@ namespace EyeTracker.Domain.Repositories
 
         void AddClickEvents(IEnumerable<ClickEvent> clickEvent);
 
-        void AddPackageEvent(PackageEvent packageEvent);
+        //void AddPackageEvent(PackageEvent packageEvent);
     }
 
 
@@ -76,8 +78,9 @@ namespace EyeTracker.Domain.Repositories
         }
 
 
-        public void AddPackageEvent(PackageEvent packageEvent)
+        public void AddPackageEvent(IPackageEvent packageEvent)
         {
+            Contract.Requires<ArgumentException>(packageEvent is PackageEvent);
             try
             {
                 using (ISession session = NHibernateHelper.OpenSession())
@@ -101,7 +104,7 @@ namespace EyeTracker.Domain.Repositories
                         //    }
                         //}
                         //object objResult = 
-                        session.SaveOrUpdate(packageEvent);
+                        session.SaveOrUpdate(packageEvent as PackageEvent);
                         transaction.Commit();
                     }
                 }
