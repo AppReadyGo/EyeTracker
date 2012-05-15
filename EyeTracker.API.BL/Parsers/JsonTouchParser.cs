@@ -5,6 +5,7 @@ using System.Linq;
 using EyeTracker.API.BL.Contract;
 using EyeTracker.Common.Logger;
 using System.Reflection;
+using EyeTracker.Common.Interfaces;
 namespace EyeTracker.API.BL.Parsers
 {
 

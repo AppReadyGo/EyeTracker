@@ -30,37 +30,37 @@ namespace EyeTracker.Controllers
         }
 
         #region Old code 
-        [HttpPost]
-        public JsonResult Visit(VisitEvent visitEvent)
-        {
-            log.WriteInformation("-->Visit()");
-            OperationResult<long> res = null;
-            if (ModelState.IsValid)
-            {
-                visitEvent.Ip = Request.UserHostAddress;
-#if JSUNITTEST
-                res = new OperationResult<long>(1);
-#else
-                res = eventsServices.AddVisitEvent(visitEvent);
-#endif
-            }
-            else
-            {
-                var sb = new StringBuilder();
-                foreach (var key in ModelState.Keys)
-                {
-                    var error = ModelState[key].Errors.FirstOrDefault();
-                    if (error != null)
-                    {
-                        sb.AppendFormat("{0} ", error.ErrorMessage);
-                    }
-                }
-                res = new OperationResult<long>(ErrorNumber.WrongParameter, sb.ToString());
-            }
-            Response.AddHeader("Access-Control-Allow-Origin", "*");
-            log.WriteInformation("Visit:{0}-->", res);
-            return base.Json(res);
-        }
+//        [HttpPost]
+//        public JsonResult Visit(VisitEvent visitEvent)
+//        {
+//            log.WriteInformation("-->Visit()");
+//            OperationResult<long> res = null;
+//            if (ModelState.IsValid)
+//            {
+//                visitEvent.Ip = Request.UserHostAddress;
+//#if JSUNITTEST
+//                res = new OperationResult<long>(1);
+//#else
+//                res = eventsServices.AddVisitEvent(visitEvent);
+//#endif
+//            }
+//            else
+//            {
+//                var sb = new StringBuilder();
+//                foreach (var key in ModelState.Keys)
+//                {
+//                    var error = ModelState[key].Errors.FirstOrDefault();
+//                    if (error != null)
+//                    {
+//                        sb.AppendFormat("{0} ", error.ErrorMessage);
+//                    }
+//                }
+//                res = new OperationResult<long>(ErrorNumber.WrongParameter, sb.ToString());
+//            }
+//            Response.AddHeader("Access-Control-Allow-Origin", "*");
+//            log.WriteInformation("Visit:{0}-->", res);
+//            return base.Json(res);
+//        }
 
         [HttpPost]
         public JsonResult Package(PackageEvent packageEvent)

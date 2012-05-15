@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using EyeTracker.Domain.Model.Events;
 using EyeTracker.CustomModelBinders.Parsers;
+using EyeTracker.Common.Interfaces;
 
 namespace EyeTracker.CustomModelBinders
 {

@@ -16,6 +16,7 @@ using System.Threading;
 using EyeTracker.Common.Logger;
 using System.Reflection;
 using System.ComponentModel;
+using EyeTracker.Domain.Repositories;
 
 namespace EyeTracker.API
 {
@@ -73,9 +74,15 @@ namespace EyeTracker.API
                 }
 
                 PackageEvent objParserResult = EventParser.Parse(package) as PackageEvent;
-                EventsServices objEventSvc = new EventsServices();
+                EventsServices objEventSvc = new EventsServices("EyeTracker.Domain", "EyeTracker.Domain.Repositories.EventsRepository");
                 OperationResult objSaveResult = objEventSvc.HandlePackageEvent(objParserResult);
                 log.WriteVerbose("return result is " + !objSaveResult.HasError);
+
+                #region TEMP
+                DataRepositoryServices objDataRepositorySvc = new DataRepositoryServices("EyeTracker.Domain", "EyeTracker.Domain.Repositories.DataRepository");
+                objDataRepositorySvc.HandlePackageEvent(objParserResult);
+                #endregion
+
                 return !objSaveResult.HasError;
             }
             catch (Exception ex)

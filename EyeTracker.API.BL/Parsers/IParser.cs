@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using EyeTracker.API.BL.Contract;
 using EyeTracker.Domain.Model.Events;
+using EyeTracker.Common.Interfaces;
 //using EyeTracker.Domain.Model.Events;
 
 
