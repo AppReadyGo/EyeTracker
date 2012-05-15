@@ -92,6 +92,11 @@
     <Compile Include="ErrorNumbers.cs" />
     <Compile Include="IValidationContext.cs" />
     <Compile Include="MailSettings.cs" />
+    <Compile Include="Interfaces\IDataRepository.cs" />
+    <Compile Include="Interfaces\IEvent.cs" />
+    <Compile Include="Interfaces\IPackageEvent.cs" />
+    <Compile Include="Interfaces\IStoreRepository.cs" />
+    <Compile Include="Interfaces\IStoreServices.cs" />
     <Compile Include="Messenger.cs" />
     <Compile Include="ObjectSerializator.cs" />
     <Compile Include="OperationResult.cs" />
