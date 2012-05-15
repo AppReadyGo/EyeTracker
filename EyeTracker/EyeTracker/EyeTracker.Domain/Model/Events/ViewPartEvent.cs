@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using EyeTracker.Common.Interfaces;
 
 namespace EyeTracker.Domain.Model.Events
 {
