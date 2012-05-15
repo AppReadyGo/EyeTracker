@@ -3,6 +3,7 @@ using EyeTracker.Domain.Model.Events;
 using System;
 using EyeTracker.Common.Logger;
 using System.Reflection;
+using EyeTracker.Common.Interfaces;
 namespace EyeTracker.API.BL.Parsers
 {
 

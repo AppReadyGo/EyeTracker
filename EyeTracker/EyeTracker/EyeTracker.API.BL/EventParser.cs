@@ -7,6 +7,7 @@ using EyeTracker.API.BL.Parsers;
 using EyeTracker.Domain.Model.Events;
 using EyeTracker.Common.Logger;
 using System.Reflection;
+using EyeTracker.Common.Interfaces;
 
 namespace EyeTracker.API.BL
 {

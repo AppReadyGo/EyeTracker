@@ -4,6 +4,7 @@ using EyeTracker.Domain.Model.Events;
 using System.Web.Mvc;
 using System;
 using System.Collections.Generic;
+using EyeTracker.Common.Interfaces;
 namespace EyeTracker.CustomModelBinders.Parsers
 {
     public class JsonPackageParser : IParser
