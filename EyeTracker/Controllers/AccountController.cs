@@ -117,17 +117,17 @@ namespace EyeTracker.Controllers
                     //    MembershipService.DeleteUser(model.UserName);
                     //    ModelState.AddModelError("", "Error to register, please contact to support.");
                     //}
-                    //FormsService.SignOut();
-                    //try
-                    //{
-                    //    var mailer = new MailGenerator(this.ControllerContext, "Thank-you", null, null);
-                    //    mailer.Send(new string[] { model.Email });
-                    //}
-                    //catch
-                    //{
-                    //}
-                    //return Redirect("/thank-you");
-                    return RedirectToAction("Index", "Home");
+                    FormsService.SignOut();
+                    try
+                    {
+                        var mailer = new MailGenerator(this.ControllerContext, "Thank-you", null, null);
+                        mailer.Send(new string[] { model.Email });
+                    }
+                    catch
+                    {
+                    }
+                    return Redirect("/thank-you");
+                    //return RedirectToAction("Index", "Home");
                 }
                 else
                 {
