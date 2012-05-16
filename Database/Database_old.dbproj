@@ -2,7 +2,7 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Name>Database</Name>
+    <Name>Database_old</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.0</ProjectVersion>
     <ProjectGuid>{67cbc824-a49e-4e9b-a947-360f3dfe65c3}</ProjectGuid>
@@ -28,8 +28,7 @@
     <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
     <TargetConnectionString>
     </TargetConnectionString>
-    <TargetDatabase>
-    </TargetDatabase>
+    <TargetDatabase>Database</TargetDatabase>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <SuppressWarnings>
     </SuppressWarnings>
@@ -42,8 +41,7 @@
     <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
     <TargetConnectionString>
     </TargetConnectionString>
-    <TargetDatabase>
-    </TargetDatabase>
+    <TargetDatabase>Database</TargetDatabase>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <SuppressWarnings>
     </SuppressWarnings>
@@ -349,90 +347,6 @@
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
     <Build Include="Membership\aspnet_WebEvent_Events.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\AccountProfiler.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\VisitEvent.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\Application.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\AutoCreatedLocal.route.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\Browser.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\Click.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\ClickEvent.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\Content.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\ContentPages.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\Countries.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\CreateBinaryInserts.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\FK49650677F9D3FC1C.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\FK4AD899C9F9D3FC1C.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\FK5DAF59DA6C1A54A6.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\FK5DAF59DA9DB60BE.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\FK5DAF59DAAF84173A.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\FK5DAF59DAC633B88.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\FK5DAF59DAD1970229.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\FK6AF3367D1CF53E7.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\FKBEF9D818C633B88.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\Language.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\OperationSystem.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\PageView.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\Portfolio.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\Screen.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\Utils.schema.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\ViewPart.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Domain\ViewPartEvent.table.sql">
       <SubType>Code</SubType>
     </Build>
   </ItemGroup>
