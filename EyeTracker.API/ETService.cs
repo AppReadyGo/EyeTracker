@@ -39,10 +39,7 @@ namespace EyeTracker.API
         [Description("Test method")]
         public bool GetStatus()
         {
-            log.WriteVerbose("WriteVerbose: Call to GetStatus");
-            log.WriteError("WriteError: Call to GetStatus");
-            log.WriteWarning("WriteWarning: Call to GetStatus");
-            log.WriteInformation("WriteInformation: Call to GetStatus");
+            log.WriteInformation("WriteVerbose: Call to GetStatus");
             return true;
         }
 
