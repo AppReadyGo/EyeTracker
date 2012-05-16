@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker.BackOffice", "Ey
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker.Domain", "EyeTracker.Domain\EyeTracker.Domain.csproj", "{6225C68F-4446-41B2-B774-316A5F04001A}"
 EndProject
-Project("{C8D11400-126E-41CD-887F-60BD40844F9E}") = "Database", "Database\Database.dbproj", "{67CBC824-A49E-4E9B-A947-360F3DFE65C3}"
+Project("{C8D11400-126E-41CD-887F-60BD40844F9E}") = "Database_old", "Database\Database_old.dbproj", "{67CBC824-A49E-4E9B-A947-360F3DFE65C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeTracker.API", "EyeTracker.API\EyeTracker.API.csproj", "{73C6838B-6431-4C7F-B73C-3A6E517A80A5}"
 EndProject
