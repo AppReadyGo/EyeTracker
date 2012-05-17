@@ -1,3 +1,3 @@
-﻿CREATE SCHEMA [log]
+﻿CREATE SCHEMA [utls]
     AUTHORIZATION [dbo];
 

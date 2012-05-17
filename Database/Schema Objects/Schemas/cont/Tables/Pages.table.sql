@@ -1,7 +1,8 @@
-﻿CREATE TABLE [dbo].[ContentPages] (
+﻿CREATE TABLE [cont].[Pages] (
     [ID]      INT            IDENTITY (1, 1) NOT NULL,
+    [PageTypeID]     TINYINT       NOT NULL,
     [Title]   NVARCHAR (50)  NOT NULL,
-    [Content] NVARCHAR (255) NOT NULL,
+    [Content] NVARCHAR (MAX) NOT NULL,
     [Path]    NVARCHAR (255) NOT NULL,
     PRIMARY KEY CLUSTERED ([ID] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );

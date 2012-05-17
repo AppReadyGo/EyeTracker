@@ -139,28 +139,32 @@
     <Folder Include="Schema Objects\Schemas\log\Views\Indexes\" />
     <Folder Include="Schema Objects\Schemas\log\Views\Triggers\" />
     <Folder Include="Schema Objects\Schemas\log\Views\Statistics\" />
-    <Folder Include="Schema Objects\Schemas\Utils\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Defaults\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Functions\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Rules\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Stored Procedures\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Types\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Types\User Defined Data Types\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Types\User Defined Types CLR\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Types\User Defined Table Types\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Programmability\Types\XML Schema Collections\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Synonyms\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Tables\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Tables\Constraints\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Tables\Indexes\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Tables\Keys\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Tables\Triggers\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Tables\Statistics\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Views\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Views\Indexes\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Views\Triggers\" />
-    <Folder Include="Schema Objects\Schemas\Utils\Views\Statistics\" />
+    <Folder Include="Schema Objects\Schemas\utls" />
+    <Folder Include="Schema Objects\Schemas\utls\Programmability" />
+    <Folder Include="Schema Objects\Schemas\utls\Programmability\Defaults" />
+    <Folder Include="Schema Objects\Schemas\utls\Programmability\Functions" />
+    <Folder Include="Schema Objects\Schemas\utls\Programmability\Rules" />
+    <Folder Include="Schema Objects\Schemas\utls\Programmability\Stored Procedures" />
+    <Folder Include="Schema Objects\Schemas\utls\Programmability\Types" />
+    <Folder Include="Schema Objects\Schemas\utls\Programmability\Types\User Defined Data Types" />
+    <Folder Include="Schema Objects\Schemas\utls\Programmability\Types\User Defined Types CLR" />
+    <Folder Include="Schema Objects\Schemas\utls\Programmability\Types\User Defined Table Types" />
+    <Folder Include="Schema Objects\Schemas\utls\Programmability\Types\XML Schema Collections" />
+    <Folder Include="Schema Objects\Schemas\utls\Synonyms" />
+    <Folder Include="Schema Objects\Schemas\utls\Tables" />
+    <Folder Include="Schema Objects\Schemas\utls\Tables\Constraints" />
+    <Folder Include="Schema Objects\Schemas\utls\Tables\Indexes" />
+    <Folder Include="Schema Objects\Schemas\utls\Tables\Keys" />
+    <Folder Include="Schema Objects\Schemas\utls\Tables\Triggers" />
+    <Folder Include="Schema Objects\Schemas\utls\Tables\Statistics" />
+    <Folder Include="Schema Objects\Schemas\utls\Views" />
+    <Folder Include="Schema Objects\Schemas\utls\Views\Indexes" />
+    <Folder Include="Schema Objects\Schemas\utls\Views\Triggers" />
+    <Folder Include="Schema Objects\Schemas\utls\Views\Statistics" />
+    <Folder Include="Schema Objects\Schemas\usr" />
+    <Folder Include="Schema Objects\Schemas\cont" />
+    <Folder Include="Schema Objects\Schemas\usr\Tables" />
+    <Folder Include="Schema Objects\Schemas\cont\Tables" />
   </ItemGroup>
   <ItemGroup>
     <PropertiesFile Include="Properties\Database.sqlsettings">
@@ -231,30 +235,6 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FKF59F78EC7A320EF8.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_Applications_Index.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_Users_Index.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_Users_Index2.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_Paths_index.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_Roles_index1.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_Membership_index.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_PersonalizationPerUser_index1.index.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\aspnet_PersonalizationPerUser_ncindex2.index.sql">
-      <SubType>Code</SubType>
-    </Build>
     <Build Include="Schema Objects\Schemas\log\Tables\Keys\PK_Log.pkey.sql">
       <SubType>Code</SubType>
     </Build>
@@ -292,7 +272,7 @@
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\Utils\Programmability\Stored Procedures\CreateBinaryInserts.proc.sql">
+    <Build Include="Schema Objects\Schemas\utls\Programmability\Stored Procedures\CreateBinaryInserts.proc.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\aspnet_Membership_UnlockUser.proc.sql">
@@ -499,19 +479,7 @@
       <SubType>Code</SubType>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Database.rolememberships.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Database Level Objects\Security\Users\mobillify_prod.user.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_WebEvent_Events.table.sql">
-      <SubType>Code</SubType>
-    </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Application.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_Applications.table.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Browser.table.sql">
@@ -523,22 +491,7 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\ClickEvent.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_Users.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Content.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_Paths.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\ContentPages.table.sql">
-      <SubType>Code</SubType>
-    </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Countries.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_Roles.table.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Language.table.sql">
@@ -550,34 +503,19 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\PageView.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_Membership.table.sql">
-      <SubType>Code</SubType>
-    </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Portfolio.table.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Screen.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_PersonalizationAllUsers.table.sql">
-      <SubType>Code</SubType>
-    </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\ViewPart.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_PersonalizationPerUser.table.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\ViewPartEvent.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_Profile.table.sql">
-      <SubType>Code</SubType>
-    </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\VisitEvent.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_UsersInRoles.table.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\log\Tables\Log.table.sql">
@@ -598,9 +536,6 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\SessionInfoEvent.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\aspnet_SchemaVersions.table.sql">
-      <SubType>Code</SubType>
-    </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\AccountProfiler.table.sql">
       <SubType>Code</SubType>
     </Build>
@@ -610,10 +545,31 @@
     <Build Include="Schema Objects\Database Level Objects\Security\Schemas\log.schema.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\mobillify_prod.schema.sql">
+    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\utls.schema.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\Utils.schema.sql">
+    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\usr.schema.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\cont.schema.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\usr\Tables\Users.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\usr\Tables\StaffRoles.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\usr\Tables\UserStaffRoles.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\cont\Tables\Pages.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\cont\Tables\Items.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\cont\Tables\Emails.table.sql">
       <SubType>Code</SubType>
     </Build>
   </ItemGroup>

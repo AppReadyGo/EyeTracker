@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Content] (
+﻿CREATE TABLE [cont].[Items] (
     [ID]     INT            IDENTITY (1, 1) NOT NULL,
     [Key]    NVARCHAR (50)  NOT NULL,
     [SubKey] NVARCHAR (50)  NOT NULL,
