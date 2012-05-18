@@ -46,7 +46,7 @@ namespace EyeTracker.Service.Tester
 
                 var mc = GetShortPackage();
 
-                SendRequest(mc);
+                txtBlkServiceStatus.Text = SendRequest(mc).ToString();
             }
             catch (Exception ex)
             {
@@ -69,7 +69,7 @@ namespace EyeTracker.Service.Tester
 
                 var mc = GetLongPackage(100);
 
-                SendRequest(mc);
+                txtBlkServiceStatus.Text = SendRequest(mc).ToString();
             }
             catch (Exception ex)
             {
@@ -88,7 +88,7 @@ namespace EyeTracker.Service.Tester
             {
                 ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
 
-                CheckStatus();
+                txtBlkServiceStatus.Text =  CheckStatus();
             }
             catch (Exception ex)
             {
@@ -97,6 +97,23 @@ namespace EyeTracker.Service.Tester
             }
         }
 
+
+        private void btn_Save_Single_Pack(object sender, RoutedEventArgs e)
+        {
+            var mc = GetShortPackage();
+            string package = Serialize<JsonPackage>(mc);
+            
+            using (StreamWriter outfile =
+            new StreamWriter("SinglePackageTestData.txt"))
+            {
+                outfile.Write(package);
+            }
+        }
+
+        private void btn_Save_Large_Chunk(object sender, RoutedEventArgs e)
+        {
+
+        }
 
       
 
@@ -139,35 +156,47 @@ namespace EyeTracker.Service.Tester
 
 
  
-        private void SendRequest(JsonPackage mc)
+        private bool SendRequest(JsonPackage mc)
         {
-            string package = Serialize<JsonPackage>(mc);
-            
-            textBlock1.Text = package;
-            MemoryStream streamQ2 = new MemoryStream();
-            DataContractJsonSerializer serializer2 = new DataContractJsonSerializer(typeof(String));
-            serializer2.WriteObject(streamQ2, package);
-            var arrayBytes = streamQ2.ToArray();
-            
 
-            string requestUrl = string.Format("{0}{1}", ServiceUrl, SubmitService);
-            WebRequest request = WebRequest.Create(requestUrl);
-            request.Method = "POST";
-            request.ContentType = "application/json";
-            request.ContentLength = arrayBytes.Length;
+            bool result = false;
 
-            request.GetRequestStream().Write(arrayBytes, 0, arrayBytes.Length);
-            request.GetRequestStream().Close();
-
-            // Get response  
-            using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+            try
             {
-                using (Stream stream = response.GetResponseStream())
+                string package = Serialize<JsonPackage>(mc);
+                txtxBlkServiceResponse.Text = package;
+                MemoryStream streamQ2 = new MemoryStream();
+                DataContractJsonSerializer serializer2 = new DataContractJsonSerializer(typeof(String));
+                serializer2.WriteObject(streamQ2, package);
+                var arrayBytes = streamQ2.ToArray();
+
+
+                string requestUrl = string.Format("{0}{1}", ServiceUrl, SubmitService);
+                WebRequest request = WebRequest.Create(requestUrl);
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                request.ContentLength = arrayBytes.Length;
+
+                request.GetRequestStream().Write(arrayBytes, 0, arrayBytes.Length);
+                request.GetRequestStream().Close();
+
+                // Get response  
+                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
                 {
-                    DataContractJsonSerializer dcs = new DataContractJsonSerializer(typeof(bool));
-                    bool result = (bool)dcs.ReadObject(stream);
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        DataContractJsonSerializer dcs = new DataContractJsonSerializer(typeof(bool));
+                        result = (bool)dcs.ReadObject(stream);
+                    }
                 }
+
             }
+            catch (Exception ex)
+            { 
+                
+            }
+
+            return result;
         }
 
         private static string Serialize<T>(T obj)
@@ -333,10 +362,7 @@ namespace EyeTracker.Service.Tester
         private string StatusService { get; set; }
         #endregion Private members 
 
-        private void button2_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
 
        
 
