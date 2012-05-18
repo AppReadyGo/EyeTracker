@@ -5,7 +5,7 @@
     <Grid Height="388" Width="371">
         <Button Content="Single pack" Height="46" HorizontalAlignment="Left" Margin="12,252,0,0" Name="btn_single_point" VerticalAlignment="Top" Width="100" Click="btn_single_point_Click" />
         <Button Content="Large chunk" Height="46" HorizontalAlignment="Left" Margin="135,252,0,0" Name="btn_large_chunk" VerticalAlignment="Top" Width="101" Click="btn_large_chunk_Click" />
-        <Button Content="Status" HorizontalAlignment="Right" Margin="0,252,12,131" Name="button2" Width="100" Click="btn_Check_status" />
+        <Button Content="Status" HorizontalAlignment="Right" Margin="0,252,12,90" Name="button2" Width="100" Click="btn_Check_status" />
         <TextBlock Height="41" HorizontalAlignment="Left" Margin="12,124,0,0" Name="txtxBlkServiceResponse"  VerticalAlignment="Top" Width="347" TextWrapping="Wrap" />
         <Label Content="Service Response" Height="28" HorizontalAlignment="Left" Margin="12,90,0,0" Name="label1" VerticalAlignment="Top" Width="123" />
         <ComboBox Height="30" HorizontalAlignment="Left" Margin="86,192,0,0" Name="cb" VerticalAlignment="Top" Width="167" >
