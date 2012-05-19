@@ -218,7 +218,7 @@ namespace EyeTracker.Service.Tester
         private JsonPackage GetLongPackage(int size)
         {
             JsonPackage objJP = new JsonPackage();
-            objJP.ClientKey = "123";
+            objJP.ClientKey = "123" + new Random().Next(1, 5);
             objJP.ScreenHeight = SCREEN_HEIGHT;
             objJP.ScreenWidth = SCREEN_WIDTH;
             objJP.SessionsInfo = GetSessionInfo(size);
@@ -229,7 +229,7 @@ namespace EyeTracker.Service.Tester
         private JsonPackage GetShortPackage()
         {
             JsonPackage objJP = new JsonPackage();
-            objJP.ClientKey = "123";
+            objJP.ClientKey = "123" + new Random().Next(1, 5);
             objJP.ScreenHeight = SCREEN_HEIGHT;
             objJP.ScreenWidth = SCREEN_WIDTH;
             objJP.SessionsInfo = new JsonSessionInfo[1];
@@ -242,8 +242,8 @@ namespace EyeTracker.Service.Tester
             dtStart = DateTime.Now.AddSeconds(-30);
             dtEnd = DateTime.Now;
 
-            objJP.SessionsInfo[0].SessionStartDate = dtStart.ToString();
-            objJP.SessionsInfo[0].SessionCloseDate = dtEnd.ToString();
+            objJP.SessionsInfo[0].SessionStartDate = dtStart.ToString("R");
+            objJP.SessionsInfo[0].SessionCloseDate = dtEnd.ToString("R");
             objJP.SessionsInfo[0].TouchDetails = GetTouchDetails(dtStart, dtEnd);
             objJP.SessionsInfo[0].ScrollDetails = GetScrollDetails(objJP.SessionsInfo[0].TouchDetails[0], objJP.SessionsInfo[0].TouchDetails[2]);
             objJP.SessionsInfo[0].ViewAreaDetails = GetViewAreaDetails(dtStart, dtEnd);
@@ -266,13 +266,13 @@ namespace EyeTracker.Service.Tester
                 dtStart = DateTime.Now.AddSeconds(-200 + i);
                 dtEnd = DateTime.Now.AddSeconds(-200 + i + 2);
 
-                colSessions[i].SessionStartDate = dtStart.ToString();
+                colSessions[i].SessionStartDate = dtStart.ToString("R");
 
                 colSessions[i].TouchDetails = GetTouchDetails(dtStart, dtEnd);
                 colSessions[i].ScrollDetails = GetScrollDetails(colSessions[i].TouchDetails[0], colSessions[i].TouchDetails[2]);
                 colSessions[i].ViewAreaDetails = GetViewAreaDetails(dtStart, dtEnd);
 
-                colSessions[i].SessionCloseDate = dtEnd.ToString();
+                colSessions[i].SessionCloseDate = dtEnd.ToString("R");
             }
 
             return colSessions;
@@ -297,8 +297,8 @@ namespace EyeTracker.Service.Tester
             objViewAreaDetail.CoordX = r.Next(0, SCREEN_WIDTH);
             objViewAreaDetail.CoordY = r.Next(0, SCREEN_HEIGHT);
 
-            objViewAreaDetail.StartDate = dtFrom.AddMilliseconds(10).ToString();
-            objViewAreaDetail.FinishDate = dtTo.AddMilliseconds(-10).ToString();
+            objViewAreaDetail.StartDate = dtFrom.AddMilliseconds(10).ToString("R");
+            objViewAreaDetail.FinishDate = dtTo.AddMilliseconds(-10).ToString("R");
 
             objViewAreaDetail.Orientation = 7;
 
@@ -322,7 +322,7 @@ namespace EyeTracker.Service.Tester
             JsonTouchDetails objTD = new JsonTouchDetails();
             objTD.ClientX = r.Next(0, SCREEN_WIDTH);
             objTD.ClientY = r.Next(0, SCREEN_HEIGHT);
-            objTD.Date = dtFrom.AddMilliseconds((dtTo - dtFrom).TotalMilliseconds / 2).ToString();   // DateTime.Now.AddSeconds(10).ToString();   
+            objTD.Date = dtFrom.AddMilliseconds((dtTo - dtFrom).TotalMilliseconds / 2).ToString("R");   // DateTime.Now.AddSeconds(10).ToString();   
             objTD.Press = r.Next(1, 100);
             objTD.Orientation = 7;
             return objTD;
