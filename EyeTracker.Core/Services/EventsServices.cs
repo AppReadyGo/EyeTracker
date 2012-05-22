@@ -132,7 +132,7 @@ namespace EyeTracker.Core.Services
 
         public OperationResult HandlePackageEvent(IPackageEvent packageEvent)
         {
-            Contract.Requires<NullReferenceException>(packageEvent is PackageEvent);
+            //Contract.Requires<NullReferenceException>(packageEvent is PackageEvent);
             OperationResult opResult = null;
             try
             {

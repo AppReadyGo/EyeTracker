@@ -80,7 +80,7 @@ namespace EyeTracker.Domain.Repositories
 
         public void AddPackageEvent(IPackageEvent packageEvent)
         {
-            Contract.Requires<ArgumentException>(packageEvent is PackageEvent);
+            //Contract.Requires<ArgumentException>(packageEvent is PackageEvent);
             try
             {
                 using (ISession session = NHibernateHelper.OpenSession())

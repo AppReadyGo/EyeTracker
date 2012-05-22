@@ -42,7 +42,7 @@ namespace EyeTracker.Core.Services
 
         public DataRepositoryServices(IDataRepository dataRepository)
         {
-            Contract.Requires<NullReferenceException>(dataRepository != null);
+            //Contract.Requires<NullReferenceException>(dataRepository != null);
             Init(dataRepository);
         }
 
@@ -59,7 +59,7 @@ namespace EyeTracker.Core.Services
 
         public OperationResult HandlePackageEvent(IPackageEvent packageEvent)
         {
-            Contract.Requires<NullReferenceException>(packageEvent is PackageEvent);
+            //Contract.Requires<NullReferenceException>(packageEvent is PackageEvent);
             OperationResult objResult = null;
 
             try
