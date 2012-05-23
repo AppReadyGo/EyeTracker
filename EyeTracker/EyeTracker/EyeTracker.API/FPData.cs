@@ -10,7 +10,11 @@ namespace EyeTracker.API
     [DataContract()]
     public class FPData
     {
-        [DataMember()]
-        public string InstanceValue { get; set; }
+        [DataMember(Name="val")]
+        public System.String val 
+        { 
+            get; 
+            set; 
+        }
     }
 }
