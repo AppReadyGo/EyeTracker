@@ -51,19 +51,19 @@ namespace EyeTracker.API
         /// <returns></returns>
         [WebInvoke(UriTemplate = "submit", Method = "POST", RequestFormat = WebMessageFormat.Json)]
         [Description("Receives the package and stores it in DB")]
-        public bool SubmitPackage(string instance)
+        public bool SubmitPackage(FPData instance)
         {
-            log.WriteInformation("WriteVerbose: SubmitStatus");
+            log.WriteInformation("Info: Status arrived");
 
             try
             {
-                if (String.IsNullOrWhiteSpace(instance))
+                if (null == instance || String.IsNullOrWhiteSpace(instance.val))
                 {
-                    log.WriteWarning("SubmitPackage got empty string");
+                    log.WriteWarning("SubmitPackage is null or the val is empty");
                     return false;
                 }
  
-                JsonPackage package = Deserialize<JsonPackage>(instance);
+                JsonPackage package = Deserialize<JsonPackage>(instance.val);
                 if (package == null)
                 {
                     //Console.WriteLine("PROBLEMMMMMMMMM");
@@ -90,54 +90,6 @@ namespace EyeTracker.API
                 return false;
             }
         }
-
-
-        /// <summary>
-        /// Submit Json Package
-        /// </summary>
-        /// <param name="instance"></param>
-        /// <returns></returns>
-        [WebInvoke(UriTemplate = "data", Method = "POST", RequestFormat = WebMessageFormat.Json)]
-        [Description("Receives the package and stores it in DB")]
-        public bool SubmitData(FPData instanceVal)
-        {
-
-            log.WriteInformation("WriteVerbose: SubmitData");
-
-            try
-            {
-
-                string instance = instanceVal.InstanceValue;
-
-                JsonPackage package = Deserialize<JsonPackage>(instance);
-                if (package == null)
-                {
-                    //Console.WriteLine("PROBLEMMMMMMMMM");
-                    log.WriteError("SubmitPackage got smth that can't be deserialized");
-                    //ApplicationLogging.WriteError(this.GetType(), "SubmitPackage : problem with JsonPackage");
-                    return false;
-                }
-
-                PackageEvent objParserResult = EventParser.Parse(package) as PackageEvent;
-                EventsServices objEventSvc = new EventsServices("EyeTracker.Domain", "EyeTracker.Domain.Repositories.EventsRepository");
-                OperationResult objSaveResult = objEventSvc.HandlePackageEvent(objParserResult);
-                log.WriteVerbose("return result is " + !objSaveResult.HasError);
-
-                #region TEMP
-                DataRepositoryServices objDataRepositorySvc = new DataRepositoryServices("EyeTracker.Domain", "EyeTracker.Domain.Repositories.DataRepository");
-                objDataRepositorySvc.HandlePackageEvent(objParserResult);
-                #endregion
-
-                return !objSaveResult.HasError;
-            }
-            catch (Exception ex)
-            {
-                log.WriteError(ex, "Error in SubmitPackage");
-                return false;
-            }
-        }
-
-
 
         /// <summary>
         /// JSON object deserialization
