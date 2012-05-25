@@ -6,7 +6,7 @@ using NHibernate.Mapping.ByCode.Conformist;
 
 namespace EyeTracker.Domain.Model.BackOffice
 {
-
+    /*
     public class SystemApplicationMapping : ClassMapping<SystemApplication>
     {
         public SystemApplicationMapping()
@@ -31,5 +31,6 @@ namespace EyeTracker.Domain.Model.BackOffice
             SchemaAction(NHibernate.Mapping.ByCode.SchemaAction.None);
         }
     }
+    */
 
 }

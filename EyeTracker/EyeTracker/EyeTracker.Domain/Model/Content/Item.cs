@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EyeTracker.Domain.Model
+namespace EyeTracker.Domain.Model.Content
 {
-    public class ContentItem
+    public class Item
     {
         public virtual int Id { get; protected set; }
         public virtual string Key { get; protected set; }
         public virtual string SubKey { get; protected set; }
         public virtual string Value { get; protected set; }
 
-        public ContentItem()
+        public Item()
         {
         }
 
-        public ContentItem(string key, string subKey, string value)
+        public Item(string key, string subKey, string value)
         {
             this.Key = key;
             this.SubKey = subKey;

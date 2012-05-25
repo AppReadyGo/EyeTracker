@@ -20,7 +20,7 @@ namespace EyeTracker.Domain.Mapping
             Property(x => x.CreateDate, map => map.NotNullable(true));
             ManyToOne(p => p.User, map =>
             {
-                map.Column("UserId");
+                map.Column("ID");
                 map.NotNullable(true);
             });
             Property(x => x.TimeZone, map => map.NotNullable(true));

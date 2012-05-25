@@ -88,8 +88,8 @@ namespace EyeTracker.Controllers
             */
             try
             {
-                var model = new MailGenerator(this.ControllerContext, urlPart1, urlPart2, urlPart3).Model;
-                return View("Mails/" + model.Template.ToString(), model);
+                //var model = new MailGenerator(this.ControllerContext, urlPart1, urlPart2, urlPart3).Model;
+                return null;// View("Mails/" + model.Template.ToString(), model);
             }
             catch
             {

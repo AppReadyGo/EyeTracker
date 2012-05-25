@@ -5,6 +5,7 @@ using System.Text;
 using EyeTracker.Domain.Model.BackOffice;
 using Iesi.Collections.Generic;
 using NHibernate.Collection.Generic;
+using EyeTracker.Domain.Model.Users;
 
 namespace EyeTracker.Domain.Model
 {
@@ -16,7 +17,7 @@ namespace EyeTracker.Domain.Model
         public virtual string Description { get; protected set; }
         public virtual int TimeZone { get; protected set; }
         public virtual DateTime CreateDate { get; protected set; }
-        public virtual SystemUser User { get; protected set; }
+        public virtual User User { get; protected set; }
         public virtual IEnumerable<Application> Applications { get { return applications; } }
 
         public Portfolio()
@@ -24,7 +25,7 @@ namespace EyeTracker.Domain.Model
             CreateDate = DateTime.UtcNow;
         }
 
-        public Portfolio(string description, int timeZone, SystemUser user)
+        public Portfolio(string description, int timeZone, User user)
             : this()
         {
             this.Description = description;

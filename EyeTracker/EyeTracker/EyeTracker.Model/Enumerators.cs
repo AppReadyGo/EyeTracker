@@ -12,6 +12,18 @@ namespace EyeTracker.Common
         Error
     }
 
+    [Flags]
+    public enum StaffRole
+    {
+        Administrator = 1
+    }
+
+    public enum UserType : byte
+    {
+        Staff = 1,
+        Member
+    }
+
     public enum DataGrouping
     {
         Minute,

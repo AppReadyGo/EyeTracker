@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EyeTracker.Domain.Model
+namespace EyeTracker.Domain.Model.Content
 {
-    public class ContentPage
+    public enum PageType
+    {
+        Base
+    }
+
+    public abstract class Page
     {
         public virtual int Id { get; protected set; }
         public virtual string Title { get; protected set; }
         public virtual string Content { get; protected set; }
         public virtual string Path { get; set; }
+        public abstract PageType Type { get; }
 
-        public ContentPage()
+        public Page()
         {
         }
 
-        public ContentPage(string title, string content, string path)
+        public Page(string title, string content, string path)
         {
             this.Title = title;
             this.Content = content;
@@ -28,6 +34,14 @@ namespace EyeTracker.Domain.Model
             this.Title = title;
             this.Content = content;
             this.Path = path;
+        }
+    }
+
+    public class BasePage : Page
+    {
+        public override PageType Type
+        {
+            get { return PageType.Base; }
         }
     }
 }

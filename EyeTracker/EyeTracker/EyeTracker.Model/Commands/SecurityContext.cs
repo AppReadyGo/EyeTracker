@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Security;
+using System.Web;
 
 namespace EyeTracker.Common.Commands
 {
@@ -13,9 +14,9 @@ namespace EyeTracker.Common.Commands
 
     public class CurrentUserDetails
     {
-        public Guid Id { get; private set; }
+        public int Id { get; private set; }
 
-        public CurrentUserDetails(Guid id)
+        public CurrentUserDetails(int id)
         {
             this.Id = id;
         }
@@ -27,10 +28,9 @@ namespace EyeTracker.Common.Commands
 
         public SecurityContext()
         {
-            MembershipUser user = Membership.GetUser();
-            if (user != null)
+            if (HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                this.CurrentUser = new CurrentUserDetails(new Guid(user.ProviderUserKey.ToString()));
+                this.CurrentUser = new CurrentUserDetails(int.Parse(HttpContext.Current.User.Identity.Name));
             }
         }
     }

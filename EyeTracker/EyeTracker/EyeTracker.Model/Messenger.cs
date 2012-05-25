@@ -18,14 +18,20 @@ namespace EyeTracker.Common
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
 
-        public static void SendEmail(string from, IEnumerable<string> toList, string subject, string body)
+
+        public static void SendEmail(IEnumerable<string> to, string subject, string body, IEnumerable<string> cc = null, IEnumerable<string> bcc = null)
+        {
+            SendEmail(null, to, subject, body, cc, bcc);
+        }
+
+        public static void SendEmail(string from, IEnumerable<string> to, string subject, string body, IEnumerable<string> cc = null, IEnumerable<string> bcc = null)
         {
             try
             {
                 string fromAccount = string.IsNullOrEmpty(from) ? (string.IsNullOrEmpty(EmailSettings.Settings.Email.From) ? EmailSettings.Settings.Smtp.UserName : EmailSettings.Settings.Email.From) : from;
                 if (!EmailSettings.Settings.Enabled)
                 {
-                    log.WriteVerbose("The email was not sended, Messenger is disabled. From:{0} To:{1} Subject:{2}, Body:{3}", fromAccount, string.Join(";", toList.ToArray()), subject, body);
+                    log.WriteVerbose("The email was not sended, Messenger is disabled. From:{0} To:{1} Subject:{2}, Body:{3}", fromAccount, string.Join(";", to.ToArray()), subject, body);
                     return;
                 }
 
@@ -33,11 +39,11 @@ namespace EyeTracker.Common
                 if (EmailSettings.Settings.Forward && !string.IsNullOrEmpty(EmailSettings.Settings.Email.Forward))
                 {
                     mail.To.Add(EmailSettings.Settings.Email.Forward);
-                    body = string.Format("The email originally sent to: <br>{0} <br> Body: <br>{1}", string.Join(";", toList.ToArray()), body);
+                    body = string.Format("The email originally sent to: <br>{0} <br> Body: <br>{1}", string.Join(";", to.ToArray()), body);
                 }
                 else
                 {
-                    foreach (string curTo in toList)
+                    foreach (string curTo in to)
                     {
                         mail.To.Add(curTo);
                     }
@@ -60,24 +66,24 @@ namespace EyeTracker.Common
 
                 //TODO: replace {#}imgageId|imagePath{#} to cid:imageId in body
                 //Get from body images urls
-                var imagesPathes = new Dictionary<string, string>();
-                foreach (var item in imagesPathes)
-                {
-                    int idx = item.Value.LastIndexOf('.');
-                    string extention = item.Value.Substring(idx + 1);
-                    string imageType = string.Empty;
-                    if (extention.Equals("png", StringComparison.OrdinalIgnoreCase))
-                        imageType = "png";
-                    else if (extention.Equals("jpg", StringComparison.OrdinalIgnoreCase))
-                        imageType = "jpeg";
-                    else if (extention.Equals("tiff", StringComparison.OrdinalIgnoreCase))
-                        imageType = "tiff";
+                //var imagesPathes = new Dictionary<string, string>();
+                //foreach (var item in imagesPathes)
+                //{
+                //    int idx = item.Value.LastIndexOf('.');
+                //    string extention = item.Value.Substring(idx + 1);
+                //    string imageType = string.Empty;
+                //    if (extention.Equals("png", StringComparison.OrdinalIgnoreCase))
+                //        imageType = "png";
+                //    else if (extention.Equals("jpg", StringComparison.OrdinalIgnoreCase))
+                //        imageType = "jpeg";
+                //    else if (extention.Equals("tiff", StringComparison.OrdinalIgnoreCase))
+                //        imageType = "tiff";
 
-                    LinkedResource imagelink = new LinkedResource(HttpContext.Current.Server.MapPath(".") + item.Value, "image/" + imageType);
-                    imagelink.ContentId = item.Key;
-                    imagelink.TransferEncoding = System.Net.Mime.TransferEncoding.Base64;
-                    htmlView.LinkedResources.Add(imagelink);
-                }
+                //    LinkedResource imagelink = new LinkedResource(HttpContext.Current.Server.MapPath(".") + item.Value, "image/" + imageType);
+                //    imagelink.ContentId = item.Key;
+                //    imagelink.TransferEncoding = System.Net.Mime.TransferEncoding.Base64;
+                //    htmlView.LinkedResources.Add(imagelink);
+                //}
                 mail.AlternateViews.Add(htmlView);
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = EmailSettings.Settings.Smtp.Host;
@@ -89,7 +95,7 @@ namespace EyeTracker.Common
             }
             catch (Exception ex)
             {
-                log.WriteError(false, ex, "Error send email: {0}, Subject:{1}, Body:{2}", toList, subject, body);
+                log.WriteError(false, ex, "Error send email: {0}, Subject:{1}, Body:{2}", to, subject, body);
             }
         }
     }

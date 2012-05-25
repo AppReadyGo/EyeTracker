@@ -17,7 +17,7 @@ namespace EyeTracker.Domain.Mapping
             Property(x => x.Price, map => map.NotNullable(true));
             Bag(x => x.Users, map =>
             {
-                map.Key(k => k.Column("UserId"));
+                map.Key(k => k.Column("ID"));
             }, r => r.OneToMany());
         }
     }

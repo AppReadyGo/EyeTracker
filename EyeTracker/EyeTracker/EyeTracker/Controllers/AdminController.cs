@@ -50,49 +50,49 @@ namespace EyeTracker.Controllers
 
         public ActionResult Membership()
         {
-            var membership = adminService.GetMembership();
-            ViewBag.Applications = membership.Applications;
-            ViewBag.Roles = membership.Roles;
-            ViewBag.Users = membership.Users;
+            //var membership = adminService.GetMembership();
+            //ViewBag.Applications = membership.Applications;
+            //ViewBag.Roles = membership.Roles;
+            //ViewBag.Users = membership.Users;
             return View(new AdminModel());
         }
 
         public ActionResult UserEdit(Guid id)
         {
-            SystemUser curUser = adminService.Get<SystemUser>(id);
-            var userModel = new UserModel()
-            {
-                Id = curUser.Id,
-                Name = curUser.Name,
-                Email = curUser.Membership.Email,
-                Roles = curUser.Roles.Select(curItem => curItem.Id).ToList()
-            };
-            IList<SystemRole> roles = adminService.GetAll<SystemRole>();
-            ViewBag.Roles = roles;
-            return View(userModel);
+            //SystemUser curUser = adminService.Get<SystemUser>(id);
+            //var userModel = new UserModel()
+            //{
+            //    Id = curUser.Id,
+            //    Name = curUser.Name,
+            //    Email = curUser.Membership.Email,
+            //    Roles = curUser.Roles.Select(curItem => curItem.Id).ToList()
+            //};
+            //IList<SystemRole> roles = adminService.GetAll<SystemRole>();
+            //ViewBag.Roles = roles;
+            return null;// View(userModel);
         }
 
         [HttpPost]
         public ActionResult UserEdit(UserModel userModel)
         {
-            IList<SystemRole> roles = adminService.GetAll<SystemRole>();
-            ViewBag.Roles = roles;
-            if (ModelState.IsValid)
-            {
-                var user = adminService.Get<SystemUser>(userModel.Id);
-                user.Name = userModel.Name;
-                user.Membership.Email = userModel.Email;
-                if (userModel.Roles != null)
-                {
-                    user.Roles = roles.Where(curItem => userModel.Roles.Contains(curItem.Id)).ToList();
-                }
-                else
-                {
-                    user.Roles = null;
-                }
-                adminService.Edit<SystemUser>(user);
-                return RedirectToAction("Membership");
-            }
+            //IList<SystemRole> roles = adminService.GetAll<SystemRole>();
+            //ViewBag.Roles = roles;
+            //if (ModelState.IsValid)
+            //{
+            //    var user = adminService.Get<SystemUser>(userModel.Id);
+            //    user.Name = userModel.Name;
+            //    user.Membership.Email = userModel.Email;
+            //    if (userModel.Roles != null)
+            //    {
+            //        user.Roles = roles.Where(curItem => userModel.Roles.Contains(curItem.Id)).ToList();
+            //    }
+            //    else
+            //    {
+            //        user.Roles = null;
+            //    }
+            //    adminService.Edit<SystemUser>(user);
+            //    return RedirectToAction("Membership");
+            //}
             return View(userModel);
         }
 

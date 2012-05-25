@@ -9,6 +9,7 @@ using EyeTracker.Domain.Model.BackOffice;
 
 namespace EyeTracker.Domain.Mapping.BackOffice
 {
+    /*
     public class SystemRoleMapping : ClassMapping<SystemRole>
     {
         public SystemRoleMapping()
@@ -35,4 +36,5 @@ namespace EyeTracker.Domain.Mapping.BackOffice
             SchemaAction(NHibernate.Mapping.ByCode.SchemaAction.None);
         }
     }
+     * */
 }

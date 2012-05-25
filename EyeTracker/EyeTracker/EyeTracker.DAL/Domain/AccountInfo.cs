@@ -9,7 +9,7 @@ namespace EyeTracker.DAL.Domain
     {
         public int Id { get; set; }
 
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
 
         public string FirstName { get; set; }
 

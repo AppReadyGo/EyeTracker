@@ -7,7 +7,7 @@ using EyeTracker.Domain.Model.BackOffice;
 using NHibernate.Mapping.ByCode;
 
 namespace EyeTracker.Domain.Mapping.BackOffice
-{
+{/*
     public class SystemMembershipMapping : ClassMapping<SystemMembership>
     {
         public SystemMembershipMapping()
@@ -27,4 +27,5 @@ namespace EyeTracker.Domain.Mapping.BackOffice
             SchemaAction(NHibernate.Mapping.ByCode.SchemaAction.None);
         }
     }
+  * */
 }

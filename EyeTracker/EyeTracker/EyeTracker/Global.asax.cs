@@ -59,9 +59,15 @@ namespace EyeTracker
             );
 
             routes.MapRoute(
-                "Account", 
-                "Account/{action}", 
-                new { controller = "Account", action = "LogOn" } 
+                "Account",
+                "Account/{action}",
+                new { controller = "Account", action = "LogOn" }
+            );
+
+            routes.MapRoute(
+                "Activation",
+                "Account/{action}/{key}",
+                new { controller = "Account", action = "Activate" }
             );
 
             routes.MapRoute(

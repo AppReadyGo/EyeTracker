@@ -72,6 +72,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,7 +88,13 @@
     <Compile Include="Commands\RemoveContentItemCommand.cs" />
     <Compile Include="Commands\SecurityContext.cs" />
     <Compile Include="Commands\UpdateContentItemCommand.cs" />
+    <Compile Include="Commands\Users\ActivateUserCommand.cs" />
+    <Compile Include="Commands\Users\CreateUserCommand.cs" />
+    <Compile Include="Commands\Users\ResetPasswordCommand.cs" />
+    <Compile Include="Commands\Users\UnsubscribeCommand.cs" />
     <Compile Include="Commands\ValidationResult.cs" />
+    <Compile Include="Encryption.cs" />
+    <Compile Include="EncryptionSettings.cs" />
     <Compile Include="Enumerators.cs" />
     <Compile Include="ErrorNumbers.cs" />
     <Compile Include="IValidationContext.cs" />
@@ -110,6 +117,8 @@
     <Compile Include="Queries\GetKeyContentQuery.cs" />
     <Compile Include="Queries\GetPageContent.cs" />
     <Compile Include="Queries\IQuery.cs" />
+    <Compile Include="Queries\Users\GetUserSecuredDetailsByEmailQuery.cs" />
+    <Compile Include="Queries\Users\GetUserDetailsByEmailQuery.cs" />
     <Compile Include="QueryResults\Admin\LogDataResult.cs" />
     <Compile Include="QueryResults\Admin\LogResult.cs" />
     <Compile Include="QueryResults\Analytics\ApplicationResult.cs" />
@@ -121,6 +130,8 @@
     <Compile Include="QueryResults\Analytics\PortfoliosDataResult.cs" />
     <Compile Include="QueryResults\Analytics\UsageViewDataResult.cs" />
     <Compile Include="QueryResults\PageContentResult.cs" />
+    <Compile Include="QueryResults\Users\UserSecureDetailsResult.cs" />
+    <Compile Include="QueryResults\Users\UserDetailsResult.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

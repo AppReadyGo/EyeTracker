@@ -1,8 +1,8 @@
-﻿using EyeTracker.Domain.Model.BackOffice;
+﻿using EyeTracker.Domain.Model.Logs;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
 
-namespace EyeTracker.Domain.Mapping.BackOffice
+namespace EyeTracker.Domain.Mapping.Logs
 {
     public class CategoryMapping : ClassMapping<Category>
     {

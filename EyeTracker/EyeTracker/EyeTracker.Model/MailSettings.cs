@@ -13,10 +13,7 @@ namespace EyeTracker.Common
 
         public static EmailSettings Settings
         {
-            get
-            {
-                return settings;
-            }
+            get { return settings; }
         }
 
         [ConfigurationProperty("enabled", IsRequired = true)]
@@ -36,13 +33,19 @@ namespace EyeTracker.Common
         [ConfigurationProperty("smtp")]
         public SmtpElement Smtp
         {
-            get{ return (SmtpElement)base["smtp"]; }
+            get { return (SmtpElement)base["smtp"]; }
         }
 
         [ConfigurationProperty("email")]
         public EmailElement Email
         {
             get { return (EmailElement)base["email"]; }
+        }
+
+        [ConfigurationProperty("linksExpire")]
+        public LinksExpireElement LinksExpire
+        {
+            get { return (LinksExpireElement)base["linksExpire"]; }
         }
     }
 
@@ -84,6 +87,23 @@ namespace EyeTracker.Common
         }
     }
 
+    public class LinksExpireElement : ConfigurationElement
+    {
+        [ConfigurationProperty("activation", IsRequired = true)]
+        public int Activation
+        {
+            get { return (int)this["activation"]; }
+            set { this["activation"] = value; }
+        }
+
+        [ConfigurationProperty("forgotPassword", IsRequired = true)]
+        public int ForgotPassword
+        {
+            get { return (int)this["forgotPassword"]; }
+            set { this["forgotPassword"] = value; }
+        }
+    }
+
     public class EmailElement : ConfigurationElement
     {
         [ConfigurationProperty("from", IsRequired = false)]
@@ -106,6 +126,12 @@ namespace EyeTracker.Common
             get { return (string)this["fromName"]; }
             set { this["fromName"] = value; }
         }
-        
+
+        [ConfigurationProperty("contactUsEmail", IsRequired = true)]
+        public string ContactUsEmail
+        {
+            get { return (string)this["contactUsEmail"]; }
+            set { this["contactUsEmail"] = value; }
+        }
     }
 }
