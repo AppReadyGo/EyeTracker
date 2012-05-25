@@ -32,7 +32,7 @@ namespace EyeTracker.Core
     public class ObjectContainer : IObjectContainer
     {
         private static readonly object locker = new object();
-        private static ObjectContainer instance = null;
+        private static IObjectContainer instance = null;
 
         private readonly WindsorContainer container = new WindsorContainer();
         private IRepository repository;
@@ -40,7 +40,7 @@ namespace EyeTracker.Core
         private ISessionFactory sessionFactory;
         private NHibernate.Cfg.Configuration configuration;
 
-        public static ObjectContainer Instance
+        public static IObjectContainer Instance
         {
             get
             {
@@ -166,14 +166,16 @@ namespace EyeTracker.Core
             Type[] typeArgs = { command.GetType(), typeof(TResult) };
             var obj = container.Resolve(handlerTypeBluprint.MakeGenericType(typeArgs));
             MethodInfo method = obj.GetType().GetMethod("Execute");
+            var commandResult = new CommandResult<TResult>();
             using (ISession session = sessionFactory.OpenSession())
             {
-                var commandResult = new CommandResult<TResult>();
                 using (ITransaction dbTrans = session.BeginTransaction())
                 {
-                    commandResult.Validation = command.ValidatePermissions(container.Resolve<ISecurityContext>()).ToList();
-                    commandResult.Validation.Union(command.Validate(container.Resolve<IValidationContext>()));
-                    if (!commandResult.Validation.Any())
+                    var list = new List<ValidationResult>();
+                    list.AddRange(command.ValidatePermissions(container.Resolve<ISecurityContext>()));
+                    list.AddRange(command.Validate(new ValidationContext(session)));
+                    commandResult.Validation = list;
+                    if (!list.Any())
                     {
                         commandResult.Result = (TResult)method.Invoke(obj, new object[] { session, command });
                         dbTrans.Commit();

@@ -65,7 +65,7 @@ namespace EyeTracker.Core.Services
                 {
                     return new OperationResult<IList<Portfolio>>(userRes);
                 }
-                Guid userId = userRes.Value;
+                int userId = userRes.Value;
                 return new OperationResult<IList<Portfolio>>(repository.GetAll(userId));
             }
             catch (Exception exp)
