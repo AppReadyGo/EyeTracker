@@ -50,9 +50,6 @@ namespace EyeTracker.Models.Account
     [PropertiesMustMatch("Password", "ConfirmPassword", ErrorMessage = "The password and confirmation password do not match.")]
     public class RegisterModel
     {
-        [DisplayName("User name")]
-        public string UserName { get; set; }
-
         [Required]
         [DataType(DataType.EmailAddress)]
         [DisplayName("Email address")]

@@ -14,9 +14,9 @@ namespace EyeTracker.DAL
     {
         int Add(AccountInfo account);
 
-        AccountInfo Get(Guid UserId, int accId);
+        AccountInfo Get(int UserId, int accId);
 
-        ErrorNumber Remove(Guid UserId, int accId);
+        ErrorNumber Remove(int UserId, int accId);
 
         ErrorNumber Update(AccountInfo account);
     }
@@ -36,7 +36,7 @@ namespace EyeTracker.DAL
             return account.Id;
         }
 
-        public AccountInfo Get(Guid UserId, int accId)
+        public AccountInfo Get(int UserId, int accId)
         {
             AccountInfo accInfo = null;
             using (ISession session = NHibernateHelper.OpenSession())
@@ -49,7 +49,7 @@ namespace EyeTracker.DAL
             return accInfo;
         }
 
-        public ErrorNumber Remove(Guid UserId, int accId)
+        public ErrorNumber Remove(int UserId, int accId)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {

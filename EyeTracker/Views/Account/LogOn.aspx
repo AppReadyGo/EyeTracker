@@ -7,7 +7,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, EyeTracker.Models.Ac
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <div>
-<% Html.RenderPartial("LogOnForm", Model.View); %>
+<% Html.RenderPartial("Forms/LogOnForm", Model.View); %>
 </div>
 <p style="clear:both;"></p>
 </asp:Content>

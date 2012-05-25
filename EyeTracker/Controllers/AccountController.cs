@@ -13,6 +13,13 @@ using EyeTracker.DAL.Domain;
 using EyeTracker.Models.Account;
 using EyeTracker.Model.Master;
 using EyeTracker.Model;
+using EyeTracker.Core;
+using EyeTracker.Common.Commands.Users;
+using EyeTracker.Common.Mails;
+using EyeTracker.Model.Pages.Account;
+using EyeTracker.Common.Queries.Users;
+using EyeTracker.Common.Commands;
+using EyeTracker.Common;
 
 namespace EyeTracker.Controllers
 {
@@ -20,31 +27,9 @@ namespace EyeTracker.Controllers
     [HandleError]
     public class AccountController : Controller
     {
-
-        public IFormsAuthenticationService FormsService { get; set; }
-        public IMembershipService MembershipService { get; set; }
-        private IAccountService acountService = null;
-
-        public AccountController(): this(new AccountService())
-        {
-        }
-
-        public AccountController(IAccountService acountService)
-        {
-            this.acountService = acountService;
-        }
-
-        protected override void Initialize(RequestContext requestContext)
-        {
-            if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
-            if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
-
-            base.Initialize(requestContext);
-        }
-
         public ActionResult LogOn()
         {
-            return View(new ViewModelWrapper<BeforeLoginMasterModel, LogOnModel>(new BeforeLoginMasterModel(), new LogOnModel()));
+            return this.View(new LogOnModel(), BeforeLoginMasterModel.MenuItem.None);
         }
 
         [HttpPost]
@@ -52,10 +37,21 @@ namespace EyeTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (MembershipService.ValidateUser(model.UserName, model.Password))
+                var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.UserName));
+                if (securedDetails.Password != Encryption.SaltedHash(model.Password, securedDetails.PasswordSalt))
                 {
-                    FormsService.SignIn(model.UserName, model.RememberMe);
-                    if (!String.IsNullOrEmpty(returnUrl))
+                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                }
+                else if(!securedDetails.Activated)
+                {
+                    ModelState.AddModelError("", "You account is not activated, please use the link from activation email to activate your account.");
+                }
+                else
+                {
+                    // TODO: add terms and conditions
+                    FormsAuthentication.SetAuthCookie(securedDetails.Id.ToString(), model.RememberMe);
+                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
                         return Redirect(returnUrl);
                     }
@@ -64,35 +60,28 @@ namespace EyeTracker.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
-                else
-                {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                }
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(new ViewModelWrapper<BeforeLoginMasterModel, LogOnModel>(new BeforeLoginMasterModel(), model));
+            return this.View(model, BeforeLoginMasterModel.MenuItem.None);
         }
-
-        // **************************************
-        // URL: /Account/LogOff
-        // **************************************
 
         public ActionResult LogOff()
         {
-            FormsService.SignOut();
+            FormsAuthentication.SignOut();
 
             return RedirectToAction("Index", "Home");
         }
 
-        // **************************************
-        // URL: /Account/Register
-        // **************************************
-
         public ActionResult Register()
         {
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-            return View(new ViewModelWrapper<BeforeLoginMasterModel, RegisterModel>(new BeforeLoginMasterModel(), new RegisterModel()));
+            return this.View(new RegisterModel(), BeforeLoginMasterModel.MenuItem.None);
+        }
+
+        private ActionResult View<TViewModel>(TViewModel viewModel, BeforeLoginMasterModel.MenuItem selectedItem)
+        {
+            var model = new ViewModelWrapper<BeforeLoginMasterModel, TViewModel>(new BeforeLoginMasterModel(selectedItem), viewModel);
+
+            return View(model);
         }
 
         [HttpPost]
@@ -100,55 +89,115 @@ namespace EyeTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                //User name will be email
-                model.UserName = model.Email;
-                // Attempt to register the user
-                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
+                var result = ObjectContainer.Instance.Dispatch(new CreateMemberCommand(model.Email, model.Password));
 
-                if (createStatus == MembershipCreateStatus.Success)
+                if (!result.Validation.Any())
                 {
-                    FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
-
-                    //Add account information to database
-                    //var res = acountService.Add(new AccountInfo()/* { TimeZone = model.TimeZone }*/);
-                    //if (res.HasError)
-                    //{
-                    //    FormsService.SignOut();
-                    //    MembershipService.DeleteUser(model.UserName);
-                    //    ModelState.AddModelError("", "Error to register, please contact to support.");
-                    //}
-                    FormsService.SignOut();
-                    try
-                    {
-                        var mailer = new MailGenerator(this.ControllerContext, "Thank-you", null, null);
-                        mailer.Send(new string[] { model.Email });
-                    }
-                    catch
-                    {
-                    }
-                    return Redirect("/thank-you");
-                    //return RedirectToAction("Index", "Home");
+                    //Waiting for activation
+                    //FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
+                    new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
+                    return Redirect("/activation-email-sent");
                 }
                 else
                 {
-                    ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
+                    ModelState.AddModelError("", ErrorCodeToString(result.Validation));
                 }
             }
 
-            // If we got this far, something failed, redisplay form
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-            return View(new ViewModelWrapper<BeforeLoginMasterModel, RegisterModel>(new BeforeLoginMasterModel(), model));
+            return this.View(model, BeforeLoginMasterModel.MenuItem.None);
         }
 
-        // **************************************
-        // URL: /Account/ChangePassword
-        // **************************************
+        private string ErrorCodeToString(IEnumerable<ValidationResult> validations)
+        {
+            if(validations.Any(v => v.ErrorCode == ErrorCode.EmailExists))
+            {
+                return "User with the email already exists, please check your email.";
+            }
+            return "System error, please contact to administrator.";
+        }
+
+        public ActionResult Activate(string key)
+        {
+            var splitedKey = key.DecryptLow().Split(',');
+            if (DateTime.Now > DateTime.Parse(splitedKey[0]))
+            {
+                throw new Exception("Activation link expired.");
+            }
+            var result = ObjectContainer.Instance.Dispatch(new ActivateUserCommand(splitedKey[1]));
+            if (result.Validation.Any())
+            {
+                throw new Exception("User does not found.");
+            }
+            return Redirect("~/account-activated"); ;
+        }
+
+        public ActionResult ForgotPassword()
+        {
+            return View(new ForgotPasswordModel(), BeforeLoginMasterModel.MenuItem.None);
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(ForgotPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.Email));
+                if (userDetails != null)
+                {
+                    new MailGenerator(this.ControllerContext).Send(new ForgotPasswordMail(model.Email));
+                    return Redirect("/forgot-password-email-sent"); // Redirect to content page
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The user does not exits in the system.");
+                }
+            }
+
+            return View(model, BeforeLoginMasterModel.MenuItem.None);
+        }
+
+        public ActionResult ResetPassword(string key)
+        {
+            var splitedKey = key.DecryptLow().Split(',');
+            if (DateTime.Now > DateTime.Parse(splitedKey[0]))
+            {
+                throw new Exception("Reset password link expired.");
+            }
+            var userDetails = ObjectContainer.Instance.RunQuery(new GetUserDetailsByEmailQuery(splitedKey[1]));
+            if (userDetails == null)
+            {
+                throw new Exception("User does not found.");
+            }
+            return View(new ResetPasswordModel(), BeforeLoginMasterModel.MenuItem.None);
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(ResetPasswordModel model, string key)
+        {
+            if (ModelState.IsValid)
+            {
+                var splitedKey = key.DecryptLow().Split(',');
+                var email = splitedKey[1];
+                if (DateTime.Now > DateTime.Parse(splitedKey[0]))
+                {
+                    throw new Exception("Reset password link expired.");
+                }
+                var result = ObjectContainer.Instance.Dispatch(new ResetPasswordCommand(email, model.NewPassword));
+                if (result.Validation.Any())
+                {
+                    ModelState.AddModelError("", "Wrong password.");
+                }
+                FormsAuthentication.SetAuthCookie(email, false);
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(model, BeforeLoginMasterModel.MenuItem.None);
+        }
 
         [Authorize]
         public ActionResult ChangePassword()
         {
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-            return View();
+            return View(new ChangePasswordModel(), BeforeLoginMasterModel.MenuItem.None);
         }
 
         [Authorize]
@@ -157,34 +206,49 @@ namespace EyeTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (MembershipService.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
+                var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(User.Identity.Name));
+                if (securedDetails.Password == Encryption.SaltedHash(model.OldPassword, securedDetails.PasswordSalt))
                 {
-                    return RedirectToAction("ChangePasswordSuccess");
+                    var result = ObjectContainer.Instance.Dispatch(new ResetPasswordCommand(securedDetails.Email, model.NewPassword));
+                    if (result.Validation.Any())
+                    {
+                        //Redirect to error page
+                    }
+                    return Redirect("/password-changed-successful");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                    ModelState.AddModelError("", "The current password is incorrect.");
                 }
             }
 
-            // If we got this far, something failed, redisplay form
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-            return View(model);
+            return View(model, BeforeLoginMasterModel.MenuItem.None);
         }
 
-        // **************************************
-        // URL: /Account/ChangePasswordSuccess
-        // **************************************
-
-        public ActionResult ChangePasswordSuccess()
+        public ActionResult Unsubscribe(string email)
         {
-            return View();
+            return View(new UnsubscribeModel { Email = email }, BeforeLoginMasterModel.MenuItem.None);
         }
+
+        [HttpPost]
+        public ActionResult Unsubscribe(UnsubscribeModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = ObjectContainer.Instance.Dispatch(new UnsubscribeCommand(model.Email));
+                if (result.Validation.Any())
+                {
+                    ModelState.AddModelError("", "Wrong email.");
+                }
+                return Redirect("/unsubscrubed-successful");
+            }
+            return View(model, BeforeLoginMasterModel.MenuItem.None);
+        }
+
 
         public ActionResult Details()
         {
             return View();
         }
-
     }
 }

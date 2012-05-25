@@ -25,6 +25,7 @@
         <div class="editor-label">
             <%: Html.CheckBoxFor(m => m.RememberMe)%>
             <%: Html.LabelFor(m => m.RememberMe)%>
+            <%: Html.ActionLink("forgot password", "ForgotPassword") %>
         </div>
                 
         <p>

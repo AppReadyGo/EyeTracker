@@ -108,12 +108,15 @@
     <Reference Include="System.Web.Helpers" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Mails\ActivationEmail.cs" />
+    <Compile Include="Common\Mails\Email.cs" />
+    <Compile Include="Common\Mails\ForgotPasswordMail.cs" />
+    <Compile Include="Common\Mails\PromotionEmail.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
-    <Compile Include="Controllers\MailGenerator.cs" />
     <Compile Include="Controllers\Master\AfterLoginController.cs" />
     <Compile Include="Controllers\Master\AnalyticsMasterController.cs" />
     <Compile Include="Controllers\Master\BaseMasterController.cs" />
@@ -140,7 +143,14 @@
     <Compile Include="CustomModelBinders\Parsers\JsonScrollParser.cs" />
     <Compile Include="CustomModelBinders\Parsers\JsonViewAreaParser.cs" />
     <Compile Include="Helpers\General.cs" />
+    <Compile Include="Common\MailGenerator.cs" />
+    <Compile Include="Model\Mails\MailMasterModel.cs" />
+    <Compile Include="Model\Mails\PromotionEmailModel.cs" />
+    <Compile Include="Model\Mails\SystemEmailModel.cs" />
     <Compile Include="Model\Master\BeforeLoginMasterModel.cs" />
+    <Compile Include="Model\Pages\Account\ForgotPasswordModel.cs" />
+    <Compile Include="Model\Pages\Account\ResetPasswordModel.cs" />
+    <Compile Include="Model\Pages\Account\UnsubscribeModel.cs" />
     <Compile Include="Model\Pages\Admin\AdminModel.cs" />
     <Compile Include="Model\Pages\Admin\LogsModel.cs" />
     <Compile Include="Model\Pages\Analytics\FilterParametersModel.cs" />
@@ -342,8 +352,15 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Scripts\AnalyticsTemplate.js" />
-    <Content Include="Views\Account\RegisterForm.ascx" />
-    <Content Include="Views\Account\LogOnForm.ascx" />
+    <Content Include="Views\Account\Unsubscribe.aspx" />
+    <Content Include="Views\Account\Forms\UnsubscribeForm.ascx" />
+    <Content Include="Views\Account\ResetPassword.aspx" />
+    <Content Include="Views\Account\Forms\ChangePasswordForm.ascx" />
+    <Content Include="Views\Account\Forms\ResetPasswordForm.ascx" />
+    <Content Include="Views\Account\Forms\ForgotPasswordForm.ascx" />
+    <Content Include="Views\Account\ForgotPassword.aspx" />
+    <Content Include="Views\Account\Forms\RegisterForm.ascx" />
+    <Content Include="Views\Account\Forms\LogOnForm.ascx" />
     <Content Include="Views\Admin\Logs.aspx" />
     <Content Include="Views\Application\Form.ascx" />
     <Content Include="Views\Analytics\Date.ascx" />
@@ -367,6 +384,8 @@
     <Content Include="Views\Analytics\Index.aspx" />
     <Content Include="Views\Home\Pricing.aspx" />
     <Content Include="Views\Home\Mails\Basic.aspx" />
+    <Content Include="Views\Mails\Promotion.aspx" />
+    <Content Include="Views\Mails\System.aspx" />
     <Content Include="Views\Portfolio\Edit.aspx" />
     <Content Include="Views\Portfolio\Form.ascx" />
     <Content Include="Views\Portfolio\New.aspx" />
@@ -388,7 +407,6 @@
     <Content Include="Scripts\ThridParty\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\ThridParty\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\Account\ChangePassword.aspx" />
-    <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Account\Register.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
@@ -451,7 +469,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1058</DevelopmentServerPort>
+          <DevelopmentServerPort>1059</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

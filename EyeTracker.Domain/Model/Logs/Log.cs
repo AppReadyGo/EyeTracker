@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EyeTracker.Domain.Model.BackOffice
+namespace EyeTracker.Domain.Model.Logs
 {
     public class Log
     {

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NHibernate.Mapping.ByCode.Conformist;
-using EyeTracker.Domain.Model;
+﻿using EyeTracker.Domain.Model.Content;
 using NHibernate.Mapping.ByCode;
+using NHibernate.Mapping.ByCode.Conformist;
 
-namespace EyeTracker.Domain.Mapping
+namespace EyeTracker.Domain.Mapping.Content
 {
-    public class ContentItemMaping : ClassMapping<ContentItem>
+    public class ItemMaping : ClassMapping<Item>
     {
-        public ContentItemMaping()
+        public ItemMaping()
         {
-            Table("Content");
+            Schema("cont");
+            Table("Items");
             Id(x => x.Id, map => { map.Generator(Generators.Identity); map.Column("ID"); });
             Property(p => p.Key, map => { map.NotNullable(true); map.Length(50); });
             Property(p => p.SubKey, map => { map.NotNullable(true); map.Length(50); });

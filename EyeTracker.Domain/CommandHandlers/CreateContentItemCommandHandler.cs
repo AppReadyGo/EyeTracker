@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EyeTracker.Domain.Model;
-using EyeTracker.Common.Commands;
+﻿using EyeTracker.Common.Commands;
+using EyeTracker.Domain.Model.Content;
 using NHibernate;
 
 namespace EyeTracker.Domain.CommandHandlers
@@ -19,7 +15,7 @@ namespace EyeTracker.Domain.CommandHandlers
 
         public int Execute(ISession session, CreateContentItemCommand cmd)
         {
-            var item = new ContentItem(cmd.Key, cmd.SubKey, cmd.Value);
+            var item = new Item(cmd.Key, cmd.SubKey, cmd.Value);
             this.repository.Add(item);
             return item.Id;
         }

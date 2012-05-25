@@ -14,7 +14,7 @@ namespace EyeTracker.Domain.Repositories
 
         IEnumerable<ViewHeatMapData> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
 
-        IEnumerable<PortfolioDetails> GetAllPortfolios(Guid userId);
+        IEnumerable<PortfolioDetails> GetAllPortfolios(int userId);
     }
     
     public class AnalyticsRepository : IAnalyticsRepository
@@ -60,7 +60,7 @@ namespace EyeTracker.Domain.Repositories
             }
         }
 
-        public IEnumerable<PortfolioDetails> GetAllPortfolios(Guid userId)
+        public IEnumerable<PortfolioDetails> GetAllPortfolios(int userId)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {

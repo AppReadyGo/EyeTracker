@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using EyeTracker.Common.Queries.Admin;
 using EyeTracker.Common.Results.Admin;
-using EyeTracker.Domain.Model.BackOffice;
+using EyeTracker.Domain.Model.Logs;
 using EyeTracker.Domain.Queries;
 using NHibernate;
 using NHibernate.Criterion;

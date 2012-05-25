@@ -20,7 +20,7 @@ namespace EyeTracker.Domain.Repositories
 {
     public interface IAdminRepository
     {
-        MembershipInfo GetMembership();
+        //MembershipInfo GetMembership();
 
         IList<T> GetAll<T>() where T : Entity, new();
 
@@ -55,17 +55,17 @@ namespace EyeTracker.Domain.Repositories
             }
         }
 
-        public MembershipInfo GetMembership()
-        {
-            var res = new MembershipInfo();
-            using (ISession session = NHibernateHelper.OpenSession())
-            {
-                res.Applications = session.CreateCriteria<SystemApplication>().List<SystemApplication>();
-                res.Roles = session.CreateCriteria<SystemRole>().List<SystemRole>();
-                res.Users = session.CreateCriteria<SystemUser>().List<SystemUser>();
-            }
-            return res;
-        }
+        //public MembershipInfo GetMembership()
+        //{
+        //    var res = new MembershipInfo();
+        //    using (ISession session = NHibernateHelper.OpenSession())
+        //    {
+        //        res.Applications = session.CreateCriteria<SystemApplication>().List<SystemApplication>();
+        //        res.Roles = session.CreateCriteria<SystemRole>().List<SystemRole>();
+        //        res.Users = session.CreateCriteria<SystemUser>().List<SystemUser>();
+        //    }
+        //    return res;
+        //}
 
         public IList<T> GetAll<T>() where T : Entity, new()
         {
@@ -84,11 +84,11 @@ namespace EyeTracker.Domain.Repositories
             {
                 res = session.Get<T>(id);
                 var type = typeof(T);
-                if (type == typeof(SystemUser))
-                {
-                    var tRes = res as SystemUser;
-                    NHibernateUtil.Initialize(tRes.Roles);
-                }
+                //if (type == typeof(SystemUser))
+                //{
+                //    var tRes = res as SystemUser;
+                //    NHibernateUtil.Initialize(tRes.Roles);
+                //}
             }
             return res;
         }

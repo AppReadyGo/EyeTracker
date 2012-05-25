@@ -6,6 +6,7 @@ using EyeTracker.Domain.Model;
 using NHibernate;
 using NHibernate.Linq;
 using EyeTracker.Domain.Model.BackOffice;
+using EyeTracker.Domain.Model.Users;
 
 namespace EyeTracker.Domain.Repositories
 {
@@ -13,11 +14,11 @@ namespace EyeTracker.Domain.Repositories
     {
         Portfolio Get(int id);
 
-        IList<Portfolio> GetAll(Guid userId);
+        IList<Portfolio> GetAll(int userId);
 
         IList<Country> GetCountries();
 
-        int AddPortfolio(string description, int timeZone, Guid guid);
+        int AddPortfolio(string description, int timeZone, int userId);
 
         void Update(int id, string description, int timeZone);
 
@@ -34,7 +35,7 @@ namespace EyeTracker.Domain.Repositories
             }
         }
 
-        public IList<Portfolio> GetAll(Guid userId)
+        public IList<Portfolio> GetAll(int userId)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -51,11 +52,11 @@ namespace EyeTracker.Domain.Repositories
             }
         }
 
-        public int AddPortfolio(string description, int timeZone, Guid guid)
+        public int AddPortfolio(string description, int timeZone, int userId)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                var user = session.Get<SystemUser>(guid);
+                var user = session.Get<User>(userId);
                 var portfolio = new Portfolio(description, timeZone, user);
                 using (ITransaction transaction = session.BeginTransaction())
                 {
