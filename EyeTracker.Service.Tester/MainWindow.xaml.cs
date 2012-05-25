@@ -17,6 +17,7 @@ using System.IO;
 using System.Net;
 using System.Configuration;
 using System.Threading;
+using EyeTracker.API;
 
 namespace EyeTracker.Service.Tester
 {
@@ -124,7 +125,21 @@ namespace EyeTracker.Service.Tester
             {
                 String str = fileReader.ReadToEnd();
 
-                SendToServer(new System.Text.UTF8Encoding().GetBytes(str));
+                
+                FPData obj = new FPData() { val = str};
+
+               
+
+                MemoryStream streamQ2 = new MemoryStream();
+                DataContractJsonSerializer serializer2 = new DataContractJsonSerializer(typeof(FPData));
+                serializer2.WriteObject(streamQ2, obj);
+
+                //str = string.Format("{0}={1}", "val", str);
+
+                // Encode the parameters as form data:
+                //byte[] formData = UTF8Encoding.UTF8.GetBytes(paramz.ToString());
+
+                SendToServer(streamQ2.ToArray());
             }
 
             
