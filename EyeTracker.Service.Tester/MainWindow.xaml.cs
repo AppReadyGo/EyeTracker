@@ -46,7 +46,7 @@ namespace EyeTracker.Service.Tester
 
                 var mc = GetShortPackage();
 
-                txtBlkServiceStatus.Text = SendRequest(mc).ToString();
+                txtBlkServiceStatus.Text = SendPackage(mc).ToString();
             }
             catch (Exception ex)
             {
@@ -69,7 +69,7 @@ namespace EyeTracker.Service.Tester
 
                 var mc = GetLongPackage(100);
 
-                txtBlkServiceStatus.Text = SendRequest(mc).ToString();
+                txtBlkServiceStatus.Text = SendPackage(mc).ToString();
             }
             catch (Exception ex)
             {
@@ -115,7 +115,21 @@ namespace EyeTracker.Service.Tester
 
         }
 
-      
+        private void btn_Package_From_File(object sender, RoutedEventArgs e)
+        {
+
+            ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
+
+            using (StreamReader fileReader = new StreamReader("SavedDataFromAndroid.txt"))
+            {
+                String str = fileReader.ReadToEnd();
+
+                SendToServer(new System.Text.UTF8Encoding().GetBytes(str));
+            }
+
+            
+        }
+
 
         #region code
 
@@ -156,7 +170,7 @@ namespace EyeTracker.Service.Tester
 
 
  
-        private bool SendRequest(JsonPackage mc)
+        private bool SendPackage(JsonPackage mc)
         {
 
             bool result = false;
@@ -170,26 +184,7 @@ namespace EyeTracker.Service.Tester
                 serializer2.WriteObject(streamQ2, package);
                 var arrayBytes = streamQ2.ToArray();
 
-
-                string requestUrl = string.Format("{0}{1}", ServiceUrl, SubmitService);
-                WebRequest request = WebRequest.Create(requestUrl);
-                request.Method = "POST";
-                request.ContentType = "application/json";
-                request.ContentLength = arrayBytes.Length;
-
-                request.GetRequestStream().Write(arrayBytes, 0, arrayBytes.Length);
-                request.GetRequestStream().Close();
-
-                // Get response  
-                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
-                {
-                    using (Stream stream = response.GetResponseStream())
-                    {
-                        DataContractJsonSerializer dcs = new DataContractJsonSerializer(typeof(bool));
-                        result = (bool)dcs.ReadObject(stream);
-                    }
-                }
-
+                result = SendToServer(arrayBytes);
             }
             catch (Exception ex)
             { 
@@ -197,6 +192,35 @@ namespace EyeTracker.Service.Tester
             }
 
             return result;
+        }
+
+
+        /// <summary>
+        /// Actual sending to server
+        /// </summary>
+        /// <param name="arrayBytes"></param>
+        /// <returns></returns>
+        private bool SendToServer(byte[] arrayBytes)
+        {
+            string requestUrl = string.Format("{0}{1}", ServiceUrl, SubmitService);
+            WebRequest request = WebRequest.Create(requestUrl);
+            request.Method = "POST";
+            request.ContentType = "application/json";
+            request.ContentLength = arrayBytes.Length;
+
+            request.GetRequestStream().Write(arrayBytes, 0, arrayBytes.Length);
+            request.GetRequestStream().Close();
+
+            // Get response  
+            using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+            {
+                using (Stream stream = response.GetResponseStream())
+                {
+                    DataContractJsonSerializer dcs = new DataContractJsonSerializer(typeof(bool));
+                    return (bool)dcs.ReadObject(stream);
+                }
+            }
+        
         }
 
         private static string Serialize<T>(T obj)
@@ -362,6 +386,7 @@ namespace EyeTracker.Service.Tester
         private string StatusService { get; set; }
         #endregion Private members 
 
+      
        
 
        
