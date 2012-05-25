@@ -21,7 +21,7 @@ namespace EyeTracker.Core.Services
         bool ChangePassword(string userName, string oldPassword, string newPassword);
         void DeleteUser(string userName);
         OperationResult<MembershipUser> GetCurrentUser();
-        OperationResult<Guid> GetCurrentUserId();
+        OperationResult<int> GetCurrentUserId();
 
     }
 
@@ -101,16 +101,16 @@ namespace EyeTracker.Core.Services
 
 
 
-        public OperationResult<Guid> GetCurrentUserId()
+        public OperationResult<int> GetCurrentUserId()
         {
             var getCurUserRes = GetCurrentUser();
             if (getCurUserRes.HasError)
             {
-                return new OperationResult<Guid>(getCurUserRes);
+                return new OperationResult<int>(getCurUserRes);
             }
             else
             {
-                return new OperationResult<Guid>(new Guid(getCurUserRes.Value.ProviderUserKey.ToString()));
+                return new OperationResult<int>(int.Parse(getCurUserRes.Value.ProviderUserKey.ToString()));
             }
         }
 

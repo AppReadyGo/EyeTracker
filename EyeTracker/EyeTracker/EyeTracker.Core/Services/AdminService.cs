@@ -10,7 +10,7 @@ namespace EyeTracker.Core.Services
 {
     public interface IAdminService
     {
-        MembershipInfo GetMembership();
+        //MembershipInfo GetMembership();
 
         T Get<T>(Guid id) where T : Entity, new();
 
@@ -31,10 +31,10 @@ namespace EyeTracker.Core.Services
             this.adminRepository = adminRepository;
         }
 
-        public MembershipInfo GetMembership()
-        {
-            return adminRepository.GetMembership();
-        }
+        //public MembershipInfo GetMembership()
+        //{
+        //    return adminRepository.GetMembership();
+        //}
 
         public T Get<T>(Guid id) where T : Entity, new()
         {
