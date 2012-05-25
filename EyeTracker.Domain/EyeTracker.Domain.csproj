@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandlers\Admin\ClearLogCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Content\CreatePageCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Content\UpdatePageCommandHandler.cs" />
     <Compile Include="CommandHandlers\ICommandHandler.cs" />
     <Compile Include="CommandHandlers\CreateContentItemCommandHandler.cs" />
     <Compile Include="CommandHandlers\StoredProcedureCommandHandler.cs" />
@@ -73,20 +75,26 @@
     <Compile Include="Common\PortfolioDetails.cs" />
     <Compile Include="Enumirators.cs" />
     <Compile Include="Mapping\AccountProfilerMaping.cs" />
-    <Compile Include="Mapping\Content\MailMaping.cs" />
+    <Compile Include="Mapping\Content\Email.cs" />
+    <Compile Include="Mapping\Content\KeyMapping.cs" />
+    <Compile Include="Mapping\Content\MailMapping.cs" />
+    <Compile Include="Mapping\Content\ThemeMapping.cs" />
     <Compile Include="Mapping\Logs\CategoryMapping.cs" />
     <Compile Include="Mapping\Logs\LogMapping.cs" />
     <Compile Include="Mapping\BackOffice\SystemMembershipMapping.cs" />
-    <Compile Include="Mapping\Content\ItemMaping.cs" />
-    <Compile Include="Mapping\Content\PageMaping.cs" />
+    <Compile Include="Mapping\Content\ItemMapping.cs" />
+    <Compile Include="Mapping\Content\PageMapping.cs" />
     <Compile Include="Mapping\Events\PackageEventMapping.cs" />
     <Compile Include="Mapping\Events\ScrollEventMapping.cs" />
     <Compile Include="Mapping\Events\SessionInfoEventMapping.cs" />
     <Compile Include="Mapping\ScreenMapping.cs" />
     <Compile Include="Mapping\Users\UserMapping.cs" />
     <Compile Include="Model\AnalyticsType.cs" />
+    <Compile Include="Model\Content\Key.cs" />
+    <Compile Include="Model\Content\Language.cs" />
+    <Compile Include="Model\Content\Mail.cs" />
+    <Compile Include="Model\Content\Theme.cs" />
     <Compile Include="Model\Logs\Category.cs" />
-    <Compile Include="Model\Content\Email.cs" />
     <Compile Include="Model\Logs\Log.cs" />
     <Compile Include="Model\BackOffice\SystemMembership.cs" />
     <Compile Include="Mapping\ClickMaping.cs" />
@@ -145,7 +153,15 @@
     <Compile Include="QueriesHandlers\Analytics\DashboardViewDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\FilterBaseQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\UsageViewDataQueryHandler.cs" />
-    <Compile Include="QueriesHandlers\GetKeyContentQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Content\GetAllKeysQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetAllMailsQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetAllPagesQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetAllThemesQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetKeyQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetMailQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetPageQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetSystemMailQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetThemeQuery.cs" />
     <Compile Include="QueriesHandlers\IQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserSecuredDetailsByEmailQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserDetailsByEmailQueryHandler.cs" />

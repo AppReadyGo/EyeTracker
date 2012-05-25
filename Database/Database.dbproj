@@ -349,13 +349,19 @@
     <Build Include="Schema Objects\Schemas\cont\Tables\Items.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\cont\Tables\Emails.table.sql">
+    <Build Include="Schema Objects\Schemas\cont\Tables\Mails.table.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Scroll.table.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\Scroll.FK_Scroll_PageView.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\cont\Tables\Keys.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\cont\Tables\Themes.table.sql">
       <SubType>Code</SubType>
     </Build>
   </ItemGroup>

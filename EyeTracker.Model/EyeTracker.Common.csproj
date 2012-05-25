@@ -82,6 +82,12 @@
   <ItemGroup>
     <Compile Include="ApplicationLogging.cs" />
     <Compile Include="Commands\Admin\ClearLogCommand.cs" />
+    <Compile Include="Commands\Content\CreateMailCommand.cs" />
+    <Compile Include="Commands\Content\CreatePageCommand.cs" />
+    <Compile Include="Commands\Content\UpdateKeyCommand.cs" />
+    <Compile Include="Commands\Content\UpdateMailCommand.cs" />
+    <Compile Include="Commands\Content\UpdatePageCommand.cs" />
+    <Compile Include="Commands\Content\UpdateThemeCommand.cs" />
     <Compile Include="Commands\CreateContentItemCommand.cs" />
     <Compile Include="Commands\Extentions.cs" />
     <Compile Include="Commands\ICommand.cs" />
@@ -114,8 +120,15 @@
     <Compile Include="Queries\Analytics\FingerPrintViewDataQuery.cs" />
     <Compile Include="Queries\Analytics\PortfoliosQuery.cs" />
     <Compile Include="Queries\Analytics\UsageViewDataQuery.cs" />
-    <Compile Include="Queries\GetKeyContentQuery.cs" />
-    <Compile Include="Queries\GetPageContent.cs" />
+    <Compile Include="Queries\Content\GetAllKeysQuery.cs" />
+    <Compile Include="Queries\Content\GetAllMailsQuery.cs" />
+    <Compile Include="Queries\Content\GetKeyQuery.cs" />
+    <Compile Include="Queries\Content\GetMailQuery.cs" />
+    <Compile Include="Queries\Content\GetAllPagesQuery.cs" />
+    <Compile Include="Queries\Content\GetAllThemesQuery.cs" />
+    <Compile Include="Queries\Content\GetPageQuery.cs" />
+    <Compile Include="Queries\Content\GetSystemMailQuery.cs" />
+    <Compile Include="Queries\Content\GetThemeQuery.cs" />
     <Compile Include="Queries\IQuery.cs" />
     <Compile Include="Queries\Users\GetUserSecuredDetailsByEmailQuery.cs" />
     <Compile Include="Queries\Users\GetUserDetailsByEmailQuery.cs" />
@@ -129,6 +142,11 @@
     <Compile Include="QueryResults\Analytics\PortfolioResult.cs" />
     <Compile Include="QueryResults\Analytics\PortfoliosDataResult.cs" />
     <Compile Include="QueryResults\Analytics\UsageViewDataResult.cs" />
+    <Compile Include="QueryResults\Content\ItemResult.cs" />
+    <Compile Include="QueryResults\Content\KeyResult.cs" />
+    <Compile Include="QueryResults\Content\MailResult.cs" />
+    <Compile Include="QueryResults\Content\PageResult.cs" />
+    <Compile Include="QueryResults\Content\ThemeResult.cs" />
     <Compile Include="QueryResults\PageContentResult.cs" />
     <Compile Include="QueryResults\Users\UserSecureDetailsResult.cs" />
     <Compile Include="QueryResults\Users\UserDetailsResult.cs" />
