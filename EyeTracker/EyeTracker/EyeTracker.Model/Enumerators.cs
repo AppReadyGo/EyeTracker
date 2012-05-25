@@ -6,6 +6,13 @@ using System.Xml.Linq;
 
 namespace EyeTracker.Common
 {
+    public enum ThemeType
+    {
+        SystemMail = 1,
+        Mail,
+        Page
+    }
+
     public enum ApplicationEvent
     {
         FatalError = 1,

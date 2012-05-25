@@ -14,6 +14,7 @@ using EyeTracker.Model.Pages.Home;
 using EyeTracker.Model.Master;
 using EyeTracker.Common.Queries;
 using EyeTracker.Model.Pages.Home.Mails;
+using EyeTracker.Common.Queries.Content;
 
 namespace EyeTracker.Controllers
 {
@@ -109,8 +110,8 @@ namespace EyeTracker.Controllers
                 path += "/" + urlPart3;
             }
 
-            var keys = ObjectContainer.Instance.RunQuery(new GetKeyContentQuery(path.ToLower()));
-            if (!keys.Any())
+            var page = ObjectContainer.Instance.RunQuery(new GetPageQuery(path.ToLower()));
+            if (page == null)
             {
                 return View("404", new PricingModel { }, BeforeLoginMasterModel.MenuItem.None);
             }
@@ -121,7 +122,7 @@ namespace EyeTracker.Controllers
                 {
                     selectedItem = BeforeLoginMasterModel.MenuItem.None;
                 }
-                return View(new ContentModel { Title = keys["title"], Content = keys["content"] }, selectedItem);
+                return View(new ContentModel { Title = page.Title, Content = page.Content }, selectedItem);
             }
         }
     }
