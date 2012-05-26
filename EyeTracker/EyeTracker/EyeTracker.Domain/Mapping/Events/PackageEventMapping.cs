@@ -19,6 +19,52 @@ namespace EyeTracker.Domain.Mapping
                 map.Length(225);
                 map.NotNullable(true);
             });
+            Property(x => x.Ip, map =>
+            {
+                map.Length(15);
+                map.NotNullable(false);
+            });
+            ManyToOne(x => x.Language, map =>
+            {
+                map.Cascade(Cascade.All);
+                map.NotNullable(false);
+                map.Column("LanguageId");
+
+            });
+            ManyToOne(x => x.Country, map =>
+            {
+                map.Cascade(Cascade.All);
+                map.NotNullable(false);
+                map.Column("CountryId");
+
+            });
+            Property(x => x.City, map =>
+            {
+                map.Length(50);
+                map.NotNullable(false);
+            });
+            ManyToOne(x => x.OperationSystem, map =>
+            {
+                map.Cascade(Cascade.All);
+                map.NotNullable(false);
+                map.Column("OperationSystemId");
+
+            });
+            ManyToOne(x => x.Browser, map =>
+            {
+                map.Cascade(Cascade.All);
+                map.NotNullable(false);
+                map.Column("BrowserId");
+
+            });
+            ManyToOne(x => x.Application, map =>
+            {
+                map.Cascade(Cascade.All);
+                //change to true!!
+                map.NotNullable(false);
+                map.Column("ApplicationId");
+
+            });
             Property(p => p.ScreenWidth, map => map.NotNullable(true));
             Property(p => p.ScreenHeight, map => map.NotNullable(true));
             Bag(p => p.Sessions, map =>

@@ -140,6 +140,7 @@
     <Compile Include="Model\Application.cs" />
     <Compile Include="Model\Portfolio.cs" />
     <Compile Include="Model\Screen.cs" />
+    <Compile Include="Model\Scroll.cs" />
     <Compile Include="Model\Size.cs" />
     <Compile Include="Model\Users\Users.cs" />
     <Compile Include="Model\ViewHeatMapData.cs" />
