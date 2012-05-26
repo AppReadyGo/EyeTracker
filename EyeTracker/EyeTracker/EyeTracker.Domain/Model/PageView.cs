@@ -40,7 +40,9 @@ namespace EyeTracker.Domain.Model
 
         public virtual IList<Click> Clicks { get; set; }
 
-        //public virtual IList<ViewPart> ViewParts { get; set; }
-        public virtual IList<ViewPartEvent> ViewParts { get; set; }
+        public virtual IList<ViewPart> ViewParts { get; set; }
+        //public virtual IList<ViewPartEvent> ViewParts { get; set; }
+
+        public virtual IList<Scroll> Scrolls { get; set; }
     }
 }
