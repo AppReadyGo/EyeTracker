@@ -11,6 +11,10 @@ namespace EyeTracker.Domain.Mapping
 {
     public class ClickEventMapping : ClassMapping<ClickEvent>
     {
+        static ClickEventMapping()
+        {
+            int i = 5;
+        }
         public ClickEventMapping()
         {
             Id(p => p.Id, map => map.Generator(Generators.Identity));
