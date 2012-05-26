@@ -121,7 +121,7 @@ namespace EyeTracker.Service.Tester
 
             ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
 
-            using (StreamReader fileReader = new StreamReader("SavedDataFromAndroid.txt"))
+            using (StreamReader fileReader = new StreamReader("TestData\\SavedDataFromAndroid.txt"))
             {
                 String str = fileReader.ReadToEnd();
 
@@ -202,8 +202,8 @@ namespace EyeTracker.Service.Tester
                 result = SendToServer(arrayBytes);
             }
             catch (Exception ex)
-            { 
-                
+            {
+                MessageBox.Show(ex.Message);
             }
 
             return result;
