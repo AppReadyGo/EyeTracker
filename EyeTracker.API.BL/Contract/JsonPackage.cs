@@ -15,7 +15,8 @@ namespace EyeTracker.API.BL.Contract
     ///     ssd:               //session data
     ///     [
     ///     si{}, si{}, si{}......
-    ///     ]
+    ///     ],
+    ///     ssi{}              //client system info
     /// }
     /// </example>
     [DataContract]
@@ -32,6 +33,9 @@ namespace EyeTracker.API.BL.Contract
 
         [DataMember(Name = "ssd")]
         public JsonSessionInfo[] SessionsInfo { get; set; }
+
+        [DataMember(Name = "ssi")]
+        public JsonSystemInfo SystemInfo { get; set; }
 
         #region IPackage Members
 
