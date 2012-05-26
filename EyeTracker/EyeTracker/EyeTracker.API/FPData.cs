@@ -16,5 +16,11 @@ namespace EyeTracker.API
             get; 
             set; 
         }
+
+        public System.String Ip
+        {
+            get;
+            set;
+        }
     }
 }
