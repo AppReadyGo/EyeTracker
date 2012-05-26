@@ -7,5 +7,6 @@ namespace EyeTracker.Domain.Model
 {
     public class OperationSystem : Nameable
     {
+   
     }
 }
