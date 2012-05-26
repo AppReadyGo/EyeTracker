@@ -7,5 +7,6 @@ namespace EyeTracker.Common.Interfaces
 {
     public interface IPackageEvent : IEvent
     {
+        //todo: move here props of PackageEvent!!
     }
 }
