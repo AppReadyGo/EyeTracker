@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
+using EyeTracker.Common.Interfaces;
 
 namespace EyeTracker.API.BL.Contract
 {
     /// <summary>
     /// Represents System information about a mobile device 
-    ///si //system info
+    ///ssi //system info
     ///{
     ///     brn     //string - brand name
     ///     den     //string - device name
@@ -25,7 +26,8 @@ namespace EyeTracker.API.BL.Contract
     ///     sdki    //integer - The user-visible SDK version of the framework; its possible values are defined in         //Build.VERSION_CODES.
     ///}
     /// </summary>
-    public class JsonSystemInfo
+    [DataContract]
+    public class JsonSystemInfo : IJsonSystemInfo
     {
         [DataMember(Name="brn")]
         public string BrandName { get; set; }
@@ -51,22 +53,19 @@ namespace EyeTracker.API.BL.Contract
         [DataMember(Name = "opn")]
         public string OperatorName { get; set; }
 
-        //[DataMember(Name = "brn")]
-        //public string BrandName { get; set; }
+        [DataMember(Name = "prn")]
+        public string ProductName { get; set; }
 
-        [DataMember(Name = "skdi")]
-        public string SdkIdentName { get; set; }
+        [DataMember(Name = "con")]
+        public string DevCodeName { get; set; }
+ 
+        [DataMember(Name = "inc")]
+        public string InternalName { get; set; }
 
         [DataMember(Name = "rel")]
         public string RealVersionName { get; set; }
 
-        [DataMember(Name = "inc")]
-        public string InternalName { get; set; }
-
-        [DataMember(Name = "con")]
-        public string DevCodeName { get; set; }
-
-        [DataMember(Name = "prn")]
-        public string ProductName { get; set; }
+        [DataMember(Name = "sdki")]
+        public string SdkIdentName { get; set; }     
     }
 }

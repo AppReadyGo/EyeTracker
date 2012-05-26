@@ -43,6 +43,7 @@ namespace EyeTracker.API.BL.Parsers
                 Key = jPackage.ClientKey,
                 ScreenHeight = jPackage.ScreenHeight,
                 ScreenWidth = jPackage.ScreenWidth,
+                SystemInfo = jPackage.SystemInfo
             };
 
             var sessionEvents = new List<SessionInfoEvent>();
@@ -78,12 +79,6 @@ namespace EyeTracker.API.BL.Parsers
                         ClientHeight = session.ClientHeight,
                         ClientWidth = session.ClientWidth,
                         Path = session.PageUri
-                        //Clicks          = ParseData<JsonTouchDetails, ClickEvent> 
-                        //                        (session.TouchDetails),
-                        //ScreenViewParts = ParseData<JsonViewAreaDetails, ViewPartEvent> 
-                        //                        (session.ViewAreaDetails),
-                        //Scrolls         = ParseData<JsonScrollDetails, ScrollEvent> 
-                        //                        (session.ScrollDetails),
                     };
 
                     sessionEvent.Clicks = ParseData<JsonTouchDetails, ClickEvent, SessionInfoEvent>(session.TouchDetails, sessionEvent);
