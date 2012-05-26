@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Runtime.Serialization;
 using EyeTracker.Common.Interfaces;
+using EyeTracker.Common;
 
 namespace EyeTracker.Domain.Model.Events
 {
@@ -15,8 +16,6 @@ namespace EyeTracker.Domain.Model.Events
     {
         public PackageEvent()
         {
-            //clicks = new List<ClickEvent>();
-            //parts = new List<ViewPartEvent>();
             Sessions = new List<SessionInfoEvent>();
         }
 
@@ -31,6 +30,36 @@ namespace EyeTracker.Domain.Model.Events
         public virtual string Key { get; set; }
 
         /// <summary>
+        /// client IP
+        /// </summary>
+        public virtual string Ip { get; set; }
+
+        /// <summary>
+        /// language
+        /// </summary>
+        public virtual Language Language { get; set; }
+
+        /// <summary>
+        /// client's Country
+        /// </summary>
+        public virtual Country Country { get; set; }
+
+        /// <summary>
+        /// client's City
+        /// </summary>
+        public virtual string City { get; set; }
+
+        /// <summary>
+        /// client's OS
+        /// </summary>
+        public virtual OperationSystem OperationSystem { get; set; }
+
+        /// <summary>
+        /// client's Browser
+        /// </summary>
+        public virtual Browser Browser { get; set; }
+
+        /// <summary>
         /// client Screen Width
         /// </summary>
         public virtual int ScreenWidth { get; set; }
@@ -43,8 +72,19 @@ namespace EyeTracker.Domain.Model.Events
         /// </summary>
         public virtual IList<SessionInfoEvent> Sessions { get; set; }
 
-        //todo:remove
-        //public List<ClickEvent> clicks { get; set; }
-        //public List<ViewPartEvent> parts { get; set; }
+        /// <summary>
+        /// client's Application - identified by Key property
+        /// </summary>
+        public virtual Application Application { get; set; }
+
+        /// <summary>
+        /// todo: client's device info
+        /// </summary>
+        public virtual IJsonSystemInfo SystemInfo { get; set; }
+
+        /// <summary>
+        /// todo: do we need it? we have Ip property
+        /// </summary>
+        //public virtual RequestInfo MyRequestInfo { get; set; }
     }
 }
