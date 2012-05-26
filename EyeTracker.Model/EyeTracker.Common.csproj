@@ -103,6 +103,7 @@
     <Compile Include="EncryptionSettings.cs" />
     <Compile Include="Enumerators.cs" />
     <Compile Include="ErrorNumbers.cs" />
+    <Compile Include="Interfaces\IJsonSystemInfo.cs" />
     <Compile Include="IValidationContext.cs" />
     <Compile Include="MailSettings.cs" />
     <Compile Include="Interfaces\IDataRepository.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="QueryResults\Content\PageResult.cs" />
     <Compile Include="QueryResults\Content\ThemeResult.cs" />
     <Compile Include="QueryResults\PageContentResult.cs" />
+    <Compile Include="RequestInfo.cs" />
     <Compile Include="QueryResults\Users\UserSecureDetailsResult.cs" />
     <Compile Include="QueryResults\Users\UserDetailsResult.cs" />
   </ItemGroup>
