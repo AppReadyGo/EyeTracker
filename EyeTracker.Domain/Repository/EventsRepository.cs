@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using EyeTracker.Domain.Model.Events;
 using NHibernate;
+using NHibernate.Linq;
 using EyeTracker.Common.Logger;
 using System.Reflection;
 using EyeTracker.Common.Interfaces;
 using System.Diagnostics.Contracts;
+using EyeTracker.Domain.Model;
 
 namespace EyeTracker.Domain.Repositories
 {
@@ -81,10 +83,43 @@ namespace EyeTracker.Domain.Repositories
         public void AddPackageEvent(IPackageEvent packageEvent)
         {
             //Contract.Requires<ArgumentException>(packageEvent is PackageEvent);
+            PackageEvent objPackageEvent = packageEvent as PackageEvent;
+            if (objPackageEvent == null)
+            {
+                log.WriteError(new ArgumentException("EventsRepository::AddPackageEvent got wrong argument"), "packageEvent");
+                return;
+            }
             try
             {
                 using (ISession session = NHibernateHelper.OpenSession())
                 {
+                    int appId = int.Parse(objPackageEvent.Key.Split(new char[] { '-' })[2]);
+                    Application objApp = session.Get<Application>(appId);
+#if DEBUG
+                    if (objApp == null)
+                    {
+
+                        //Portfolio port = new Portfolio();
+                        //port.Update("gogo", 0);
+                        //objApp = new Application(port, "debug app", ApplicationType.Android);
+
+                        //session.SaveOrUpdate(port);
+                    }
+#endif
+                    objPackageEvent.Application = objApp;
+
+                    //var test = session.Get<OperationSystem>(1);
+                    //var test2 = session.Query<OperationSystem>().ToList();
+                    OperationSystem objOS = session.Query<OperationSystem>().
+                                            Where(os => os.Name.ToLower() == objPackageEvent.SystemInfo.RealVersionName). //check which name to use!
+                                            FirstOrDefault();
+                    objPackageEvent.OperationSystem = objOS;
+
+                    //todo: browser
+                    //todo: language
+                    //todo: country
+                    //todo: city
+
                     using (ITransaction transaction = session.BeginTransaction())
                     {
                         //////here
@@ -104,7 +139,7 @@ namespace EyeTracker.Domain.Repositories
                         //    }
                         //}
                         //object objResult = 
-                        session.SaveOrUpdate(packageEvent as PackageEvent);
+                        session.SaveOrUpdate(objPackageEvent);
                         transaction.Commit();
                     }
                 }

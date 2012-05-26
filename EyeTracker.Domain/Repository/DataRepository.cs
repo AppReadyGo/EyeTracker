@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using EyeTracker.Domain.Model.Events;
 using NHibernate;
+using NHibernate.Linq;
 using EyeTracker.Domain.Model;
 using EyeTracker.Common.Interfaces;
 using EyeTracker.Common.Logger;
@@ -157,11 +158,83 @@ namespace EyeTracker.Domain.Repositories
             //Contract.Requires<ArgumentException>(packageEvent is PackageEvent);
             try
             {
+                PackageEvent objPackageEvent = packageEvent as PackageEvent;
+                if (objPackageEvent == null)
+                {
+                    log.WriteError("DataRepository::AddPackageEvent got wrong argument type");
+                    return;
+                }
+                if(objPackageEvent.Sessions == null || objPackageEvent.Sessions.Count == 0)
+                {
+                    log.WriteError("DataRepository::AddPackageEvent got package with empty Sessions collection");
+                    return;
+                }
                 using (ISession session = NHibernateHelper.OpenSession())
                 {
+                    int appId = int.Parse(objPackageEvent.Key.Split(new char[] { '-' })[2]);
+                    Application objApp = session.Get<Application>(appId);
+
+                    OperationSystem objOS = session.Query<OperationSystem>().
+                                            Where(os => os.Name.ToLower() == objPackageEvent.SystemInfo.RealVersionName). //check which name to use!
+                                            FirstOrDefault();
+
+                    PageView objPageView = new PageView()
+                    {
+                        Id = objPackageEvent.Id,
+                        Application = objApp,
+                        Browser = null, //todo
+                        Path = objPackageEvent.Sessions[0].Path, //todo: Path should be on another level?
+                        Language = null,    //todo
+                        Ip = objPackageEvent.Ip,
+                        Country = null, //todo: 3rd party service
+                        City = null,    //same as Country
+                        OperationSystem = objOS, 
+                        ScreenHeight = objPackageEvent.ScreenHeight,
+                        ScreenWidth = objPackageEvent.ScreenWidth,
+                        ClientHeight = objPackageEvent.Sessions[0].ClientHeight,
+                        ClientWidth = objPackageEvent.Sessions[0].ClientWidth
+                        
+                    };
+                    //Clicks
+                    objPageView.Clicks = new List<Click>();
+                    objPackageEvent.Sessions[0].Clicks.ToList().ForEach(clickEvent =>
+                        objPageView.Clicks.Add(
+                        new Click()
+                        {
+                            PageView = objPageView,
+                            X = clickEvent.ClientX,
+                            Y = clickEvent.ClientY,
+                            Date = clickEvent.Date
+                        }));
+
+                    //ViewParts
+                    objPageView.ViewParts = new List<ViewPart>();
+                    objPackageEvent.Sessions[0].ScreenViewParts.ToList().ForEach(viewPart =>
+                        objPageView.ViewParts.Add(
+                        new ViewPart()
+                        {
+                            StartDate = viewPart.StartDate,
+                            FinishDate = viewPart.FinishDate,
+                            X = viewPart.ScrollLeft,
+                            Y = viewPart.ScrollTop,
+                            Orientation = viewPart.Orientation,
+                            PageView = objPageView
+                        }));
+
+                    //Scrolls
+                    objPageView.Scrolls = new List<Scroll>();
+                    objPackageEvent.Sessions[0].Scrolls.ToList().ForEach(scrollEvent =>
+                        objPageView.Scrolls.Add(
+                        new Scroll()
+                        {
+                            MyPageView = objPageView,
+                            FirstTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.FirstTouch.Date),
+                            LastTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.LastTouch.Date),
+                        }));
+
                     using (ITransaction transaction = session.BeginTransaction())
                     {
-                        session.SaveOrUpdate(packageEvent as PackageEvent);
+                        session.SaveOrUpdate(objPageView);
                         transaction.Commit();
                     }
                 }
