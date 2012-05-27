@@ -13,7 +13,7 @@ namespace EyeTracker.Domain.Mapping.Content
 
             Id(x => x.Id, map => { map.Column("ID"); map.Generator(Generators.Identity); });
             Property(x => x.Url, map => { map.NotNullable(true); map.Length(256); });
-            Property(x => x.Theme, map => { map.NotNullable(true); map.Column("ThemeID"); });
+            ManyToOne(x => x.Theme, map => { map.NotNullable(true); map.Column("ThemeID"); });
             OneToOne(x => x.Title, map => { });
             OneToOne(x => x.Content, map => { });
         }

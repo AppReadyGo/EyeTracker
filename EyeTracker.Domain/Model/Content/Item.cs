@@ -12,7 +12,7 @@ namespace EyeTracker.Domain.Model.Content
         public virtual int Version { get; protected set; }
         */
 
-        public string SubKey { get; set; }
+        public virtual string SubKey { get; protected set; }
 
         public virtual bool IsHTML { get; protected set; }
 
@@ -23,6 +23,8 @@ namespace EyeTracker.Domain.Model.Content
         public virtual Mail Mail { get; protected set; }
 
         public virtual Key Key { get; protected set; }
+
+        public Item() { }
 
         public Item(string subKey, string value, bool isHTML)
         {
