@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [cont].[Pages] (
 	[ID]			INT  IDENTITY(1,1)	NOT NULL,
-	[Url]				VARCHAR(256)	NOT NULL,
+	[Url]				NVARCHAR(256)	NOT NULL,
 	[ThemeID]			INT				NOT NULL
 );
 GO

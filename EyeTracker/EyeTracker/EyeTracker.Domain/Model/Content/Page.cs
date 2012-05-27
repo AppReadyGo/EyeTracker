@@ -13,6 +13,8 @@ namespace EyeTracker.Domain.Model.Content
 
         public virtual Item Content { get; protected set; }
 
+        public Page() { }
+
         public Page(string url, Theme theme, string title, string content)
         {
             this.Url = url;

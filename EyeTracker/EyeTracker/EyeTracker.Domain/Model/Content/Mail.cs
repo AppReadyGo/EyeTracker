@@ -5,6 +5,8 @@ namespace EyeTracker.Domain.Model.Content
     {
         public override bool IsSystem { get { return false; } }
 
+        public Mail() { }
+
         public Mail(string url, Theme theme, string subject, string body)
         {
             this.Url = url;
@@ -39,6 +41,7 @@ namespace EyeTracker.Domain.Model.Content
         /// <summary>
         /// System mail cannot be created programmatically just by script
         /// </summary>
+        public SystemMail() { }
 
         public virtual void Update(Theme theme, string subject, string body)
         {

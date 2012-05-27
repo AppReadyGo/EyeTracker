@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [cont].[Items] (
 	[ID]			INT IDENTITY(1,1)	NOT NULL,
-	[SubKey]		VARCHAR(256)		NOT NULL,
+	[SubKey]		NVARCHAR(256)		NOT NULL,
 	[IsHTML]		BIT					NOT NULL,
 	[Value]			NVARCHAR(MAX)		NOT NULL,
 	[PageID]		INT					NULL,

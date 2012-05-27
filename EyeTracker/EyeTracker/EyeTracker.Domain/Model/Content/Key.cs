@@ -11,7 +11,7 @@ namespace EyeTracker.Domain.Model.Content
         /// <summary>
         /// The property is readonly, can't changed programmatically just by script, the change involve code changes.
         /// </summary>
-        public virtual string Url { get; private set; }
+        public virtual string Url { get; protected set; }
 
         public virtual IEnumerable<Item> Items { get { return items; } }
 

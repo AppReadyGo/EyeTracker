@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [cont].[Mails] (
 	[ID]			INT IDENTITY(1,1)	NOT NULL,
 	[IsSystem]		BIT					NOT NULL,
-	[Url]			VARCHAR(256)		NOT NULL,
+	[Url]			NVARCHAR(256)		NOT NULL,
 	[ThemeID]		INT					NOT NULL
 );
 GO
