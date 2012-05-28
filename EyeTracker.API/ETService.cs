@@ -58,11 +58,6 @@ namespace EyeTracker.API
 
             try
             {
-                //dima: save ip of the request before inserting data to queue
-                instance.Ip = GetRequestInfo().Ip;
-                //TEMP: remove after bug with null==instance.val fixed!!
-                instance.val = "{\"cid\":\"123-45-1\",\"sh\":960,\"ssd\":[{\"ch\":800,\"cw\":500,\"sc\":\"Sat, 19 May 2012 11:08:17 GMT\",\"sda\":[{\"ctd\":{\"cx\":109,\"cy\":329,\"d\":\"Sat, 19 May 2012 11:08:17 GMT\",\"o\":7,\"p\":92},\"std\":{\"cx\":109,\"cy\":329,\"d\":\"Sat, 19 May 2012 11:08:17 GMT\",\"o\":7,\"p\":92}}],\"ss\":\"Sat, 19 May 2012 11:08:17 GMT\",\"tda\":[{\"cx\":109,\"cy\":329,\"d\":\"Sat, 19 May 2012 11:08:17 GMT\",\"o\":7,\"p\":92}],\"uri\":\"myPageUri\",\"vwa\":[{\"cx\":109,\"cy\":329,\"fd\":\"Sat, 19 May 2012 11:08:17 GMT\",\"o\":7,\"sd\":\"Sat, 19 May 2012 11:08:17 GMT\"}]}],\"sw\":640,\"ssi\":{\"brn\":\"a3d\",\"den\":\"2sd\",\"din\":\"asd\",\"fin\":\"a4d\",\"han\":\"lsd\",\"man\":\"a4d\",\"mon\":\"asf\",\"opn\":\"bss\",\"prn\":\"GT-P1000\",\"con\":\"REL\",\"inc\":\"XWJP9\",\"rel\":\"2.3.3\",\"sdki\":\"10\"}}";
-
                 if (null == instance || String.IsNullOrWhiteSpace(instance.val))
                 {
                     log.WriteWarning("SubmitPackage is null or the val is empty");
@@ -79,7 +74,8 @@ namespace EyeTracker.API
                 }
 
                 PackageEvent objParserResult = EventParser.Parse(package) as PackageEvent;
-                objParserResult.Ip = instance.Ip;
+                //objParserResult.Ip = instance.Ip;
+                objParserResult.Ip = "Not needed";
 
                 EventsServices objEventSvc = new EventsServices("EyeTracker.Domain", "EyeTracker.Domain.Repositories.EventsRepository");
                 OperationResult objSaveResult = objEventSvc.HandlePackageEvent(objParserResult);
@@ -101,33 +97,36 @@ namespace EyeTracker.API
             }
         }
 
+
+        //DELETED by Pavel
         /// <summary>
         /// It's worthwhile to know that behind the scenes WCF is passing the client's IP and port (along some other information) with each message as the properties for the message. 
         /// This is happening for services hosted on HTTP or TCP protocols so the important point is here and you can't apply this code for other protocols.
         /// </summary>
         /// <returns></returns>
-        private RequestInfo GetRequestInfo()
-        {
+        //private RequestInfo GetRequestInfo()
+        //{
             
-            RequestInfo objRI = new RequestInfo();
-            try
-            {
-                OperationContext context = OperationContext.Current;
-                MessageProperties messageProperties = context.IncomingMessageProperties;
-                RemoteEndpointMessageProperty endpointProperty =
-                    messageProperties[RemoteEndpointMessageProperty.Name]
-                    as RemoteEndpointMessageProperty;
-                if (endpointProperty != null)
-                {
-                    objRI.Ip = endpointProperty.Address;
-                }
-            }
-            catch (Exception ex)
-            {
-                log.WriteError(ex, "Error retrieving client Ip");
-            }
-            return objRI;
-        }
+        //    RequestInfo objRI = new RequestInfo();
+        //    try
+        //    {
+        //        OperationContext context = OperationContext.Current;
+        //        MessageProperties messageProperties = context.IncomingMessageProperties;
+        //        RemoteEndpointMessageProperty endpointProperty =
+        //            messageProperties[RemoteEndpointMessageProperty.Name]
+        //            as RemoteEndpointMessageProperty;
+        //        if (endpointProperty != null)
+        //        {
+        //            objRI.Ip = endpointProperty.Address;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.WriteError(ex, "Error retrieving client Ip");
+        //    }
+        //    return objRI;
+        //}
+        
 
         /// <summary>
         /// JSON object deserialization
