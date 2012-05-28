@@ -20,7 +20,7 @@ namespace EyeTracker.Domain.Model.Content
 
         public virtual Page Page { get; protected set; }
 
-        public virtual Mail Mail { get; protected set; }
+        public virtual SystemMail Mail { get; protected set; }
 
         public virtual Key Key { get; protected set; }
 

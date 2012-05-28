@@ -15,9 +15,6 @@ namespace EyeTracker.Domain.Mapping.Content
             Property(x => x.SubKey, map => { map.NotNullable(true); map.Length(256); });
             Property(x => x.IsHTML, map => { map.NotNullable(true); });
             Property(x => x.Value, map => { map.NotNullable(true); });
-            ManyToOne(x => x.Page, map => { map.Column("PageID"); });
-            ManyToOne(x => x.Mail, map => { map.Column("MailID"); });
-            ManyToOne(x => x.Key, map => { map.Column("KeyID"); });
         }
     }
 }

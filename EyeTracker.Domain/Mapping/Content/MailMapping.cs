@@ -19,8 +19,16 @@ namespace EyeTracker.Domain.Mapping.Content
             Property(x => x.Url, map => { map.NotNullable(true); map.Length(256); });
             ManyToOne(x => x.Theme, map => { map.NotNullable(true); map.Column("ThemeID"); });
             Property(x => x.IsSystem, map => { map.NotNullable(true); });
-            OneToOne(x => x.Subject, map => { });
-            OneToOne(x => x.Body, map => { });
+            Set(
+                x => x.Items,
+                map =>
+                {
+                    map.Access(Accessor.Field);
+                    map.Cascade(Cascade.All);
+                    map.Inverse(true);
+                    map.Key(x => x.Column("MailID"));
+                },
+                r => r.OneToMany());
         }
     }
     public class MailMapping : SubclassMapping<Mail>

@@ -14,8 +14,16 @@ namespace EyeTracker.Domain.Mapping.Content
             Id(x => x.Id, map => { map.Column("ID"); map.Generator(Generators.Identity); });
             Property(x => x.Url, map => { map.NotNullable(true); map.Length(256); });
             ManyToOne(x => x.Theme, map => { map.NotNullable(true); map.Column("ThemeID"); });
-            OneToOne(x => x.Title, map => { });
-            OneToOne(x => x.Content, map => { });
+            Set(
+                x => x.Items,
+                map =>
+                {
+                    map.Access(Accessor.Field);
+                    map.Cascade(Cascade.All);
+                    map.Inverse(true);
+                    map.Key(x => x.Column("PageID"));
+                },
+                r => r.OneToMany());
         }
     }
 }
