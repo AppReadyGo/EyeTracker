@@ -11,17 +11,26 @@ namespace EyeTracker.Domain.Queries
     {
         public MailResult Run(ISession session, GetMailQuery query)
         {
-            return session.Query<Mail>()
+            var mail = session.Query<Mail>()
                             .Where(m => m.Url.ToLower() == query.Url.ToLower())
                             .Select(m => new MailResult
                             {
                                 Id = m.Id,
                                 Url = m.Url,
-                                Body = m.Body.Value,
-                                Subject = m.Subject.Value,
                                 ThemeUrl = m.Theme.Url
                             })
                             .SingleOrDefault();
+
+            var items = session.Query<Mail>()
+                            .Where(m => m.Id == mail.Id)
+                            .SelectMany(m => m.Items)
+                            .Select(i => new { i.SubKey, i.Value })
+                            .ToArray();
+
+            mail.Body = items.Single(i => i.SubKey.ToLower() == "body").Value;
+            mail.Subject = items.Single(i => i.SubKey.ToLower() == "subject").Value;
+
+            return mail;
         }
     }
 }

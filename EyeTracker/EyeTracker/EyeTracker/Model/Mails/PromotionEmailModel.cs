@@ -13,6 +13,7 @@ namespace EyeTracker.Model.Mails
         public string Body { get; set; }
         public string ContactUsEmail { get; set; }
         public string UnsubscribeUrl { get; set; }
+        public string UserEmail { get; set; }
 
         public PromotionEmailModel(bool isEmailProcess)
             : base(isEmailProcess)

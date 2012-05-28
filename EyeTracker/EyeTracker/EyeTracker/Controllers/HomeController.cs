@@ -15,6 +15,7 @@ using EyeTracker.Model.Master;
 using EyeTracker.Common.Queries;
 using EyeTracker.Model.Pages.Home.Mails;
 using EyeTracker.Common.Queries.Content;
+using EyeTracker.Common.Mails;
 
 namespace EyeTracker.Controllers
 {
@@ -89,8 +90,8 @@ namespace EyeTracker.Controllers
             */
             try
             {
-                //var model = new MailGenerator(this.ControllerContext, urlPart1, urlPart2, urlPart3).Model;
-                return null;// View("Mails/" + model.Template.ToString(), model);
+                var email = new PromotionEmail(urlPart1, urlPart2, false);
+                return View(email.EmailPagePath, email.Model);
             }
             catch
             {

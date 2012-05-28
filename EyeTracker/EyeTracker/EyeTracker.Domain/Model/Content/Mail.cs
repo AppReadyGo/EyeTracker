@@ -1,4 +1,6 @@
-﻿
+﻿using System.Linq;
+using System.Collections.Generic;
+using Iesi.Collections.Generic;
 namespace EyeTracker.Domain.Model.Content
 {
     public class Mail : SystemMail
@@ -11,8 +13,7 @@ namespace EyeTracker.Domain.Model.Content
         {
             this.Url = url;
             this.Theme = theme;
-            this.Subject = new Item("subject", subject, false);
-            this.Body = new Item("body", body, true);
+            this.items = new HashedSet<Item>(new[] { new Item("subject", subject, false), new Item("body", body, true) });
         }
 
         public virtual void Update(string url, Theme theme, string subject, string body)
@@ -26,6 +27,10 @@ namespace EyeTracker.Domain.Model.Content
 
     public class SystemMail
     {
+        protected Iesi.Collections.Generic.ISet<Item> items = null;
+        private Item body = null;
+        private Item subject = null;
+
         public virtual int Id { get; protected set; }
 
         public virtual string Url { get; protected set; }
@@ -34,9 +39,31 @@ namespace EyeTracker.Domain.Model.Content
 
         public virtual bool IsSystem { get { return true; } }
 
-        public virtual Item Subject { get; protected set; }
+        public virtual Item Subject 
+        {
+            get
+            {
+                if (subject == null)
+                {
+                    this.InitItems();
+                }
+                return subject;
+            }
+        }
 
-        public virtual Item Body { get; protected set; }
+        public virtual Item Body
+        {
+            get
+            {
+                if (body == null)
+                {
+                    this.InitItems();
+                }
+                return body;
+            }
+        }
+
+        public virtual IEnumerable<Item> Items { get { return items; } }
 
         /// <summary>
         /// System mail cannot be created programmatically just by script
@@ -48,6 +75,12 @@ namespace EyeTracker.Domain.Model.Content
             this.Theme = theme;
             this.Subject.Update(subject);
             this.Body.Update(body);
+        }
+
+        private void InitItems()
+        {
+            this.body = this.items.Single(i => i.SubKey.ToLower() == "body");
+            this.subject = this.items.Single(i => i.SubKey.ToLower() == "subject");
         }
     }
 }

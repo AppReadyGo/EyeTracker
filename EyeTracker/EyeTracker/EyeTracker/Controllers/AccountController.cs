@@ -93,10 +93,12 @@ namespace EyeTracker.Controllers
 
                 if (!result.Validation.Any())
                 {
-                    //Waiting for activation
-                    //FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
-                    new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
-                    return Redirect("/activation-email-sent");
+                    //TODO: send welcome email
+                    new MailGenerator(this.ControllerContext).Send(new PromotionEmail("thank-you", model.Email));
+                    return Redirect("/thank-you");
+                    ////Waiting for activation
+                    //new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
+                    //return Redirect("/activation-email-sent");
                 }
                 else
                 {

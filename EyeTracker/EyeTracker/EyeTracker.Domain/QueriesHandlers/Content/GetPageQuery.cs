@@ -11,17 +11,26 @@ namespace EyeTracker.Domain.Queries
     {
         public PageResult Run(ISession session, GetPageQuery query)
         {
-            return session.Query<Page>()
+            var page = session.Query<Page>()
                             .Where(p => p.Url.ToLower() == query.Url.ToLower())
                             .Select(p => new PageResult
                             {
                                 Id = p.Id,
                                 Url = p.Url,
-                                Title = p.Title.Value,
-                                Content = p.Content.Value,
                                 ThemeUrl = p.Theme.Url
                             })
                             .SingleOrDefault();
+
+            var items = session.Query<Page>()
+                            .Where(p => p.Id == page.Id)
+                            .SelectMany(p => p.Items)
+                            .Select(i => new { i.SubKey, i.Value })
+                            .ToArray();
+
+            page.Title = items.Single(i => i.SubKey.ToLower() == "title").Value;
+            page.Content = items.Single(i => i.SubKey.ToLower() == "content").Value;
+
+            return page;
         }
     }
 }

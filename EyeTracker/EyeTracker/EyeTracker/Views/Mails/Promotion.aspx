@@ -47,7 +47,7 @@ Inherits="System.Web.Mvc.ViewPage<EyeTracker.Model.Mails.PromotionEmailModel>" %
                                                 <tbody><tr>
                                                     <td valign="top" style="border-collapse:collapse">
                                                         <div style="color:#505050;font-family:Arial;font-size:14px;line-height:157%;text-align:left">
-<%=Model.Content %>
+<%=Model.Body %>
                                                         </div>
                                                                                                         </td>
                                                 </tr>
@@ -78,7 +78,7 @@ Inherits="System.Web.Mvc.ViewPage<EyeTracker.Model.Mails.PromotionEmailModel>" %
 <p>Contact us at: <%:Model.ContactUsEmail %>.</p>
         <%if (Model.IsEmailProcess)
           { %>
-    <p><a href="<%:Model.UnsubscribeUrl %>" style="color:#707070;font-weight:normal;text-decoration:underline" target="_blank">unsubscribe</a> | --><a href="<%:Model.ThisEmailUrl %>" style="color:#707070;font-weight:normal;text-decoration:underline" target="_blank">view it in your browser</a></p>
+    <p><a href="<%:Model.UnsubscribeUrl %>" style="color:#707070;font-weight:normal;text-decoration:underline" target="_blank">unsubscribe</a> | <a href="<%:Model.ThisEmailUrl %>" style="color:#707070;font-weight:normal;text-decoration:underline" target="_blank">view it in your browser</a></p>
 <%} %>
                                                         </div>
                                                     </td>
