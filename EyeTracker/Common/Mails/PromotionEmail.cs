@@ -31,9 +31,8 @@ namespace EyeTracker.Common.Mails
                 SiteRootUrl = siteRootUrl,
                 Subject = mailContent.Subject,
                 Body = body,
-                ThisEmailUrl = string.Format("{0}/mails/{1}", siteRootUrl, emailKey),
-                UnsubscribeUrl = string.Format("{0}/Account/Unsubscribe/{1}", siteRootUrl, userDetails.Email),
-                UserEmail = userDetails.Email
+                ThisEmailUrl = string.Format("{0}/mails/{1}/{2}", siteRootUrl, emailKey, userDetails.Email),
+                UnsubscribeUrl = string.Format("{0}/Account/Unsubscribe/{1}", siteRootUrl, userDetails.Email)
             };
 
             this.Subject = mailContent.Subject;
