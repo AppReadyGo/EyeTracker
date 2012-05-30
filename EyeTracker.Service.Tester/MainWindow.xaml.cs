@@ -195,11 +195,12 @@ namespace EyeTracker.Service.Tester
                 string package = Serialize<JsonPackage>(mc);
                 txtxBlkServiceResponse.Text = package;
                 MemoryStream streamQ2 = new MemoryStream();
-                DataContractJsonSerializer serializer2 = new DataContractJsonSerializer(typeof(String));
-                serializer2.WriteObject(streamQ2, package);
-                var arrayBytes = streamQ2.ToArray();
+                FPData obj = new FPData() { val = package };
 
-                result = SendToServer(arrayBytes);
+                DataContractJsonSerializer serializer2 = new DataContractJsonSerializer(typeof(FPData));
+                serializer2.WriteObject(streamQ2, obj);
+
+                result = SendToServer(streamQ2.ToArray());
             }
             catch (Exception ex)
             {
