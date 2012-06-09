@@ -1,0 +1,81 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html> 
+<html> 
+<head runat="server">
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <meta charset="utf-8" />
+    
+    <!-- Full Screen Web App Stuff for iOS -->
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"> 
+    <link href="images/icon.png" rel="apple-touch-icon" />
+	<link href="images/gt-startup.png" rel="apple-touch-startup-image" /> 
+        
+	<!-- JQuery Mobile -->  
+    <link rel="stylesheet" href="/Areas/m/Content/jqthemes/GreenBlack.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile.structure-1.1.0.min.css" /> 
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script> 
+    <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script> 
+    <!-- JQuery Mobile -->     
+    
+    <!-- Custom for GameTech -->
+   	
+    <link rel="stylesheet" href="/Areas/m/content/custom.css" />
+    <script src="/Areas/m/Scripts/custom.js"></script>
+
+       
+   	<script>
+   	// Twitter Feed Using JQuery
+   	$("#main").live('pageinit', function (evt) {
+   	    var url = 'http://twitter.com/statuses/user_timeline.json?screen_name=Mobillify&count=5&callback=?';
+   	    var html = '<marquee behavior="scroll" scrollamount="7" direction="left">';
+
+   	    $.getJSON(url, function (data) {
+   	        $.each(data, function (i, tweet) {
+   	            html += '<a href="http://mobile.twitter.com/Mobillify" target="_blank">' + tweet.text + '</a> . . . ';
+   	        });
+
+   	        html += '</marquee>';
+   	        $(".results").append(html);
+   	        $('div.results marquee').marquee();
+
+   	    });
+
+   	});
+	</script>
+
+
+</head>
+
+<body class="bggt"> 
+
+<div data-role="page" id="main" class="bggt">
+
+<div data-role="header" data-position="fixed">
+
+		<div data-role="navbar" class="custom-navbar">
+			<ul>
+            <li><a href="#main" data-theme="a" class="ui-btn-active">Home</a></li>
+            <li><a href="products">Products</a></li>
+            <li><a href="PlanAndPricing">Plan And Pricing</a></li>
+            </ul>
+	</div>
+</div><!-- /header -->
+    
+	<div data-role="content">
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    </div><!-- /content -->
+
+ 
+	
+<div data-role="footer" data-theme="gt" data-position="fixed">
+<div id="twitbar">
+<a href="http://mobile.twitter.com/searches?q=%23gametech" data-mini="true" data-role="button" data-icon="twitter" data-theme="a" target="_blank">#GameTech</a></div> 
+<div class="results"></div> 
+</div><!-- /footer -->
+
+</div><!-- /page -->
+
+</body>
+</html>
