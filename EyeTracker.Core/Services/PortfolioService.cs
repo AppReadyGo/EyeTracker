@@ -43,10 +43,10 @@ namespace EyeTracker.Core.Services
         {
             try
             {
-                var userRes = membershipService.GetCurrentUserId();
-                if (userRes.HasError)
+                var userId = membershipService.GetCurrentUserId();
+                if (!userId.HasValue)
                 {
-                    return new OperationResult<Portfolio>(userRes);
+                    return new OperationResult<Portfolio>(ErrorNumber.AccessDenied);
                 }
                 return new OperationResult<Portfolio>(repository.Get(id));
             }
@@ -60,13 +60,12 @@ namespace EyeTracker.Core.Services
         {
             try
             {
-                var userRes = membershipService.GetCurrentUserId();
-                if (userRes.HasError)
+                var userId = membershipService.GetCurrentUserId();
+                if (!userId.HasValue)
                 {
-                    return new OperationResult<IList<Portfolio>>(userRes);
+                    return new OperationResult<IList<Portfolio>>(ErrorNumber.AccessDenied);
                 }
-                int userId = userRes.Value;
-                return new OperationResult<IList<Portfolio>>(repository.GetAll(userId));
+                return new OperationResult<IList<Portfolio>>(repository.GetAll(userId.Value));
             }
             catch (Exception exp)
             {
@@ -91,12 +90,12 @@ namespace EyeTracker.Core.Services
             try
             {
                 //Check Security
-                var userRes = membershipService.GetCurrentUserId();
-                if (userRes.HasError)
+                var userId = membershipService.GetCurrentUserId();
+                if (!userId.HasValue)
                 {
-                    return new OperationResult<int>(userRes);
+                    return new OperationResult<int>(ErrorNumber.AccessDenied);
                 }
-                var id = repository.AddPortfolio(description, timeZone, userRes.Value);
+                var id = repository.AddPortfolio(description, timeZone, userId.Value);
                 return new OperationResult<int>(id);
             }
             catch (Exception exp)
@@ -111,10 +110,10 @@ namespace EyeTracker.Core.Services
             try
             {
                 //Check Security
-                var userRes = membershipService.GetCurrentUserId();
-                if (userRes.HasError)
+                var userId = membershipService.GetCurrentUserId();
+                if (!userId.HasValue)
                 {
-                    return new OperationResult<int>(userRes);
+                    return new OperationResult<int>(ErrorNumber.AccessDenied);
                 }
                 repository.Update(id, description, timeZone);
                 return new OperationResult();

@@ -21,7 +21,7 @@ namespace EyeTracker.Core
 
         public OperationResult Write(string userId, UserActivityType userActivityType, string description, int? linkedObjectId)
         {
-            return Write(new UserActivity() { Date = DateTime.UtcNow, UserId = new Guid(userId), ActivityType = userActivityType, Description = description, LinkedObjectId = linkedObjectId });
+            return Write(new UserActivity() { Date = DateTime.UtcNow, UserId = int.Parse(userId), ActivityType = userActivityType, Description = description, LinkedObjectId = linkedObjectId });
         }
 
         public OperationResult Write(UserActivity userActivity)
@@ -41,11 +41,11 @@ namespace EyeTracker.Core
             }
         }
 
-        public OperationResult<List<UserActivity>> Get(string userId, UserActivityType? userActivityType, DateTime? fromDate, DateTime? toDate, int? lastActivitesCount)
+        public OperationResult<List<UserActivity>> Get(int userId, UserActivityType? userActivityType, DateTime? fromDate, DateTime? toDate, int? lastActivitesCount)
         {
             try
             {
-                return new OperationResult<List<UserActivity>>(repository.Get(new Guid(userId), userActivityType, fromDate, toDate, lastActivitesCount));
+                return new OperationResult<List<UserActivity>>(repository.Get(userId, userActivityType, fromDate, toDate, lastActivitesCount));
             }
             catch (Exception exp)
             {

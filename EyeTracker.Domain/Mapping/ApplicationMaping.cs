@@ -23,14 +23,12 @@ namespace EyeTracker.Domain.Mapping
             ManyToOne(x => x.Portfolio, map =>
             {
                 map.NotNullable(true);
-                map.Column("PortfolioId");
-                map.Lazy(LazyRelation.NoLazy);
+                map.Column("PortfolioID");
                 map.Cascade(Cascade.DeleteOrphans);
             });
             Set(p => p.Screens, 
                 map => {
-                    map.Key(k => k.Column("ApplicationId"));
-                    map.Lazy(CollectionLazy.NoLazy);
+                    map.Key(k => k.Column("ApplicationID"));
                     map.Table("ApplicationScreens");
                     map.Cascade(Cascade.All);
                 },

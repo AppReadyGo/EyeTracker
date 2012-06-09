@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Security;
 using EyeTracker.Common;
+using System.Web;
 
 namespace EyeTracker.Core.Services
 {
@@ -20,8 +21,7 @@ namespace EyeTracker.Core.Services
         MembershipCreateStatus CreateUser(string userName, string password, string email);
         bool ChangePassword(string userName, string oldPassword, string newPassword);
         void DeleteUser(string userName);
-        OperationResult<MembershipUser> GetCurrentUser();
-        OperationResult<int> GetCurrentUserId();
+        int? GetCurrentUserId();
 
     }
 
@@ -89,28 +89,15 @@ namespace EyeTracker.Core.Services
             }
         }
 
-        public OperationResult<MembershipUser> GetCurrentUser()
+        public int? GetCurrentUserId()
         {
-            MembershipUser user = Membership.GetUser();
-            if (user == null)
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                return new OperationResult<MembershipUser>(ErrorNumber.AccessDenied);
-            }
-            return new OperationResult<MembershipUser>(user);
-        }
-
-
-
-        public OperationResult<int> GetCurrentUserId()
-        {
-            var getCurUserRes = GetCurrentUser();
-            if (getCurUserRes.HasError)
-            {
-                return new OperationResult<int>(getCurUserRes);
+                return int.Parse(HttpContext.Current.User.Identity.Name);
             }
             else
             {
-                return new OperationResult<int>(int.Parse(getCurUserRes.Value.ProviderUserKey.ToString()));
+                return null;
             }
         }
 

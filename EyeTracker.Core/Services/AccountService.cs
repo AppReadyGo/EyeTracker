@@ -41,12 +41,12 @@ namespace EyeTracker.Core.Services
                 account.FirstName = WebUtility.HtmlDecode(account.FirstName);
                 account.LastName = WebUtility.HtmlDecode(account.LastName);
                 //Check Security
-                var userRes = membershipService.GetCurrentUserId();
-                if (userRes.HasError)
+                var userId = membershipService.GetCurrentUserId();
+                if (!userId.HasValue)
                 {
-                    return new OperationResult<int>(userRes);
+                    return new OperationResult<int>(userId.Value);
                 }
-                account.UserId = userRes.Value;
+                account.UserId = userId.Value;
                 //Check account properties
                 ErrorNumber res = CheckAccountProperties(account);
                 if (res != ErrorNumber.None)
@@ -84,12 +84,12 @@ namespace EyeTracker.Core.Services
             try
             {
                 //Check Security
-                var userRes = membershipService.GetCurrentUserId();
-                if (userRes.HasError)
+                var userId = membershipService.GetCurrentUserId();
+                if (!userId.HasValue)
                 {
-                    return new OperationResult<AccountInfo>(userRes);
+                    return new OperationResult<AccountInfo>(ErrorNumber.AccessDenied);
                 }
-                var accInfo = repository.Get(userRes.Value, accId);
+                var accInfo = repository.Get(userId.Value, accId);
                 if (accInfo == null)
                 {
                     return new OperationResult<AccountInfo>(ErrorNumber.NotFound);
@@ -108,12 +108,12 @@ namespace EyeTracker.Core.Services
             try
             {
                 //Check Security
-                var userRes = membershipService.GetCurrentUserId();
-                if (userRes.HasError)
+                var userId = membershipService.GetCurrentUserId();
+                if (!userId.HasValue)
                 {
-                    return new OperationResult<AccountInfo>(userRes);
+                    return new OperationResult<AccountInfo>(ErrorNumber.AccessDenied);
                 }
-                return new OperationResult(repository.Remove(userRes.Value, accId));
+                return new OperationResult(repository.Remove(userId.Value, accId));
             }
             catch (Exception exp)
             {
@@ -126,12 +126,12 @@ namespace EyeTracker.Core.Services
             try
             {
                 //Check Security
-                var userRes = membershipService.GetCurrentUserId();
-                if (userRes.HasError)
+                var userId = membershipService.GetCurrentUserId();
+                if (userId.HasValue)
                 {
-                    return new OperationResult<AccountInfo>(userRes);
+                    return new OperationResult<AccountInfo>(ErrorNumber.AccessDenied);
                 }
-                account.UserId = userRes.Value;
+                account.UserId = userId.Value;
                 //Check account properties
                 ErrorNumber res = CheckAccountProperties(account);
                 if (res != ErrorNumber.None)
