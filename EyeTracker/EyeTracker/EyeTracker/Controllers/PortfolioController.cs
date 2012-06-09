@@ -14,6 +14,7 @@ using EyeTracker.Controllers.Master;
 using EyeTracker.Model.Pages.Portfolio;
 using EyeTracker.Model.Master;
 using EyeTracker.Common.QueryResults.Analytics.QueryResults;
+using EyeTracker.Model.Pages.Analytics;
 
 namespace EyeTracker.Controllers
 {
@@ -45,9 +46,10 @@ namespace EyeTracker.Controllers
             if (!countriesRes.HasError)
             {
                 var timeZones = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
+                FilterParametersModel filter = null;
 
-                return View(new PortfolioModel { TimeZone = 0, ViewData = new SelectList(timeZones, "Id", "DisplayName") }, 
-                            AnalyticsMasterModel.MenuItem.Portfolios, new FilterDataResult(), null);
+                return View(new PortfolioModel { TimeZone = 0, ViewData = new SelectList(timeZones, "Id", "DisplayName") },
+                            AnalyticsMasterModel.MenuItem.Portfolios, new FilterDataResult(), filter);
             }
             else
             {
@@ -77,8 +79,9 @@ namespace EyeTracker.Controllers
                 {
                     var timeZones = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
                     model.ViewData = new SelectList(timeZones, "Id", "DisplayName");
+                    FilterParametersModel filter = null;
 
-                    return View(model, AnalyticsMasterModel.MenuItem.Portfolios, new FilterDataResult(), null);
+                    return View(model, AnalyticsMasterModel.MenuItem.Portfolios, new FilterDataResult(), filter);
                 }
                 else
                 {

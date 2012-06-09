@@ -6,7 +6,7 @@ using EyeTracker.Common.Queries;
 using EyeTracker.Common.Mails;
 using EyeTracker.Common;
 
-namespace EyeTracker.Controllers
+namespace EyeTracker.Common
 {
     public class MailGenerator
     {

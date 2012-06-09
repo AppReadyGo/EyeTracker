@@ -1,34 +1,29 @@
 ﻿<%@ Control Language="C#" Inherits="ViewUserControl<EyeTracker.Models.Account.LogOnModel>" %>
 <% using (Html.BeginForm()) { %>
-    <%: Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.") %>
-        <h3>Log On</h3>
-        <p>
-            Please enter your username and password. 
-        </p>
+    <h2>Log On</h2>
+    <p>
+        Please enter your username and password. 
+    </p>
                
-        <div class="editor-label">
-            <%: Html.LabelFor(m => m.UserName) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.TextBoxFor(m => m.UserName)%>
-            <%: Html.ValidationMessageFor(m => m.UserName)%>
+    <fieldset>
+	    <div class="field text">
+            <%: Html.LabelFor(m => m.UserName) %> <%: Html.TextBoxFor(m => m.UserName)%>
+            <div class="error"><%: Html.ValidationMessageFor(m => m.UserName)%></div>
         </div>
                 
-        <div class="editor-label">
-            <%: Html.LabelFor(m => m.Password)%>
+	    <div class="field text">
+            <%: Html.LabelFor(m => m.Password)%> <%: Html.PasswordFor(m => m.Password)%>
+            <div class="error"><%: Html.ValidationMessageFor(m => m.Password)%></div>
         </div>
-        <div class="editor-field">
-            <%: Html.PasswordFor(m => m.Password)%>
-            <%: Html.ValidationMessageFor(m => m.Password)%>
-        </div>
+        <div class="error"><%: Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.") %></div>
                 
-        <div class="editor-label">
+	    <div class="subactions">
+            <span class="forgot-password"><%: Html.ActionLink("forgot password", "ForgotPassword") %></span>
             <%: Html.CheckBoxFor(m => m.RememberMe)%>
             <%: Html.LabelFor(m => m.RememberMe)%>
-            <%: Html.ActionLink("forgot password", "ForgotPassword") %>
+            <div style="clear:both;"></div>
         </div>
                 
-        <p>
-            <input type="submit" value="Log On" />
-        </p>
+	    <div class="alignright"><a href="#" class="link2" onClick="$(this).closest('form').submit();"><span><span>LogOn</span></span></a></div>
+    </fieldset>
 <% } %>

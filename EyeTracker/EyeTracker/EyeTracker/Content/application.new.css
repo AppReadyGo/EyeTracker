@@ -8,7 +8,7 @@ form input.name{width:300px;}
 .step textarea{border:1px solid #666;width:100%;height:270px;}
 .step div{margin:10px 5px 10px 0;}
 
-.overlay{position:absolute;background-color:rgba(255, 255, 255, 0.6);z-index:100;}
+.overlay{position:absolute;background-color:rgba(240, 240, 240, 0.6);z-index:100;}
 
 .img-preview{display:none;position:absolute;background-color:rgba(255, 255, 255, 0.6);z-index:101;width:100%;height:100%;text-align:center;top:0;left:0;}
 .img-preview div{position:absolute;background-color:#fff;z-index:102;padding:10px;border:1px solid #666;margin:auto;}

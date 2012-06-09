@@ -8,13 +8,14 @@ namespace EyeTracker.Model.Master
     public class AfterLoginMasterModel
     {
         public SelectedMenuItem SelectedItem { get; private set; }
-        public string AnalyticsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Analytics ? "class=\"selected\"" : string.Empty; } }
-        public string MyAccountCssClassAttribute { get { return SelectedItem == SelectedMenuItem.MyAccount ? "class=\"selected\"" : string.Empty; } }
-        public string TutorialsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Tutorials ? "class=\"selected\"" : string.Empty; } }
-        public string ProductsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Products ? "class=\"selected\"" : string.Empty; } }
-        public string PlanAndPricingCssClassAttribute { get { return SelectedItem == SelectedMenuItem.PlanAndPricing ? "class=\"selected\"" : string.Empty; } }
-        public string ContactsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Contacts ? "class=\"selected\"" : string.Empty; } }
-        public string AdministratorCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Administrator ? "class=\"selected\"" : string.Empty; } }
+        public string AnalyticsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Analytics ? "class=\"current\"" : string.Empty; } }
+        public string MyAccountCssClassAttribute { get { return SelectedItem == SelectedMenuItem.MyAccount ? "class=\"current\"" : string.Empty; } }
+        public string TutorialsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Tutorials ? "class=\"current\"" : string.Empty; } }
+        public string ProductsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Products ? "class=\"current\"" : string.Empty; } }
+        public string PlanAndPricingCssClassAttribute { get { return SelectedItem == SelectedMenuItem.PlanAndPricing ? "class=\"current\"" : string.Empty; } }
+        public string ContactsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Contacts ? "class=\"current\"" : string.Empty; } }
+        public string AdministratorCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Administrator ? "class=\"current\"" : string.Empty; } }
+        public string UserName { get; set; }
 
         public AfterLoginMasterModel()
         {
@@ -23,6 +24,7 @@ namespace EyeTracker.Model.Master
         public AfterLoginMasterModel(SelectedMenuItem selectedItem)
         {
             this.SelectedItem = selectedItem;
+            this.UserName = "Yuri Panshin";
         }
 
         public enum SelectedMenuItem

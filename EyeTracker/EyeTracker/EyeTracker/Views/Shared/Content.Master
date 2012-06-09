@@ -4,11 +4,13 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
-    <link href="<%: Url.Content("~/Content/content.master.css") %>" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<div class="content">
+<div class="inside">
+	<div class="wrap">
     <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    <div class="clear"></div>
+	</div>
 </div>
 </asp:Content>
 

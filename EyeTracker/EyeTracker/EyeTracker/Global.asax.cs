@@ -11,6 +11,7 @@ using EyeTracker.Model;
 using EyeTracker.DAL.Domain;
 using EyeTracker.Domain;
 using EyeTracker.Domain.Model.Events;
+using EyeTracker.Common;
 
 namespace EyeTracker
 {
@@ -25,119 +26,141 @@ namespace EyeTracker
             routes.MapRoute(
                 "JavaScript",
                 "Analytics/{filename}.js",
-                new { controller = "Data", action = "Analytics" }
+                new { controller = "Data", action = "Analytics" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "AjaxData", 
-                "Data/{action}/", 
-                new { controller = "Data" } 
+                "Data/{action}/",
+                new { controller = "Data" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "Home", 
-                "", 
-                new { controller = "Home", action = "Index" } 
+                "",
+                new { controller = "Home", action = "Index" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "Admin",
                 "Admin/{action}",
-                new { action = "Index", controller = "Admin" }
+                new { action = "Index", controller = "Admin" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "Admin_elmah",
                 "Admin/Elmah/{query}",
-                new { action = "Elmah", controller = "Admin", query = UrlParameter.Optional }
+                new { action = "Elmah", controller = "Admin", query = UrlParameter.Optional },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                "Admin_edit",
                "Admin/{action}/{id}",
-               new { action = "UserEdit", controller = "Admin" }
+               new { action = "UserEdit", controller = "Admin" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "Account",
                 "Account/{action}",
-                new { controller = "Account", action = "LogOn" }
+                new { controller = "Account", action = "LogOn" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "Activation",
                 "Account/{action}/{key}",
-                new { controller = "Account", action = "Activate" }
+                new { controller = "Account", action = "Activate" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "ApplicationScreen", 
-                "Application/Screen/{appId}/{width}/{height}/{file}", 
-                new { controller = "Application", action = "Screen", appId = UrlParameter.Optional }
+                "Application/Screen/{appId}/{width}/{height}/{file}",
+                new { controller = "Application", action = "Screen", appId = UrlParameter.Optional },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "ApplicationClickHeatMapImage",
                 "Application/ClickHeatMapImage/{appId}/{pageUri}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}/{preview}",
-                new { controller = "Application", action = "ClickHeatMapImage" }
+                new { controller = "Application", action = "ClickHeatMapImage" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "ApplicationViewHeatMapImage",
                 "Application/ViewHeatMapImage/{appId}/{pageUri}/{clientWidth}/{clientHeight}/{fromDate}/{toDate}/{preview}",
-                new { controller = "Application", action = "ViewHeatMapImage" }
+                new { controller = "Application", action = "ViewHeatMapImage" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "Application", 
-                "Application/{action}/{portfolioId}/{appId}", 
-                new { controller = "Application", action = "Index", appId = UrlParameter.Optional }
+                "Application/{action}/{portfolioId}/{appId}",
+                new { controller = "Application", action = "Index", appId = UrlParameter.Optional },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "ApplicationDef", 
-                "Application/{portfolioId}", 
-                new { controller = "Application", action = "Index" }
+                "Application/{portfolioId}",
+                new { controller = "Application", action = "Index" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "Portfolio",
                 "Portfolio/{action}/{id}",
-                new { controller = "Portfolio", action = "Index", id = UrlParameter.Optional }
+                new { controller = "Portfolio", action = "Index", id = UrlParameter.Optional },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "AnalyticsData",
                 "Analytics/{action}/{portfolioId}/{applicationId}/{fromDate}/{toDate}/{screenSize}/{path}/{language}/{os}/{location}",
-                new { controller = "Analytics", action = "Dashboard", applicationId = UrlParameter.Optional, fromDate = UrlParameter.Optional, toDate = UrlParameter.Optional, screenSize = UrlParameter.Optional, path = UrlParameter.Optional, language = UrlParameter.Optional, os = UrlParameter.Optional, location = UrlParameter.Optional }
+                new { controller = "Analytics", action = "Dashboard", applicationId = UrlParameter.Optional, fromDate = UrlParameter.Optional, toDate = UrlParameter.Optional, screenSize = UrlParameter.Optional, path = UrlParameter.Optional, language = UrlParameter.Optional, os = UrlParameter.Optional, location = UrlParameter.Optional },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "Analytics",
                 "Analytics/{action}/{id}",
-                new { controller = "Analytics", action = "Index", id = UrlParameter.Optional }
+                new { controller = "Analytics", action = "Index", id = UrlParameter.Optional },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
-                "PlanAndPricing",
-                "PlanAndPricing",
-                new { controller = "Home", action = "Pricing" });
+                "CSS", // Route name
+                "content/css/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}/{path7}", // URL with parameters
+                new { controller = "Home", action = "css", path2 = UrlParameter.Optional, path3 = UrlParameter.Optional, path4 = UrlParameter.Optional, path5 = UrlParameter.Optional, path6 = UrlParameter.Optional, path7 = UrlParameter.Optional }, // Parameter defaults
+                new[] { "EyeTracker.Controllers" } // Namespaces
+            );
 
             routes.MapRoute(
                 "HomeRoute",
                 "Home/{action}",
-                new { controller = "Home", action = "Index" });
+                new { controller = "Home", action = "Index" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
+            );
 
             routes.MapRoute(
                 "Mails",
                 "Mails/{urlPart1}/{urlPart2}/{urlPart3}/{isMail}",
-                new { controller = "Home", action = "MailContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional, isMail = UrlParameter.Optional }
+                new { controller = "Home", action = "MailContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional, isMail = UrlParameter.Optional },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
                 "Content", 
-                "{urlPart1}/{urlPart2}/{urlPart3}/", 
-                new { controller = "Home", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional }
+                "{urlPart1}/{urlPart2}/{urlPart3}/",
+                new { controller = "Home", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional },
+                new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             //routes.MapRoute(
@@ -178,6 +201,9 @@ namespace EyeTracker
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
+            // GlobalFilters.Filters.Add(new CSSAttribute());
+            GlobalFilters.Filters.Add(new RedirectToMobileAttribute(), 1);
+
 
             //ModelBinders.Binders[typeof(VisitEvent)] = new JsonVisitInfoModelBinder();
             //ModelBinders.Binders[typeof(PackageEvent)] = new JsonPackageModelBinder();

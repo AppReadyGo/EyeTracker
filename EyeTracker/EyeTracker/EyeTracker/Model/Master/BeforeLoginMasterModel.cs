@@ -20,7 +20,7 @@ namespace EyeTracker.Model.Master
 
         public string GetMenuItemClass(MenuItem item)
         {
-            return item == this.SelectedItem ? "selected" : string.Empty;
+            return item == this.SelectedItem ? "current" : string.Empty;
         }
 
         public enum MenuItem

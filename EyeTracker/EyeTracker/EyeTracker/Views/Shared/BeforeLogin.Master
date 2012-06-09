@@ -8,21 +8,31 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
 
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
    <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
-   <link href="<%: Url.Content("~/Content/beforelogin.master.css") %>" rel="stylesheet" type="text/css" />
+   <link rel="stylesheet" href="<%: Url.Content("~/Content/template/css/beforelogin.master.css") %>" type="text/css" media="all">
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <div class="main-wrapper">
-    <div class="header">
-        <div class="top">
-            <b class="left"></b>
-            <b class="right"></b>
-            <div class="clears"></div>
-            <div class="logo">
-                <div><a href="/"><img title="Finger" alt="Home" src="/Content/images/logo_60.png"></a></div>
-            </div>
-            <!-- AddThis Button BEGIN -->
-            <div class="social addthis_toolbox addthis_default_style ">
+<div class="tail-top">
+<!-- header -->
+	<header>
+		<div class="container">
+			<div class="header-box">
+				<div class="left">
+					<div class="right">
+						<nav>
+							<ul>
+                                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Home) %>"><a href="/">Home</a></li>
+                            <%--<li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Tutorials) %>"><a href="/Tutorials/">Tutorials</a></li>--%>
+                                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Products) %>"><a href="/Products">Products</a></li>
+                                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing) %>"><a href="/PlanAndPricing">Plans and Pricing</a></li>
+							</ul>
+						</nav>
+						<h1><a href="/"><img title="Finger" alt="Home" src="/Content/images/logo_60.png"></a></h1>
+					</div>
+				</div>
+			</div>
+			<!-- AddThis Button BEGIN -->
+            <div class="addthis_toolbox addthis_default_style " style="position:absolute; top:20px;left:5px;width:300px;">
             <a class="addthis_button_preferred_1"></a>
             <a class="addthis_button_preferred_2"></a>
             <a class="addthis_button_preferred_3"></a>
@@ -30,33 +40,94 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
             <a class="addthis_button_compact"></a>
             <a class="addthis_counter addthis_bubble_style"></a>
             </div>
-            <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4f9fc39f532649c9"></script>
+            <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4fc7cd9c2af8afd3"></script>
             <!-- AddThis Button END -->
-        </div>
-        <div class="menu">
-            <ul class="main-menu">
-                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Home) %>"><a href="/">Home</a></li>
-<%--            <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Tutorials) %>"><a href="/Tutorials/">Tutorials</a></li>--%>
-                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Products) %>"><a href="/Products">Products</a></li>
-                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing) %>"><a href="/PlanAndPricing">Plans and Pricing</a></li>
-            </ul>
-            <ul class="login-menu">
-                <%--<li><a href="/account/logon">Login</a></li>--%>
-                <li><a href="/account/register">Register</a></li>
-            </ul>
-        </div>
-    </div>
-    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-    <div class="bottom">
-        <b class="left"></b>
-        <b class="right"></b>
-        <div class="clears"></div>
-    </div>
-    <div class="footer">
-        <span>Copyright &#169; 2011<%= DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "" %> <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></span>
-<%--        <ul>
-            <li><a href="/Contacts">Contacts</a></li>
-        </ul>
---%>    </div>
-    </div>
+			<form action="/Account/LogOn" method="post" id="login-form">
+				<fieldset>
+					<span class="text">
+						<input type="text" name="UserName" value="Username" onFocus="if(this.value=='Username'){this.value=''}" onBlur="if(this.value==''){this.value='Username'}">
+					</span>
+					<span class="text">
+						<input type="password" name="Password" value="Password" onFocus="if(this.value=='Password'){this.value=''}" onBlur="if(this.value==''){this.value='Password'}">
+					</span>
+					<a href="#" class="login" onClick="$(this).closest('form').submit();"><span><span>Login</span></span></a>
+					<span class="links"><%: Html.ActionLink("Forgot Password?", "ForgotPassword", "Account") %><br/><%: Html.ActionLink("Register", "Register", "Account")%></span>
+				</fieldset>
+			</form>
+		</div>
+	</header>
+<!-- content -->
+	<section id="content">
+		<div class="container">
+             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+       </div>
+    </section>
+</div>
+<!-- aside -->
+<aside>
+	<div class="container">
+		<div class="inside">
+			<div class="line-ver1">
+				<div class="line-ver2">
+					<div class="line-ver3">
+						<div class="wrapper line-ver4">
+							<ul class="list col-1">
+								<li>Products</li>
+								<li><a href="/products/touch-map">Touch Map</a></li>
+								<li><a href="/products/eye-track">Eye Track</a></li>
+								<li><a href="/products/play-back">Play Back</a></li>
+							</ul>
+							<ul class="list col-2">
+								<li>Shopping</li>
+								<li><a href="#">Offer Disclaimers</a></li>
+								<li><a href="#">Domain Search</a></li>
+								<li><a href="#">Product Catalog</a></li>
+								<li><a href="#">Producr Advisor</a></li>
+								<li><a href="#">Gift Cards</a></li>
+								<li><a href="#">Mobile</a></li>
+							</ul>
+							<ul class="list col-3">
+								<li>Resources</li>
+								<li><a href="#">Webmail</a></li>
+								<li><a href="#">WHOIS search</a></li>
+								<li><a href="#">ICANN Confirmation</a></li>
+								<li><a href="#">Affiliates</a></li>
+								<li><a href="#">Connect with Us</a></li>
+								<li><a href="#">Gadgets / Widgets</a></li>
+							</ul>
+							<ul class="list col-4">
+								<li>Help and Support</li>
+								<li><a href="#">Support &amp; Sales</a></li>
+								<li><a href="#">Billing Support</a></li>
+								<li><a href="#">Email Our Support Team</a></li>
+								<li><a href="#">FAQ’s</a></li>
+								<li><a href="#">User’s Guides</a></li>
+								<li><a href="#">Report Spam</a></li>
+							</ul>
+							<ul class="list col-5">
+								<li>About</li>
+								<li><a href="#">Careers</a></li>
+								<li><a href="#">Security Center</a></li>
+								<li><a href="#">Company Info</a></li>
+								<li><a href="#">News Center</a></li>
+								<li><a href="#">Customer Testimonials</a></li>
+								<li><a href="#">What’s New</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</aside>
+<!-- footer -->
+<footer>
+	<div class="container">
+		<div class="inside">
+			<a rel="nofollow" href="http://www.templatemonster.com" class="new_window">Website template</a> designed by TemplateMonster.com<br>
+			<a href="http://www.templates.com/product/3d-models/" class="new_window">3D Models</a> provided by Templates.com<br>
+            <span>Copyright &#169; 2011<%= DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "" %> <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></span>
+		</div>
+	</div>
+</footer>
 </asp:Content>

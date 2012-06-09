@@ -16,6 +16,9 @@ using EyeTracker.Common.Queries;
 using EyeTracker.Model.Pages.Home.Mails;
 using EyeTracker.Common.Queries.Content;
 using EyeTracker.Common.Mails;
+using System.Text.RegularExpressions;
+using System.Text;
+using System.IO;
 
 namespace EyeTracker.Controllers
 {
@@ -125,6 +128,47 @@ namespace EyeTracker.Controllers
                 }
                 return View(new ContentModel { Title = page.Title, Content = page.Content }, selectedItem);
             }
+        }
+
+        public ActionResult css(string path1, string path2, string path3, string path4, string path5, string path6, string path7)
+        {
+            var paths = new string[] { path1, path2, path3, path4, path5, path6, path7 }.Where(p => !string.IsNullOrEmpty(p));
+
+
+            var sb = new StringBuilder();
+            foreach (var p in paths)
+            {
+                string path = p;
+                if (path.EndsWith(".css"))
+                {
+                    path = path.Substring(0, path.Length - 4);
+                }
+
+                var dir = Server.MapPath("~/Content/");
+                path = path.Replace("_", "\\");
+                sb.AppendLine("/*" + path + "*/");
+                var fileContent = System.IO.File.ReadAllText(dir + path + ".css");
+
+                sb.Append(fileContent);
+            }
+            byte[] byteArray = Encoding.ASCII.GetBytes(RemoveWhiteSpaceFromStylesheets(sb.ToString()));
+            return base.File(byteArray, "text/css");
+        }
+
+
+        public string RemoveWhiteSpaceFromStylesheets(string body)
+        {
+            body = Regex.Replace(body, @"[a-zA-Z]+#", "#");
+            body = Regex.Replace(body, @"[\n\r]+\s*", string.Empty);
+            body = Regex.Replace(body, @"\s+", " ");
+            body = Regex.Replace(body, @"\s?([:,;{}])\s?", "$1");
+            body = body.Replace(";}", "}");
+            body = Regex.Replace(body, @"([\s:]0)(px|pt|%|em)", "$1");
+
+            // Remove comments from CSS
+            body = Regex.Replace(body, @"/\*[\d\D]*?\*/", string.Empty);
+
+            return body;
         }
     }
 }

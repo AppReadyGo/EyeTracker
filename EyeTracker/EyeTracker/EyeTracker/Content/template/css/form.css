@@ -1,0 +1,12 @@
+﻿
+form .field {width:100%;overflow:hidden}
+form .field.text {margin-bottom:10px;}
+form .field.text .error {text-align:right;color:Red;font-size:11px;}
+form .error {color:Red;margin-bottom:10px;}
+form label {float:left;width:125px}
+form input,
+form textarea {border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;behavior:url(js/PIE.htc);position:relative; border:1px solid #cbcbcb; background-color:#fff;float:left; color:#464646}
+form input {width:300px;padding:3px 3px}
+form textarea {width:549px;height:293px;padding:3px 3px;overflow:auto;margin-bottom:17px}
+form a {margin-left:6px}
+

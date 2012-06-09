@@ -8,7 +8,7 @@
             <tr><td class="label"><%: Html.LabelFor(m => m.Type)%></td><td><%: Html.DropDownListFor(m => m.Type, Model.ViewData.TypesList)%></td></tr>
         </tbody>
     </table>
-    <p id="action_pnl"><input type="button" id="create_lnk" value="Create Application" /><a href="/Analytics">Cancel</a></p>
+    <p id="action_pnl"><a href="#" id="create_lnk" class="link2"><span><span>Create</span></span></a>&nbsp;<a class="link4" href="/Analytics"><span><span>Cancel</span></span></a></p>
 <div id="sample_code">
     <!--div id="screens" class="step" style="display:none;">
         <div id="img_preview" class="img-preview"><div><img src="" /><a>X</a></div></div>
@@ -29,7 +29,7 @@
         </fieldset>
      </div-->
     <div id="sample_web_code" class="step">
-        <h3>3. Paste this code on your site</h3>
+        <strong>3. Paste this code on your site</strong>
         <div>Copy the following code, then paste it onto every page you want to track immediately before the closing &lt;/head&gt; tag.</div>
         <textarea readonly="readonly" id="web_code">
             <script type="text/javascript">
@@ -48,48 +48,25 @@
         </textarea>
     </div>
     <div id="sample_android_code" class="step">
-        <h3>3. Download package and insert into your code</h3>
+        <strong>3. Download package and insert into your code</strong>
         <div>Package: <a href="<%: Model.ViewData.PackageLink %>">Android Package 1.0.1</a></div>
         <div>Property ID: <strong id="property_id"><%: Model.ViewData.PropertyId%></strong></div>
         <textarea readonly="readonly" id="android_code">
-    public static void main(String[] args) {
- 
-    int radius = 0;
-    System.out.println("Please enter radius of a circle");
- 
-    try
-    {
-    //get the radius from console
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    radius = Integer.parseInt(br.readLine());
-    }
-    //if invalid value was entered
-    catch(NumberFormatException ne)
-    {
-    System.out.println("Invalid radius value" + ne);
-    System.exit(0);
-    }
-    catch(IOException ioe)
-    {
-    System.out.println("IO Error :" + ioe);
-    System.exit(0);
-    }
- 
-    /*
-    * Area of a circle is
-    * pi * r * r
-    * where r is a radius of a circle.
-    */
- 
-    //NOTE : use Math.PI constant to get value of pi
-    double area = Math.PI * radius * radius;
- 
-    System.out.println("Area of a circle is " + area);
-    }
+    import com.mobillify.fingerprint.FingerPrint;
+    public class TestActivity extends Activity {
 
+        //Activity and View Details
+        private static final String appID = "<%: Model.ViewData.PropertyId%>";
+        private static final String viewPath = "View Unique Name";
+
+        .
+        .
+        .
+        .
+     }
         </textarea>
     </div>
-    <p><input type="submit" value="Save Application" /><a href="/Analytics">Cancel</a></p>
+    <p><a href="#" class="link2" onClick="$(this).closest('form').submit();"><span><span>Save</span></span></a>&nbsp;<a class="link4" href="/Analytics"><span><span>Cancel</span></span></a></p>
 </div>
 </form>
 <div id="overlay" class="overlay"></div>
