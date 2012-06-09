@@ -58,7 +58,8 @@ namespace EyeTracker.Domain.Queries.Analytics
                         Id = a.AppId,
                         Description = a.AppDescription,
                         Visits = visits.Where(v => v.key == a.AppId).Sum(v => v.visits)
-                    });
+                    })
+                    .ToArray();
                 portfolio.Visits = portfolio.Applications.Sum(a => a.Visits);
             }
 

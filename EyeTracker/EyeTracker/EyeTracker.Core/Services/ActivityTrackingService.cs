@@ -42,15 +42,14 @@ namespace EyeTracker.Core.Services
 
         public OperationResult Write(UserActivityType userActivityType, string description, int? linkedObjectId)
         {
-            var userRes = membershipService.GetCurrentUser();
-            if (userRes.HasError)
+            var userId = membershipService.GetCurrentUserId();
+            if (!userId.HasValue)
             {
-                return new OperationResult(userRes);
+                return new OperationResult(ErrorNumber.AccessDenied);
             }
-            string userId = userRes.Value.ProviderUserKey.ToString();
             return tracking.Write(new UserActivity() { 
                 Date = DateTime.UtcNow,
-                UserId = new Guid(userId),
+                UserId = userId.Value,
                 ActivityType = userActivityType,
                 Description = description,
                 LinkedObjectId = linkedObjectId
@@ -74,13 +73,12 @@ namespace EyeTracker.Core.Services
 
         public OperationResult<List<UserActivity>> Get(UserActivityType? userActivityType, DateTime? fromDate, DateTime? toDate, int? lastActivitesCount)
         {
-            var userRes = membershipService.GetCurrentUser();
-            if (userRes.HasError)
+            var userId = membershipService.GetCurrentUserId();
+            if (!userId.HasValue)
             {
-                return new OperationResult<List<UserActivity>>(userRes);
+                return new OperationResult<List<UserActivity>>(ErrorNumber.AccessDenied);
             }
-            string userId = userRes.Value.ProviderUserKey.ToString();
-            return tracking.Get(userId, userActivityType, fromDate, toDate, lastActivitesCount);
+            return tracking.Get(userId.Value, userActivityType, fromDate, toDate, lastActivitesCount);
         }
     }
 }

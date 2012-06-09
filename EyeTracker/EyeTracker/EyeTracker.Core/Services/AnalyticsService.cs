@@ -104,12 +104,12 @@ namespace EyeTracker.Core.Services
         {
             try
             {
-                var userRes = membershipService.GetCurrentUserId();
-                if (userRes.HasError)
+                var userId = membershipService.GetCurrentUserId();
+                if (!userId.HasValue)
                 {
-                    return new OperationResult<IEnumerable<PortfolioDetails>>(userRes);
+                    return new OperationResult<IEnumerable<PortfolioDetails>>(ErrorNumber.AccessDenied);
                 }
-                return new OperationResult<IEnumerable<PortfolioDetails>>(repository.GetAllPortfolios(userRes.Value));
+                return new OperationResult<IEnumerable<PortfolioDetails>>(repository.GetAllPortfolios(userId.Value));
             }
             catch (Exception exp)
             {

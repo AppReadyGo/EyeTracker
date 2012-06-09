@@ -21,14 +21,17 @@ namespace EyeTracker.Domain.Queries
                             })
                             .SingleOrDefault();
 
-            var items = session.Query<Page>()
-                            .Where(p => p.Id == page.Id)
-                            .SelectMany(p => p.Items)
-                            .Select(i => new { i.SubKey, i.Value })
-                            .ToArray();
+            if (page != null)
+            {
+                var items = session.Query<Page>()
+                                .Where(p => p.Id == page.Id)
+                                .SelectMany(p => p.Items)
+                                .Select(i => new { i.SubKey, i.Value })
+                                .ToArray();
 
-            page.Title = items.Single(i => i.SubKey.ToLower() == "title").Value;
-            page.Content = items.Single(i => i.SubKey.ToLower() == "content").Value;
+                page.Title = items.Single(i => i.SubKey.ToLower() == "title").Value;
+                page.Content = items.Single(i => i.SubKey.ToLower() == "content").Value;
+            }
 
             return page;
         }

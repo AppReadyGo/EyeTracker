@@ -10,7 +10,7 @@ namespace EyeTracker.DAL
     {
         void Write(UserActivity userActivity);
 
-        List<UserActivity> Get(Guid userId, UserActivityType? userActivityType, DateTime? fromDate, DateTime? toDate, int? lastActivitesCount);
+        List<UserActivity> Get(int userId, UserActivityType? userActivityType, DateTime? fromDate, DateTime? toDate, int? lastActivitesCount);
     }
 
     public class ActivityTrackingRepository : IActivityTrackingRepository
@@ -23,7 +23,7 @@ namespace EyeTracker.DAL
             //e.SaveChanges();
         }
 
-        public List<UserActivity> Get(Guid userId, UserActivityType? userActivityType, DateTime? fromDate, DateTime? toDate, int? lastActivitesCount)
+        public List<UserActivity> Get(int userId, UserActivityType? userActivityType, DateTime? fromDate, DateTime? toDate, int? lastActivitesCount)
         {
             //var e = new Entities("name=EyeTrackerEntities");
             //var res = e.UserActivities.Where(curItem => curItem.UserId == userId &&

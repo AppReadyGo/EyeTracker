@@ -20,14 +20,13 @@ namespace EyeTracker.Domain.Mapping
             Property(x => x.CreateDate, map => map.NotNullable(true));
             ManyToOne(p => p.User, map =>
             {
-                map.Column("ID");
+                map.Column("UserID");
                 map.NotNullable(true);
             });
             Property(x => x.TimeZone, map => map.NotNullable(true));
             Set(x => x.Applications, map =>
             {
-                map.Key(k => k.Column("PortfolioId"));
-                map.Lazy(CollectionLazy.NoLazy);
+                map.Key(k => k.Column("PortfolioID"));
                 map.Cascade(Cascade.DeleteOrphans);
                 map.Access(Accessor.Field);
                 map.Inverse(true);

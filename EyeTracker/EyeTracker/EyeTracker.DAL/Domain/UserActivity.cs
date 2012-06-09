@@ -9,7 +9,7 @@ namespace EyeTracker.DAL.Domain
     {
         public DateTime Date { get; set; }
 
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
 
         public UserActivityType ActivityType { get; set; }
 
