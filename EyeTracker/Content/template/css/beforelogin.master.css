@@ -1,0 +1,21 @@
+﻿
+/* Global Structure = */
+.container {margin:0 auto;width:990px;font-size:.75em}
+/* Header */
+header .container {height:131px;overflow:hidden;position:relative}
+/* Sidebar */
+aside {background:url(../images/aside-tail.gif) repeat-x left top #131313;min-width:980px}
+/* Footer */
+footer .container {text-align:center;line-height:1.667em;padding:26px 0}
+
+
+.header-box {width:100%;background:url(../images/header-box-tail.gif) repeat-x left top;position:relative;top:50px}
+.header-box .left {background:url(../images/header-box-left.gif) no-repeat left top}
+.header-box .right {background:url(../images/header-box-right.gif) no-repeat right top;height:81px}
+/* header */
+header nav {float:right;padding:13px 24px 0 0}
+header nav li {float:left;font-size:18px;line-height:3em;text-transform:uppercase;padding-left:21px;margin-left:19px;background:url(../images/divider.gif) repeat-y left top}
+header nav li:first-child {background:none;padding-left:0;margin-left:0}
+header nav li a {color:#fff;text-decoration:none}
+header nav li.current a, header nav li a:hover {color:#82b704}
+header .top-info {position:absolute;left:45px;top:17px}

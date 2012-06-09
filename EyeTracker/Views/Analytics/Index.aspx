@@ -8,13 +8,14 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
     <script src="<%: Url.Content("~/Scripts/Analytics.Index.js") %>" type="text/javascript"></script>
+    <link href="<%: Url.Content("~/Content/after.login.master.css")%>" rel="stylesheet" type="text/css" />
     <link href="<%: Url.Content("~/Content/Analytics.Index.css")%>" rel="stylesheet" type="text/css" />
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h3 class="title">Portfolios</h3>
+    <h2 class="title">Portfolios</h2>
     <div class="actions">
-        <a class="button" href="/Portfolio/New"><span class="icon"></span>Add Portfolio</a>
+        <a href="/portfolio/new" class="link2"><span><span>Add Portfolio</span></span></a>
     </div>
     <div class="table-header">
         <div style="width:5%;"></div>

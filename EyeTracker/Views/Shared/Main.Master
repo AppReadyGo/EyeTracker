@@ -1,10 +1,25 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Finger - <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" /></title>
-    <link href="<%: Url.Content("~/Content/main.master.css") %>" rel="stylesheet" type="text/css" />
-    <script src="<%: Url.Content("~/Scripts/ThridParty/jquery-1.4.4.min.js") %>" type="text/javascript"></script>
+    <meta name="description" content="Place your description here">
+    <meta name="keywords" content="put, your, keyword, here">
+    <meta name="author" content="mobillify.com">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="<%: Url.Content("~/Content/template/css/reset.css") %>" type="text/css" media="all">
+    <link rel="stylesheet" href="<%: Url.Content("~/Content/template/css/layout.css") %>" type="text/css" media="all">
+    <link rel="stylesheet" href="<%: Url.Content("~/Content/template/css/style.css") %>" type="text/css" media="all">
+
+    <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/maxheight.js")%>"></script>
+    <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/cufon-yui.js")%>"></script>
+    <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/cufon-replace.js")%>"></script>
+    <script type="text/javascript" src="<%: Url.Content("~/Scripts/ThridParty/jquery-1.4.4.min.js") %>"></script>
+    <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/Myriad_Pro_300.font.js")%>"></script>
+    <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/Myriad_Pro_400.font.js")%>"></script>
+    <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/jquery.faded.js")%>"></script>
+    <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/jquery.jqtransform.js")%>"></script>
+    <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/script.js")%>"></script>
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
     <script type="text/javascript">
     /*
@@ -20,7 +35,8 @@
     */
     </script>
     </head>
-<body>
+<body id="page1" onLoad="new ElementMaxHeight();">
 <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+<script type="text/javascript">    Cufon.now(); </script>
 </body>
 </html>

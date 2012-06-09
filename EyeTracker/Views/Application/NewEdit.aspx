@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/TopMenu.Master" Inherits="System.Web.Mvc.ViewPage<EyeTracker.Model.ApplicationModel>" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">New Application</asp:Content>
+<asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">New Application</asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
     <link href="<%: Url.Content("~/Content/ApplicationNewEdit.css")%>" rel="stylesheet" type="text/css" />
     <script src="<%: Url.Content("~/Scripts/ApplicationNewEdit.js")%>" type="text/javascript"></script>
@@ -23,7 +23,7 @@
 <form id="application_form" name="applicationForm" method="post" action="/Application/Edit/<%= ViewBag.PortfolioId %>">
 <%: Html.HiddenFor(m => m.Id)%>
 <div id="app_config" class="step">
-    <h3>1. Application Configuration</h3>
+    <h4>1. Application Configuration</h4>
     <div><%: Html.LabelFor(m => m.Description)%> <%: Html.TextBoxFor(m => m.Description)%></div>
     <div id="description_error"><%: Html.ValidationMessageFor(m => m.Description)%></div>
     <div><%: Html.LabelFor(m => m.Type)%> <%: Html.DropDownListFor(m => m.Type, (IEnumerable<SelectListItem>)ViewData["TypesList"])%></div>
@@ -49,7 +49,7 @@
     </fieldset>
  </div-->
 <div id="sample_web_code" class="step">
-    <h3>3. Paste this code on your site</h3>
+    <h4>3. Paste this code on your site</h4>
     <div>Copy the following code, then paste it onto every page you want to track immediately before the closing &lt;/head&gt; tag.</div>
     <textarea readonly="readonly" id="web_code">
         <script type="text/javascript">

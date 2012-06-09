@@ -21,7 +21,7 @@
 .header ul.login-menu a{color:#ffff1f;}
 .header ul.login-menu a:hover{text-decoration:underline;}
 
-.main-content{padding:20px;min-height:500px;background-color:#fff;}
+.main-content{padding:20px;min-height:500px;}
 .main-content h3.title{margin-top:0;font-size:17px;}
 
 .left-panel{border-right:1px solid #d9d9d9;width:250px;float:left;}
@@ -34,13 +34,13 @@
 .left-panel .left-menu ul{margin-right:10px;}
 .left-panel .left-menu ul li{border-bottom:1px solid #E8E8E8;}
 .left-panel .left-menu ul li:first-child{border-bottom:1px solid #fff;}
-.left-panel .left-menu ul li a{text-decoration:none;display: block;font-weight: bold;height: 30px;cursor:pointer;
+.left-panel .left-menu ul li a{text-decoration:none;display: block;height: 30px;cursor:pointer;
 								line-height: 29px;outline: 0 none;padding: 0 19px 0 34px;position: relative;
 								color:#000;}
-.left-panel .left-menu ul li span{display:block;background:url("images/sprite.10.png") no-repeat scroll -327px -106px transparent;
+.left-panel .left-menu ul li span{display:block;background:url("template/images/marker.gif") no-repeat scroll left 4px transparent;
                                   float:right;width:10px;height:10px;margin-top:10px;}
-.left-panel .left-menu ul li a:hover{color: #F7892F;}
-.left-panel .left-menu ul li.active a{background-color: #F6F6F6; border-radius: 3px 3px 3px 3px;color: #F7892F;}
+.left-panel .left-menu ul li a:hover{color: #82B704;}
+.left-panel .left-menu ul li.active a{background-color: #e3e3e3; border-radius: 3px 3px 3px 3px;color: #82B704;}
 .left-panel .left-menu ul li.active span{background:none;}
 .left-panel .left-menu ul li.disabled a{color: #E8E8E8;cursor:default;}
 .left-panel .left-menu ul li.disabled a:hover{color: #E8E8E8;}

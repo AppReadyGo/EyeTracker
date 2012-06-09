@@ -6,6 +6,6 @@ form td{padding:8px 0 8px 10px;text-align:left;vertical-align:top;}
 form td.label{text-align:right;padding:10px 0 8px 30px;color:#666;width:1%;}
 form input{border:1px solid #a3a3a3;padding:3px;}
 form p{margin-top:25px;padding-left:70px;}
-form p a{padding:5px;margin-left:10px; font-size:14px;}
+xform p a{padding:5px;margin-left:10px; font-size:14px;}
 form .input-validation-error{border-color:#BB0000;}
 form .field-validation-error,form .validation-summary-errors{color:#BB0000;font-size:11px;font-weight:bold;}

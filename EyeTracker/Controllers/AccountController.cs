@@ -38,7 +38,7 @@ namespace EyeTracker.Controllers
             if (ModelState.IsValid)
             {
                 var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(model.UserName));
-                if (securedDetails.Password != Encryption.SaltedHash(model.Password, securedDetails.PasswordSalt))
+                if (securedDetails == null || securedDetails.Password != Encryption.SaltedHash(model.Password, securedDetails.PasswordSalt))
                 {
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
                 }

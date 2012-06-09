@@ -1,7 +1,7 @@
 ﻿
 function showOverlay(elem) {
     if (appId == 0) {
-        var width = elem.outerWidth();
+        var width = elem.outerWidth() + 5;
         var height = elem.outerHeight();
         var offset = elem.offset();
         $('#overlay').css({ width: width, height: height, top: offset.top, left: offset.left });
@@ -114,6 +114,9 @@ $(document).ready(function () {
     $('#create_lnk').click(function () {
         var desc = $('#Description').val();
         var type = $('#Type').val();
+        $('#Description').removeClass('input-validation-error');
+        $('.validation-summary-errors').remove();
+        $('.field-validation-error').remove();
         if (desc.length == 0) {
             $('#Description').addClass('input-validation-error');
             $('#tbody').prepend('<tr><td colspan="2" class="validation-summary-errors"><span>Account creation was unsuccessful. Please contact to administrator.</span></td></tr>');
@@ -121,9 +124,6 @@ $(document).ready(function () {
             showOverlay($('#sample_code'));
         }
         else {
-            $('#Description').removeClass('input-validation-error');
-            $('.validation-summary-errors').remove();
-            $('.field-validation-error').remove();
             showOverlay($('#sample_code'));
             $.ajax({
                 url: newAppURL,
@@ -144,6 +144,7 @@ $(document).ready(function () {
                         $('#Id').val(appId);
                         $('#edit_form').attr("action", $('#edit_form').attr("action") + appId);
                     }
+                    showOverlay($('#sample_code'));
                 }
             });
         }
