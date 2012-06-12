@@ -16,8 +16,16 @@ namespace EyeTracker.Areas.m
         {
             context.MapRoute(
                 "m_default",
-                "m/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                "m",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                new[] { "EyeTracker.Areas.m.Controllers" } // Namespaces            
+            );
+
+            context.MapRoute(
+                "m_content",
+                "m/{urlPart1}/{urlPart2}/{urlPart3}/",
+                new { controller = "Home", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional },
+                new[] { "EyeTracker.Areas.m.Controllers" } // Namespaces
             );
         }
     }

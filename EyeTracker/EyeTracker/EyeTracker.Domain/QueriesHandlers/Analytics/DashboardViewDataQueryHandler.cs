@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using EyeTracker.Common;
 using EyeTracker.Common.Queries.Analytics;
 using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 using EyeTracker.Domain.Model;
 using NHibernate;
 using NHibernate.Linq;
-using EyeTracker.Common.Commands;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {

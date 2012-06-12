@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace EyeTracker.Controllers
+namespace EyeTracker.Common
 {
     public static class MIMEAssistant
     {

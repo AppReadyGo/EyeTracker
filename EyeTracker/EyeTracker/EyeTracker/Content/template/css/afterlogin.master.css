@@ -21,7 +21,7 @@ header .top-info {position:absolute;left:45px;top:17px}
 
 h1.logo {padding:9px 0 0 44px;font-size:30px;line-height:1.2em}
 
-div.user-info{position:absolute;right:10px;top:5px;width:300px;text-align:right;}
+div.user-info{position:absolute;right:10px;top:5px;width:700px;text-align:right;}
 div.user-info h2{font-size:17px;line-height:33px;}
 div.user-info form{float:right;margin-left:20px;}
 

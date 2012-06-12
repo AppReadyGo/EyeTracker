@@ -7,6 +7,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
     <link href="<%: Url.Content("~/Content/shared/form.css")%>" rel="stylesheet" type="text/css" />
     <link href="<%: Url.Content("~/Content/application.new.css")%>" rel="stylesheet" type="text/css" />
     <script src="<%: Url.Content("~/Scripts/application.new.js")%>" type="text/javascript"></script>
+    <link href="<%: Url.Content("~/Content/after.login.master.css")%>" rel="stylesheet" type="text/css" />
     <script src="<%: Url.Content("~/Scripts/ThridParty/ajaxfileupload.js")%>" type="text/javascript"></script>
 	<script type="text/javascript" src="<%: Url.Content("~/Scripts/ThridParty/fancybox/jquery.fancybox-1.3.4.pack.js")%>"></script>
 	<link rel="stylesheet" type="text/css" href="<%: Url.Content("~/Scripts/ThridParty/fancybox/jquery.fancybox-1.3.4.css")%>" media="screen" />
@@ -19,7 +20,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
-<h3 class="title">Edit Application</h3>
+<h2 class="title">Edit Application</h2>
 <% Html.RenderPartial("Form", Model.View); %>
 </asp:Content>
 

@@ -127,7 +127,7 @@
     <Compile Include="Controllers\Master\BaseMasterController.cs" />
     <Compile Include="Controllers\Master\BaseSubMasterController.cs" />
     <Compile Include="Controllers\Master\BeforeLoginController.cs" />
-    <Compile Include="Controllers\MIMEAssistant.cs" />
+    <Compile Include="Common\MIMEAssistant.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -198,6 +198,7 @@
     <Content Include="Areas\m\Content\JQThemes\images\icons-36-black.png" />
     <Content Include="Areas\m\Content\JQThemes\images\icons-36-white.png" />
     <Content Include="Areas\m\Views\Home\Index.aspx" />
+    <Content Include="Areas\m\Views\Home\PageContent.aspx" />
     <Content Include="Content\admin.logs.css" />
     <Content Include="Content\content.master.css" />
     <Content Include="Content\after.login.master.css" />
@@ -525,7 +526,6 @@
     <Content Include="Views\Analytics\Analytics.master" />
     <Content Include="Views\Shared\Main.Master" />
     <Content Include="Views\Shared\BeforeLogin.Master" />
-    <Content Include="Views\Shared\Content.Master" />
     <Content Include="Views\Shared\AfterLogin.Master" />
     <Content Include="Views\Shared\Mail.Master" />
     <Content Include="Views\Web.config" />

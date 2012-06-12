@@ -159,7 +159,7 @@ namespace EyeTracker.Controllers
                     PortfolioId = portfolioId,
                     Type = app.Type
                 };
-                model.ViewData = GetViewData(model.PortfolioId);
+                model.ViewData = GetViewData(model.PortfolioId, model.Type, model.Id);
 
                 return View(model, AnalyticsMasterModel.MenuItem.Portfolios, null, null);
             }
@@ -190,21 +190,19 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                model.ViewData = GetViewData(model.PortfolioId);
+                model.ViewData = GetViewData(model.PortfolioId, model.Type, model.AppId);
                 return View(model, AnalyticsMasterModel.MenuItem.Portfolios, null, null);
             }
         }
 
-        private static ApplicationViewModel GetViewData(int portfolioId)
+        private static ApplicationViewModel GetViewData(int portfolioId, ApplicationType? type = null, int? appId = null)
         {
             return new ApplicationViewModel
             {
                 Screens = new List<Screen>(),
                 PortfolioId = portfolioId,
                 TypesList = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() }),
-                PackageLink = "http://mobillify.com",
-                PropertyId = "**-******-***",
-                CodeSample = "<script type=\"text/javascript\">\nvar _gaq = _gaq || [];_\ngaq.push(['_setAccount', '**-******-***']);",
+                PropertyId = appId.HasValue ? string.Format("{0}-{1:0000}-{2:000000}", GetAppKey(type.Value), portfolioId, appId.Value) : "**-****-******"
             };
         }
 

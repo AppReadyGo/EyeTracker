@@ -93,7 +93,6 @@
     <Compile Include="Extentions.cs" />
     <Compile Include="HeatMapImage.cs" />
     <Compile Include="ObjectContainer.cs" />
-    <Compile Include="SecurityContext.cs" />
     <Compile Include="Services\AccountMembershipService.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\AdminService.cs" />

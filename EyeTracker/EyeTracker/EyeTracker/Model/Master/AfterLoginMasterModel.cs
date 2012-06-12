@@ -15,16 +15,16 @@ namespace EyeTracker.Model.Master
         public string PlanAndPricingCssClassAttribute { get { return SelectedItem == SelectedMenuItem.PlanAndPricing ? "class=\"current\"" : string.Empty; } }
         public string ContactsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Contacts ? "class=\"current\"" : string.Empty; } }
         public string AdministratorCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Administrator ? "class=\"current\"" : string.Empty; } }
-        public string UserName { get; set; }
+        public string DisplayName { get; private set; }
 
         public AfterLoginMasterModel()
         {
         }
 
-        public AfterLoginMasterModel(SelectedMenuItem selectedItem)
+        public AfterLoginMasterModel(string displayName, SelectedMenuItem selectedItem)
         {
             this.SelectedItem = selectedItem;
-            this.UserName = "Yuri Panshin";
+            this.DisplayName = displayName;
         }
 
         public enum SelectedMenuItem

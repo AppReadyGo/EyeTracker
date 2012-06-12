@@ -23,12 +23,6 @@ using EyeTracker.Common;
 
 namespace EyeTracker.Core
 {
-    public interface IObjectContainer
-    {
-        TResult RunQuery<TResult>(IQuery<TResult> query);
-        CommandResult<TResult> Dispatch<TResult>(ICommand<TResult> command);
-    }
-
     public class ObjectContainer : IObjectContainer
     {
         private static readonly object locker = new object();
@@ -55,6 +49,15 @@ namespace EyeTracker.Core
                     }
                 }
                 return instance;
+            }
+        }
+
+        public CurrentUserDetails CurrentUserDetails
+        {
+            get
+            {
+                var securityContext = container.Resolve<ISecurityContext>();
+                return securityContext.CurrentUser;
             }
         }
 
@@ -88,8 +91,9 @@ namespace EyeTracker.Core
                     }
                 }
             }
+            container.Register(Component.For<IObjectContainer>().Instance(this));
             container.Register(Component.For<IRepository>().ImplementedBy<Repository>());
-            container.Register(Component.For<ISecurityContext>().ImplementedBy<SecurityContext>());
+            container.Register(Component.For<ISecurityContext>().ImplementedBy<SecurityContext>().LifeStyle.PerWebRequest);
             container.Register(Component.For<IValidationContext>().ImplementedBy<ValidationContext>());
 
             this.repository = container.Resolve<IRepository>();

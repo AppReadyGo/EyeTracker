@@ -40,7 +40,7 @@
 .left-panel .left-menu ul li span{display:block;background:url("template/images/marker.gif") no-repeat scroll left 4px transparent;
                                   float:right;width:10px;height:10px;margin-top:10px;}
 .left-panel .left-menu ul li a:hover{color: #82B704;}
-.left-panel .left-menu ul li.active a{background-color: #e3e3e3; border-radius: 3px 3px 3px 3px;color: #82B704;}
+.left-panel .left-menu ul li.active a{background-color: #e4e4e4; border-radius: 3px 3px 3px 3px;color: #82B704;}
 .left-panel .left-menu ul li.active span{background:none;}
 .left-panel .left-menu ul li.disabled a{color: #E8E8E8;cursor:default;}
 .left-panel .left-menu ul li.disabled a:hover{color: #E8E8E8;}

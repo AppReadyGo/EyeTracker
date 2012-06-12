@@ -3,7 +3,7 @@
 <!DOCTYPE html> 
 <html> 
 <head runat="server">
-    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <title><asp:ContentPlaceHolder ID="PageTitleContent" runat="server" /></title>
     <meta charset="utf-8" />
     
     <!-- Full Screen Web App Stuff for iOS -->
@@ -17,64 +17,19 @@
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile.structure-1.1.0.min.css" /> 
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script> 
     <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script> 
-    <!-- JQuery Mobile -->     
-    
-    <!-- Custom for GameTech -->
-   	
-    <link rel="stylesheet" href="/Areas/m/content/custom.css" />
-    <script src="/Areas/m/Scripts/custom.js"></script>
-
-       
-   	<script>
-   	// Twitter Feed Using JQuery
-   	$("#main").live('pageinit', function (evt) {
-   	    var url = 'http://twitter.com/statuses/user_timeline.json?screen_name=Mobillify&count=5&callback=?';
-   	    var html = '<marquee behavior="scroll" scrollamount="7" direction="left">';
-
-   	    $.getJSON(url, function (data) {
-   	        $.each(data, function (i, tweet) {
-   	            html += '<a href="http://mobile.twitter.com/Mobillify" target="_blank">' + tweet.text + '</a> . . . ';
-   	        });
-
-   	        html += '</marquee>';
-   	        $(".results").append(html);
-   	        $('div.results marquee').marquee();
-
-   	    });
-
-   	});
-	</script>
-
-
+    <!-- JQuery Mobile -->
 </head>
 
-<body class="bggt"> 
+<body> 
 
-<div data-role="page" id="main" class="bggt">
-
-<div data-role="header" data-position="fixed">
-
-		<div data-role="navbar" class="custom-navbar">
-			<ul>
-            <li><a href="#main" data-theme="a" class="ui-btn-active">Home</a></li>
-            <li><a href="products">Products</a></li>
-            <li><a href="PlanAndPricing">Plan And Pricing</a></li>
-            </ul>
-	</div>
-</div><!-- /header -->
-    
-	<div data-role="content">
-    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+<div data-role="page" id="page1" data-theme="a">
+    <div data-role="header" data-position="fixed" back-btn="true">
+        <a href="/m" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+        <h1>Fingerprint</h1>
+    </div>
+    <div data-role="content">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
     </div><!-- /content -->
-
- 
-	
-<div data-role="footer" data-theme="gt" data-position="fixed">
-<div id="twitbar">
-<a href="http://mobile.twitter.com/searches?q=%23gametech" data-mini="true" data-role="button" data-icon="twitter" data-theme="a" target="_blank">#GameTech</a></div> 
-<div class="results"></div> 
-</div><!-- /footer -->
-
 </div><!-- /page -->
 
 </body>
