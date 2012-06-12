@@ -11,7 +11,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
         $("#faded").faded({
             speed: 500,
             crossfade: true,
-            //autoplay: 10000,
+            autoplay: 10000,
             autopagination: false
         });
 
@@ -26,35 +26,35 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
 	<ul class="slides">
 		<li>
             <div>
-            <img style="top:18px; position:absolute; right:375px; width:200px;" src="/Resources/eye_track.jpg"/>
+            <img style="top:18px; position:absolute; right:375px; width:200px;" src="/Resources/eye_track.png"/>
             <h3 style="position: absolute;right: 62px;top: 92px;width: 200px;">Eye Tracker</h3>
             <h4 style="position: absolute;right: 62px;top: 147px;width: 200px;">Know what people look at!</h4>
             </div>
-            <a href="/account/regester"><span><span>Regester</span></span></a>
+            <a href="/account/register"><span><span>Regester</span></span></a>
         </li>
 		<li>
             <div>
-            <img style="top:18px; position:absolute; right:375px; width:200px;" src="/Resources/touch_map.jpg"/>
+            <img style="top:18px; position:absolute; right:375px; width:200px;" src="/Resources/touch_map.png"/>
             <h3 style="position: absolute;right: 62px;top: 92px;width: 200px;">Touch Map</h3>
             <h4 style="position: absolute;right: 62px;top: 147px;width: 200px;">Get to see every touch!</h4>
             </div>
-            <a href="/account/regester"><span><span>Regester</span></span></a>
+            <a href="/account/register"><span><span>Regester</span></span></a>
         </li>
 		<li>
             <div>
-            <img style="top:18px; position:absolute; right:375px; width:200px;" src="/Resources/play_back.jpg"/>
+            <img style="top:18px; position:absolute; right:375px; width:200px;" src="/Resources/play_back.png"/>
             <h3 style="position: absolute;right: 62px;top: 92px;width: 200px;">Play Back</h3>
             <h4 style="position: absolute;right: 62px;top: 147px;width: 200px;">Rewind any session!</h4>
             </div>
-            <a href="/account/regester"><span><span>Regester</span></span></a>
+            <a href="/account/register"><span><span>Regester</span></span></a>
          </li>
 		 <li>
             <div>
-            <img style="top:18px; position:absolute; right:375px; width:200px;" src="/Resources/play_back.jpg"/>
+            <img style="top:18px; position:absolute; right:375px; width:200px;" src="/Resources/life_cycle.png"/>
             <h3 style="position: absolute;right: 62px;top: 92px;width: 200px;">Life-cycle</h3>
             <h4 style="position: absolute;right: 62px;top: 147px;width: 200px;">Understand UI changes!</h4>
             </div>
-            <a href="/account/regester"><span><span>Regester</span></span></a>
+            <a href="/account/register"><span><span>Regester</span></span></a>
          </li>
 	</ul>
 	<ul class="pagination">

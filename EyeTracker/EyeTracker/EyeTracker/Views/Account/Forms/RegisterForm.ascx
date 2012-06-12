@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" Inherits="ViewUserControl<EyeTracker.Models.Account.RegisterModel>" %>
 <% using (Html.BeginForm()) { %>
     <h2>Account Information</h2>
-    <p>Passwords are required to be a minimum of <%: ViewData["PasswordLength"] %> characters in length.</p>
+    <p>Passwords are required to be a minimum of 6 characters in length.</p>
     <fieldset>
 	    <div class="field text">
             <%: Html.LabelFor(m => m.Email) %> <%: Html.TextBoxFor(m => m.Email, new { autocomplete="off" })%>

@@ -118,7 +118,10 @@ h5 {font-size:1em;line-height:1.667em;margin-bottom:10px}
 #content .indent {padding:7px 0 18px 0}
 #content .indent1 {padding:17px 0 18px 0}
 /* Sidebar */
-aside .inside {padding:35px 40px 35px 44px}
+aside .inside {padding:35px 40px 35px 44px;text-align:center;}
+aside .list{padding:0 57px;background-image:url(../images/line-ver.gif);background-repeat:repeat-y;background-position:0px 0;height:150px;}
+aside .list.col-1{background-image:none;}
+aside .wrapper{text-align:left;margin:auto;width:600px;}
 aside .line-ver1 {background-image:url(../images/line-ver.gif);background-repeat:repeat-y;background-position:162px 0;width:100%}
 aside .line-ver2 {background-image:url(../images/line-ver.gif);background-repeat:repeat-y;background-position:354px 0;width:100%}
 aside .line-ver3 {background-image:url(../images/line-ver.gif);background-repeat:repeat-y;background-position:547px 0;width:100%}

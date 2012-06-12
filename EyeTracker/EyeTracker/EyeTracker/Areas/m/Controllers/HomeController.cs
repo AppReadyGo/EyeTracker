@@ -14,14 +14,12 @@ namespace EyeTracker.Areas.m.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
-
             return View();
         }
 
         public ActionResult PageContent(string urlPart1, string urlPart2, string urlPart3)
         {
-            string path = urlPart1;
+            string path = urlPart1 == "s" ? urlPart1 : "m/" + urlPart1;
             if (!string.IsNullOrEmpty(urlPart2))
             {
                 path += "/" + urlPart2;
