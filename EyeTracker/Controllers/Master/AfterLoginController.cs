@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using EyeTracker.Model.Master;
 using EyeTracker.Model;
+using EyeTracker.Core;
 
 namespace EyeTracker.Controllers.Master
 {
@@ -15,7 +16,7 @@ namespace EyeTracker.Controllers.Master
 
         protected virtual AfterLoginMasterModel GetModel(AfterLoginMasterModel.SelectedMenuItem selectedItem)
         {
-            var model = new AfterLoginMasterModel(selectedItem);
+            var model = new AfterLoginMasterModel(ObjectContainer.Instance.CurrentUserDetails.DisplayName, selectedItem);
             model.IsAdmin = true;
             return model;
         }

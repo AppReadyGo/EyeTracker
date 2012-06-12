@@ -7,9 +7,9 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 <asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Portfolios</asp:Content>
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
-    <script src="<%: Url.Content("~/Scripts/Analytics.Index.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/analytics.index.js") %>" type="text/javascript"></script>
     <link href="<%: Url.Content("~/Content/after.login.master.css")%>" rel="stylesheet" type="text/css" />
-    <link href="<%: Url.Content("~/Content/Analytics.Index.css")%>" rel="stylesheet" type="text/css" />
+    <link href="<%: Url.Content("~/Content/analytics.index.css")%>" rel="stylesheet" type="text/css" />
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -28,9 +28,9 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
         <ul class="computerdata detail" id="target">
         <%foreach (var item in Model.View.Portfolios1)
           {%>
-            <li class="row portfolio" url="/Analytics/Dashboard/?pid=<%: item.Id %>" pid="<%: item.Id %>">
+            <li class="row portfolio<%: item.Applications.Any() ? "" : " disabled" %>" url="/Analytics/Dashboard/?pid=<%: item.Id %>" pid="<%: item.Id %>">
                 <div style="width:5%;" class="center">
-                    <div class="expand<%: item.Applications.Any() ? "" : " disabled" %>"></div>
+                    <div class="expand"></div>
                 </div>
                 <div style="width:10%;" class="center">
                     <div class="status-ok"></div>

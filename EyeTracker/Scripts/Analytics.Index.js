@@ -1,9 +1,9 @@
 ﻿
 $(document).ready(function () {
     $('div.expand').click(function () {
-        if (!$(this).hasClass('disabled')) {
-            var li = $(this).parent().parent();
-            var sub = $('.portfolio-'+li.attr('pid'));
+        var li = $(this).parent().parent();
+        if (!li.hasClass('disabled')) {
+            var sub = $('.portfolio-' + li.attr('pid'));
             if (sub.is(':visible')) {
                 sub.hide();
                 li.removeClass('expanded');
@@ -14,6 +14,9 @@ $(document).ready(function () {
         }
     });
     $('.table ul li.portfolio > div.nav, .table ul li.app > div.nav').click(function () {
-        window.location.href = $(this).parent().attr('url');
+        var li = $(this).parent();
+        if (!li.hasClass('disabled')) {
+            window.location.href = li.attr('url');
+        }
     });
 });

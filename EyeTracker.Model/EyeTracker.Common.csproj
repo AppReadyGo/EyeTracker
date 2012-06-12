@@ -92,7 +92,9 @@
     <Compile Include="Commands\Extentions.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\RemoveContentItemCommand.cs" />
-    <Compile Include="Commands\SecurityContext.cs" />
+    <Compile Include="IObjectContainer.cs" />
+    <Compile Include="Queries\Users\GetUserDetailsByIdQuery.cs" />
+    <Compile Include="SecurityContext.cs" />
     <Compile Include="Commands\UpdateContentItemCommand.cs" />
     <Compile Include="Commands\Users\ActivateUserCommand.cs" />
     <Compile Include="Commands\Users\CreateUserCommand.cs" />
