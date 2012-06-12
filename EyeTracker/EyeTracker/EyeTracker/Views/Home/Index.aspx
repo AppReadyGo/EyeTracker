@@ -30,7 +30,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
             <h3 style="position: absolute;right: 62px;top: 92px;width: 200px;">Eye Tracker</h3>
             <h4 style="position: absolute;right: 62px;top: 147px;width: 200px;">Know what people look at!</h4>
             </div>
-            <a href="/account/register"><span><span>Regester</span></span></a>
+            <a href="/account/register"><span><span>Register</span></span></a>
         </li>
 		<li>
             <div>
@@ -38,7 +38,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
             <h3 style="position: absolute;right: 62px;top: 92px;width: 200px;">Touch Map</h3>
             <h4 style="position: absolute;right: 62px;top: 147px;width: 200px;">Get to see every touch!</h4>
             </div>
-            <a href="/account/register"><span><span>Regester</span></span></a>
+            <a href="/account/register"><span><span>Register</span></span></a>
         </li>
 		<li>
             <div>
@@ -46,7 +46,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
             <h3 style="position: absolute;right: 62px;top: 92px;width: 200px;">Play Back</h3>
             <h4 style="position: absolute;right: 62px;top: 147px;width: 200px;">Rewind any session!</h4>
             </div>
-            <a href="/account/register"><span><span>Regester</span></span></a>
+            <a href="/account/register"><span><span>Register</span></span></a>
          </li>
 		 <li>
             <div>
@@ -54,14 +54,14 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
             <h3 style="position: absolute;right: 62px;top: 92px;width: 200px;">Life-cycle</h3>
             <h4 style="position: absolute;right: 62px;top: 147px;width: 200px;">Understand UI changes!</h4>
             </div>
-            <a href="/account/register"><span><span>Regester</span></span></a>
+            <a href="/account/register"><span><span>Register</span></span></a>
          </li>
 	</ul>
 	<ul class="pagination">
 		<li><a href="/products/eye-track" rel="0"><span>Eye tracker</span><small>Get more information</small></a></li>
 		<li><a href="/products/touch-map" rel="1"><span>Touch Map</span><small>Get more information</small></a></li>
 		<li><a href="/products/play-back" rel="2"><span>Play Back</span><small>Get more information</small></a></li>
-		<li><a href="/account/regester" rel="3"><span>Life-cycle</span><small>Get more information</small></a></li>
+		<li><a href="/account/register" rel="3"><span>Life-cycle</span><small>Get more information</small></a></li>
 	</ul>
 </div>
 <div class="inside">
