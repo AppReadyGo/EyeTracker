@@ -1,0 +1,17 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/BeforeLogin.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
+    <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
+    <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
+</asp:Content>
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+<div class="inside">
+	<div class="wrap">
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    <div class="clear"></div>
+	</div>
+</div>
+</asp:Content>
+
+

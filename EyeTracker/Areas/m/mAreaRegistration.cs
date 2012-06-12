@@ -22,6 +22,13 @@ namespace EyeTracker.Areas.m
             );
 
             context.MapRoute(
+                "m_account",
+                "m/account/{action}",
+                new { controller = "Account", action = "Register" },
+                new[] { "EyeTracker.Areas.m.Controllers" } // Namespaces            
+            );
+
+            context.MapRoute(
                 "m_content",
                 "m/{urlPart1}/{urlPart2}/{urlPart3}/",
                 new { controller = "Home", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional },

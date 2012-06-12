@@ -27,7 +27,7 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
                                 <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing) %>"><a href="/PlanAndPricing">Plans and Pricing</a></li>
 							</ul>
 						</nav>
-						<h1><a href="/"><img title="Finger" alt="Home" src="/Content/images/logo_60.png"></a></h1>
+						<h1><a href="/"><img title="Finger" alt="Home" src="/Content/images/logo_43.png"></a></h1>
 					</div>
 				</div>
 			</div>
@@ -42,7 +42,7 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
             </div>
             <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4fc7cd9c2af8afd3"></script>
             <!-- AddThis Button END -->
-			<form action="/Account/LogOn" method="post" id="login-form">
+			<%--<form action="/Account/LogOn" method="post" id="login-form">
 				<fieldset>
 					<span class="text">
 						<input type="text" name="UserName" value="Username" onFocus="if(this.value=='Username'){this.value=''}" onBlur="if(this.value==''){this.value='Username'}">
@@ -53,7 +53,7 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
 					<a href="#" class="login" onClick="$(this).closest('form').submit();"><span><span>Login</span></span></a>
 					<span class="links"><%: Html.ActionLink("Forgot Password?", "ForgotPassword", "Account") %><br/><%: Html.ActionLink("Register", "Register", "Account")%></span>
 				</fieldset>
-			</form>
+			</form>--%>
 		</div>
 	</header>
 <!-- content -->
@@ -67,56 +67,29 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
 <aside>
 	<div class="container">
 		<div class="inside">
-			<div class="line-ver1">
-				<div class="line-ver2">
-					<div class="line-ver3">
-						<div class="wrapper line-ver4">
-							<ul class="list col-1">
-								<li>Products</li>
-								<li><a href="/products/touch-map">Touch Map</a></li>
-								<li><a href="/products/eye-track">Eye Track</a></li>
-								<li><a href="/products/play-back">Play Back</a></li>
-							</ul>
-							<ul class="list col-2">
-								<li>Shopping</li>
-								<li><a href="#">Offer Disclaimers</a></li>
-								<li><a href="#">Domain Search</a></li>
-								<li><a href="#">Product Catalog</a></li>
-								<li><a href="#">Producr Advisor</a></li>
-								<li><a href="#">Gift Cards</a></li>
-								<li><a href="#">Mobile</a></li>
-							</ul>
-							<ul class="list col-3">
-								<li>Resources</li>
-								<li><a href="#">Webmail</a></li>
-								<li><a href="#">WHOIS search</a></li>
-								<li><a href="#">ICANN Confirmation</a></li>
-								<li><a href="#">Affiliates</a></li>
-								<li><a href="#">Connect with Us</a></li>
-								<li><a href="#">Gadgets / Widgets</a></li>
-							</ul>
-							<ul class="list col-4">
-								<li>Help and Support</li>
-								<li><a href="#">Support &amp; Sales</a></li>
-								<li><a href="#">Billing Support</a></li>
-								<li><a href="#">Email Our Support Team</a></li>
-								<li><a href="#">FAQ’s</a></li>
-								<li><a href="#">User’s Guides</a></li>
-								<li><a href="#">Report Spam</a></li>
-							</ul>
-							<ul class="list col-5">
-								<li>About</li>
-								<li><a href="#">Careers</a></li>
-								<li><a href="#">Security Center</a></li>
-								<li><a href="#">Company Info</a></li>
-								<li><a href="#">News Center</a></li>
-								<li><a href="#">Customer Testimonials</a></li>
-								<li><a href="#">What’s New</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
+            <div class="wrapper">
+			    <ul class="list col-1">
+				    <li>Products</li>
+				    <li><a href="/products/touch-map">Touch Map</a></li>
+				    <li><a href="/products/eye-track">Eye Track</a></li>
+				    <li><a href="/products/play-back">Play Back</a></li>
+			    </ul>
+			    <ul class="list col-3">
+				    <li>Stay connected</li>
+				    <li><a href="http://mobillify.com">Mobillify</a></li>
+				    <li><a href="http://twitter.com/mobillify">Twitter</a></li>
+				    <li><a href="http://www.youtube.com/user/TheMobillify">Youtube</a></li>
+				    <li><a href="http://www.facebook.com/Mobillify">Facebook</a></li>
+				    <li><a href="http://www.linkedin.com/company/2531757?trk=pro_other_cmpy">LinkedIn</a></li>
+				    <li><a href="http://angel.co/mobillify">Angellist</a></li> 
+			    </ul>
+			    <ul class="list col-2">
+				    <li>Plans And Pricing</li>
+				    <li><a href="/planandpricing">Basic</a></li>
+				    <li><a href="/planandpricing">Plus</a></li>
+				    <li><a href="/planandpricing">Pro</a></li>
+			    </ul>
+            </div>
 		</div>
 	</div>
 </aside>

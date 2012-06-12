@@ -13,23 +13,33 @@
 	<link href="images/gt-startup.png" rel="apple-touch-startup-image" /> 
         
 	<!-- JQuery Mobile -->  
-    <link rel="stylesheet" href="/Areas/m/Content/jqthemes/GreenBlack.min.css" />
+    <link rel="stylesheet" href="/Areas/m/Content/jqthemes/default.css" />
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile.structure-1.1.0.min.css" /> 
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script> 
     <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script> 
     <!-- JQuery Mobile -->
+    <link rel="stylesheet" href="/Areas/m/Content/jqthemes/custom.css" />
 </head>
 
 <body> 
 
-<div data-role="page" id="page1" data-theme="a">
-    <div data-role="header" data-position="fixed" back-btn="true">
-        <a href="/m" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
-        <h1>Fingerprint</h1>
+<div data-role="page" id="page1" data-theme="f">
+    <div data-role="header" data-position="fixed" style="text-align:center;">
+        <img alt="Fingerprint" src="/Content/images/logo_43.png" style="margin:4px;"/>
     </div>
     <div data-role="content">
         <asp:ContentPlaceHolder ID="MainContent" runat="server" />
     </div><!-- /content -->
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+		<ul>
+			<li><a href="/m" id="home" data-icon="home">Home</a></li>
+			<li><a href="/m/products" id="products" data-icon="grid">Products</a></li>
+			<li><a href="/m/planandpricing" id="planandprice" data-icon="star">Plan And Price</a></li>
+			<li><a href="/m/account/register" data-icon="gear">Register</a></li>
+		</ul>
+		</div>
+	</div><!-- /footer -->
 </div><!-- /page -->
 
 </body>

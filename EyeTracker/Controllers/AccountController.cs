@@ -95,7 +95,7 @@ namespace EyeTracker.Controllers
                 {
                     //TODO: send welcome email
                     new MailGenerator(this.ControllerContext).Send(new PromotionEmail("thank-you", model.Email));
-                    return Redirect("/thank-you");
+                    return Redirect("~/s/thank-you");
                     ////Waiting for activation
                     //new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
                     //return Redirect("/activation-email-sent");
@@ -130,7 +130,7 @@ namespace EyeTracker.Controllers
             {
                 throw new Exception("User does not found.");
             }
-            return Redirect("~/account-activated"); ;
+            return Redirect("~/s/account-activated"); ;
         }
 
         public ActionResult ForgotPassword()
@@ -147,7 +147,7 @@ namespace EyeTracker.Controllers
                 if (userDetails != null)
                 {
                     new MailGenerator(this.ControllerContext).Send(new ForgotPasswordMail(model.Email));
-                    return Redirect("/forgot-password-email-sent"); // Redirect to content page
+                    return Redirect("~/s/forgot-password-email-sent"); // Redirect to content page
                 }
                 else
                 {
@@ -216,7 +216,7 @@ namespace EyeTracker.Controllers
                     {
                         //Redirect to error page
                     }
-                    return Redirect("/password-changed-successful");
+                    return Redirect("~/s/password-changed-successful");
                 }
                 else
                 {
@@ -242,7 +242,7 @@ namespace EyeTracker.Controllers
                 {
                     ModelState.AddModelError("", "Wrong email.");
                 }
-                return Redirect("/unsubscrubed-successful");
+                return Redirect("~/s/unsubscrubed-successful");
             }
             return View(model, BeforeLoginMasterModel.MenuItem.None);
         }
