@@ -46,6 +46,7 @@ namespace EyeTracker.Domain.Mapping.Users
                x => x.Roles,
                map =>
                {
+                   map.Schema("usr");
                    map.Table("UserStaffRoles");
                    map.Key(k => k.Column("UserID"));
                    map.Access(Accessor.Field);

@@ -492,6 +492,7 @@
     <Content Include="Views\Application\NewEdit.aspx" />
     <Content Include="Views\Application\ScreenDetails.aspx" />
     <Content Include="Views\Application\Usage.aspx" />
+    <Content Include="Views\Analytics\PageContent.aspx" />
     <Content Include="Views\Home\PlayGround.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\PageContent.aspx" />

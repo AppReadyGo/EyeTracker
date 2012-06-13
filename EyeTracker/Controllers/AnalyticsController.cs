@@ -25,6 +25,8 @@ using EyeTracker.Models;
 using System.IO;
 using System.Drawing.Imaging;
 using EyeTracker.Common.Queries;
+using EyeTracker.Model.Pages.Home;
+using EyeTracker.Common.Queries.Content;
 
 namespace EyeTracker.Controllers
 {
@@ -58,9 +60,9 @@ namespace EyeTracker.Controllers
             this.analyticsService = analyticsService;
         }
 
-        public override AfterLoginMasterModel.SelectedMenuItem SelectedMenuItem
+        public override AfterLoginMasterModel.MenuItem SelectedMenuItem
         {
-            get { return AfterLoginMasterModel.SelectedMenuItem.Analytics; }
+            get { return AfterLoginMasterModel.MenuItem.Analytics; }
         }
 
         public ActionResult Index()
@@ -290,6 +292,34 @@ namespace EyeTracker.Controllers
             Image bgImg = null;
             if (System.IO.File.Exists(bgPath)) bgImg = Image.FromFile(bgPath);
             return bgImg;
+        }
+
+        public ActionResult PageContent(string urlPart1, string urlPart2, string urlPart3)
+        {
+            string path = urlPart1;
+            if (!string.IsNullOrEmpty(urlPart2))
+            {
+                path += "/" + urlPart2;
+            }
+            if (!string.IsNullOrEmpty(urlPart3))
+            {
+                path += "/" + urlPart3;
+            }
+
+            var page = ObjectContainer.Instance.RunQuery(new GetPageQuery(path.ToLower()));
+            if (page == null)
+            {
+                return View("404", new ContentModel { }, AfterLoginMasterModel.MenuItem.None);
+            }
+            else
+            {
+                AfterLoginMasterModel.MenuItem selectedItem = AfterLoginMasterModel.MenuItem.None;
+                if (!Enum.TryParse<AfterLoginMasterModel.MenuItem>(urlPart1, true, out selectedItem))
+                {
+                    selectedItem = AfterLoginMasterModel.MenuItem.None;
+                }
+                return View(new ContentModel { Title = page.Title, Content = page.Content }, selectedItem);
+            }
         }
     }
 }

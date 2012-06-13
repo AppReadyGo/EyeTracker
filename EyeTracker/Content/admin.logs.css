@@ -1,3 +1,4 @@
 ﻿
-.btn-clear{float:right;padding:0 8px !important;}
+.btn-clear{float:right;}
 label{white-space:nowrap;margin-right:20px;line-height:30px;}
+textarea{font-size:12px;}
