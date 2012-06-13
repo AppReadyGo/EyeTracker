@@ -10,7 +10,7 @@ namespace EyeTracker.Controllers.Master
 {
     public abstract class AnalyticsMasterController : AfterLoginController
     {
-        protected virtual ActionResult View<TViewModel>(TViewModel viewModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, string filterUrlPart, AfterLoginMasterModel.SelectedMenuItem selectedItem)
+        protected virtual ActionResult View<TViewModel>(TViewModel viewModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, string filterUrlPart, AfterLoginMasterModel.MenuItem selectedItem)
         {
             var model = new ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel, TViewModel>(GetModel(selectedItem), new AnalyticsMasterModel(leftMenuSelectedItem, filterUrlPart), viewModel);
 

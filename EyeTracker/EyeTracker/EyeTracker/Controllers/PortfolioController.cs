@@ -35,9 +35,9 @@ namespace EyeTracker.Controllers
             this.portfolioService = portfolioService;
         }
 
-        public override AfterLoginMasterModel.SelectedMenuItem SelectedMenuItem
+        public override AfterLoginMasterModel.MenuItem SelectedMenuItem
         {
-            get { return AfterLoginMasterModel.SelectedMenuItem.Analytics; }
+            get { return AfterLoginMasterModel.MenuItem.Analytics; }
         }
 
         public ActionResult New()

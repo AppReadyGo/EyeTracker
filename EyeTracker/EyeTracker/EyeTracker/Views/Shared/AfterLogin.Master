@@ -32,7 +32,7 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel>>" %>
                                 <%} %>
 							</ul>
 						</nav>
-						<h1 class="logo">Mobillify</h1>
+                        <img class="logo" src="/Content/images/logo_43.png" alt="Fingerprint" />
 					</div>
 				</div>
 			</div>

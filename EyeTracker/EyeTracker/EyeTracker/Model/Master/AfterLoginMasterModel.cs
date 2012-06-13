@@ -7,27 +7,27 @@ namespace EyeTracker.Model.Master
 {
     public class AfterLoginMasterModel
     {
-        public SelectedMenuItem SelectedItem { get; private set; }
-        public string AnalyticsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Analytics ? "class=\"current\"" : string.Empty; } }
-        public string MyAccountCssClassAttribute { get { return SelectedItem == SelectedMenuItem.MyAccount ? "class=\"current\"" : string.Empty; } }
-        public string TutorialsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Tutorials ? "class=\"current\"" : string.Empty; } }
-        public string ProductsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Products ? "class=\"current\"" : string.Empty; } }
-        public string PlanAndPricingCssClassAttribute { get { return SelectedItem == SelectedMenuItem.PlanAndPricing ? "class=\"current\"" : string.Empty; } }
-        public string ContactsCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Contacts ? "class=\"current\"" : string.Empty; } }
-        public string AdministratorCssClassAttribute { get { return SelectedItem == SelectedMenuItem.Administrator ? "class=\"current\"" : string.Empty; } }
+        public MenuItem SelectedItem { get; private set; }
+        public string AnalyticsCssClassAttribute { get { return SelectedItem == MenuItem.Analytics ? "class=\"current\"" : string.Empty; } }
+        public string MyAccountCssClassAttribute { get { return SelectedItem == MenuItem.MyAccount ? "class=\"current\"" : string.Empty; } }
+        public string TutorialsCssClassAttribute { get { return SelectedItem == MenuItem.Tutorials ? "class=\"current\"" : string.Empty; } }
+        public string ProductsCssClassAttribute { get { return SelectedItem == MenuItem.Products ? "class=\"current\"" : string.Empty; } }
+        public string PlanAndPricingCssClassAttribute { get { return SelectedItem == MenuItem.PlanAndPricing ? "class=\"current\"" : string.Empty; } }
+        public string ContactsCssClassAttribute { get { return SelectedItem == MenuItem.Contacts ? "class=\"current\"" : string.Empty; } }
+        public string AdministratorCssClassAttribute { get { return SelectedItem == MenuItem.Administrator ? "class=\"current\"" : string.Empty; } }
         public string DisplayName { get; private set; }
 
         public AfterLoginMasterModel()
         {
         }
 
-        public AfterLoginMasterModel(string displayName, SelectedMenuItem selectedItem)
+        public AfterLoginMasterModel(string displayName, MenuItem selectedItem)
         {
             this.SelectedItem = selectedItem;
             this.DisplayName = displayName;
         }
 
-        public enum SelectedMenuItem
+        public enum MenuItem
         {
             Analytics,
             MyAccount,
@@ -35,7 +35,8 @@ namespace EyeTracker.Model.Master
             Products,
             PlanAndPricing,
             Contacts,
-            Administrator
+            Administrator,
+            None
         }
 
         public bool IsAdmin { get; set; }

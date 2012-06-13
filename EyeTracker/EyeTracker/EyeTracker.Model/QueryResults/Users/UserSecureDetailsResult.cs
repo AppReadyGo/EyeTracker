@@ -16,5 +16,7 @@ namespace EyeTracker.Common.QueryResults.Users
         public bool Activated { get; set; }
 
         public int Id { get; set; }
+
+        public IEnumerable<StaffRole> Roles { get; set; }
     }
 }

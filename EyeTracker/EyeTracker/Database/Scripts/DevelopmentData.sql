@@ -3,8 +3,12 @@
 -- =============================================
 
 INSERT INTO [usr].[Users] ([UserTypeID], [Email], [Password], [PasswordSalt], [CreateDate], [Activated], [FirstName], [LastName],[Unsubscribed])
-VALUES (2/*Staff*/, 'dev@mobillify.com', 'XW0mA5DzfN4XL851H/i1xNFFbMOdtjVAL6fjBN5monE='/*111111*/, '/WCjbQ==', '20120101', 1, 'Development', 'Mobillify', 0);
+VALUES (1/*Staff*/, 'dev@mobillify.com', 'XW0mA5DzfN4XL851H/i1xNFFbMOdtjVAL6fjBN5monE='/*111111*/, '/WCjbQ==', '20120101', 1, 'Development', 'Mobillify', 0);
 
+GO
+
+INSERT INTO [usr].[UserStaffRoles](UserID, RoleID)
+VALUES((SELECT ID FROM [usr].[Users] WHERE Email = 'dev@mobillify.com'), 1)
 GO
 
 INSERT INTO [dbo].[Portfolio] ([Description] ,[TimeZone] ,[CreateDate] ,[UserId])

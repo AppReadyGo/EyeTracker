@@ -530,3 +530,9 @@ VALUES (3, 0, 'subject', 'Thank You'),
 <p style="margin-bottom:16px"><em>Looking forward to serve you,<br>Mobillify team</em></p>');
 
 GO
+
+
+--======================= Staff roles =============================--
+
+INSERT INTO [usr].[StaffRoles](ID, Name)
+VALUES(1, 'Administrator')

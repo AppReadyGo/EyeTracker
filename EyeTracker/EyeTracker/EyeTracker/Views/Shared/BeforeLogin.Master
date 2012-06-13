@@ -42,7 +42,7 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
             </div>
             <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4fc7cd9c2af8afd3"></script>
             <!-- AddThis Button END -->
-			<%--<form action="/Account/LogOn" method="post" id="login-form">
+			<form action="/Account/LogOn" method="post" id="login-form">
 				<fieldset>
 					<span class="text">
 						<input type="text" name="UserName" value="Username" onFocus="if(this.value=='Username'){this.value=''}" onBlur="if(this.value==''){this.value='Username'}">
@@ -53,7 +53,7 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
 					<a href="#" class="login" onClick="$(this).closest('form').submit();"><span><span>Login</span></span></a>
 					<span class="links"><%: Html.ActionLink("Forgot Password?", "ForgotPassword", "Account") %><br/><%: Html.ActionLink("Register", "Register", "Account")%></span>
 				</fieldset>
-			</form>--%>
+			</form>
 		</div>
 	</header>
 <!-- content -->

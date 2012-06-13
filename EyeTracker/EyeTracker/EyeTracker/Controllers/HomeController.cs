@@ -104,29 +104,36 @@ namespace EyeTracker.Controllers
 
         public ActionResult PageContent(string urlPart1, string urlPart2, string urlPart3)
         {
-            string path = urlPart1;
-            if (!string.IsNullOrEmpty(urlPart2))
+            if (this.User.Identity.IsAuthenticated)
             {
-                path += "/" + urlPart2;
-            }
-            if (!string.IsNullOrEmpty(urlPart3))
-            {
-                path += "/" + urlPart3;
-            }
-
-            var page = ObjectContainer.Instance.RunQuery(new GetPageQuery(path.ToLower()));
-            if (page == null)
-            {
-                return View("404", new PricingModel { }, BeforeLoginMasterModel.MenuItem.None);
+                return new AnalyticsController().PageContent(urlPart1, urlPart2, urlPart3);//RedirectToAction("PageContent", "Analytics", new { urlPart1, urlPart2, urlPart3 });
             }
             else
             {
-                BeforeLoginMasterModel.MenuItem selectedItem = BeforeLoginMasterModel.MenuItem.None;
-                if (!Enum.TryParse<BeforeLoginMasterModel.MenuItem>(urlPart1, true, out selectedItem))
+                string path = urlPart1;
+                if (!string.IsNullOrEmpty(urlPart2))
                 {
-                    selectedItem = BeforeLoginMasterModel.MenuItem.None;
+                    path += "/" + urlPart2;
                 }
-                return View(new ContentModel { Title = page.Title, Content = page.Content }, selectedItem);
+                if (!string.IsNullOrEmpty(urlPart3))
+                {
+                    path += "/" + urlPart3;
+                }
+
+                var page = ObjectContainer.Instance.RunQuery(new GetPageQuery(path.ToLower()));
+                if (page == null)
+                {
+                    return View("404", new PricingModel { }, BeforeLoginMasterModel.MenuItem.None);
+                }
+                else
+                {
+                    BeforeLoginMasterModel.MenuItem selectedItem = BeforeLoginMasterModel.MenuItem.None;
+                    if (!Enum.TryParse<BeforeLoginMasterModel.MenuItem>(urlPart1, true, out selectedItem))
+                    {
+                        selectedItem = BeforeLoginMasterModel.MenuItem.None;
+                    }
+                    return View(new ContentModel { Title = page.Title, Content = page.Content }, selectedItem);
+                }
             }
         }
 

@@ -3,8 +3,7 @@
         background: url("images/beforelogn.header.bg.jpg") repeat-x scroll 0 -42px #95cf63;
         border-bottom:3px solid #f7892f;}
 
-.header .logo{display:block;float:left;}
-.header .logo img{height: 30px;margin-left: 10px;margin-right: 10px;margin-top: 4px;border:0px;}
+.header-box img.logo{height: 28px; margin-left: 19px; margin-top: 9px;}
 
 .header ul{margin:0;padding:0;line-height:40px;color:#fff;}
 .header li{list-style-type:none;display:inline;}

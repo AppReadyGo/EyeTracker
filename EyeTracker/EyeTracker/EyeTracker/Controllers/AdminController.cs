@@ -14,17 +14,19 @@ using EyeTracker.Domain.Model.BackOffice;
 using EyeTracker.Model;
 using EyeTracker.Model.Pages.Admin;
 using EyeTracker.Model.Master;
+using EyeTracker.Common;
+using System.Web.Security;
 
 namespace EyeTracker.Controllers
 {
-   // [Authorize(Roles = "Administrators")]
+    [Authorize(Roles = "Administrator")]
     public class AdminController : AfterLoginController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         
-        public override Model.Master.AfterLoginMasterModel.SelectedMenuItem SelectedMenuItem
+        public override Model.Master.AfterLoginMasterModel.MenuItem SelectedMenuItem
         {
-            get { return Model.Master.AfterLoginMasterModel.SelectedMenuItem.Administrator; }
+            get { return Model.Master.AfterLoginMasterModel.MenuItem.Administrator; }
         }
 
         IAdminService adminService;
