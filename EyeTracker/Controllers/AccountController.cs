@@ -46,21 +46,25 @@ namespace EyeTracker.Controllers
                 {
                     ModelState.AddModelError("", "You account is not activated, please use the link from activation email to activate your account.");
                 }
+                else if (!Membership.Provider.ValidateUser(model.UserName, model.Password))
+                {
+                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                }
                 else
                 {
                     // TODO: add terms and conditions
                     FormsAuthentication.SetAuthCookie(securedDetails.Id.ToString(), model.RememberMe);
-                    if (securedDetails.Roles != null)
-                    {
-                        foreach(var r in securedDetails.Roles.Select(r => r.ToString()))
-                        {
-                            if(!Roles.IsUserInRole(securedDetails.Id.ToString(), r))
-                            {
-                                Roles.AddUserToRole(securedDetails.Id.ToString(), r);
-                            }
-                        }
+                    //if (securedDetails.Roles != null)
+                    //{
+                    //    foreach(var r in securedDetails.Roles.Select(r => r.ToString()))
+                    //    {
+                    //        if(!Roles.IsUserInRole(securedDetails.Id.ToString(), r))
+                    //        {
+                    //            Roles.AddUserToRole(securedDetails.Id.ToString(), r);
+                    //        }
+                    //    }
                         
-                    }
+                    //}
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
@@ -78,7 +82,6 @@ namespace EyeTracker.Controllers
 
         public ActionResult LogOff()
         {
-            Roles.DeleteCookie();
             FormsAuthentication.SignOut();
 
             return RedirectToAction("Index", "Home");

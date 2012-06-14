@@ -109,7 +109,7 @@ namespace EyeTracker.Controllers
             var severities = result.Severities.OrderBy(s => s).Select(s => new SelectListItem { Text = s, Value = s }).ToList();
             severities.Insert(0, new SelectListItem { Text = "All", Value = string.Empty, Selected = true });
             ViewBag.Severities = severities;
-            
+
             return View(new LogsModel());
         }
 

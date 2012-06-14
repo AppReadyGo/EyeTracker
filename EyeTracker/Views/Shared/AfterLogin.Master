@@ -37,8 +37,8 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel>>" %>
 				</div>
 			</div>
             <div class="user-info">
-			<form action="account/LogOff">
-                <a href="account/changepassword">Change password</a><br/><a href="#" onClick="$(this).closest('form').submit();">Logout</a>
+			<form action="/account/LogOff">
+                <a href="/account/changepassword">Change password</a><br/><a href="#" onClick="$(this).closest('form').submit();">Logout</a>
 			</form>
             <h2>Welcome! &nbsp;<%=Model.Master.DisplayName%></h2>
             </div>
