@@ -33,5 +33,15 @@ namespace EyeTracker.Tests.FakeData
             }
             return new List<UserActivity>();
         }
+
+        #region IActivityTrackingRepository Members
+
+
+        public List<UserActivity> Get(int userId, UserActivityType? userActivityType, DateTime? fromDate, DateTime? toDate, int? lastActivitesCount)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

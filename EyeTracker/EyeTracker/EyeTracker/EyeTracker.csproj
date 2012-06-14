@@ -113,6 +113,8 @@
     <Compile Include="Areas\m\mAreaRegistration.cs" />
     <Compile Include="Common\CSSAttribute.cs" />
     <Compile Include="Common\CSSFilter.cs" />
+    <Compile Include="App_Data\CustomMembershipProvider.cs" />
+    <Compile Include="App_Data\CustomRoleProvider.cs" />
     <Compile Include="Common\Mails\ActivationEmail.cs" />
     <Compile Include="Common\Mails\Email.cs" />
     <Compile Include="Common\Mails\ForgotPasswordMail.cs" />
@@ -540,7 +542,6 @@
     <Content Include="Web.prod.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\m\Models\" />
     <Folder Include="Scripts\Tests\UnitTests\" />
     <Folder Include="Users_Resources\Screens\" />

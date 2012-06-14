@@ -164,6 +164,7 @@
     <Compile Include="QueriesHandlers\Content\GetSystemMailQuery.cs" />
     <Compile Include="QueriesHandlers\Content\GetThemeQuery.cs" />
     <Compile Include="QueriesHandlers\IQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Users\GetUserRolesQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserDetailsByIdQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserSecuredDetailsByEmailQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserDetailsByEmailQueryHandler.cs" />
