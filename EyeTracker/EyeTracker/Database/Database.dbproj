@@ -388,5 +388,8 @@
     <NotInBuild Include="Scripts\DevelopmentData.sql">
       <SubType>NotInBuild</SubType>
     </NotInBuild>
+    <NotInBuild Include="Scripts\ClearUserData.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
   </ItemGroup>
 </Project>
