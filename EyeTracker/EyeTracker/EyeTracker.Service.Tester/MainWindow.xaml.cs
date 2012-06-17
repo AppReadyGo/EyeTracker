@@ -145,6 +145,12 @@ namespace EyeTracker.Service.Tester
             
         }
 
+        private void btnFillTestApp_Click(object sender, RoutedEventArgs e)
+        {
+            //todo: orientation!!
+            var jsonPackage1 = GetCustomPackage("RunNow-RunNow-1", 800, 480, 300, 100, "ActivityPickerActivity");
+            var jsonPackage2 = GetCustomPackage("RunNow-RunNow-1", 800, 480, 200, 200, "FrontDoorActivity");
+        }
 
         #region code
 
@@ -284,9 +290,36 @@ namespace EyeTracker.Service.Tester
 
             objJP.SessionsInfo[0].SessionStartDate = dtStart.ToString("R");
             objJP.SessionsInfo[0].SessionCloseDate = dtEnd.ToString("R");
-            objJP.SessionsInfo[0].TouchDetails = GetTouchDetails(dtStart, dtEnd);
-            objJP.SessionsInfo[0].ScrollDetails = GetScrollDetails(objJP.SessionsInfo[0].TouchDetails[0], objJP.SessionsInfo[0].TouchDetails[2]);
+            objJP.SessionsInfo[0].TouchDetails = GetTouchDetails(dtStart, dtEnd, 3, SCREEN_HEIGHT, SCREEN_WIDTH);
+            objJP.SessionsInfo[0].ScrollDetails = GetScrollDetails(objJP.SessionsInfo[0].TouchDetails[0], objJP.SessionsInfo[0].TouchDetails[2], 1);
             objJP.SessionsInfo[0].ViewAreaDetails = GetViewAreaDetails(dtStart, dtEnd);
+
+            return objJP;
+        }
+
+        private JsonPackage GetCustomPackage(string clientKey, int screenHeight, int screenWidth, 
+            int clientHeight, int clientWidth,
+            string pageUri)
+        {
+            JsonPackage objJP = new JsonPackage();
+            objJP.ClientKey = clientKey;
+            objJP.ScreenHeight = screenHeight;
+            objJP.ScreenWidth = screenWidth;
+            objJP.SessionsInfo = new JsonSessionInfo[1];
+            objJP.SessionsInfo[0] = new JsonSessionInfo();
+            objJP.SessionsInfo[0].ClientHeight = clientHeight;
+            objJP.SessionsInfo[0].ClientWidth = clientWidth;
+            objJP.SessionsInfo[0].PageUri = pageUri;
+
+            DateTime dtStart, dtEnd;
+            dtStart = DateTime.Now.AddSeconds(-30);
+            dtEnd = DateTime.Now;
+
+            objJP.SessionsInfo[0].SessionStartDate = dtStart.ToString("R");
+            objJP.SessionsInfo[0].SessionCloseDate = dtEnd.ToString("R");
+            objJP.SessionsInfo[0].TouchDetails = GetTouchDetails(dtStart, dtEnd, 50, clientHeight, clientWidth);
+            objJP.SessionsInfo[0].ScrollDetails = GetScrollDetails(objJP.SessionsInfo[0].TouchDetails[0], objJP.SessionsInfo[0].TouchDetails[2], 20);
+            objJP.SessionsInfo[0].ViewAreaDetails = GetViewAreaDetails(dtStart, dtEnd, 10, clientHeight, clientWidth);
 
             return objJP;
         }
@@ -308,8 +341,9 @@ namespace EyeTracker.Service.Tester
 
                 colSessions[i].SessionStartDate = dtStart.ToString("R");
 
-                colSessions[i].TouchDetails = GetTouchDetails(dtStart, dtEnd);
-                colSessions[i].ScrollDetails = GetScrollDetails(colSessions[i].TouchDetails[0], colSessions[i].TouchDetails[2]);
+                colSessions[i].TouchDetails = GetTouchDetails(dtStart, dtEnd, 3, SCREEN_HEIGHT, SCREEN_WIDTH);
+                //todo!
+                colSessions[i].ScrollDetails = GetScrollDetails(colSessions[i].TouchDetails[0], colSessions[i].TouchDetails[2], 1);
                 colSessions[i].ViewAreaDetails = GetViewAreaDetails(dtStart, dtEnd);
 
                 colSessions[i].SessionCloseDate = dtEnd.ToString("R");
@@ -318,62 +352,82 @@ namespace EyeTracker.Service.Tester
             return colSessions;
         }
 
-        private JsonViewAreaDetails[] GetViewAreaDetails(DateTime dtFrom, DateTime dtTo)
+        private JsonViewAreaDetails[] GetViewAreaDetails(DateTime dtFrom, DateTime dtTo, int count = 3, int clientHeight = SCREEN_HEIGHT, int clientWidth = SCREEN_WIDTH)
         {
-            var colViewAreaDetails = new JsonViewAreaDetails[]
+            var colViewAreaDetails = new JsonViewAreaDetails[count];
+            //{
+            //    GetViewAreaDetail(dtFrom, dtTo),
+            //    GetViewAreaDetail(dtFrom, dtTo),
+            //    GetViewAreaDetail(dtFrom, dtTo)
+            //};
+            for (int i = 0; i < count; i++)
             {
-                GetViewAreaDetail(dtFrom, dtTo),
-                GetViewAreaDetail(dtFrom, dtTo),
-                GetViewAreaDetail(dtFrom, dtTo)
-            };
+                colViewAreaDetails[i] = GetViewAreaDetail(dtFrom, dtTo, clientHeight, clientWidth);
+            }
             return colViewAreaDetails;
 
         }
 
-        private JsonViewAreaDetails GetViewAreaDetail(DateTime dtFrom, DateTime dtTo)
+        private JsonViewAreaDetails GetViewAreaDetail(DateTime dtFrom, DateTime dtTo, int clientHeight = SCREEN_HEIGHT, int clientWidth = SCREEN_WIDTH)
         {
             Random r = new Random();
             var objViewAreaDetail = new JsonViewAreaDetails();
-            objViewAreaDetail.CoordX = r.Next(0, SCREEN_WIDTH);
-            objViewAreaDetail.CoordY = r.Next(0, SCREEN_HEIGHT);
+            objViewAreaDetail.CoordX = r.Next(0, clientWidth);
+            objViewAreaDetail.CoordY = r.Next(0, clientHeight);
 
             objViewAreaDetail.StartDate = dtFrom.AddMilliseconds(10).ToString("R");
             objViewAreaDetail.FinishDate = dtTo.AddMilliseconds(-10).ToString("R");
 
-            objViewAreaDetail.Orientation = 7;
+            objViewAreaDetail.Orientation = 7; //??
 
             return objViewAreaDetail;
         }
 
-        private JsonTouchDetails[] GetTouchDetails(DateTime dtFrom, DateTime dtTo)
+        private JsonTouchDetails[] GetTouchDetails(DateTime dtFrom, DateTime dtTo, int count, int clientHeight, int clientWidth)
         {
-            var colTouchDeatils = new JsonTouchDetails[]
+            var colTouchDeatils = new JsonTouchDetails[count];
+            for(int i = 0; i<count; i++)
             {
-                GetTouchDetail(dtFrom, dtTo),
-                GetTouchDetail(dtFrom, dtTo),
-                GetTouchDetail(dtFrom, dtTo)
-            };
+                colTouchDeatils[i] = GetTouchDetail(dtFrom, dtTo, clientHeight, clientWidth);
+                //GetTouchDetail(dtFrom, dtTo),
+                //GetTouchDetail(dtFrom, dtTo),
+                //GetTouchDetail(dtFrom, dtTo)
+            }
             return colTouchDeatils;
+        }
+
+        private JsonTouchDetails GetTouchDetail(DateTime dtFrom, DateTime dtTo, int clientHeight, int clientWidth)
+        {
+            Random r = new Random();
+            JsonTouchDetails objTD = new JsonTouchDetails();
+            objTD.ClientX = r.Next(0, clientWidth);
+            objTD.ClientY = r.Next(0, clientHeight);
+            objTD.Date = dtFrom.AddMilliseconds((dtTo - dtFrom).TotalMilliseconds / 2).ToString("R");   // DateTime.Now.AddSeconds(10).ToString();   
+            objTD.Press = r.Next(1, 100);
+            objTD.Orientation = 7; //??
+            return objTD;
         }
 
         private JsonTouchDetails GetTouchDetail(DateTime dtFrom, DateTime dtTo)
         {
-            Random r = new Random();
-            JsonTouchDetails objTD = new JsonTouchDetails();
-            objTD.ClientX = r.Next(0, SCREEN_WIDTH);
-            objTD.ClientY = r.Next(0, SCREEN_HEIGHT);
-            objTD.Date = dtFrom.AddMilliseconds((dtTo - dtFrom).TotalMilliseconds / 2).ToString("R");   // DateTime.Now.AddSeconds(10).ToString();   
-            objTD.Press = r.Next(1, 100);
-            objTD.Orientation = 7;
-            return objTD;
+            return GetTouchDetail(dtFrom, dtTo, SCREEN_HEIGHT, SCREEN_WIDTH);
+            //Random r = new Random();
+            //JsonTouchDetails objTD = new JsonTouchDetails();
+            //objTD.ClientX = r.Next(0, SCREEN_WIDTH);
+            //objTD.ClientY = r.Next(0, SCREEN_HEIGHT);
+            //objTD.Date = dtFrom.AddMilliseconds((dtTo - dtFrom).TotalMilliseconds / 2).ToString("R");   // DateTime.Now.AddSeconds(10).ToString();   
+            //objTD.Press = r.Next(1, 100);
+            //objTD.Orientation = 7;
+            //return objTD;
         }
 
-        private JsonScrollDetails[] GetScrollDetails(JsonTouchDetails p_objStartTouch, JsonTouchDetails p_objEndTouch)
+        private JsonScrollDetails[] GetScrollDetails(JsonTouchDetails p_objStartTouch, JsonTouchDetails p_objEndTouch, int count)
         {
+            //count: todo!
             JsonScrollDetails objScrollDetails = new JsonScrollDetails();
             objScrollDetails.StartTouchData = p_objStartTouch;
             objScrollDetails.CloseTouchData = p_objEndTouch;
-
+            
             var colScrollDetails = new JsonScrollDetails[]
             {
                 objScrollDetails
@@ -402,6 +456,9 @@ namespace EyeTracker.Service.Tester
         private string StatusService { get; set; }
         #endregion Private members 
 
+        
+
+        
       
        
 
