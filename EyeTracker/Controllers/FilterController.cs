@@ -22,6 +22,13 @@ namespace EyeTracker.Controllers
             return View(viewModel, leftMenuSelectedItem, GetUrlPart(viewModel));
         }
 
+        protected virtual ActionResult View<TViewModel>(TViewModel viewModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem)
+            where TViewModel : FilterModel
+        {
+            viewModel.NoData = true;
+            return View(viewModel, leftMenuSelectedItem, GetUrlPart(viewModel));
+        }
+
         private string GetUrlPart(FilterModel filter)
         {
             if (filter.NoData)

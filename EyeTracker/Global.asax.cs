@@ -102,8 +102,8 @@ namespace EyeTracker
 
             routes.MapRoute(
                 "Application", 
-                "Application/{action}/{portfolioId}/{appId}",
-                new { controller = "Application", action = "Index", appId = UrlParameter.Optional },
+                "Application/{action}/{id}",
+                new { controller = "Application", action = "New" },
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
 

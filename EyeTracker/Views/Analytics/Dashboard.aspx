@@ -31,30 +31,38 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
             <div id="usage_charts_place_holder" style="height:200px;width:875px;"></div>
         </div>
     </td>
-</tr><tr>  
+</tr>
+<%--<tr>  
     <td>
         <div class="title"><span>Visitors</span></div>
         <div id="visitors_charts_place_holder" style="height:200px;width:437px;"></div>
     </td>
     <td>
         <div class="title"><span>Map Overlay</span></div>
-        <img src="/Content/img/world_map.jpg" class="item" />
+        <img src="/Content/images/world_map.jpg" class="item" />
     </td>
-</tr><tr>  
-    <td>
+</tr>--%>
+<tr>  
+<%--    <td>
         <div class="title"><span>Trafic Sources</span></div>
         <div class="item"></div>
-    </td>
-    <td>
+    </td>--%>
+    <td colspan="2">
         <div class="title"><span>Content Overview</span></div>
         <table>
             <thead><tr><th>Path</th><th>Views</th><th>% Views</th></tr></thead>
             <tbody>
-            <tr><td></td><td></td><td></td></tr>
-            <tr><td></td><td></td><td></td></tr>
-            <tr><td></td><td></td><td></td></tr>
-            <tr><td></td><td></td><td></td></tr>
-            <tr><td></td><td></td><td></td></tr>
+                <%if (Model.View.ContentOverviewData.Any())
+                {
+                    foreach (var item in Model.View.ContentOverviewData)
+                    { %>
+                        <tr><td></td><td></td><td></td></tr>
+                  <% }
+                }
+                else
+                {%>
+                    <tr><td colspan="3">No Data</td></tr>
+                <%} %>
             </tbody>
         </table>
         <div class="item"></div>

@@ -16,8 +16,10 @@
 .table ul li.expanded > div div.expand{background-position:-338px -102px;}
 .table ul li.expanded > div{border-bottom:1px dashed #F0F0F0;}
 .table ul li > div div.status-ok{margin:4px auto auto; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -321px -41px transparent;}
-.table ul li > div div.properties{display:inline-block;margin:4px 3px 4px 0px; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -301px -1px transparent;}
-.table ul li > div div.new-app{display:inline-block;margin:4px 0px 4px 3px; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -23px -1px transparent;}
+.table ul li > div div.status-alert{margin:4px auto auto; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -342px -41px transparent;}
+.table ul li > div a.edit span{display:inline-block;margin:4px 3px 4px 0px; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -301px -1px transparent;}
+.table ul li > div a.new-app span{display:inline-block;margin:4px 0px 4px 3px; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -23px -1px transparent;}
+.table ul li > div a.remove span{display:inline-block;margin:4px 0px 4px 3px; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -481px -40px transparent;}
 .table ul li.app{display:none;}
 .table ul li > div.nav{cursor:pointer;}
 .table ul li.disabled > div.nav{cursor:default;}

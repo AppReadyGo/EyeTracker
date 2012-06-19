@@ -25,10 +25,6 @@ namespace EyeTracker.Controllers
     [HandleError]
     public class HomeController : Master.BeforeLoginController
     {
-        public HomeController()
-        {
-        }
-
         public ActionResult Index(long? appId, string pageUri, string clientSize)
         {
             if (Request.IsAuthenticated)
@@ -102,6 +98,13 @@ namespace EyeTracker.Controllers
             }
         }
 
+        /// <summary>
+        /// Before login page content
+        /// </summary>
+        /// <param name="urlPart1"></param>
+        /// <param name="urlPart2"></param>
+        /// <param name="urlPart3"></param>
+        /// <returns></returns>
         public ActionResult PageContent(string urlPart1, string urlPart2, string urlPart3)
         {
             if (this.User.Identity.IsAuthenticated)
@@ -162,8 +165,7 @@ namespace EyeTracker.Controllers
             return base.File(byteArray, "text/css");
         }
 
-
-        public string RemoveWhiteSpaceFromStylesheets(string body)
+        private string RemoveWhiteSpaceFromStylesheets(string body)
         {
             body = Regex.Replace(body, @"[a-zA-Z]+#", "#");
             body = Regex.Replace(body, @"[\n\r]+\s*", string.Empty);

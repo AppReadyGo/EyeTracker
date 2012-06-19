@@ -11,6 +11,7 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
         public string Description { get; set; }
         public IEnumerable<ApplicationResult> Applications { get; set; }
 
+        public bool IsActive { get; set; }
         public long Visits { get; set; }
     }
 }

@@ -6,6 +6,7 @@ namespace EyeTracker.Common
     public interface ISecurityContext
     {
         CurrentUserDetails CurrentUser { get; }
+        void ClearCurrentUserDetails();
     }
 
     public class CurrentUserDetails
@@ -42,6 +43,11 @@ namespace EyeTracker.Common
                     this.CurrentUser = userDetails;
                 }
             }
+        }
+
+        public void ClearCurrentUserDetails()
+        {
+            HttpContext.Current.Session["CurrentUserDetails"] = null;
         }
     }
 }

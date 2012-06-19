@@ -42,19 +42,9 @@ namespace EyeTracker.Controllers
 
         public ActionResult New()
         {
-            var countriesRes = portfolioService.GetCountries();
-            if (!countriesRes.HasError)
-            {
-                var timeZones = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
-                FilterParametersModel filter = null;
-
-                return View(new PortfolioModel { TimeZone = 0, ViewData = new SelectList(timeZones, "Id", "DisplayName") },
-                            AnalyticsMasterModel.MenuItem.Portfolios, new FilterDataResult(), filter);
-            }
-            else
-            {
-                return View("Error");
-            }
+            var model = this.GetModel();
+            model.TimeZone = 0;
+            return View(model, AnalyticsMasterModel.MenuItem.Portfolios);
         }
 
         [HttpPost]
@@ -74,19 +64,7 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                var countriesRes = portfolioService.GetCountries();
-                if (!countriesRes.HasError)
-                {
-                    var timeZones = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
-                    model.ViewData = new SelectList(timeZones, "Id", "DisplayName");
-                    FilterParametersModel filter = null;
-
-                    return View(model, AnalyticsMasterModel.MenuItem.Portfolios, new FilterDataResult(), filter);
-                }
-                else
-                {
-                    return View("Error");
-                }
+                return View(this.GetModel(model), AnalyticsMasterModel.MenuItem.Portfolios);
             }
         }
 
@@ -99,43 +77,31 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                var model = new PortfolioModel
-                {
-                    Id = portfolioRes.Value.Id,
-                    Description = portfolioRes.Value.Description,
-                    TimeZone = portfolioRes.Value.TimeZone
-                };
-                var countriesRes = portfolioService.GetCountries();
-                if (!countriesRes.HasError)
-                {
-                    var timeZones = this.GetTimeZones().Value.Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
-                    model.ViewData = new SelectList(timeZones, "Id", "DisplayName");
-                    return View(model, AnalyticsMasterModel.MenuItem.Portfolios, null, null);
-                }
-                else
-                {
-                    return View("Error");
-                }
+                var model = this.GetModel();
+                model.Id = portfolioRes.Value.Id;
+                model.Description = portfolioRes.Value.Description;
+                model.TimeZone = portfolioRes.Value.TimeZone;
+                
+                return View(model, AnalyticsMasterModel.MenuItem.Portfolios);
             }
         }
 
         [HttpPost]
-        public ActionResult Edit(PortfolioModel viewModel)
+        public ActionResult Edit(PortfolioModel model)
         {
             if (ModelState.IsValid)
             {
-                var res = portfolioService.Update(viewModel.Id, viewModel.Description, viewModel.TimeZone);
+                var res = portfolioService.Update(model.Id, model.Description, model.TimeZone);
                 return Redirect("/Analytics");
             }
             else
             {
-                return View(viewModel, AnalyticsMasterModel.MenuItem.Portfolios, null, null);
+                return View(this.GetModel(model), AnalyticsMasterModel.MenuItem.Portfolios);
             }
         }
 
         public ActionResult Remove(int id)
         {
-            /*
             var res = portfolioService.Remove(id);
             if (res.HasError)
             {
@@ -143,16 +109,18 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                return RedirectToAction("");
+                return RedirectToAction("", "Analytics");
             }
-             */
-             return View("Error");
         }
 
-
-        public OperationResult<ReadOnlyCollection<TimeZoneInfo>> GetTimeZones()
+        private PortfolioModel GetModel(PortfolioModel model = null)
         {
-            return new OperationResult<ReadOnlyCollection<TimeZoneInfo>>(TimeZoneInfo.GetSystemTimeZones());
+            var m = model == null ? new PortfolioModel() : model;
+
+            var timeZones = TimeZoneInfo.GetSystemTimeZones().Select((curItem, i) => new { DisplayName = curItem.DisplayName, Id = (short)curItem.BaseUtcOffset.Hours, i = i });
+            m.ViewData = new SelectList(timeZones, "Id", "DisplayName");
+
+            return m;
         }
     }
 }

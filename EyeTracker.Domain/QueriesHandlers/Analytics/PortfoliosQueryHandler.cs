@@ -64,7 +64,7 @@ namespace EyeTracker.Domain.Queries.Analytics
             }
 
             var viewDataResult = GetResult<PortfoliosDataResult>(session, securityContext.CurrentUser.Id);
-            viewDataResult.Portfolios1 = portfolios;
+            viewDataResult.PortfoliosData = portfolios;
             return viewDataResult;
         }
     }
