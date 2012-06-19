@@ -10,7 +10,7 @@ using EyeTracker.Model.Filter;
 
 namespace EyeTracker.Model.Pages.Application
 {
-    public class ApplicationModel : FilterModel//ViewModel<ApplicationViewModel>
+    public class ApplicationModel : FilterModel
     {
         public int Id { get; set; }
 

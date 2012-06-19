@@ -1,30 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
-using System.IO;
-using System.Text;
-using System.Runtime.Serialization;
-using System.Drawing;
-using EyeTracker.Models;
-using System.Drawing.Imaging;
-using System.Runtime.Serialization.Json;
-using EyeTracker.Common;
-using EyeTracker.Model;
-using EyeTracker.Core;
-using EyeTracker.Common.Logger;
-using System.Reflection;
-using EyeTracker.Core.Services;
-using EyeTracker.DAL.Domain;
-using EyeTracker.Helpers;
-using EyeTracker.Domain.Model;
 using System.Web.Script.Serialization;
-using EyeTracker.Domain.Model.Events;
-using EyeTracker.Domain;
-using EyeTracker.Controllers.Master;
-using EyeTracker.Model.Pages.Application;
+using EyeTracker.Common;
+using EyeTracker.Common.Logger;
+using EyeTracker.Core;
+using EyeTracker.Core.Services;
+using EyeTracker.Domain.Model;
+using EyeTracker.Helpers;
+using EyeTracker.Model;
 using EyeTracker.Model.Master;
+using EyeTracker.Model.Pages.Application;
 
 namespace EyeTracker.Controllers
 {
@@ -35,29 +25,179 @@ namespace EyeTracker.Controllers
         
         private IApplicationService service;
         private IPortfolioService portfolioService;
-        private IAnalyticsService analyticsService;
 
         public ApplicationController()
             : this(new ApplicationService(), 
-            new PortfolioService(), 
-            new AnalyticsService())
+            new PortfolioService())
         {
         }
 
         public ApplicationController(IApplicationService service, 
-            IPortfolioService portfolioService, 
-            IAnalyticsService analyticsService)
+            IPortfolioService portfolioService)
         {
             this.service = service;
             this.portfolioService = portfolioService;
-            this.analyticsService = analyticsService;
         }
 
         public override AfterLoginMasterModel.MenuItem SelectedMenuItem
         {
             get { return AfterLoginMasterModel.MenuItem.Analytics; }
         }
+         
+        public ActionResult New(int id)
+        {
+            var viewData = GetViewData(id);
+            return View(new ApplicationModel { PortfolioId = id, ViewData = viewData }, AnalyticsMasterModel.MenuItem.Portfolios);
+        }
 
+        [HttpPost]
+        public JsonResult New(ApplicationModel model)
+        {
+            object res = null;
+            if (ModelState.IsValid)
+            {
+                var portfolioRes = portfolioService.Get(model.PortfolioId);
+                if (portfolioRes.HasError)
+                {
+                    res = new { HasError = true };
+                }
+                else
+                {
+                    var app = new Application(portfolioRes.Value, model.Description, model.Type);
+                    var appRes = service.Add(app);
+                    if (appRes.HasError)
+                    {
+                        res = new { HasError = true };
+                    }
+                    else
+                    {
+                        res = new { 
+                            HasError = false,
+                            code = GetAppKey(app.Type, model.PortfolioId, appRes.Value),
+                            appId = appRes.Value
+                        };
+                    }
+                }
+            }
+            else
+            {
+                res = new { };
+            }
+            return Json(res);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var appRes = service.Get(id);
+            if (appRes.HasError)
+            {
+                return View("Error");
+            }
+            else
+            {
+                var app = appRes.Value;
+                var model = new ApplicationEditModel
+                {
+                    Id = app.Id,
+                    Description = app.Description,
+                    Type = app.Type,
+                    PortfolioId = app.Portfolio.Id
+                };
+                model.ViewData = GetViewData(model.PortfolioId, model.Type, model.Id);
+
+                return View(model, AnalyticsMasterModel.MenuItem.Portfolios);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ApplicationEditModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var portfolioRes = portfolioService.Get(model.PortfolioId);
+                if (portfolioRes.HasError)
+                {
+                    return View("Error");
+                }
+                else
+                {
+                    var appRes = service.Update(model.Id, model.Description);
+                    if (appRes.HasError)
+                    {
+                        return View("Error");
+                    }
+                    else
+                    {
+                        return Redirect("/Analytics");
+                    }
+                }
+            }
+            else
+            {
+                model.ViewData = GetViewData(model.PortfolioId, model.Type, model.AppId);
+                return View(model, AnalyticsMasterModel.MenuItem.Portfolios);
+            }
+        }
+
+        public ActionResult Remove(int id)
+        {
+            var res = service.Remove(id);
+            if (res.HasError)
+            {
+                return View("Error");
+            }
+            else
+            {
+                return RedirectToAction("", "Analytics");
+            }
+        }
+
+        private static ApplicationViewModel GetViewData(int portfolioId, ApplicationType? type = null, int? appId = null)
+        {
+            return new ApplicationViewModel
+            {
+                Screens = new List<Screen>(),
+                TypesList = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() }),
+                PropertyId = GetAppKey(type, portfolioId, appId)
+            };
+        }
+
+        private static string GetAppKey(ApplicationType? type, int? portfolioId, int? applicationId)
+        {
+            string key = "";
+            if (type.HasValue)
+            {
+                switch (type)
+                {
+                    case ApplicationType.Android:
+                        key = "MA";
+                        break;
+                    case ApplicationType.Web:
+                        key = "WP";
+                        break;
+                    case ApplicationType.iPhone:
+                        key = "MI";
+                        break;
+                    case ApplicationType.WebMobile:
+                        key = "WM";
+                        break;
+                    case ApplicationType.WindowsMobile:
+                        key = "MW";
+                        break;
+                }
+            }
+
+            if (type.HasValue && portfolioId.HasValue && applicationId.HasValue)
+            {
+                return string.Format("{0}-{1:0000}-{2:000000}", key, portfolioId.Value, applicationId.Value);
+            }
+            else
+            {
+                return "**-****-******";
+            }
+        }
+
+        /*
         public ActionResult Index(int portfolioId)
         {
             var appRes = service.GetAll(portfolioId);
@@ -99,142 +239,6 @@ namespace EyeTracker.Controllers
             return View();
         }
 
-        public ActionResult New(int portfolioId)
-        {
-            var viewData = GetViewData(portfolioId);
-            return View(new ApplicationModel { ViewData = viewData }, AnalyticsMasterModel.MenuItem.Portfolios, null, null);
-        }
-
-        [HttpPost]
-        public JsonResult New(ApplicationModel model)
-        {
-            object res = null;
-            if (ModelState.IsValid)
-            {
-                var portfolioRes = portfolioService.Get(model.PortfolioId);
-                if (portfolioRes.HasError)
-                {
-                    res = new { HasError = true };
-                }
-                else
-                {
-                    var app = new Application(portfolioRes.Value, model.Description, model.Type);
-                    var appRes = service.Add(app);
-                    if (appRes.HasError)
-                    {
-                        res = new { HasError = true };
-                    }
-                    else
-                    {
-                        string key = GetAppKey(app.Type);
-                        res = new { 
-                            HasError = false, 
-                            code = string.Format("{0}-{1:000000}-{2:0000}", key, model.PortfolioId, appRes.Value),
-                            appId = appRes.Value
-                        };
-                    }
-                }
-            }
-            else
-            {
-                res = new { };
-            }
-            return Json(res);
-        }
-
-        public ActionResult Edit(int portfolioId, int appId)
-        {
-            var appRes = service.Get(appId);
-            if (appRes.HasError)
-            {
-                return View("Error");
-            }
-            else
-            {
-                var app = appRes.Value;
-                var model = new ApplicationEditModel
-                {
-                    Id = app.Id,
-                    Description = app.Description,
-                    PortfolioId = portfolioId,
-                    Type = app.Type
-                };
-                model.ViewData = GetViewData(model.PortfolioId, model.Type, model.Id);
-
-                return View(model, AnalyticsMasterModel.MenuItem.Portfolios, null, null);
-            }
-        }
-
-        [HttpPost]
-        public ActionResult Edit(ApplicationEditModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var portfolioRes = portfolioService.Get(model.PortfolioId);
-                if (portfolioRes.HasError)
-                {
-                    return View("Error");
-                }
-                else
-                {
-                    var appRes = service.Update(model.Id, model.Description);
-                    if (appRes.HasError)
-                    {
-                        return View("Error");
-                    }
-                    else
-                    {
-                        return Redirect("/Analytics");
-                    }
-                }
-            }
-            else
-            {
-                model.ViewData = GetViewData(model.PortfolioId, model.Type, model.AppId);
-                return View(model, AnalyticsMasterModel.MenuItem.Portfolios, null, null);
-            }
-        }
-
-        private static ApplicationViewModel GetViewData(int portfolioId, ApplicationType? type = null, int? appId = null)
-        {
-            return new ApplicationViewModel
-            {
-                Screens = new List<Screen>(),
-                PortfolioId = portfolioId,
-                TypesList = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() }),
-                PropertyId = appId.HasValue ? string.Format("{0}-{1:0000}-{2:000000}", GetAppKey(type.Value), portfolioId, appId.Value) : "**-****-******"
-            };
-        }
-
-
-
-
-
-
-        private static string GetAppKey(ApplicationType type)
-        {
-            string key = "";
-            switch (type)
-            {
-                case ApplicationType.Android:
-                    key = "MA";
-                    break;
-                case ApplicationType.Web:
-                    key = "WP";
-                    break;
-                case ApplicationType.iPhone:
-                    key = "MI";
-                    break;
-                case ApplicationType.WebMobile:
-                    key = "WM";
-                    break;
-                case ApplicationType.WindowsMobile:
-                    key = "MW";
-                    break;
-            }
-            return key;
-        }
-
         [HttpPost]
         public ActionResult AddScreen(ScreenDetailsModel screenDetails)
         {
@@ -269,18 +273,6 @@ namespace EyeTracker.Controllers
             return actionResult;
         }
 
-        public ActionResult Remove(int portfolioId, int appId)
-        {
-            var res = service.Remove(appId);
-            if (res.HasError)
-            {
-                return View("Error");
-            }
-            else
-            {
-                return RedirectToAction("");
-            }
-        }
         public FileResult Screen(int appId, int width, int height, string file)
         {
             var res = service.GetScreen(appId, width, height);
@@ -368,5 +360,6 @@ namespace EyeTracker.Controllers
                 return View("Image");
             }
         }
+        */
     }
 }

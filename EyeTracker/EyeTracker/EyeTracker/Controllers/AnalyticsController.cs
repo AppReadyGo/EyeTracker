@@ -1,32 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
-using EyeTracker.Common.Logger;
-using System.Reflection;
-using EyeTracker.Core.Services;
-using EyeTracker.Helpers;
-using EyeTracker.Model;
-using EyeTracker.Domain.Model;
 using System.Web.Script.Serialization;
-using EyeTracker.Core;
 using EyeTracker.Common;
-using EyeTracker.Domain;
-using System.Collections.ObjectModel;
+using EyeTracker.Common.Logger;
+using EyeTracker.Common.Queries.Analytics;
+using EyeTracker.Common.Queries.Content;
+using EyeTracker.Core;
+using EyeTracker.Core.Services;
 using EyeTracker.Model.Filter;
 using EyeTracker.Model.Master;
 using EyeTracker.Model.Pages.Analytics;
-using EyeTracker.Controllers.Master;
-using EyeTracker.Domain.Common;
-using EyeTracker.Common.Queries.Analytics;
-using System.Drawing;
-using EyeTracker.Models;
-using System.IO;
-using System.Drawing.Imaging;
-using EyeTracker.Common.Queries;
 using EyeTracker.Model.Pages.Home;
-using EyeTracker.Common.Queries.Content;
+using EyeTracker.Models;
 
 namespace EyeTracker.Controllers
 {
@@ -35,28 +27,15 @@ namespace EyeTracker.Controllers
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         
-        private IPortfolioService portfolioService;
-        private IAccountService accountService;
-        private IApplicationService applicationService;
         private IAnalyticsService analyticsService;
 
         public AnalyticsController()
-            : this(new PortfolioService(),
-            new ApplicationService(),
-            new AnalyticsService(),
-            new AccountService())
+            : this(new AnalyticsService())
         {
         }
 
-        public AnalyticsController(
-            IPortfolioService portfolioService,
-            IApplicationService applicationService,
-            IAnalyticsService analyticsService,
-            IAccountService accountService)
+        public AnalyticsController(IAnalyticsService analyticsService)
         {
-            this.portfolioService = portfolioService;
-            this.accountService = accountService;
-            this.applicationService = applicationService;
             this.analyticsService = analyticsService;
         }
 
@@ -67,18 +46,8 @@ namespace EyeTracker.Controllers
 
         public ActionResult Index()
         {
-            var portfolioData = ObjectContainer.Instance.RunQuery(new PortfoliosQuery());
-            FilterParametersModel filter = null;
-            if(portfolioData.Portfolios1.Any())
-            {
-                var portfolio = portfolioData.Portfolios1.First();
-                filter = new FilterParametersModel
-                {
-                    pid = portfolio.Id
-                };
-                filter.Validate();
-            }
-            return View(new IndexViewModel(portfolioData.Portfolios1), AnalyticsMasterModel.MenuItem.Portfolios, portfolioData, filter);
+            var portfolios = ObjectContainer.Instance.RunQuery(new PortfoliosQuery());
+            return View(new IndexViewModel(portfolios.PortfoliosData), AnalyticsMasterModel.MenuItem.Portfolios);
         }
 
         public ActionResult Dashboard(FilterParametersModel filter)
@@ -229,7 +198,6 @@ namespace EyeTracker.Controllers
             return View(new FilterModel(), AnalyticsMasterModel.MenuItem.EyeTracker, filterData, filter);
         }
 
-
         public FileResult ClickHeatMapImage(FilterParametersModel filter)
         {
             string[] splitedScreenSize = filter.ss.Split(new char[] { 'X' });
@@ -294,6 +262,13 @@ namespace EyeTracker.Controllers
             return bgImg;
         }
 
+        /// <summary>
+        /// After login page content
+        /// </summary>
+        /// <param name="urlPart1"></param>
+        /// <param name="urlPart2"></param>
+        /// <param name="urlPart3"></param>
+        /// <returns></returns>
         public ActionResult PageContent(string urlPart1, string urlPart2, string urlPart3)
         {
             string path = urlPart1;

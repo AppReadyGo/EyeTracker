@@ -129,16 +129,16 @@ $(document).ready(function () {
                 url: newAppURL,
                 dataType: 'json',
                 type: 'POST',
-                data: { "Description": desc, "Type": type },
+                data: { "PortfolioId": $('#PortfolioId').val(),"Description": desc, "Type": type },
                 success: function (json) {
                     if (json.HasError) {
                         $('#tbody').prepend('<tr><td colspan="2" class="validation-summary-errors"><span>Account creation was unsuccessful. Please contact to administrator.</span></td></tr>');
                     } else {
                         $('#overlay').hide();
                         $('#action_pnl').hide();
-                        $('#web_code').html($('#web_code').html().replace('**-******-***', json.code));
-                        $('#android_code').html($('#android_code').html().replace('**-******-***', json.code));
-                        $('#property_id').text($('#property_id').text().replace('**-******-***', json.code));
+                        $('#web_code').val($('#web_code').val().replace('**-****-******', json.code));
+                        $('#android_code').val($('#android_code').val().replace('**-****-******', json.code));
+                        $('.property-id').text(json.code);
                         $('#Type').attr('disabled', 'disabled');
                         appId = json.appId;
                         $('#Id').val(appId);
@@ -149,6 +149,7 @@ $(document).ready(function () {
             });
         }
     });
+
     $('#done_lnk').click(function () {
         var desc = $('#Description').val();
         if (desc.length == 0) {
@@ -159,8 +160,10 @@ $(document).ready(function () {
             $('#application_form')[0].submit();
         }
     });
+
     $('#save_btn').click(function () {
     });
+
     //Disable not exsists types
     $('#Type option[value!=3]').attr('disabled', true);
     $('#Type option[value=1]').attr('disabled', null);

@@ -83,6 +83,7 @@ namespace EyeTracker.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
+            ObjectContainer.Instance.ClearCurrentUserDetails();
 
             return RedirectToAction("Index", "Home");
         }

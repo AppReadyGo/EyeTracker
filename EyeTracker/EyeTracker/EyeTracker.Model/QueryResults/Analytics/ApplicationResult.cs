@@ -15,6 +15,8 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
 
         public IEnumerable<string> Pathes { get; set; }
 
+        public bool IsActive { get; set; }
+
         public long Visits { get; set; }
     }
 }

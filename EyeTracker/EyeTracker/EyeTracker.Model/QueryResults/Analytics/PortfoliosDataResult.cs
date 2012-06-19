@@ -5,6 +5,6 @@ namespace EyeTracker.Common.QueryResults.Analytics
 {
     public class PortfoliosDataResult : FilterDataResult
     {
-        public IEnumerable<PortfolioResult> Portfolios1 { get; set; }
+        public IEnumerable<PortfolioResult> PortfoliosData { get; set; }
     }
 }

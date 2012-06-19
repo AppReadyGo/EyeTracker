@@ -99,6 +99,11 @@ namespace EyeTracker.Core
             this.repository = container.Resolve<IRepository>();
         }
 
+        public void ClearCurrentUserDetails()
+        {
+            container.Resolve<ISecurityContext>().ClearCurrentUserDetails();
+        }
+
         private ICommandHandler<TCommand, TResult> GetCommandHandler<TCommand, TResult>(ICommand<TResult> command)
         {
             return container.Resolve<ICommandHandler<TCommand, TResult>>();

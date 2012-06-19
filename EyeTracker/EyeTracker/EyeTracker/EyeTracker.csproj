@@ -481,19 +481,12 @@
     <Content Include="Views\Account\Forms\LogOnForm.ascx" />
     <Content Include="Views\Admin\Logs.aspx" />
     <Content Include="Views\Application\Form.ascx" />
-    <Content Include="Views\Analytics\Date.ascx" />
     <Content Include="Views\Analytics\Filter.ascx" />
     <Content Include="Views\Analytics\FingerPrint.aspx" />
     <Content Include="Views\Analytics\EyeTracker.aspx" />
-    <Content Include="Views\Analytics\Selector.ascx" />
     <Content Include="Views\Application\Edit.aspx" />
     <Content Include="Views\Application\New.aspx" />
-    <Content Include="Views\Application\Image.aspx" />
     <Content Include="Views\Account\Details.aspx" />
-    <Content Include="Views\Application\Index.aspx" />
-    <Content Include="Views\Application\NewEdit.aspx" />
-    <Content Include="Views\Application\ScreenDetails.aspx" />
-    <Content Include="Views\Application\Usage.aspx" />
     <Content Include="Views\Analytics\PageContent.aspx" />
     <Content Include="Views\Home\PlayGround.aspx" />
     <Content Include="Views\Home\Index.aspx" />
@@ -507,7 +500,6 @@
     <Content Include="Views\Portfolio\Edit.aspx" />
     <Content Include="Views\Portfolio\Form.ascx" />
     <Content Include="Views\Portfolio\New.aspx" />
-    <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Shared\404.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -532,8 +524,6 @@
     <Content Include="Views\Admin\Index.aspx" />
     <Content Include="Views\Admin\Membership.aspx" />
     <Content Include="Views\Admin\UserEdit.aspx" />
-    <Content Include="Views\Application\Analytics.master" />
-    <Content Include="Views\Analytics\Analytics.master" />
     <Content Include="Views\Shared\Main.Master" />
     <Content Include="Views\Shared\BeforeLogin.Master" />
     <Content Include="Views\Shared\AfterLogin.Master" />
@@ -563,9 +553,6 @@
       <Project>{F5D9FA27-BAAF-4B4B-97F0-0A71F2210009}</Project>
       <Name>EyeTracker.Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\FixedContent.Master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\m\Views\Web.config" />

@@ -8,5 +8,6 @@ namespace EyeTracker.Common
         TResult RunQuery<TResult>(IQuery<TResult> query);
         CommandResult<TResult> Dispatch<TResult>(ICommand<TResult> command);
         CurrentUserDetails CurrentUserDetails { get; }
+        void ClearCurrentUserDetails();
     }
 }
