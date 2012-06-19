@@ -68,7 +68,7 @@ namespace EyeTracker.Service.Tester
             {
                 ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
 
-                var mc = GetLongPackage(100);
+                var mc = GetLongPackage(10);
 
                 txtBlkServiceStatus.Text = SendPackage(mc).ToString();
             }
@@ -145,11 +145,22 @@ namespace EyeTracker.Service.Tester
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnFillTestApp_Click(object sender, RoutedEventArgs e)
         {
-            //todo: orientation!!
+            ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
+
             var jsonPackage1 = GetCustomPackage("RunNow-RunNow-1", 800, 480, 300, 100, "ActivityPickerActivity");
+
+            SendPackage(jsonPackage1);
+
             var jsonPackage2 = GetCustomPackage("RunNow-RunNow-1", 800, 480, 200, 200, "FrontDoorActivity");
+
+            SendPackage(jsonPackage2);
         }
 
         #region code
@@ -321,7 +332,35 @@ namespace EyeTracker.Service.Tester
             objJP.SessionsInfo[0].ScrollDetails = GetScrollDetails(objJP.SessionsInfo[0].TouchDetails[0], objJP.SessionsInfo[0].TouchDetails[2], 20);
             objJP.SessionsInfo[0].ViewAreaDetails = GetViewAreaDetails(dtStart, dtEnd, 10, clientHeight, clientWidth);
 
+            objJP.SystemInfo = GetSystemInfo();
+
+
             return objJP;
+        }
+
+        /// <summary>
+        /// Create basic system info for Samsung Galaxy 2
+        /// </summary>
+        /// <returns></returns>
+        private JsonSystemInfo GetSystemInfo()
+        {
+            JsonSystemInfo jsi = new JsonSystemInfo();
+            jsi.BrandName = "a3d";
+            jsi.DeviceName = "2sd";
+            jsi.DisplayName = "asd";
+            jsi.FingerprintName = "a4d";
+            jsi.HardwareName = "lsd";
+            jsi.ManufactureName = "a4d";
+            jsi.ModelName = "asf";
+            jsi.OperatorName = "bss";
+            jsi.ProductName = "GT-P1000";
+            jsi.DevCodeName = "REL";
+            jsi.InternalName = "XWJP9";
+            jsi.RealVersionName = "2.3.3";
+            jsi.SdkIdentName = "10";
+
+            return jsi;
+
         }
 
         private JsonSessionInfo[] GetSessionInfo(int num)
@@ -404,7 +443,7 @@ namespace EyeTracker.Service.Tester
             objTD.ClientY = r.Next(0, clientHeight);
             objTD.Date = dtFrom.AddMilliseconds((dtTo - dtFrom).TotalMilliseconds / 2).ToString("R");   // DateTime.Now.AddSeconds(10).ToString();   
             objTD.Press = r.Next(1, 100);
-            objTD.Orientation = 7; //??
+            objTD.Orientation = 0; //portrait 
             return objTD;
         }
 

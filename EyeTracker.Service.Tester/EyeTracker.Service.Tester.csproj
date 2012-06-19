@@ -108,6 +108,10 @@
       <Project>{73C6838B-6431-4C7F-B73C-3A6E517A80A5}</Project>
       <Name>EyeTracker.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EyeTracker.Model\EyeTracker.Common.csproj">
+      <Project>{F5D9FA27-BAAF-4B4B-97F0-0A71F2210009}</Project>
+      <Name>EyeTracker.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="TestData\SavedDataFromAndroid.txt">
