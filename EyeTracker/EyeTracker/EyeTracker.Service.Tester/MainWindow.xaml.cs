@@ -100,7 +100,10 @@ namespace EyeTracker.Service.Tester
         {
             ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
 
-            var jsonPackage1 = GetCustomPackage();
+
+            var id = "RunNow-RunNow-" + txtBooxId.Text;
+
+            var jsonPackage1 = GetCustomPackage(clientKey: id);
 
             SendPackage(jsonPackage1);
 
@@ -267,11 +270,19 @@ namespace EyeTracker.Service.Tester
         /// <param name="clientWidth"></param>
         /// <param name="pageUri"></param>
         /// <returns></returns>
-        private JsonPackage GetCustomPackage(string clientKey = "RunNow-RunNow-1" , int screenHeight = 800, int screenWidth = 480, 
+        private JsonPackage GetCustomPackage(string clientKey = "", int screenHeight = 800, int screenWidth = 480, 
             int clientHeight = 300, int clientWidth = 100, string pageUri = "ActivityPickerActivity", int touches = 50, int scrolls = 20, int views = 10)
         {
             JsonPackage objJP = new JsonPackage();
-            objJP.ClientKey = clientKey;
+            if (txtBooxId.Text == string.Empty)
+            {
+                objJP.ClientKey = "RunNow-RunNow-1";
+            }
+            else
+            {
+                objJP.ClientKey = clientKey;
+            }
+            
             objJP.ScreenHeight = screenHeight;
             objJP.ScreenWidth = screenWidth;
             objJP.SessionsInfo = new JsonSessionInfo[1];
