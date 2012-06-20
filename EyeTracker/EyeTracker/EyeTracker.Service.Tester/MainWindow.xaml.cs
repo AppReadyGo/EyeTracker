@@ -41,20 +41,11 @@ namespace EyeTracker.Service.Tester
         /// <param name="e"></param>
         private void btn_single_point_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
+            ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
 
-                var mc = GetShortPackage();
+            var mc = GetShortPackage();
 
-                txtBlkServiceStatus.Text = SendPackage(mc).ToString();
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show("Error while sending single package: " + ex.Message, "ETService", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            
+            txtBlkServiceStatus.Text = SendPackage(mc).ToString();
         }
 
         /// <summary>
@@ -64,18 +55,11 @@ namespace EyeTracker.Service.Tester
         /// <param name="e"></param>
         private void btn_large_chunk_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
+            ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
 
-                var mc = GetLongPackage(10);
+            var mc = GetLongPackage(10);
 
-                txtBlkServiceStatus.Text = SendPackage(mc).ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error while sending large package: " + ex.Message, "ETService", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            txtBlkServiceStatus.Text = SendPackage(mc).ToString();  
         }
 
         /// <summary>
@@ -85,64 +69,26 @@ namespace EyeTracker.Service.Tester
         /// <param name="e"></param>
         private void btn_Check_status(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
+            ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
 
-                txtBlkServiceStatus.Text =  CheckStatus();
-            }
-            catch (Exception ex)
-            {
-                
-                 MessageBox.Show("Error while checking status: " + ex.Message, "ETService", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            txtBlkServiceStatus.Text =  CheckStatus();
         }
 
-
-        private void btn_Save_Single_Pack(object sender, RoutedEventArgs e)
-        {
-            var mc = GetShortPackage();
-            string package = Serialize<JsonPackage>(mc);
-            
-            using (StreamWriter outfile =
-            new StreamWriter("SinglePackageTestData.txt"))
-            {
-                outfile.Write(package);
-            }
-        }
-
-        private void btn_Save_Large_Chunk(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void btn_Package_From_File(object sender, RoutedEventArgs e)
         {
-
             ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
 
             using (StreamReader fileReader = new StreamReader("TestData\\SavedDataFromAndroid.txt"))
             {
                 String str = fileReader.ReadToEnd();
-
-                
-                FPData obj = new FPData() { val = str};
-
-               
-
+                FPData obj = new FPData() { val = str };
                 MemoryStream streamQ2 = new MemoryStream();
                 DataContractJsonSerializer serializer2 = new DataContractJsonSerializer(typeof(FPData));
                 serializer2.WriteObject(streamQ2, obj);
 
-                //str = string.Format("{0}={1}", "val", str);
-
-                // Encode the parameters as form data:
-                //byte[] formData = UTF8Encoding.UTF8.GetBytes(paramz.ToString());
-
                 SendToServer(streamQ2.ToArray());
-            }
-
-            
+            } 
         }
 
         /// <summary>
@@ -154,11 +100,11 @@ namespace EyeTracker.Service.Tester
         {
             ServiceUrl = ConfigurationSettings.AppSettings[cb.SelectedIndex.ToString()];
 
-            var jsonPackage1 = GetCustomPackage("RunNow-RunNow-1", 800, 480, 300, 100, "ActivityPickerActivity");
+            var jsonPackage1 = GetCustomPackage();
 
             SendPackage(jsonPackage1);
 
-            var jsonPackage2 = GetCustomPackage("RunNow-RunNow-1", 800, 480, 200, 200, "FrontDoorActivity");
+            var jsonPackage2 = GetCustomPackage();
 
             SendPackage(jsonPackage2);
         }
@@ -179,23 +125,26 @@ namespace EyeTracker.Service.Tester
             //2.
             using ( var response = (HttpWebResponse) request.GetResponse( ) )  
             {  
-                var responseValue = string.Empty;  
-  
-                if ( response.StatusCode != HttpStatusCode.OK )  
-                {  
-                    string message = String.Format( "Status failed. Received HTTP {0}", response.StatusCode );  
+                var responseValue = string.Empty;
+
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    string message = String.Format("Status failed. Received HTTP {0}", response.StatusCode);
                     MessageBox.Show(message, "ETService", MessageBoxButton.OK, MessageBoxImage.Error);
-                }  
-  
-                // grab the response  
-                using ( var responseStream = response.GetResponseStream() )  
-                {  
-                    using ( var reader = new StreamReader( responseStream ) )  
-                    {  
-                        responseValue = reader.ReadToEnd();  
-                    }  
-                }  
-                return responseValue;  
+                    return "Error";
+                }
+                else
+                {
+                    // grab the response  
+                    using (var responseStream = response.GetResponseStream())
+                    {
+                        using (var reader = new StreamReader(responseStream))
+                        {
+                            responseValue = reader.ReadToEnd();
+                        }
+                    }
+                    return responseValue;
+                }
             }  
  
         }
@@ -308,9 +257,18 @@ namespace EyeTracker.Service.Tester
             return objJP;
         }
 
-        private JsonPackage GetCustomPackage(string clientKey, int screenHeight, int screenWidth, 
-            int clientHeight, int clientWidth,
-            string pageUri)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clientKey"></param>
+        /// <param name="screenHeight"></param>
+        /// <param name="screenWidth"></param>
+        /// <param name="clientHeight"></param>
+        /// <param name="clientWidth"></param>
+        /// <param name="pageUri"></param>
+        /// <returns></returns>
+        private JsonPackage GetCustomPackage(string clientKey = "RunNow-RunNow-1" , int screenHeight = 800, int screenWidth = 480, 
+            int clientHeight = 300, int clientWidth = 100, string pageUri = "ActivityPickerActivity", int touches = 50, int scrolls = 20, int views = 10)
         {
             JsonPackage objJP = new JsonPackage();
             objJP.ClientKey = clientKey;
@@ -328,15 +286,15 @@ namespace EyeTracker.Service.Tester
 
             objJP.SessionsInfo[0].SessionStartDate = dtStart.ToString("R");
             objJP.SessionsInfo[0].SessionCloseDate = dtEnd.ToString("R");
-            objJP.SessionsInfo[0].TouchDetails = GetTouchDetails(dtStart, dtEnd, 50, clientHeight, clientWidth);
-            objJP.SessionsInfo[0].ScrollDetails = GetScrollDetails(objJP.SessionsInfo[0].TouchDetails[0], objJP.SessionsInfo[0].TouchDetails[2], 20);
-            objJP.SessionsInfo[0].ViewAreaDetails = GetViewAreaDetails(dtStart, dtEnd, 10, clientHeight, clientWidth);
+            objJP.SessionsInfo[0].TouchDetails = GetTouchDetails(dtStart, dtEnd, touches, clientHeight, clientWidth);
+            objJP.SessionsInfo[0].ScrollDetails = GetScrollDetails(objJP.SessionsInfo[0].TouchDetails[0], objJP.SessionsInfo[0].TouchDetails[2], scrolls);
+            objJP.SessionsInfo[0].ViewAreaDetails = GetViewAreaDetails(dtStart, dtEnd, views, clientHeight, clientWidth);
 
             objJP.SystemInfo = GetSystemInfo();
-
-
             return objJP;
         }
+
+
 
         /// <summary>
         /// Create basic system info for Samsung Galaxy 2
@@ -496,10 +454,22 @@ namespace EyeTracker.Service.Tester
         #endregion Private members 
 
         
+        ///// <summary>
+        ///// save single 
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void btn_Save_Single_Pack(object sender, RoutedEventArgs e)
+        //{
+        //    var mc = GetShortPackage();
+        //    string package = Serialize<JsonPackage>(mc);
 
-        
-      
-       
+        //    using (StreamWriter outfile =
+        //    new StreamWriter("SinglePackageTestData.txt"))
+        //    {
+        //        outfile.Write(package);
+        //    }
+        //}
 
        
 

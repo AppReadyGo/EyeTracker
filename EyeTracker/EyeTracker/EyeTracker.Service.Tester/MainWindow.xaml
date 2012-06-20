@@ -1,11 +1,11 @@
 ﻿<Window x:Class="EyeTracker.Service.Tester.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="417" Width="581">
-    <Grid Height="388" Width="571">
+        Title="MainWindow" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="463" Width="428">
+    <Grid Height="385" Width="386">
         <Button Content="Single pack" Height="46" HorizontalAlignment="Left" Margin="12,252,0,0" Name="btn_single_point" VerticalAlignment="Top" Width="105" Click="btn_single_point_Click" />
         <Button Content="Large chunk" Height="46" HorizontalAlignment="Left" Margin="134,252,0,0" Name="btn_large_chunk" VerticalAlignment="Top" Width="105" Click="btn_large_chunk_Click" />
-        <Button Content="Status" HorizontalAlignment="Right" Margin="0,252,212,90" Name="button2" Width="105" Click="btn_Check_status" />
+        <Button Content="Status" HorizontalAlignment="Right" Margin="0,252,27,87" Name="button2" Width="105" Click="btn_Check_status" />
         <TextBlock Height="41" HorizontalAlignment="Left" Margin="12,124,0,0" Name="txtxBlkServiceResponse"  VerticalAlignment="Top" Width="347" TextWrapping="Wrap" />
         <Label Content="Service Response" Height="28" HorizontalAlignment="Left" Margin="12,90,0,0" Name="label1" VerticalAlignment="Top" Width="123" />
         <ComboBox Height="30" HorizontalAlignment="Left" Margin="12,187,0,0" Name="cb" VerticalAlignment="Top" Width="347" >
@@ -14,9 +14,7 @@
         </ComboBox>
         <TextBlock Height="39" HorizontalAlignment="Left" Margin="12,45,0,0" Name="txtBlkServiceStatus" VerticalAlignment="Top" Width="347" />
         <Label Content="Service Was Invoked" Height="27" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label2" VerticalAlignment="Top" Width="123" />
-        <Button Content="Create single pack test data" Height="46" HorizontalAlignment="Left" Margin="12,324,0,0" Name="btnSaveSinglePack" VerticalAlignment="Top" Width="105" Click="btn_Save_Single_Pack" />
-        <Button Content="Create large chunk test data" Height="46" HorizontalAlignment="Right" Margin="0,324,332,0" Name="btnSaveLargeChunk" VerticalAlignment="Top" Width="105" Click="btn_Save_Large_Chunk"/>
         <Button Content="Package from file" Height="46" HorizontalAlignment="Left" Margin="254,324,0,0" Name="btnDataFromFile" VerticalAlignment="Top" Width="105" Click="btn_Package_From_File" />
-        <Button Content="Fill test app" Height="46" HorizontalAlignment="Left" Margin="377,252,0,0" Name="btnFillTestApp" VerticalAlignment="Top" Width="105" Click="btnFillTestApp_Click" />
+        <Button Content="Fill test app" Height="46" HorizontalAlignment="Left" Margin="12,324,0,0" Name="btnFillTestApp" VerticalAlignment="Top" Width="105" Click="btnFillTestApp_Click" />
     </Grid>
 </Window>
