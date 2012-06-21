@@ -26,14 +26,14 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
     </div>
     <div class="table" style="height: 364px;">
         <ul class="computerdata detail" id="target">
-        <%foreach (var item in Model.View.Portfolios1)
+        <%foreach (var item in Model.View.PortfoliosInfo)
           {%>
             <li class="row portfolio<%: item.Applications.Any() ? "" : " disabled" %>" url="/analytics/dashboard/?pid=<%: item.Id %>" pid="<%: item.Id %>">
                 <div style="width:5%;" class="center">
                     <div class="expand"></div>
                 </div>
                 <div style="width:10%;" class="center">
-                    <div class="<%: item.IsActive ? "status-ok" : "status-alert"%>"></div>
+                    <div class="<%: item.Applications.Any(a => a.Visits == 0) ? "status-alert" : "status-ok"%>"></div>
                 </div>
                 <div style="width:50%;" class="nav">
                     <%: item.Description%>
@@ -42,9 +42,9 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
                     <%:item.Visits%>
                 </div>
                 <div style="width:10%;" class="center">
-                    <a href="/application/new/<%: item.Id %>" title="add application" class="new-app"><span></span></a>
-                    <a href="Portfolio/Edit/<%: item.Id%>" title="edit" class="edit"><span></span></a>
-                    <a href="Portfolio/Remove/<%: item.Id %>" title="remove portfolio" class="remove" onclick="javascript:return confirm('Are you realy want to remove the portfolio and all analytics data?');"><span></span></a>
+                    <a href="/Application/New/<%: item.Id %>" title="add application" class="new-app"><span></span></a>
+                    <a href="/Portfolio/Edit/<%: item.Id%>" title="edit" class="edit"><span></span></a>
+                    <a href="/Portfolio/Remove/<%: item.Id %>" title="remove portfolio" class="remove" onclick="javascript:return confirm('Are you realy want to remove the portfolio and all analytics data?');"><span></span></a>
                 </div>
             </li>
             <%if (item.Applications.Any())
@@ -54,7 +54,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
                     <li class="row app portfolio-<%: item.Id %>" url="/analytics/dashboard/?pid=<%: item.Id %>&aid=<%: app.Id %>">
                         <div style="width:5%;" class="center"></div>
                         <div style="width:10%;" class="center">
-                            <div class="<%: app.IsActive ? "status-ok" : "status-alert"%>"></div>
+                            <div class="<%: app.Visits > 0 ? "status-ok" : "status-alert"%>"></div>
                         </div>
                         <div style="width:50%;" class="nav">
                             <%: app.Description%>
@@ -63,8 +63,8 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
                             <%: app.Visits %>
                         </div>
                         <div style="width:10%;" class="center">
-                            <a href="Application/Edit/<%: app.Id%>" title="edit" class="edit"><span></span></a>
-                            <a href="Application/Remove/<%: app.Id%>" title="remove application" class="remove" onclick="javascript:return confirm('Are you realy want to remove the application and all analytics data?');"><span></span></a>
+                            <a href="/Application/Edit/<%: app.Id%>" title="edit" class="edit"><span></span></a>
+                            <a href="/Application/Remove/<%: app.Id%>" title="remove application" class="remove" onclick="javascript:return confirm('Are you realy want to remove the application and all analytics data?');"><span></span></a>
                         </div>
                     </li>
                     <%}

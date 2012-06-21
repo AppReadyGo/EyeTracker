@@ -53,13 +53,15 @@ namespace EyeTracker.Domain.Queries.Analytics
 
             foreach (var portfolio in portfolios)
             {
-                portfolio.Applications = applications.Where(a => a.PortfolioId == portfolio.Id).Select(a => new ApplicationResult
-                    {
-                        Id = a.AppId,
-                        Description = a.AppDescription,
-                        Visits = visits.Where(v => v.key == a.AppId).Sum(v => v.visits)
-                    })
-                    .ToArray();
+                portfolio.Applications = applications
+                                        .Where(a => a.PortfolioId == portfolio.Id)
+                                        .Select(a => new ApplicationResult
+                                        {
+                                            Id = a.AppId,
+                                            Description = a.AppDescription,
+                                            Visits = visits.Where(v => v.key == a.AppId).Sum(v => v.visits)
+                                        })
+                                        .ToArray();
                 portfolio.Visits = portfolio.Applications.Sum(a => a.Visits);
             }
 

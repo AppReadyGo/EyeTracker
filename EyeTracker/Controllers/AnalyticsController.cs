@@ -99,6 +99,7 @@ namespace EyeTracker.Controllers
             var dashboardModel = new DashboardModel
             {
                 UsageChartData = new JavaScriptSerializer().Serialize(usageInitData),
+                ContentOverviewData = dashboardViewData.ContentOverview
             };
 
             return View(dashboardModel, AnalyticsMasterModel.MenuItem.Dashboard, dashboardViewData, filter);

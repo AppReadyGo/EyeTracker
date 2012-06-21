@@ -8,3 +8,7 @@
 table.dashboard{}
 table.dashboard div.item{height:437px;}
 table.dashboard p{margin:0;}
+
+/* Green template */
+
+.content-overview article{width:30%;}

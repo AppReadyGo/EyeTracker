@@ -22,6 +22,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
+<h2 class="title">Dashboard</h2>
 <% Html.RenderPartial("Filter", Model.View); %>
 <table class="dashboard">
 <tr>
@@ -49,22 +50,67 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
     </td>--%>
     <td colspan="2">
         <div class="title"><span>Content Overview</span></div>
-        <table>
-            <thead><tr><th>Path</th><th>Views</th><th>% Views</th></tr></thead>
-            <tbody>
-                <%if (Model.View.ContentOverviewData.Any())
-                {
-                    foreach (var item in Model.View.ContentOverviewData)
-                    { %>
-                        <tr><td></td><td></td><td></td></tr>
-                  <% }
-                }
-                else
-                {%>
-                    <tr><td colspan="3">No Data</td></tr>
-                <%} %>
-            </tbody>
-        </table>
+        <section id="content" class="content-overview">
+	        <div class="box extra">
+		        <div class="border-right">
+			        <div class="border-bot">
+				        <div class="border-left">
+					        <div class="left-top-corner1">
+						        <div class="right-top-corner1">
+							        <div class="right-bot-corner">
+								        <div class="left-bot-corner">
+									        <div class="inner">
+										        <div class="left-indent line-ver1">
+											        <div class="line-ver2">
+												        <article class="col-1 indent">
+													        <h4>Pathes</h4>
+													        <ul class="info-list1">
+                                                            <%if (Model.View.ContentOverviewData.Any())
+                                                            {
+                                                                foreach (var item in Model.View.ContentOverviewData)
+                                                                { %>
+														            <li><%= item.Path %></li>
+														        <% }
+                                                            }%>
+													        </ul>
+												        </article>
+												        <article class="col-2 indent">
+													        <h4 class="aligncenter">Views</h4>
+													        <ul class="info-list1 alt">
+                                                            <%if (Model.View.ContentOverviewData.Any())
+                                                            {
+                                                                foreach (var item in Model.View.ContentOverviewData)
+                                                                { %>
+														            <li><%= item.Views%></li>
+														        <% }
+                                                            }%>
+													        </ul>
+												        </article>
+												        <article class="col-3 indent">
+													        <h4 class="aligncenter">% Views</h4>
+													        <ul class="info-list1 alt">
+                                                            <%if (Model.View.ContentOverviewData.Any())
+                                                            {
+                                                                foreach (var item in Model.View.ContentOverviewData)
+                                                                { %>
+														            <li></li>
+														        <% }
+                                                            }%>
+													        </ul>
+												        </article>
+												        <div class="clear"></div>
+											        </div>
+										        </div>
+									        </div>
+								        </div>
+							        </div>
+						        </div>
+					        </div>
+				        </div>
+			        </div>
+		        </div>
+	        </div>
+        </section>
         <div class="item"></div>
     </td>
 </tr>

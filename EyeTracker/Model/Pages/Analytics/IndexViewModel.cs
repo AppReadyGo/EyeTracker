@@ -10,13 +10,13 @@ namespace EyeTracker.Model.Pages.Analytics
 {
     public class IndexViewModel : FilterModel
     {
-        public IEnumerable<PortfolioResult> Portfolios1 { get; private set; }
+        public IEnumerable<PortfolioResult> PortfoliosInfo { get; private set; }
 
-        public int PortfoliosCount { get { return Portfolios1.Count(); } }
+        public int PortfoliosCount { get { return PortfoliosInfo.Count(); } }
 
         public IndexViewModel(IEnumerable<PortfolioResult> portfolios)
         {
-            this.Portfolios1 = portfolios;
+            this.PortfoliosInfo = portfolios;
         }
     }
 }

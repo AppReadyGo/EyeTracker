@@ -17,6 +17,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
+<h2 class="title">Finger Print</h2>
 <% Html.RenderPartial("Filter", Model.View); %>
 <div>
 <%if (Model.View.NoData)
