@@ -12,9 +12,9 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 	<script type="text/javascript" src="<%: Url.Content("~/Scripts/ThridParty/fancybox/jquery.fancybox-1.3.4.pack.js")%>"></script>
 	<link rel="stylesheet" type="text/css" href="<%: Url.Content("~/Scripts/ThridParty/fancybox/jquery.fancybox-1.3.4.css")%>" media="screen" />
     <script type="text/javascript">
-        var newAppURL = '/Application/New/<%: Model.View.ViewData.PortfolioId %>/';
+        var newAppURL = '/Application/New/<%: Model.View.PortfolioId %>/';
         var appId = <%: Model.View.Id %>;
-        var addScreenURL = '/Application/AddScreen/<%: Model.View.ViewData.PortfolioId %>/';
+        var addScreenURL = '/Application/AddScreen/<%: Model.View.PortfolioId %>/';
         var screenImgURL = '/Application/Screen/';
     </script>
 </asp:Content>

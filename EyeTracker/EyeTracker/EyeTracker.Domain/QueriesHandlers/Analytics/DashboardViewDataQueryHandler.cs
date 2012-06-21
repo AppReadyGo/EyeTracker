@@ -7,6 +7,7 @@ using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 using EyeTracker.Domain.Model;
 using NHibernate;
 using NHibernate.Linq;
+using EyeTracker.Common.QueryResults.Analytics;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {
@@ -28,22 +29,39 @@ namespace EyeTracker.Domain.Queries.Analytics
             var res = GetResult<DashboardViewDataResult>(session, securityContext.CurrentUser.Id);
             if (applicationId.HasValue)
             {
-                res.Data = session.Query<PageView>()
-                   .Where(pv => pv.Application.Id == applicationId.Value && pv.Date >= query.From && pv.Date <= query.To)
-                   .GroupBy(g => g.Date)
-                   .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
-                   .ToList().ToDictionary(v => v.Key, v => v.Value);
+                var dataQuery = session.Query<PageView>()
+                                    .Where(pv => pv.Application.Id == applicationId.Value && pv.Date >= query.From && pv.Date <= query.To);
+
+                res.Data = dataQuery.GroupBy(g => g.Date)
+                                   .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
+                                   .ToList().ToDictionary(v => v.Key, v => v.Value);
+                res.ContentOverview = dataQuery.GroupBy(v => v.Path)
+                                                .Select(g => new ContentOverviewResult
+                                                {
+                                                    Path = g.Key,
+                                                    Views = g.Count()
+                                                })
+                                                .ToArray();
             }
             else
             {
                 var portfolio = session.Get<Portfolio>(query.PortfolioId);
                 IEnumerable<int> appIds = portfolio.Applications.Select(a => a.Id).ToArray();
 
-                res.Data = session.Query<PageView>()
-                    .Where(pv => appIds.Contains(pv.Application.Id) && pv.Date >= query.From && pv.Date <= query.To)
-                    .GroupBy(g => g.Date)
+                var dataQuery = session.Query<PageView>()
+                    .Where(pv => appIds.Contains(pv.Application.Id) && pv.Date >= query.From && pv.Date <= query.To);
+
+                res.Data = dataQuery.GroupBy(g => g.Date)
                     .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
                     .ToList().ToDictionary(v => v.Key, v => v.Value);
+
+                res.ContentOverview = dataQuery.GroupBy(v => v.Path)
+                                                .Select(g => new ContentOverviewResult
+                                                {
+                                                    Path = g.Key,
+                                                    Views = g.Count()
+                                                })
+                                                .ToArray();
             }
 
             return res;
