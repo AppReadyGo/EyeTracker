@@ -12,7 +12,7 @@ namespace EyeTracker.Domain.Mapping
     {
         public PageViewMaping()
         {
-            Id(x => x.Id, map => { });
+            Id(x => x.Id, map => { map.Generator(Generators.Identity); });
             Property(p => p.Date, map => map.NotNullable(true));
             OneToOne(p => p.PreviousPageView, map => { });
             Property(x => x.Path, map =>
