@@ -227,7 +227,7 @@ namespace EyeTracker.Service.Tester
         private JsonPackage GetLongPackage(int size)
         {
             JsonPackage objJP = new JsonPackage();
-            objJP.ClientKey = "123" + new Random().Next(1, 5);
+            objJP.ClientKey = m_r.Next(1, 5).ToString();
             objJP.ScreenHeight = SCREEN_HEIGHT;
             objJP.ScreenWidth = SCREEN_WIDTH;
             objJP.SessionsInfo = GetSessionInfo(size);
@@ -238,7 +238,7 @@ namespace EyeTracker.Service.Tester
         private JsonPackage GetShortPackage()
         {
             JsonPackage objJP = new JsonPackage();
-            objJP.ClientKey = "123" + new Random().Next(1, 5);
+            objJP.ClientKey = m_r.Next(1, 5).ToString();
             objJP.ScreenHeight = SCREEN_HEIGHT;
             objJP.ScreenWidth = SCREEN_WIDTH;
             objJP.SessionsInfo = new JsonSessionInfo[1];
@@ -283,6 +283,7 @@ namespace EyeTracker.Service.Tester
                 objJP.ClientKey = clientKey;
             }
             
+           
             objJP.ScreenHeight = screenHeight;
             objJP.ScreenWidth = screenWidth;
             objJP.SessionsInfo = new JsonSessionInfo[1];
@@ -378,10 +379,10 @@ namespace EyeTracker.Service.Tester
 
         private JsonViewAreaDetails GetViewAreaDetail(DateTime dtFrom, DateTime dtTo, int clientHeight = SCREEN_HEIGHT, int clientWidth = SCREEN_WIDTH)
         {
-            Random r = new Random();
+       
             var objViewAreaDetail = new JsonViewAreaDetails();
-            objViewAreaDetail.CoordX = r.Next(0, clientWidth);
-            objViewAreaDetail.CoordY = r.Next(0, clientHeight);
+            objViewAreaDetail.CoordX = m_r.Next(0, clientWidth);
+            objViewAreaDetail.CoordY = m_r.Next(0, clientHeight);
 
             objViewAreaDetail.StartDate = dtFrom.AddMilliseconds(10).ToString("R");
             objViewAreaDetail.FinishDate = dtTo.AddMilliseconds(-10).ToString("R");
@@ -406,12 +407,12 @@ namespace EyeTracker.Service.Tester
 
         private JsonTouchDetails GetTouchDetail(DateTime dtFrom, DateTime dtTo, int clientHeight, int clientWidth)
         {
-            Random r = new Random();
+            
             JsonTouchDetails objTD = new JsonTouchDetails();
-            objTD.ClientX = r.Next(0, clientWidth);
-            objTD.ClientY = r.Next(0, clientHeight);
+            objTD.ClientX = m_r.Next(1, clientWidth);
+            objTD.ClientY = m_r.Next(1, clientHeight);
             objTD.Date = dtFrom.AddMilliseconds((dtTo - dtFrom).TotalMilliseconds / 2).ToString("R");   // DateTime.Now.AddSeconds(10).ToString();   
-            objTD.Press = r.Next(1, 100);
+            objTD.Press = m_r.Next(1, 100);
             objTD.Orientation = 0; //portrait 
             return objTD;
         }
@@ -464,6 +465,8 @@ namespace EyeTracker.Service.Tester
         private string StatusService { get; set; }
         #endregion Private members 
 
+
+        Random m_r = new Random();
         
         ///// <summary>
         ///// save single 
