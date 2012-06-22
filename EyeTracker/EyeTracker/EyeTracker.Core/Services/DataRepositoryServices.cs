@@ -31,16 +31,16 @@ namespace EyeTracker.Core.Services
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private IDataRepository m_objDataRepository = null;
+        private DataRepository m_objDataRepository = null;
 
         public DataRepositoryServices(string p_strAssemblyFullName, string p_strTypeFullName)
         {
             Type objType = ReflectionServices.MyInstance.GetType(p_strAssemblyFullName, p_strTypeFullName);
-            IDataRepository objRepositoryInstance = ReflectionServices.MyInstance.CreateInstance(objType);
+            DataRepository objRepositoryInstance = ReflectionServices.MyInstance.CreateInstance(objType);
             Init(objRepositoryInstance);
         }
 
-        public DataRepositoryServices(IDataRepository dataRepository)
+        public DataRepositoryServices(DataRepository dataRepository)
         {
             //Contract.Requires<NullReferenceException>(dataRepository != null);
             Init(dataRepository);
@@ -52,7 +52,7 @@ namespace EyeTracker.Core.Services
 
         }
 
-        private void Init(IDataRepository p_objDataRepository)
+        private void Init(DataRepository p_objDataRepository)
         {
             m_objDataRepository = p_objDataRepository;
         }

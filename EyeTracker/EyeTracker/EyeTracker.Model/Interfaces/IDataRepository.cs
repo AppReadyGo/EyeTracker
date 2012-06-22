@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EyeTracker.Common.Interfaces
 {
-    public interface IDataRepository : IStoreRepository
-    {
-    }
+//    public interface IDataRepository : IStoreRepository
+//    {
+//    }
 }

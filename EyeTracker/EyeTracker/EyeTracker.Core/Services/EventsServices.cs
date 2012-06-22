@@ -54,7 +54,6 @@ namespace EyeTracker.Core.Services
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
         private IEventsRepository m_objEventsRepository = null;
-        //private IDataRepository dataRepository = null;
 
         public EventsServices(string p_strAssemblyFullName, string p_strTypeFullName)
            // : this(new T())
@@ -81,54 +80,7 @@ namespace EyeTracker.Core.Services
             m_objEventsRepository = eventRepository;
         }
 
-        #region Old Code 
-        //public OperationResult<long> AddVisitEvent(VisitEvent visitEvent)
-        //{
-        //    try
-        //    {
-        //        //TODO: Add events writing by thread and queue
-        //        long eventId = eventRepository.AddVisitEvent(visitEvent);
-        //        //TODO: get country and city by ip
-        //        string country = string.Empty;
-        //        string city = string.Empty;
-        //        visitEvent.Id = eventId;
-        //        dataRepository.ParseVisitEvent(visitEvent, country, city);
-        //        return new OperationResult<long>(eventId);
-        //    }
-        //    catch (Exception exp)
-        //    {
-        //        return new OperationResult<long>(exp);
-        //    }
-        //}
-
-        //public OperationResult AddViewPartEvents(IEnumerable<ViewPartEvent> viewPartEvents)
-        //{
-        //    try
-        //    {
-        //        eventRepository.AddViewPartEvents(viewPartEvents);
-        //        dataRepository.ParseViewPartEvents(viewPartEvents);
-        //        return new OperationResult();
-        //    }
-        //    catch (Exception exp)
-        //    {
-        //        return new OperationResult(exp);
-        //    }
-        //}
-
-        //public OperationResult AddClickEvents(IEnumerable<ClickEvent> clickEvents)
-        //{
-        //    try
-        //    {
-        //        eventRepository.AddClickEvents(clickEvents);
-        //        dataRepository.ParseClickEvents(clickEvents);
-        //        return new OperationResult();
-        //    }
-        //    catch (Exception exp)
-        //    {
-        //        return new OperationResult(exp);
-        //    }
-        //}
-        #endregion Old Code
+   
 
         public OperationResult HandlePackageEvent(IPackageEvent packageEvent)
         {
@@ -228,6 +180,56 @@ namespace EyeTracker.Core.Services
         }
     }
      
+     * 
+     *      #region Old Code 
+        //public OperationResult<long> AddVisitEvent(VisitEvent visitEvent)
+        //{
+        //    try
+        //    {
+        //        //TODO: Add events writing by thread and queue
+        //        long eventId = eventRepository.AddVisitEvent(visitEvent);
+        //        //TODO: get country and city by ip
+        //        string country = string.Empty;
+        //        string city = string.Empty;
+        //        visitEvent.Id = eventId;
+        //        dataRepository.ParseVisitEvent(visitEvent, country, city);
+        //        return new OperationResult<long>(eventId);
+        //    }
+        //    catch (Exception exp)
+        //    {
+        //        return new OperationResult<long>(exp);
+        //    }
+        //}
+
+        //public OperationResult AddViewPartEvents(IEnumerable<ViewPartEvent> viewPartEvents)
+        //{
+        //    try
+        //    {
+        //        eventRepository.AddViewPartEvents(viewPartEvents);
+        //        dataRepository.ParseViewPartEvents(viewPartEvents);
+        //        return new OperationResult();
+        //    }
+        //    catch (Exception exp)
+        //    {
+        //        return new OperationResult(exp);
+        //    }
+        //}
+
+        //public OperationResult AddClickEvents(IEnumerable<ClickEvent> clickEvents)
+        //{
+        //    try
+        //    {
+        //        eventRepository.AddClickEvents(clickEvents);
+        //        dataRepository.ParseClickEvents(clickEvents);
+        //        return new OperationResult();
+        //    }
+        //    catch (Exception exp)
+        //    {
+        //        return new OperationResult(exp);
+        //    }
+        //}
+        #endregion Old Code
+     * 
      */
     #endregion
 }

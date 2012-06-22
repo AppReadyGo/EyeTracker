@@ -23,7 +23,7 @@ namespace EyeTracker.Domain.Repositories
     //    void AddPackageEvent(PackageEvent packageEvent);
     //}
 
-    public class DataRepository : IDataRepository
+    public class DataRepository 
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -182,17 +182,18 @@ namespace EyeTracker.Domain.Repositories
                     {
                         Id = objPackageEvent.Id,
                         Application = objApp,
-                        Browser = null, //todo
-                        Path = objPackageEvent.Sessions[0].Path, //todo: Path should be on another level?
-                        Language = null,    //todo
+                        Browser = null, 
+                        Path = objPackageEvent.Sessions[0].Path, //TODO: Path should be on another level?
+                        Language = null,    //TODO: 
                         Ip = objPackageEvent.Ip,
-                        Country = null, //todo: 3rd party service
-                        City = null,    //same as Country
+                        Country = null, //TODO: 3rd party service
+                        City = null,    //TODO: same as Country
                         OperationSystem = objOS, 
+                        Date = DateTime.Now,
                         ScreenHeight = objPackageEvent.ScreenHeight,
                         ScreenWidth = objPackageEvent.ScreenWidth,
-                        ClientHeight = objPackageEvent.Sessions[0].ClientHeight,
-                        ClientWidth = objPackageEvent.Sessions[0].ClientWidth
+                        ClientHeight = objPackageEvent.Sessions[0].ClientHeight, //problem 
+                        ClientWidth = objPackageEvent.Sessions[0].ClientWidth    //problem
                         
                     };
                     //Clicks

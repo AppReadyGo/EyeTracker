@@ -77,18 +77,20 @@ namespace EyeTracker.API
                 //objParserResult.Ip = instance.Ip;
                 objParserResult.Ip = "Not needed";
 
-                EventsServices objEventSvc = new EventsServices("EyeTracker.Domain", "EyeTracker.Domain.Repositories.EventsRepository");
-                OperationResult objSaveResult = objEventSvc.HandlePackageEvent(objParserResult);
-                log.WriteVerbose("return result is " + !objSaveResult.HasError);
+                //---EventsServices objEventSvc = new EventsServices("EyeTracker.Domain", "EyeTracker.Domain.Repositories.EventsRepository");
+                //---OperationResult objSaveResult = objEventSvc.HandlePackageEvent(objParserResult);
+                //---log.WriteVerbose("return result is " + !objSaveResult.HasError);
 
                 
 
                 //#region TEMP
-                //DataRepositoryServices objDataRepositorySvc = new DataRepositoryServices("EyeTracker.Domain", "EyeTracker.Domain.Repositories.DataRepository");
-                //objDataRepositorySvc.HandlePackageEvent(objParserResult);
+                DataRepositoryServices objDataRepositorySvc = new DataRepositoryServices("EyeTracker.Domain", "EyeTracker.Domain.Repositories.DataRepository");
+                return !objDataRepositorySvc.HandlePackageEvent(objParserResult).HasError;
                 //#endregion
 
-                return !objSaveResult.HasError;
+
+                
+                //---return !objSaveResult.HasError;
             }
             catch (Exception ex)
             {
