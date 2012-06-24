@@ -189,7 +189,7 @@ namespace EyeTracker.Domain.Repositories
                         Country = null, //TODO: 3rd party service
                         City = null,    //TODO: same as Country
                         OperationSystem = objOS, 
-                        Date = DateTime.Now,
+                        Date = DateTime.UtcNow,
                         ScreenHeight = objPackageEvent.ScreenHeight,
                         ScreenWidth = objPackageEvent.ScreenWidth,
                         ClientHeight = objPackageEvent.Sessions[0].ClientHeight, //problem 
