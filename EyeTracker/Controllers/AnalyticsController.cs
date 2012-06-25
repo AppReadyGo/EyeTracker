@@ -204,20 +204,21 @@ namespace EyeTracker.Controllers
             string[] splitedScreenSize = filter.ss.Split(new char[] { 'X' });
             int sw = int.Parse(splitedScreenSize[0]);
             int sh = int.Parse(splitedScreenSize[1]);
+
+            var data = ObjectContainer.Instance.RunQuery(new ClickHeatMapDataQuery(filter.aid.Value, filter.p, sw, sh, filter.fd.Value, filter.td.Value));
             byte[] imageData = null;
-            var opResult = analyticsService.GetClickHeatMapData(filter.aid.Value, filter.p, sw, sh, filter.fd.Value, filter.td.Value);
-            if (!opResult.HasError)
+            if (data.Any())
             {
                 Image bgImg = GetBackgroundImage(filter.aid.Value, sw, sh);
-                Image image = HeatMapImage_.CreateClickHeatMap(opResult.Value, sw, sh, bgImg);
+                Image image = HeatMapImage_.CreateClickHeatMap(data, sw, sh, bgImg);
                 using (MemoryStream mStream = new MemoryStream())
                 {
                     image.Save(mStream, ImageFormat.Png);
                     imageData = mStream.ToArray();
                 }
                 image.Dispose();
-
             }
+
             if (imageData == null)
             {
                 throw new HttpException(404, "Not found");
@@ -233,12 +234,14 @@ namespace EyeTracker.Controllers
             string[] splitedScreenSize = filter.ss.Split(new char[] { 'X' });
             int sw = int.Parse(splitedScreenSize[0]);
             int sh = int.Parse(splitedScreenSize[1]);
+
+            var data = ObjectContainer.Instance.RunQuery(new HeatMapDataQuery(filter.aid.Value, filter.p, sw, sh, filter.fd.Value, filter.td.Value));
             byte[] imageData = null;
-            var opResult = analyticsService.GetViewHeatMapData(filter.aid.Value, filter.p, sw, sh, filter.fd.Value, filter.td.Value);
-            if (!opResult.HasError)
+
+            if (data.Any())
             {
                 Image bgImg = GetBackgroundImage(filter.aid.Value, sw, sh);
-                Image image = HeatMapImage_.CreateViewHeatMap(opResult.Value, sw, sh, bgImg);
+                Image image = HeatMapImage_.CreateViewHeatMap(data, sw, sh, bgImg);
                 using (MemoryStream mStream = new MemoryStream())
                 {
                     image.Save(mStream, ImageFormat.Png);

@@ -209,8 +209,8 @@ namespace EyeTracker.Domain.Repositories
                         }));
 
                     //ViewParts
-                    objPageView.ViewParts = new List<ViewPart>();
-                    objPackageEvent.Sessions[0].ScreenViewParts.ToList().ForEach(viewPart =>
+                    //objPageView.ViewParts = new List<ViewPart>();
+                    /*objPackageEvent.Sessions[0].ScreenViewParts.ToList().ForEach(viewPart =>
                         objPageView.ViewParts.Add(
                         new ViewPart()
                         {
@@ -220,7 +220,7 @@ namespace EyeTracker.Domain.Repositories
                             Y = viewPart.ScrollTop,
                             Orientation = viewPart.Orientation,
                             PageView = objPageView
-                        }));
+                        }));*/
 
                     //Scrolls
                     objPageView.Scrolls = new List<Scroll>();

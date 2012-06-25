@@ -10,56 +10,11 @@ namespace EyeTracker.Domain.Repositories
 {
     public interface IAnalyticsRepository
     {
-        IEnumerable<ClickHeatMapData> GetClickHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
-
-        IEnumerable<ViewHeatMapData> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate);
-
         IEnumerable<PortfolioDetails> GetAllPortfolios(int userId);
     }
     
     public class AnalyticsRepository : IAnalyticsRepository
     {
-        public IEnumerable<ClickHeatMapData> GetClickHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
-        {
-            using (ISession session = NHibernateHelper.OpenSession())
-            {
-                var result = session.Query<PageView>()
-                    .Where(p => p.Application.Id == appId &&
-                                p.Path == pageUri &&
-                                p.ClientWidth == clientHeight &&
-                                p.ClientHeight == clientHeight &&
-                                p.Date >= fromDate &&
-                                p.Date <= toDate)
-                    .SelectMany(p => p.Clicks)
-                    .GroupBy(c => new { X = c.X, Y = c.Y })
-                    .Select(c => new ClickHeatMapData { ClientX = c.Key.X, ClientY = c.Key.Y, Count = c.Count() })
-                    .ToList();
-                return result;
-            }
-        }
-
-        public IEnumerable<ViewHeatMapData> GetViewHeatMapData(long appId, string pageUri, int clientWidth, int clientHeight, DateTime fromDate, DateTime toDate)
-        {
-            using (ISession session = NHibernateHelper.OpenSession())
-            {
-                var result = session.Query<PageView>()
-                    .Where(p => p.Application.Id == appId &&
-                                p.Path == pageUri &&
-                                p.ClientWidth == clientHeight &&
-                                p.ClientHeight == clientHeight &&
-                                p.Date >= fromDate &&
-                                p.Date <= toDate)
-                    .Select(p => p)
-                    .ToList()
-                    .SelectMany(p => p.ViewParts.Select(vp => new { X = vp.X, Y = vp.Y, ScreenWidth = p.ClientWidth, ScreenHeight = p.ScreenHeight, StartDate = vp.StartDate, FinishDate = vp.FinishDate, Orientation = vp.Orientation }))
-                    //.SelectMany(p => p.ViewParts.Select(vp => new { X = vp.ScrollLeft, Y = vp.ScrollTop, ScreenWidth = p.ClientWidth, ScreenHeight = p.ScreenHeight, StartDate = vp.StartDate, FinishDate = vp.FinishDate, Orientation = vp.Orientation }))
-                    .GroupBy(c => c)
-                    .Select(c => new ViewHeatMapData { ScrollLeft = c.Key.X, ScrollTop = c.Key.Y, ScreenHeight = c.Key.ScreenHeight, ScreenWidth = c.Key.ScreenWidth, TimeSpan = c.Count() })
-                    .ToList();
-                return result;
-            }
-        }
-
         public IEnumerable<PortfolioDetails> GetAllPortfolios(int userId)
         {
             using (ISession session = NHibernateHelper.OpenSession())
