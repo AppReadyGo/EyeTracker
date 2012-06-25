@@ -188,7 +188,6 @@
     <Compile Include="Model\Pages\Application\ApplicationModel.cs" />
     <Compile Include="Model\Pages\ViewModel.cs" />
     <Compile Include="Model\ScreenDetailsModel.cs" />
-    <Compile Include="Model\Filter\SelectorModel.cs" />
     <Compile Include="Model\MasterViewModelWrapper.cs" />
     <Compile Include="Model\ViewModelWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -207,10 +207,20 @@ namespace EyeTracker.Controllers
 
             var data = ObjectContainer.Instance.RunQuery(new ClickHeatMapDataQuery(filter.aid.Value, filter.p, sw, sh, filter.fd.Value, filter.td.Value));
             byte[] imageData = null;
+            Image image = null;
             if (data.Any())
             {
                 Image bgImg = GetBackgroundImage(filter.aid.Value, sw, sh);
-                Image image = HeatMapImage_.CreateClickHeatMap(data, sw, sh, bgImg);
+                image = HeatMapImage_.CreateClickHeatMap(data, sw, sh, bgImg);
+            }
+            else
+            {
+                //Show no data
+                image = HeatMapImage_.CreateEmpityBackground("NO DATA", sw, sh);
+            }
+
+            if (image != null)
+            {
                 using (MemoryStream mStream = new MemoryStream())
                 {
                     image.Save(mStream, ImageFormat.Png);
@@ -248,6 +258,7 @@ namespace EyeTracker.Controllers
                     imageData = mStream.ToArray();
                 }
             }
+
             if (imageData == null)
             {
                 throw new HttpException(404, "Not found");
