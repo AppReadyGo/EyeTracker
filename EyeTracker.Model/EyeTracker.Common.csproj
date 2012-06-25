@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="ApplicationLogging.cs" />
     <Compile Include="Commands\Admin\ClearLogCommand.cs" />
+    <Compile Include="Commands\API\AddPackageCommand.cs" />
     <Compile Include="Commands\Content\CreateMailCommand.cs" />
     <Compile Include="Commands\Content\CreatePageCommand.cs" />
     <Compile Include="Commands\Content\UpdateKeyCommand.cs" />
@@ -92,6 +93,8 @@
     <Compile Include="Commands\Extentions.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\RemoveContentItemCommand.cs" />
+    <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\SystemInfo.cs" />
     <Compile Include="IObjectContainer.cs" />
     <Compile Include="Queries\Users\GetUserDetailsByIdQuery.cs" />
     <Compile Include="Queries\Users\GetUserRolesQuery.cs" />

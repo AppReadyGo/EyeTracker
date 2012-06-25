@@ -2,7 +2,7 @@
     [Id]                BIGINT IDENTITY (1, 1) NOT NULL,
     [Date]              DATETIME       NOT NULL,
     [Path]              NVARCHAR (256) NOT NULL,
-    [Ip]                NVARCHAR (15)  NULL,
+    [Ip]                NVARCHAR (15)  NULL,-- TODO: Remove
     [LanguageId]        INT            NULL,
     [CountryId]         INT            NULL,
     [City]              NVARCHAR (50)  NULL,
