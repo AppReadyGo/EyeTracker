@@ -141,7 +141,7 @@ namespace EyeTracker.Models
         {
             if (bgImg == null)
             {
-                bgImg = CreateNoImageBackground(clientWidth, clientHeight);
+                bgImg = CreateEmpityBackground("NO IMAGE", clientWidth, clientHeight);
             }
             log.WriteInformation("-->CreateViewHeatMap: viewParts:{0},clientWidth:{1},clientHeight:{2}",viewParts.Count(),clientWidth,clientHeight);
             int[,] heatMap = new int[clientWidth, clientHeight];
@@ -188,7 +188,7 @@ namespace EyeTracker.Models
         {
             if (bgImg == null)
             {
-                bgImg = CreateNoImageBackground(clientWidth, clientHeight);
+                bgImg = CreateEmpityBackground("NO IMAGE", clientWidth, clientHeight);
             }
 
             log.WriteInformation("CreateClickHeatMap: clicks:{0},clientWidth:{1},clientHeight:{2}", clicks.Count(), clientWidth, clientHeight);
@@ -261,9 +261,8 @@ namespace EyeTracker.Models
             return bmpPic;
         }
 
-        private static Image CreateNoImageBackground(int width, int height)
+        public static Image CreateEmpityBackground(string title, int width, int height)
         {
-            string nImageStr ="NO IMAGE";
             Bitmap nImgPic = new Bitmap(width, height);
             using (Graphics g = Graphics.FromImage(nImgPic))
             {
@@ -272,8 +271,8 @@ namespace EyeTracker.Models
                     s.Alignment = StringAlignment.Center;
                     s.LineAlignment = StringAlignment.Center;
                     SizeF sf;
-                    Font nImageFnt = AppropriateFont(g, 12, 1000, new Size(width - 20, height - 20), nImageStr, new Font(FontFamily.GenericSerif, 20, FontStyle.Bold), out sf);
-                    g.DrawString(nImageStr, nImageFnt, new SolidBrush(Color.Black), new Rectangle(0, 0, width, height), s);
+                    Font nImageFnt = AppropriateFont(g, 12, 1000, new Size(width - 20, height - 20), title, new Font(FontFamily.GenericSerif, 20, FontStyle.Bold), out sf);
+                    g.DrawString(title, nImageFnt, new SolidBrush(Color.Black), new Rectangle(0, 0, width, height), s);
                 }
 
                 //int diagonal = (int)Math.Sqrt(width * width + hight * hight);

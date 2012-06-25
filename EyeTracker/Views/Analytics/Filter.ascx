@@ -7,21 +7,38 @@
         dateTo: '<%=Model.DateTo.ToString("dd MMM yyyy") %>',
         dateToMin: '<%=Model.DateFrom.ToString("dd MMM yyyy") %>',
         dateToMax: '<%=DateTime.UtcNow.ToString("dd MMM yyyy") %>',
-        pApps: <%=Model.PortfoliosData %>,
+        pData: <%=Model.PortfoliosData %>,
+        aData: <%=Model.ApplicationsData %>,
         action: '<%= Model.FormAction %>'
     };
     $(document).ready(function(){
         $('#portfolioId').change(function(){
             var id = $(this).val();
             $('#applicationId').empty();
-            $('#applicationId').append('<option value="0">All Applications</option>');
-            var apps = analytics.pApps[id];
-            for(var i=0;i<apps.length;i++){
-                $('#applicationId').append('<option value="'+apps[i].id+'">'+apps[i].desc+'</option>');
+            $('#applicationId').append('<option value="0">All</option>');
+            var data = analytics.pData[id];
+            for(var i=0;i<data.length;i++){
+                $('#applicationId').append('<option value="'+data[i].id+'">'+data[i].desc+'</option>');
             } 
         });
+        $('#applicationId').change(function(){
+            var id = $(this).val();
+            $('#screenSize').empty();
+            $('#screenSize').append('<option value="">All</option>');
+            $('#path').empty();
+            $('#path').append('<option value="">All</option>');
+            if(id != '0'){
+                var data = analytics.aData[id];
+                for(var i=0;i<data.scr.length;i++){
+                    $('#screenSize').append('<option value="'+data.scr[i]+'">'+data.scr[i]+'</option>');
+                } 
+                for(var i=0;i<data.pth.length;i++){
+                    $('#path').append('<option value="'+data.pth[i]+'">'+data.pth[i]+'</option>');
+                } 
+            }
+        });
         $('#portfolioId').change();
-        $('#applicationId').val(<%=Model.AppId %>);
+        $('#applicationId').val(<%=Model.ApplicationId %>);
     });
 </script>
 <div class="filter">
@@ -40,7 +57,7 @@
     <div class="body" id="filter_body"><a id="close_btn" class="cancel-btn"></a>
         <div id="date_range">
             <div>
-                <h3>Date range</h3>
+                <h2>Date range</h2>
                 <span id="datepicker_from"></span>
                 <span id="datepicker_to"></span>
                 <div>
@@ -59,24 +76,19 @@
         </div>
         <div id="advanced_filter">
             <div>
-                <h3>Filter</h3>
+                <h2>Filter</h2>
                 <label>Portfolio: <%= Html.DropDownList("portfolioId", Model.Portfolios) %></label>
                 <label>Application: <%= Html.DropDownList("applicationId", Model.Applications) %></label>
                 <label>Screen size <%= Html.DropDownList("screenSize", Model.ScreenSizes) %></label>
                 <label>Path <%= Html.DropDownList("path", Model.Pathes) %></label>
-                <label>OS <select><option>All</option></select></label>
+                <!--label>OS <select><option>All</option></select></label>
                 <label>Language <select><option>All</option></select></label>
                 <label>Country <select><option>All</option></select></label>
-                <label>City <select><option>All</option></select></label>
+                <label>City <select><option>All</option></select></label-->
             </div>
             <div class="actions"><a class="button" id="apply_btn">Apply</a><a class="link" id="cancel_btn">cancel</a></div>
         </div>
     </div>
-<%--    <% Html.RenderPartial("Selector", ViewData["Pathes"]); %>
-    <% Html.RenderPartial("Selector", ViewData["Languages"]); %>
---%>    <!--1. Usage: Application (All), screen size (All), path (All), language (All), OS (All), location (All)  -->
-    <!--2. Fingerprint: Application (All), screen size (All), path (All), language (All), OS (All), location (All)  -->
-    <!--3. Eyetracker: Application (All), screen size (All), path (All), language (All), OS (All), location (All)  -->
 </div>
 
 

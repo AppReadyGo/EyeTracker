@@ -38,7 +38,7 @@ namespace EyeTracker.Controllers
             else
             {
                 var parts = new List<string>(){string.Format("pid={0}",filter.PortfolioId)};
-                if (filter.AppId != 0) parts.Add(string.Format("aid={0}", filter.AppId));
+                if (filter.ApplicationId != 0) parts.Add(string.Format("aid={0}", filter.ApplicationId));
                 if (!string.IsNullOrEmpty(filter.ScreenSize)) parts.Add(string.Format("ss={0}", filter.ScreenSize));
                 if (!string.IsNullOrEmpty(filter.Path)) parts.Add(string.Format("p={0}", HttpUtility.UrlEncode(filter.Path)));
                 parts.Add(string.Format("fd={0}", filter.DateFrom.ToString("dd-MMM-yyyy")));
@@ -63,7 +63,7 @@ namespace EyeTracker.Controllers
 
                 var js = new JavaScriptSerializer();
                 filterModel.PortfoliosData = string.Format("{{{0}}}", string.Join(",", filterDataResult.Portfolios.Select(p => string.Format("{0}:{1}", p.Id, js.Serialize(p.Applications.Select(a => new { id = a.Id, desc = a.Description }))))));
-                filterModel.ApplicationsData = string.Format("{{{0}}}", string.Join(",", filterDataResult.Portfolios.SelectMany(p => p.Applications).Select(a => string.Format("{0}:{1}", a.Id, js.Serialize(new { scr = a.Screens, pth = a.Pathes })))));
+                filterModel.ApplicationsData = string.Format("{{{0}}}", string.Join(",", filterDataResult.Portfolios.SelectMany(p => p.Applications).Select(a => string.Format("{0}:{1}", a.Id, js.Serialize(new { scr = a.Screens, pth = a.Pathes.Select(p => Server.UrlEncode(p)) })))));
                 filterModel.Portfolios = filterDataResult.Portfolios.Select(p => new SelectListItem() { Text = p.Description, Value = p.Id.ToString(), Selected = p.Id == filter.pid });
                 filterModel.FormAction = leftMenuSelectedItem.ToString();
 
@@ -81,8 +81,8 @@ namespace EyeTracker.Controllers
                     var curApplication = filter.aid.HasValue ? curPortfolio.Applications.Single(a => a.Id == filter.aid.Value) :
                                                                (isSpecificFilter ? curPortfolio.Applications.First() : null);
 
-                    filterModel.AppId = curApplication != null ? curApplication.Id : 0;
-                    if (filterModel.AppId == 0)
+                    filterModel.ApplicationId = curApplication != null ? curApplication.Id : 0;
+                    if (filterModel.ApplicationId == 0)
                     {
                         filterModel.ApplicationName = "All";
                     }
@@ -93,11 +93,11 @@ namespace EyeTracker.Controllers
 
                     if (!isSpecificFilter)
                     {
-                        apps.Add(new SelectListItem { Value = "0", Text = "All Applications", Selected = filterModel.AppId == 0 });
+                        apps.Add(new SelectListItem { Value = "0", Text = "All Applications", Selected = filterModel.ApplicationId == 0 });
                         sizes.Add(new SelectListItem { Value = "0", Text = "All Sizes", Selected = filterModel.ScreenSize == null });
                         pathes.Add(new SelectListItem { Value = "0", Text = "All Pathes", Selected = filterModel.Path == null });
                     }
-                    apps.AddRange(curPortfolio.Applications.Select(a => new SelectListItem { Value = a.Id.ToString(), Text = a.Description, Selected = a.Id == filterModel.AppId }));
+                    apps.AddRange(curPortfolio.Applications.Select(a => new SelectListItem { Value = a.Id.ToString(), Text = a.Description, Selected = a.Id == filterModel.ApplicationId }));
                     if (curApplication != null)
                     {
                         filterModel.ScreenSize = string.IsNullOrEmpty(filter.ss) ? (isSpecificFilter ? curApplication.Screens.First() : null) : filter.ss;

@@ -87,8 +87,15 @@ $(function () {
         var to = $("#datepicker_to").datepicker("getDate");
         var portfolio = $('#portfolioId').val();
         var application = $('#applicationId').val();
-        var url = '/Analytics/' + analytics.action + '/?pid=' + portfolio + '&fd=' + $.datepicker.formatDate('dd-M-yy', from) + 'td=' + $.datepicker.formatDate('dd-M-yy', to);
+        var screenSize = $('#screenSize').val();
+        var path = $('#path').val();
+        var url = '/Analytics/' + analytics.action +
+                  '/?pid=' + portfolio +
+                  '&fd=' + $.datepicker.formatDate('dd-M-yy', from) + 
+                  'td=' + $.datepicker.formatDate('dd-M-yy', to);
         if (application != 0) url += '&aid=' + application;
+        if (screenSize != '') url += '&ss=' + screenSize;
+        if (path != '') url += '&p=' + path;
 
         document.location.href = url;
     });
