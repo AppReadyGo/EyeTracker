@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandlers\Admin\ClearLogCommandHandler.cs" />
+    <Compile Include="CommandHandlers\API\AddPackageCommandHandler.cs" />
     <Compile Include="CommandHandlers\Content\CreatePageCommandHandler.cs" />
     <Compile Include="CommandHandlers\Content\UpdatePageCommandHandler.cs" />
     <Compile Include="CommandHandlers\ICommandHandler.cs" />

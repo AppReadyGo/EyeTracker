@@ -16,6 +16,7 @@ namespace EyeTracker.Core
             return ts.TotalMilliseconds;
         }
 
+
         /// <summary>
         /// Merge point with distance less than mergeDist and if the point Intensity more than minIntensity
         /// </summary>

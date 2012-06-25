@@ -248,8 +248,8 @@ namespace EyeTracker.Service.Tester
             objJP.SessionsInfo[0].PageUri = "myPageUri";
 
             DateTime dtStart, dtEnd;
-            dtStart = DateTime.Now.AddSeconds(-30);
-            dtEnd = DateTime.Now;
+            dtStart = DateTime.UtcNow.AddSeconds(-30);
+            dtEnd = DateTime.UtcNow;
 
             objJP.SessionsInfo[0].SessionStartDate = dtStart.ToString("R");
             objJP.SessionsInfo[0].SessionCloseDate = dtEnd.ToString("R");
@@ -293,8 +293,8 @@ namespace EyeTracker.Service.Tester
             objJP.SessionsInfo[0].PageUri = pageUri;
 
             DateTime dtStart, dtEnd;
-            dtStart = DateTime.Now.AddSeconds(-30);
-            dtEnd = DateTime.Now;
+            dtStart = DateTime.UtcNow.AddSeconds(-30);
+            dtEnd = DateTime.UtcNow;
 
             objJP.SessionsInfo[0].SessionStartDate = dtStart.ToString("R");
             objJP.SessionsInfo[0].SessionCloseDate = dtEnd.ToString("R");
@@ -345,8 +345,8 @@ namespace EyeTracker.Service.Tester
                 colSessions[i].ClientWidth = 500;
                 colSessions[i].PageUri = "myPageUri";
 
-                dtStart = DateTime.Now.AddSeconds(-200 + i);
-                dtEnd = DateTime.Now.AddSeconds(-200 + i + 2);
+                dtStart = DateTime.UtcNow.AddSeconds(-200 + i);
+                dtEnd = DateTime.UtcNow.AddSeconds(-200 + i + 2);
 
                 colSessions[i].SessionStartDate = dtStart.ToString("R");
 
