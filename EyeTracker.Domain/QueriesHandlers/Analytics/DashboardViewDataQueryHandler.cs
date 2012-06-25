@@ -32,7 +32,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                 var dataQuery = session.Query<PageView>()
                                     .Where(pv => pv.Application.Id == applicationId.Value && pv.Date >= query.From && pv.Date <= query.To);
 
-                res.Data = dataQuery.GroupBy(g => g.Date)
+                res.Data = dataQuery.GroupBy(g => g.Date.Date)
                                    .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
                                    .ToList().ToDictionary(v => v.Key, v => v.Value);
                 res.ContentOverview = dataQuery.GroupBy(v => v.Path)
@@ -51,7 +51,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                 var dataQuery = session.Query<PageView>()
                     .Where(pv => appIds.Contains(pv.Application.Id) && pv.Date >= query.From && pv.Date <= query.To);
 
-                res.Data = dataQuery.GroupBy(g => g.Date)
+                res.Data = dataQuery.GroupBy(g => g.Date.Date)
                     .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
                     .ToList().ToDictionary(v => v.Key, v => v.Value);
 

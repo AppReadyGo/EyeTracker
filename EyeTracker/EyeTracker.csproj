@@ -469,6 +469,8 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Scripts\AnalyticsTemplate.js" />
+    <Content Include="Users_Resources\Screens\5.480.800.png" />
+    <Content Include="Users_Resources\Screens\SC20120424-220947.png" />
     <Content Include="Views\Account\Unsubscribe.aspx" />
     <Content Include="Views\Account\Forms\UnsubscribeForm.ascx" />
     <Content Include="Views\Account\ResetPassword.aspx" />
@@ -533,7 +535,6 @@
   <ItemGroup>
     <Folder Include="Areas\m\Models\" />
     <Folder Include="Scripts\Tests\UnitTests\" />
-    <Folder Include="Users_Resources\Screens\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EyeTracker.Core\EyeTracker.Core.csproj">
