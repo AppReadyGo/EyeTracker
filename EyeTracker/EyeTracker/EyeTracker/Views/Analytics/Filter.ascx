@@ -78,7 +78,7 @@
             <div>
                 <h2>Filter</h2>
                 <label>Portfolio: <%= Html.DropDownList("portfolioId", Model.Portfolios) %></label>
-                <label>Application: <%= Html.DropDownList("applicationId", Model.Applications) %></label>
+                <label>Application: <%= Html.DropDownList("applicationId", Model.Applications) %></label><br />
                 <label>Screen size <%= Html.DropDownList("screenSize", Model.ScreenSizes) %></label>
                 <label>Path <%= Html.DropDownList("path", Model.Pathes) %></label>
                 <!--label>OS <select><option>All</option></select></label>
@@ -86,7 +86,7 @@
                 <label>Country <select><option>All</option></select></label>
                 <label>City <select><option>All</option></select></label-->
             </div>
-            <div class="actions"><a class="button" id="apply_btn">Apply</a><a class="link" id="cancel_btn">cancel</a></div>
+            <div class="actions"><a id="apply_btn" class="link2"><span><span>Apply</span></span></a><a class="link4" id="cancel_btn"><span><span>Cancel</span></span></a></div>
         </div>
     </div>
 </div>
