@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Drawing.Drawing2D;
 using System.Text;
 using EyeTracker.Domain.Model;
+using EyeTracker.Common.QueryResults.Analytics;
 
 namespace EyeTracker.Models
 {
@@ -136,7 +137,7 @@ namespace EyeTracker.Models
         }
 
 
-        public static Image CreateViewHeatMap(IEnumerable<ViewHeatMapData> viewParts, int clientWidth, int clientHeight, Image bgImg)
+        public static Image CreateViewHeatMap(IEnumerable<HeatMapDataResult> viewParts, int clientWidth, int clientHeight, Image bgImg)
         {
             if (bgImg == null)
             {
@@ -183,7 +184,7 @@ namespace EyeTracker.Models
             return bgImg;
         }
 
-        public static Image CreateClickHeatMap(IEnumerable<ClickHeatMapData> clicks, int clientWidth, int clientHeight, Image bgImg, int? maxHeight = null, int? maxWidth = null)
+        public static Image CreateClickHeatMap(IEnumerable<ClickHeatMapDataResult> clicks, int clientWidth, int clientHeight, Image bgImg, int? maxHeight = null, int? maxWidth = null)
         {
             if (bgImg == null)
             {

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EyeTracker.Domain.Model
+namespace EyeTracker.Common.QueryResults.Analytics
 {
-    public class ClickHeatMapData
+    public class ClickHeatMapDataResult
     {
         public int Count { get; set; }
+
         public int ClientX { get; set; }
+
         public int ClientY { get; set; }
     }
 }

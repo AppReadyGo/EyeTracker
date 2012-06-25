@@ -96,6 +96,10 @@
     <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\SystemInfo.cs" />
     <Compile Include="IObjectContainer.cs" />
+    <Compile Include="Queries\Analytics\ClickHeatMapDataQuery.cs" />
+    <Compile Include="Queries\Analytics\HeatMapDataQuery.cs" />
+    <Compile Include="QueryResults\Analytics\ClickHeatMapDataResult.cs" />
+    <Compile Include="QueryResults\Analytics\HeatMapDataResult.cs" />
     <Compile Include="Queries\Users\GetUserDetailsByIdQuery.cs" />
     <Compile Include="Queries\Users\GetUserRolesQuery.cs" />
     <Compile Include="QueryResults\Analytics\ContentOverviewResult.cs" />
