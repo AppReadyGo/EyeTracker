@@ -205,7 +205,8 @@ namespace EyeTracker.Domain.Repositories
                             PageView = objPageView,
                             X = clickEvent.ClientX,
                             Y = clickEvent.ClientY,
-                            Date = clickEvent.Date
+                            Date = clickEvent.Date,
+                            Orientation = clickEvent.Orientation
                         }));
 
                     //ViewParts
@@ -228,7 +229,7 @@ namespace EyeTracker.Domain.Repositories
                         objPageView.Scrolls.Add(
                         new Scroll()
                         {
-                            MyPageView = objPageView,
+                            PageView = objPageView,
                             FirstTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.FirstTouch.Date),
                             LastTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.LastTouch.Date),
                         }));

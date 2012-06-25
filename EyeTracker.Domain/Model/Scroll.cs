@@ -10,6 +10,10 @@ namespace EyeTracker.Domain.Model
     /// </summary>
     public class Scroll
     {
+
+        /// <summary>
+        /// Schroll ID
+        /// </summary>
         public virtual long Id { get; set; }
 
         /// <summary>
@@ -22,6 +26,10 @@ namespace EyeTracker.Domain.Model
         /// </summary>
         public virtual Click LastTouch { get; set; }
 
-        public virtual PageView MyPageView { get; set; }
+
+        /// <summary>
+        /// Page View ID
+        /// </summary>
+        public virtual PageView PageView { get; set; }
     }
 }

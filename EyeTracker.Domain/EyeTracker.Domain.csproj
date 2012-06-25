@@ -89,6 +89,7 @@
     <Compile Include="Mapping\Events\ScrollEventMapping.cs" />
     <Compile Include="Mapping\Events\SessionInfoEventMapping.cs" />
     <Compile Include="Mapping\ScreenMapping.cs" />
+    <Compile Include="Mapping\ScrollMapping.cs" />
     <Compile Include="Mapping\Users\UserMapping.cs" />
     <Compile Include="Model\AnalyticsType.cs" />
     <Compile Include="Model\Content\Key.cs" />
