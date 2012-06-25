@@ -16,6 +16,7 @@ namespace EyeTracker.Domain.Mapping
             Property(p => p.Date, map => map.NotNullable(true));
             Property(p => p.X, map => map.NotNullable(true));
             Property(p => p.Y, map => map.NotNullable(true));
+            Property(p => p.Orientation, map => map.NotNullable(true));
             ManyToOne(p => p.PageView, map =>
                 {
                     map.NotNullable(true);
