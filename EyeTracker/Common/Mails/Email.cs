@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using EyeTracker.Common.QueryResults.Content;
+using EyeTracker.Core;
+using EyeTracker.Common.Queries.Content;
 
 namespace EyeTracker.Common.Mails
 {
@@ -29,6 +32,7 @@ namespace EyeTracker.Common.Mails
             this.Cc = cc;
             this.Bcc = bcc;
         }
+
     }
 
     public abstract class SystemEmail : Email
@@ -36,6 +40,11 @@ namespace EyeTracker.Common.Mails
         public SystemEmail()
             : base("~/Views/Mails/System.aspx")
         {
+        }
+
+        protected MailResult GetMailContent()
+        {
+            return ObjectContainer.Instance.RunQuery(new GetSystemMailQuery(string.Format("mails/{0}", this.GetType().Name).ToLower()));
         }
     }
 }

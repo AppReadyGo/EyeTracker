@@ -136,6 +136,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CustomExceptions.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\SecureController.cs" />
     <Compile Include="CustomModelBinders\EventParser.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="CustomModelBinders\JsonObjects\JsonPackage.cs" />
@@ -233,6 +234,7 @@
     <Content Include="Content\template\css\404.css" />
     <Content Include="Content\template\css\beforelogin.master.css" />
     <Content Include="Content\template\css\afterlogin.master.css" />
+    <Content Include="Content\template\css\secure.change.password.css" />
     <Content Include="Content\template\css\home.pagecontent.css" />
     <Content Include="Content\template\css\form.css" />
     <Content Include="Content\template\css\home.index.css" />
@@ -474,7 +476,7 @@
     <Content Include="Views\Account\Unsubscribe.aspx" />
     <Content Include="Views\Account\Forms\UnsubscribeForm.ascx" />
     <Content Include="Views\Account\ResetPassword.aspx" />
-    <Content Include="Views\Account\Forms\ChangePasswordForm.ascx" />
+    <Content Include="Views\Secure\Forms\ChangePasswordForm.ascx" />
     <Content Include="Views\Account\Forms\ResetPasswordForm.ascx" />
     <Content Include="Views\Account\Forms\ForgotPasswordForm.ascx" />
     <Content Include="Views\Account\ForgotPassword.aspx" />
@@ -488,7 +490,7 @@
     <Content Include="Views\Application\Edit.aspx" />
     <Content Include="Views\Application\New.aspx" />
     <Content Include="Views\Account\Details.aspx" />
-    <Content Include="Views\Analytics\PageContent.aspx" />
+    <Content Include="Views\Secure\PageContent.aspx" />
     <Content Include="Views\Home\PlayGround.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\PageContent.aspx" />
@@ -517,7 +519,7 @@
     <Content Include="Scripts\ThridParty\MicrosoftMvcAjax.debug.js" />
     <Content Include="Scripts\ThridParty\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\ThridParty\MicrosoftMvcValidation.debug.js" />
-    <Content Include="Views\Account\ChangePassword.aspx" />
+    <Content Include="Views\Secure\ChangePassword.aspx" />
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Account\Register.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
@@ -530,10 +532,13 @@
     <Content Include="Views\Shared\AfterLogin.Master" />
     <Content Include="Views\Shared\Mail.Master" />
     <Content Include="Views\Web.config" />
-    <Content Include="Web.prod.config" />
+    <Content Include="Web.prod.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\m\Models\" />
+    <Folder Include="Model\Pages\Secure\" />
     <Folder Include="Scripts\Tests\UnitTests\" />
   </ItemGroup>
   <ItemGroup>
@@ -563,6 +568,8 @@
   <ItemGroup>
     <None Include="Areas\m\Content\JQThemes\images\Thumbs.db" />
     <Content Include="Views\Shared\Content.Master" />
+    <Content Include="Views\Shared\AfterLoginContent.Master" />
+    <Content Include="Views\Shared\AfterLoginLeftMenu.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

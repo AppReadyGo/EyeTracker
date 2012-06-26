@@ -136,6 +136,13 @@ namespace EyeTracker
             );
 
             routes.MapRoute(
+                "Secure",
+                "Secure/{action}",
+                new { controller = "Secure", action = "ChangePassword" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
+            );
+
+            routes.MapRoute(
                 "CSS", // Route name
                 "content/css/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}/{path7}", // URL with parameters
                 new { controller = "Home", action = "css", path2 = UrlParameter.Optional, path3 = UrlParameter.Optional, path4 = UrlParameter.Optional, path5 = UrlParameter.Optional, path6 = UrlParameter.Optional, path7 = UrlParameter.Optional }, // Parameter defaults
@@ -157,7 +164,14 @@ namespace EyeTracker
             );
 
             routes.MapRoute(
-                "Content", 
+                "ContentSecure",
+                "Secure/{urlPart1}/{urlPart2}/{urlPart3}/",
+                new { controller = "Home", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional },
+                new[] { "EyeTracker.Controllers" } // Namespaces
+            );
+
+            routes.MapRoute(
+                "Content",
                 "{urlPart1}/{urlPart2}/{urlPart3}/",
                 new { controller = "Home", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional },
                 new[] { "EyeTracker.Controllers" } // Namespaces

@@ -1,0 +1,26 @@
+﻿<%@ Master Language="C#" 
+MasterPageFile="~/Views/Shared/AfterLogin.Master" 
+Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel>>" %>
+
+<asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
+    <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
+   <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
+   <link rel="stylesheet" href="<%: Url.Content("~/Content/template/css/afterlogin.left.menu.master.css") %>" type="text/css" media="all">
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+<div class="left-panel">
+    <div class="left-menu">
+        <asp:ContentPlaceHolder ID="LeftMenuContent" runat="server" />
+    </div>
+    <div class="footer">
+        <span>Copyright &#64; 2011<%= DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "" %> <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></span>
+    </div>
+</div>
+<div class="right-panel">
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+</div>
+</asp:Content>

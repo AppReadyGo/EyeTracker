@@ -11,8 +11,7 @@ namespace EyeTracker.Common.Mails
         public ForgotPasswordMail(string email)
         {
             this.To = new string[] { email };
-            string contentPath = string.Format("mails/{0}", this.GetType().Name);
-            var mailContent = ObjectContainer.Instance.RunQuery(new GetMailQuery(contentPath.ToLower()));
+            var mailContent = GetMailContent();
 
             string activationKey = string.Format("{0},{0}", DateTime.Now.AddDays(EmailSettings.Settings.LinksExpire.ForgotPassword), email).EncryptLow();
             string siteRootUrl = string.Format("{0}://{1}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Authority);

@@ -20,6 +20,7 @@ namespace EyeTracker.Domain.Model.Users
         public virtual string FirstName { get; protected set; }
         public virtual string LastName { get; protected set; }
         public virtual bool Unsubscribed { get; protected set; }
+        public virtual bool SpecialAccess { get; protected set; }
         public virtual IEnumerable<Portfolio> Portfolios
         {
             get { return this.portfolios; }

@@ -33,8 +33,8 @@ namespace EyeTracker.Common.Queries.Analytics
             string country,
             string city)
         {
-            this.From = from;
-            this.To = to;
+            this.From = from.StartDay();
+            this.To = to.EndDay();
             this.PortfolioId = portfolioId;
             this.ApplicationId = applicationId;
             this.ScreenHeight = screenHeight;

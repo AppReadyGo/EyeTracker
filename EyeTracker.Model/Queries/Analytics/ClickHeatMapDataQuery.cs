@@ -21,8 +21,8 @@ namespace EyeTracker.Common.Queries.Analytics
             this.Path = path;
             this.ClientHeight = clientHeight;
             this.ClientWidth = clientWidth;
-            this.FromDate = fromDate;
-            this.ToDate = toDate;
+            this.FromDate = fromDate.StartDay();
+            this.ToDate = toDate.EndDay();
         }
     }
 }

@@ -95,6 +95,7 @@
     <Compile Include="Commands\RemoveContentItemCommand.cs" />
     <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\SystemInfo.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="IObjectContainer.cs" />
     <Compile Include="Queries\Analytics\ClickHeatMapDataQuery.cs" />
     <Compile Include="Queries\Analytics\HeatMapDataQuery.cs" />

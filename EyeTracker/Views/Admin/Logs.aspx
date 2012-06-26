@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" 
-MasterPageFile="~/Views/Shared/AfterLogin.Master" 
+MasterPageFile="~/Views/Shared/AfterLoginLeftMenu.Master" 
 Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, EyeTracker.Model.Pages.Admin.LogsModel>>" %>
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">Logs</asp:Content>
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">

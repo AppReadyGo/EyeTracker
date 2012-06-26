@@ -19,7 +19,7 @@ namespace EyeTracker.Domain.Queries
                                 Url = m.Url,
                                 ThemeUrl = m.Theme.Url
                             })
-                            .SingleOrDefault();
+                            .Single();
 
             var items = session.Query<Mail>()
                             .Where(m => m.Id == mail.Id)

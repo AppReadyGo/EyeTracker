@@ -15,7 +15,7 @@
             <%: Html.LabelFor(m => m.ConfirmPassword) %><%: Html.PasswordFor(m => m.ConfirmPassword, new { autocomplete = "off" })%>
             <div class="error"><%: Html.ValidationMessageFor(m => m.ConfirmPassword) %></div>
         </div>
-        <div class="error"><%: Html.ValidationSummary(true) %>
+        <div class="error"><%: Html.ValidationSummary(true) %></div>
 	    <div class="alignright"><a href="#" class="link2" onClick="$(this).closest('form').submit();"><span><span>Register</span></span></a></div>
     </fieldset>
 <% } %>
