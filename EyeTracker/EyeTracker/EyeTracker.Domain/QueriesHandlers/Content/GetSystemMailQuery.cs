@@ -10,17 +10,18 @@ namespace EyeTracker.Domain.Queries
     {
         public MailResult Run(NHibernate.ISession session, GetSystemMailQuery query)
         {
-            return session.Query<SystemMail>()
+            var mail = session.Query<SystemMail>()
                             .Where(m => m.Url.ToLower() == query.Url.ToLower())
-                            .Select(m => new MailResult
-                            {
-                                Id = m.Id,
-                                Url = m.Url,
-                                Body = m.Body.Value,
-                                Subject = m.Subject.Value,
-                                ThemeUrl = m.Theme.Url
-                            })
-                            .SingleOrDefault();
+                            .Select(m => m)
+                            .Single();
+            return new MailResult
+            {
+                Id = mail.Id,
+                Url = mail.Url,
+                Body = mail.Body.Value,
+                Subject = mail.Subject.Value,
+                ThemeUrl = mail.Theme.Url
+            };
         }
     }
 }

@@ -4,7 +4,7 @@
     <p>
         Please enter your username and password. 
     </p>
-               
+    <%= ViewData["SpecialMessage"] %>           
     <fieldset>
 	    <div class="field text">
             <%: Html.LabelFor(m => m.UserName) %> <%: Html.TextBoxFor(m => m.UserName)%>

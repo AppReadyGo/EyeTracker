@@ -17,6 +17,8 @@ namespace EyeTracker.Common.QueryResults.Users
 
         public int Id { get; set; }
 
+        public bool SpecialAccess { get; set; }
+
         public IEnumerable<StaffRole> Roles { get; set; }
     }
 }

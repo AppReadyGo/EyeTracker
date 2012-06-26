@@ -46,6 +46,11 @@ namespace EyeTracker.Controllers
                 {
                     ModelState.AddModelError("", "You account is not activated, please use the link from activation email to activate your account.");
                 }
+                // Temprorary access just for special users
+                else if (!securedDetails.SpecialAccess && securedDetails.Roles == null)
+                {
+                    return Redirect("~/s/special-access-required");
+                }
                 else if (!Membership.Provider.ValidateUser(model.UserName, model.Password))
                 {
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
@@ -54,17 +59,7 @@ namespace EyeTracker.Controllers
                 {
                     // TODO: add terms and conditions
                     FormsAuthentication.SetAuthCookie(securedDetails.Id.ToString(), model.RememberMe);
-                    //if (securedDetails.Roles != null)
-                    //{
-                    //    foreach(var r in securedDetails.Roles.Select(r => r.ToString()))
-                    //    {
-                    //        if(!Roles.IsUserInRole(securedDetails.Id.ToString(), r))
-                    //        {
-                    //            Roles.AddUserToRole(securedDetails.Id.ToString(), r);
-                    //        }
-                    //    }
-                        
-                    //}
+
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
@@ -110,11 +105,11 @@ namespace EyeTracker.Controllers
                 if (!result.Validation.Any())
                 {
                     //TODO: send welcome email
-                    new MailGenerator(this.ControllerContext).Send(new PromotionEmail("thank-you", model.Email));
-                    return Redirect("~/s/thank-you");
-                    ////Waiting for activation
-                    //new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
-                    //return Redirect("/activation-email-sent");
+                    //new MailGenerator(this.ControllerContext).Send(new PromotionEmail("thank-you", model.Email));
+                    //return Redirect("~/s/thank-you");
+                    //Waiting for activation
+                    new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
+                    return Redirect("~/s/activation-email-sent");
                 }
                 else
                 {
@@ -207,37 +202,6 @@ namespace EyeTracker.Controllers
                 }
                 FormsAuthentication.SetAuthCookie(email, false);
                 return RedirectToAction("Index", "Home");
-            }
-
-            return View(model, BeforeLoginMasterModel.MenuItem.None);
-        }
-
-        [Authorize]
-        public ActionResult ChangePassword()
-        {
-            return View(new ChangePasswordModel(), BeforeLoginMasterModel.MenuItem.None);
-        }
-
-        [Authorize]
-        [HttpPost]
-        public ActionResult ChangePassword(ChangePasswordModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(User.Identity.Name));
-                if (securedDetails.Password == Encryption.SaltedHash(model.OldPassword, securedDetails.PasswordSalt))
-                {
-                    var result = ObjectContainer.Instance.Dispatch(new ResetPasswordCommand(securedDetails.Email, model.NewPassword));
-                    if (result.Validation.Any())
-                    {
-                        //Redirect to error page
-                    }
-                    return Redirect("~/s/password-changed-successful");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The current password is incorrect.");
-                }
             }
 
             return View(model, BeforeLoginMasterModel.MenuItem.None);

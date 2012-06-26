@@ -13,10 +13,12 @@ namespace EyeTracker.Common
     {
         public int Id { get; private set; }
         public string DisplayName { get; private set; }
+        public string Email { get; set; }
 
-        public CurrentUserDetails(int id, string displayName)
+        public CurrentUserDetails(int id, string email, string displayName)
         {
             this.Id = id;
+            this.Email = email;
             this.DisplayName = displayName;
         }
     }
@@ -35,7 +37,7 @@ namespace EyeTracker.Common
                     int userId = int.Parse(HttpContext.Current.User.Identity.Name);
                     var details = container.RunQuery(new GetUserDetailsByIdQuery(userId));
                     string displayName = string.IsNullOrEmpty(details.FirstName) || string.IsNullOrEmpty(details.LastName) ? details.Email : string.Format("{0} {1}", details.FirstName, details.LastName);
-                    this.CurrentUser = new CurrentUserDetails(userId, displayName);
+                    this.CurrentUser = new CurrentUserDetails(userId, details.Email, displayName);
                     HttpContext.Current.Session["CurrentUserDetails"] = this.CurrentUser;
                 }
                 else

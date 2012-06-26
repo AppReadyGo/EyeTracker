@@ -1,6 +1,6 @@
 ﻿<%@ Import Namespace="EyeTracker.Helpers" %>
 <%@ Master Language="C#" 
-MasterPageFile="~/Views/Shared/AfterLogin.Master" 
+MasterPageFile="~/Views/Shared/AfterLoginLeftMenu.Master" 
 Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel>>"%>
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
         <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />

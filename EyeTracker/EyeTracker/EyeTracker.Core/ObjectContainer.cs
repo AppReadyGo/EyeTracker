@@ -74,7 +74,7 @@ namespace EyeTracker.Core
                     var @interface = type.GetInterfaces().FirstOrDefault();
                     if (@interface != null && @interface.IsGenericType && @interface.GetGenericTypeDefinition() == parentCommandHandler)
                     {
-                        container.Register(Component.For(@interface).ImplementedBy(type));
+                        container.Register(Component.For(@interface).ImplementedBy(type).LifeStyle.PerWebRequest);
                     }
                 }
             }
@@ -87,14 +87,14 @@ namespace EyeTracker.Core
                     var @interface = type.GetInterfaces().FirstOrDefault();
                     if (@interface != null && @interface.IsGenericType && @interface.GetGenericTypeDefinition() == parentQueryHandler)
                     {
-                        container.Register(Component.For(@interface).ImplementedBy(type));
+                        container.Register(Component.For(@interface).ImplementedBy(type).LifeStyle.PerWebRequest);
                     }
                 }
             }
             container.Register(Component.For<IObjectContainer>().Instance(this));
             container.Register(Component.For<IRepository>().ImplementedBy<Repository>());
             container.Register(Component.For<ISecurityContext>().ImplementedBy<SecurityContext>().LifeStyle.PerWebRequest);
-            container.Register(Component.For<IValidationContext>().ImplementedBy<ValidationContext>());
+            container.Register(Component.For<IValidationContext>().ImplementedBy<ValidationContext>().LifeStyle.PerWebRequest);
 
             this.repository = container.Resolve<IRepository>();
         }

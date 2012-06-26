@@ -47,7 +47,8 @@ VALUES (1, 3, 'products/touch-map'),
 		(12, 3, 'm/products/play-back'),
 		(13, 3, 'm/products/eye-track'),
 		(14, 3, 'm/products'),
-		(15, 3, 'm/planandpricing');
+		(15, 3, 'm/planandpricing'),
+		(16, 3, 's/special-access-required');
 
 SET IDENTITY_INSERT [cont].[Pages] OFF
 GO		
@@ -115,13 +116,20 @@ Having the cumulative statistics of your website visitor’s interaction within 
 <p style="margin-bottom:16px">Thanks again for your patience.</p>
 <p style="margin-bottom:16px"><em>Looking forward to serve you,<br>Mobillify team</em></p></article>'),
 		(5, 0, 'title', 'Activation email was sent'),
-		(5, 1, 'content', '<article class="col">Activation email was sent, please check your email.</article>'),
+		(5, 1, 'content', ' <article class="col center"><h2>Activation email was sent</h2>
+							<p>Please check your email.</p>
+							<p>And use activation link in the email to activate your account.</p>
+							</article>'),
 		(6, 0, 'title', 'Your account was activated'),
-		(6, 1, 'content', '<article class="col">Your account was activated</article>'),
+		(6, 1, 'content', ' <article class="col center"><h2>Your account was activated</h2>
+							<p>Account was activated.</p>
+							<p>You can use your user name and password to log in.</p>
+							<p><a href="/Account/LogOn" class="link2"><span><span>Log On</span></span></a></p>
+							</article>'),
 		(7, 0, 'title', 'Forgot password email was sent'),
-		(7, 1, 'content', '<article class="col">Forgot password email was sent.</article>'),
+		(7, 1, 'content', '<article class="col center"><h2>Forgot password email was sent</h2></article>'),
 		(8, 0, 'title', 'Unsubscrubed successful'),
-		(8, 1, 'content', '<article class="col">Unsubscrubed successful.</article>'),
+		(8, 1, 'content', '<article class="col center"><h2>Unsubscrubed successful</h2></article>'),
 		(9, 0, 'title', 'Products'),
 		(9, 1, 'content', '<article class="col-1-3">
                 <h2>
@@ -483,7 +491,11 @@ Having the cumulative statistics of your website visitor’s interaction within 
 			</div>
 		</div>
 	</div>
-</div>');
+</div>'),
+		(16, 0, 'title', 'Special Access Required'),
+		(16, 1, 'content', ' <article class="col center"><h2>Special Access Required</h2>
+							<p>At this stage we provide access just for selected number of users, </br>if you would like to get the access please contact us by the email: <a href=\"mailto:support@mobillify.com\">support@mobillify.com</a>.</p>
+							</article>');
 
 GO
 

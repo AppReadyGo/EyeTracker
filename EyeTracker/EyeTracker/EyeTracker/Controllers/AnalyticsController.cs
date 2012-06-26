@@ -47,6 +47,7 @@ namespace EyeTracker.Controllers
         public ActionResult Index()
         {
             var portfolios = ObjectContainer.Instance.RunQuery(new PortfoliosQuery());
+            ViewData["IsAdmin"] = User.IsInRole(StaffRole.Administrator.ToString());
             return View(new IndexViewModel(portfolios.PortfoliosData), AnalyticsMasterModel.MenuItem.Portfolios);
         }
 

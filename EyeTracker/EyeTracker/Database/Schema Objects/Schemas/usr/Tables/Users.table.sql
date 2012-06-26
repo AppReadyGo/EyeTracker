@@ -6,10 +6,11 @@
     [PasswordSalt]   NVARCHAR (50) NOT NULL,
     [CreateDate]     DATETIME      NOT NULL,
     [LastAccessDate] DATETIME      NULL,
-	[Activated]		BIT				NOT NULL,
-	[Unsubscribed]  BIT				NOT NULL,
+	[Activated]		BIT			   NOT NULL,
+	[Unsubscribed]  BIT			   NOT NULL,
 	[FirstName]		NVARCHAR (100) NULL,
 	[LastName]		NVARCHAR (100) NULL,
+	[SpecialAccess] BIT			   NOT NULL,
     PRIMARY KEY CLUSTERED ([ID] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
 

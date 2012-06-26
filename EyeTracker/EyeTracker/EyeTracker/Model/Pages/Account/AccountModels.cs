@@ -28,7 +28,7 @@ namespace EyeTracker.Models.Account
 
         [Required]
         [DataType(DataType.Password)]
-        [DisplayName("Confirm new password")]
+        [DisplayName("Confirm password")]
         public string ConfirmPassword { get; set; }
     }
 

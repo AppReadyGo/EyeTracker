@@ -14,15 +14,23 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2 class="title">Portfolios</h2>
+    <%if ((bool)ViewData["IsAdmin"])
+      { %>
     <div class="actions">
         <a href="/portfolio/new" class="link2"><span><span>Add Portfolio</span></span></a>
     </div>
+    <%} %>
     <div class="table-header">
         <div style="width:5%;"></div>
         <div title="Status" class="center" style="width:10%;">Status</div>
         <div title="Description" style="width:50%;">Description</div>
         <div title="Visits" style="width:20%;">Activity</div>
-        <div title="Properties" class="center" style="width:10%;">Properties</div>
+        <div title="Properties" class="center" style="width:10%;">
+        <%if ((bool)ViewData["IsAdmin"])
+        { %>
+        Properties
+        <%} %>
+        </div>
     </div>
     <div class="table" style="height: 364px;">
         <ul class="computerdata detail" id="target">
@@ -42,9 +50,12 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
                     <%:item.Visits%>
                 </div>
                 <div style="width:10%;" class="center">
+                <%if ((bool)ViewData["IsAdmin"])
+                  { %>
                     <a href="/Application/New/<%: item.Id %>" title="add application" class="new-app"><span></span></a>
                     <a href="/Portfolio/Edit/<%: item.Id%>" title="edit" class="edit"><span></span></a>
                     <a href="/Portfolio/Remove/<%: item.Id %>" title="remove portfolio" class="remove" onclick="javascript:return confirm('Are you realy want to remove the portfolio and all analytics data?');"><span></span></a>
+                <%} %>
                 </div>
             </li>
             <%if (item.Applications.Any())
@@ -63,8 +74,11 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
                             <%: app.Visits %>
                         </div>
                         <div style="width:10%;" class="center">
+                        <%if ((bool)ViewData["IsAdmin"])
+                          { %>
                             <a href="/Application/Edit/<%: app.Id%>" title="edit" class="edit"><span></span></a>
                             <a href="/Application/Remove/<%: app.Id%>" title="remove application" class="remove" onclick="javascript:return confirm('Are you realy want to remove the application and all analytics data?');"><span></span></a>
+                        <%} %>
                         </div>
                     </li>
                     <%}
