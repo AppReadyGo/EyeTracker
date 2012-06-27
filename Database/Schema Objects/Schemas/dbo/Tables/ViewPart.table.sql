@@ -1,4 +1,4 @@
-﻿/*
+﻿
 CREATE TABLE [dbo].[ViewPart] (
     [Id]         BIGINT   IDENTITY (1, 1) NOT NULL,
     [X]          INT      NOT NULL,
@@ -15,4 +15,4 @@ GO
 ALTER TABLE [dbo].[ViewPart]
 ADD CONSTRAINT [FK_ViewPart_PageView] FOREIGN KEY ([PageViewId]) REFERENCES [dbo].[PageView] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
-*/
+
