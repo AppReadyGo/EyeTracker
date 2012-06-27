@@ -72,9 +72,6 @@
     <Compile Include="CommandHandlers\Users\ResetPasswordCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\CreateUserCommandHandler.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="Common\ApplicationDetails.cs" />
-    <Compile Include="Common\PortfolioDetails.cs" />
-    <Compile Include="Enumirators.cs" />
     <Compile Include="Mapping\AccountProfilerMaping.cs" />
     <Compile Include="Mapping\Content\Email.cs" />
     <Compile Include="Mapping\Content\KeyMapping.cs" />
@@ -146,6 +143,9 @@
     <Compile Include="Model\Users\Users.cs" />
     <Compile Include="Model\ViewPart.cs" />
     <Compile Include="NHibernateHelper.cs" />
+    <Compile Include="Overwrite\ActivityTrackingRepository.cs" />
+    <Compile Include="Overwrite\Domain\Enumerators.cs" />
+    <Compile Include="Overwrite\Domain\UserActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueriesHandlers\Admin\LogQueryHadler.cs" />
     <Compile Include="QueriesHandlers\Analytics\HeatMapDataQueryHandler.cs" />
@@ -171,11 +171,8 @@
     <Compile Include="QueriesHandlers\Users\GetUserSecuredDetailsByEmailQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserDetailsByEmailQueryHandler.cs" />
     <Compile Include="Repository.cs" />
-    <Compile Include="Repository\AdminRepository.cs" />
-    <Compile Include="Repository\AnalyticsRepository.cs" />
     <Compile Include="Repository\ApplicationRepository.cs" />
     <Compile Include="Repository\DataRepository.cs" />
-    <Compile Include="Repository\EventsRepository.cs" />
     <Compile Include="Repository\PortfolioRepository.cs" />
   </ItemGroup>
   <ItemGroup>

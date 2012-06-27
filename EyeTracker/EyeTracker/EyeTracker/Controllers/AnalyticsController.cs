@@ -27,18 +27,6 @@ namespace EyeTracker.Controllers
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         
-        private IAnalyticsService analyticsService;
-
-        public AnalyticsController()
-            : this(new AnalyticsService())
-        {
-        }
-
-        public AnalyticsController(IAnalyticsService analyticsService)
-        {
-            this.analyticsService = analyticsService;
-        }
-
         public override AfterLoginMasterModel.MenuItem SelectedMenuItem
         {
             get { return AfterLoginMasterModel.MenuItem.Analytics; }

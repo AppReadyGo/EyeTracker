@@ -18,16 +18,16 @@ namespace EyeTracker.BackOffice.Controllers
     public class HomeController : Controller
     {
         
-        IBackOfficeService service;
-        public HomeController()
-            : this(new BackOfficeService())
-        {
-        }
+        //IBackOfficeService service;
+        //public HomeController()
+        //    : this(new BackOfficeService())
+        //{
+        //}
 
-        public HomeController(IBackOfficeService service)
-        {
-            this.service = service;
-        }
+        //public HomeController(IBackOfficeService service)
+        //{
+        //    this.service = service;
+        //}
 
         public ActionResult Index(string searchStr, int? categoriesList, string severityList, DateTime? fromDate, DateTime? toDate, int? processId, int? threadId)
         {

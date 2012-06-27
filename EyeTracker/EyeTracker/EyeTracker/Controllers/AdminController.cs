@@ -29,17 +29,6 @@ namespace EyeTracker.Controllers
             get { return Model.Master.AfterLoginMasterModel.MenuItem.Administrator; }
         }
 
-        IAdminService adminService;
-        public AdminController()
-            : this(new AdminService())
-        {
-        }
-
-        public AdminController(IAdminService adminService)
-        {
-            this.adminService = adminService;
-        }
-
         public ActionResult Index()
         {
             return RedirectToAction("Logs");

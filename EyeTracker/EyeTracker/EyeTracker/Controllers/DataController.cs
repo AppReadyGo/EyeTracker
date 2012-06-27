@@ -17,17 +17,17 @@ namespace EyeTracker.Controllers
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         
-        private IEventsServices eventsServices = null;
+        //private IEventsServices eventsServices = null;
 
-        public DataController()
-            : this(new EventsServices())
-        {
-        }
+        //public DataController()
+        //    : this(new EventsServices())
+        //{
+        //}
 
-        public DataController(IEventsServices eventsServices)
-        {
-            this.eventsServices = eventsServices;
-        }
+        //public DataController(IEventsServices eventsServices)
+        //{
+        //    this.eventsServices = eventsServices;
+        //}
 
         #region Old code 
 //        [HttpPost]
@@ -96,36 +96,36 @@ namespace EyeTracker.Controllers
 
         #endregion Old Code
 
-        /// <summary>
-        /// Mobile event handler 
-        /// responsible to hable PackageEvent that contains mobile client data
-        /// <logic>
-        /// 1. Handle event
-        /// 2. call event services 
-        /// 3. return response 
-        /// </logic>
-        /// </summary>
-        /// <param name="packageEvent"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public JsonResult Mobile(PackageEvent packageEvent)
-        {
-            OperationResult res = default(OperationResult);
-            try
-            {
-                res = new OperationResult();
+        ///// <summary>
+        ///// Mobile event handler 
+        ///// responsible to hable PackageEvent that contains mobile client data
+        ///// <logic>
+        ///// 1. Handle event
+        ///// 2. call event services 
+        ///// 3. return response 
+        ///// </logic>
+        ///// </summary>
+        ///// <param name="packageEvent"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //public JsonResult Mobile(PackageEvent packageEvent)
+        //{
+        //    OperationResult res = default(OperationResult);
+        //    try
+        //    {
+        //        res = new OperationResult();
 
-                eventsServices.HandlePackageEvent(packageEvent);
+        //        eventsServices.HandlePackageEvent(packageEvent);
 
-                Response.AddHeader("Access-Control-Allow-Origin", "*");
-            }
-            catch (Exception exp)
-            {
-                res = new OperationResult<long>(exp, "Package");
-            }
-            log.WriteInformation("Package:{0}-->", res);
-            return base.Json(res);
-        }
+        //        Response.AddHeader("Access-Control-Allow-Origin", "*");
+        //    }
+        //    catch (Exception exp)
+        //    {
+        //        res = new OperationResult<long>(exp, "Package");
+        //    }
+        //    log.WriteInformation("Package:{0}-->", res);
+        //    return base.Json(res);
+        //}
 
 
         /// <summary>
