@@ -17,7 +17,8 @@
     <DefaultFileStructure>BySchema</DefaultFileStructure>
     <DeployToDatabaseAddToServerExplorer>True</DeployToDatabaseAddToServerExplorer>
     <DeployToScript>True</DeployToScript>
-    <CatalogPropertiesFile>Properties\Database.sqlsettings</CatalogPropertiesFile>
+    <CatalogPropertiesFile>
+    </CatalogPropertiesFile>
     <LoadSqlClrTypes>True</LoadSqlClrTypes>
     <RootNamespace>Database</RootNamespace>
     <DefaultSchema>dbo</DefaultSchema>
@@ -40,8 +41,10 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>.\sql\debug\</OutputPath>
     <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
-    <TargetConnectionString>Data Source=finger.mobillify.com;User ID=mobillify_prod;Pooling=False</TargetConnectionString>
-    <TargetDatabase>mobi_fing</TargetDatabase>
+    <TargetConnectionString>
+    </TargetConnectionString>
+    <TargetDatabase>
+    </TargetDatabase>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <SuppressWarnings>
     </SuppressWarnings>
@@ -165,15 +168,10 @@
     <Folder Include="Schema Objects\Schemas\cont\Tables" />
   </ItemGroup>
   <ItemGroup>
-    <PropertiesFile Include="Properties\Database.sqlsettings">
-    </PropertiesFile>
     <PropertiesFile Include="Properties\Database.sqldeployment">
     </PropertiesFile>
     <PropertiesFile Include="Properties\Database.sqlcmdvars">
     </PropertiesFile>
-    <Build Include="Properties\Database.sqlpermissions">
-      <ModelBuilderType>Permissions</ModelBuilderType>
-    </Build>
     <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql">
       <SubType>Code</SubType>
     </PreDeploy>
@@ -191,46 +189,10 @@
     <Build Include="Schema Objects\Database Level Objects\Storage\Files\ypanshin_mobillify_qa_data.sqlfile.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK6AF3367D1CF53E7.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK49650677F9D3FC1C.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK5DAF59DAC633B88.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK5DAF59DA6C1A54A6.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK5DAF59DAAF84173A.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK5DAF59DAD1970229.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK5DAF59DA9DB60BE.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FKBEF9D818C633B88.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK4AD899C9F9D3FC1C.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
     <Build Include="Schema Objects\Schemas\log\Tables\Keys\FK_CategoryLog_Audit.fkey.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\log\Tables\Keys\FK_CategoryLog_Category.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK5249FB211EAE4DA0.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK5249FB21F2B6C1ED.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FKF59F78EC7A320EF8.fkey.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\log\Tables\Keys\PK_Log.pkey.sql">
@@ -351,9 +313,6 @@
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Scroll.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\Scroll.FK_Scroll_PageView.fkey.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\PackageEvent.FK_PACKAGEEVENT_LANGUAGE.fkey.sql">
