@@ -52,8 +52,6 @@ namespace EyeTracker.CustomModelBinders
             string json = HttpUtility.UrlDecode(controllerContext.HttpContext.Request.Form.ToString());
             try
             {
-                IAnalyticsService service = WindsorFactory.Resolve<IAnalyticsService>();
-
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(JsonVisitInfo));
                 MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(json));
                 var visitInfoModel = serializer.ReadObject(ms) as JsonVisitInfo;

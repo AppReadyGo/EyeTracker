@@ -25,13 +25,11 @@ namespace EyeTracker.Core.Services
     public class ActivityTrackingService : IActivityTrackingService
     {
         ActivityTracking tracking;
-        private IMembershipService membershipService;
 
-        public ActivityTrackingService() : this(new AccountMembershipService(), new ActivityTracking()) { }
+        public ActivityTrackingService() : this(new ActivityTracking()) { }
 
-        public ActivityTrackingService(IMembershipService membershipService, ActivityTracking tracking)
+        public ActivityTrackingService(ActivityTracking tracking)
         {
-            this.membershipService = membershipService;
             this.tracking = tracking;
         }
 
@@ -42,14 +40,9 @@ namespace EyeTracker.Core.Services
 
         public OperationResult Write(UserActivityType userActivityType, string description, int? linkedObjectId)
         {
-            var userId = membershipService.GetCurrentUserId();
-            if (!userId.HasValue)
-            {
-                return new OperationResult(ErrorNumber.AccessDenied);
-            }
             return tracking.Write(new UserActivity() { 
                 Date = DateTime.UtcNow,
-                UserId = userId.Value,
+                UserId = ObjectContainer.Instance.CurrentUserDetails.Id,
                 ActivityType = userActivityType,
                 Description = description,
                 LinkedObjectId = linkedObjectId
@@ -73,12 +66,7 @@ namespace EyeTracker.Core.Services
 
         public OperationResult<List<UserActivity>> Get(UserActivityType? userActivityType, DateTime? fromDate, DateTime? toDate, int? lastActivitesCount)
         {
-            var userId = membershipService.GetCurrentUserId();
-            if (!userId.HasValue)
-            {
-                return new OperationResult<List<UserActivity>>(ErrorNumber.AccessDenied);
-            }
-            return tracking.Get(userId.Value, userActivityType, fromDate, toDate, lastActivitesCount);
+            return tracking.Get(ObjectContainer.Instance.CurrentUserDetails.Id, userActivityType, fromDate, toDate, lastActivitesCount);
         }
     }
 }

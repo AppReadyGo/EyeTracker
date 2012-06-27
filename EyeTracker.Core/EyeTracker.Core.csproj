@@ -88,37 +88,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivityTracking.cs" />
-    <Compile Include="AggregationService\Service.cs" />
     <Compile Include="IntensityPoint.cs" />
     <Compile Include="Extentions.cs" />
     <Compile Include="HeatMapImage.cs" />
     <Compile Include="ObjectContainer.cs" />
-    <Compile Include="Services\AccountMembershipService.cs" />
-    <Compile Include="Services\AccountService.cs" />
-    <Compile Include="Services\AdminService.cs" />
-    <Compile Include="Services\AnalyticsService.cs" />
     <Compile Include="Services\ApplicationService.cs" />
-    <Compile Include="Services\BackOfficeService.cs" />
     <Compile Include="HeatMapImage_.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ActivityTrackingService.cs" />
     <Compile Include="Services\DataRepositoryServices.cs" />
-    <Compile Include="Services\EventsServices.cs" />
-    <Compile Include="Services\FormsAuthenticationService.cs" />
     <Compile Include="Services\PortfolioService.cs" />
     <Compile Include="Services\ReflectionServices.cs" />
-    <Compile Include="Services\ReportsServices.cs" />
     <Compile Include="ValidationContext.cs" />
-    <Compile Include="WcfService\AnalyticsHandler.cs" />
-    <Compile Include="WcfService\AnalyticsService.cs" />
-    <Compile Include="WcfService\MessageQueue.cs" />
     <Compile Include="WebsiteSnapshot.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EyeTracker.DAL\EyeTracker.DAL.csproj">
-      <Project>{726E47E8-4DA8-4BDF-96E2-9E9CE6EB1454}</Project>
-      <Name>EyeTracker.DAL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EyeTracker.Domain\EyeTracker.Domain.csproj">
       <Project>{6225C68F-4446-41B2-B774-316A5F04001A}</Project>
       <Name>EyeTracker.Domain</Name>

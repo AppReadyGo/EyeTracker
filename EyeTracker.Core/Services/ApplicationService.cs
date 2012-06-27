@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EyeTracker.DAL;
-using EyeTracker.DAL.Domains;
 using EyeTracker.Common;
 using EyeTracker.Domain.Model;
 
@@ -13,12 +12,10 @@ namespace EyeTracker.Core.Services
     {
         OperationResult<int> Add(Application application);
         OperationResult<Application> Get(int appId);
-        OperationResult<IList<Application>> GetAll(int portfolioId);
         OperationResult Remove(int appId);
         OperationResult Update(int appId, string description);
         OperationResult<long> AddScreen(Screen screen);
         OperationResult<Screen> GetScreen(int appId, int width, int height);
-        OperationResult<EyeTrackerData> GetEyeTrackerData(int appId, DateTime fromDate, DateTime toDate);
     }
 
     public class ApplicationService : IApplicationService
@@ -89,20 +86,6 @@ namespace EyeTracker.Core.Services
             }
         }
 
-
-        public OperationResult<IList<Application>> GetAll(int portfolioId)
-        {
-            //Check Security
-            try
-            {
-                return new OperationResult<IList<Application>>(repository.GetAll(portfolioId));
-            }
-            catch (Exception exp)
-            {
-                return new OperationResult<IList<Application>>(exp);
-            }
-        }
-
         public OperationResult<long> AddScreen(Screen screen)
         {
             try
@@ -124,18 +107,6 @@ namespace EyeTracker.Core.Services
             catch (Exception exp)
             {
                 return new OperationResult<Screen>(exp);
-            }
-        }
-
-        public OperationResult<EyeTrackerData> GetEyeTrackerData(int appId, DateTime fromDate, DateTime toDate)
-        {
-            try
-            {
-                return new OperationResult<EyeTrackerData>(repository.GetEyeTrackerData(appId, fromDate, toDate));
-            }
-            catch (Exception exp)
-            {
-                return new OperationResult<EyeTrackerData>(exp);
             }
         }
     }

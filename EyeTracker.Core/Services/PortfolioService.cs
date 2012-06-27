@@ -26,28 +26,21 @@ namespace EyeTracker.Core.Services
     public class PortfolioService : IPortfolioService
     {
         IPortfolioRepository repository;
-        IMembershipService membershipService;
         
         public PortfolioService()
-            : this(new PortfolioRepository(), new AccountMembershipService())
+            : this(new PortfolioRepository())
         {
         }
 
-        public PortfolioService(IPortfolioRepository repository, IMembershipService membershipService)
+        public PortfolioService(IPortfolioRepository repository)
         {
             this.repository = repository;
-            this.membershipService = membershipService;
         }
 
         public OperationResult<Portfolio> Get(int id)
         {
             try
             {
-                var userId = membershipService.GetCurrentUserId();
-                if (!userId.HasValue)
-                {
-                    return new OperationResult<Portfolio>(ErrorNumber.AccessDenied);
-                }
                 return new OperationResult<Portfolio>(repository.Get(id));
             }
             catch (Exception exp)
@@ -60,12 +53,7 @@ namespace EyeTracker.Core.Services
         {
             try
             {
-                var userId = membershipService.GetCurrentUserId();
-                if (!userId.HasValue)
-                {
-                    return new OperationResult<IList<Portfolio>>(ErrorNumber.AccessDenied);
-                }
-                return new OperationResult<IList<Portfolio>>(repository.GetAll(userId.Value));
+                return new OperationResult<IList<Portfolio>>(repository.GetAll(ObjectContainer.Instance.CurrentUserDetails.Id));
             }
             catch (Exception exp)
             {
@@ -89,13 +77,7 @@ namespace EyeTracker.Core.Services
         {
             try
             {
-                //Check Security
-                var userId = membershipService.GetCurrentUserId();
-                if (!userId.HasValue)
-                {
-                    return new OperationResult<int>(ErrorNumber.AccessDenied);
-                }
-                var id = repository.AddPortfolio(description, timeZone, userId.Value);
+                var id = repository.AddPortfolio(description, timeZone, ObjectContainer.Instance.CurrentUserDetails.Id);
                 return new OperationResult<int>(id);
             }
             catch (Exception exp)
@@ -109,12 +91,6 @@ namespace EyeTracker.Core.Services
         {
             try
             {
-                //Check Security
-                var userId = membershipService.GetCurrentUserId();
-                if (!userId.HasValue)
-                {
-                    return new OperationResult<int>(ErrorNumber.AccessDenied);
-                }
                 repository.Update(id, description, timeZone);
                 return new OperationResult();
             }

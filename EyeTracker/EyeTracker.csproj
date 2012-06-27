@@ -546,10 +546,6 @@
       <Project>{28075AB1-E262-4FBC-846C-BF11A6E5FE41}</Project>
       <Name>EyeTracker.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EyeTracker.DAL\EyeTracker.DAL.csproj">
-      <Project>{726E47E8-4DA8-4BDF-96E2-9E9CE6EB1454}</Project>
-      <Name>EyeTracker.DAL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EyeTracker.Domain\EyeTracker.Domain.csproj">
       <Project>{6225C68F-4446-41B2-B774-316A5F04001A}</Project>
       <Name>EyeTracker.Domain</Name>
