@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EyeTracker.Common.Commands
+namespace EyeTracker.Common.Commands.Content
 {
-    public class CreateContentItemCommand : ICommand<int>
+    public class UpdateContentItemCommand : ICommand<bool>
     {
         public string Key { get; protected set; }
         public string SubKey { get; protected set; }
         public string Value { get; protected set; }
 
-        public CreateContentItemCommand(string key, string subKey, string value)
+        public UpdateContentItemCommand(string key, string subKey, string value)
         {
             this.Key = key;
             this.SubKey = subKey;

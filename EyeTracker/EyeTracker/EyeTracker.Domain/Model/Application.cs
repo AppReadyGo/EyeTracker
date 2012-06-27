@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EyeTracker.Domain.Model.BackOffice;
+using EyeTracker.Common.Entities;
 
 namespace EyeTracker.Domain.Model
 {

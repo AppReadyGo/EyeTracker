@@ -2,7 +2,7 @@
 using EyeTracker.Domain.Model.Content;
 using NHibernate;
 
-namespace EyeTracker.Domain.CommandHandlers
+namespace EyeTracker.Domain.CommandHandlers.Content
 {
     //public class CreateContentItemCommandHandler : ICommandHandler<CreateContentItemCommand, int>
     //{

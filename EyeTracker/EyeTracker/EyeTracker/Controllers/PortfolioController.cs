@@ -15,6 +15,9 @@ using EyeTracker.Model.Pages.Portfolio;
 using EyeTracker.Model.Master;
 using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 using EyeTracker.Model.Pages.Analytics;
+using EyeTracker.Common.Commands;
+using EyeTracker.Core;
+using EyeTracker.Common.Queries.Users;
 
 namespace EyeTracker.Controllers
 {
@@ -22,18 +25,6 @@ namespace EyeTracker.Controllers
     public class PortfolioController : FilterController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
-        private IPortfolioService portfolioService;
-
-        public PortfolioController()
-            : this(new PortfolioService())
-        {
-            log.WriteInformation("");
-        }
-
-        public PortfolioController(IPortfolioService portfolioService)
-        {
-            this.portfolioService = portfolioService;
-        }
 
         public override AfterLoginMasterModel.MenuItem SelectedMenuItem
         {
@@ -52,15 +43,8 @@ namespace EyeTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                var res = portfolioService.AddPortfolio(model.Description, model.TimeZone);
-                if (res.HasError)
-                {
-                    return View("Error");
-                }
-                else
-                {
-                    return Redirect("/Analytics");
-                }
+                var res = ObjectContainer.Instance.Dispatch(new CreatePortfolioCommand(model.Description, model.TimeZone));
+                return Redirect("/Analytics");
             }
             else
             {
@@ -70,17 +54,17 @@ namespace EyeTracker.Controllers
 
         public ActionResult Edit(int id)
         {
-            var portfolioRes = portfolioService.Get(id);
-            if (portfolioRes.HasError)
+            var portfolio = ObjectContainer.Instance.RunQuery(new GetPortfolioDetailsQuery(id));
+            if (portfolio == null)
             {
                 return View("Error");
             }
             else
             {
                 var model = this.GetModel();
-                model.Id = portfolioRes.Value.Id;
-                model.Description = portfolioRes.Value.Description;
-                model.TimeZone = portfolioRes.Value.TimeZone;
+                model.Id = portfolio.Id;
+                model.Description = portfolio.Description;
+                model.TimeZone = portfolio.TimeZone;
                 
                 return View(model, AnalyticsMasterModel.MenuItem.Portfolios);
             }
@@ -91,7 +75,7 @@ namespace EyeTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                var res = portfolioService.Update(model.Id, model.Description, model.TimeZone);
+                var res = ObjectContainer.Instance.Dispatch(new UpdatePortfolioCommand(model.Id, model.Description, model.TimeZone));
                 return Redirect("/Analytics");
             }
             else
@@ -102,15 +86,8 @@ namespace EyeTracker.Controllers
 
         public ActionResult Remove(int id)
         {
-            var res = portfolioService.Remove(id);
-            if (res.HasError)
-            {
-                return View("Error");
-            }
-            else
-            {
-                return RedirectToAction("", "Analytics");
-            }
+            var res = ObjectContainer.Instance.Dispatch(new RemovePortfolioCommand(id));
+            return RedirectToAction("", "Analytics");
         }
 
         private PortfolioModel GetModel(PortfolioModel model = null)

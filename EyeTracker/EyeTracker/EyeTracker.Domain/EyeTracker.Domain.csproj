@@ -64,8 +64,14 @@
     <Compile Include="CommandHandlers\API\AddPackageCommandHandler.cs" />
     <Compile Include="CommandHandlers\Content\CreatePageCommandHandler.cs" />
     <Compile Include="CommandHandlers\Content\UpdatePageCommandHandler.cs" />
+    <Compile Include="CommandHandlers\CreatePortfolioCommandHandler.cs" />
+    <Compile Include="CommandHandlers\RemovePortfolioCommandHandler.cs" />
+    <Compile Include="CommandHandlers\UpdatePortfolioCommandHandler.cs" />
+    <Compile Include="CommandHandlers\RemoveApplicationCommandHandler.cs" />
+    <Compile Include="CommandHandlers\CreateApplicationCommandHandler.cs" />
+    <Compile Include="CommandHandlers\UpdateApplicationCommandHandler.cs" />
     <Compile Include="CommandHandlers\ICommandHandler.cs" />
-    <Compile Include="CommandHandlers\CreateContentItemCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Content\CreateContentItemCommandHandler.cs" />
     <Compile Include="CommandHandlers\StoredProcedureCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\ActivateUserCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\UnsubscribeCommandHandler.cs" />
@@ -85,7 +91,6 @@
     <Compile Include="Mapping\ScreenMapping.cs" />
     <Compile Include="Mapping\ScrollMapping.cs" />
     <Compile Include="Mapping\Users\UserMapping.cs" />
-    <Compile Include="Model\AnalyticsType.cs" />
     <Compile Include="Model\Content\Key.cs" />
     <Compile Include="Model\Content\Language.cs" />
     <Compile Include="Model\Content\Mail.cs" />
@@ -113,7 +118,6 @@
     <Compile Include="Mapping\PortfolioMapping.cs" />
     <Compile Include="Mapping\ViewPartMaping.cs" />
     <Compile Include="Model\AccountProfiler.cs" />
-    <Compile Include="Model\ApplicationType.cs" />
     <Compile Include="Model\BackOffice\SystemApplication.cs" />
     <Compile Include="Mapping\BackOffice\SystemApplicationMapping.cs" />
     <Compile Include="Model\Click.cs" />
@@ -159,15 +163,15 @@
     <Compile Include="QueriesHandlers\Content\GetPageQuery.cs" />
     <Compile Include="QueriesHandlers\Content\GetSystemMailQuery.cs" />
     <Compile Include="QueriesHandlers\Content\GetThemeQuery.cs" />
+    <Compile Include="QueriesHandlers\GetPortfolioDetailsQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\GetApplicationDetailsQueryHandler.cs" />
     <Compile Include="QueriesHandlers\IQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserRolesQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserDetailsByIdQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserSecuredDetailsByEmailQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserDetailsByEmailQueryHandler.cs" />
     <Compile Include="Repository.cs" />
-    <Compile Include="Repository\ApplicationRepository.cs" />
     <Compile Include="Repository\DataRepository.cs" />
-    <Compile Include="Repository\PortfolioRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EyeTracker.Model\EyeTracker.Common.csproj">

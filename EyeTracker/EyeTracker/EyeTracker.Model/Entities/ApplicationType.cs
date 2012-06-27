@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EyeTracker.Domain.Model
+namespace EyeTracker.Common.Entities
 {
     /// <summary>
     /// Enum represents Application platform types

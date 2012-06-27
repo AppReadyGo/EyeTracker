@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<EyeTracker.Model.Pages.Application.ApplicationModel>" %>
-<form id="edit_form" action="/application/edit/" method="post">
+<form id="edit_form" action="/Application/Edit" method="post">
     <%:Html.HiddenFor(m => m.Id) %>
     <%:Html.HiddenFor(m => m.PortfolioId) %>
     <table>
@@ -66,7 +66,7 @@
          }
             </textarea>
         </div>
-        <p><a href="#" class="link2" onClick="$(this).closest('form').submit();"><span><span>Save</span></span></a>&nbsp;<a class="link4" href="/Analytics"><span><span>Cancel</span></span></a></p>
+        <p><a class="link2" onClick="$(this).closest('form').submit();"><span><span>Save</span></span></a>&nbsp;<a class="link4" href="/Analytics"><span><span>Cancel</span></span></a></p>
     </div>
 </form>
 <div id="overlay" class="overlay"></div>

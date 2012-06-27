@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
-using EyeTracker.Common;
+using EyeTracker.Common.Commands;
+using EyeTracker.Common.Entities;
 using EyeTracker.Common.Logger;
+using EyeTracker.Common.Queries.Users;
 using EyeTracker.Core;
 using EyeTracker.Core.Services;
 using EyeTracker.Domain.Model;
-using EyeTracker.Helpers;
-using EyeTracker.Model;
 using EyeTracker.Model.Master;
 using EyeTracker.Model.Pages.Application;
 
@@ -22,22 +19,6 @@ namespace EyeTracker.Controllers
     public class ApplicationController : FilterController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
-        
-        private IApplicationService service;
-        private IPortfolioService portfolioService;
-
-        public ApplicationController()
-            : this(new ApplicationService(), 
-            new PortfolioService())
-        {
-        }
-
-        public ApplicationController(IApplicationService service, 
-            IPortfolioService portfolioService)
-        {
-            this.service = service;
-            this.portfolioService = portfolioService;
-        }
 
         public override AfterLoginMasterModel.MenuItem SelectedMenuItem
         {
@@ -56,28 +37,13 @@ namespace EyeTracker.Controllers
             object res = null;
             if (ModelState.IsValid)
             {
-                var portfolioRes = portfolioService.Get(model.PortfolioId);
-                if (portfolioRes.HasError)
+                var appId = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.PortfolioId, model.Description, model.Type));
+                res = new
                 {
-                    res = new { HasError = true };
-                }
-                else
-                {
-                    var app = new Application(portfolioRes.Value, model.Description, model.Type);
-                    var appRes = service.Add(app);
-                    if (appRes.HasError)
-                    {
-                        res = new { HasError = true };
-                    }
-                    else
-                    {
-                        res = new { 
-                            HasError = false,
-                            code = GetAppKey(app.Type, model.PortfolioId, appRes.Value),
-                            appId = appRes.Value
-                        };
-                    }
-                }
+                    HasError = false,
+                    code = GetAppKey(model.Type, model.PortfolioId, appId.Result),
+                    appId = appId.Result
+                };
             }
             else
             {
@@ -88,20 +54,19 @@ namespace EyeTracker.Controllers
 
         public ActionResult Edit(int id)
         {
-            var appRes = service.Get(id);
-            if (appRes.HasError)
+            var app = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(id));
+            if (app == null)
             {
                 return View("Error");
             }
             else
             {
-                var app = appRes.Value;
                 var model = new ApplicationEditModel
                 {
                     Id = app.Id,
                     Description = app.Description,
                     Type = app.Type,
-                    PortfolioId = app.Portfolio.Id
+                    PortfolioId = app.PortfolioId
                 };
                 model.ViewData = GetViewData(model.PortfolioId, model.Type, model.Id);
 
@@ -114,23 +79,8 @@ namespace EyeTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                var portfolioRes = portfolioService.Get(model.PortfolioId);
-                if (portfolioRes.HasError)
-                {
-                    return View("Error");
-                }
-                else
-                {
-                    var appRes = service.Update(model.Id, model.Description);
-                    if (appRes.HasError)
-                    {
-                        return View("Error");
-                    }
-                    else
-                    {
-                        return Redirect("/Analytics");
-                    }
-                }
+                var appId = ObjectContainer.Instance.Dispatch(new UpdateApplicationCommand(model.Id, model.Description));
+                return Redirect("/Analytics");
             }
             else
             {
@@ -141,15 +91,8 @@ namespace EyeTracker.Controllers
 
         public ActionResult Remove(int id)
         {
-            var res = service.Remove(id);
-            if (res.HasError)
-            {
-                return View("Error");
-            }
-            else
-            {
-                return RedirectToAction("", "Analytics");
-            }
+            var appId = ObjectContainer.Instance.Dispatch(new RemoveApplicationCommand(id));
+            return Redirect("/Analytics");
         }
 
         private static ApplicationViewModel GetViewData(int portfolioId, ApplicationType? type = null, int? appId = null)

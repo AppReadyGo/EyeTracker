@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EyeTracker.Common.Commands
+namespace EyeTracker.Common.Commands.Content
 {
     public class RemoveContentItemCommand : ICommand<int>
     {
