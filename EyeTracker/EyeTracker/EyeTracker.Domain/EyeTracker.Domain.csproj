@@ -82,9 +82,6 @@
     <Compile Include="Mapping\BackOffice\SystemMembershipMapping.cs" />
     <Compile Include="Mapping\Content\ItemMapping.cs" />
     <Compile Include="Mapping\Content\PageMapping.cs" />
-    <Compile Include="Mapping\Events\PackageEventMapping.cs" />
-    <Compile Include="Mapping\Events\ScrollEventMapping.cs" />
-    <Compile Include="Mapping\Events\SessionInfoEventMapping.cs" />
     <Compile Include="Mapping\ScreenMapping.cs" />
     <Compile Include="Mapping\ScrollMapping.cs" />
     <Compile Include="Mapping\Users\UserMapping.cs" />
@@ -99,10 +96,7 @@
     <Compile Include="Mapping\ClickMaping.cs" />
     <Compile Include="Mapping\BrowserMapping.cs" />
     <Compile Include="Mapping\OperationSystemMapping.cs" />
-    <Compile Include="Mapping\Events\ClickEventMapping.cs" />
     <Compile Include="Mapping\CountryMapping.cs" />
-    <Compile Include="Mapping\Events\VisitEventMapping.cs" />
-    <Compile Include="Mapping\Events\ViewPartEventMapping.cs" />
     <Compile Include="Mapping\LanguageMapping.cs" />
     <Compile Include="Mapping\NameableMapping.cs" />
     <Compile Include="Model\Browser.cs" />

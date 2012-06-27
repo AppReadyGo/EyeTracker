@@ -1,4 +1,5 @@
-﻿CREATE TABLE [dbo].[VisitEvent] (
+﻿/*
+CREATE TABLE [dbo].[VisitEvent] (
     [Id]              BIGINT         IDENTITY (1, 1) NOT NULL,
     [Key]             NVARCHAR (13)  NOT NULL,
     [Date]            DATETIME       NOT NULL,
@@ -14,4 +15,5 @@
     [ClientHeight]    INT            NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
+*/
 
