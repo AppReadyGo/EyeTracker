@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using EyeTracker.Domain.Model.BackOffice;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
-using EyeTracker.Domain.Model;
+﻿using System.ComponentModel;
+using EyeTracker.Common.Entities;
 
 namespace EyeTracker.Model.Pages.Application
 {
