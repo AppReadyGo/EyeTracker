@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Runtime.Serialization;
-using EyeTracker.Core;
+using EyeTracker.Common;
 
 namespace EyeTracker.Model.Pages.Analytics
 {
@@ -33,12 +29,12 @@ namespace EyeTracker.Model.Pages.Analytics
         {
             if (!this.fd.HasValue)
             {
-                this.fd = DateTime.UtcNow.AddDays(-30);
+                this.fd = DateTime.UtcNow.AddDays(-30).StartDay();
             }
 
             if (!this.td.HasValue)
             {
-                this.td = DateTime.UtcNow;
+                this.td = DateTime.UtcNow.EndDay();
             }
             return true;
         }
