@@ -22,9 +22,9 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
 						<nav>
 							<ul>
                                 <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Home) %>"><a href="/">Home</a></li>
-                            <%--<li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Tutorials) %>"><a href="/Tutorials/">Tutorials</a></li>--%>
-                                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Products) %>"><a href="/Products">Products</a></li>
-                                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing) %>"><a href="/PlanAndPricing">Plans and Pricing</a></li>
+                            <%--<li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Tutorials) %>"><a href="/p/Tutorials/">Tutorials</a></li>--%>
+                                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Products) %>"><a href="/p/Products">Products</a></li>
+                                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing) %>"><a href="/p/PlanAndPricing">Plans and Pricing</a></li>
 							</ul>
 						</nav>
 						<h1><a href="/"><img title="Finger" alt="Home" src="/Content/images/logo_43.png"></a></h1>
@@ -70,9 +70,9 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
             <div class="wrapper">
 			    <ul class="list col-1">
 				    <li>Products</li>
-				    <li><a href="/products/touch-map">Touch Map</a></li>
-				    <li><a href="/products/eye-track">Eye Track</a></li>
-				    <li><a href="/products/play-back">Play Back</a></li>
+				    <li><a href="/p/products/touch-map">Touch Map</a></li>
+				    <li><a href="/p/products/eye-track">Eye Track</a></li>
+				    <li><a href="/p/products/play-back">Play Back</a></li>
 			    </ul>
 			    <ul class="list col-3">
 				    <li>Stay connected</li>
@@ -85,9 +85,9 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
 			    </ul>
 			    <ul class="list col-2">
 				    <li>Plans And Pricing</li>
-				    <li><a href="/planandpricing">Basic</a></li>
-				    <li><a href="/planandpricing">Plus</a></li>
-				    <li><a href="/planandpricing">Pro</a></li>
+				    <li><a href="/p/planandpricing">Basic</a></li>
+				    <li><a href="/p/planandpricing">Plus</a></li>
+				    <li><a href="/p/planandpricing">Pro</a></li>
 			    </ul>
             </div>
 		</div>

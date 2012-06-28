@@ -66,6 +66,13 @@ namespace EyeTracker
             );
 
             routes.MapRoute(
+                "AccountChangePassword",
+                "Account/ChangePassword",
+                new { controller = "Secure", action = "ChangePassword" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
+            );
+
+            routes.MapRoute(
                 "Account",
                 "Account/{action}",
                 new { controller = "Account", action = "LogOn" },
@@ -143,39 +150,41 @@ namespace EyeTracker
             );
 
             routes.MapRoute(
-                "CSS", // Route name
-                "content/css/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}/{path7}", // URL with parameters
-                new { controller = "Home", action = "css", path2 = UrlParameter.Optional, path3 = UrlParameter.Optional, path4 = UrlParameter.Optional, path5 = UrlParameter.Optional, path6 = UrlParameter.Optional, path7 = UrlParameter.Optional }, // Parameter defaults
-                new[] { "EyeTracker.Controllers" } // Namespaces
-            );
-
-            routes.MapRoute(
                 "HomeRoute",
                 "Home/{action}",
                 new { controller = "Home", action = "Index" },
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
+            //-----  Content routes
+            routes.MapRoute(
+               "404",
+               "404",
+               new { controller = "Content", action = "ErrorPage404" },
+               new[] { "EyeTracker.Controllers" } // Namespaces
+            );
+            
+            routes.MapRoute(
+                "CSS", // Route name
+                "content/css/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}/{path7}", // URL with parameters
+                new { controller = "Content", action = "css", path2 = UrlParameter.Optional, path3 = UrlParameter.Optional, path4 = UrlParameter.Optional, path5 = UrlParameter.Optional, path6 = UrlParameter.Optional, path7 = UrlParameter.Optional }, // Parameter defaults
+                new[] { "EyeTracker.Controllers" } // Namespaces
+            );
+
             routes.MapRoute(
                 "Mails",
-                "Mails/{urlPart1}/{urlPart2}/{urlPart3}/{isMail}",
-                new { controller = "Home", action = "MailContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional, isMail = UrlParameter.Optional },
+                "m/{urlPart1}/{urlPart2}/{urlPart3}/{isMail}",
+                new { controller = "Content", action = "MailContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional, isMail = UrlParameter.Optional },
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
-                "ContentSecure",
-                "Secure/{urlPart1}/{urlPart2}/{urlPart3}/",
-                new { controller = "Home", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional },
+                "Pages",
+                "p/{urlPart1}/{urlPart2}/{urlPart3}/",
+                new { controller = "Content", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional },
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
-            routes.MapRoute(
-                "Content",
-                "{urlPart1}/{urlPart2}/{urlPart3}/",
-                new { controller = "Home", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional },
-                new[] { "EyeTracker.Controllers" } // Namespaces
-            );
 
             //routes.MapRoute(
             //    "JavaScript", 
