@@ -1,7 +1,7 @@
 ﻿<%@ Import Namespace="EyeTracker.Model.Pages.Home" %>
 <%@ Page Title="" Language="C#" 
 MasterPageFile="~/Views/Shared/Content.Master" 
-Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, PricingModel>>" %>
+Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, ContentModel>>" %>
 
 <asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">
     404 Error

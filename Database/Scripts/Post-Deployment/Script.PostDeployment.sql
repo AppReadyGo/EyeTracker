@@ -57,9 +57,9 @@ VALUES (1, 0, 'title', 'Touch Map'),
 		(1, 1, 'content', '<article class="col-1-2">
 							<h2>Products</h2>
 							<ul class="list1">
-								<li><a href="/products/touch-map">Touch Map</a></li>
-								<li><a href="/products/eye-track">Eye Track</a></li>
-								<li><a href="/products/play-back">Play Back</a></li>
+								<li><a href="/p/products/touch-map">Touch Map</a></li>
+								<li><a href="/p/products/eye-track">Eye Track</a></li>
+								<li><a href="/p/products/play-back">Play Back</a></li>
 							</ul>
 							</article><article class="col-2-2"><h2>Touch map:</h2>
 <p><strong>Touch Map</strong> gives you the marketing power to know everywhere your visitors touch on your application, whether it''s links, images, text or dead space. Know what ads, images and links aren''t getting enough click attention and what call to action buttons are being completely ignored.</p>
@@ -74,9 +74,9 @@ Having the cumulative statistics of your website visitor’s interaction within 
 		(2, 1, 'content', '<article class="col-1-2">
 							<h2>Products</h2>
 							<ul class="list1">
-								<li><a href="/products/touch-map">Touch Map</a></li>
-								<li><a href="/products/eye-track">Eye Track</a></li>
-								<li><a href="/products/play-back">Play Back</a></li>
+								<li><a href="/p/products/touch-map">Touch Map</a></li>
+								<li><a href="/p/products/eye-track">Eye Track</a></li>
+								<li><a href="/p/products/play-back">Play Back</a></li>
 							</ul>
 							</article><article class="col-2-2">
 <h2>Play back</h2>
@@ -94,9 +94,9 @@ Having the cumulative statistics of your website visitor’s interaction within 
 		(3, 1, 'content', '<article class="col-1-2">
 							<h2>Products</h2>
 							<ul class="list1">
-								<li><a href="/products/touch-map">Touch Map</a></li>
-								<li><a href="/products/eye-track">Eye Track</a></li>
-								<li><a href="/products/play-back">Play Back</a></li>
+								<li><a href="/p/products/touch-map">Touch Map</a></li>
+								<li><a href="/p/products/eye-track">Eye Track</a></li>
+								<li><a href="/p/products/play-back">Play Back</a></li>
 							</ul>
 							</article><article class="col-2-2"><h2>Eye track</h2>
 <p><strong>Understanding</strong> how much attention your visitors pay to a specific spot on your application and knowing what your visitors care about the most, what they read, and what content was completely skipped over is pure gold to increased monetization of your business.</p>
@@ -134,7 +134,7 @@ Having the cumulative statistics of your website visitor’s interaction within 
 		(9, 1, 'content', '<article class="col-1-3">
                 <h2>
                     TouchMap</h2>
-                <a href="/products/touch-map">
+                <a href="/p/products/touch-map">
                     <img alt="" src="/Resources/TouchMap1.jpg" style="width: 270px;" /></a>
                 <p>
                     <strong>TouchMap</strong> is a unique technology which analyzes touches in any area
@@ -146,12 +146,12 @@ Having the cumulative statistics of your website visitor’s interaction within 
                         at the “right” places</li>
                     <li>See how page changes improve sales</li>
                 </ul>
-                <a href="/products/touch-map" class="link2"><span><span>Read more</span></span></a>
+                <a href="/p/products/touch-map" class="link2"><span><span>Read more</span></span></a>
             </article>
             <article class="col-2-3">
                 <h2>
                     EyeTrack</h2>
-                <a href="/products/eye-track">
+                <a href="/p/products/eye-track">
                     <img alt="" src="/Resources/EyeTrack2.jpg" style="width: 270px;" /></a>
                 <p>
                     The<strong> EyeTrack</strong> technology will indicate for you how much time and
@@ -169,12 +169,12 @@ Having the cumulative statistics of your website visitor’s interaction within 
                 </ul>
                 <p>
                     EyeTrack is available for everyone with affordable rates.</p>
-                <a href="/products/eye-track" class="link2"><span><span>Read more</span></span></a>
+                <a href="/p/products/eye-track" class="link2"><span><span>Read more</span></span></a>
             </article>
             <article class="col-3-3">
                 <h2>
                     PlayBack</h2>
-                <a href="/products/play-back">
+                <a href="/p/products/play-back">
                     <img alt="" src="/Resources/play_back1.jpg" style="width: 270px;" /></a>
                 <p>
                     Use <strong>PlayBack</strong> to make the most out of your applications. Improve
@@ -186,7 +186,7 @@ Having the cumulative statistics of your website visitor’s interaction within 
                     <li>See what users do with your app.</li>
                     <li>Fix the UI so everything makes sense for your customers.</li>
                 </ul>
-                <a href="/products/play-back" class="link2"><span><span>Read more</span></span></a>
+                <a href="/p/products/play-back" class="link2"><span><span>Read more</span></span></a>
             </article>
 			<div style="clear:both;"></div>'),
 		(10, 0, 'title', 'Plan And Pricing'),
@@ -209,7 +209,7 @@ Having the cumulative statistics of your website visitor’s interaction within 
 															<li><span>Alerts</span>Weekly</li>
 														</ul>
 														<span class="price">Free</span>
-														<div class="aligncenter"><a href="account/register" class="link1"><span><span>Learn More</span></span></a></div>
+														<div class="aligncenter"><a href="/account/register" class="link1"><span><span>Learn More</span></span></a></div>
 													</div>
 												</div>
 											</div>
@@ -237,7 +237,7 @@ Having the cumulative statistics of your website visitor’s interaction within 
 															<li><span>Alerts</span>Daily</li>
 														</ul>
 														<span class="price">$ 49 p/m</span>
-														<div class="aligncenter"><a href="account/register" class="link1"><span><span>Learn More</span></span></a></div>
+														<div class="aligncenter"><a href="/account/register" class="link1"><span><span>Learn More</span></span></a></div>
 													</div>
 												</div>
 											</div>
@@ -265,7 +265,7 @@ Having the cumulative statistics of your website visitor’s interaction within 
 															<li><span>Alerts</span>Hourly</li>
 														</ul>
 														<span class="price">$ 99 p/m</span>
-														<div class="aligncenter"><a href="account/register" class="link1"><span><span>Learn More</span></span></a></div>
+														<div class="aligncenter"><a href="/account/register" class="link1"><span><span>Learn More</span></span></a></div>
 													</div>
 												</div>
 											</div>

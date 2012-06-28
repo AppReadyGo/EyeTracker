@@ -8,7 +8,6 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
     <script src="<%: Url.Content("~/Scripts/analytics.index.js") %>" type="text/javascript"></script>
-    <link href="<%: Url.Content("~/Content/after.login.master.css")%>" rel="stylesheet" type="text/css" />
     <link href="<%: Url.Content("~/Content/analytics.index.css")%>" rel="stylesheet" type="text/css" />
 </asp:Content>
 

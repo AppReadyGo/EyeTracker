@@ -79,7 +79,7 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                BeforeLoginMasterModel.MenuItem selectedItem = BeforeLoginMasterModel.MenuItem.None;
+                var selectedItem = BeforeLoginMasterModel.MenuItem.None;
                 if (!Enum.TryParse<BeforeLoginMasterModel.MenuItem>(urlPart1, true, out selectedItem))
                 {
                     selectedItem = BeforeLoginMasterModel.MenuItem.None;

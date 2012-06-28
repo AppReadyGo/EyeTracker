@@ -124,6 +124,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\Master\AfterLoginController.cs" />
     <Compile Include="Controllers\Master\AnalyticsMasterController.cs" />
@@ -476,6 +477,7 @@
     <Content Include="Views\Account\Unsubscribe.aspx" />
     <Content Include="Views\Account\Forms\UnsubscribeForm.ascx" />
     <Content Include="Views\Account\ResetPassword.aspx" />
+    <Content Include="Views\Content\Public404.aspx" />
     <Content Include="Views\Secure\Forms\ChangePasswordForm.ascx" />
     <Content Include="Views\Account\Forms\ResetPasswordForm.ascx" />
     <Content Include="Views\Account\Forms\ForgotPasswordForm.ascx" />
@@ -490,10 +492,10 @@
     <Content Include="Views\Application\Edit.aspx" />
     <Content Include="Views\Application\New.aspx" />
     <Content Include="Views\Account\Details.aspx" />
-    <Content Include="Views\Secure\PageContent.aspx" />
+    <Content Include="Views\Content\AuthenticatedPageContent.aspx" />
     <Content Include="Views\Home\PlayGround.aspx" />
     <Content Include="Views\Home\Index.aspx" />
-    <Content Include="Views\Home\PageContent.aspx" />
+    <Content Include="Views\Content\PublicPageContent.aspx" />
     <Content Include="Views\Analytics\Usage.aspx" />
     <Content Include="Views\Analytics\Dashboard.aspx" />
     <Content Include="Views\Analytics\Index.aspx" />
@@ -503,7 +505,7 @@
     <Content Include="Views\Portfolio\Edit.aspx" />
     <Content Include="Views\Portfolio\Form.ascx" />
     <Content Include="Views\Portfolio\New.aspx" />
-    <Content Include="Views\Shared\404.aspx" />
+    <Content Include="Views\Content\Authenticated404.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
