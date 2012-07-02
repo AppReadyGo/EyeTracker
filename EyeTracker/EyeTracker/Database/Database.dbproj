@@ -342,6 +342,9 @@
     <Build Include="Schema Objects\Schemas\cont\Tables\Themes.table.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Schema Objects\Schemas\usr\Tables\Memberships.table.sql">
+      <SubType>Code</SubType>
+    </Build>
   </ItemGroup>
   <ItemGroup>
     <NotInBuild Include="Scripts\DevelopmentData.sql">
