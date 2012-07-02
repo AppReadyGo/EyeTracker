@@ -50,7 +50,8 @@ namespace EyeTracker.Domain.Queries.Analytics
                                 .Select(p => new
                                 {
                                     key = p.Application.Id,
-                                    size = p.ClientWidth + "X" + p.ClientHeight
+                                    width = p.ClientWidth,
+                                    height =  p.ClientHeight
                                 })
                                 .ToArray().Distinct();
 
@@ -70,8 +71,8 @@ namespace EyeTracker.Domain.Queries.Analytics
                                                         {
                                                             Id = ai.app.Id,
                                                             Description = ai.app.Description,
-                                                            Screens = sizes.Where(s => s.key == ai.app.Id)
-                                                                            .Select(s => s.size)
+                                                            ScreenSizes = sizes.Where(s => s.key == ai.app.Id)
+                                                                            .Select(s => new Size(s.width, s.height))
                                                                             .ToArray(),
                                                             Pathes = pathes.Where(p => p.key == ai.app.Id)
                                                                             .Select(p => p.path)

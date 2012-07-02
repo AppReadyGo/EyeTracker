@@ -6,13 +6,15 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
 <script src="<%: Url.Content("~/Scripts/ThridParty/jquery-ui.min.js")%>" type="text/javascript"></script>
+<script src="<%: Url.Content("~/Scripts/ThridParty/jquery-ui.min.js")%>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Scripts/ThridParty/DateFormat.js")%>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Scripts/ThridParty/Flot/jquery.flot.min.js")%>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Scripts/ThridParty/Flot/jquery.flot.resize.min.js")%>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Scripts/analytics.dashboard.js")%>" type="text/javascript"></script>
-<script src="<%: Url.Content("~/Scripts/analytics.selector.js")%>" type="text/javascript"></script>
+<script src="<%: Url.Content("~/Scripts/ThridParty/jquery.multiselect.js")%>" type="text/javascript"></script>
 <link href="<%: Url.Content("~/Content/after.login.master.css")%>" rel="stylesheet" type="text/css" />
 <link href="<%: Url.Content("~/Content/themes/cupertino/jquery-ui.css") %>" rel="stylesheet" type="text/css" />
+<link href="<%: Url.Content("~/Content/ThridParty/jquery.multiselect.css") %>" rel="stylesheet" type="text/css" />
 <link href="<%: Url.Content("~/Content/shared/filter.css")%>" rel="stylesheet" type="text/css" />
 <script src="<%: Url.Content("~/Scripts/filter.js")%>" type="text/javascript"></script>
 <link href="<%: Url.Content("~/Content/analytics.dashboard.css")%>" rel="stylesheet" type="text/css" />
@@ -22,7 +24,6 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<h2 class="title">Dashboard</h2>
 <% Html.RenderPartial("Filter", Model.View); %>
 <table class="dashboard">
 <tr>

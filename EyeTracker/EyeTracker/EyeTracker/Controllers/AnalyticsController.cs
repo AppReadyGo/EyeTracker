@@ -43,33 +43,26 @@ namespace EyeTracker.Controllers
         {
             log.WriteInformation("Dashboard");
 
-            filter.Validate();
-
-            string[] splitedScreenSize = string.IsNullOrEmpty(filter.ss) ? null : filter.ss.Split(new char[] { 'X' });
-            int? sw = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[0]);
-            int? sh = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[1]);
-
             var dashboardViewData = ObjectContainer.Instance.RunQuery(
-                new DashboardViewDataQuery(filter.fd.Value,
-                                    filter.td.Value,
-                                    filter.pid,
-                                    filter.aid,
-                                    sh,
-                                    sw,
-                                    filter.p,
-                                    filter.l,
-                                    filter.os,
-                                    filter.c,
-                                    filter.ct,
+                new DashboardViewDataQuery(filter.FromDate,
+                                    filter.ToDate,
+                                    filter.Portfolio,
+                                    filter.ApplicationId,
+                                    filter.ScreenSize,
+                                    filter.Path,
+                                    filter.Language,
+                                    filter.OperationSystem,
+                                    filter.Country,
+                                    filter.City,
                                     DataGrouping.Day));
 
             //Grouping data by day. To show on graph all days from start till end.
             var visitsData = new List<object[]>();
-            int diffDays = (filter.td.Value - filter.fd.Value).Days;
+            int diffDays = (filter.ToDate - filter.FromDate).Days;
             for (int i = 0; i < diffDays; i++)
             {
                 int count = 0;
-                var curDate = filter.fd.Value.AddDays(i);
+                var curDate = filter.FromDate.AddDays(i);
                 if (dashboardViewData.Data.ContainsKey(curDate))
                 {
                     count = dashboardViewData.Data[curDate];
@@ -90,6 +83,8 @@ namespace EyeTracker.Controllers
                 UsageChartData = new JavaScriptSerializer().Serialize(usageInitData),
                 ContentOverviewData = dashboardViewData.ContentOverview
             };
+
+            dashboardModel.Title = "Dashboard";
 
             return View(dashboardModel, AnalyticsMasterModel.MenuItem.Dashboard, dashboardViewData, filter);
         }
@@ -143,25 +138,19 @@ namespace EyeTracker.Controllers
 
         public ActionResult FingerPrint(FilterParametersModel filter)
         {
-            filter.Validate();
-
-            string[] splitedScreenSize = string.IsNullOrEmpty(filter.ss) ? null : filter.ss.Split(new char[] { 'X' });
-            int? sw = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[0]);
-            int? sh = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[1]);
             var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
-                                filter.fd.Value,
-                                filter.td.Value,
-                                filter.pid,
-                                filter.aid,
-                                sh,
-                                sw,
-                                null,
+                                filter.FromDate,
+                                filter.ToDate,
+                                filter.Portfolio,
+                                filter.ApplicationId,
+                                filter.ScreenSize,
+                                filter.Path,
                                 null,
                                 null,
                                 null,
                                 null));
 
-            return View(new FilterModel(), AnalyticsMasterModel.MenuItem.FingerPrint, filterData, filter);
+            return View(new FilterModel() { Title = "Fingerprint" }, AnalyticsMasterModel.MenuItem.FingerPrint, filterData, filter);
         }
 
         public ActionResult EyeTracker(FilterParametersModel filter)
