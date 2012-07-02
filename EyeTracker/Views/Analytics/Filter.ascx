@@ -41,54 +41,86 @@
         $('#applicationId').val(<%=Model.ApplicationId %>);
     });
 </script>
-<div class="filter">
-    <div class="title">
-        <a id="filter_title">
-            <ul>
-                <li>Portfolio:</li>
-                <li><%: Model.PortfolioName%></li>
-                <li>Application:</li>
-                <li><%: Model.ApplicationName%></li>
-                <li><%= Model.DateFrom.ToString("dd MMM yyyy")%> - <%= Model.DateTo.ToString("dd MMM yyyy")%></li>
-                <li><span class="button"><span class="icon"></span>Filter</span></li>
-            </ul>
-        </a>
-    </div>
-    <div class="body" id="filter_body"><a id="close_btn" class="cancel-btn"></a>
-        <div id="date_range">
-            <div>
-                <h2>Date range</h2>
-                <span id="datepicker_from"></span>
-                <span id="datepicker_to"></span>
-                <div>
-                    <label>Preset range: <select id="preset_range">
-                        <option value="custom">Custom</option>
-                        <option value="today">Today</option>
-                        <option value="yesterday">Yesterday</option>
-                        <option value="lastweek">Last week</option>
-                        <option value="lastmonth">Last month</option>
-                    </select></label>
-                </div>
-                <div class="input-wrapper">
-                <input id="date_from" name="fromDate" value="<%= Model.DateFrom.ToString("dd MMM yyyy")%>" /> - <input id="date_to" name="toDate" value="<%= Model.DateTo.ToString("dd MMM yyyy")%>"/>
-                </div>
-            </div>
-        </div>
-        <div id="advanced_filter">
-            <div>
-                <h2>Filter</h2>
-                <label>Portfolio: <%= Html.DropDownList("portfolioId", Model.Portfolios) %></label>
-                <label>Application: <%= Html.DropDownList("applicationId", Model.Applications) %></label><br />
-                <label>Screen size <%= Html.DropDownList("screenSize", Model.ScreenSizes) %></label>
-                <label>Path <%= Html.DropDownList("path", Model.Pathes) %></label>
-                <!--label>OS <select><option>All</option></select></label>
-                <label>Language <select><option>All</option></select></label>
-                <label>Country <select><option>All</option></select></label>
-                <label>City <select><option>All</option></select></label-->
-            </div>
-            <div class="actions"><a id="apply_btn" class="link2"><span><span>Apply</span></span></a><a class="link4" id="cancel_btn"><span><span>Cancel</span></span></a></div>
-        </div>
+<div class="date-range">
+    <span id="date_range_btn" class="date-button"><%= Model.DateFrom.ToString("dd MMM yyyy")%> - <%= Model.DateTo.ToString("dd MMM yyyy")%></span>
+    <div id="date_range_pnl" class="selector">
+        <table>
+            <tr>
+                <td class="picker-wrapper">
+                    <span id="datepicker_from"></span>
+                </td>
+                <td class="picker-wrapper">
+                    <span id="datepicker_to"></span>
+                </td>
+                <td class="form-wrapper">
+                    <p>
+                        <label>
+                            <strong>Preset range:</strong>
+                            <select id="preset_range">
+                                <option value="custom">Custom</option>
+                                <option value="today">Today</option>
+                                <option value="yesterday">Yesterday</option>
+                                <option value="lastweek">Last week</option>
+                                <option value="lastmonth">Last month</option>
+                            </select></label>
+                    </p>
+                    <p class="input-wrapper">
+                        <input id="date_from" name="fromDate" value="30 May 2012" />
+                        -
+                        <input id="date_to" name="toDate" value="29 Jun 2012" />
+                    </p>
+                    <p class="actions">
+                        <a id="date_range_apply">Apply</a><a id="date_range_cancel">Cancel</a>
+                    </p>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
-
+<h2 class="title"><%:Model.Title%></h2>
+<div class="filter">
+    <div class="title">
+        <ul>
+            <li><strong>Portfolio:</strong></li>
+            <li class="multiselect">
+                <%= Html.DropDownList("portfolios", Model.Portfolios, new { @class = "multiselect" })%>
+            </li>
+            <li><strong>Application:</strong></li>
+            <li class="multiselect">
+                <%= Html.DropDownList("applications", Model.Applications, new { @class = "multiselect", multiple = "multiple" })%>
+            </li>
+            <li class="multiselect"><button id="advanced_filter_btn">Advanced filter</button></li>
+        </ul>
+    </div>
+    <div class="advanced_filter" id="advanced_filter">
+        <p>
+            <label>
+                <strong>Portfolio:</strong>
+                <%= Html.DropDownList("advanced_portfolios", Model.Portfolios, new { @class = "multiselect" })%>
+            </label>
+            <label>
+                <strong>Application:</strong>
+                <%= Html.DropDownList("advanced_applications", Model.Applications, new { @class = "multiselect", multiple = "multiple" })%>
+            </label>
+        </p>
+        <p>
+            <label>
+                <strong>Screen size:</strong>
+                <%= Html.DropDownList("screenSize", Model.ScreenSizes, new { @class = "multiselect", multiple = "multiple" })%>
+            </label>
+            <label>
+                <strong>Path:</strong>
+                <%= Html.DropDownList("path", Model.Pathes, new { @class = "multiselect", multiple = "multiple" })%>
+            </label>
+            <!--label>OS <select><option>All</option></select></label>
+        <label>Language <select><option>All</option></select></label>
+        <label>Country <select><option>All</option></select></label>
+        <label>City <select><option>All</option></select></label-->
+        </p>
+        <p class="actions">
+            <a id="advanced_filter_apply">Apply</a><a id="advanced_filter_cancel">Cancel</a></p>
+    </div>
+</div>
+<div id="current_filter">
+</div>
 

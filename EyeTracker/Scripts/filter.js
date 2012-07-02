@@ -82,27 +82,133 @@ $(function () {
         maxDate: analytics.dateToMax,
         minDate: analytics.dateToMin
     });
-    $('#apply_btn').click(function () {
+});
+
+$(document).ready(function () {
+    function updateFilter(source, target) {
+        var sOptions = source.find('option');
+        var tOptions = target.find('option');
+        for (var i = 0; i < sOptions.length; i++) {
+            tOptions[i].selected = sOptions[i].selected;
+        }
+        target.multiselect('refresh');
+    }
+    function advancedFilteApply() {
         var from = $("#datepicker_from").datepicker("getDate");
         var to = $("#datepicker_to").datepicker("getDate");
-        var portfolio = $('#portfolioId').val();
-        var application = $('#applicationId').val();
-        var screenSize = $('#screenSize').val();
-        var path = $('#path').val();
+        var portfolios = $('#advanced_portfolios').val();
+        var applications = $('#advanced_applications').val();
+        var screenSizes = $('#screenSize').val();
+        var paths = $('#path').val();
         var url = '/Analytics/' + analytics.action +
-                  '/?pid=' + portfolio +
-                  '&fd=' + $.datepicker.formatDate('dd-M-yy', from) + 
+                  '/?pid=' + portfolios +
+                  '&fd=' + $.datepicker.formatDate('dd-M-yy', from) +
                   'td=' + $.datepicker.formatDate('dd-M-yy', to);
-        if (application != 0) url += '&aid=' + application;
-        if (screenSize != '') url += '&ss=' + screenSize;
-        if (path != '') url += '&p=' + path;
+        if (applications) url += '&aid=' + applications;
+        if (screenSizes) url += '&ss=' + screenSizes;
+        if (paths) url += '&p=' + paths;
 
         document.location.href = url;
+
+        // Not need for update will refresh page
+        //updateFilter($('#advanced_portfolios,#advanced_applications'), $('#portfolios,#applications'));
+        //$('#advanced_filter').hide();
+        //$('#portfolios,#applications').multiselect('enable');
+    }
+
+    var isMultipleSelect = true;
+    $('#portfolios,#advanced_portfolios').multiselect({
+        multiple: false,
+        selectedList: 1,
+        header: false
     });
-    $('#close_btn,#cancel_btn').click(function () {
-        $('#filter_body').hide();
+    $('select.multiselect').multiselect({
+        multiple: isMultipleSelect,
+        noneSelectedText: 'All',
+        selectedList: 1
     });
-    $('#filter_title').click(function () {
-        $('#filter_body').show();
+    $('#portfolios,#applications').bind("multiselectclose", function (event, ui) {
+        var from = $("#datepicker_from").datepicker("getDate");
+        var to = $("#datepicker_to").datepicker("getDate");
+        var portfolios = $('#portfolios').val();
+        var applications = $('#applications').val();
+        var url = '/Analytics/' + analytics.action +
+                  '/?pid=' + portfolios +
+                  '&fd=' + $.datepicker.formatDate('dd-M-yy', from) +
+                  'td=' + $.datepicker.formatDate('dd-M-yy', to);
+        if (applications) url += '&aid=' + applications;
+
+        document.location.href = url;
+
+        // Not need for update will refresh page
+        // updateFilter($('#portfolios,#applications'), $('#advanced_portfolios,#advanced_applications'));
     });
+    $('a', '.actions').button();
+
+    $('#advanced_filter_btn').button({
+        icons: { primary: 'ui-icon-plus' },
+        text: false
+    });
+
+    // --- Data range buttons
+    $('#date_range_btn').click(function () {
+        $('#date_range_pnl').show();
+        $('#advanced_filter').hide();
+    });
+
+    $('#date_range_apply').click(function () {
+        advancedFilteApply();
+        
+        // Not need for update will refresh page
+        $('#date_range_btn').text($('#date_from').val() + ' - ' + $('#date_to').val());
+        $('#date_range_pnl').hide();
+    });
+
+    $('#date_range_cancel').click(function () {
+        $('#date_range_pnl').hide();
+    });
+
+    // --- advanced filter buttons
+    $('#advanced_filter_btn').click(function () {
+        $('#advanced_filter').show();
+        $('#date_range_pnl').hide();
+        $('#portfolios,#applications').multiselect('disable');
+    });
+    $('#advanced_filter_cancel').click(function () {
+        $('#advanced_filter').hide();
+        $('#portfolios,#applications').multiselect('enable');
+    });
+    $('#advanced_filter_apply').click(advancedFilteApply);
+
+
+    $('#portfolioId').change(function () {
+        var id = $(this).val();
+        $('#applicationId').empty();
+        $('#applicationId').append('<option value="0">All</option>');
+        var data = analytics.pData[id];
+        for (var i = 0; i < data.length; i++) {
+            $('#applicationId').append('<option value="' + data[i].id + '">' + data[i].desc + '</option>');
+        }
+    });
+
+    $('#applicationId').change(function () {
+        var id = $(this).val();
+        $('#screenSize').empty();
+        $('#screenSize').append('<option value="">All</option>');
+        $('#path').empty();
+        $('#path').append('<option value="">All</option>');
+        if (id != '0') {
+            var data = analytics.aData[id];
+            for (var i = 0; i < data.scr.length; i++) {
+                $('#screenSize').append('<option value="' + data.scr[i] + '">' + data.scr[i] + '</option>');
+            }
+            for (var i = 0; i < data.pth.length; i++) {
+                $('#path').append('<option value="' + data.pth[i] + '">' + data.pth[i] + '</option>');
+            }
+        }
+    });
+
+    $('#portfolioId').change();
+    $('#applicationId').val(1);
 });
+

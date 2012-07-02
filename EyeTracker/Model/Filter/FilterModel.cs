@@ -13,12 +13,12 @@ namespace EyeTracker.Model.Filter
         public bool ShowScreenSizesSelector { get; set; }
         public bool ShowPathesSelector { get; set; }
 
-        public int PortfolioId { get; set; }
-        public int ApplicationId { get; set; }
-        public DateTime DateFrom { get; set; }
-        public DateTime DateTo { get; set; }
-        public string ScreenSize { get; set; }
-        public string Path { get; set; }
+        public int SelectedPortfolioId { get; set; }
+        public int? SelectedApplicationId { get; set; }
+        public DateTime SelectedDateFrom { get; set; }
+        public DateTime SelectedDateTo { get; set; }
+        public string SelectedScreenSize { get; set; }
+        public string SelectedPath { get; set; }
 
 
         public IEnumerable<SelectListItem> Portfolios { get; set; }
@@ -35,8 +35,8 @@ namespace EyeTracker.Model.Filter
 
         public bool NoData { get; set; }
 
-        //Top Panel
-        public string PortfolioName { get; set; }
-        public string ApplicationName { get; set; }
+        public string Title { get; set; }
+
+        public bool IsSingleMode { get; set; }
     }
 }

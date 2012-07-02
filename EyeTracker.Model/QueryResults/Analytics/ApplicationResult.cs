@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
 {
@@ -11,7 +12,7 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
 
         public string Description { get; set; }
 
-        public IEnumerable<string> Screens { get; set; }
+        public IEnumerable<Size> ScreenSizes { get; set; }
 
         public IEnumerable<string> Pathes { get; set; }
 
