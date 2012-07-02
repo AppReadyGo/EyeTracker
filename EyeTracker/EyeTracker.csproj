@@ -324,6 +324,7 @@
     <Content Include="Content\themes\cupertino\images\ui-icons_72a7cf_256x240.png" />
     <Content Include="Content\themes\cupertino\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\themes\cupertino\jquery-ui.css" />
+    <Content Include="Content\ThridParty\jquery.multiselect.css" />
     <Content Include="Resources\EyeTrack1.jpg" />
     <Content Include="Resources\EyeTrack2.jpg" />
     <Content Include="Resources\eye_track.jpg" />
@@ -354,6 +355,8 @@
     <Content Include="Scripts\template\js\PIE.htc" />
     <Content Include="Scripts\template\js\script.js" />
     <Content Include="Scripts\ThridParty\jquery-ui.min.js" />
+    <Content Include="Scripts\ThridParty\jquery.multiselect.js" />
+    <Content Include="Scripts\ThridParty\jquery.multiselect.min.js" />
     <Content Include="Scripts\ThridParty\jquery.roundabout.js" />
     <Content Include="Scripts\ThridParty\jquery.roundabout.min.js" />
     <Compile Include="Windsor\WindsorFactory.cs" />

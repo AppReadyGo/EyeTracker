@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EyeTracker.Common;
 using Iesi.Collections.Generic;
+using EyeTracker.Common.Entities;
 
 
 namespace EyeTracker.Domain.Model.Users
@@ -21,6 +22,7 @@ namespace EyeTracker.Domain.Model.Users
         public virtual string LastName { get; protected set; }
         public virtual bool Unsubscribed { get; protected set; }
         public virtual bool SpecialAccess { get; protected set; }
+        public virtual Membership Membership { get; protected set; }
         public virtual IEnumerable<Portfolio> Portfolios
         {
             get { return this.portfolios; }
@@ -72,6 +74,11 @@ namespace EyeTracker.Domain.Model.Users
         public override UserType Type
         {
             get { return UserType.Staff; }
+        }
+
+        public override Membership Membership
+        {
+            get { return Membership.Pro; }
         }
 
         public Staff(string email, string password)

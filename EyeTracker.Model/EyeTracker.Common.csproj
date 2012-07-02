@@ -101,6 +101,7 @@
     <Compile Include="Commands\Content\UpdateContentItemCommand.cs" />
     <Compile Include="Entities\ApplicationType.cs" />
     <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\Membership.cs" />
     <Compile Include="Entities\SystemInfo.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="IObjectContainer.cs" />
