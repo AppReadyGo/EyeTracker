@@ -165,6 +165,13 @@ namespace EyeTracker
                new { controller = "Content", action = "ErrorPage404" },
                new[] { "EyeTracker.Controllers" } // Namespaces
             );
+
+            routes.MapRoute(
+               "Error",
+               "Error",
+               new { controller = "Content", action = "ErrorPage" },
+               new[] { "EyeTracker.Controllers" } // Namespaces
+            );
             
             routes.MapRoute(
                 "CSS", // Route name
