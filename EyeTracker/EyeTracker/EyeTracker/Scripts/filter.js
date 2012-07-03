@@ -96,14 +96,14 @@ $(document).ready(function () {
     function advancedFilteApply() {
         var from = $("#datepicker_from").datepicker("getDate");
         var to = $("#datepicker_to").datepicker("getDate");
-        var portfolios = $('#advanced_portfolios').val();
-        var applications = $('#advanced_applications').val();
-        var screenSizes = $('#screenSize').val();
-        var paths = $('#path').val();
+        var portfolios = $('#SelectedPortfolioId').val();
+        var applications = $('#SelectedApplicationId').val();
+        var screenSizes = $('#SelectedScreenSize').val();
+        var paths = $('#SelectedPath').val();
         var url = '/Analytics/' + analytics.action +
                   '/?pid=' + portfolios +
                   '&fd=' + $.datepicker.formatDate('dd-M-yy', from) +
-                  'td=' + $.datepicker.formatDate('dd-M-yy', to);
+                  '&td=' + $.datepicker.formatDate('dd-M-yy', to);
         if (applications) url += '&aid=' + applications;
         if (screenSizes) url += '&ss=' + screenSizes;
         if (paths) url += '&p=' + paths;
@@ -116,33 +116,6 @@ $(document).ready(function () {
         //$('#portfolios,#applications').multiselect('enable');
     }
 
-    var isMultipleSelect = true;
-    $('#portfolios,#advanced_portfolios').multiselect({
-        multiple: false,
-        selectedList: 1,
-        header: false
-    });
-    $('select.multiselect').multiselect({
-        multiple: isMultipleSelect,
-        noneSelectedText: 'All',
-        selectedList: 1
-    });
-    $('#portfolios,#applications').bind("multiselectclose", function (event, ui) {
-        var from = $("#datepicker_from").datepicker("getDate");
-        var to = $("#datepicker_to").datepicker("getDate");
-        var portfolios = $('#portfolios').val();
-        var applications = $('#applications').val();
-        var url = '/Analytics/' + analytics.action +
-                  '/?pid=' + portfolios +
-                  '&fd=' + $.datepicker.formatDate('dd-M-yy', from) +
-                  'td=' + $.datepicker.formatDate('dd-M-yy', to);
-        if (applications) url += '&aid=' + applications;
-
-        document.location.href = url;
-
-        // Not need for update will refresh page
-        // updateFilter($('#portfolios,#applications'), $('#advanced_portfolios,#advanced_applications'));
-    });
     $('a', '.actions').button();
 
     $('#advanced_filter_btn').button({
@@ -172,43 +145,38 @@ $(document).ready(function () {
     $('#advanced_filter_btn').click(function () {
         $('#advanced_filter').show();
         $('#date_range_pnl').hide();
-        $('#portfolios,#applications').multiselect('disable');
     });
     $('#advanced_filter_cancel').click(function () {
         $('#advanced_filter').hide();
-        $('#portfolios,#applications').multiselect('enable');
     });
     $('#advanced_filter_apply').click(advancedFilteApply);
 
 
-    $('#portfolioId').change(function () {
+    $('#SelectedPortfolioId').change(function () {
         var id = $(this).val();
-        $('#applicationId').empty();
-        $('#applicationId').append('<option value="0">All</option>');
+        $('#SelectedApplicationId').empty();
+        $('#SelectedApplicationId').append('<option value="0">All</option>');
         var data = analytics.pData[id];
         for (var i = 0; i < data.length; i++) {
-            $('#applicationId').append('<option value="' + data[i].id + '">' + data[i].desc + '</option>');
+            $('#SelectedApplicationId').append('<option value="' + data[i].id + '">' + data[i].desc + '</option>');
         }
     });
 
-    $('#applicationId').change(function () {
+    $('#SelectedApplicationId').change(function () {
         var id = $(this).val();
-        $('#screenSize').empty();
-        $('#screenSize').append('<option value="">All</option>');
-        $('#path').empty();
-        $('#path').append('<option value="">All</option>');
+        $('#SelectedScreenSize').empty();
+        $('#SelectedScreenSize').append('<option value="">All</option>');
+        $('#SelectedPath').empty();
+        $('#SelectedPath').append('<option value="">All</option>');
         if (id != '0') {
             var data = analytics.aData[id];
             for (var i = 0; i < data.scr.length; i++) {
-                $('#screenSize').append('<option value="' + data.scr[i] + '">' + data.scr[i] + '</option>');
+                $('#SelectedScreenSize').append('<option value="' + data.scr[i] + '">' + data.scr[i] + '</option>');
             }
             for (var i = 0; i < data.pth.length; i++) {
-                $('#path').append('<option value="' + data.pth[i] + '">' + data.pth[i] + '</option>');
+                $('#SelectedPath').append('<option value="' + data.pth[i] + '">' + data.pth[i] + '</option>');
             }
         }
     });
-
-    $('#portfolioId').change();
-    $('#applicationId').val(1);
 });
 

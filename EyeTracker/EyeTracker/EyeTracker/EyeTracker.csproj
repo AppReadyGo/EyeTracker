@@ -138,6 +138,7 @@
     <Compile Include="Controllers\CustomExceptions.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\SecureController.cs" />
+    <Compile Include="CustomModelBinders\FilterParametersModelBinder.cs" />
     <Compile Include="CustomModelBinders\EventParser.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="CustomModelBinders\JsonObjects\JsonPackage.cs" />

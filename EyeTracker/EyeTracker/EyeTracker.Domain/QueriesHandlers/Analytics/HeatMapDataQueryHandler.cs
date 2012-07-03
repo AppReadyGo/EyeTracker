@@ -32,8 +32,8 @@ namespace EyeTracker.Domain.Queries
                 .JoinAlias(p => p.Application, () => application)
                 .Where(p => application.Id == query.AplicationId &&
                             p.Path == query.Path &&
-                            p.ClientWidth == query.ClientWidth &&
-                            p.ClientHeight == query.ClientHeight &&
+                            p.ClientWidth == query.ScreenSize.Width &&
+                            p.ClientHeight == query.ScreenSize.Height &&
                             p.Date >= query.FromDate &&
                             p.Date <= query.ToDate)
                 .SelectList(list => list
