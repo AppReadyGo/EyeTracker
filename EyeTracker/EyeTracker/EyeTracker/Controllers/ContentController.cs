@@ -70,6 +70,18 @@ namespace EyeTracker.Controllers
             }
         }
 
+        public ActionResult ErrorPage()
+        {
+            if (ObjectContainer.Instance.CurrentUserDetails != null)
+            {
+                return View("AuthenticatedError", new ContentModel { }, AfterLoginMasterModel.MenuItem.None);
+            }
+            else
+            {
+                return View("PublicError", new ContentModel { }, AfterLoginMasterModel.MenuItem.None);
+            }
+        }
+
         public ActionResult ErrorPage404()
         {
             if (ObjectContainer.Instance.CurrentUserDetails != null)

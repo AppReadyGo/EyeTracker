@@ -91,13 +91,15 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                return View("Error");
+                return Redirect("~/Error");
             }
         }
 
         public ActionResult Usage(FilterParametersModel filter)
         {
-            var query = new UsageViewDataQuery(
+            if (ModelState.IsValid)
+            {
+                var query = new UsageViewDataQuery(
                 filter.FromDate,
                 filter.ToDate,
                 filter.PortfolioId,
@@ -111,54 +113,68 @@ namespace EyeTracker.Controllers
                 null,
                 DataGrouping.Day);
 
-            var usageViewData = ObjectContainer.Instance.RunQuery(query);
+                var usageViewData = ObjectContainer.Instance.RunQuery(query);
 
-            //Grouping data by day. To show on graph all days from start till end.
-            var data = new List<object[]>();
-            int diffDays = (filter.ToDate - filter.FromDate).Days;
-            for (int i = 0; i < diffDays; i++)
-            {
-                int count = 0;
-                var curDate = filter.FromDate.AddDays(i);
-                if (usageViewData.Data.ContainsKey(curDate))
+                //Grouping data by day. To show on graph all days from start till end.
+                var data = new List<object[]>();
+                int diffDays = (filter.ToDate - filter.FromDate).Days;
+                for (int i = 0; i < diffDays; i++)
                 {
-                    count = usageViewData.Data[curDate];
+                    int count = 0;
+                    var curDate = filter.FromDate.AddDays(i);
+                    if (usageViewData.Data.ContainsKey(curDate))
+                    {
+                        count = usageViewData.Data[curDate];
+                    }
+                    data.Add(new object[] { curDate.MilliTimeStamp(), count });
                 }
-                data.Add(new object[] { curDate.MilliTimeStamp(), count });
+
+                //Create chart data
+                var usageInitData = new List<object>();
+                usageInitData.Add(new
+                {
+                    data = data,
+                    color = "#461D7C"
+                });
+
+                var model = new UsageModel { UsageChartData = new JavaScriptSerializer().Serialize(usageInitData) };
+
+                return View(model, AnalyticsMasterModel.MenuItem.Usage, usageViewData, filter, false);
             }
-
-            //Create chart data
-            var usageInitData = new List<object>();
-            usageInitData.Add(new
+            else
             {
-                data = data,
-                color = "#461D7C"
-            });
-
-            var model = new UsageModel { UsageChartData = new JavaScriptSerializer().Serialize(usageInitData) };
-
-            return View(model, AnalyticsMasterModel.MenuItem.Usage, usageViewData, filter, false);
+                return Redirect("~/Error");
+            }
         }
 
         public ActionResult FingerPrint(FilterParametersModel filter)
         {
-            var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
-                                filter.FromDate,
-                                filter.ToDate,
-                                filter.PortfolioId,
-                                filter.ApplicationId,
-                                filter.ScreenSize,
-                                filter.Path,
-                                null,
-                                null,
-                                null,
-                                null));
+            if (ModelState.IsValid)
+            {
+                var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
+                                     filter.FromDate,
+                                     filter.ToDate,
+                                     filter.PortfolioId,
+                                     filter.ApplicationId,
+                                     filter.ScreenSize,
+                                     filter.Path,
+                                     null,
+                                     null,
+                                     null,
+                                     null));
 
-            return View(new FilterModel() { Title = "Fingerprint" }, AnalyticsMasterModel.MenuItem.FingerPrint, filterData, filter, true);
-        }
+                return View(new FilterModel() { Title = "Fingerprint" }, AnalyticsMasterModel.MenuItem.FingerPrint, filterData, filter, true);
+            }
+            else
+            {
+                return Redirect("~/Error");
+            }
+       }
 
         public ActionResult EyeTracker(FilterParametersModel filter)
-        {
+        {            if (ModelState.IsValid)
+            {
+
             var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
                                 filter.FromDate,
                                 filter.ToDate,
@@ -172,7 +188,12 @@ namespace EyeTracker.Controllers
                                 null));
 
             return View(new FilterModel() { Title = "Eye Tracker" }, AnalyticsMasterModel.MenuItem.EyeTracker, filterData, filter, true);
-        }
+             }
+            else
+            {
+                return Redirect("~/Error");
+            }
+       }
 
         public FileResult ClickHeatMapImage(FilterParametersModel filter)
         {

@@ -481,6 +481,8 @@
     <Content Include="Views\Account\Unsubscribe.aspx" />
     <Content Include="Views\Account\Forms\UnsubscribeForm.ascx" />
     <Content Include="Views\Account\ResetPassword.aspx" />
+    <Content Include="Views\Content\AuthenticatedError.aspx" />
+    <Content Include="Views\Content\PublicError.aspx" />
     <Content Include="Views\Content\Public404.aspx" />
     <Content Include="Views\Secure\Forms\ChangePasswordForm.ascx" />
     <Content Include="Views\Account\Forms\ResetPasswordForm.ascx" />
@@ -528,7 +530,6 @@
     <Content Include="Views\Secure\ChangePassword.aspx" />
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Account\Register.aspx" />
-    <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\Analytics.master" />
     <Content Include="Views\Admin\Index.aspx" />
     <Content Include="Views\Admin\Membership.aspx" />
