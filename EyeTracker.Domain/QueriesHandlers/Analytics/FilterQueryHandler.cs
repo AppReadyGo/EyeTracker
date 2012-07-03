@@ -18,7 +18,11 @@ namespace EyeTracker.Domain.Queries.Analytics
 
         public FilterDataResult Run(ISession session, FilterQuery query)
         {
-            return GetResult<FilterDataResult>(session, securityContext.CurrentUser.Id);
+            int? applicationId = !query.ApplicationId.HasValue || query.ApplicationId.Value == 0 ? null : query.ApplicationId;
+
+            var res = GetResult<FilterDataResult>(session, securityContext.CurrentUser.Id);
+
+            return res;
         }
     }
 }

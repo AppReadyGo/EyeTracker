@@ -84,7 +84,7 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                model.ViewData = GetViewData(model.PortfolioId, model.Type, model.ApplicationId);
+                model.ViewData = GetViewData(model.PortfolioId, model.Type, model.SelectedApplicationId);
                 return View(model, AnalyticsMasterModel.MenuItem.Portfolios);
             }
         }

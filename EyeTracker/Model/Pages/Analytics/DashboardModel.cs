@@ -11,8 +11,6 @@ namespace EyeTracker.Model.Pages.Analytics
     {
         public string UsageChartData { get; set; }
 
-        public int MyProperty { get; set; }
-
         public ContentOverviewResult[] ContentOverviewData { get; set; }
     }
 }

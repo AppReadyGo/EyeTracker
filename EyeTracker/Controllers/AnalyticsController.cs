@@ -42,62 +42,66 @@ namespace EyeTracker.Controllers
         public ActionResult Dashboard(FilterParametersModel filter)
         {
             log.WriteInformation("Dashboard");
-
-            var dashboardViewData = ObjectContainer.Instance.RunQuery(
-                new DashboardViewDataQuery(filter.FromDate,
-                                    filter.ToDate,
-                                    filter.Portfolio,
-                                    filter.ApplicationId,
-                                    filter.ScreenSize,
-                                    filter.Path,
-                                    filter.Language,
-                                    filter.OperationSystem,
-                                    filter.Country,
-                                    filter.City,
-                                    DataGrouping.Day));
-
-            //Grouping data by day. To show on graph all days from start till end.
-            var visitsData = new List<object[]>();
-            int diffDays = (filter.ToDate - filter.FromDate).Days;
-            for (int i = 0; i < diffDays; i++)
+            if (ModelState.IsValid)
             {
-                int count = 0;
-                var curDate = filter.FromDate.AddDays(i);
-                if (dashboardViewData.Data.ContainsKey(curDate))
+                var dashboardViewData = ObjectContainer.Instance.RunQuery(
+                            new DashboardViewDataQuery(filter.FromDate,
+                                                filter.ToDate,
+                                                filter.PortfolioId,
+                                                filter.ApplicationId,
+                                                filter.ScreenSize,
+                                                filter.Path,
+                                                filter.Language,
+                                                filter.OperationSystem,
+                                                filter.Country,
+                                                filter.City,
+                                                DataGrouping.Day));
+
+                //Grouping data by day. To show on graph all days from start till end.
+                var visitsData = new List<object[]>();
+                int diffDays = (filter.ToDate - filter.FromDate).Days;
+                for (int i = 0; i < diffDays; i++)
                 {
-                    count = dashboardViewData.Data[curDate];
+                    int count = 0;
+                    var curDate = filter.FromDate.AddDays(i);
+                    if (dashboardViewData.Data.ContainsKey(curDate))
+                    {
+                        count = dashboardViewData.Data[curDate];
+                    }
+                    visitsData.Add(new object[] { curDate.MilliTimeStamp(), count });
                 }
-                visitsData.Add(new object[] { curDate.MilliTimeStamp(), count });
+
+                //Create chart data
+                var usageInitData = new List<object>();
+                usageInitData.Add(new
+                {
+                    data = visitsData,
+                    color = "#461D7C"
+                });
+
+                var dashboardModel = new DashboardModel
+                {
+                    UsageChartData = new JavaScriptSerializer().Serialize(usageInitData),
+                    ContentOverviewData = dashboardViewData.ContentOverview
+                };
+
+                dashboardModel.Title = "Dashboard";
+
+                return View(dashboardModel, AnalyticsMasterModel.MenuItem.Dashboard, dashboardViewData, filter, false);
             }
-
-            //Create chart data
-            var usageInitData = new List<object>();
-            usageInitData.Add(new
+            else
             {
-                data = visitsData,
-                color = "#461D7C"
-            });
-
-            var dashboardModel = new DashboardModel
-            {
-                UsageChartData = new JavaScriptSerializer().Serialize(usageInitData),
-                ContentOverviewData = dashboardViewData.ContentOverview
-            };
-
-            dashboardModel.Title = "Dashboard";
-
-            return View(dashboardModel, AnalyticsMasterModel.MenuItem.Dashboard, dashboardViewData, filter);
+                return View("Error");
+            }
         }
 
         public ActionResult Usage(FilterParametersModel filter)
         {
-            filter.Validate();
-
             var query = new UsageViewDataQuery(
-                filter.fd.Value,
-                filter.td.Value,
-                filter.pid,
-                filter.aid,
+                filter.FromDate,
+                filter.ToDate,
+                filter.PortfolioId,
+                filter.ApplicationId,
                 null,
                 null,
                 null,
@@ -111,11 +115,11 @@ namespace EyeTracker.Controllers
 
             //Grouping data by day. To show on graph all days from start till end.
             var data = new List<object[]>();
-            int diffDays = (filter.td.Value - filter.fd.Value).Days;
+            int diffDays = (filter.ToDate - filter.FromDate).Days;
             for (int i = 0; i < diffDays; i++)
             {
                 int count = 0;
-                var curDate = filter.fd.Value.AddDays(i);
+                var curDate = filter.FromDate.AddDays(i);
                 if (usageViewData.Data.ContainsKey(curDate))
                 {
                     count = usageViewData.Data[curDate];
@@ -133,7 +137,7 @@ namespace EyeTracker.Controllers
 
             var model = new UsageModel { UsageChartData = new JavaScriptSerializer().Serialize(usageInitData) };
 
-            return View(model, AnalyticsMasterModel.MenuItem.Usage, usageViewData, filter);
+            return View(model, AnalyticsMasterModel.MenuItem.Usage, usageViewData, filter, false);
         }
 
         public ActionResult FingerPrint(FilterParametersModel filter)
@@ -141,7 +145,7 @@ namespace EyeTracker.Controllers
             var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
                                 filter.FromDate,
                                 filter.ToDate,
-                                filter.Portfolio,
+                                filter.PortfolioId,
                                 filter.ApplicationId,
                                 filter.ScreenSize,
                                 filter.Path,
@@ -150,51 +154,40 @@ namespace EyeTracker.Controllers
                                 null,
                                 null));
 
-            return View(new FilterModel() { Title = "Fingerprint" }, AnalyticsMasterModel.MenuItem.FingerPrint, filterData, filter);
+            return View(new FilterModel() { Title = "Fingerprint" }, AnalyticsMasterModel.MenuItem.FingerPrint, filterData, filter, true);
         }
 
         public ActionResult EyeTracker(FilterParametersModel filter)
         {
-            var s = EmailSettings.Settings.Forward;
-            filter.Validate();
-
-            string[] splitedScreenSize = string.IsNullOrEmpty(filter.ss) ? null : filter.ss.Split(new char[] { 'X' });
-            int? sw = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[0]);
-            int? sh = splitedScreenSize == null ? null : (int?)int.Parse(splitedScreenSize[1]);
             var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
-                                filter.fd.Value,
-                                filter.td.Value,
-                                filter.pid,
-                                filter.aid,
-                                sh,
-                                sw,
-                                null,
+                                filter.FromDate,
+                                filter.ToDate,
+                                filter.PortfolioId,
+                                filter.ApplicationId,
+                                filter.ScreenSize,
+                                filter.Path,
                                 null,
                                 null,
                                 null,
                                 null));
 
-            return View(new FilterModel(), AnalyticsMasterModel.MenuItem.EyeTracker, filterData, filter);
+            return View(new FilterModel() { Title = "Eye Tracker" }, AnalyticsMasterModel.MenuItem.EyeTracker, filterData, filter, true);
         }
 
         public FileResult ClickHeatMapImage(FilterParametersModel filter)
         {
-            string[] splitedScreenSize = filter.ss.Split(new char[] { 'X' });
-            int sw = int.Parse(splitedScreenSize[0]);
-            int sh = int.Parse(splitedScreenSize[1]);
-
-            var data = ObjectContainer.Instance.RunQuery(new ClickHeatMapDataQuery(filter.aid.Value, filter.p, sw, sh, filter.fd.Value, filter.td.Value));
+            var data = ObjectContainer.Instance.RunQuery(new ClickHeatMapDataQuery(filter.ApplicationId.Value, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
             byte[] imageData = null;
             Image image = null;
             if (data.Any())
             {
-                Image bgImg = GetBackgroundImage(filter.aid.Value, sw, sh);
-                image = HeatMapImage_.CreateClickHeatMap(data, sw, sh, bgImg);
+                Image bgImg = GetBackgroundImage(filter.ApplicationId.Value, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height);
+                image = HeatMapImage_.CreateClickHeatMap(data, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, bgImg);
             }
             else
             {
                 //Show no data
-                image = HeatMapImage_.CreateEmpityBackground("NO DATA", sw, sh);
+                image = HeatMapImage_.CreateEmpityBackground("NO DATA", filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height);
             }
 
             if (image != null)
@@ -219,17 +212,13 @@ namespace EyeTracker.Controllers
 
         public FileResult ViewHeatMapImage(FilterParametersModel filter)
         {
-            string[] splitedScreenSize = filter.ss.Split(new char[] { 'X' });
-            int sw = int.Parse(splitedScreenSize[0]);
-            int sh = int.Parse(splitedScreenSize[1]);
-
-            var data = ObjectContainer.Instance.RunQuery(new HeatMapDataQuery(filter.aid.Value, filter.p, sw, sh, filter.fd.Value, filter.td.Value));
+            var data = ObjectContainer.Instance.RunQuery(new HeatMapDataQuery(filter.ApplicationId.Value, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
             byte[] imageData = null;
 
             if (data.Any())
             {
-                Image bgImg = GetBackgroundImage(filter.aid.Value, sw, sh);
-                Image image = HeatMapImage_.CreateViewHeatMap(data, sw, sh, bgImg);
+                Image bgImg = GetBackgroundImage(filter.ApplicationId.Value, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height);
+                Image image = HeatMapImage_.CreateViewHeatMap(data, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, bgImg);
                 using (MemoryStream mStream = new MemoryStream())
                 {
                     image.Save(mStream, ImageFormat.Png);

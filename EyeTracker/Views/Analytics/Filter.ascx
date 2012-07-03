@@ -1,11 +1,11 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<EyeTracker.Model.Filter.FilterModel>" %>
 <script type="text/javascript">
     var analytics = {
-        dateFrom: '<%=Model.DateFrom.ToString("dd MMM yyyy") %>',
+        dateFrom: '<%=Model.SelectedDateFrom.ToString("dd MMM yyyy") %>',
         dateFromMin: '<%=DateTime.UtcNow.AddYears(-20).ToString("dd MMM yyyy") %>',
-        dateFromMax: '<%=Model.DateTo.ToString("dd MMM yyyy") %>',
-        dateTo: '<%=Model.DateTo.ToString("dd MMM yyyy") %>',
-        dateToMin: '<%=Model.DateFrom.ToString("dd MMM yyyy") %>',
+        dateFromMax: '<%=Model.SelectedDateTo.ToString("dd MMM yyyy") %>',
+        dateTo: '<%=Model.SelectedDateTo.ToString("dd MMM yyyy") %>',
+        dateToMin: '<%=Model.SelectedDateFrom.ToString("dd MMM yyyy") %>',
         dateToMax: '<%=DateTime.UtcNow.ToString("dd MMM yyyy") %>',
         pData: <%=Model.PortfoliosData %>,
         aData: <%=Model.ApplicationsData %>,
@@ -38,11 +38,11 @@
             }
         });
         $('#portfolioId').change();
-        $('#applicationId').val(<%=Model.ApplicationId %>);
+        $('#applicationId').val(<%=Model.SelectedApplicationId %>);
     });
 </script>
 <div class="date-range">
-    <span id="date_range_btn" class="date-button"><%= Model.DateFrom.ToString("dd MMM yyyy")%> - <%= Model.DateTo.ToString("dd MMM yyyy")%></span>
+    <span id="date_range_btn" class="date-button"><%= Model.SelectedDateFrom.ToString("dd MMM yyyy")%> - <%= Model.SelectedDateTo.ToString("dd MMM yyyy")%></span>
     <div id="date_range_pnl" class="selector">
         <table>
             <tr>
@@ -82,13 +82,9 @@
     <div class="title">
         <ul>
             <li><strong>Portfolio:</strong></li>
-            <li class="multiselect">
-                <%= Html.DropDownList("portfolios", Model.Portfolios, new { @class = "multiselect" })%>
-            </li>
+            <li><%: Model.PortfolioName%></li>
             <li><strong>Application:</strong></li>
-            <li class="multiselect">
-                <%= Html.DropDownList("applications", Model.Applications, new { @class = "multiselect", multiple = "multiple" })%>
-            </li>
+            <li><%: Model.ApplicationName%></li>
             <li class="multiselect"><button id="advanced_filter_btn">Advanced filter</button></li>
         </ul>
     </div>
@@ -96,21 +92,21 @@
         <p>
             <label>
                 <strong>Portfolio:</strong>
-                <%= Html.DropDownList("advanced_portfolios", Model.Portfolios, new { @class = "multiselect" })%>
+                <%= Html.DropDownList("SelectedPortfolioId", Model.Portfolios)%>
             </label>
             <label>
                 <strong>Application:</strong>
-                <%= Html.DropDownList("advanced_applications", Model.Applications, new { @class = "multiselect", multiple = "multiple" })%>
+                <%= Html.DropDownList("SelectedApplicationId", Model.Applications)%>
             </label>
         </p>
         <p>
             <label>
                 <strong>Screen size:</strong>
-                <%= Html.DropDownList("screenSize", Model.ScreenSizes, new { @class = "multiselect", multiple = "multiple" })%>
+                <%= Html.DropDownList("SelectedScreenSize", Model.ScreenSizes)%>
             </label>
             <label>
                 <strong>Path:</strong>
-                <%= Html.DropDownList("path", Model.Pathes, new { @class = "multiselect", multiple = "multiple" })%>
+                <%= Html.DropDownList("SelectedPath", Model.Pathes)%>
             </label>
             <!--label>OS <select><option>All</option></select></label>
         <label>Language <select><option>All</option></select></label>

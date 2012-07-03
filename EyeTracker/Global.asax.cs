@@ -12,6 +12,8 @@ using EyeTracker.DAL.Domain;
 using EyeTracker.Domain;
 using EyeTracker.Domain.Model.Events;
 using EyeTracker.Common;
+using EyeTracker.Model.Pages.Analytics;
+using EyeTracker.Core;
 
 namespace EyeTracker
 {
@@ -228,13 +230,9 @@ namespace EyeTracker
             GlobalFilters.Filters.Add(new RedirectToMobileAttribute(), 1);
 
 
-            //ModelBinders.Binders[typeof(VisitEvent)] = new JsonVisitInfoModelBinder();
-            //ModelBinders.Binders[typeof(PackageEvent)] = new JsonPackageModelBinder();
-            ModelBinders.Binders[typeof(PackageEvent)] = new JsonMobileDataModelBinder();
+            ModelBinders.Binders[typeof(FilterParametersModel)] = new FilterParametersModelBinder();
 
-            using (var session = NHibernateHelper.OpenSession())
-            {
-            }
+            ObjectContainer.Instance.GetType();
             //ControllerBuilder.Current.SetControllerFactory(new WindsorFactory(applicationWideWindsorContainer));
             //// Initialize / install components in container
             //applicationWideWindsorContainer.Install(new WindsorInstaller());
