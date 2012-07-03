@@ -381,13 +381,14 @@ namespace EyeTracker.Service.Tester
         {
        
             var objViewAreaDetail = new JsonViewAreaDetails();
-            objViewAreaDetail.CoordX = m_r.Next(0, clientWidth);
-            objViewAreaDetail.CoordY = m_r.Next(0, clientHeight);
+            objViewAreaDetail.CoordX = 0;//m_r.Next(0, clientWidth);//temp data mobile screen without X offser 
+            objViewAreaDetail.CoordY = m_r.Next(0, 3) * 100;
+            
 
             objViewAreaDetail.StartDate = dtFrom.AddMilliseconds(10).ToString("R");
             objViewAreaDetail.FinishDate = dtTo.AddMilliseconds(-10).ToString("R");
 
-            objViewAreaDetail.Orientation = 7; //??
+            objViewAreaDetail.Orientation = 0; //??
 
             return objViewAreaDetail;
         }
