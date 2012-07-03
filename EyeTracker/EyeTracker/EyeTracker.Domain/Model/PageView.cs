@@ -9,17 +9,29 @@ namespace EyeTracker.Domain.Model
     public class PageView
     {
         public virtual long Id { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DateTime Date { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual string Path { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual PageView PreviousPageView { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual string Ip { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual Language Language { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual Country Country { get; set; }
 
         public virtual string City { get; set; }
@@ -40,8 +52,7 @@ namespace EyeTracker.Domain.Model
 
         public virtual IList<Click> Clicks { get; set; }
 
-        //public virtual IList<ViewPart> ViewParts { get; set; }
-        //public virtual IList<ViewPartEvent> ViewParts { get; set; }
+        public virtual IList<ViewPart> ViewParts { get; set; }
 
         public virtual IList<Scroll> Scrolls { get; set; }
     }
