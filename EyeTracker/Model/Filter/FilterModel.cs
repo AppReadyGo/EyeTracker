@@ -20,7 +20,6 @@ namespace EyeTracker.Model.Filter
         public string SelectedScreenSize { get; set; }
         public string SelectedPath { get; set; }
 
-
         public IEnumerable<SelectListItem> Portfolios { get; set; }
         public IEnumerable<SelectListItem> Applications { get; set; }
         public IEnumerable<SelectListItem> Pathes { get; set; }
@@ -31,7 +30,6 @@ namespace EyeTracker.Model.Filter
         //Json data
         public string PortfoliosData { get; set; }
         public string ApplicationsData { get; set; }
-
 
         public bool NoData { get; set; }
 
