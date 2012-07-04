@@ -210,29 +210,29 @@ namespace EyeTracker.Domain.Repositories
                         }));
 
                     //ViewParts
-                    objPageView.ViewParts = new List<ViewPart>();
-                    objPackageEvent.Sessions[0].ScreenViewParts.ToList().ForEach(viewPart =>
-                        objPageView.ViewParts.Add(
-                        new ViewPart()
-                        {
-                            StartDate = viewPart.StartDate,
-                            FinishDate = viewPart.FinishDate,
-                            X = viewPart.ScrollLeft,
-                            Y = viewPart.ScrollTop,
-                            Orientation = viewPart.Orientation,
-                            PageView = objPageView
-                        }));
+                    objPageView.ViewParts = objPackageEvent.Sessions
+                                                            .First()
+                                                            .ScreenViewParts
+                                                            .Select(viewPart => new ViewPart
+                    {
+                        StartDate = viewPart.StartDate,
+                        FinishDate = viewPart.FinishDate,
+                        X = viewPart.ScrollLeft,
+                        Y = viewPart.ScrollTop,
+                        Orientation = viewPart.Orientation,
+                        PageView = objPageView
+                    }).ToList();
 
                     //Scrolls
-                    objPageView.Scrolls = new List<Scroll>();
-                    objPackageEvent.Sessions[0].Scrolls.ToList().ForEach(scrollEvent =>
-                        objPageView.Scrolls.Add(
-                        new Scroll()
-                        {
-                            PageView = objPageView,
-                            FirstTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.FirstTouch.Date),
-                            LastTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.LastTouch.Date),
-                        }));
+                    //objPageView.Scrolls = new List<Scroll>();
+                    //objPackageEvent.Sessions[0].Scrolls.ToList().ForEach(scrollEvent =>
+                    //    objPageView.Scrolls.Add(
+                    //    new Scroll()
+                    //    {
+                    //        PageView = objPageView,
+                    //        FirstTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.FirstTouch.Date),
+                    //        LastTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.LastTouch.Date),
+                    //    }));
 
                     using (ITransaction transaction = session.BeginTransaction())
                     {

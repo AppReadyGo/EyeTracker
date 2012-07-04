@@ -27,8 +27,8 @@ namespace EyeTracker.Domain.Queries
             ViewPart viewPart = null;
             Application application = null;
             ViewPartData viewPartData = null;
-            var result = session.QueryOver<PageView>()
-                .JoinAlias(p => p.Scrolls, () => viewPart)
+            return session.QueryOver<PageView>()
+                .JoinAlias(p => p.ViewParts, () => viewPart)
                 .JoinAlias(p => p.Application, () => application)
                 .Where(p => application.Id == query.AplicationId &&
                             p.Path == query.Path &&
@@ -63,8 +63,6 @@ namespace EyeTracker.Domain.Queries
             //                .GroupBy(d => new { d.X, d.Y, d.ScreenHeight, d.ScreenWidth})
             //                .Select(g => new HeatMapDataResult { ScrollLeft = g.Key.X, ScrollTop = g.Key.Y, ScreenHeight = g.Key.ScreenHeight, ScreenWidth = g.Key.ScreenWidth, TimeSpan = g.Count() })
             //                .ToArray();
-
-            return null;
         }
 
         private class ViewPartData

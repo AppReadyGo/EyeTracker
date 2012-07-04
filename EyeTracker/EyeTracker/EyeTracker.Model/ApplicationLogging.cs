@@ -209,7 +209,6 @@ namespace EyeTracker.Common.Logger
             logEntry.Severity = eventType;
             Microsoft.Practices.EnterpriseLibrary.Logging.Logger.Write(logEntry);
         }
-
     }
 
     /*

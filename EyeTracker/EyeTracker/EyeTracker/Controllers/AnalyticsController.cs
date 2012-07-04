@@ -13,7 +13,6 @@ using EyeTracker.Common.Logger;
 using EyeTracker.Common.Queries.Analytics;
 using EyeTracker.Common.Queries.Content;
 using EyeTracker.Core;
-using EyeTracker.Core.Services;
 using EyeTracker.Model.Filter;
 using EyeTracker.Model.Master;
 using EyeTracker.Model.Pages.Analytics;
@@ -235,11 +234,21 @@ namespace EyeTracker.Controllers
         {
             var data = ObjectContainer.Instance.RunQuery(new HeatMapDataQuery(filter.ApplicationId.Value, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
             byte[] imageData = null;
+            Image image = null;
 
             if (data.Any())
             {
                 Image bgImg = GetBackgroundImage(filter.ApplicationId.Value, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height);
-                Image image = HeatMapImage_.CreateViewHeatMap(data, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, bgImg);
+                image = HeatMapImage_.CreateViewHeatMap(data, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, bgImg);
+            }
+            else
+            {
+                //Show no data
+                image = HeatMapImage_.CreateEmpityBackground("NO DATA", filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height);
+            }
+
+            if (image != null)
+            {
                 using (MemoryStream mStream = new MemoryStream())
                 {
                     image.Save(mStream, ImageFormat.Png);

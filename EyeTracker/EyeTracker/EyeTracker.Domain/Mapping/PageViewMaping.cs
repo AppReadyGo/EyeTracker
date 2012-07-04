@@ -53,20 +53,13 @@ namespace EyeTracker.Domain.Mapping
                 map.Column("ApplicationId");
                 map.Cascade(Cascade.All);
             });
+
             Bag(p => p.Clicks, map =>
             {
                 map.Key(k => k.Column("PageViewId"));
                 map.Lazy(CollectionLazy.Lazy);
                 map.Cascade(Cascade.All);
             }, prop => prop.OneToMany());
-
-            Bag(p => p.Scrolls, map =>
-            {
-                map.Key(k => k.Column("PageViewId"));
-                map.Lazy(CollectionLazy.Lazy);
-                map.Cascade(Cascade.All);
-            }, prop => prop.OneToMany());
-
 
             Bag(p => p.ViewParts, map =>
             {
