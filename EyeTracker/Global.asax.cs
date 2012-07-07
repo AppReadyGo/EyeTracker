@@ -14,6 +14,9 @@ using EyeTracker.Domain.Model.Events;
 using EyeTracker.Common;
 using EyeTracker.Model.Pages.Analytics;
 using EyeTracker.Core;
+using System.Configuration;
+using System.Web.Configuration;
+using System.Web.Hosting;
 
 namespace EyeTracker
 {
@@ -230,6 +233,7 @@ namespace EyeTracker
 
         protected void Application_Start()
         {
+            EncryptConnectionStringsSection();
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
@@ -243,6 +247,35 @@ namespace EyeTracker
             //ControllerBuilder.Current.SetControllerFactory(new WindsorFactory(applicationWideWindsorContainer));
             //// Initialize / install components in container
             //applicationWideWindsorContainer.Install(new WindsorInstaller());
+        }
+
+        private void EncryptConnectionStringsSection()
+        {
+            if (!System.Diagnostics.Debugger.IsAttached)
+            {
+                try
+                {
+                    Configuration config = WebConfigurationManager.OpenWebConfiguration(HostingEnvironment.ApplicationVirtualPath);
+                    ConfigurationSection connStringsConfigSection = config.ConnectionStrings;
+                    if (connStringsConfigSection != null)
+                    {
+                        if (!connStringsConfigSection.SectionInformation.IsProtected)
+                        {
+                            if (!connStringsConfigSection.ElementInformation.IsLocked)
+                            {
+                                connStringsConfigSection.SectionInformation.ProtectSection("RsaProtectedConfigurationProvider");
+                                connStringsConfigSection.SectionInformation.ForceSave = true;
+                                connStringsConfigSection.CurrentConfiguration.Save(ConfigurationSaveMode.Full);
+                            }
+
+                        }
+                    }
+                }
+                finally
+                {
+                    //no logs here
+                }
+            }
         }
     }
 }
