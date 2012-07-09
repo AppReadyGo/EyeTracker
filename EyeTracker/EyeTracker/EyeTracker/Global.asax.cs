@@ -1,39 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using EyeTracker.CustomModelBinders;
-using Castle.Windsor;
-using EyeTracker.Windsor;
-using EyeTracker.Model;
-using EyeTracker.DAL.Domain;
-using EyeTracker.Domain;
-using EyeTracker.Domain.Model.Events;
-using EyeTracker.Common;
-using EyeTracker.Model.Pages.Analytics;
-using EyeTracker.Core;
 using System.Configuration;
+using System.Reflection;
 using System.Web.Configuration;
 using System.Web.Hosting;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Castle.Windsor;
+using EyeTracker.Common;
+using EyeTracker.Common.Logger;
+using EyeTracker.Core;
+using EyeTracker.CustomModelBinders;
+using EyeTracker.Model.Pages.Analytics;
 
 namespace EyeTracker
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
         WindsorContainer applicationWideWindsorContainer = new WindsorContainer();
         
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                "JavaScript",
-                "Analytics/{filename}.js",
-                new { controller = "Data", action = "Analytics" },
-                new[] { "EyeTracker.Controllers" } // Namespaces
-            );
 
             routes.MapRoute(
                 "AjaxData", 
@@ -161,6 +151,19 @@ namespace EyeTracker
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
+            routes.MapRoute(
+                "JavaScript",
+                "Analytics/JavaScript/{filename}.js",
+                new { controller = "Files", action = "Analytics" }
+            );
+
+            routes.MapRoute(
+                "Packages",
+                "Packages/{filename}.jar",
+                new { controller = "Files", action = "Packages" }
+            );
+
+
             //-----  Content routes
             routes.MapRoute(
                "404",
@@ -198,11 +201,6 @@ namespace EyeTracker
             );
 
 
-            //routes.MapRoute(
-            //    "JavaScript", 
-            //    "Analytics/JavaScript/{filename}.js",
-            //    new { controller = "Analytics", action = "JavaScriptFile" } 
-            //);
             //routes.MapRoute(
             //    "AjaxVisit", 
             //    "Analytics/{action}/{json}", 
@@ -249,10 +247,16 @@ namespace EyeTracker
             //applicationWideWindsorContainer.Install(new WindsorInstaller());
         }
 
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            var error = Server.GetLastError() as Exception;
+            Server.ClearError();
+            log.WriteFatalError(error, "Application Error");
+        }
+
         private void EncryptConnectionStringsSection()
         {
-            if (!System.Diagnostics.Debugger.IsAttached)
-            {
+#if !DEBUG
                 try
                 {
                     Configuration config = WebConfigurationManager.OpenWebConfiguration(HostingEnvironment.ApplicationVirtualPath);
@@ -276,6 +280,7 @@ namespace EyeTracker
                     //no logs here
                 }
             }
+#endif
         }
     }
 }
