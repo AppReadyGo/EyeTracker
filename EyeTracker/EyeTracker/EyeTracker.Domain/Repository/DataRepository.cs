@@ -186,54 +186,66 @@ namespace EyeTracker.Domain.Repositories
                         Path = objPackageEvent.Sessions[0].Path, //TODO: Path should be on another level?
                         Language = null,    //TODO: 
                         Ip = objPackageEvent.Ip,
-                        Country = null, //TODO: 3rd party service
-                        City = null,    //TODO: same as Country
+                        Country = null, //TODO : 3rd party service
+                        City = null,    //TODO : same as Country
                         OperationSystem = objOS, 
                         Date = DateTime.UtcNow,
                         ScreenHeight = objPackageEvent.ScreenHeight,
                         ScreenWidth = objPackageEvent.ScreenWidth,
-                        ClientHeight = objPackageEvent.Sessions[0].ClientHeight, //problem 
-                        ClientWidth = objPackageEvent.Sessions[0].ClientWidth    //problem
+                        ClientHeight = objPackageEvent.Sessions[0].ClientHeight, //TODO : problem 
+                        ClientWidth = objPackageEvent.Sessions[0].ClientWidth    //TODO : problem
                         
                     };
-                    //Clicks
-                    objPageView.Clicks = new List<Click>();
-                    objPackageEvent.Sessions[0].Clicks.ToList().ForEach(clickEvent =>
-                        objPageView.Clicks.Add(
-                        new Click()
-                        {
-                            PageView = objPageView,
-                            X = clickEvent.ClientX,
-                            Y = clickEvent.ClientY,
-                            Date = clickEvent.Date,
-                            Orientation = clickEvent.Orientation
-                        }));
 
-                    //ViewParts
-                    objPageView.ViewParts = objPackageEvent.Sessions
-                                                            .First()
-                                                            .ScreenViewParts
-                                                            .Select(viewPart => new ViewPart
+                    if (objPackageEvent.Sessions[0].Clicks != null)
                     {
-                        StartDate = viewPart.StartDate,
-                        FinishDate = viewPart.FinishDate,
-                        X = viewPart.ScrollLeft,
-                        Y = viewPart.ScrollTop,
-                        Orientation = viewPart.Orientation,
-                        PageView = objPageView
-                    }).ToList();
+                        //Clicks
+                        objPageView.Clicks = new List<Click>();
+                        objPackageEvent.Sessions[0].Clicks.ToList().ForEach(clickEvent =>
+                            objPageView.Clicks.Add(
+                            new Click()
+                            {
+                                PageView = objPageView,
+                                X = clickEvent.ClientX,
+                                Y = clickEvent.ClientY,
+                                Date = clickEvent.Date,
+                                Orientation = clickEvent.Orientation
+                            }));
+
+                    }
+                 
+                    //ViewParts
+                    if ( objPackageEvent.Sessions[0].ScreenViewParts != null)
+                    {
+                        objPageView.ViewParts = objPackageEvent.Sessions
+                                                           .First()
+                                                           .ScreenViewParts
+                                                           .Select(viewPart => new ViewPart
+                                                           {
+                                                               StartDate = viewPart.StartDate,
+                                                               FinishDate = viewPart.FinishDate,
+                                                               X = viewPart.ScrollLeft,
+                                                               Y = viewPart.ScrollTop,
+                                                               Orientation = viewPart.Orientation,
+                                                               PageView = objPageView
+                                                           }).ToList();
+                    }
+                   
 
                     //Scrolls
-                    //objPageView.Scrolls = new List<Scroll>();
-                    //objPackageEvent.Sessions[0].Scrolls.ToList().ForEach(scrollEvent =>
-                    //    objPageView.Scrolls.Add(
-                    //    new Scroll()
-                    //    {
-                    //        PageView = objPageView,
-                    //        FirstTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.FirstTouch.Date),
-                    //        LastTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.LastTouch.Date),
-                    //    }));
+                    if (objPackageEvent.Sessions[0].Scrolls != null)
+                    {
+                        objPackageEvent.Sessions[0].Scrolls.ToList().ForEach(scrollEvent =>
+                       objPageView.Scrolls.Add(
+                       new Scroll()
+                       {
+                           PageView = objPageView,
+                           FirstTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.FirstTouch.Date),
+                           LastTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.LastTouch.Date),
+                       }));
 
+                    }
+                   
                     using (ITransaction transaction = session.BeginTransaction())
                     {
                         session.SaveOrUpdate(objPageView);

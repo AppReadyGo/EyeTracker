@@ -8,6 +8,16 @@ namespace EyeTracker.Domain.Model
 {
     public class PageView
     {
+
+        public PageView()
+        {
+            Clicks = new List<Click>();
+            ViewParts = new List<ViewPart>();
+            Scrolls = new List<Scroll>();
+        
+        }
+
+
         public virtual long Id { get; set; }
         /// <summary>
         /// 
@@ -53,5 +63,7 @@ namespace EyeTracker.Domain.Model
         public virtual IList<Click> Clicks { get; set; }
 
         public virtual IList<ViewPart> ViewParts { get; set; }
+
+        public virtual IList<Scroll> Scrolls { get; set; }
     }
 }
