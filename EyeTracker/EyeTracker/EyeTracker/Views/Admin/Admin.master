@@ -1,0 +1,26 @@
+﻿<%@ Import Namespace="EyeTracker.Helpers" %>
+<%@ Import Namespace="EyeTracker.Model.Pages.Admin" %>
+<%@ Master Language="C#" 
+MasterPageFile="~/Views/Shared/AfterLoginLeftMenu.Master" 
+Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel, AdminMasterModel>>"%>
+<asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
+        <asp:ContentPlaceHolder ID="PageTitleContent" runat="server" />
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
+        <link href="<%: Url.Content("~/Content/after.login.master.css")%>" rel="stylesheet" type="text/css" />
+        <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
+</asp:Content>
+
+<asp:Content ID="LeftMenuContent" ContentPlaceHolderID="LeftMenuContent" runat="server">
+    <ul>
+        <li class="<%: Model.SubMaster.GetMenuItemClass(AdminMasterModel.MenuItem.Logs) %>"><span></span><a href="/Admin/Logs">Logs</a></li>
+        <li class="<%: Model.SubMaster.GetMenuItemClass(AdminMasterModel.MenuItem.Staff) %>"><span></span><a href="/Admin/Staff">Staff</a></li>
+        <li class="<%: Model.SubMaster.GetMenuItemClass(AdminMasterModel.MenuItem.Members) %>"><span></span><a href="/Admin/Members">Members</a></li>
+    </ul>
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ContentPlaceHolder ID="TopMenu" runat="server" />
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+</asp:Content>

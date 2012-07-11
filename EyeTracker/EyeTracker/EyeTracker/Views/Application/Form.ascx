@@ -50,7 +50,7 @@
         </div>
         <div id="sample_android_code" class="step">
             <strong>3. Download package and insert into your code</strong>
-            <div>Package: <a href="">Android Package 1.0.1</a></div>
+            <div>Package: <a href="/Packages/Android_Package_1.0.1.jar">Android Package 1.0.1 <strong>Download</strong></a></div>
             <div>Property ID: <strong class="property-id"><%= Model.ViewData.PropertyId%></strong></div>
             <textarea readonly="readonly" id="android_code">
         import com.mobillify.fingerprint.FingerPrint;

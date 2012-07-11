@@ -81,7 +81,7 @@ namespace EyeTracker.Controllers
                 var dashboardModel = new DashboardModel
                 {
                     UsageChartData = new JavaScriptSerializer().Serialize(usageInitData),
-                    ContentOverviewData = dashboardViewData.ContentOverview
+                    ContentOverviewData = dashboardViewData.ContentOverview.Select((d, i) => new ContentOverviewModel { Path = d.Path, Views = d.Views, Index = i }).ToArray()
                 };
 
                 dashboardModel.Title = "Dashboard";

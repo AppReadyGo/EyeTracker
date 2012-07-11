@@ -125,6 +125,7 @@
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\Master\AfterLoginController.cs" />
     <Compile Include="Controllers\Master\AnalyticsMasterController.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CustomExceptions.cs" />
     <Compile Include="Controllers\AnalyticsController.cs" />
+    <Compile Include="Controllers\Master\AdminMasterController.cs" />
     <Compile Include="Controllers\SecureController.cs" />
     <Compile Include="CustomModelBinders\FilterParametersModelBinder.cs" />
     <Compile Include="CustomModelBinders\EventParser.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="Model\Pages\Account\ResetPasswordModel.cs" />
     <Compile Include="Model\Pages\Account\UnsubscribeModel.cs" />
     <Compile Include="Model\Pages\Admin\AdminModel.cs" />
+    <Compile Include="Model\Pages\Admin\AdminMasterModel.cs" />
     <Compile Include="Model\Pages\Admin\LogsModel.cs" />
     <Compile Include="Model\Pages\Analytics\FilterParametersModel.cs" />
     <Compile Include="Model\Pages\Analytics\FingerPrintModel.cs" />
@@ -236,8 +239,9 @@
     <Content Include="Content\template\css\404.css" />
     <Content Include="Content\template\css\beforelogin.master.css" />
     <Content Include="Content\template\css\afterlogin.master.css" />
+    <Content Include="Content\template\css\content.public.page.css" />
     <Content Include="Content\template\css\secure.change.password.css" />
-    <Content Include="Content\template\css\home.pagecontent.css" />
+    <Content Include="Content\template\css\content.authenticated.page.css" />
     <Content Include="Content\template\css\form.css" />
     <Content Include="Content\template\css\home.index.css" />
     <Content Include="Content\template\css\layout.css" />
@@ -481,6 +485,10 @@
     <Content Include="Views\Account\Unsubscribe.aspx" />
     <Content Include="Views\Account\Forms\UnsubscribeForm.ascx" />
     <Content Include="Views\Account\ResetPassword.aspx" />
+    <Content Include="Views\Admin\Members.aspx" />
+    <Content Include="Views\Admin\Staff.aspx" />
+    <Content Include="Views\Admin\Logs.aspx" />
+    <Content Include="Views\Admin\Forms\LogsFilter.ascx" />
     <Content Include="Views\Content\AuthenticatedError.aspx" />
     <Content Include="Views\Content\PublicError.aspx" />
     <Content Include="Views\Content\Public404.aspx" />
@@ -490,7 +498,6 @@
     <Content Include="Views\Account\ForgotPassword.aspx" />
     <Content Include="Views\Account\Forms\RegisterForm.ascx" />
     <Content Include="Views\Account\Forms\LogOnForm.ascx" />
-    <Content Include="Views\Admin\Logs.aspx" />
     <Content Include="Views\Application\Form.ascx" />
     <Content Include="Views\Analytics\Filter.ascx" />
     <Content Include="Views\Analytics\FingerPrint.aspx" />
@@ -546,6 +553,7 @@
   <ItemGroup>
     <Folder Include="Areas\m\Models\" />
     <Folder Include="Model\Pages\Secure\" />
+    <Folder Include="Restricted\Packages\" />
     <Folder Include="Scripts\Tests\UnitTests\" />
   </ItemGroup>
   <ItemGroup>
@@ -573,6 +581,7 @@
     <Content Include="Views\Shared\Content.Master" />
     <Content Include="Views\Shared\AfterLoginContent.Master" />
     <Content Include="Views\Shared\AfterLoginLeftMenu.Master" />
+    <Content Include="Views\Admin\Admin.master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
