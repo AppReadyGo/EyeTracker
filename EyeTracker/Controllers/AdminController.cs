@@ -20,23 +20,13 @@ using System.Web.Security;
 namespace EyeTracker.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class AdminController : AfterLoginController
+    public class AdminController : AdminMasterController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         
-        public override Model.Master.AfterLoginMasterModel.MenuItem SelectedMenuItem
-        {
-            get { return Model.Master.AfterLoginMasterModel.MenuItem.Administrator; }
-        }
-
         public ActionResult Index()
         {
             return RedirectToAction("Logs");
-        }
-
-        public ActionResult Elmah(string query)
-        {
-            return new ElmahResult(query);
         }
 
         public ActionResult Membership()
@@ -87,6 +77,16 @@ namespace EyeTracker.Controllers
             return View(userModel);
         }
 
+        public ActionResult Staff()
+        {
+            return View(new LogsModel(), AdminMasterModel.MenuItem.Staff);
+        }
+
+        public ActionResult Members()
+        {
+            return View(new LogsModel(), AdminMasterModel.MenuItem.Members);
+        }
+
         public ActionResult Logs()
         {
             var result = ObjectContainer.Instance.RunQuery(new LogDataQuery());
@@ -99,7 +99,7 @@ namespace EyeTracker.Controllers
             severities.Insert(0, new SelectListItem { Text = "All", Value = string.Empty, Selected = true });
             ViewBag.Severities = severities;
 
-            return View(new LogsModel());
+            return View(new LogsModel(), AdminMasterModel.MenuItem.Logs);
         }
 
         public ActionResult ClearLogs()
@@ -123,10 +123,21 @@ namespace EyeTracker.Controllers
             severities.Insert(0, new SelectListItem { Text = "All", Value = "0", Selected = true });
             ViewBag.Severities = severities;
 
-            return View(model);
+            return View(model, AdminMasterModel.MenuItem.Logs);
         }
+
+        /*
+                 
+        public ActionResult Elmah(string query)
+        {
+            return new ElmahResult(query);
+        }
+
+         */
     }
 
+
+/*
     class ElmahResult : ActionResult
     {
         private string _resouceType;
@@ -166,4 +177,5 @@ namespace EyeTracker.Controllers
             return _resouceType != "stylesheet" ? context.HttpContext.Request.Path.Replace(String.Format("/{0}", _resouceType), string.Empty) : context.HttpContext.Request.Path;
         }
     }
+ */
 }

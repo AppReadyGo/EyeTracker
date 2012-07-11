@@ -1,23 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
+using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization.Json;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
-using System.Runtime.Serialization.Json;
-using System.IO;
-using EyeTracker.API.BL.Contract;
 using EyeTracker.API.BL;
+using EyeTracker.API.BL.Contract;
+using EyeTracker.Common.Logger;
 using EyeTracker.Core.Services;
 using EyeTracker.Domain.Model.Events;
-using EyeTracker.Common;
-using System.Threading;
-using EyeTracker.Common.Logger;
-using System.Reflection;
-using System.ComponentModel;
-using EyeTracker.Domain.Repositories;
-using System.ServiceModel.Channels;
 
 namespace EyeTracker.API
 {

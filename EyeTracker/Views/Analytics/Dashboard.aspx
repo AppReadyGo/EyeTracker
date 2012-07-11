@@ -50,65 +50,36 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
     <td colspan="2">
         <div class="title"><span>Content Overview</span></div>
         <section id="content" class="content-overview">
-	        <div class="box extra">
-		        <div class="border-right">
-			        <div class="border-bot">
-				        <div class="border-left">
-					        <div class="left-top-corner1">
-						        <div class="right-top-corner1">
-							        <div class="right-bot-corner">
-								        <div class="left-bot-corner">
-									        <div class="inner">
-										        <div class="left-indent line-ver1">
-											        <div class="line-ver2">
-												        <article class="col-1 indent">
-													        <h4>Pathes</h4>
-													        <ul class="info-list1">
-                                                            <%if (Model.View.ContentOverviewData.Any())
-                                                            {
-                                                                foreach (var item in Model.View.ContentOverviewData)
-                                                                { %>
-														            <li><%= item.Path %></li>
-														        <% }
-                                                            }%>
-													        </ul>
-												        </article>
-												        <article class="col-2 indent">
-													        <h4 class="aligncenter">Views</h4>
-													        <ul class="info-list1 alt">
-                                                            <%if (Model.View.ContentOverviewData.Any())
-                                                            {
-                                                                foreach (var item in Model.View.ContentOverviewData)
-                                                                { %>
-														            <li><%= item.Views%></li>
-														        <% }
-                                                            }%>
-													        </ul>
-												        </article>
-												        <article class="col-3 indent">
-													        <h4 class="aligncenter">% Views</h4>
-													        <ul class="info-list1 alt">
-                                                            <%if (Model.View.ContentOverviewData.Any())
-                                                            {
-                                                                foreach (var item in Model.View.ContentOverviewData)
-                                                                { %>
-														            <li></li>
-														        <% }
-                                                            }%>
-													        </ul>
-												        </article>
-												        <div class="clear"></div>
-											        </div>
-										        </div>
-									        </div>
-								        </div>
-							        </div>
-						        </div>
-					        </div>
-				        </div>
-			        </div>
-		        </div>
-	        </div>
+
+        <table class="fc aP">
+            <thead>
+                <tr>
+                    <th class="bu"></th>
+                    <th class="F3 ">Pathes</th>
+                    <th class="pr">Visits</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%if (Model.View.ContentOverviewData.Any())
+                {
+                    foreach (var item in Model.View.ContentOverviewData)
+                    { %>
+                        <tr class="ID-row-0-0-0 ACTION-select TARGET-row-0 <%= item.IndexIsOdd ? "Mbb" : "" %>">
+                            <td class="hJ">
+                                <%= item.Index %>
+                            </td>
+                            <td class="HD ">
+                                <div class="Xp Ccb">
+                                    <a href="<%= item.GetPathUrl(Model.SubMaster.FilterUrlPart) %>"><%= item.Path %></a></div>
+                            </td>
+                            <td class="pr">
+                                <%= item.Views %>
+                            </td>
+                        </tr>
+					<% }
+                }%>
+            </tbody>
+        </table>
         </section>
         <div class="item"></div>
     </td>

@@ -12,3 +12,57 @@ table.dashboard p{margin:0;}
 /* Green template */
 
 .content-overview article{width:30%;}
+
+/*Table*/
+.fc {
+  border-collapse: collapse;
+  font-size: 98%;
+  margin-bottom: 7px;
+  table-layout: fixed;
+  width: 100%;
+}
+.fc th {
+  text-align: center;
+}
+.fc tr:first-child th {
+  border-bottom: 1px solid #808080;
+  color: #000000;
+  font-weight: bold;
+  padding: 12px 8px 3px;
+}
+.fc th.bu {
+  width: 20px;
+}
+.fc th.F3 {
+  text-align: left;
+}
+.fc .pr {
+  text-align: right;
+}
+.fc .Kv {
+  text-align: left;
+  width: 150px;
+}
+.fc tr.Mbb {
+  background-color: #F8F8F8;
+}
+.fc td {
+  border-bottom: 1px solid #CBCBCB;
+}
+.fc tr td {
+  padding: 8px 8px 7px;
+}
+.fc td.hJ {
+  text-align: right;
+  vertical-align: top;
+  width: 1%;
+}
+.fc td.HD {
+  text-align: left;
+}
+.fc .s2 {
+  white-space: nowrap;
+}
+.fc tr:hover td{background-color:#ffffcc;}
+
+
