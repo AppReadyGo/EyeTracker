@@ -250,7 +250,7 @@ namespace EyeTracker
         protected void Application_Error(object sender, EventArgs e)
         {
             var error = Server.GetLastError() as Exception;
-            Server.ClearError();
+            //Server.ClearError();
             log.WriteFatalError(error, "Application Error");
         }
 

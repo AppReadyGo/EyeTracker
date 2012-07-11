@@ -77,14 +77,38 @@ namespace EyeTracker.Controllers
             return View(userModel);
         }
 
-        public ActionResult Staff()
+        public ActionResult Staff(string srch = "", int scol = 1, int cp = 1)
         {
-            return View(new LogsModel(), AdminMasterModel.MenuItem.Staff);
+            //Func<TSource, TKey> keySelector
+
+            var data = ObjectContainer.Instance.RunQuery(new GetAllStaffQuery(srch/*, ord*/, cp, 5));
+            var model = new PagingModel 
+            { 
+                IsOnePage = data.TotalPages == 1,
+                Count = data.Count,
+                PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
+                NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
+                TotalPages = data.TotalPages,
+                CurPage = data.CurPage,
+                Users = data.Users.Select((u,i) => new StaffUserDetailsModel
+                {
+                    Id = u.Id,
+                    Email = u.Email,
+                    Name = string.IsNullOrEmpty(u.FirstName + u.LastName) ? string.Empty : string.Concat(u.FirstName, " ", u.LastName),
+                    Roles = string.Join(", ", u.Roles.Select(r => r.ToString())),
+                    Activated = u.Activated,
+                    Index = i,
+                    IsAlternative = i % 2 != 0,
+                    LastAccess = u.LastAccessDate.HasValue ? u.LastAccessDate.Value.ToString("dd MMM yyyy") : string.Empty
+                }).OrderBy(u => u.LastAccess).ToArray()
+            };
+            return View(model, AdminMasterModel.MenuItem.Staff);
         }
 
-        public ActionResult Members()
+        public ActionResult Members(int cp = 1)
         {
-            return View(new LogsModel(), AdminMasterModel.MenuItem.Members);
+            var data = ObjectContainer.Instance.RunQuery(new GetAllMembersQuery(cp, 50));
+            return View(data, AdminMasterModel.MenuItem.Members);
         }
 
         public ActionResult Logs()
