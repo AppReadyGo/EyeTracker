@@ -18,6 +18,11 @@ namespace EyeTracker.Domain.Queries.Admin
 
             var usersQuery = session.Query<User>()
                         .Where(u => u.Type == UserType.Staff);
+            if (!string.IsNullOrEmpty(query.SearchStr))
+            {
+                var str = query.SearchStr.ToLower();
+                usersQuery = usersQuery.Where(u => u.Email.ToLower().Contains(str) || u.FirstName.ToLower().Contains(str) || u.LastName.ToLower().Contains(str));
+            }
 
             res.Count = usersQuery.Count();
             res.TotalPages = (res.Count + query.PageSize - 1) / query.PageSize;

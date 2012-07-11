@@ -12,12 +12,15 @@ namespace EyeTracker.Common.Queries.Admin
 
         public int PageSize { get; set; }
 
+        public string SearchStr { get; set; }
+
         //public Func<TSource, TKey> KeySelector { get; set; }
 
         public GetAllStaffQuery(string searchStr/*, Func<TSource, TKey> keySelector*/,int curPage, int pageSize)
         {
             this.CurPage = curPage;
             this.PageSize = pageSize;
+            this.SearchStr = searchStr;
         }
     }
 }

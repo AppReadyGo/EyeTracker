@@ -81,7 +81,7 @@ namespace EyeTracker.Controllers
         {
             //Func<TSource, TKey> keySelector
 
-            var data = ObjectContainer.Instance.RunQuery(new GetAllStaffQuery(srch/*, ord*/, cp, 5));
+            var data = ObjectContainer.Instance.RunQuery(new GetAllStaffQuery(srch/*, ord*/, cp, 20));
             var model = new PagingModel 
             { 
                 IsOnePage = data.TotalPages == 1,
@@ -107,7 +107,7 @@ namespace EyeTracker.Controllers
 
         public ActionResult Members(int cp = 1)
         {
-            var data = ObjectContainer.Instance.RunQuery(new GetAllMembersQuery(cp, 50));
+            var data = ObjectContainer.Instance.RunQuery(new GetAllMembersQuery(cp, 20));
             return View(data, AdminMasterModel.MenuItem.Members);
         }
 
