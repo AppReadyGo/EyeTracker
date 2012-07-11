@@ -193,6 +193,7 @@
     <Compile Include="Model\AdminModels.cs" />
     <Compile Include="Model\Pages\Application\ApplicationModel.cs" />
     <Compile Include="Model\Pages\ViewModel.cs" />
+    <Compile Include="Model\PagingModel.cs" />
     <Compile Include="Model\ScreenDetailsModel.cs" />
     <Compile Include="Model\MasterViewModelWrapper.cs" />
     <Compile Include="Model\ViewModelWrapper.cs" />
@@ -212,6 +213,7 @@
     <Content Include="Content\content.master.css" />
     <Content Include="Content\after.login.master.css" />
     <Content Include="Content\images\logo_43.png" />
+    <Content Include="Content\shared\table.css" />
     <Content Include="Content\template\css\account.forgotpassword.css" />
     <Content Include="Content\home.pricing.css" />
     <Content Include="Content\error.css" />
