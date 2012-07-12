@@ -12,10 +12,25 @@ namespace EyeTracker.Common.Queries.Admin
 
         public int PageSize { get; set; }
 
-        public GetAllMembersQuery(int curPage, int pageSize)
+        public string SearchStr { get; set; }
+
+        public bool ASC { get; set; }
+
+        public OrderByColumn OrderBy { get; set; }
+
+        public GetAllMembersQuery(string searchStr, OrderByColumn orderBy, bool asc, int curPage, int pageSize)
         {
+            this.ASC = asc;
             this.CurPage = curPage;
             this.PageSize = pageSize;
+            this.SearchStr = searchStr;
+            this.OrderBy = orderBy;
+        }
+
+        public enum OrderByColumn
+        {
+            Email,
+            Name
         }
     }
 }

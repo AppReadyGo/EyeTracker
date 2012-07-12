@@ -14,5 +14,7 @@ namespace EyeTracker.Common.QueryResults.Users
         public bool SpecialAccess { get; set; }
 
         public DateTime? LastAccessDate { get; set; }
+
+        public DateTime CreateDate { get; set; }
     }
 }

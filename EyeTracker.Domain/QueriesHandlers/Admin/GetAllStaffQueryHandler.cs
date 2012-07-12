@@ -29,16 +29,28 @@ namespace EyeTracker.Domain.Queries.Admin
             res.CurPage = query.CurPage > res.TotalPages ? res.TotalPages : query.CurPage;
             res.PageSize = query.PageSize;
 
-            res.Users = usersQuery.Select(u => new StaffFullDetailsResult
+
+            var users = usersQuery.Select(u => new StaffFullDetailsResult
                         {
                             Email = u.Email,
                             FirstName = u.FirstName,
                             LastName = u.LastName,
                             Activated = u.Activated,
                             Id = u.Id,
-                            LastAccessDate = u.LastAccessDate
-                        })
-                        .Skip(res.PageSize * (res.CurPage - 1))
+                            LastAccessDate = u.LastAccessDate,
+                            CreateDate = u.CreateDate,
+                        });
+
+            if (query.OrderBy == GetAllStaffQuery.OrderByColumn.Email)
+            {
+                users = query.ASC ? users.OrderBy(u => u.Email) : users.OrderByDescending(u => u.Email);
+            }
+            else if (query.OrderBy == GetAllStaffQuery.OrderByColumn.Name)
+            {
+                users = query.ASC ? users.OrderBy(u => u.LastName + " " + u.FirstName) : users.OrderByDescending(u => u.Email);
+            }
+
+            res.Users = users.Skip(res.PageSize * (res.CurPage - 1))
                         .Take(res.PageSize)
                         .ToArray();
 
