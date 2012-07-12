@@ -90,6 +90,8 @@ namespace EyeTracker.Controllers
                 NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
                 TotalPages = data.TotalPages,
                 CurPage = data.CurPage,
+                SearchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch)),
+                SearchStr = srch,
                 Users = data.Users.Select((u,i) => new StaffUserDetailsModel
                 {
                     Id = u.Id,

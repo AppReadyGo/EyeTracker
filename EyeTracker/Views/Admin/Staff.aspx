@@ -18,19 +18,19 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
             <a href="user-new.php" class="add-new-h2">+ Add New</a>
         </div>
 		<div class="a-l search-box">
-			<input type="search" id="user-search-input" name="s" value="" />
-			<input type="submit" name="" id="search-submit" class="button" value="Search Users"  />
+			<input type="search" id="user-search-input" name="s" value="<%=Model.View.SearchStr %>" />
+			<input type="button" name="" id="search-submit" class="button" value="Search Users" onclick="javascript: document.location.href = '/Admin/Staff?cp=1&srch=' + escape($('#user-search-input').val());" />
 		</div>
 		<div class='t-nav-pages <%= Model.View.IsOnePage ? "one-page" : "" %>'>
 			<span class="d-num"><%= Model.View.Count %> items</span>
 			<span class='pagination-links'>
-				<a class='first-page <%= Model.View.IsOnePage ? "disabled" : "" %>' title='Go to the first page' href='/Admin/Staff?cp=1'>&laquo;</a>
-				<a class='prev-page <%= Model.View.PreviousPage.HasValue ? "" : "disabled" %>' title='Go to the previous page' href='/Admin/Staff?cp=<%= Model.View.PreviousPage.HasValue ? Model.View.PreviousPage.Value : 1 %>'>&lsaquo;</a>
+				<a class='first-page <%= Model.View.IsOnePage ? "disabled" : "" %>' title='Go to the first page' href='/Admin/Staff?cp=1<%=Model.View.SearchStrUrlPart %>'>&laquo;</a>
+				<a class='prev-page <%= Model.View.PreviousPage.HasValue ? "" : "disabled" %>' title='Go to the previous page' href='/Admin/Staff?cp=<%= Model.View.PreviousPage.HasValue ? Model.View.PreviousPage.Value : 1 %><%=Model.View.SearchStrUrlPart %>'>&lsaquo;</a>
 				<span class="paging-input">
 					<input class='cur-p' title='Current page' type='text' name='paged' value='<%= Model.View.CurPage %>' size='1' /> of <span class='total-pages'><%= Model.View.TotalPages%></span>
 				</span>
-				<a class='next-page <%= Model.View.NextPage.HasValue ? "" : "disabled" %>' title='Go to the next page' href='/Admin/Staff?cp=<%= Model.View.NextPage.HasValue ? Model.View.NextPage.Value : Model.View.TotalPages %>'>&rsaquo;</a>
-				<a class='last-page <%= Model.View.IsOnePage ? "disabled" : "" %>' title='Go to the last page' href='/Admin/Staff?cp=<%= Model.View.TotalPages%>'>&raquo;</a>
+				<a class='next-page <%= Model.View.NextPage.HasValue ? "" : "disabled" %>' title='Go to the next page' href='/Admin/Staff?cp=<%= Model.View.NextPage.HasValue ? Model.View.NextPage.Value : Model.View.TotalPages %><%=Model.View.SearchStrUrlPart %>'>&rsaquo;</a>
+				<a class='last-page <%= Model.View.IsOnePage ? "disabled" : "" %>' title='Go to the last page' href='/Admin/Staff?cp=<%= Model.View.TotalPages%><%=Model.View.SearchStrUrlPart %>'>&raquo;</a>
 			</span>
 		</div>
 	</div><!-- /table-head -->
@@ -87,11 +87,11 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
 		<div class='t-nav-pages <%= Model.View.IsOnePage ? "one-page" : "" %>'>
 			<span class="d-num"><%= Model.View.Count %> items</span>
 			<span class='pagination-links'>
-				<a class='first-page <%= Model.View.IsOnePage ? "disabled" : "" %>' title='Go to the first page' href='/Admin/Staff?cp=1'>&laquo;</a>
-				<a class='prev-page <%= Model.View.PreviousPage.HasValue ? "" : "disabled" %>' title='Go to the previous page' href='/Admin/Staff?cp=<%= Model.View.PreviousPage.HasValue ? Model.View.PreviousPage.Value : 1 %>'>&lsaquo;</a>
+				<a class='first-page <%= Model.View.IsOnePage ? "disabled" : "" %>' title='Go to the first page' href='/Admin/Staff?cp=1<%=Model.View.SearchStrUrlPart %>'>&laquo;</a>
+				<a class='prev-page <%= Model.View.PreviousPage.HasValue ? "" : "disabled" %>' title='Go to the previous page' href='/Admin/Staff?cp=<%= Model.View.PreviousPage.HasValue ? Model.View.PreviousPage.Value : 1 %><%=Model.View.SearchStrUrlPart %>'>&lsaquo;</a>
 				<span class="paging-input"><%= Model.View.CurPage %> of <span class='total-pages'><%= Model.View.TotalPages%></span></span>
-				<a class='next-page <%= Model.View.NextPage.HasValue ? "" : "disabled" %>' title='Go to the next page' href='/Admin/Staff?cp=<%= Model.View.NextPage.HasValue ? Model.View.NextPage.Value : Model.View.TotalPages %>'>&rsaquo;</a>
-				<a class='last-page <%= Model.View.IsOnePage ? "disabled" : "" %>' title='Go to the last page' href='/Admin/Staff?cp=<%= Model.View.TotalPages%>'>&raquo;</a>
+				<a class='next-page <%= Model.View.NextPage.HasValue ? "" : "disabled" %>' title='Go to the next page' href='/Admin/Staff?cp=<%= Model.View.NextPage.HasValue ? Model.View.NextPage.Value : Model.View.TotalPages %><%=Model.View.SearchStrUrlPart %>'>&rsaquo;</a>
+				<a class='last-page <%= Model.View.IsOnePage ? "disabled" : "" %>' title='Go to the last page' href='/Admin/Staff?cp=<%= Model.View.TotalPages%><%=Model.View.SearchStrUrlPart %>'>&raquo;</a>
 			</span>
 		</div>
 		<br class="clear" />
