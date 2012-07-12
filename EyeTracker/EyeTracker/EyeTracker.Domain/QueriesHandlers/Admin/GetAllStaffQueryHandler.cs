@@ -69,7 +69,7 @@ namespace EyeTracker.Domain.Queries.Admin
 
             foreach (var u in res.Users)
             {
-                u.Roles = userRoles.Where(x => x.Id == u.Id).Select(x => x.Role);
+                u.Roles = userRoles.Where(x => x.Id == u.Id).Select(x => x.Role).ToArray();
             }
 
             return res;

@@ -124,6 +124,12 @@ namespace EyeTracker
             );
 
             routes.MapRoute(
+                "JavaScript",
+                "Analytics/{filename}.js",
+                new { controller = "Files", action = "Analytics" }
+            );
+
+            routes.MapRoute(
                 "AnalyticsData",
                 "Analytics/{action}/{portfolioId}/{applicationId}/{fromDate}/{toDate}/{screenSize}/{path}/{language}/{os}/{location}",
                 new { controller = "Analytics", action = "Dashboard", applicationId = UrlParameter.Optional, fromDate = UrlParameter.Optional, toDate = UrlParameter.Optional, screenSize = UrlParameter.Optional, path = UrlParameter.Optional, language = UrlParameter.Optional, os = UrlParameter.Optional, location = UrlParameter.Optional },
@@ -149,12 +155,6 @@ namespace EyeTracker
                 "Home/{action}",
                 new { controller = "Home", action = "Index" },
                 new[] { "EyeTracker.Controllers" } // Namespaces
-            );
-
-            routes.MapRoute(
-                "JavaScript",
-                "Analytics/JavaScript/{filename}.js",
-                new { controller = "Files", action = "Analytics" }
             );
 
             routes.MapRoute(
