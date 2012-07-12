@@ -20,6 +20,10 @@ namespace EyeTracker.Model
         public IEnumerable<StaffUserDetailsModel> Users { get; set; }
 
         public int CurPage { get; set; }
+
+        public string SearchStrUrlPart { get; set; }
+
+        public string SearchStr { get; set; }
     }
 
     public class StaffUserDetailsModel
