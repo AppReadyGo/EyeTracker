@@ -1,7 +1,8 @@
 ﻿var _mfyaq = _mfyaq || {};
 
-_mfyaq.visitHandlerUrl = '{VISIT_HANDLER_URL}',
-_mfyaq.packageHandlerUrl = '{PACKAGE_HANDLER_URL}',
+//_mfyaq.visitHandlerUrl = '{VISIT_HANDLER_URL}',
+//_mfyaq.packageHandlerUrl = '{PACKAGE_HANDLER_URL}',
+_mfyaq.handlerUrl = '{HANDLER_URL}',
 _mfyaq.visitId = -1,
 _mfyaq.winSize = null,
 _mfyaq.clicksData = new Array(),
@@ -28,10 +29,10 @@ _mfyaq.init = function () {
         data += '"cid":"' + _mfyaq.key + '",';
         data += '"sw":' + _mfyaq.winSize.w + ',';
         data += '"sh":' + _mfyaq.winSize.h + ',';
-        data += '"cw":' + _mfyaq.clientWidth() + ',';
-        data += '"ch":' + _mfyaq.clientHeight() + ',';
-        data += '"d":"' + new Date().toUTCString() + '",';
-        data += '"uri":"' + location.href + '"';
+        //data += '"cw":' + _mfyaq.clientWidth() + ',';
+        //data += '"ch":' + _mfyaq.clientHeight() + ',';
+        //data += '"d":"' + new Date().toUTCString() + '",';
+        //data += '"uri":"' + location.href + '"';
         data += '}';
         _mfyaq.sendData(_mfyaq.visitHandlerUrl, data, function (xmlhttp) {
             var res = eval("(" + xmlhttp.responseText + ')');

@@ -1,1 +1,57 @@
-﻿{"sh":800,"cid":"123-45-1","ssd":[{"sda":[{"ctd":{"o":0,"cy":658,"d":"Tue, 12 Jun 2012 20:32:52 GMT","cx":189,"p":1},"std":{"o":0,"cy":443,"d":"Tue, 12 Jun 2012 20:32:52 GMT","cx":369,"p":1}}],"sc":"Tue, 12 Jun 2012 20:32:54 GMT","wma":[{"sd":"Tue, 12 Jun 2012 20:32:12 GMT","o":0,"cy":0,"cx":0,"fd":"Tue, 12 Jun 2012 20:32:54 GMT"}],"ss":"Tue, 12 Jun 2012 20:32:12 GMT","tda":[{"o":0,"cy":443,"d":"Tue, 12 Jun 2012 20:32:52 GMT","cx":369,"p":1},{"o":0,"cy":658,"d":"Tue, 12 Jun 2012 20:32:52 GMT","cx":189,"p":1}],"cw":-1,"ch":-1,"uri":"ActivityPickerActivity"}],"sw":480,"ssi":{"brn":"a3d","den":"2sd","din":"asd","fin":"a4d","han":"lsd","man":"a4d","mon":"asf","opn":"bss","prn":"GT-P1000","con":"REL","inc":"XWJP9","rel":"2.3.3","sdki":"10"}}
+﻿{ "cid" : "123-45-1",
+  "sh" : 800,
+  "sw" : 480,
+  "ssd" : [ { 
+		"ch" : -1,
+        "cw" : -1,
+        "uri" : "ActivityPickerActivity",
+        "ss" : "Tue, 12 Jun 2012 20:32:12 GMT",
+        "sc" : "Tue, 12 Jun 2012 20:32:54 GMT",
+        "sda" : [ { "ctd" : { "cx" : 189,
+                  "cy" : 658,
+                  "d" : "Tue, 12 Jun 2012 20:32:52 GMT",
+                  "o" : 0,
+                  "p" : 1
+                },
+              "std" : { "cx" : 369,
+                  "cy" : 443,
+                  "d" : "Tue, 12 Jun 2012 20:32:52 GMT",
+                  "o" : 0,
+                  "p" : 1
+                }
+            } ],
+        "tda" : [ { "cx" : 369,
+              "cy" : 443,
+              "d" : "Tue, 12 Jun 2012 20:32:52 GMT",
+              "o" : 0,
+              "p" : 1
+            },
+            { "cx" : 189,
+              "cy" : 658,
+              "d" : "Tue, 12 Jun 2012 20:32:52 GMT",
+              "o" : 0,
+              "p" : 1
+            }
+          ],
+        "wma" : [ { "cx" : 0,
+              "cy" : 0,
+              "fd" : "Tue, 12 Jun 2012 20:32:54 GMT",
+              "o" : 0,
+              "sd" : "Tue, 12 Jun 2012 20:32:12 GMT"
+            } ]
+      } ],
+  "ssi" : { "brn" : "a3d",
+      "con" : "REL",
+      "den" : "2sd",
+      "din" : "asd",
+      "fin" : "a4d",
+      "han" : "lsd",
+      "inc" : "XWJP9",
+      "man" : "a4d",
+      "mon" : "asf",
+      "opn" : "bss",
+      "prn" : "GT-P1000",
+      "rel" : "2.3.3",
+      "sdki" : "10"
+    }
+}
