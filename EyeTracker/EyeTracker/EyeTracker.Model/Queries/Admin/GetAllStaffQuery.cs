@@ -6,7 +6,7 @@ using EyeTracker.Common.QueryResults.Users;
 
 namespace EyeTracker.Common.Queries.Admin
 {
-    public class GetAllStaffQuery/*<TSource, TKey>*/ : IQuery<AllStaffResult>
+    public class GetAllStaffQuery : IQuery<AllStaffResult>
     {
         public int CurPage { get; set; }
 
@@ -14,13 +14,23 @@ namespace EyeTracker.Common.Queries.Admin
 
         public string SearchStr { get; set; }
 
-        //public Func<TSource, TKey> KeySelector { get; set; }
+        public bool ASC { get; set; }
 
-        public GetAllStaffQuery(string searchStr/*, Func<TSource, TKey> keySelector*/,int curPage, int pageSize)
+        public OrderByColumn OrderBy { get; set; }
+
+        public GetAllStaffQuery(string searchStr, OrderByColumn orderBy, bool asc, int curPage, int pageSize)
         {
+            this.ASC = asc;
             this.CurPage = curPage;
             this.PageSize = pageSize;
             this.SearchStr = searchStr;
+            this.OrderBy = orderBy;
+        }
+
+        public enum OrderByColumn
+        {
+            Email,
+            Name
         }
     }
 }
