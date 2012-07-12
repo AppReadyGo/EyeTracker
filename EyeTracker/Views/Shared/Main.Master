@@ -22,17 +22,15 @@
     <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/script.js")%>"></script>
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
     <script type="text/javascript">
-    /*
     var _mfyaq = _mfyaq || {};
-    _mfyaq.key = 'WP-000004-0013';
+    _mfyaq.key = 'WP-0002-000019';
 
     (function () {
         var mfyaq = document.createElement('script'); mfyaq.type = 'text/javascript'; mfyaq.async = true;
         mfyaq.src = ('https:' == document.location.protocol ? 'https://ssl' : ('//www' == document.location ? 'http://www' : 'http://'))
-        mfyaq.src += 'localhost:1058/Analytics/analytics.js';
+        mfyaq.src += 'localhost:1059/Analytics/analytics.js';
         var scr = document.getElementsByTagName('script')[0]; scr.parentNode.insertBefore(mfyaq, scr);
     })();
-    */
     </script>
     </head>
 <body id="page1" onLoad="new ElementMaxHeight();">
