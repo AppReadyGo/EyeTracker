@@ -49,7 +49,7 @@ namespace EyeTracker.Controllers
                 // Temprorary access just for special users
                 else if (!securedDetails.SpecialAccess && securedDetails.Roles == null)
                 {
-                    return Redirect("~/s/special-access-required");
+                    return Redirect("~/p/special-access-required");
                 }
                 else if (!Membership.Provider.ValidateUser(model.UserName, model.Password))
                 {
@@ -106,10 +106,10 @@ namespace EyeTracker.Controllers
                 {
                     //TODO: send welcome email
                     //new MailGenerator(this.ControllerContext).Send(new PromotionEmail("thank-you", model.Email));
-                    //return Redirect("~/s/thank-you");
+                    //return Redirect("~/p/thank-you");
                     //Waiting for activation
                     new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
-                    return Redirect("~/s/activation-email-sent");
+                    return Redirect("~/p/activation-email-sent");
                 }
                 else
                 {
@@ -141,7 +141,7 @@ namespace EyeTracker.Controllers
             {
                 throw new Exception("User does not found.");
             }
-            return Redirect("~/s/account-activated"); ;
+            return Redirect("~/p/account-activated"); ;
         }
 
         public ActionResult ForgotPassword()
@@ -158,7 +158,7 @@ namespace EyeTracker.Controllers
                 if (userDetails != null)
                 {
                     new MailGenerator(this.ControllerContext).Send(new ForgotPasswordMail(model.Email));
-                    return Redirect("~/s/forgot-password-email-sent"); // Redirect to content page
+                    return Redirect("~/p/forgot-password-email-sent"); // Redirect to content page
                 }
                 else
                 {
@@ -179,7 +179,7 @@ namespace EyeTracker.Controllers
             var userDetails = ObjectContainer.Instance.RunQuery(new GetUserDetailsByEmailQuery(splitedKey[1]));
             if (userDetails == null)
             {
-                throw new Exception("User does not found.");
+                throw new Exception("User not found.");
             }
             return View(new ResetPasswordModel(), BeforeLoginMasterModel.MenuItem.None);
         }
@@ -200,8 +200,30 @@ namespace EyeTracker.Controllers
                 {
                     ModelState.AddModelError("", "Wrong password.");
                 }
-                FormsAuthentication.SetAuthCookie(email, false);
-                return RedirectToAction("Index", "Home");
+                else if (!result.Result.HasValue)
+                {
+                    throw new Exception("User not found.");
+                }
+                else
+                {
+                    var securedDetails = ObjectContainer.Instance.RunQuery(new GetUserSecuredDetailsByEmailQuery(email));
+                    if (!securedDetails.Activated)
+                    {
+                        ObjectContainer.Instance.Dispatch(new ActivateUserCommand(email));
+                    }
+                    // Temprorary access just for special users
+                    if (!securedDetails.SpecialAccess && securedDetails.Roles == null)
+                    {
+                        return Redirect("~/p/special-access-required");
+                    }
+                    else
+                    {
+                        // TODO: add terms and conditions
+                        FormsAuthentication.SetAuthCookie(securedDetails.Id.ToString(), false);
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
             }
 
             return View(model, BeforeLoginMasterModel.MenuItem.None);
@@ -222,7 +244,7 @@ namespace EyeTracker.Controllers
                 {
                     ModelState.AddModelError("", "Wrong email.");
                 }
-                return Redirect("~/s/unsubscrubed-successful");
+                return Redirect("~/p/unsubscrubed-successful");
             }
             return View(model, BeforeLoginMasterModel.MenuItem.None);
         }

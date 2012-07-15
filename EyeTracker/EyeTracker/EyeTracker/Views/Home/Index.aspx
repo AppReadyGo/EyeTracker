@@ -58,10 +58,10 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
          </li>
 	</ul>
 	<ul class="pagination">
-		<li><a href="/products/eye-track" rel="0"><span>Eye tracker</span><small>Get more information</small></a></li>
-		<li><a href="/products/touch-map" rel="1"><span>Touch Map</span><small>Get more information</small></a></li>
-		<li><a href="/products/play-back" rel="2"><span>Play Back</span><small>Get more information</small></a></li>
-		<li><a href="/account/register" rel="3"><span>Life-cycle</span><small>Get more information</small></a></li>
+		<li><a href="/p/products/eye-track" rel="0"><span>Eye tracker</span><small>Get more information</small></a></li>
+		<li><a href="/p/products/touch-map" rel="1"><span>Touch Map</span><small>Get more information</small></a></li>
+		<li><a href="/p/products/play-back" rel="2"><span>Play Back</span><small>Get more information</small></a></li>
+		<li><a href="/p/account/register" rel="3"><span>Life-cycle</span><small>Get more information</small></a></li>
 	</ul>
 </div>
 <div class="inside">
@@ -77,7 +77,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
 										<div class="inner">
 											<h3>Touch Map</h3>
 											<p>Visualized reports of end-user attention held by each area, on every page of a given application.</p>
-											<div class="aligncenter"><a href="/products/touch-map" class="link1"><span><span>Learn More</span></span></a></div>
+											<div class="aligncenter"><a href="/p/products/touch-map" class="link1"><span><span>Learn More</span></span></a></div>
 										</div>
 									</div>
 								</div>
@@ -98,7 +98,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
 										<div class="inner">
 											<h3>Eye Track</h3>
 											<p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
-											<div class="aligncenter"><a href="/products/eye-track" class="link1"><span><span>Learn More</span></span></a></div>
+											<div class="aligncenter"><a href="/p/products/eye-track" class="link1"><span><span>Learn More</span></span></a></div>
 										</div>
 									</div>
 								</div>
@@ -119,7 +119,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
 										<div class="inner">
 											<h3>Play Back</h3>
 											<p>Rewind or watch your visitors' full browsing sessions to discover exactly how they use your application.</p>
-											<div class="aligncenter"><a href="/products/play-back" class="link1"><span><span>Learn More</span></span></a></div>
+											<div class="aligncenter"><a href="/p/products/play-back" class="link1"><span><span>Learn More</span></span></a></div>
 										</div>
 									</div>
 								</div>
@@ -169,17 +169,17 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
     <div>
         <h3>Touch Map</h3>
         <p>Visualized reports of end-user attention held by each area, on every page of a given application.</p>
-        <div class="action"><a href="/products/touch-map">Read more</a></div>
+        <div class="action"><a href="/p/products/touch-map">Read more</a></div>
     </div>
     <div>
         <h3>Play Back</h3>
         <p>Rewind or watch your visitors' full browsing sessions to discover exactly how they use your application.</p>
-        <div class="action"><a href="/products/play-back">Read more</a></div>
+        <div class="action"><a href="/p/products/play-back">Read more</a></div>
     </div>
     <div>
         <h3>Eye Track</h3>
         <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
-        <div class="action"><a href="/products/eye-track">Read more</a></div>
+        <div class="action"><a href="/p/products/eye-track">Read more</a></div>
     </div>
     <p style="clear:both;"></p>
 </div>--%>

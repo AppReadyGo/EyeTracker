@@ -6,9 +6,9 @@ using NHibernate.Linq;
 
 namespace EyeTracker.Domain.CommandHandlers.Users
 {
-    public class ResetPasswordCommandHandler : ICommandHandler<ResetPasswordCommand, bool>
+    public class ResetPasswordCommandHandler : ICommandHandler<ResetPasswordCommand, int?>
     {
-        public bool Execute(ISession session, ResetPasswordCommand cmd)
+        public int? Execute(ISession session, ResetPasswordCommand cmd)
         {
             var user = session.Query<User>()
                             .Where(u => u.Email.ToLower() == cmd.Email.ToLower())
@@ -17,11 +17,11 @@ namespace EyeTracker.Domain.CommandHandlers.Users
             if (user != null)
             {
                 user.ChangePassword(cmd.Password);
-                return true;
+                return user.Id;
             }
             else
             {
-                return false;
+                return null;
             }
         }
     }

@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="<%: Url.Content("~/Content/template/css/reset.css") %>" type="text/css" media="all">
     <link rel="stylesheet" href="<%: Url.Content("~/Content/template/css/layout.css") %>" type="text/css" media="all">
     <link rel="stylesheet" href="<%: Url.Content("~/Content/template/css/style.css") %>" type="text/css" media="all">
-
     <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/maxheight.js")%>"></script>
     <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/cufon-yui.js")%>"></script>
     <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/cufon-replace.js")%>"></script>
@@ -21,7 +20,7 @@
     <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/jquery.jqtransform.js")%>"></script>
     <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/script.js")%>"></script>
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
-    <script type="text/javascript">
+    <!--script type="text/javascript">
     var _mfyaq = _mfyaq || {};
     _mfyaq.key = 'WP-0002-000019';
 
@@ -31,17 +30,16 @@
         mfyaq.src += 'localhost:1059/Analytics/analytics.js';
         var scr = document.getElementsByTagName('script')[0]; scr.parentNode.insertBefore(mfyaq, scr);
     })();
-    </script>
+    </script-->
     </head>
 <body id="page1" onLoad="new ElementMaxHeight();">
 <asp:ContentPlaceHolder ID="MainContent" runat="server" />
 <script type="text/javascript">    Cufon.now(); </script>
-<!--
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-10271152-1']);
-  _gaq.push(['_setDomainName', 'mobillify.com']);
+  _gaq.push(['_setDomainName', 'finger.mobillify.com']);
   _gaq.push(['_trackPageview']);
 
   (function() {
@@ -51,6 +49,5 @@
   })();
 
 </script>
--->
 </body>
 </html>

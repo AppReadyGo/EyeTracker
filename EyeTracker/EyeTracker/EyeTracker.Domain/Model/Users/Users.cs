@@ -36,6 +36,7 @@ namespace EyeTracker.Domain.Model.Users
         protected User()
         {
             this.CreateDate = DateTime.UtcNow;
+            this.Membership = Membership.Basic;
             this.PasswordSalt = Encryption.GenerateSalt();
         }
 

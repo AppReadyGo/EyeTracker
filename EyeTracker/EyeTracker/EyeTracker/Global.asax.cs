@@ -199,7 +199,7 @@ namespace EyeTracker
                 new { controller = "Content", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional },
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
-
+            
 
             //routes.MapRoute(
             //    "AjaxVisit", 

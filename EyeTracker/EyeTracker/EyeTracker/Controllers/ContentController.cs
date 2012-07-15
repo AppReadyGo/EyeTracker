@@ -13,11 +13,14 @@ using EyeTracker.Common.Mails;
 using EyeTracker.Common.QueryResults.Content;
 using EyeTracker.Model;
 using EyeTracker.Common;
+using EyeTracker.Common.Logger;
+using System.Reflection;
 
 namespace EyeTracker.Controllers
 {
     public class ContentController : Controller
     {
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
         public ActionResult MailContent(string urlPart1, string urlPart2, string urlPart3)
         {
@@ -72,13 +75,21 @@ namespace EyeTracker.Controllers
 
         public ActionResult ErrorPage()
         {
-            if (ObjectContainer.Instance.CurrentUserDetails != null)
+            try
             {
-                return View("AuthenticatedError", new ContentModel { }, AfterLoginMasterModel.MenuItem.None);
+                if (ObjectContainer.Instance.CurrentUserDetails != null)
+                {
+                    return View("AuthenticatedError", new ContentModel { }, AfterLoginMasterModel.MenuItem.None);
+                }
+                else
+                {
+                    return View("PublicError", new ContentModel { }, BeforeLoginMasterModel.MenuItem.None);
+                }
             }
-            else
+            catch (Exception exp)
             {
-                return View("PublicError", new ContentModel { }, AfterLoginMasterModel.MenuItem.None);
+                log.WriteFatalError(exp, "Error to redirect to error page, show static error page.");
+                return Redirect("/fatal-error.html");
             }
         }
 
@@ -90,7 +101,7 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                return View("Public404", new ContentModel { }, AfterLoginMasterModel.MenuItem.None);
+                return View("Public404", new ContentModel { }, BeforeLoginMasterModel.MenuItem.None);
             }
         }
 

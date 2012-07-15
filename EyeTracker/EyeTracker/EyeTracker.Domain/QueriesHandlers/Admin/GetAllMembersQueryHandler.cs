@@ -49,6 +49,10 @@ namespace EyeTracker.Domain.Queries.Admin
             {
                 users = query.ASC ? users.OrderBy(u => u.LastName + " " + u.FirstName) : users.OrderByDescending(u => u.Email);
             }
+            else if (query.OrderBy == GetAllMembersQuery.OrderByColumn.CreateDate)
+            {
+                users = query.ASC ? users.OrderBy(u => u.CreateDate) : users.OrderByDescending(u => u.CreateDate);
+            }
 
             res.Users = users.Skip(res.PageSize * (res.CurPage - 1))
                         .Take(res.PageSize)
