@@ -36,11 +36,11 @@ INSERT INTO [cont].[Pages] ([ID], [ThemeID], [Url])
 VALUES (1, 3, 'products/touch-map'),
 		(2, 3, 'products/play-back'),
 		(3, 3, 'products/eye-track'),
-		(4, 3, 's/thank-you'),
-		(5, 3, 's/activation-email-sent'),
-		(6, 3, 's/account-activated'),
-		(7, 3, 's/forgot-password-email-sent'),
-		(8, 3, 's/unsubscrubed-successful'),
+		(4, 3, 'thank-you'),
+		(5, 3, 'activation-email-sent'),
+		(6, 3, 'account-activated'),
+		(7, 3, 'forgot-password-email-sent'),
+		(8, 3, 'unsubscrubed-successful'),
 		(9, 3, 'products'),
 		(10, 3, 'planandpricing'),
 		(11, 3, 'm/products/touch-map'),
@@ -48,7 +48,7 @@ VALUES (1, 3, 'products/touch-map'),
 		(13, 3, 'm/products/eye-track'),
 		(14, 3, 'm/products'),
 		(15, 3, 'm/planandpricing'),
-		(16, 3, 's/special-access-required');
+		(16, 3, 'special-access-required');
 
 SET IDENTITY_INSERT [cont].[Pages] OFF
 GO		
@@ -494,7 +494,7 @@ Having the cumulative statistics of your website visitor’s interaction within 
 </div>'),
 		(16, 0, 'title', 'Special Access Required'),
 		(16, 1, 'content', ' <article class="col center"><h2>Special Access Required</h2>
-							<p>At this stage we provide access just for selected number of users, </br>if you would like to get the access please contact us by the email: <a href=\"mailto:support@mobillify.com\">support@mobillify.com</a>.</p>
+							<p>At this stage we provide access just for selected number of users, </br>if you would like to get the access please contact us by the email: <a href="mailto:support@mobillify.com">support@mobillify.com</a>.</p>
 							</article>');
 
 GO

@@ -74,6 +74,7 @@
     <Compile Include="CommandHandlers\Content\CreateContentItemCommandHandler.cs" />
     <Compile Include="CommandHandlers\StoredProcedureCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\ActivateUserCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\RemoveUserCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\UnsubscribeCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\ResetPasswordCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\CreateUserCommandHandler.cs" />

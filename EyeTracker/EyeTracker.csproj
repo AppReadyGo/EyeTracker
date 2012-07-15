@@ -243,6 +243,7 @@
     <Content Include="Content\template\css\beforelogin.master.css" />
     <Content Include="Content\template\css\afterlogin.master.css" />
     <Content Include="Content\template\css\content.public.page.css" />
+    <Content Include="Content\template\css\error.css" />
     <Content Include="Content\template\css\secure.change.password.css" />
     <Content Include="Content\template\css\content.authenticated.page.css" />
     <Content Include="Content\template\css\form.css" />
@@ -333,6 +334,8 @@
     <Content Include="Content\themes\cupertino\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\themes\cupertino\jquery-ui.css" />
     <Content Include="Content\ThridParty\jquery.multiselect.css" />
+    <Content Include="maintenance.htm" />
+    <Content Include="fatal-error.html" />
     <Content Include="Resources\EyeTrack1.jpg" />
     <Content Include="Resources\EyeTrack2.jpg" />
     <Content Include="Resources\eye_track.jpg" />

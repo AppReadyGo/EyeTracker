@@ -16,6 +16,7 @@ using EyeTracker.Model.Pages.Admin;
 using EyeTracker.Model.Master;
 using EyeTracker.Common;
 using System.Web.Security;
+using EyeTracker.Common.Commands.Users;
 
 namespace EyeTracker.Controllers
 {
@@ -114,8 +115,8 @@ namespace EyeTracker.Controllers
 
         public ActionResult Members(string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")
         {
-            bool asc = string.IsNullOrEmpty(orderby) ? true : order.Equals("asc", StringComparison.OrdinalIgnoreCase);
-            var orderBy = string.IsNullOrEmpty(orderby) ? GetAllMembersQuery.OrderByColumn.Email : (GetAllMembersQuery.OrderByColumn)Enum.Parse(typeof(GetAllMembersQuery.OrderByColumn), orderby, true);
+            var orderBy = string.IsNullOrEmpty(orderby) ? GetAllMembersQuery.OrderByColumn.CreateDate : (GetAllMembersQuery.OrderByColumn)Enum.Parse(typeof(GetAllMembersQuery.OrderByColumn), orderby, true);
+            bool asc = string.IsNullOrEmpty(orderby) ? ((orderBy == GetAllMembersQuery.OrderByColumn.CreateDate) ? false : true) : order.Equals("asc", StringComparison.OrdinalIgnoreCase);
             var data = ObjectContainer.Instance.RunQuery(new GetAllMembersQuery(srch, orderBy, asc, cp, 15));
 
             var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
@@ -132,6 +133,7 @@ namespace EyeTracker.Controllers
                 SearchStr = srch,
                 EmailOrder = orderBy == GetAllMembersQuery.OrderByColumn.Email && asc ? "desc" : "asc",
                 NameOrder = orderBy == GetAllMembersQuery.OrderByColumn.Name && asc ? "desc" : "asc",
+                CreateDateOrder = orderBy == GetAllMembersQuery.OrderByColumn.CreateDate && asc ? "desc" : "asc",
                 Users = data.Users.Select((u, i) => new MemberDetailsModel
                 {
                     Id = u.Id,
@@ -146,6 +148,12 @@ namespace EyeTracker.Controllers
                 }).ToArray()
             };
             return View(model, AdminMasterModel.MenuItem.Members);
+        }
+
+        public ActionResult DeleteMember(int id)
+        {
+            var result = ObjectContainer.Instance.Dispatch(new RemoveUserCommand(id));
+            return RedirectToAction("Members");
         }
 
         public ActionResult Logs()

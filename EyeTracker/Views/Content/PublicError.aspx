@@ -8,7 +8,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, ContentModel>>" %>
 </asp:Content>
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
-   <link href="<%: Url.Content("~/Content/error.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%: Url.Content("~/Content/template/css/error.css") %>" rel="stylesheet" type="text/css" />
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">

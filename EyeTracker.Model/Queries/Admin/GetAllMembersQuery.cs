@@ -30,7 +30,8 @@ namespace EyeTracker.Common.Queries.Admin
         public enum OrderByColumn
         {
             Email,
-            Name
+            Name,
+            CreateDate
         }
     }
 }

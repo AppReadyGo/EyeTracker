@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EyeTracker.Common.Commands.Users
 {
-    public class ResetPasswordCommand : ICommand<bool>
+    public class ResetPasswordCommand : ICommand<int?>
     {
         public string Email { get; private set; }
         public string Password { get; private set; }

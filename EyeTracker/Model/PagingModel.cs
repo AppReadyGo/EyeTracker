@@ -42,6 +42,8 @@ namespace EyeTracker.Model
         public string EmailOrder { get; set; }
 
         public string NameOrder { get; set; }
+
+        public string CreateDateOrder { get; set; }
     }
 
     public class StaffDetailsModel

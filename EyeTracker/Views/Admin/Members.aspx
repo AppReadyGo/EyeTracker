@@ -15,7 +15,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
 	<h2>Members</h2>
 	<div class="t-nav">
         <div class="a-l actions">
-            <a href="/Admin/NewStaff" class="add-new-h2">+ Add New</a>
+            <a href="/Admin/NewMember" class="add-new-h2">+ Add New</a>
         </div>
 		<div class="a-l search-box">
 			<input type="search" id="user-search-input" name="s" value="<%=Model.View.SearchStr %>" />
@@ -42,7 +42,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
 			<th scope='col' id='activated' class='manage-column column-activated'>Activated</th>
 			<th scope='col' id='special_access' class='manage-column column-special-access'>Special Access</th>
 			<th scope='col' id='last_access_date' class='manage-column column-last-access num'>Last Access Date</th>	
-			<th scope='col' class='manage-column column-registred'>Registred Date</th>	
+			<th scope='col' class='manage-column column-registred sortable'><a href="/Admin/Members?cp=1&orderby=createdate&order=<%=Model.View.CreateDateOrder + Model.View.SearchStrUrlPart %>"><span>Registred Date</span><span class="sorting-indicator"></span></a></th>	
 		</tr>
 		</thead>
 		<tfoot>
@@ -52,7 +52,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
 			<th scope='col' class='manage-column column-activated'>Activated</th>
 			<th scope='col' class='manage-column column-special-access'>Special Access</th>
 			<th scope='col' class='manage-column column-last-access'>Last Access Date</th>	
-			<th scope='col' class='manage-column column-registred'>Registred Date</th>	
+			<th scope='col' class='manage-column column-registred sortable'><a href="/Admin/Members?cp=1&orderby=createdate&order=<%=Model.View.CreateDateOrder + Model.View.SearchStrUrlPart %>"><span>Registred Date</span><span class="sorting-indicator"></span></a></th>	
 		</tr>
 		</tfoot>
 		<tbody id="the-list" class='list:user'>
@@ -65,8 +65,8 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
 				<strong><a href='mailto:<%= user.Email %>' title='E-mail: <%= user.Email %>'><%= user.Email%></a></strong>
 				<br />
 				<div class="row-actions">
-					<span class='edit'><a href="/Admin/EditStaff/<%= user.Id %>">Edit</a> | </span>
-					<span class='delete'><a class='submitdelete' href='/Admin/DeleteStaff/<%= user.Id %>'>Delete</a></span>
+					<span class='edit'><a href="/Admin/EditMember/<%= user.Id %>">Edit</a> | </span>
+					<span class='delete'><a class='submitdelete' href='/Admin/DeleteMember/<%= user.Id %>' onclick="javascript:return confirm('Are you realy want to remove <%= user.Email %> user? The operation is not recoverable!');">Delete</a></span>
 				</div>
 			</td>
 			<td class="name column-name"><%= user.Name%></td>
@@ -98,7 +98,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
           }
           else
           {%>
-          <tr class="no-items"><td colspan="5" class="colspanchange">No matching staff were found.</td></tr>
+          <tr class="no-items"><td colspan="5" class="colspanchange">No matching members were found.</td></tr>
         <%} %>
 		</tbody>
 	</table>

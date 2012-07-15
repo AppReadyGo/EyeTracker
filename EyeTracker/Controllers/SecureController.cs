@@ -41,7 +41,7 @@ namespace EyeTracker.Controllers
                     {
                         //Redirect to error page
                     }
-                    //return Redirect("~/secure/s/password-changed-successful");
+                    //return Redirect("~/p/secure/password-changed-successful");
                     return Redirect("~/");
                 }
                 else

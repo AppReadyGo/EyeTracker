@@ -99,6 +99,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\Content\RemoveContentItemCommand.cs" />
     <Compile Include="Commands\Content\UpdateContentItemCommand.cs" />
+    <Compile Include="Commands\Users\RemoveUserCommand.cs" />
     <Compile Include="Entities\ApplicationType.cs" />
     <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\Membership.cs" />
