@@ -347,6 +347,7 @@
     <Content Include="Resources\TouchMap1.jpg" />
     <Content Include="Resources\touch_map.jpg" />
     <Content Include="Resources\touch_map.png" />
+    <Content Include="Restricted\Packages\fingerprint.jar" />
     <Content Include="Scripts\Analytics.Index.js" />
     <Content Include="Scripts\analytics.selector.js" />
     <Content Include="Scripts\analytics.master.js" />
@@ -560,7 +561,6 @@
   <ItemGroup>
     <Folder Include="Areas\m\Models\" />
     <Folder Include="Model\Pages\Secure\" />
-    <Folder Include="Restricted\Packages\" />
     <Folder Include="Scripts\Tests\UnitTests\" />
   </ItemGroup>
   <ItemGroup>
