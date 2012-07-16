@@ -213,6 +213,7 @@
     <Content Include="Content\content.master.css" />
     <Content Include="Content\after.login.master.css" />
     <Content Include="Content\images\logo_43.png" />
+    <Content Include="Content\images\manufacturers.png" />
     <Content Include="Content\images\sort.gif" />
     <Content Include="Content\shared\table.css" />
     <Content Include="Content\template\css\account.forgotpassword.css" />
@@ -488,6 +489,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Scripts\AnalyticsTemplate.js" />
+    <Content Include="test.htm" />
     <Content Include="Users_Resources\Screens\5.480.800.png" />
     <Content Include="Users_Resources\Screens\SC20120424-220947.png" />
     <Content Include="Views\Account\Unsubscribe.aspx" />
