@@ -197,54 +197,47 @@ namespace EyeTracker.Domain.Repositories
                         
                     };
 
-                    if (objPackageEvent.Sessions[0].Clicks != null)
-                    {
-                        //Clicks
-                        objPageView.Clicks = new List<Click>();
-                        objPackageEvent.Sessions[0].Clicks.ToList().ForEach(clickEvent =>
-                            objPageView.Clicks.Add(
-                            new Click()
-                            {
-                                PageView = objPageView,
-                                X = clickEvent.ClientX,
-                                Y = clickEvent.ClientY,
-                                Date = clickEvent.Date,
-                                Orientation = clickEvent.Orientation
-                            }));
-
-                    }
+                    
+                    //Clicks
+                    objPageView.Clicks = new List<Click>();
+                    objPackageEvent.Sessions[0].Clicks.ToList().ForEach(clickEvent =>
+                        objPageView.Clicks.Add(
+                        new Click()
+                        {
+                            PageView = objPageView,
+                            X = clickEvent.ClientX,
+                            Y = clickEvent.ClientY,
+                            Date = clickEvent.Date,
+                            Orientation = clickEvent.Orientation
+                        }));
                  
                     //ViewParts
-                    if ( objPackageEvent.Sessions[0].ScreenViewParts != null)
-                    {
-                        objPageView.ViewParts = objPackageEvent.Sessions
-                                                           .First()
-                                                           .ScreenViewParts
-                                                           .Select(viewPart => new ViewPart
-                                                           {
-                                                               StartDate = viewPart.StartDate,
-                                                               FinishDate = viewPart.FinishDate,
-                                                               X = viewPart.ScrollLeft,
-                                                               Y = viewPart.ScrollTop,
-                                                               Orientation = viewPart.Orientation,
-                                                               PageView = objPageView
-                                                           }).ToList();
-                    }
+                    objPageView.ViewParts = objPackageEvent.Sessions
+                                                        .First()
+                                                        .ScreenViewParts
+                                                        .Select(viewPart => new ViewPart
+                                                        {
+                                                            StartDate = viewPart.StartDate,
+                                                            FinishDate = viewPart.FinishDate,
+                                                            X = viewPart.ScrollLeft,
+                                                            Y = viewPart.ScrollTop,
+                                                            Orientation = viewPart.Orientation,
+                                                            PageView = objPageView
+                                                        }).ToList();
+                   
                    
 
                     //Scrolls
-                    if (objPackageEvent.Sessions[0].Scrolls != null)
+                    objPackageEvent.Sessions[0].Scrolls.ToList().ForEach(scrollEvent =>
+                    objPageView.Scrolls.Add(
+                    new Scroll()
                     {
-                        objPackageEvent.Sessions[0].Scrolls.ToList().ForEach(scrollEvent =>
-                       objPageView.Scrolls.Add(
-                       new Scroll()
-                       {
-                           PageView = objPageView,
-                           FirstTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.FirstTouch.Date),
-                           LastTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.LastTouch.Date),
-                       }));
+                        PageView = objPageView,
+                        FirstTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.FirstTouch.Date),
+                        LastTouch = objPageView.Clicks.FirstOrDefault(c => c.Date == scrollEvent.LastTouch.Date),
+                    }));
 
-                    }
+                    
                    
                     using (ITransaction transaction = session.BeginTransaction())
                     {
