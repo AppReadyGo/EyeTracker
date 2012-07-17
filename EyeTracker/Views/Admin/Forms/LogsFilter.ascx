@@ -7,7 +7,7 @@
     <label>From: <%: Html.TextBoxFor(m => m.FromDate)%></label>
     <label>To: <%: Html.TextBoxFor(m => m.ToDate)%></label>
     <label>Process Id: <%: Html.TextBoxFor(m => m.ProcessId)%></label>
-    <label>Thread Id: <%: Html.TextBoxFor(m => m.ThreadId)%></label><label>Current Server Time: <%: DateTime.Now.ToString() %></label></div>
+    <label>Thread Id: <%: Html.TextBoxFor(m => m.ThreadId)%></label><label>Current Server Time: <%: DateTime.UtcNow.ToString() %></label></div>
 </div>
 <p>
     <a href="/Admin/ClearLogs" class="link2 btn-clear"><span><span>Clear Logs</span></span></a>
