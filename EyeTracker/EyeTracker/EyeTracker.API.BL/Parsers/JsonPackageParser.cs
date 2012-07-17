@@ -81,9 +81,14 @@ namespace EyeTracker.API.BL.Parsers
                         Path = session.PageUri
                     };
 
-                    sessionEvent.Clicks = ParseData<JsonTouchDetails, ClickEvent, SessionInfoEvent>(session.TouchDetails, sessionEvent);
-                    sessionEvent.ScreenViewParts = ParseData<JsonViewAreaDetails, ViewPartEvent, SessionInfoEvent>(session.ViewAreaDetails, sessionEvent);
-                    sessionEvent.Scrolls = ParseData<JsonScrollDetails, ScrollEvent, SessionInfoEvent>(session.ScrollDetails, sessionEvent);
+                    //if not null should be parsed otherwise new () 
+                    sessionEvent.Clicks = session.TouchDetails != null ? 
+                        ParseData<JsonTouchDetails, ClickEvent, SessionInfoEvent>(session.TouchDetails, sessionEvent) : new List<ClickEvent>() ;
+                    sessionEvent.ScreenViewParts = session.ViewAreaDetails != null ? 
+                        ParseData<JsonViewAreaDetails, ViewPartEvent, SessionInfoEvent>(session.ViewAreaDetails, sessionEvent) : new List<ViewPartEvent>();
+                    sessionEvent.Scrolls = session.ScrollDetails != null ?
+                        ParseData<JsonScrollDetails, ScrollEvent, SessionInfoEvent>(session.ScrollDetails, sessionEvent) : new List<ScrollEvent>();
+
                     packageEvent.Sessions.Add(sessionEvent);
                 }
                 catch (Exception ex)
