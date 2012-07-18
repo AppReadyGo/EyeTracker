@@ -82,12 +82,12 @@ namespace EyeTracker.API.BL.Parsers
                         Path = session.PageUri
                     };
 
-                    //if not null should be parsed otherwise new () 
-                    sessionEvent.Clicks = session.TouchDetails != null ? 
+                    //if not null and not empty should be parsed otherwise new () 
+                    sessionEvent.Clicks = (session.TouchDetails != null && session.TouchDetails.Length > 0) ? 
                         ParseData<JsonTouchDetails, ClickEvent, SessionInfoEvent>(session.TouchDetails, sessionEvent) : new List<ClickEvent>() ;
-                    sessionEvent.ScreenViewParts = session.ViewAreaDetails != null ? 
+                    sessionEvent.ScreenViewParts = (session.ViewAreaDetails != null && session.ViewAreaDetails.Length > 0) ? 
                         ParseData<JsonViewAreaDetails, ViewPartEvent, SessionInfoEvent>(session.ViewAreaDetails, sessionEvent) : new List<ViewPartEvent>();
-                    sessionEvent.Scrolls = session.ScrollDetails != null ?
+                    sessionEvent.Scrolls = (session.ScrollDetails != null && session.ScrollDetails.Length > 0) ?
                         ParseData<JsonScrollDetails, ScrollEvent, SessionInfoEvent>(session.ScrollDetails, sessionEvent) : new List<ScrollEvent>();
 
                     packageEvent.Sessions.Add(sessionEvent);
@@ -103,18 +103,19 @@ namespace EyeTracker.API.BL.Parsers
         }
 
         /// <summary>
-        /// 
+        /// TODO : 
         /// </summary>
         /// <param name="mSate"></param>
         /// <param name="details"></param>
         /// <returns></returns>
         private List<E> ParseData<P,E,K>(P[] details, K parentEvent) where P : IPackage  where E : class where K:IEvent
         {
-            if (details == null || details.Length == 0)
-            {
-                log.WriteWarning("collection of type {0} is empty", typeof(P).Name);
-                return null;
-            }
+            //PM : not needed and should be checked before 
+            //if (details == null || details.Length == 0)
+            //{
+            //    log.WriteWarning("collection of type {0} is empty", typeof(P).Name);
+            //    return null;
+            //}
             var info = new List<E>();
 
             foreach (var item in details)
