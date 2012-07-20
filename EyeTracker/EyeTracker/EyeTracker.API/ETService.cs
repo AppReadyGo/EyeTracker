@@ -48,7 +48,7 @@ namespace EyeTracker.API
         [Description("Receives the package and stores it in DB")]
         public bool SubmitPackage(FPData instance)
         {
-            log.WriteInformation("Info: Status arrived");
+            log.WriteInformation("Info: Status arrived with Data: " + instance.val);
 
             try
             {
