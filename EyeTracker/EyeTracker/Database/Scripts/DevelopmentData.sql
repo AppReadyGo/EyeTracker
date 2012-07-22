@@ -2,8 +2,8 @@
 -- Script initilizate database with development data
 -- =============================================
 
-INSERT INTO [usr].[Users] ([UserTypeID], [Email], [Password], [PasswordSalt], [CreateDate], [Activated], [FirstName], [LastName],[Unsubscribed], [SpecialAccess])
-VALUES (1/*Staff*/, 'dev@mobillify.com', 'XW0mA5DzfN4XL851H/i1xNFFbMOdtjVAL6fjBN5monE='/*111111*/, '/WCjbQ==', '20120101', 1, 'Development', 'Mobillify', 0, 0);
+INSERT INTO [usr].[Users] ([UserTypeID], [Email], [Password], [PasswordSalt], [CreateDate], [Activated], [FirstName], [LastName],[Unsubscribed], [SpecialAccess],[MembershipID])
+VALUES (1/*Staff*/, 'dev@mobillify.com', 'XW0mA5DzfN4XL851H/i1xNFFbMOdtjVAL6fjBN5monE='/*111111*/, '/WCjbQ==', '20120101', 1, 'Development', 'Mobillify', 0, 0, (select [ID] from [usr].[Memberships] where Name = 'Pro'));
 
 GO
 
