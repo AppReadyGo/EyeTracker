@@ -76,8 +76,9 @@ namespace EyeTracker.Domain.QueriesHandlers.Admin
                 Message = a.Message,
                 FormattedMessage = a.FormattedMessage
             })
-                        .OrderByDescending(a => a.Timestamp)
-                        .ToArray();
+            .Take(100)
+            .OrderByDescending(a => a.Timestamp)
+            .ToArray();
 
             var auditIds = res.Log.Select(a => a.Id).ToArray();
 
