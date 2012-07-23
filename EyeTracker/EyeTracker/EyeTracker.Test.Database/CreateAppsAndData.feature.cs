@@ -88,7 +88,12 @@ this.FeatureBackground();
 #line 9
  testRunner.Then("I have added 10 apps");
 #line 10
- testRunner.And("I have created 50 touches for each app");
+ testRunner.And("I have added a screen for each app with height=1280 and width=600");
+#line 11
+ testRunner.And("I have added a page view for each app with client height=1280 and client width=60" +
+                    "0");
+#line 12
+ testRunner.And("I have created 50 touches for each page view");
 #line hidden
             this.ScenarioCleanup();
         }
