@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[Screen] (
     [Id]            BIGINT       IDENTITY (1, 1) NOT NULL,
-    [ApplicationId] INT          NOT NULL,
+    [ApplicationID] INT          NOT NULL,
+    [Path]          NVARCHAR (256) NOT NULL,
     [Width]         INT          NOT NULL,
     [Height]        INT          NOT NULL,
     [FileExtension] NVARCHAR (5) NOT NULL,

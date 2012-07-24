@@ -137,7 +137,7 @@ namespace EyeTracker.Models
         }
 
 
-        public static Image CreateViewHeatMap(IEnumerable<HeatMapDataResult> viewParts, int clientWidth, int clientHeight, Image bgImg)
+        public static Image CreateViewHeatMap(IEnumerable<HeatMapItemResult> viewParts, int clientWidth, int clientHeight, Image bgImg)
         {
             if (bgImg == null)
             {
@@ -184,7 +184,7 @@ namespace EyeTracker.Models
             return bgImg;
         }
 
-        public static Image CreateClickHeatMap(IEnumerable<ClickHeatMapDataResult> clicks, int clientWidth, int clientHeight, Image bgImg, int? maxHeight = null, int? maxWidth = null)
+        public static Image CreateClickHeatMap(IEnumerable<ClickHeatMapItemResult> clicks, int clientWidth, int clientHeight, Image bgImg, int? maxHeight = null, int? maxWidth = null)
         {
             if (bgImg == null)
             {

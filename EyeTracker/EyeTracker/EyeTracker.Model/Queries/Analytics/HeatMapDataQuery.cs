@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace EyeTracker.Common.Queries.Analytics
 {
-    public class HeatMapDataQuery : IQuery<IEnumerable<HeatMapDataResult>>
+    public class HeatMapDataQuery : IQuery<HeatMapDataResult>
     {
         public long AplicationId { get; private set; }
         public string Path { get; private set; }

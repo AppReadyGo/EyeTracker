@@ -7,10 +7,8 @@ namespace EyeTracker.Common.QueryResults.Analytics
 {
     public class ClickHeatMapDataResult
     {
-        public int Count { get; set; }
+        public ScreenResult Screen { get; set; }
 
-        public int ClientX { get; set; }
-
-        public int ClientY { get; set; }
+        public IEnumerable<ClickHeatMapItemResult> Data { get; set; }
     }
 }

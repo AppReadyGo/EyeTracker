@@ -18,6 +18,7 @@ using EyeTracker.Model.Master;
 using EyeTracker.Model.Pages.Analytics;
 using EyeTracker.Model.Pages.Home;
 using EyeTracker.Models;
+using EyeTracker.Common.QueryResults.Analytics;
 
 namespace EyeTracker.Controllers
 {
@@ -196,13 +197,14 @@ namespace EyeTracker.Controllers
 
         public FileResult ClickHeatMapImage(FilterParametersModel filter)
         {
-            var data = ObjectContainer.Instance.RunQuery(new ClickHeatMapDataQuery(filter.ApplicationId.Value, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
+            var result = ObjectContainer.Instance.RunQuery(new ClickHeatMapDataQuery(filter.ApplicationId.Value, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
+            
             byte[] imageData = null;
             Image image = null;
-            if (data.Any())
+            if (result.Data.Any())
             {
-                Image bgImg = GetBackgroundImage(filter.ApplicationId.Value, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height);
-                image = HeatMapImage_.CreateClickHeatMap(data, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, bgImg);
+                Image bgImg = GetBackgroundImage(result.Screen);
+                image = HeatMapImage_.CreateClickHeatMap(result.Data, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, bgImg);
             }
             else
             {
@@ -232,14 +234,15 @@ namespace EyeTracker.Controllers
 
         public FileResult ViewHeatMapImage(FilterParametersModel filter)
         {
-            var data = ObjectContainer.Instance.RunQuery(new HeatMapDataQuery(filter.ApplicationId.Value, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
+            var result = ObjectContainer.Instance.RunQuery(new HeatMapDataQuery(filter.ApplicationId.Value, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
+            
             byte[] imageData = null;
             Image image = null;
 
-            if (data.Any())
+            if (result.Data.Any())
             {
-                Image bgImg = GetBackgroundImage(filter.ApplicationId.Value, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height);
-                image = HeatMapImage_.CreateViewHeatMap(data, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, bgImg);
+                Image bgImg = GetBackgroundImage(result.Screen);
+                image = HeatMapImage_.CreateViewHeatMap(result.Data, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, bgImg);
             }
             else
             {
@@ -266,11 +269,14 @@ namespace EyeTracker.Controllers
             }
         }
 
-        private Image GetBackgroundImage(long appId, int clientWidth, int clientHeight)
+        private Image GetBackgroundImage(ScreenResult screen)
         {
-            string bgPath = Path.Combine(Server.MapPath("/Users_Resources/Screens"), string.Format("{0}.{1}.{2}.png", appId, clientWidth, clientHeight));
             Image bgImg = null;
-            if (System.IO.File.Exists(bgPath)) bgImg = Image.FromFile(bgPath);
+            if (screen != null)
+            {
+                string bgPath = Path.Combine(Server.MapPath("/Users_Resources/Screens"), string.Concat(screen.Id, ".", screen.FileExtension));
+                if (System.IO.File.Exists(bgPath)) bgImg = Image.FromFile(bgPath);
+            }
             return bgImg;
         }
 

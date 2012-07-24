@@ -115,10 +115,13 @@
     <Compile Include="Queries\GetPortfolioDetailsQuery.cs" />
     <Compile Include="QueryResults\Admin\StaffFullDetailsResult.cs" />
     <Compile Include="QueryResults\Admin\UserFullDetailsResult.cs" />
-    <Compile Include="QueryResults\ApplicationDetailsResult.cs" />
-    <Compile Include="Queries\GetApplicationDetailsQuery.cs" />
     <Compile Include="QueryResults\Analytics\ClickHeatMapDataResult.cs" />
     <Compile Include="QueryResults\Analytics\HeatMapDataResult.cs" />
+    <Compile Include="QueryResults\Analytics\ScreenResult.cs" />
+    <Compile Include="QueryResults\ApplicationDetailsResult.cs" />
+    <Compile Include="Queries\GetApplicationDetailsQuery.cs" />
+    <Compile Include="QueryResults\Analytics\ClickHeatMapItemResult.cs" />
+    <Compile Include="QueryResults\Analytics\HeatMapItemResult.cs" />
     <Compile Include="Queries\Users\GetUserDetailsByIdQuery.cs" />
     <Compile Include="Queries\Users\GetUserRolesQuery.cs" />
     <Compile Include="QueryResults\Analytics\ContentOverviewResult.cs" />
