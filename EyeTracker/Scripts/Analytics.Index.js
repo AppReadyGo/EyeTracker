@@ -13,7 +13,10 @@ $(document).ready(function () {
             }
         }
     });
-    $('.table ul li.portfolio > div.nav, .table ul li.app > div.nav').click(function () {
+    $('.table ul li.portfolio > div.nav').click(function () {
+        $(this).parent().find('div.expand').click();
+    });
+    $('.table ul li.app > div.nav').click(function () {
         var li = $(this).parent();
         if (!li.hasClass('disabled')) {
             window.location.href = li.attr('url');

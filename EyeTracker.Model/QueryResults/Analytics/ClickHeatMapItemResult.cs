@@ -5,10 +5,12 @@ using System.Text;
 
 namespace EyeTracker.Common.QueryResults.Analytics
 {
-    public class HeatMapDataResult
+    public class ClickHeatMapItemResult
     {
-        public ScreenResult Screen { get; set; }
+        public int Count { get; set; }
 
-        public IEnumerable<HeatMapItemResult> Data { get; set; }
+        public int ClientX { get; set; }
+
+        public int ClientY { get; set; }
     }
 }

@@ -13,7 +13,7 @@ using NHibernate.Transform;
 
 namespace EyeTracker.Domain.Queries
 {
-    public class HeatMapDataQueryHandler : IQueryHandler<HeatMapDataQuery, IEnumerable<HeatMapDataResult>>
+    public class HeatMapDataQueryHandler : IQueryHandler<HeatMapDataQuery, HeatMapDataResult>
     {
         private ISecurityContext securityContext;
 
@@ -22,12 +22,31 @@ namespace EyeTracker.Domain.Queries
             this.securityContext = securityContext;
         }
 
-        public IEnumerable<HeatMapDataResult> Run(ISession session, HeatMapDataQuery query)
+        public HeatMapDataResult Run(ISession session, HeatMapDataQuery query)
         {
+            var result = new HeatMapDataResult();
+
+            result.Screen = session.Query<Screen>()
+                    .Where(s => s.Application.Id == query.AplicationId &&
+                                s.Path.ToLower() == query.Path.ToLower() &&
+                                s.Width == query.ScreenSize.Width &&
+                                s.Height == query.ScreenSize.Height)
+                    .Select(s => new ScreenResult
+                    {
+                        Id = s.Id,
+                        Path = s.Path,
+                        ApplicationId = s.Application.Id,
+                        Height = s.Height,
+                        Width = s.Width,
+                        FileExtension = s.FileExtension
+                    })
+                    .FirstOrDefault();
+
+
             ViewPart viewPart = null;
             Application application = null;
             ViewPartData viewPartData = null;
-            return session.QueryOver<PageView>()
+            result.Data = session.QueryOver<PageView>()
                 .JoinAlias(p => p.ViewParts, () => viewPart)
                 .JoinAlias(p => p.Application, () => application)
                 .Where(p => application.Id == query.AplicationId &&
@@ -46,7 +65,7 @@ namespace EyeTracker.Domain.Queries
                 .TransformUsing(Transformers.AliasToBean<ViewPartData>())
                 .List<ViewPartData>()
                 .GroupBy(d => new { d.X, d.Y, d.ScreenHeight, d.ScreenWidth })
-                .Select(g => new HeatMapDataResult { ScrollLeft = g.Key.X, ScrollTop = g.Key.Y, ScreenHeight = g.Key.ScreenHeight, ScreenWidth = g.Key.ScreenWidth, TimeSpan = g.Count() })
+                .Select(g => new HeatMapItemResult { ScrollLeft = g.Key.X, ScrollTop = g.Key.Y, ScreenHeight = g.Key.ScreenHeight, ScreenWidth = g.Key.ScreenWidth, TimeSpan = g.Count() })
                 .ToList();
 
             //var result = session.Query<PageView>()
@@ -63,6 +82,8 @@ namespace EyeTracker.Domain.Queries
             //                .GroupBy(d => new { d.X, d.Y, d.ScreenHeight, d.ScreenWidth})
             //                .Select(g => new HeatMapDataResult { ScrollLeft = g.Key.X, ScrollTop = g.Key.Y, ScreenHeight = g.Key.ScreenHeight, ScreenWidth = g.Key.ScreenWidth, TimeSpan = g.Count() })
             //                .ToArray();
+
+            return result;
         }
 
         private class ViewPartData
