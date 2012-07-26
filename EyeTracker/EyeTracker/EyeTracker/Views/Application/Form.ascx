@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<EyeTracker.Model.Pages.Application.ApplicationModel>" %>
-<form id="edit_form" action="/Application/Edit" method="post">
+<form id="edit_form" action="/Application/Edit/" method="post">
     <%:Html.HiddenFor(m => m.Id) %>
     <%:Html.HiddenFor(m => m.PortfolioId) %>
     <table>
@@ -11,24 +11,6 @@
     </table>
     <p id="action_pnl"><a href="#" id="create_lnk" class="link2"><span><span>Create</span></span></a>&nbsp;<a class="link4" href="/Analytics"><span><span>Cancel</span></span></a></p>
     <div id="sample_code">
-        <!--div id="screens" class="step" style="display:none;">
-            <div id="img_preview" class="img-preview"><div><img src="" /><a>X</a></div></div>
-            <h3>2. Screenshots</h3>
-            <ul id="screens_list">
-            <%foreach (var curScreen in Model.ViewData.Screens)
-              { %>
-                <li><a class="remove-btn">&nbsp</a><a class="img-lnk" href="/Application/Screen/<%: Model.Id %>/<%:curScreen.Width %>/<%:curScreen.Height %>/screen.jpg"><%:curScreen.Width %>X<%:curScreen.Height %></a></li>
-            <%} %>
-            </ul>
-            <fieldset>
-                <legend>New Screen</legend>
-                <div class="error" id="screen_error"></div>
-                <div>Width: <input id="screen_width"/></div>
-                <div>Height: <input id="screen_height"/></div>
-                <div>Image: <input type="file" id="screen_img" name="screen_img"/></div>
-                <div><a id="add_screen_btn">add</a></div>
-            </fieldset>
-         </div-->
         <div id="sample_web_code" class="step">
             <strong>3. Paste this code on your site</strong>
             <div>Copy the following code, then paste it onto every page you want to track immediately before the closing &lt;/head&gt; tag.</div>

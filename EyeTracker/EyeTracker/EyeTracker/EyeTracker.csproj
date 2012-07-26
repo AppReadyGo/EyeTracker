@@ -499,6 +499,7 @@
     <Content Include="Views\Admin\Staff.aspx" />
     <Content Include="Views\Admin\Logs.aspx" />
     <Content Include="Views\Admin\Forms\LogsFilter.ascx" />
+    <Content Include="Views\Application\Screens.aspx" />
     <Content Include="Views\Content\AuthenticatedError.aspx" />
     <Content Include="Views\Content\PublicError.aspx" />
     <Content Include="Views\Content\Public404.aspx" />

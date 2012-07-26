@@ -47,7 +47,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                                 .Select(g => new
                                 {
                                     key = g.Key,
-                                    visits = g.Sum(a => a.Id)
+                                    visits = g.Count()
                                 })
                                 .ToArray();
 

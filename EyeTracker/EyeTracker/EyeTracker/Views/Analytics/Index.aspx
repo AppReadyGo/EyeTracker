@@ -61,7 +61,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
                 { 
                    foreach (var app in item.Applications)
                     { %>
-                    <li class="row app portfolio-<%: item.Id %>" url="/analytics/dashboard/?pid=<%: item.Id %>&aid=<%: app.Id %>">
+                    <li class="row app portfolio-<%: item.Id %><%: app.Visits != 0 ? "" : " disabled" %>" url="/analytics/dashboard/?pid=<%: item.Id %>&aid=<%: app.Id %>">
                         <div style="width:5%;" class="center"></div>
                         <div style="width:10%;" class="center">
                             <div class="<%: app.Visits > 0 ? "status-ok" : "status-alert"%>"></div>
