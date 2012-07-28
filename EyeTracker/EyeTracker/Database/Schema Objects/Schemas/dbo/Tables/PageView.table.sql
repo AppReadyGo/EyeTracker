@@ -30,7 +30,9 @@ ADD CONSTRAINT [FK_PageView_OperationSystem] FOREIGN KEY ([OperationSystemId]) R
 GO
 
 ALTER TABLE [dbo].[PageView]
-ADD CONSTRAINT [FK_PageView_Application] FOREIGN KEY ([ApplicationId]) REFERENCES [dbo].[Application] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT [FK_PageView_Application] FOREIGN KEY ([ApplicationId]) REFERENCES [dbo].[Application] ([Id]) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
 GO
 
 ALTER TABLE [dbo].[PageView]
