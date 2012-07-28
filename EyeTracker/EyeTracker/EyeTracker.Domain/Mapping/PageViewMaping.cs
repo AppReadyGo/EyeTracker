@@ -52,6 +52,7 @@ namespace EyeTracker.Domain.Mapping
                 map.Lazy(LazyRelation.NoLazy);
                 map.Column("ApplicationId");
                 map.Cascade(Cascade.All);
+               
             });
 
             Bag(p => p.Clicks, map =>

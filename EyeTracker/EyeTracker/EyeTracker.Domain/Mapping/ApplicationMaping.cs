@@ -26,13 +26,24 @@ namespace EyeTracker.Domain.Mapping
                 map.Column("PortfolioID");
                 map.Cascade(Cascade.DeleteOrphans);
             });
-            Set(p => p.Screens, 
-                map => {
-                    map.Key(k => k.Column("ApplicationID"));
-                    map.Table("ApplicationScreens");
-                    map.Cascade(Cascade.All);
-                },
-                rel => rel.OneToMany() );
+
+
+            //Set(p => p.Screens, 
+            //    map => {
+            //        map.Key(k => k.Column("ApplicationID"));
+            //        map.Table("ApplicationScreens");
+            //        map.Cascade(Cascade.DeleteOrphans);
+            //       // map.Inverse(false);
+            //    },
+            //    rel => rel.OneToMany() );
+
+            Bag(p => p.Screens, map =>
+            {
+                map.Key(k => k.Column("ApplicationId"));
+                map.Lazy(CollectionLazy.Lazy);
+                map.Cascade(Cascade.All);
+                map.Inverse(true);
+            }, prop => prop.OneToMany());
         }
     }
 }
