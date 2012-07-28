@@ -13,13 +13,14 @@ namespace EyeTracker.Domain.Mapping
         public ScreenMapping()
         {
             Id(p => p.Id, map => map.Generator(Generators.Identity));
-
+            //Property(p => p.ApplicationId, map => { map.NotNullable(true); });
             ManyToOne(p => p.Application, map =>
             {
                 map.NotNullable(true);
-                map.Column("ApplicationID");
+                map.Column("ApplicationId");
                 map.Cascade(Cascade.All);
-            }); 
+               
+            });
             
             Property(p => p.Path, map => { map.NotNullable(true); map.Length(256); });
             Property(p => p.Height, map => map.NotNullable(true));
