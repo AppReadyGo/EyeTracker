@@ -20,28 +20,51 @@ namespace EyeTracker.Test.Database
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
+                var apps = session.Query<Application>().Where(app => app.Description.Contains("specflow test app "));
+
+
+                //using (ITransaction t = session.BeginTransaction())
+                //{
+
+                //    apps.ForEach(app =>
+                //                     {
+                //                         foreach (var screen in app.Screens)
+                //                         {
+                //                             //screen.Application = 0;
+                //                             //session.Delete(screen);
+                //                             //screen = null;
+                //                         }
+                //                         var collection = app.Screens as ICollection<Screen>;
+                //                         if (collection != null)
+                //                             collection.Clear();
+                //                     });
+                //    t.Commit();
+                //}
+
                 using (ITransaction t = session.BeginTransaction())
                 {
-                    var apps = session.Query<Application>().Where(app => app.Description.Contains("specflow test app "));
-                    apps.ForEach(app =>
-                                     {
-                                         app.Screens.ForEach(screen =>
-                                                                 {
-                                                                     session.Delete(screen);
-                                                                     screen = null;
-                                                                 });
-                                         app.Screens = null;
-                                     });
 
-                    apps.ForEach(app =>
+                    //apps.ForEach(app =>
+                    //{
+                    //    session.Delete(app);
+
+                    //});
+                    foreach (var application in apps)
                     {
-                        session.Delete(app);
+                        foreach (var screen in application.Screens)
+                        {
+                            session.Delete(screen);
+                        }
+                        var collection = application.Screens as ICollection<Screen>;
+                        if (collection != null)
+                            collection.Clear();
+                        session.Delete(application);
+                    }
 
-                    });
-                    //here:test
                     t.Commit();
-
                 }
+
+               
             }
         }
 
@@ -116,7 +139,8 @@ namespace EyeTracker.Test.Database
                     foreach (var app in apps)
                     {
                         Screen screen = new Screen();
-                        screen.ApplicationId = app.Id;
+                        //screen.ApplicationId = app.Id;
+                        screen.Application = app;
                         screen.Height = screenHeight;
                         screen.Width = screenWidth;
                         screen.FileExtension = "jpg";
