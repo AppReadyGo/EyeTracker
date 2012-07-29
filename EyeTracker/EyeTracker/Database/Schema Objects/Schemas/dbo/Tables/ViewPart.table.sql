@@ -13,6 +13,8 @@ CREATE TABLE [dbo].[ViewPart] (
 GO
 
 ALTER TABLE [dbo].[ViewPart]
-ADD CONSTRAINT [FK_ViewPart_PageView] FOREIGN KEY ([PageViewId]) REFERENCES [dbo].[PageView] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT [FK_ViewPart_PageView] FOREIGN KEY ([PageViewId]) REFERENCES [dbo].[PageView] ([Id]) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
 GO
 

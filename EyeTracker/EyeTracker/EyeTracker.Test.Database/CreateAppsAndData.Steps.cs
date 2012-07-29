@@ -16,7 +16,7 @@ namespace EyeTracker.Test.Database
     public class CreateAppsAndData
     {
         [Given(@"I have cleared the relevant tables")]
-        public void GivenIHaveClearedTheRelevantTables()
+        public void IHaveClearedTheRelevantTables()
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -77,7 +77,7 @@ namespace EyeTracker.Test.Database
         }
 
         [Then("I have added (.*) apps")]
-        public void ThenIHaveAddedNApps(int appsNumber)
+        public void IHaveAddedNApps(int appsNumber)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -98,7 +98,7 @@ namespace EyeTracker.Test.Database
         }
 
         [Then("I have created (.*) touches for each page view")]
-        public void ThenICHaveCreatedNTouches(int touchesNumberPerApp)
+        public void IHaveCreatedNTouches(int touchesNumberPerApp)
         {
             Random random = new Random();
             
@@ -128,8 +128,68 @@ namespace EyeTracker.Test.Database
             }
         }
 
+        [Then(@"I have created (.*) scrolls for each page view")]
+        public void IHaveCreatedNScrollsForEachPageView(int scrollsNumber)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                using (ITransaction t = session.BeginTransaction())
+                {
+                    var apps = session.Query<Application>().Where(app => app.Description.Contains("specflow test app "));
+                    foreach (var app in apps)
+                    {
+                        var pageView = session.Query<PageView>().First(pv => pv.Application.Id == app.Id);
+                        for (int i = 0; i < scrollsNumber; i++)
+                        {
+                            Scroll scroll = new Scroll();
+                            scroll.PageView = pageView;
+                            scroll.FirstTouch = pageView.Clicks.First();
+                            scroll.LastTouch = pageView.Clicks.Last();
+
+                            pageView.Scrolls.Add(scroll);
+                        }
+                        session.Save(pageView);
+                    }
+                    t.Commit();
+                }
+            }
+        }
+
+        [Then(@"I have created (.*) viewparts for each page view")]
+        public void IHaveCreated10ViewpartsForEachPageView(int viewPartsNumber)
+        {
+            Random random = new Random();
+
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                using (ITransaction t = session.BeginTransaction())
+                {
+                    var apps = session.Query<Application>().Where(app => app.Description.Contains("specflow test app "));
+                    foreach (var app in apps)
+                    {
+                        var pageView = session.Query<PageView>().First(pv => pv.Application.Id == app.Id);
+                        for (int i = 0; i < viewPartsNumber; i++)
+                        {
+                            ViewPart viewPart = new ViewPart();
+                            viewPart.PageView = pageView;
+                            viewPart.X = random.Next(0, pageView.ClientWidth);
+                            viewPart.Y = random.Next(0, pageView.ClientHeight);
+                            viewPart.Orientation = random.Next(0, 1);
+                            viewPart.StartDate = DateTime.UtcNow.AddSeconds(i - viewPartsNumber);
+                            viewPart.FinishDate = DateTime.UtcNow;
+
+                            pageView.ViewParts.Add(viewPart);
+                        }
+                        session.Save(pageView);
+                    }
+                    t.Commit();
+                }
+            }
+        }
+
+
         [Then(@"I have added a screen for each app with height=(.*) and width=(.*)")]
-        public void ThenIHaveAddedAScreenForEachApp(int screenHeight, int screenWidth)
+        public void IHaveAddedAScreenForEachApp(int screenHeight, int screenWidth)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -139,7 +199,7 @@ namespace EyeTracker.Test.Database
                     foreach (var app in apps)
                     {
                         Screen screen = new Screen();
-                        //screen.ApplicationId = app.Id;
+                        screen.Path = "add path";
                         screen.Application = app;
                         screen.Height = screenHeight;
                         screen.Width = screenWidth;
@@ -154,7 +214,7 @@ namespace EyeTracker.Test.Database
 
 
         [Then(@"I have added a page view for each app with client height=(.*) and client width=(.*)")]
-        public void ThenIHaveAddedAPageViewForEachApp(int clientHeight, int clientWidth )
+        public void IHaveAddedAPageViewForEachApp(int clientHeight, int clientWidth )
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
