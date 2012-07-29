@@ -94,6 +94,8 @@ this.FeatureBackground();
                     "0");
 #line 12
  testRunner.And("I have created 50 touches for each page view");
+#line 14
+ testRunner.And("I have created 10 viewparts for each page view");
 #line hidden
             this.ScenarioCleanup();
         }
