@@ -202,7 +202,7 @@ namespace EyeTracker.Models
             bmpPic = SetImgOpacity((Image)bmpPic, IMAGE_OPACITY);
             foreach (var curClick in clicks)
             {
-                var pntBmp = CreateBlurPoint(33, GetColorFromWaveLength(((int)(curClick.Count * WAVE_LENGTH_DIFF / maxCounter)) + WAVE_LENGTH_BLUE));
+                var pntBmp = CreateBlurPoint(10, GetColorFromWaveLength(((int)(curClick.Count * WAVE_LENGTH_DIFF / maxCounter)) + WAVE_LENGTH_BLUE));
                 //bmpPic.SetPixel(curClick.ClientX, curClick.ClientY, getColorFromWaveLength(((int)(curClick.Count * WAVE_LENGTH_DIFF / maxCounter)) + WAVE_LENGTH_BLUE));
                 using (Graphics g = Graphics.FromImage(bmpPic))
                 {
