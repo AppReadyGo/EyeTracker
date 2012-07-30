@@ -1,7 +1,11 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<script type="text/javascript" src="Scripts/ThridParty/jquery-1.4.1.js"></script>
+
+
     <title></title>
+    <link rel="stylesheet" href="/Content/template/css/reset.css" type="text/css" media="all">
     <style>
 article {
   padding: 30px 0 20px 0;
@@ -75,6 +79,49 @@ article {
     <li><a href="http://www.symbian.org/" class="symbian">Symbian</a></li>
     <li><a href="http://meego.com/" class="meego">MeeGo&trade;</a></li>
   </ul>
-  </div>
+  </article>
+  <br />
+  <style>
+.crumbs{width:300px;overflow:hidden;height:2.3em;border:1px solid #dedede;position:relative;}
+.crumbs ul{width:10000px;height:2.3em;}
+.crumbs ul li {float:left;line-height:2.3em;padding-left:.75em;color:#777;}
+.crumbs ul li a {
+display:block;
+padding:0 15px 0 0;
+background:url(/Content/images/crumbs.gif) no-repeat right center;
+}
+.crumbs ul li a:link, .crumbs ul li a:visited {
+text-decoration:none;
+color:#777;
+}
+.crumbs ul li a:hover, .crumbs ul li a:focus {
+color:#dd2c0d;
+}
+ul li.first,ul li.last{display:none;}
+ul.previous li.first{display:block; position:absolute;left:0px;border-right:1px solid #d8d8d8;padding-left:0px !important;width:30px;}
+ul.previous li.first a{background:url(/Content/images/left.png) no-repeat left center !important;}
+ul.next li.last{display:block; position:absolute;right:0px;}
+ul.next li.last a{background:url(/Content/images/right.png) no-repeat right center !important;border-left:1px solid #d8d8d8;padding:0px !important;width:30px;}
+
+ 
+
+</style>
+<script type="text/javascript" >
+    $(document).ready(function () { 
+    
+    });
+</script>
+
+<div class="crumbs">
+<ul class="previous next">
+    <li class="first"><a href="#">&nbsp</a></li>
+    <li class="second"><a href="#">Portfolios</a></li>
+    <li><a href="#">Main section</a></li>
+    <li><a href="#">Sub section</a></li>
+    <li><a href="#">Sub sub section</a></li>
+    <li>The page you are on right now</li>
+    <li class="last"><a href="#">&nbsp</a></li>
+</ul>
+</div>
 </body>
 </html>
