@@ -23,8 +23,8 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel>>" %>
 						<nav>
 							<ul>
                                 <li <%= Model.Master.AnalyticsCssClassAttribute %>><a href="/">Analytics</a></li>
-                                <%--<li <%= Model.Master.MyAccountCssClassAttribute %>><a href="/">My Account</a></li>
-                                <li <%= Model.Master.TutorialsCssClassAttribute %>><a href="/Tutorials/">Tutorials</a></li>--%>
+                                <%--<li <%= Model.Master.MyAccountCssClassAttribute %>><a href="/">My Account</a></li>--%>
+                                <li <%= Model.Master.TutorialsCssClassAttribute %>><a href="/p/Tutorials">Get Started</a></li>
                                 <li <%= Model.Master.ProductsCssClassAttribute %>><a href="/p/Products">Products</a></li>
                                 <li <%= Model.Master.PlanAndPricingCssClassAttribute %>><a href="/p/PlanAndPricing">Plans and Pricing</a></li>
                                 <%--<li <%= Model.Master.ContactsCssClassAttribute %>><a href="/Contacts">Contacts</a></li>--%>
