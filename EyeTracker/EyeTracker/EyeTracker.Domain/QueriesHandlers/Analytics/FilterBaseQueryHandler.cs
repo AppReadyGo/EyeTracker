@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Drawing;
-using EyeTracker.Common.Queries.Analytics;
+using EyeTracker.Common.QueryResults.Analytics.QueryResults;
+using EyeTracker.Common.QueryResults.Application;
+using EyeTracker.Common.QueryResults.Portfolio;
+using EyeTracker.Domain.Model;
 using NHibernate;
 using NHibernate.Linq;
-using EyeTracker.Domain.Model;
-using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {
@@ -32,7 +30,7 @@ namespace EyeTracker.Domain.Queries.Analytics
 
             var portfoliosIds = portfolios.Select(p => p.key).ToArray();
 
-            var applications = session.Query<Application>()
+            var applications = session.Query<Model.Application>()
                 .Where(a => portfoliosIds.Contains(a.Portfolio.Id))
                 .Select(a => new
                 {

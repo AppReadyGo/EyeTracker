@@ -62,14 +62,17 @@
   <ItemGroup>
     <Compile Include="CommandHandlers\Admin\ClearLogCommandHandler.cs" />
     <Compile Include="CommandHandlers\API\AddPackageCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\AddScreenCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\RemoveScreenCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\UpdateScreenCommandHandler.cs" />
     <Compile Include="CommandHandlers\Content\CreatePageCommandHandler.cs" />
     <Compile Include="CommandHandlers\Content\UpdatePageCommandHandler.cs" />
     <Compile Include="CommandHandlers\CreatePortfolioCommandHandler.cs" />
     <Compile Include="CommandHandlers\RemovePortfolioCommandHandler.cs" />
     <Compile Include="CommandHandlers\UpdatePortfolioCommandHandler.cs" />
-    <Compile Include="CommandHandlers\RemoveApplicationCommandHandler.cs" />
-    <Compile Include="CommandHandlers\CreateApplicationCommandHandler.cs" />
-    <Compile Include="CommandHandlers\UpdateApplicationCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\RemoveApplicationCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\CreateApplicationCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\UpdateApplicationCommandHandler.cs" />
     <Compile Include="CommandHandlers\ICommandHandler.cs" />
     <Compile Include="CommandHandlers\Content\CreateContentItemCommandHandler.cs" />
     <Compile Include="CommandHandlers\StoredProcedureCommandHandler.cs" />
@@ -152,7 +155,10 @@
     <Compile Include="QueriesHandlers\Analytics\HeatMapDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\FilterQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\ClickHeatMapDataQueryHandler.cs" />
-    <Compile Include="QueriesHandlers\Analytics\PortfoliosQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\GetAllApplicationsQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\GetScreenDetailsQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\ScreensQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\PortfoliosQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\FingerPrintViewDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\DashboardViewDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\FilterBaseQueryHandler.cs" />
@@ -167,7 +173,7 @@
     <Compile Include="QueriesHandlers\Content\GetSystemMailQuery.cs" />
     <Compile Include="QueriesHandlers\Content\GetThemeQuery.cs" />
     <Compile Include="QueriesHandlers\GetPortfolioDetailsQueryHandler.cs" />
-    <Compile Include="QueriesHandlers\GetApplicationDetailsQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\GetApplicationDetailsQueryHandler.cs" />
     <Compile Include="QueriesHandlers\IQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserRolesQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Users\GetUserDetailsByIdQueryHandler.cs" />

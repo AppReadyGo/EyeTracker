@@ -44,7 +44,7 @@ namespace EyeTracker.Domain.Queries
 
 
             ViewPart viewPart = null;
-            Application application = null;
+            Model.Application application = null;
             ViewPartData viewPartData = null;
             result.Data = session.QueryOver<PageView>()
                 .JoinAlias(p => p.ViewParts, () => viewPart)
