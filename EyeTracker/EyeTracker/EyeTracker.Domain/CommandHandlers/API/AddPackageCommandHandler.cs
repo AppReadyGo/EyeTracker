@@ -12,7 +12,7 @@ namespace EyeTracker.Domain.CommandHandlers.API
     {
         public int Execute(ISession session, AddPackageCommand cmd)
         {
-            var application = session.Get<Application>(cmd.ApplicationId);
+            var application = session.Get<Model.Application>(cmd.ApplicationId);
 
             foreach (var s in cmd.Sessions)
             {
