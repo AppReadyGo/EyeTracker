@@ -105,13 +105,13 @@ namespace EyeTracker
             routes.MapRoute(
                 "Application", 
                 "Application/{action}/{id}",
-                new { controller = "Application", action = "New" },
+                new { controller = "Application", action = "Index" },
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
-                "ApplicationDef", 
-                "Application/{portfolioId}",
+                "ApplicationIndex",
+                "Application/{id}",
                 new { controller = "Application", action = "Index" },
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
@@ -138,8 +138,8 @@ namespace EyeTracker
 
             routes.MapRoute(
                 "Analytics",
-                "Analytics/{action}/{id}",
-                new { controller = "Analytics", action = "Index", id = UrlParameter.Optional },
+                "Analytics/{action}/",
+                new { controller = "Analytics", action = "Index"},
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
@@ -159,8 +159,14 @@ namespace EyeTracker
 
             routes.MapRoute(
                 "Packages",
-                "Packages/{filename}.jar",
+                "Packages/{filename}",
                 new { controller = "Files", action = "Packages" }
+            );
+
+            routes.MapRoute(
+                "Screens",
+                "Screens/{filename}",
+                new { controller = "Files", action = "Screens" }
             );
 
 

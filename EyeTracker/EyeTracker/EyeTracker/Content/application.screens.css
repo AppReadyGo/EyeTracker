@@ -1,0 +1,7 @@
+﻿
+div.status-ok{margin:4px auto auto; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -321px -41px transparent;}
+div.status-alert{margin:4px auto auto; width:20px;height:20px; background:url("images/sprite.10.png") no-repeat scroll -342px -41px transparent;}
+
+.column-image{width: 80px;padding: 8px;}
+
+.content-wrapper{padding:20px;}

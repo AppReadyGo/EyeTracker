@@ -7,5 +7,7 @@ namespace EyeTracker.Model.Pages.Application
     {
         [DisplayName("Type")]
         public new ApplicationType Type { get; set; }
+
+        public int? SelectedApplicationId { get; set; }
     }
 }

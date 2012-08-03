@@ -1,0 +1,9 @@
+﻿
+.crumb .inner{background:url(/Content/images/crumb-middle.png) repeat-x center center;height:55px;}
+.crumb .border-right{background:url(/Content/images/crumb-right.png) no-repeat center right;padding-right:7px;}
+.crumb .border-left{background:url(/Content/images/crumb-left.png) no-repeat center left;padding-left:7px;}
+.crumb .inner ul{height:40px;}
+.crumb .inner ul li {overflow:hidden;float:left;line-height:50px;padding-right:18px;background:url(/Content/images/crumb-separator.png) no-repeat center right;height:53px;}
+.crumb .inner ul li h4{padding-left:10px;line-height:50px;margin:0px;}
+.main-content{padding:6px 0px 0px 0px !important;}
+

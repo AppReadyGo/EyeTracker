@@ -47,14 +47,28 @@ namespace EyeTracker.Controllers
         [Authorize]
         public FileResult Packages(string filename)
         {
-            string packagePath = Server.MapPath(string.Format("~/Restricted/Packages/{0}.jar", filename));
-            var file = new FileInfo(packagePath);
-            if (file.Exists)
+            string packagePath = Server.MapPath(string.Format("~/Restricted/Packages/{0}", filename));
+
+            if (System.IO.File.Exists(packagePath))
             {
-                using (var fs = file.OpenRead())
-                {
-                    return base.File(fs, "application/java-archive", filename + ".jar");
-                }
+                var contentType = Path.GetExtension(filename) == ".jar" ? "application/java-archive" : "text/plain";
+                return base.File(packagePath, contentType, filename);
+            }
+            else
+            {
+                throw new HttpException(404, "Not found");
+            }
+        }
+
+        [Authorize]
+        public FileResult Screens(string filename)
+        {
+            string screenPath = Server.MapPath(string.Format("~/Restricted/Screens/{0}", filename));
+
+            if (System.IO.File.Exists(screenPath))
+            {
+                var contentType = "image/" + (Path.GetExtension(filename) == ".png" ? "png" : "jpeg");
+                return base.File(screenPath, contentType, filename);
             }
             else
             {

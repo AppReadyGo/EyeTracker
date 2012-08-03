@@ -5,7 +5,7 @@ using EyeTracker.Model.Filter;
 
 namespace EyeTracker.Model.Pages.Application
 {
-    public class ApplicationModel : FilterModel
+    public class ApplicationModel
     {
         public int Id { get; set; }
 
@@ -19,7 +19,7 @@ namespace EyeTracker.Model.Pages.Application
 
         [Required]
         [DisplayName("Type")]
-        public ApplicationType Type { get; set; }
+        public int Type { get; set; }
 
         public ApplicationViewModel ViewData { get; set; }
     }

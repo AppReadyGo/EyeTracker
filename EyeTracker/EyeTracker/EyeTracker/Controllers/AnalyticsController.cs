@@ -32,13 +32,6 @@ namespace EyeTracker.Controllers
             get { return AfterLoginMasterModel.MenuItem.Analytics; }
         }
 
-        public ActionResult Index()
-        {
-            var portfolios = ObjectContainer.Instance.RunQuery(new PortfoliosQuery());
-            ViewData["IsAdmin"] = User.IsInRole(StaffRole.Administrator.ToString());
-            return View(new IndexViewModel(portfolios.PortfoliosData), AnalyticsMasterModel.MenuItem.Portfolios);
-        }
-
         public ActionResult Dashboard(FilterParametersModel filter)
         {
             log.WriteInformation("Dashboard");
@@ -274,7 +267,7 @@ namespace EyeTracker.Controllers
             Image bgImg = null;
             if (screen != null)
             {
-                string bgPath = Path.Combine(Server.MapPath("/Users_Resources/Screens"), string.Concat(screen.Id, ".", screen.FileExtension));
+                string bgPath = Path.Combine(Server.MapPath("~/Restricted/Screens/"), string.Concat(screen.Id, screen.FileExtension));
                 if (System.IO.File.Exists(bgPath)) bgImg = Image.FromFile(bgPath);
             }
             return bgImg;
