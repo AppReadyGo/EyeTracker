@@ -1,3 +1,6 @@
 ﻿
 
-form input.name{width:300px;}
+form input.name{width:100%;}
+form p{padding:0px;}
+
+.content-wrapper{width:600px;margin:auto;padding:20px 20px 40px;}

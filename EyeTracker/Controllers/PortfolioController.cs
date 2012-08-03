@@ -18,11 +18,12 @@ using EyeTracker.Model.Pages.Analytics;
 using EyeTracker.Common.Commands;
 using EyeTracker.Core;
 using EyeTracker.Common.Queries.Users;
+using EyeTracker.Common.Queries.Analytics;
 
 namespace EyeTracker.Controllers
 {
     [Authorize]
-    public class PortfolioController : FilterController
+    public class PortfolioController : AfterLoginController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -31,11 +32,40 @@ namespace EyeTracker.Controllers
             get { return AfterLoginMasterModel.MenuItem.Analytics; }
         }
 
+        public ActionResult Index(string srch = "", int scol = 1, int cp = 1)
+        {
+            var data = ObjectContainer.Instance.RunQuery(new PortfoliosQuery(srch, cp, 15));
+            ViewData["IsAdmin"] = User.IsInRole(StaffRole.Administrator.ToString());
+
+            var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
+            var model = new PortfolioIndexModel
+            {
+                IsOnePage = data.TotalPages == 1,
+                Count = data.Count,
+                PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
+                NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
+                TotalPages = data.TotalPages,
+                CurPage = data.CurPage,
+                SearchStrUrlPart = searchStrUrlPart,
+                SearchStr = srch,
+                Portfolios = data.Portfolios.Select((p, i) => new PortfolioItemModel
+                {
+                    Id = p.Id,
+                    Description = p.Description,
+                    IsActive = p.IsActive,
+                    IsAlternative = i % 2 != 0,
+                    ApplicationsCount = p.ApplicationsCount,
+                    Visits = p.Visits
+                }).ToArray()
+            };
+            return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+        }
+
         public ActionResult New()
         {
             var model = this.GetModel();
             model.TimeZone = 0;
-            return View(model, AnalyticsMasterModel.MenuItem.Portfolios);
+            return View(model, AfterLoginMasterModel.MenuItem.Analytics);
         }
 
         [HttpPost]
@@ -44,11 +74,11 @@ namespace EyeTracker.Controllers
             if (ModelState.IsValid)
             {
                 var res = ObjectContainer.Instance.Dispatch(new CreatePortfolioCommand(model.Description, model.TimeZone));
-                return Redirect("/Analytics");
+                return Redirect("/Portfolio");
             }
             else
             {
-                return View(this.GetModel(model), AnalyticsMasterModel.MenuItem.Portfolios);
+                return View(this.GetModel(model), AfterLoginMasterModel.MenuItem.Analytics);
             }
         }
 
@@ -65,8 +95,8 @@ namespace EyeTracker.Controllers
                 model.Id = portfolio.Id;
                 model.Description = portfolio.Description;
                 model.TimeZone = portfolio.TimeZone;
-                
-                return View(model, AnalyticsMasterModel.MenuItem.Portfolios);
+
+                return View(model, AfterLoginMasterModel.MenuItem.Analytics);
             }
         }
 
@@ -76,18 +106,18 @@ namespace EyeTracker.Controllers
             if (ModelState.IsValid)
             {
                 var res = ObjectContainer.Instance.Dispatch(new UpdatePortfolioCommand(model.Id, model.Description, model.TimeZone));
-                return Redirect("/Analytics");
+                return Redirect("/Portfolio");
             }
             else
             {
-                return View(this.GetModel(model), AnalyticsMasterModel.MenuItem.Portfolios);
+                return View(this.GetModel(model), AfterLoginMasterModel.MenuItem.Analytics);
             }
         }
 
         public ActionResult Remove(int id)
         {
             var res = ObjectContainer.Instance.Dispatch(new RemovePortfolioCommand(id));
-            return RedirectToAction("", "Analytics");
+            return Redirect("/Portfolio");
         }
 
         private PortfolioModel GetModel(PortfolioModel model = null)

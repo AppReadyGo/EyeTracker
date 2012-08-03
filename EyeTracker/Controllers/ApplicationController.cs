@@ -12,23 +12,69 @@ using EyeTracker.Core.Services;
 using EyeTracker.Domain.Model;
 using EyeTracker.Model.Master;
 using EyeTracker.Model.Pages.Application;
+using EyeTracker.Controllers.Master;
+using EyeTracker.Common.Queries.Analytics;
+using EyeTracker.Common;
+using System.Web;
+using EyeTracker.Model.Pages.Portfolio;
+using EyeTracker.Common.Commands.Application;
+using System.IO;
+using EyeTracker.Common.Queries.Application;
+using System.Configuration;
 
 namespace EyeTracker.Controllers
 {
     [Authorize]
-    public class ApplicationController : FilterController
+    public class ApplicationController : AfterLoginController
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
+        private static string androidPackageVersion = ConfigurationManager.AppSettings["AndroidPackageVersion"];
 
         public override AfterLoginMasterModel.MenuItem SelectedMenuItem
         {
             get { return AfterLoginMasterModel.MenuItem.Analytics; }
         }
-         
+
+        public ActionResult Index(int id, string srch = "", int scol = 1, int cp = 1)
+        {
+            var data = ObjectContainer.Instance.RunQuery(new GetAllApplicationsQuery(id, srch, cp, 15));
+            ViewData["IsAdmin"] = User.IsInRole(StaffRole.Administrator.ToString());
+
+            var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
+            var model = new ApplicationIndexModel
+            {
+                PortfolioId = data.PortfolioId,
+                PortfolioDescription = data.PortfolioDescription,
+                IsOnePage = data.TotalPages == 1,
+                Count = data.Count,
+                PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
+                NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
+                TotalPages = data.TotalPages,
+                CurPage = data.CurPage,
+                SearchStrUrlPart = searchStrUrlPart,
+                SearchStr = srch,
+                Applications = data.Applications.Select((a, i) => new ApplicationItemModel
+                {
+                    Id = a.Id,
+                    Description = a.Description,
+                    IsActive = a.IsActive,
+                    IsAlternative = i % 2 != 0,
+                    Key = GetAppKey(a.Type, data.PortfolioId, a.Id),
+                    Visits = a.Visits
+                }).ToArray()
+            };
+            return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+        }
+        
         public ActionResult New(int id)
         {
+            var portfolio = ObjectContainer.Instance.RunQuery(new GetPortfolioDetailsQuery(id));
+            ViewBag.Edit = false;
+            ViewBag.PortfolioDescritpion = portfolio.Description;
+            ViewBag.Version = androidPackageVersion;
             var viewData = GetViewData(id);
-            return View(new ApplicationModel { PortfolioId = id, ViewData = viewData }, AnalyticsMasterModel.MenuItem.Portfolios);
+            return View(new ApplicationModel { PortfolioId = id, ViewData = viewData }, AfterLoginMasterModel.MenuItem.Analytics);
         }
 
         [HttpPost]
@@ -37,11 +83,11 @@ namespace EyeTracker.Controllers
             object res = null;
             if (ModelState.IsValid)
             {
-                var appId = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.PortfolioId, model.Description, model.Type));
+                var appId = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.PortfolioId, model.Description, (ApplicationType)model.Type));
                 res = new
                 {
                     HasError = false,
-                    code = GetAppKey(model.Type, model.PortfolioId, appId.Result),
+                    code = GetAppKey((ApplicationType)model.Type, model.PortfolioId, appId.Result),
                     appId = appId.Result
                 };
             }
@@ -54,6 +100,8 @@ namespace EyeTracker.Controllers
 
         public ActionResult Edit(int id)
         {
+            ViewBag.Version = androidPackageVersion;
+            ViewBag.Edit = true;
             var app = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(id));
             if (app == null)
             {
@@ -61,38 +109,51 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                var model = new ApplicationEditModel
+                ViewBag.PortfolioDescription = app.PortfolioDescription;
+                var model = new ApplicationModel
                 {
                     Id = app.Id,
                     Description = app.Description,
-                    Type = app.Type,
+                    Type = (int)app.Type,
                     PortfolioId = app.PortfolioId
                 };
-                model.ViewData = GetViewData(model.PortfolioId, model.Type, model.Id);
+                model.ViewData = GetViewData(model.PortfolioId, app.Type, model.Id);
 
-                return View(model, AnalyticsMasterModel.MenuItem.Portfolios);
+                return View(model, AfterLoginMasterModel.MenuItem.Analytics);
             }
         }
 
         [HttpPost]
-        public ActionResult Edit(ApplicationEditModel model)
+        public ActionResult Edit(ApplicationModel model)
         {
             if (ModelState.IsValid)
             {
                 var appId = ObjectContainer.Instance.Dispatch(new UpdateApplicationCommand(model.Id, model.Description));
-                return Redirect("/Analytics");
+                return Redirect("/Application/" + model.PortfolioId);
             }
             else
             {
-                model.ViewData = GetViewData(model.PortfolioId, model.Type, model.SelectedApplicationId);
-                return View(model, AnalyticsMasterModel.MenuItem.Portfolios);
+                var portfolio = ObjectContainer.Instance.RunQuery(new GetPortfolioDetailsQuery(model.PortfolioId));
+                ViewBag.Edit = true;
+                ViewBag.PortfolioDescritpion = portfolio.Description;
+                ViewBag.Version = androidPackageVersion;
+                model.ViewData = GetViewData(model.PortfolioId, (ApplicationType)model.Type, model.Id);
+                return View(model, AfterLoginMasterModel.MenuItem.Analytics);
             }
         }
 
         public ActionResult Remove(int id)
         {
-            var appId = ObjectContainer.Instance.Dispatch(new RemoveApplicationCommand(id));
-            return Redirect("/Analytics");
+            var app = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(id));
+            if (app == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                ObjectContainer.Instance.Dispatch(new RemoveApplicationCommand(id));
+            }
+            return Redirect("/Application/" + app.PortfolioId);
         }
 
         private static ApplicationViewModel GetViewData(int portfolioId, ApplicationType? type = null, int? appId = null)
@@ -138,6 +199,185 @@ namespace EyeTracker.Controllers
             {
                 return "**-****-******";
             }
+        }
+
+        public ActionResult Screens(int id, string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")
+        {
+            var orderBy = string.IsNullOrEmpty(orderby) ? ScreensQuery.OrderByColumn.Path : (ScreensQuery.OrderByColumn)Enum.Parse(typeof(ScreensQuery.OrderByColumn), orderby, true);
+            bool asc = string.IsNullOrEmpty(orderby) ? ((orderBy == ScreensQuery.OrderByColumn.Path) ? false : true) : order.Equals("asc", StringComparison.OrdinalIgnoreCase);
+            var data = ObjectContainer.Instance.RunQuery(new ScreensQuery(id, srch, cp, 10, orderBy, asc));
+            var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
+
+            var model = new ScreensListModel
+            {
+                IsOnePage = data.TotalPages == 1,
+                Count = data.Count,
+                PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
+                NextPage = data.CurPage == data.TotalPages ? null : (int?)(data.CurPage + 1),
+                TotalPages = data.TotalPages,
+                CurPage = data.CurPage,
+                UrlPart = string.Concat(searchStrUrlPart, string.IsNullOrEmpty(orderby) ? string.Empty : string.Concat("&orderby=", orderby), string.IsNullOrEmpty(order) ? string.Empty : string.Concat("&order=", order)),
+
+                PathOrder = orderBy == ScreensQuery.OrderByColumn.Path && asc ? "desc" : "asc",
+                WidthOrder = orderBy == ScreensQuery.OrderByColumn.Width && asc ? "desc" : "asc",
+                HeightOrder = orderBy == ScreensQuery.OrderByColumn.Height && asc ? "desc" : "asc",
+
+                SearchStrUrlPart = searchStrUrlPart,
+                SearchStr = srch,
+
+                ApplicationId = data.ApplicationId,
+                ApplicationDescription = data.ApplicationDescription,
+                PortfolioId = data.PortfolioId,
+                PortfolioDescription = data.PortfolioDescription,
+                Screens = data.Screens.Select((s, i) => new ScreenItemModel
+                {
+                    Id = s.Id,
+                    Width = s.Width,
+                    Height = s.Height,
+                    Path = s.Path,
+                    FileExtention = s.FileExtension,
+                    IsAlternative = i % 2 != 0
+                }).ToArray()
+            };
+            return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+        }
+
+        public ActionResult ScreenNew(int id)
+        {
+            var application = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(id));
+            ViewBag.PortfolioId = application.PortfolioId;
+            ViewBag.PortfolioDescription = application.PortfolioDescription;
+            ViewBag.ApplicationDescription = application.Description;
+            return View(new ScreenModel { ApplicationId = id }, AfterLoginMasterModel.MenuItem.Analytics);
+        }
+
+        [HttpPost]
+        public ActionResult ScreenNew(ScreenModel model)
+        {
+            if (model.Height <= 0)
+            {
+                ModelState.AddModelError("Height", "Please enter correct height.");
+            }
+            if (model.Width <= 0)
+            {
+                ModelState.AddModelError("Width", "Please enter correct width.");
+            }
+            if(Request.Files.Count == 0 || Request.Files[0].ContentLength == 0)
+            {
+                ModelState.AddModelError("file", "The File field is required.");
+            }
+            if (ModelState.IsValid)
+            {
+                string fileExtention = Path.GetExtension(Request.Files[0].FileName);
+
+                var result = ObjectContainer.Instance.Dispatch(new AddScreenCommand(model.ApplicationId, model.Path, model.Width, model.Height, fileExtention));
+                if (result.Validation.Any())
+                {
+                    return View("Error");
+                }
+                else
+                {
+                    var path = Path.Combine(Server.MapPath("~/Restricted/Screens/"), result.Result + fileExtention);
+                    Request.Files[0].SaveAs(path);
+                }
+                return Redirect("/Application/Screens/" + model.ApplicationId);
+            }
+            else
+            {
+                var application = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(model.ApplicationId));
+                ViewBag.PortfolioId = application.PortfolioId;
+                ViewBag.PortfolioDescription = application.PortfolioDescription;
+                ViewBag.ApplicationDescription = application.Description;
+
+                return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+            }
+        }
+
+        public ActionResult ScreenEdit(int id)
+        {
+            var screen = ObjectContainer.Instance.RunQuery(new GetScreenDetailsQuery(id));
+            if (screen == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                ViewBag.PortfolioId = screen.PortfolioId;
+                ViewBag.PortfolioDescription = screen.PortfolioDescription;
+                ViewBag.ApplicationDescription = screen.ApplicationDescription;
+
+                var model = new ScreenModel
+                {
+                    Id = screen.Id,
+                    Path = screen.Path,
+                    Width = screen.Width,
+                    Height = screen.Height,
+                    FileExtention = screen.FileExtention,
+                    ApplicationId = screen.ApplicationId
+                };
+                return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ScreenEdit(ScreenModel model)
+        {
+            if (model.Height <= 0)
+            {
+                ModelState.AddModelError("Height", "Please enter correct height.");
+            }
+            if (model.Width <= 0)
+            {
+                ModelState.AddModelError("Width", "Please enter correct width.");
+            }
+            if (ModelState.IsValid)
+            {
+                bool newFile = Request.Files.Count == 1 && Request.Files[0].ContentLength > 0;
+                string fileExtention = newFile ? Path.GetExtension(Request.Files[0].FileName) : model.FileExtention;
+
+                var result = ObjectContainer.Instance.Dispatch(new UpdateScreenCommand(model.Id, model.Path, model.Width, model.Height, fileExtention));
+                if (result.Validation.Any())
+                {
+                    return View("Error");
+                }
+                else
+                {
+                    if (newFile)
+                    {
+                        //Remove previous file
+                        var path = Path.Combine(Server.MapPath("~/Restricted/Screens/"), model.Id + model.FileExtention);
+                        System.IO.File.Delete(path);
+
+                        path = Path.Combine(Server.MapPath("~/Restricted/Screens/"), model.Id + fileExtention);
+                        Request.Files[0].SaveAs(path);
+                    }
+                }
+                return Redirect("/Application/Screens/" + model.ApplicationId.ToString());
+            }
+            else
+            {
+                var application = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(model.ApplicationId));
+                ViewBag.PortfolioId = application.PortfolioId;
+                ViewBag.PortfolioDescription = application.PortfolioDescription;
+                ViewBag.ApplicationDescription = application.Description;
+                return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+            }
+        }
+
+        public ActionResult ScreenRemove(int id)
+        {
+            var screen = ObjectContainer.Instance.RunQuery(new GetScreenDetailsQuery(id));
+            if (screen == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                ObjectContainer.Instance.Dispatch(new RemoveScreenCommand(id));
+                var path = Path.Combine(Server.MapPath("~/Restricted/Screens/"), screen.Id + screen.FileExtention);
+                System.IO.File.Delete(path);
+            }
+            return Redirect("/Application/Screens/" + screen.ApplicationId);
         }
 
         /*

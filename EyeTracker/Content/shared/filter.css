@@ -8,7 +8,7 @@
 .filter .title ul{height: 25px;list-style: none outside none;margin:0;padding:0;}
 .filter .title li{display:inline;margin-right:5px;}
 .filter .title select{margin-right:5px;}
-.filter .advanced_filter{display:none;background: -moz-linear-gradient(center top , #FBFBFB, #EEEEEE) repeat scroll 0 0 transparent;
+.filter .advanced_filter{display:none;background-color:#EEE;
                 border-color: #E8E8E8 #E8E8E8 #CCCCCC;border-radius: 4px 4px 4px 4px;border-style: solid;
                 border-width: 1px;color: #444444;line-height: normal;margin: 0 0 1px;min-width: 590px;
                 padding: 10px 10px 4px;white-space: nowrap;font-size:12px;position:absolute;z-index:1;margin-top:3px;left:0px;}

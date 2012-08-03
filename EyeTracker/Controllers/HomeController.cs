@@ -29,7 +29,7 @@ namespace EyeTracker.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return RedirectToAction("", "Analytics", new { });
+                return RedirectToAction("", "Portfolio", new { });
             }
             else
             {
