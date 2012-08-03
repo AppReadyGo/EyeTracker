@@ -48,7 +48,8 @@ VALUES (1, 3, 'products/touch-map'),
 		(13, 3, 'm/products/eye-track'),
 		(14, 3, 'm/products'),
 		(15, 3, 'm/planandpricing'),
-		(16, 3, 'special-access-required');
+		(16, 3, 'special-access-required'),
+		(17, 3, 'tutorials');
 
 SET IDENTITY_INSERT [cont].[Pages] OFF
 GO		
@@ -495,7 +496,108 @@ Having the cumulative statistics of your website visitor’s interaction within 
 		(16, 0, 'title', 'Special Access Required'),
 		(16, 1, 'content', ' <article class="col center"><h2>Special Access Required</h2>
 							<p>At this stage we provide access just for selected number of users, </br>if you would like to get the access please contact us by the email: <a href="mailto:support@mobillify.com">support@mobillify.com</a>.</p>
-							</article>');
+							</article>'),
+		(17, 0, 'title', 'Get Started'),
+		(17, 1, 'content', '<h2>Getting Started</h2>
+<p dir="LTR">
+    <strong>Requirements</strong>
+    <strong></strong>
+</p>
+<p dir="LTR">
+    To integrate FingerPrint with your Android app, you will need the following:
+    <br/><a href="/Resources/Packages/fingerprint.jar" target="_blank">Android Package 1.0</a>
+    <br/><a href="/Resources/Packages/fingerprint.properties" target="_blank">FingerPrint.properties</a>
+</p>
+<p dir="LTR">
+    <strong>Setup</strong>
+    <strong></strong>
+</p>
+<ol start="1" type="1">
+    <li dir="LTR">
+        &#183; Add fingerptint.jar to your project''s /libs directory.//-- ad screenshot
+    </li>
+    <li dir="LTR">
+        &#183; Add fingerprint.properties file to assets folder.
+    </li>
+    <li dir="LTR">
+        &#183; Add the following permissions to your project''s AndroidManifest.xml manifest file:
+    </li>
+</ol>
+<p dir="LTR">
+    &lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+</p>
+<p dir="LTR">
+    &lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
+</p>
+<p dir="LTR">
+    <br/>
+    Add new application your Portfolio and create a AppID.
+</p>
+<p dir="LTR">
+    <strong>Starting the Tracker</strong>
+    <strong></strong>
+</p>
+<p dir="LTR">
+    1. Call <em>FingerPrint.init</em> method in onCreate method of your activity.
+</p>
+<p dir="LTR">
+    2. Call <em>FingerPrint.start</em><em>(this, viewUri)</em> method in onStart() method
+</p>
+<p dir="LTR">
+    3. Call <em>FingerPrint.finsih</em><em>(</em><em>this, viewUri)</em> in onStop() method passing the View''s URI and activity being tracked.
+    <br/>
+<pre class="java">
+import com.mobillify.fingerprint.FingerPrint;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.ImageView;
+
+public class TestActivity extends Activity {
+
+//Activity and View Details
+private static final String appID = "MA-XXXX-YY";
+private static final String viewPath = "ViewID1";
+ 
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.main);
+FingerPrint.init(activityName, viewUri, this);
+///////////////////////////////////////////////////////////////
+//// Only if you are setting custom onTouchListener,
+//call FingerPrint.onTouch(view, event) method explicitly
+//insert FingerPrint.onTouch(view, event) method call
+///////////////////////////////////////////////////////////////
+ImageView imageView = (ImageView)findViewById(R.id.ImageView);
+imageView.setOnTouchListener(new OnTouchListener() {
+@Override
+public boolean onTouch(View view, MotionEvent event) {
+//Only if you are overriding onTouch method for a certain view, use this method
+FingerPrint.onTouch(view, event);
+return false;}
+////////////////////////////////////////////////////////////////////////
+});
+}
+ 
+protected void onStart() {
+super.onStart();
+//Starting FingerPrint service
+FingerPrint.start(this, viewUri);
+}
+ 
+@Override
+protected void onStop() {
+super.onStop();
+//Finishing FingerPrint service
+FingerPrint.finish(this, viewUri);
+}
+}
+
+</pre>
+<br/>
+</p>');
 
 GO
 
