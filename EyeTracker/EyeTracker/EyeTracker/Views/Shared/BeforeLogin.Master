@@ -63,44 +63,4 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
        </div>
     </section>
 </div>
-<!-- aside -->
-<aside>
-	<div class="container">
-		<div class="inside">
-            <div class="wrapper">
-			    <ul class="list col-1">
-				    <li>Products</li>
-				    <li><a href="/p/products/touch-map">Touch Map</a></li>
-				    <li><a href="/p/products/eye-track">Eye Track</a></li>
-				    <li><a href="/p/products/play-back">Play Back</a></li>
-			    </ul>
-			    <ul class="list col-3">
-				    <li>Stay connected</li>
-				    <li><a href="http://mobillify.com" target="_blank">Mobillify</a></li>
-				    <li><a href="http://twitter.com/mobillify" target="_blank">Twitter</a></li>
-				    <li><a href="http://www.youtube.com/user/TheMobillify" target="_blank">Youtube</a></li>
-				    <li><a href="http://www.facebook.com/Mobillify" target="_blank">Facebook</a></li>
-				    <li><a href="http://www.linkedin.com/company/2531757?trk=pro_other_cmpy" target="_blank">LinkedIn</a></li>
-				    <li><a href="http://angel.co/mobillify" target="_blank">Angellist</a></li> 
-			    </ul>
-			    <ul class="list col-2">
-				    <li>Plans And Pricing</li>
-				    <li><a href="/p/planandpricing">Basic</a></li>
-				    <li><a href="/p/planandpricing">Plus</a></li>
-				    <li><a href="/p/planandpricing">Pro</a></li>
-			    </ul>
-            </div>
-		</div>
-	</div>
-</aside>
-<!-- footer -->
-<footer>
-	<div class="container">
-		<div class="inside">
-			<a rel="nofollow" href="http://www.templatemonster.com" class="new_window">Website template</a> designed by TemplateMonster.com<br>
-			<a href="http://www.templates.com/product/3d-models/" class="new_window">3D Models</a> provided by Templates.com<br>
-            <span>Copyright &#169; 2011<%= DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "" %> <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></span>
-		</div>
-	</div>
-</footer>
 </asp:Content>

@@ -14,7 +14,7 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel, Analytics
 
 <asp:Content ID="LeftMenuContent" ContentPlaceHolderID="LeftMenuContent" runat="server">
     <ul>
-        <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.Portfolios) %>"><span></span><a href="/Analytics/">Portfolios</a></li>
+        <li class="<%: Model.SubMaster.GetMenuItemClass(AnalyticsMasterModel.MenuItem.Portfolios) %>"><span></span><a href="/Portfolio/">Portfolios</a></li>
         <%= Html.MenuItem("Dashboard", "/Analytics/Dashboard/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.Dashboard, Model.SubMaster.IsMenuDisabled) %>
         <%= Html.MenuItem("Finger Print", "/Analytics/FingerPrint/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.FingerPrint, Model.SubMaster.IsMenuDisabled)%>
         <%= Html.MenuItem("Eye Tracker", "/Analytics/EyeTracker/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.EyeTracker, Model.SubMaster.IsMenuDisabled)%>

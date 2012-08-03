@@ -12,6 +12,21 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel>>" %>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
+<%--<div class="crumb">
+    <div class="border-right">
+		<div class="border-left">
+			<div class="inner">
+                <ul>
+		           <li><a href="/Portfolio"><h4>Portfolios</h4></a></li>
+		           <li><a href="/Application/"><h4>Some portfolio</h4></a></li>
+		           <li class="last"><h4>Some application</h4></li>
+		        </ul>
+			</div>
+		</div>
+    </div>
+</div>
+<div style="clear:both;"></div>--%>
+
 <div class="left-panel">
     <div class="left-menu">
         <asp:ContentPlaceHolder ID="LeftMenuContent" runat="server" />
