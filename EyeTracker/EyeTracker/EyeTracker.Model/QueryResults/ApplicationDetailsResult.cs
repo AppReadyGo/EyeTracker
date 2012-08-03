@@ -11,5 +11,7 @@ namespace EyeTracker.Common.QueryResults
         public ApplicationType Type { get; set; }
 
         public int PortfolioId { get; set; }
+
+        public string PortfolioDescription { get; set; }
     }
 }

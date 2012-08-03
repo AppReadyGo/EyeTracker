@@ -6,7 +6,7 @@ using EyeTracker.Common.QueryResults.Users;
 using EyeTracker.Common.Queries;
 using EyeTracker.Common.QueryResults;
 
-namespace EyeTracker.Common.Queries.Users
+namespace EyeTracker.Common.Queries.Application
 {
     public class GetApplicationDetailsQuery : IQuery<ApplicationDetailsResult>
     {

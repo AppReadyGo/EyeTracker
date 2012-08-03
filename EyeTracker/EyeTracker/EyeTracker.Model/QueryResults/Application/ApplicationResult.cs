@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
+namespace EyeTracker.Common.QueryResults.Application
 {
     public class ApplicationResult
     {
