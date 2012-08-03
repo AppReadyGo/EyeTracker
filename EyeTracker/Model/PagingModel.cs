@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 
 namespace EyeTracker.Model
 {
