@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Drawing;
+using EyeTracker.Common.QueryResults.Portfolio;
+using EyeTracker.Common.QueryResults.Application;
 
 namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
 {

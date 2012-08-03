@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using EyeTracker.Common.Entities;
 
-namespace EyeTracker.Common.Commands
+namespace EyeTracker.Common.Commands.Application
 {
     public class CreateApplicationCommand : ICommand<int>
     {

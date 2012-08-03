@@ -7,7 +7,7 @@ namespace EyeTracker.Common.QueryResults.Analytics
 {
     public class ScreenResult
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         public int ApplicationId { get; set; }
 
