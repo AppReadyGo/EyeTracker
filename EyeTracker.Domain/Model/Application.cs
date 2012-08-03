@@ -12,6 +12,8 @@ namespace EyeTracker.Domain.Model
     /// </summary>
     public class Application
     {
+        private Iesi.Collections.Generic.ISet<Screen> screens;
+
         /// <summary>
         /// application ID 
         /// </summary>
@@ -35,24 +37,14 @@ namespace EyeTracker.Domain.Model
         /// <summary>
         /// holds application screens list 
         /// </summary>
-        public virtual IEnumerable<Screen> Screens { get; set; }
+        public virtual IEnumerable<Screen> Screens { get { return screens; } set { } }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public Application()
         {
-            Screens = new List<Screen>();
-            CreateDate = DateTime.UtcNow;
+            this.screens = new Iesi.Collections.Generic.HashedSet<Screen>();
+            this.CreateDate = DateTime.UtcNow;
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="portfolio"></param>
-        /// <param name="description"></param>
-        /// <param name="type"></param>
         public Application(Portfolio portfolio, string description, ApplicationType type)
             : this()
         {
@@ -64,6 +56,19 @@ namespace EyeTracker.Domain.Model
         protected internal virtual void Update(string description)
         {
             this.Description = description;
+        }
+
+        public virtual void AddScreen(Screen screen)
+        {
+            this.screens.Add(screen);
+        }
+
+        public virtual void RemoveScreen(Screen screen)
+        {
+            if (this.screens.Contains(screen))
+            {
+                this.screens.Remove(screen);
+            }
         }
     }
 }

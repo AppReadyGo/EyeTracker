@@ -18,7 +18,6 @@ namespace EyeTracker.Domain.Mapping
             {
                 map.NotNullable(true);
                 map.Column("ApplicationId");
-                map.Cascade(Cascade.All);
                
             });
             
