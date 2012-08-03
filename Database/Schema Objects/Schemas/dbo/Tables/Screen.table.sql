@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Screen] (
-    [Id]            BIGINT       IDENTITY (1, 1) NOT NULL,
+    [Id]            INT       IDENTITY (1, 1) NOT NULL,
     [ApplicationID] INT          NOT NULL,
     [Path]          NVARCHAR (256) NOT NULL,
     [Width]         INT          NOT NULL,
