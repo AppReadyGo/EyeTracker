@@ -48,8 +48,8 @@ namespace EyeTracker.Domain.Queries.Analytics
                                 .Select(p => new
                                 {
                                     key = p.Application.Id,
-                                    width = p.ClientWidth,
-                                    height =  p.ClientHeight
+                                    width = p.ScreenWidth,
+                                    height = p.ScreenHeight
                                 })
                                 .ToArray().Distinct();
 

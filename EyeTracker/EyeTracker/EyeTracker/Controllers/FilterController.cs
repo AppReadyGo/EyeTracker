@@ -73,12 +73,14 @@ namespace EyeTracker.Controllers
                 var pathes = new List<SelectListItem>();
 
                 //Set current application
-                if (!curPortfolio.Applications.Any() || !curPortfolio.Applications.SelectMany(a => a.ScreenSizes).Any())
+                if (!curPortfolio.Applications.Any())
                 {
                     filterModel.NoData = true;
                 }
                 else
                 {
+                    filterModel.NoData =  !curPortfolio.Applications.SelectMany(a => a.ScreenSizes).Any();
+
                     var curApplication = filter.ApplicationId.HasValue ? curPortfolio.Applications.Single(a => a.Id == filter.ApplicationId.Value)
                                                                        : (isSingleMode ? curPortfolio.Applications.First() : null);
 
