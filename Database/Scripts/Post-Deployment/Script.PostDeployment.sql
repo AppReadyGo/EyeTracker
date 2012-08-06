@@ -514,7 +514,7 @@ Having the cumulative statistics of your website visitor’s interaction within 
 </p>
 <ol start="1" type="1">
     <li dir="LTR">
-        &#183; Add fingerptint.jar to your project''s /libs directory.//-- ad screenshot
+        &#183; Add fingerptint.jar to your project''s /libs directory.
     </li>
     <li dir="LTR">
         &#183; Add fingerprint.properties file to assets folder.
@@ -538,13 +538,13 @@ Having the cumulative statistics of your website visitor’s interaction within 
     <strong></strong>
 </p>
 <p dir="LTR">
-    1. Call <em>FingerPrint.init</em> method in onCreate method of your activity.
+    1. Call <em>FingerPrint.init</em><em>(this)</em> method in <em><strong>onCreate</strong></em> method of your activity.
 </p>
 <p dir="LTR">
-    2. Call <em>FingerPrint.start</em><em>(this, viewUri)</em> method in onStart() method
+    2. Call <em>FingerPrint.start</em><em>(this)</em> method in <em><strong>onStart</strong></em> method
 </p>
 <p dir="LTR">
-    3. Call <em>FingerPrint.finsih</em><em>(</em><em>this, viewUri)</em> in onStop() method passing the View''s URI and activity being tracked.
+    3. Call <em>FingerPrint.finsih</em><em>(</em><em>this)</em> in <em><strong>onStop</strong></em> method passing the View''s URI and activity being tracked.
     <br/>
 <pre class="java">
 import com.mobillify.fingerprint.FingerPrint;
@@ -557,14 +557,10 @@ import android.widget.ImageView;
 
 public class TestActivity extends Activity {
 
-//Activity and View Details
-private static final String appID = "MA-XXXX-YY";
-private static final String viewPath = "ViewID1";
- 
 protected void onCreate(Bundle savedInstanceState) {
 super.onCreate(savedInstanceState);
 setContentView(R.layout.main);
-FingerPrint.init(activityName, viewUri, this);
+FingerPrint.init(viewUri);
 ///////////////////////////////////////////////////////////////
 //// Only if you are setting custom onTouchListener,
 //call FingerPrint.onTouch(view, event) method explicitly
@@ -584,14 +580,14 @@ return false;}
 protected void onStart() {
 super.onStart();
 //Starting FingerPrint service
-FingerPrint.start(this, viewUri);
+FingerPrint.start(this);
 }
  
 @Override
 protected void onStop() {
 super.onStop();
 //Finishing FingerPrint service
-FingerPrint.finish(this, viewUri);
+FingerPrint.finish(this);
 }
 }
 
