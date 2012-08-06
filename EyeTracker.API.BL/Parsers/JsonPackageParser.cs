@@ -52,7 +52,7 @@ namespace EyeTracker.API.BL.Parsers
             {
                 try
                 {
-                    log.WriteInformation("Try to parse date: {0}", session.SessionStartDate);
+                    //log.WriteInformation("Try to parse date: {0}", session.SessionStartDate);
                     DateTime startDate;
                     if (!DateTime.TryParse(session.SessionStartDate, out startDate))
                     {
