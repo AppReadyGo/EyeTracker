@@ -531,7 +531,7 @@ Having the cumulative statistics of your website visitor’s interaction within 
 </p>
 <p dir="LTR">
     <br/>
-    Add new application your Portfolio and create a AppID.
+    Add a new application to your Portfolio and create a AppID.
 </p>
 <p dir="LTR">
     <strong>Starting the Tracker</strong>
