@@ -42,8 +42,8 @@ namespace EyeTracker.Domain.Queries
             result.Data = session.Query<PageView>()
                     .Where(p => p.Application.Id == query.AplicationId &&
                                 p.Path.ToLower() == query.Path.ToLower() &&
-                                p.ClientWidth == query.ScreenSize.Width &&
-                                p.ClientHeight == query.ScreenSize.Height &&
+                                p.ScreenWidth == query.ScreenSize.Width &&
+                                p.ScreenHeight == query.ScreenSize.Height &&
                                 p.Date >= query.FromDate &&
                                 p.Date <= query.ToDate)
                     .SelectMany(p => p.Clicks)

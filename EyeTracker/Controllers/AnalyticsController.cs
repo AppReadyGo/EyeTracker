@@ -97,13 +97,12 @@ namespace EyeTracker.Controllers
                 filter.ToDate,
                 filter.PortfolioId,
                 filter.ApplicationId,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                filter.ScreenSize,
+                filter.Path,
+                filter.Language,
+                filter.OperationSystem,
+                filter.Country,
+                filter.City,
                 DataGrouping.Day);
 
                 var usageViewData = ObjectContainer.Instance.RunQuery(query);

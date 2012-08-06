@@ -254,6 +254,7 @@ namespace EyeTracker.Controllers
         [HttpPost]
         public ActionResult ScreenNew(ScreenModel model)
         {
+            log.WriteInformation("Add a new screen for application: {0}, Height: {1}, Width: {2}", model.ApplicationId, model.Height, model.Width);
             if (model.Height <= 0)
             {
                 ModelState.AddModelError("Height", "Please enter correct height.");
@@ -273,17 +274,20 @@ namespace EyeTracker.Controllers
                 var result = ObjectContainer.Instance.Dispatch(new AddScreenCommand(model.ApplicationId, model.Path, model.Width, model.Height, fileExtention));
                 if (result.Validation.Any())
                 {
+                    log.WriteError("Error to add screen to database: {0}", string.Join("; ", result.Validation.Select(v => string.Format("Code:{0}, Message: {1}", v.ErrorCode, v.Message)).ToArray()));
                     return View("Error");
                 }
                 else
                 {
                     var path = Path.Combine(Server.MapPath("~/Restricted/Screens/"), result.Result + fileExtention);
+                    log.WriteInformation("Save file: {0}", path);
                     Request.Files[0].SaveAs(path);
                 }
                 return Redirect("/Application/Screens/" + model.ApplicationId);
             }
             else
             {
+                log.WriteInformation("Wrong model");
                 var application = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(model.ApplicationId));
                 ViewBag.PortfolioId = application.PortfolioId;
                 ViewBag.PortfolioDescription = application.PortfolioDescription;
