@@ -29,7 +29,7 @@ namespace EyeTracker.API.BL.Parsers
                 return null;
             }
 
-            log.WriteInformation("Try to parse date: {0}", jTouch.Date);
+            //log.WriteInformation("Try to parse date: {0}", jTouch.Date);
             DateTime date;
             if (!DateTime.TryParse(jTouch.Date, out date))
             {
