@@ -271,40 +271,5 @@ namespace EyeTracker.Controllers
             }
             return bgImg;
         }
-
-        /// <summary>
-        /// After login page content
-        /// </summary>
-        /// <param name="urlPart1"></param>
-        /// <param name="urlPart2"></param>
-        /// <param name="urlPart3"></param>
-        /// <returns></returns>
-        public ActionResult PageContent(string urlPart1, string urlPart2, string urlPart3)
-        {
-            string path = urlPart1;
-            if (!string.IsNullOrEmpty(urlPart2))
-            {
-                path += "/" + urlPart2;
-            }
-            if (!string.IsNullOrEmpty(urlPart3))
-            {
-                path += "/" + urlPart3;
-            }
-
-            var page = ObjectContainer.Instance.RunQuery(new GetPageQuery(path.ToLower()));
-            if (page == null)
-            {
-                return View("404", new ContentModel { }, AfterLoginMasterModel.MenuItem.None);
-            }
-            else
-            {
-                AfterLoginMasterModel.MenuItem selectedItem = AfterLoginMasterModel.MenuItem.None;
-                if (!Enum.TryParse<AfterLoginMasterModel.MenuItem>(urlPart1, true, out selectedItem))
-                {
-                    selectedItem = AfterLoginMasterModel.MenuItem.None;
-                }
-                return View(new ContentModel { Title = page.Title, Content = page.Content }, selectedItem);
-            }
-        }
     }
 }

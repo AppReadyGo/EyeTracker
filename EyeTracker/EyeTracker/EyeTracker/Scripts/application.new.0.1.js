@@ -59,7 +59,7 @@ $(document).ready(function () {
                 url: newAppURL,
                 dataType: 'json',
                 type: 'POST',
-                data: { "PortfolioId": $('#PortfolioId').val(),"Description": desc, "Type": type },
+                data: { "PortfolioId": $('#PortfolioId').val(), "Description": desc, "Type": type },
                 success: function (json) {
                     if (json.HasError) {
                         $('#tbody').prepend('<tr><td colspan="2" class="validation-summary-errors"><span>Account creation was unsuccessful. Please contact to administrator.</span></td></tr>');
@@ -67,11 +67,12 @@ $(document).ready(function () {
                         $('#overlay').hide();
                         $('#action_pnl').hide();
                         $('#web_code').val($('#web_code').val().replace('**-****-******', json.code));
-                        $('#android_code').val($('#android_code').val().replace('**-****-******', json.code));
                         $('.property-id').text(json.code);
                         $('#Type').attr('disabled', 'disabled');
                         appId = json.appId;
                         $('#Id').val(appId);
+                        var lnk = $('#properties_lnk');
+                        lnk.attr('href', lnk.attr('href').replace('{appId}', appId));
                         $('#Id').closest("form").attr("action", "/Application/Edit/" + appId);
                     }
                 }

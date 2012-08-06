@@ -61,6 +61,11 @@ namespace EyeTracker.Domain.Model.Users
         {
             this.Unsubscribed = true;
         }
+
+        public virtual void UpdateLastAccess()
+        {
+            this.LastAccessDate = DateTime.UtcNow;
+        }
     }
 
     public class Staff : User

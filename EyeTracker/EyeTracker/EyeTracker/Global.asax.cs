@@ -169,6 +169,12 @@ namespace EyeTracker
                 new { controller = "Files", action = "Screens" }
             );
 
+            routes.MapRoute(
+                "Properties",
+                "Properties/{type}/{pId}/{appId}/{filename}",
+                new { controller = "Files", action = "Properties" }
+            );
+
 
             //-----  Content routes
             routes.MapRoute(

@@ -14,13 +14,13 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
 <div class="wrap">
 	<h2>Staff</h2>
 	<div class="t-nav">
-        <div class="a-l actions">
-            <a href="/Admin/NewStaff" class="add-new-h2">+ Add New</a>
-        </div>
-		<div class="a-l search-box">
-			<input type="search" id="user-search-input" name="s" value="<%=Model.View.SearchStr %>" />
-			<input type="button" name="" id="search-submit" class="button" value="Search" onclick="javascript: document.location.href = '/Admin/Staff?cp=1&srch=' + escape($('#user-search-input').val());" />
+        <div class="a-l search-box">
+			<input type="search" id="search-input" name="s" value="<%=Model.View.SearchStr %>" />
+            <a class="link2" onclick="javascript: document.location.href = '/Admin/Staff?cp=1&srch=' + escape($('#search-input').val());"><span><span>Search</span></span></a>
 		</div>
+        <div class="a-l actions">
+            <a href="/Admin/NewStaff" class="link2"><span><span>+ Add Staff</span></span></a>
+        </div>
 		<div class='t-nav-pages <%= Model.View.IsOnePage ? "one-page" : "" %>'>
 			<span class="d-num"><%= Model.View.Count %> items</span>
 			<span class='pagination-links'>
@@ -41,7 +41,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
 			<th scope='col' id='name' class='manage-column column-name sortable desc'  style=""><a href="/Admin/Staff?cp=1&orderby=name&order=<%=Model.View.NameOrder + Model.View.SearchStrUrlPart %>"><span>Name</span><span class="sorting-indicator"></span></a></th>
 			<th scope='col' id='role' class='manage-column column-role'  style="">Role</th>
 			<th scope='col' id='activated' class='manage-column column-activated'  style="">Activated</th>
-			<th scope='col' id='last_access_date' class='manage-column column-last-access num'  style="">Last Access Date</th>	
+			<th scope='col' id='last_access_date' class='manage-column column-last-access'  style="">Last Access Date</th>	
 		</tr>
 		</thead>
 		<tfoot>
@@ -50,7 +50,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
 			<th scope='col'  class='manage-column column-name sortable desc'  style=""><a href="/Admin/Staff?cp=1&orderby=name&order=<%=Model.View.NameOrder + Model.View.SearchStrUrlPart  %>"><span>Name</span><span class="sorting-indicator"></span></a></th>
 			<th scope='col'  class='manage-column column-role'  style="">Role</th>
 			<th scope='col' id='activated' class='manage-column column-activated'  style="">Activated</th>
-			<th scope='col' id='Th1' class='manage-column column-last-access num'  style="">Last Access Date</th>	
+			<th scope='col' id='Th1' class='manage-column column-last-access'  style="">Last Access Date</th>	
 		</tr>
 		</tfoot>
 		<tbody id="the-list" class='list:user'>

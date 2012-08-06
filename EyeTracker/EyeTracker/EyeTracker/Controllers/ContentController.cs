@@ -15,6 +15,7 @@ using EyeTracker.Model;
 using EyeTracker.Common;
 using EyeTracker.Common.Logger;
 using System.Reflection;
+using EyeTracker.Common.Entities;
 
 namespace EyeTracker.Controllers
 {
@@ -142,6 +143,13 @@ namespace EyeTracker.Controllers
             {
                 selectedItem = AfterLoginMasterModel.MenuItem.None;
             }
+
+            foreach (var key in Enum.GetValues(typeof(ContentPredefinedKeys)).Cast<ContentPredefinedKeys>())
+            {
+                page.Title = page.Title.Replace(string.Format("{{{0}}}", key), key.GetContent());
+                page.Content = page.Content.Replace(string.Format("{{{0}}}", key), key.GetContent());
+            }
+
             return View("AuthenticatedPageContent", new ContentModel { Title = page.Title, Content = page.Content }, selectedItem);
         }
 

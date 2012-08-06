@@ -77,6 +77,7 @@
     <Compile Include="CommandHandlers\Content\CreateContentItemCommandHandler.cs" />
     <Compile Include="CommandHandlers\StoredProcedureCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\ActivateUserCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\UpdateLastAccessCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\RemoveUserCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\UnsubscribeCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\ResetPasswordCommandHandler.cs" />
@@ -188,6 +189,7 @@
       <Name>EyeTracker.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

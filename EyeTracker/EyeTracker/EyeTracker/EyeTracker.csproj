@@ -115,6 +115,7 @@
     <Compile Include="Common\CSSFilter.cs" />
     <Compile Include="App_Data\CustomMembershipProvider.cs" />
     <Compile Include="App_Data\CustomRoleProvider.cs" />
+    <Compile Include="Common\Extentions.cs" />
     <Compile Include="Common\Mails\ActivationEmail.cs" />
     <Compile Include="Common\Mails\Email.cs" />
     <Compile Include="Common\Mails\ForgotPasswordMail.cs" />
@@ -363,6 +364,7 @@
     <Content Include="Resources\TouchMap1.jpg" />
     <Content Include="Resources\touch_map.jpg" />
     <Content Include="Resources\touch_map.png" />
+    <Content Include="Restricted\Packages\fingerprint-1.8.62.jar" />
     <Content Include="Restricted\Packages\fingerprint.828.jar" />
     <Content Include="Restricted\Packages\fingerprint-1.0.jar" />
     <Content Include="Scripts\Analytics.Index.js" />
@@ -454,7 +456,7 @@
     <Content Include="Content\Tests\qunit.css" />
     <Content Include="Scripts\Image.js" />
     <Content Include="Scripts\ThridParty\ajaxfileupload.js" />
-    <Content Include="Scripts\application.new.js" />
+    <Content Include="Scripts\application.new.0.1.js" />
     <Content Include="Scripts\ApplicationDashboard.js" />
     <Content Include="Scripts\ApplicationUsage.js" />
     <Content Include="Scripts\analytics.dashboard.js" />
@@ -625,6 +627,7 @@
     <Content Include="Views\Admin\Admin.master" />
     <Content Include="Wordpress.config" />
     <None Include="Resources\Packages\fingerprint.properties" />
+    <None Include="Restricted\Packages\fingerprint-1.8.62.properties" />
     <None Include="Restricted\Packages\fingerprint-1.0.properties" />
     <None Include="Scripts\ThridParty\fancybox\helpers\Thumbs.db" />
     <None Include="Scripts\ThridParty\jquery-lightbox-0.5\photos\Thumbs.db" />

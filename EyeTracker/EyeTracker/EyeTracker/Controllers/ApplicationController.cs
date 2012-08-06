@@ -29,8 +29,6 @@ namespace EyeTracker.Controllers
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static string androidPackageVersion = ConfigurationManager.AppSettings["AndroidPackageVersion"];
-
         public override AfterLoginMasterModel.MenuItem SelectedMenuItem
         {
             get { return AfterLoginMasterModel.MenuItem.Analytics; }
@@ -72,7 +70,7 @@ namespace EyeTracker.Controllers
             var portfolio = ObjectContainer.Instance.RunQuery(new GetPortfolioDetailsQuery(id));
             ViewBag.Edit = false;
             ViewBag.PortfolioDescritpion = portfolio.Description;
-            ViewBag.Version = androidPackageVersion;
+            ViewBag.Version = ContentPredefinedKeys.AndroidPackageVersion.GetContent();
             var viewData = GetViewData(id);
             return View(new ApplicationModel { PortfolioId = id, ViewData = viewData }, AfterLoginMasterModel.MenuItem.Analytics);
         }
@@ -100,7 +98,7 @@ namespace EyeTracker.Controllers
 
         public ActionResult Edit(int id)
         {
-            ViewBag.Version = androidPackageVersion;
+            ViewBag.Version = ContentPredefinedKeys.AndroidPackageVersion.GetContent();
             ViewBag.Edit = true;
             var app = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(id));
             if (app == null)
@@ -136,7 +134,7 @@ namespace EyeTracker.Controllers
                 var portfolio = ObjectContainer.Instance.RunQuery(new GetPortfolioDetailsQuery(model.PortfolioId));
                 ViewBag.Edit = true;
                 ViewBag.PortfolioDescritpion = portfolio.Description;
-                ViewBag.Version = androidPackageVersion;
+                ViewBag.Version = ContentPredefinedKeys.AndroidPackageVersion.GetContent();
                 model.ViewData = GetViewData(model.PortfolioId, (ApplicationType)model.Type, model.Id);
                 return View(model, AfterLoginMasterModel.MenuItem.Analytics);
             }
@@ -166,7 +164,7 @@ namespace EyeTracker.Controllers
             };
         }
 
-        private static string GetAppKey(ApplicationType? type, int? portfolioId, int? applicationId)
+        public static string GetAppKey(ApplicationType? type, int? portfolioId, int? applicationId)
         {
             string key = "";
             if (type.HasValue)
