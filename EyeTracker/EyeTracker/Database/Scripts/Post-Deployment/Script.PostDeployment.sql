@@ -514,10 +514,10 @@ Having the cumulative statistics of your website visitor’s interaction within 
 </p>
 <ol start="1" type="1">
     <li dir="LTR">
-        &#183; Add fingerptint.jar to your project''s /libs directory.
+        &#183; Add fingerptint.jar to your project''s <em><strong>/libs</strong></em> folder in your project.
     </li>
     <li dir="LTR">
-        &#183; Add fingerprint.properties file to assets folder.
+        &#183; Add fingerprint.properties file to <em><strong>/assets</strong></em> folder in your project.
     </li>
     <li dir="LTR">
         &#183; Add the following permissions to your project''s AndroidManifest.xml manifest file:
