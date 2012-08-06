@@ -60,6 +60,8 @@ namespace EyeTracker.Controllers
                     // TODO: add terms and conditions
                     FormsAuthentication.SetAuthCookie(securedDetails.Id.ToString(), model.RememberMe);
 
+                    ObjectContainer.Instance.Dispatch(new UpdateLastAccessCommand(securedDetails.Id));
+
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {

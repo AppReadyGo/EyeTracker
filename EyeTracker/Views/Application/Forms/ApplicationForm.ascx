@@ -48,21 +48,8 @@
     <div id="sample_android_code" class="step">
         <strong><%: ViewBag.Edit ? "2" : "3" %>. Download package and insert into your code</strong>
         <div>Package: <a href="/Packages/fingerprint-<%: ViewBag.Version %>.jar">Android Package <%: ViewBag.Version %> <strong>Download</strong></a></div>
-        <div>Properties: <a href="/Packages/fingerprint-<%: ViewBag.Version %>.properties">Android Properties <%: ViewBag.Version %> <strong>Download</strong></a></div>
+        <div>Properties: <a id="properties_lnk" href="/Properties/<%:(int)EyeTracker.Common.Entities.ApplicationType.Android %>/<%: Model.PortfolioId %>/<%: ViewBag.Edit ? Model.Id.ToString() : "{appId}" %>/fingerprint-<%: ViewBag.Version %>.properties">Android Properties <%: ViewBag.Version %> <strong>Download</strong></a></div>
         <div>Property ID: <strong class="property-id"><%= Model.ViewData.PropertyId%></strong></div>
-        <textarea readonly="readonly" id="android_code">
-    import com.mobillify.fingerprint.FingerPrint;
-    public class TestActivity extends Activity {
-
-        //Activity and View Details
-        private static final String appID = "<%= Model.ViewData.PropertyId%>";
-        private static final String viewPath = "View Unique Name";
-
-        .
-        .
-        .
-        }
-        </textarea>
     </div>
     <%} %>
     <p><a class="link2" onClick="$(this).closest('form').submit();"><span><span>Save</span></span></a>&nbsp;<a class="link4" href="/Application/<%: Model.PortfolioId %>"><span><span>Cancel</span></span></a></p>
