@@ -77,6 +77,7 @@
     <Compile Include="CommandHandlers\Content\CreateContentItemCommandHandler.cs" />
     <Compile Include="CommandHandlers\StoredProcedureCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\ActivateUserCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\AcceptTermsAndConditionsCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\UpdateLastAccessCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\RemoveUserCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\UnsubscribeCommandHandler.cs" />
@@ -168,7 +169,7 @@
     <Compile Include="QueriesHandlers\Content\GetAllMailsQuery.cs" />
     <Compile Include="QueriesHandlers\Content\GetAllPagesQuery.cs" />
     <Compile Include="QueriesHandlers\Content\GetAllThemesQuery.cs" />
-    <Compile Include="QueriesHandlers\Content\GetKeyQuery.cs" />
+    <Compile Include="QueriesHandlers\Content\GetKeyQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Content\GetMailQuery.cs" />
     <Compile Include="QueriesHandlers\Content\GetPageQuery.cs" />
     <Compile Include="QueriesHandlers\Content\GetSystemMailQuery.cs" />
