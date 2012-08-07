@@ -20,6 +20,7 @@ using EyeTracker.Model.Pages.Account;
 using EyeTracker.Common.Queries.Users;
 using EyeTracker.Common.Commands;
 using EyeTracker.Common;
+using EyeTracker.Common.Queries.Content;
 
 namespace EyeTracker.Controllers
 {
@@ -55,26 +56,60 @@ namespace EyeTracker.Controllers
                 {
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
                 }
+                else if (!securedDetails.AcceptedTermsAndConditions)
+                {
+                    Session["id"] = securedDetails.Id;
+                    Session["rememberMe"] = model.RememberMe;
+                    Session["returnUrl"] = returnUrl;
+                    return RedirectToAction("TermsAndCoditions");
+                }
                 else
                 {
-                    // TODO: add terms and conditions
-                    FormsAuthentication.SetAuthCookie(securedDetails.Id.ToString(), model.RememberMe);
-
-                    ObjectContainer.Instance.Dispatch(new UpdateLastAccessCommand(securedDetails.Id));
-
-                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+                    return LogIn(securedDetails.Id, model.RememberMe, returnUrl);
                 }
             }
 
             return this.View(model, BeforeLoginMasterModel.MenuItem.None);
+        }
+
+        public ActionResult TermsAndCoditions()
+        {
+            var key = ObjectContainer.Instance.RunQuery(new GetKeyQuery("account/terms-and-coditions"));
+            ViewBag.Content = key.Items.First().Value;
+            return this.View(new object{}, BeforeLoginMasterModel.MenuItem.None);
+        }
+
+        [HttpPost]
+        public ActionResult AcceptTermsAndCoditions()
+        {
+            int id = (int)Session["id"];
+            bool rememberMe = (bool)Session["rememberMe"];
+            string returnUrl = (string)Session["returnUrl"];
+
+            Session["id"] = null;
+            Session["rememberMe"] = null;
+            Session["returnUrl"] = null;
+
+            ObjectContainer.Instance.Dispatch(new AcceptTermsAndConditionsCommand(id));
+
+            return this.LogIn(id, rememberMe, returnUrl);
+        }
+
+        private ActionResult LogIn(int id, bool rememberMe, string returnUrl)
+        {
+            FormsAuthentication.SetAuthCookie(id.ToString(), rememberMe);
+
+            ObjectContainer.Instance.Dispatch(new UpdateLastAccessCommand(id));
+
+            if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public ActionResult LogOff()

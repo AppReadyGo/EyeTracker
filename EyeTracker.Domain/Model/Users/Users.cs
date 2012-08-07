@@ -22,6 +22,7 @@ namespace EyeTracker.Domain.Model.Users
         public virtual string LastName { get; protected set; }
         public virtual bool Unsubscribed { get; protected set; }
         public virtual bool SpecialAccess { get; protected set; }
+        public virtual bool AcceptedTermsAndConditions { get; protected set; }
         public virtual Membership Membership { get; protected set; }
         public virtual IEnumerable<Portfolio> Portfolios
         {
@@ -65,6 +66,11 @@ namespace EyeTracker.Domain.Model.Users
         public virtual void UpdateLastAccess()
         {
             this.LastAccessDate = DateTime.UtcNow;
+        }
+
+        public virtual void AcceptTermsAndConditions(bool reset = false)
+        {
+            this.AcceptedTermsAndConditions = !reset;
         }
     }
 

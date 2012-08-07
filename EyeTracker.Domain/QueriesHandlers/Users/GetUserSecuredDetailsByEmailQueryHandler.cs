@@ -24,7 +24,8 @@ namespace EyeTracker.Domain.Queries
                         PasswordSalt = u.PasswordSalt,
                         Activated = u.Activated,
                         Type = u.Type,
-                        SpecialAccess = u.SpecialAccess
+                        SpecialAccess = u.SpecialAccess,
+                        AcceptedTermsAndConditions = u.AcceptedTermsAndConditions
                     })
                     .SingleOrDefault();
             if (user != null)
@@ -37,6 +38,7 @@ namespace EyeTracker.Domain.Queries
                     PasswordSalt = user.PasswordSalt,
                     Activated = user.Activated,
                     SpecialAccess = user.SpecialAccess,
+                    AcceptedTermsAndConditions = user.AcceptedTermsAndConditions,
                     Roles = user.Type == EyeTracker.Common.UserType.Staff ? session.Query<Staff>()
                                                                                     .Where(u => u.Id == user.Id)
                                                                                     .SelectMany(u => u.Roles)

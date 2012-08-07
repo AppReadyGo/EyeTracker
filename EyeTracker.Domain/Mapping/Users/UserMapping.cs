@@ -26,6 +26,7 @@ namespace EyeTracker.Domain.Mapping.Users
             Property(x => x.FirstName, map => { map.Length(100); });
             Property(x => x.LastName, map => { map.Length(100); });
             Property(x => x.SpecialAccess, map => { map.NotNullable(true); });
+            Property(x => x.AcceptedTermsAndConditions, map => { map.NotNullable(true); });
             Property(x => x.Membership, map => { map.NotNullable(true); map.Column("MembershipID"); });
           
             Set(
