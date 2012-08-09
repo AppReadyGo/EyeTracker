@@ -82,18 +82,18 @@ namespace EyeTracker.Controllers
         public FileResult Properties(ApplicationType type, int pId, int appId, string filename)
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("fingerprint={0}", ConfigurationManager.AppSettings["FingerprintEnabled"]).AppendLine();
-            sb.AppendFormat("allowsend3g={0}", ConfigurationManager.AppSettings["AllowSend3G"]).AppendLine();
-            sb.AppendFormat("applicationname={0}", ApplicationController.GetAppKey(type, pId, appId)).AppendLine();
+            sb.AppendFormat("FingerPrint={0}", ConfigurationManager.AppSettings["FingerprintEnabled"]).AppendLine();
+            sb.AppendFormat("CacheInDatabase={0}", ConfigurationManager.AppSettings["AllowSend3G"]).AppendLine();
+            sb.AppendFormat("ApplicationName={0}", ApplicationController.GetAppKey(type, pId, appId)).AppendLine();
             var cacheInDatabase = ConfigurationManager.AppSettings["CacheInDatabase"];
             if(!string.IsNullOrEmpty(cacheInDatabase))
             {
-                sb.AppendFormat("cacheindatabase={0}", cacheInDatabase).AppendLine();
+                sb.AppendFormat("CacheInDatabase={0}", cacheInDatabase).AppendLine();
             }
             var servermode = ConfigurationManager.AppSettings["ServerMode"];
             if(!string.IsNullOrEmpty(servermode))
             {
-                sb.AppendFormat("servermode={0}", servermode).AppendLine();
+                sb.AppendFormat("ServerMode={0}", servermode).AppendLine();
             }
             return base.File(System.Text.Encoding.UTF8.GetBytes(sb.ToString()), "application/octet-stream");
         }

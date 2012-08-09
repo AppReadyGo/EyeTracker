@@ -56,13 +56,13 @@ namespace EyeTracker.Controllers
                 {
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
                 }
-                else if (!securedDetails.AcceptedTermsAndConditions)
-                {
-                    Session["id"] = securedDetails.Id;
-                    Session["rememberMe"] = model.RememberMe;
-                    Session["returnUrl"] = returnUrl;
-                    return RedirectToAction("TermsAndCoditions");
-                }
+                //else if (!securedDetails.AcceptedTermsAndConditions)
+                //{
+                //    Session["id"] = securedDetails.Id;
+                //    Session["rememberMe"] = model.RememberMe;
+                //    Session["returnUrl"] = returnUrl;
+                //    return RedirectToAction("TermsAndCoditions");
+                //}
                 else
                 {
                     return LogIn(securedDetails.Id, model.RememberMe, returnUrl);
