@@ -48,7 +48,7 @@
     <div id="sample_android_code" class="step">
         <strong><%: ViewBag.Edit ? "2" : "3" %>. Download package and insert into your code</strong>
         <div>Package: <a href="/Packages/fingerprint-<%: ViewBag.Version %>.jar">Android Package <%: ViewBag.Version %> <strong>Download</strong></a></div>
-        <div>Properties: <a id="properties_lnk" href="/Properties/<%:(int)EyeTracker.Common.Entities.ApplicationType.Android %>/<%: Model.PortfolioId %>/<%: ViewBag.Edit ? Model.Id.ToString() : "{appId}" %>/fingerprint-<%: ViewBag.Version %>.properties">Android Properties <%: ViewBag.Version %> <strong>Download</strong></a></div>
+        <div>Properties: <a id="properties_lnk" href="/Properties/<%:(int)EyeTracker.Common.Entities.ApplicationType.Android %>/<%: Model.PortfolioId %>/<%: ViewBag.Edit ? Model.Id.ToString() : "{appId}" %>/fingerprint.properties">Android Properties <%: ViewBag.Version %> <strong>Download</strong></a></div>
         <div>Property ID: <strong class="property-id"><%= Model.ViewData.PropertyId%></strong></div>
     </div>
     <%} %>

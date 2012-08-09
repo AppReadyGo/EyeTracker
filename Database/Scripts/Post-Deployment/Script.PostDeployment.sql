@@ -506,7 +506,7 @@ Having the cumulative statistics of your website visitor’s interaction within 
 <p dir="LTR">
     To integrate FingerPrint with your Android app, you will need the following:
     <br/><a href="/Packages/fingerprint-{AndroidPackageVersion}.jar" target="_blank">Android Package {AndroidPackageVersion}</a>
-    <br/><a href="/Packages/fingerprint-{AndroidPackageVersion}.properties" target="_blank">FingerPrint-{AndroidPackageVersion}.properties</a>
+    <br/><a href="/Packages/fingerprint.properties" target="_blank">FingerPrint-{AndroidPackageVersion}.properties</a>
 </p>
 <p dir="LTR">
     <strong>Setup</strong>

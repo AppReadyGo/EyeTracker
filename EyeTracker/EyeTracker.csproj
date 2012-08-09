@@ -533,7 +533,6 @@
     <Content Include="Views\Application\Forms\ScreenForm.ascx" />
     <Content Include="Views\Application\Screens.aspx" />
     <Content Include="Views\Application\Index.aspx" />
-    <Content Include="Views\Application\Screens1.aspx" />
     <Content Include="Views\Content\AuthenticatedError.aspx" />
     <Content Include="Views\Content\PublicError.aspx" />
     <Content Include="Views\Content\Public404.aspx" />
