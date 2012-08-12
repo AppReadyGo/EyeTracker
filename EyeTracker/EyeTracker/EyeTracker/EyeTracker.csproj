@@ -220,6 +220,7 @@
     <Content Include="Content\application.screens.css" />
     <Content Include="Content\application.screenedit.css" />
     <Content Include="Content\account.termsandconditions.css" />
+    <Content Include="Content\application.screennew.css" />
     <Content Include="Content\images\crumb-left.png" />
     <Content Include="Content\images\crumb-middle.png" />
     <Content Include="Content\images\crumb-right.png" />

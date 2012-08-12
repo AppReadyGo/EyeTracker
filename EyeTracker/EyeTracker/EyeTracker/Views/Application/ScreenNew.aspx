@@ -5,7 +5,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, EyeTracker.Model.Page
 <asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Create Application</asp:Content>
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
     <link href="<%: Url.Content("~/Content/shared/form.css")%>" rel="stylesheet" type="text/css" />
-    <link href="<%: Url.Content("~/Content/application.new.css")%>" rel="stylesheet" type="text/css" />
+    <link href="<%: Url.Content("~/Content/application.screennew.css")%>" rel="stylesheet" type="text/css" />
     <link href="<%: Url.Content("~/Content/shared/bredcrumbs.css")%>" rel="stylesheet" type="text/css" />
     <script src="<%: Url.Content("~/scripts/application.screen.js")%>" type="text/javascript"></script>
 </asp:Content>

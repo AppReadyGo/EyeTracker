@@ -32,7 +32,7 @@
                 border-color: #E8E8E8 #E8E8E8 #CCCCCC;border-radius: 4px 4px 4px 4px;border-style: solid;
                 border-width: 1px;color: #444444;line-height: normal;margin: 0 0 1px;
                 padding: 10px 10px 4px;white-space: nowrap;font-size:20px;}
-.date-range .selector{display:none;background: -moz-linear-gradient(center top , #FBFBFB, #EEEEEE) repeat scroll 0 0 transparent;
+.date-range .selector{display:none;background: #EEE;
                 border-color: #E8E8E8 #E8E8E8 #CCCCCC;border-radius: 4px 4px 4px 4px;border-style: solid;
                 border-width: 1px;color: #444444;line-height: normal;margin: 0 0 1px;min-width: 687px;
                 padding: 10px 10px 4px;white-space: nowrap;font-size:12px;position:absolute;right:0px;z-index:1;margin-top:7px;}
