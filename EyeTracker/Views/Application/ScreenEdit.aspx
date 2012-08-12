@@ -5,7 +5,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, EyeTracker.Model.Page
 <asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Create Application</asp:Content>
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
     <link href="<%: Url.Content("~/Content/shared/form.css")%>" rel="stylesheet" type="text/css" />
-    <link href="<%: Url.Content("~/Content/application.screenedit.css")%>" rel="stylesheet" type="text/css" />
+    <link href="<%: Url.Content("~/Content/application.screen.css")%>" rel="stylesheet" type="text/css" />
     <link href="<%: Url.Content("~/Content/after.login.master.css")%>" rel="stylesheet" type="text/css" />
     <link href="<%: Url.Content("~/Content/shared/bredcrumbs.css")%>" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="<%: Url.Content("~/Scripts/ThridParty/fancybox/jquery.fancybox.css?v=2.0.6")%>" type="text/css" media="screen" />

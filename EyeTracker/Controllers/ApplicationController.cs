@@ -301,11 +301,11 @@ namespace EyeTracker.Controllers
             ViewBag.ApplicationDescription = data.ApplicationDescription;
 
             var pathes = data.Pathes.Select(p => new SelectListItem { Text = p, Value = p }).ToList();
-            pathes.Insert(0, new SelectListItem { Text = "Or select from exists", Value = "" });
+            pathes.Insert(0, new SelectListItem { Text = "Select from exists", Value = "" });
             ViewData["predefinedPathes"] = pathes;
 
             var sizes = data.Sizes.Select(s => new SelectListItem { Text = s.Width + "X" + s.Height, Value = s.Width + "X" + s.Height }).ToList();
-            sizes.Insert(0, new SelectListItem { Text = "Or select from exists", Value = "X" });
+            sizes.Insert(0, new SelectListItem { Text = "Select from exists", Value = "X" });
             ViewData["predefinedSizes"] = sizes;
 
             return View(model, AfterLoginMasterModel.MenuItem.Analytics);

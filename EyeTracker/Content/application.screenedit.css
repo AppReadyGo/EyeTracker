@@ -2,6 +2,7 @@
 form input.name{width:100%;}
 form p{padding:0px;}
 form table{width:auto;}
+form td.label{width:10%;}
 td.actions{text-align:center;}
 .content-wrapper{width:900px;margin:auto;padding:20px 20px 40px;}
 .content-wrapper div.screen{float:left;margin:0 20px 0 0;border:2px solid #fff;}
