@@ -371,6 +371,8 @@
     <Content Include="Scripts\Analytics.Index.js" />
     <Content Include="Scripts\analytics.selector.js" />
     <Content Include="Scripts\analytics.master.js" />
+    <Content Include="Scripts\application.screen.js" />
+    <Content Include="Scripts\global.js" />
     <Content Include="Scripts\table.js" />
     <Content Include="Scripts\filter.js" />
     <Content Include="Scripts\date.picker.js" />

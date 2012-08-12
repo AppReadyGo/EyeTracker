@@ -1,30 +1,30 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using EyeTracker.Common;
-using EyeTracker.Common.Queries.Analytics;
+using EyeTracker.Common.Logger;
+using EyeTracker.Common.Queries.Application;
 using EyeTracker.Common.QueryResults.Application;
-using EyeTracker.Common.QueryResults.Portfolio;
 using EyeTracker.Domain.Model;
 using NHibernate;
 using NHibernate.Linq;
-using EyeTracker.Common.Queries.Application;
 
 namespace EyeTracker.Domain.Queries.Application
 {
     public class GetAllApplicationsQueryHandler : IQueryHandler<GetAllApplicationsQuery, ApplicationsDataResult>
     {
-        private IRepository repository;
+        private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
+
         private ISecurityContext securityContext;
 
-        public GetAllApplicationsQueryHandler(IRepository repository, ISecurityContext securityContext)
+        public GetAllApplicationsQueryHandler(ISecurityContext securityContext)
         {
-            this.repository = repository;
             this.securityContext = securityContext;
         }
 
         public ApplicationsDataResult Run(ISession session, GetAllApplicationsQuery query)
         {
-
+            log.WriteInformation("-> Get all applications for portfolio:{0}, SearchStr:{1}, PageSize:{2}, CurPage:{3}, User:{4}", query.PortfolioId, query.SearchStr, query.PageSize, query.CurPage, securityContext.CurrentUser.Email);
             var res = session.Query<Portfolio>()
                               .Where(p => p.Id == query.PortfolioId && p.User.Id == securityContext.CurrentUser.Id)
                               .Select(p => new ApplicationsDataResult
@@ -81,6 +81,7 @@ namespace EyeTracker.Domain.Queries.Application
 
                 application.IsActive = count != null && count.LastRecivedDataDate < dt ? true : false;
             }
+            log.WriteInformation("Get all applications for portfolio ->");
 
             return res;
         }

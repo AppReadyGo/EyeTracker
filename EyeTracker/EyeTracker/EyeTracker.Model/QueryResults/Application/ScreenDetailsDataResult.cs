@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EyeTracker.Common.QueryResults.Application
 {
-    public class ScreenDetailsResult
+    public class ScreenDetailsDataResult : ScreenDataResult
     {
         public int Id { get; set; }
 
@@ -16,7 +16,5 @@ namespace EyeTracker.Common.QueryResults.Application
         public int Height { get; set; }
 
         public string FileExtention { get; set; }
-
-        public int ApplicationId { get; set; }
     }
 }

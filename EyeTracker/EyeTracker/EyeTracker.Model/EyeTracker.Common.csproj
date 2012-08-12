@@ -118,8 +118,10 @@
     <Compile Include="Queries\Admin\GetAllStaffQuery.cs" />
     <Compile Include="Queries\Analytics\ClickHeatMapDataQuery.cs" />
     <Compile Include="Queries\Analytics\HeatMapDataQuery.cs" />
+    <Compile Include="Queries\Application\GetScreenDataQuery.cs" />
     <Compile Include="Queries\Application\GetAllApplicationsQuery.cs" />
     <Compile Include="Queries\Application\GetScreenDetailsQuery.cs" />
+    <Compile Include="Queries\Application\GetScreenEditDataQuery.cs" />
     <Compile Include="Queries\Application\ScreensQuery.cs" />
     <Compile Include="Queries\GetPortfolioDetailsQuery.cs" />
     <Compile Include="QueryResults\Admin\StaffFullDetailsResult.cs" />
@@ -137,6 +139,8 @@
     <Compile Include="QueryResults\Application\ApplicationDataItemResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationsDataResult.cs" />
     <Compile Include="QueryResults\Application\ScreenDataItemResult.cs" />
+    <Compile Include="QueryResults\Application\ScreenDataResult.cs" />
+    <Compile Include="QueryResults\Application\ScreenDetailsDataResult.cs" />
     <Compile Include="QueryResults\Application\ScreenDetailsResult.cs" />
     <Compile Include="QueryResults\Application\ScreensDataResult.cs" />
     <Compile Include="QueryResults\PageingResult.cs" />

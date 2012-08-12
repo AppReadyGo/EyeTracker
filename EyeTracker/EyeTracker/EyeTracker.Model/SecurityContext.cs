@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using EyeTracker.Common.Queries.Users;
+using EyeTracker.Common.Commands.Users;
 
 namespace EyeTracker.Common
 {
