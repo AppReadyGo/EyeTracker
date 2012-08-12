@@ -58,6 +58,11 @@ namespace EyeTracker.Domain.Model.Users
             this.Activated = true;
         }
 
+        public virtual void Deactivate()
+        {
+            this.Activated = false;
+        }
+
         public virtual void Unsubscribe()
         {
             this.Unsubscribed = true;
