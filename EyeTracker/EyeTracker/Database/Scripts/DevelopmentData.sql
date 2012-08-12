@@ -1,10 +1,17 @@
 ﻿-- =============================================
 -- Script initilizate database with development data
 -- =============================================
+INSERT INTO [usr].[Users] ([UserTypeID], [Email], [Password], [PasswordSalt], [CreateDate], [Activated], [FirstName], [LastName],[Unsubscribed], [SpecialAccess],[MembershipID], [AcceptedTermsAndConditions])
+VALUES (1/*Staff*/, 'dev@mobillify.com', 'XW0mA5DzfN4XL851H/i1xNFFbMOdtjVAL6fjBN5monE='/*111111*/, '/WCjbQ==', '20120101', 1, 'Development', 'Mobillify', 0, 0, (select [ID] from [usr].[Memberships] where Name = 'Pro'), 1);
 
-INSERT INTO [usr].[Users] ([UserTypeID], [Email], [Password], [PasswordSalt], [CreateDate], [Activated], [FirstName], [LastName],[Unsubscribed], [SpecialAccess],[MembershipID])
-VALUES (1/*Staff*/, 'dev@mobillify.com', 'XW0mA5DzfN4XL851H/i1xNFFbMOdtjVAL6fjBN5monE='/*111111*/, '/WCjbQ==', '20120101', 1, 'Development', 'Mobillify', 0, 0, (select [ID] from [usr].[Memberships] where Name = 'Pro'));
+GO
 
+INSERT INTO [Fingerprint].[usr].[StaffRoles]
+           ([ID]
+           ,[Name])
+     VALUES
+           (1,
+           'admin');
 GO
 
 INSERT INTO [usr].[UserStaffRoles](UserID, RoleID)
@@ -21,4 +28,3 @@ VALUES ('Demo Application', '20120525', 3 /*3 stands for android, see EyeTracker
 GO
 INSERT INTO [dbo].[OperationSystem] ([Name])
 VALUES ('2.3.3');
-GO
