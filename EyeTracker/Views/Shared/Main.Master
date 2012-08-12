@@ -19,6 +19,7 @@
     <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/jquery.faded.js")%>"></script>
     <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/jquery.jqtransform.js")%>"></script>
     <script type="text/javascript" src="<%: Url.Content("~/scripts/template/js/script.js")%>"></script>
+    <script type="text/javascript" src="<%: Url.Content("~/scripts/global.js")%>"></script>
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
     <!--script type="text/javascript">
     var _mfyaq = _mfyaq || {};

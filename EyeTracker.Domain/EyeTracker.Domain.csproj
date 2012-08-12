@@ -157,6 +157,8 @@
     <Compile Include="QueriesHandlers\Analytics\HeatMapDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\FilterQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\ClickHeatMapDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\GetScreenDataQueryHandler.cs" />
+    <Compile Include="QueriesHandlers\Application\GetScreenEditDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\GetAllApplicationsQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\GetScreenDetailsQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Application\ScreensQueryHandler.cs" />

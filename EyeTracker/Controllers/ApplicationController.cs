@@ -21,6 +21,7 @@ using EyeTracker.Common.Commands.Application;
 using System.IO;
 using EyeTracker.Common.Queries.Application;
 using System.Configuration;
+using EyeTracker.Common.QueryResults.Application;
 
 namespace EyeTracker.Controllers
 {
@@ -242,11 +243,7 @@ namespace EyeTracker.Controllers
 
         public ActionResult ScreenNew(int id)
         {
-            var application = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(id));
-            ViewBag.PortfolioId = application.PortfolioId;
-            ViewBag.PortfolioDescription = application.PortfolioDescription;
-            ViewBag.ApplicationDescription = application.Description;
-            return View(new ScreenModel { ApplicationId = id }, AfterLoginMasterModel.MenuItem.Analytics);
+            return GetActionData(id, new ScreenModel { ApplicationId = id });
         }
 
         [HttpPost]
@@ -286,38 +283,53 @@ namespace EyeTracker.Controllers
             else
             {
                 log.WriteInformation("Wrong model");
-                var application = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(model.ApplicationId));
-                ViewBag.PortfolioId = application.PortfolioId;
-                ViewBag.PortfolioDescription = application.PortfolioDescription;
-                ViewBag.ApplicationDescription = application.Description;
-
-                return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+                return GetActionData(model.ApplicationId, model);
             }
+        }
+
+        private ActionResult GetActionData(int id, ScreenModel model)
+        {
+            var data = ObjectContainer.Instance.RunQuery(new GetScreenDataQuery(id));
+
+            return PrepareAction(model, data);
+        }
+
+        private ActionResult PrepareAction(ScreenModel model, ScreenDataResult data)
+        {
+            ViewBag.PortfolioId = data.PortfolioId;
+            ViewBag.PortfolioDescription = data.PortfolioDescription;
+            ViewBag.ApplicationDescription = data.ApplicationDescription;
+
+            var pathes = data.Pathes.Select(p => new SelectListItem { Text = p, Value = p }).ToList();
+            pathes.Insert(0, new SelectListItem { Text = "Or select from exists", Value = "" });
+            ViewData["predefinedPathes"] = pathes;
+
+            var sizes = data.Sizes.Select(s => new SelectListItem { Text = s.Width + "X" + s.Height, Value = s.Width + "X" + s.Height }).ToList();
+            sizes.Insert(0, new SelectListItem { Text = "Or select from exists", Value = "X" });
+            ViewData["predefinedSizes"] = sizes;
+
+            return View(model, AfterLoginMasterModel.MenuItem.Analytics);
         }
 
         public ActionResult ScreenEdit(int id)
         {
-            var screen = ObjectContainer.Instance.RunQuery(new GetScreenDetailsQuery(id));
-            if (screen == null)
+            var data = ObjectContainer.Instance.RunQuery(new GetScreenEditDataQuery(id));
+            if (data == null)
             {
                 return View("Error");
             }
             else
             {
-                ViewBag.PortfolioId = screen.PortfolioId;
-                ViewBag.PortfolioDescription = screen.PortfolioDescription;
-                ViewBag.ApplicationDescription = screen.ApplicationDescription;
-
                 var model = new ScreenModel
                 {
-                    Id = screen.Id,
-                    Path = screen.Path,
-                    Width = screen.Width,
-                    Height = screen.Height,
-                    FileExtention = screen.FileExtention,
-                    ApplicationId = screen.ApplicationId
+                    Id = data.Id,
+                    Path = data.Path,
+                    Width = data.Width,
+                    Height = data.Height,
+                    FileExtention = data.FileExtention,
+                    ApplicationId = data.ApplicationId
                 };
-                return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+                return PrepareAction(model, data);
             }
         }
 
@@ -358,11 +370,7 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                var application = ObjectContainer.Instance.RunQuery(new GetApplicationDetailsQuery(model.ApplicationId));
-                ViewBag.PortfolioId = application.PortfolioId;
-                ViewBag.PortfolioDescription = application.PortfolioDescription;
-                ViewBag.ApplicationDescription = application.Description;
-                return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+                return GetActionData(model.ApplicationId, model);
             }
         }
 

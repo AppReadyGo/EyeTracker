@@ -18,6 +18,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, EyeTracker.Model.Page
 
     <link rel="stylesheet" href="<%: Url.Content("~/Scripts/ThridParty/fancybox/helpers/jquery.fancybox-thumbs.css?v=2.0.6")%>" type="text/css" media="screen" />
     <script type="text/javascript" src="<%: Url.Content("~/Scripts/ThridParty/fancybox/helpers/jquery.fancybox-thumbs.js?v=2.0.6")%>"></script>
+    <script src="<%: Url.Content("~/scripts/application.screen.js")%>" type="text/javascript"></script>
     <script type="text/javascript">
         $(function () {
             $('.screen a').fancybox();
