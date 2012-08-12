@@ -156,6 +156,18 @@ namespace EyeTracker.Controllers
             return RedirectToAction("Members");
         }
 
+        public ActionResult Activate(string email)
+        {
+            var result = ObjectContainer.Instance.Dispatch(new ActivateUserCommand(email));
+            return RedirectToAction("Members");
+        }
+
+        public ActionResult Deactivate(int id)
+        {
+            var result = ObjectContainer.Instance.Dispatch(new DeactivateUserCommand(id));
+            return RedirectToAction("Members");
+        }
+
         public ActionResult Logs()
         {
             var result = ObjectContainer.Instance.RunQuery(new LogDataQuery());

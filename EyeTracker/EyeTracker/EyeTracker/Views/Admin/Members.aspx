@@ -76,10 +76,17 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
                   {%>
                 <br />
 				<div class="row-actions">
-					<span class='activate'><a href="/Admin/Activate/<%= user.Id %>">Activate</a> | </span>
+					<span class='activate'><%: @Html.ActionLink("Activate", "Activate", "Admin", new{email = user.Email}, null)%> | </span>
 					<span class='resend-email'><a class='submitdelete' href='/Admin/ResendEmail/<%= user.Id %>'>Resend Email</a></span>
 				</div>
-                <%} %>
+                <%}
+                  else
+                  {%>
+                      <br />
+				<div class="row-actions">
+					<span class='deactivate'><a href="/Admin/Deactivate/<%= user.Id %>">Deactivate</a></span>
+				</div>
+                  <%} %>
             </td>
 			<td class="role column-special-access">
                 <span><%= user.SpecialAccess ? "Yes" : "No"%></span>
@@ -87,7 +94,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
                   {%>
                 <br />
 				<div class="row-actions">
-					<span class='special-access'><a href="/Admin/SpecialAccess/<%= user.Id %>">Grand</a></span>
+					<span class='special-access'><a href="/Admin/SpecialAccess/<%= user.Id %>">Grant</a></span>
 				</div>
                 <%} %>
             </td>
