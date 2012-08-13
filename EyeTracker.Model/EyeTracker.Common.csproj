@@ -104,6 +104,7 @@
     <Compile Include="Commands\Content\UpdateContentItemCommand.cs" />
     <Compile Include="Commands\Users\AcceptTermsAndConditionsCommand.cs" />
     <Compile Include="Commands\Users\DeactivateUserCommand.cs" />
+    <Compile Include="Commands\Users\ResendEmailCommand.cs" />
     <Compile Include="Commands\Users\UpdateLastAccessCommand.cs" />
     <Compile Include="Commands\Users\RemoveUserCommand.cs" />
     <Compile Include="Entities\ApplicationType.cs" />

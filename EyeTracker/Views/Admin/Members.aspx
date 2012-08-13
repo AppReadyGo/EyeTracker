@@ -77,7 +77,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
                 <br />
 				<div class="row-actions">
 					<span class='activate'><%: @Html.ActionLink("Activate", "Activate", "Admin", new{email = user.Email}, null)%> | </span>
-					<span class='resend-email'><a class='submitdelete' href='/Admin/ResendEmail/<%= user.Id %>'>Resend Email</a></span>
+					<span class='resend-email'><%: @Html.ActionLink("Resend Email", "ResendEmail", "Admin", new{email = user.Email}, null)%></span>
 				</div>
                 <%}
                   else

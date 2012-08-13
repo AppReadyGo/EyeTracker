@@ -6,11 +6,13 @@ using System.Web;
 using System.Web.Mvc;
 using EyeTracker.Common.Commands.Admin;
 using EyeTracker.Common.Logger;
+using EyeTracker.Common.Mails;
 using EyeTracker.Common.Queries.Admin;
 using EyeTracker.Controllers.Master;
 using EyeTracker.Core;
 using EyeTracker.Core.Services;
 using EyeTracker.Domain.Model.BackOffice;
+using EyeTracker.Domain.Model.Users;
 using EyeTracker.Model;
 using EyeTracker.Model.Pages.Admin;
 using EyeTracker.Model.Master;
@@ -165,6 +167,22 @@ namespace EyeTracker.Controllers
         public ActionResult Deactivate(int id)
         {
             var result = ObjectContainer.Instance.Dispatch(new DeactivateUserCommand(id));
+            return RedirectToAction("Members");
+        }
+
+        public ActionResult ResendEmail(string email)
+        {
+            //resend welcome email
+            //todo: use this:
+            //var result = ObjectContainer.Instance.Dispatch(new ResendEmailCommand(id));
+            try
+            {
+                new MailGenerator(this.ControllerContext).Send(new ActivationEmail(email));
+            }
+            finally
+            {
+                
+            }
             return RedirectToAction("Members");
         }
 
