@@ -523,7 +523,7 @@
     <Content Include="Scripts\ThridParty\snippet\jquery.snippet.min.css" />
     <Content Include="Scripts\ThridParty\snippet\jquery.snippet.min.js" />
     <Content Include="test.htm" />
-    <Content Include="Views\Account\TermsAndCoditions.aspx" />
+    <Content Include="Views\Account\TermsAndConditions.aspx" />
     <Content Include="Views\Account\Unsubscribe.aspx" />
     <Content Include="Views\Account\Forms\UnsubscribeForm.ascx" />
     <Content Include="Views\Account\ResetPassword.aspx" />
