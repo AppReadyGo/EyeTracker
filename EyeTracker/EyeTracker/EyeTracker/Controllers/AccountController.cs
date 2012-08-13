@@ -72,7 +72,7 @@ namespace EyeTracker.Controllers
             return this.View(model, BeforeLoginMasterModel.MenuItem.None);
         }
 
-        public ActionResult TermsAndCoditions()
+        public ActionResult TermsAndConditions()
         {
             var key = ObjectContainer.Instance.RunQuery(new GetKeyQuery("account/terms-and-coditions"));
             ViewBag.Content = key.Items.First().Value;
