@@ -186,6 +186,32 @@ namespace EyeTracker.Controllers
             return RedirectToAction("Members");
         }
 
+        public ActionResult SpecialAccess(int id)
+        {
+            try
+            {
+                var result = ObjectContainer.Instance.Dispatch(new GrantSpecialAccessCommand(id, true));
+            }
+            finally {}
+            return RedirectToAction("Members");
+        }
+
+        public ActionResult SendSpecialAccessMail(string email)
+        {
+            //send Special Access email
+            //todo: use this:
+            //var result = ObjectContainer.Instance.Dispatch(new ResendEmailCommand(id));
+            try
+            {
+                new MailGenerator(this.ControllerContext).Send(new SpecialAccessEmail(email));
+            }
+            finally
+            {
+
+            }
+            return RedirectToAction("Members");
+        }
+
         public ActionResult Logs()
         {
             var result = ObjectContainer.Instance.RunQuery(new LogDataQuery());
