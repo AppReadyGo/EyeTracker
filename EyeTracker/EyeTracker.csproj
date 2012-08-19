@@ -120,6 +120,7 @@
     <Compile Include="Common\Mails\Email.cs" />
     <Compile Include="Common\Mails\ForgotPasswordMail.cs" />
     <Compile Include="Common\Mails\PromotionEmail.cs" />
+    <Compile Include="Common\Mails\SpecialAccessEmail.cs" />
     <Compile Include="Common\RedirectToMobileAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
