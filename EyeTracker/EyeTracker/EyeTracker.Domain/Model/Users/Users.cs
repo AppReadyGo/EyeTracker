@@ -77,6 +77,11 @@ namespace EyeTracker.Domain.Model.Users
         {
             this.AcceptedTermsAndConditions = !reset;
         }
+
+        public virtual void GrantSpecialAccess(bool specialAccess)
+        {
+            this.SpecialAccess = specialAccess;
+        }
     }
 
     public class Staff : User

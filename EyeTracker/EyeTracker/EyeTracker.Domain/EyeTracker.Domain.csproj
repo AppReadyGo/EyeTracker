@@ -79,6 +79,7 @@
     <Compile Include="CommandHandlers\Users\ActivateUserCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\AcceptTermsAndConditionsCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\DeactivateUserCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Users\GrantSpecialAccessCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\ResendEmailCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\UpdateLastAccessCommandHandler.cs" />
     <Compile Include="CommandHandlers\Users\RemoveUserCommandHandler.cs" />
