@@ -96,7 +96,14 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AdminMasterModel, Eye
 				<div class="row-actions">
 					<span class='special-access'><a href="/Admin/SpecialAccess/<%= user.Id %>">Grant</a></span>
 				</div>
-                <%} %>
+                <%}
+                  else
+                  {%>
+                      <br />
+				<div class="row-actions">
+					<span class='send-grant-mail'><%: @Html.ActionLink("Send SA Email", "SendSpecialAccessMail", "Admin", new { email = user.Email }, null)%></span>
+				</div>
+                  <%} %>
             </td>
 			<td class="role column-last-access"><%= user.LastAccess%></td>
 			<td class="role column-registred"><%= user.Registred%></td>
