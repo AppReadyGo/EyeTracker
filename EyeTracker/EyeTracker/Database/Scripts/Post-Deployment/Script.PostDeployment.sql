@@ -617,7 +617,7 @@ VALUES (1, 0, 'subject', 'Please activate your account'),
 
 GO
 
---=====================  Promotion Mailes =========================-
+--=====================  Promotion Mails =========================-
 
 GO
 SET IDENTITY_INSERT [cont].[Mails] ON
@@ -640,6 +640,28 @@ VALUES (3, 0, 'subject', 'Thank You'),
 <p style="margin-bottom:16px"><em>Looking forward to serve you,<br>Mobillify team</em></p>');
 
 GO
+--=====================  Special Access Mail =========================--
+SET IDENTITY_INSERT [cont].[Mails] ON
+
+INSERT INTO [cont].[Mails] ([ID], [IsSystem], [ThemeID], [Url])
+VALUES (4, 1, 1, 'mails/specialaccessemail');
+
+SET IDENTITY_INSERT [cont].[Mails] OFF
+
+GO	
+INSERT INTO [cont].[Items]([MailID], [IsHTML], [SubKey], [Value])
+VALUES (4, 0, 'subject', 'Hello from Mobillify! The wait is over'),
+		(4, 1, 'body', '<p style="margin-bottom:16px">Dear Friend,</p>
+		<p style="margin-bottom:16px">Welcome on board!</p>
+		<p style="margin-bottom:16px">Your account has been activated.</p>
+<p style="margin-bottom:16px">The Mobilify crew members are really excited because with your help, we are creating something really new. 
+This version of Fingerprint is not a final product. Rather, it is a tool that will allow us to demonstrate Fingerprint’s great potential as we continue to improve and expand the site’s content, accessibility, and functionality.</p>
+<p style="margin-bottom:16px">We appreciate your help and feedback for improving our service.</p>
+<p style="margin-bottom:16px"><em>The skipper</em></p>
+<p style="margin-bottom:16px">http://finger.mobillify.com</p>
+');
+
+GO	
 
 --====================== Keys ====================----
 SET IDENTITY_INSERT [cont].[Keys] ON
