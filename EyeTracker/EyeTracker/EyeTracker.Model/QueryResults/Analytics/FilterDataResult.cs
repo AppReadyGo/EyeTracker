@@ -15,5 +15,6 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
         public List<string> OperatingSystems { get; private set; }
         public List<string> Countries { get; private set; }
         public List<string> Cities { get; private set; }
+        public int? ScreenId { get; set; }
     }
 }

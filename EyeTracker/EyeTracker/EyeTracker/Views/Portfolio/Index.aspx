@@ -26,15 +26,49 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, PortfolioIndexModel>>
 <div style="clear:both;"></div>
 <div class="content-wrapper">
 <h2>Portfolios</h2>
+<div class="a-r top-panel">
+	<table class="tbl fixed" cellspacing="0">
+		<thead>
+		<tr>
+			<th scope='col' class='manage-column column-active'>Most Active Applications</th>
+		</tr>
+		</thead>
+        <tbody>
+        <%if (Model.View.TopApplications.Any()) {
+              foreach (var item in Model.View.TopApplications) { %>	
+        <tr class="<%= item.IsAlternative ? "" : "alternate" %>"><td><a href="/Analytics/Dashboard/?pid=<%: item.PortfolioId %>&aid=<%: item.Id %>"><%: item.Description %></a></td></tr>
+        <%  } 
+          } else {%>
+          <tr class="no-items"><td class="colspanchange">No applications.</td></tr>
+        <%} %>
+        </tbody>
+    </table>
+	<table class="tbl fixed" cellspacing="0">
+		<thead>
+		<tr>
+			<th scope='col' class='manage-column column-active'>Most Active Screens</th>
+		</tr>
+		</thead>
+        <tbody>
+        <%if (Model.View.TopScreens.Any()) {
+              foreach (var item in Model.View.TopScreens) { %>	
+        <tr class="<%= item.IsAlternative ? "" : "alternate" %>"><td><a href="/Analytics/Dashboard/?pid=<%: item.PortfolioId %>&aid=<%: item.ApplicationId %>&ss=<%: item.ScreenSize %>&p=<%: item.Path %>"><%: item.Path %>: <%: item.ScreenSize %></a></td></tr>
+        <%  } 
+          } else {%>
+          <tr class="no-items"><td class="colspanchange">No screens.</td></tr>
+        <%} %>
+        </tbody>
+    </table>
+</div>
 <div class="wrap">
 	<div class="t-nav">
+        <div class="a-l actions">
+            <a href="/Portfolio/New/" class="link2"><span><span>+ Add Portfolio</span></span></a>
+        </div>
 		<div class="a-l search-box">
 			<input type="search" id="search-input" name="s" value="<%=Model.View.SearchStr %>" />
             <a class="link2" onclick="javascript: document.location.href = '/Portfolio/?cp=1&srch=' + escape($('#search-input').val());"><span><span>Search</span></span></a>
 		</div>
-        <div class="a-l actions">
-            <a href="/Portfolio/New/" class="link2"><span><span>+ Add Portfolio</span></span></a>
-        </div>
 		<div class='t-nav-pages <%= Model.View.IsOnePage ? "one-page" : "" %>'>
 			<span class="d-num"><%= Model.View.Count %> items</span>
 			<span class='pagination-links'>
@@ -66,10 +100,8 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, PortfolioIndexModel>>
 		</tr>
 		</tfoot>
 		<tbody id="the-list" class='list:user'>
-        <%if (Model.View.Portfolios.Any())
-          {
-              foreach (var item in Model.View.Portfolios)
-              { %>	
+        <%if (Model.View.Portfolios.Any()) {
+              foreach (var item in Model.View.Portfolios) { %>	
 		<tr class="<%= item.IsAlternative ? "" : "alternate" %>">
 			<td class="column-email">
 				<div class="<%: !item.IsActive ? "status-alert" : "status-ok"%>" title="<%: item.IsActive ? "" : "One of the portfolio's application has not been active for past 3 days." %>"></div>
@@ -91,10 +123,8 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, PortfolioIndexModel>>
             </td>
 			<td class="role column-visits"><%= item.Visits %></td>
 		</tr>
-        <%} 
-          }
-          else
-          {%>
+        <%  } 
+          } else {%>
           <tr class="no-items"><td colspan="4" class="colspanchange">No matching portfolios were found.</td></tr>
         <%} %>
 		</tbody>
@@ -113,6 +143,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, PortfolioIndexModel>>
 		<br class="clear" />
 	</div>
 </div><!-- /wrap -->
+
 <br class="clear" />
 </div>
 </asp:Content>

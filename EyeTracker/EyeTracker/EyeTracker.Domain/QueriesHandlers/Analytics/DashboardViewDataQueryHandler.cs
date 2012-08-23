@@ -45,10 +45,11 @@ namespace EyeTracker.Domain.Queries.Analytics
                 res.Data = dataQuery.GroupBy(g => g.Date.Date)
                                    .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
                                    .ToList().ToDictionary(v => v.Key, v => v.Value);
-                res.ContentOverview = dataQuery.GroupBy(v => v.Path)
+                res.ContentOverview = dataQuery.GroupBy(v => new { v.Path, v.Application.Id })
                                                 .Select(g => new ContentOverviewResult
                                                 {
-                                                    Path = g.Key,
+                                                    ApplicationId = g.Key.Id,
+                                                    Path = g.Key.Path,
                                                     Views = g.Count()
                                                 })
                                                 .ToArray();

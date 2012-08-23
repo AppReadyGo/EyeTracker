@@ -21,6 +21,9 @@ namespace EyeTracker.Model.Pages.Analytics
         public int Index { get; set; }
         public bool IndexIsOdd { get { return this.Index % 2 == 0; } }
 
+        public int ApplicationId { get; set; }
+        public int? ScreenId { get; set; }
+
         public string GetPathUrl(string filterPath)
         {
             int pIndx = filterPath.IndexOf("p=");

@@ -14,8 +14,8 @@ br.clear { height: 2px; line-height: 2px;}
 .t-nav .t-nav-pages .cur-p { text-align: center; }
 .t-nav .d-num{margin-right:10px;font-size:12px;font-style:italic;font-family:Georgia,"Times New Roman","Bitstream Charter",Times,serif}
 .t-nav .no-pages,.t-nav .one-page .pagination-links{display:none}
-sear
-.t-nav .actions { padding: 2px 8px 0 0;line-height:30px;}
+
+.t-nav .actions { padding: 2px 8px 0 0;line-height:30px;margin-right:15px;}
 
 table.fixed{table-layout:fixed}
 

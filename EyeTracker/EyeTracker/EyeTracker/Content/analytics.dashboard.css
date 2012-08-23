@@ -14,55 +14,54 @@ table.dashboard p{margin:0;}
 .content-overview article{width:30%;}
 
 /*Table*/
-.fc {
+.content-overview {
   border-collapse: collapse;
   font-size: 98%;
   margin-bottom: 7px;
   table-layout: fixed;
   width: 100%;
 }
-.fc th {
+.content-overview th {
   text-align: center;
 }
-.fc tr:first-child th {
+.content-overview tr:first-child th {
   border-bottom: 1px solid #808080;
   color: #000000;
   font-weight: bold;
   padding: 12px 8px 3px;
 }
-.fc th.bu {
+.content-overview th.index {
   width: 20px;
 }
-.fc th.F3 {
+.content-overview th.path {
   text-align: left;
 }
-.fc .pr {
+.content-overview .visit {
   text-align: right;
 }
-.fc .Kv {
+.content-overview .action {
   text-align: left;
   width: 150px;
 }
-.fc tr.Mbb {
+.content-overview tr.odd {
   background-color: #F8F8F8;
 }
-.fc td {
+.content-overview td {
   border-bottom: 1px solid #CBCBCB;
 }
-.fc tr td {
+.content-overview tr td {
   padding: 8px 8px 7px;
 }
-.fc td.hJ {
+.content-overview td.view {
   text-align: right;
   vertical-align: top;
-  width: 1%;
 }
-.fc td.HD {
+.content-overview td.path {
   text-align: left;
 }
-.fc .s2 {
+.content-overview .s2 {
   white-space: nowrap;
 }
-.fc tr:hover td{background-color:#ffffcc;}
+.content-overview tr:hover td{background-color:#ffffcc;}
 
 

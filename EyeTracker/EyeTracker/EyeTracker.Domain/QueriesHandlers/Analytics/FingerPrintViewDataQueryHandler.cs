@@ -12,6 +12,7 @@ using EyeTracker.Common.Commands;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {
+    /*
     public class FingerPrintViewDataQueryHandler : FilterBaseQueryHandler, IQueryHandler<FingerPrintViewDataQuery, FingerPrintViewDataResult>
     {
         private IRepository repository;
@@ -25,7 +26,8 @@ namespace EyeTracker.Domain.Queries.Analytics
 
         public FingerPrintViewDataResult Run(ISession session, FingerPrintViewDataQuery query)
         {
-            return GetResult<FingerPrintViewDataResult>(session, securityContext.CurrentUser.Id);
+            return GetResult<FingerPrintViewDataResult>(session, securityContext.CurrentUser.Id, query);
         }
     }
+    */
 }

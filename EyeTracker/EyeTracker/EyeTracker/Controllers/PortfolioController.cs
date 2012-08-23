@@ -56,6 +56,21 @@ namespace EyeTracker.Controllers
                     IsAlternative = i % 2 != 0,
                     ApplicationsCount = p.ApplicationsCount,
                     Visits = p.Visits
+                }).ToArray(),
+                TopApplications = data.TopApplications.Select((a,i) => new TopApplicationsItemModel
+                {
+                    IsAlternative = i % 2 != 0,
+                    Id = a.Id,
+                    PortfolioId = a.PortfolioId,
+                    Description = a.Description
+                }).ToArray(),
+                TopScreens = data.TopScreens.Select((s, i) => new TopScreensItemModel
+                {
+                    IsAlternative = i % 2 != 0,
+                    PortfolioId = s.PortfolioId,
+                    ApplicationId = s.ApplicationId,
+                    ScreenSize = s.ScreenSize.ToFormatedString(),
+                    Path = s.Path
                 }).ToArray()
             };
             return View(model, AfterLoginMasterModel.MenuItem.Analytics);

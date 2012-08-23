@@ -75,7 +75,14 @@ namespace EyeTracker.Controllers
                 var dashboardModel = new DashboardModel
                 {
                     UsageChartData = new JavaScriptSerializer().Serialize(usageInitData),
-                    ContentOverviewData = dashboardViewData.ContentOverview.Select((d, i) => new ContentOverviewModel { Path = d.Path, Views = d.Views, Index = i }).ToArray()
+                    ContentOverviewData = dashboardViewData.ContentOverview.Select((d, i) => new ContentOverviewModel 
+                                            { 
+                                                ApplicationId = d.ApplicationId,
+                                                ScreenId = d.ScreenId,
+                                                Path = d.Path, 
+                                                Views = d.Views, 
+                                                Index = i 
+                                            }).ToArray()
                 };
 
                 dashboardModel.Title = "Dashboard";
@@ -155,7 +162,17 @@ namespace EyeTracker.Controllers
                                      null,
                                      null));
 
-                return View(new FilterModel() { Title = "Fingerprint" }, AnalyticsMasterModel.MenuItem.FingerPrint, filterData, filter, true);
+                string placeHolderHTML = string.Empty;
+                if (filterData.ScreenId.HasValue)
+                {
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", filterData.ScreenId.Value);
+                }
+                else
+                {
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value);
+                }
+
+                return View(new FilterModel() { Title = "Fingerprint" }, AnalyticsMasterModel.MenuItem.FingerPrint, filterData, filter, true, placeHolderHTML);
             }
             else
             {
@@ -164,28 +181,39 @@ namespace EyeTracker.Controllers
        }
 
         public ActionResult EyeTracker(FilterParametersModel filter)
-        {            if (ModelState.IsValid)
+        {
+            if (ModelState.IsValid)
             {
 
-            var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
-                                filter.FromDate,
-                                filter.ToDate,
-                                filter.PortfolioId,
-                                filter.ApplicationId,
-                                filter.ScreenSize,
-                                filter.Path,
-                                null,
-                                null,
-                                null,
-                                null));
+                var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
+                                    filter.FromDate,
+                                    filter.ToDate,
+                                    filter.PortfolioId,
+                                    filter.ApplicationId,
+                                    filter.ScreenSize,
+                                    filter.Path,
+                                    null,
+                                    null,
+                                    null,
+                                    null));
 
-            return View(new FilterModel() { Title = "Eye Tracker" }, AnalyticsMasterModel.MenuItem.EyeTracker, filterData, filter, true);
-             }
+                string placeHolderHTML = string.Empty;
+                if (filterData.ScreenId.HasValue)
+                {
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", filterData.ScreenId.Value);
+                }
+                else
+                {
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value);
+                }
+
+                return View(new FilterModel() { Title = "Eye Tracker" }, AnalyticsMasterModel.MenuItem.EyeTracker, filterData, filter, true, placeHolderHTML);
+            }
             else
             {
                 return Redirect("~/Error");
             }
-       }
+        }
 
         public FileResult ClickHeatMapImage(FilterParametersModel filter)
         {
