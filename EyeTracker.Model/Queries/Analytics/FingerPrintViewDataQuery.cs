@@ -6,6 +6,7 @@ using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 
 namespace EyeTracker.Common.Queries.Analytics
 {
+    /*
     public class FingerPrintViewDataQuery : IQuery<FingerPrintViewDataResult>
     {
         public DateTime From { get; private set; }
@@ -49,4 +50,5 @@ namespace EyeTracker.Common.Queries.Analytics
             this.DataGrouping = dataGrouping;
         }
     }
+     */
 }

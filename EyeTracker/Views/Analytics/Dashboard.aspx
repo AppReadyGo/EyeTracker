@@ -51,12 +51,13 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
         <div class="title"><span>Content Overview</span></div>
         <section id="content" class="content-overview">
 
-        <table class="fc aP">
+        <table class="content-overview">
             <thead>
                 <tr>
-                    <th class="bu"></th>
-                    <th class="F3 ">Pathes</th>
-                    <th class="pr">Visits</th>
+                    <th class="index"></th>
+                    <th class="path">Pathes</th>
+                    <th class="visit">Visits</th>
+                    <th class="action"></th>
                 </tr>
             </thead>
             <tbody>
@@ -64,16 +65,18 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
                 {
                     foreach (var item in Model.View.ContentOverviewData)
                     { %>
-                        <tr class="ID-row-0-0-0 ACTION-select TARGET-row-0 <%= item.IndexIsOdd ? "Mbb" : "" %>">
-                            <td class="hJ">
+                        <tr class="<%= item.IndexIsOdd ? "odd" : "" %>">
+                            <td class="index">
                                 <%= item.Index %>
                             </td>
-                            <td class="HD ">
-                                <div class="Xp Ccb">
-                                    <a href="<%= item.GetPathUrl(Model.SubMaster.FilterUrlPart) %>"><%= item.Path %></a></div>
+                            <td class="path">
+                                <a href="<%= item.GetPathUrl(Model.SubMaster.FilterUrlPart) %>"><%= item.Path %></a>
                             </td>
-                            <td class="pr">
+                            <td class="view">
                                 <%= item.Views %>
+                            </td>
+                            <td class="action">
+                                <a href="/Application/Screens/<%: item.ApplicationId %>">Add/Edit Screens</a>
                             </td>
                         </tr>
 					<% }

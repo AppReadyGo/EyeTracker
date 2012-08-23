@@ -149,6 +149,8 @@
     <Compile Include="QueryResults\PageingResult.cs" />
     <Compile Include="QueryResults\PortfolioDetailsResult.cs" />
     <Compile Include="QueryResults\Portfolio\PortfolioDataItemResult.cs" />
+    <Compile Include="QueryResults\Portfolio\TopApplicationsItemResult.cs" />
+    <Compile Include="QueryResults\Portfolio\TopScreensItemResult.cs" />
     <Compile Include="SecurityContext.cs" />
     <Compile Include="Commands\Application\CreateApplicationCommand.cs" />
     <Compile Include="Commands\Users\ActivateUserCommand.cs" />

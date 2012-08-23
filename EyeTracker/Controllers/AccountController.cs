@@ -176,8 +176,9 @@ namespace EyeTracker.Controllers
             var result = ObjectContainer.Instance.Dispatch(new ActivateUserCommand(splitedKey[1]));
             if (result.Validation.Any())
             {
-                throw new Exception("User does not found.");
+                throw new Exception("User was not found.");
             }
+            ObjectContainer.Instance.Dispatch(new GrantSpecialAccessCommand(result.Result.Value, true));
             return Redirect("~/p/account-activated"); ;
         }
 

@@ -29,13 +29,13 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, ApplicationIndexModel
 <h2><%: Model.View.PortfolioDescription%> - Applications</h2>
 <div class="wrap">  
 	<div class="t-nav">
+        <div class="a-l actions">
+            <a href="/Application/New/<%: Model.View.PortfolioId %>" class="link2"><span><span>+ Add Application</span></span></a>
+        </div>
 		<div class="a-l search-box">
 			<input type="search" id="search-input" name="s" value="<%=Model.View.SearchStr %>" />
             <a class="link2" onclick="javascript: document.location.href = '/Application/<%: Model.View.PortfolioId %>?cp=1&srch=' + escape($('#search-input').val());"><span><span>Search</span></span></a>
 		</div>
-        <div class="a-l actions">
-            <a href="/Application/New/<%: Model.View.PortfolioId %>" class="link2"><span><span>+ Add Application</span></span></a>
-        </div>
 		<div class='t-nav-pages <%= Model.View.IsOnePage ? "one-page" : "" %>'>
 			<span class="d-num"><%= Model.View.Count %> items</span>
 			<span class='pagination-links'>

@@ -27,6 +27,8 @@ namespace EyeTracker.Model.Filter
 
         public string FormAction { get; set; }
 
+        public string PlaceHolderHTML { get; set; }
+
         //Json data
         public string PortfoliosData { get; set; }
         public string ApplicationsData { get; set; }

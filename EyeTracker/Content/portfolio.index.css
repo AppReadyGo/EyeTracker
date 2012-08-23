@@ -5,3 +5,7 @@ div.status-alert{margin:4px auto auto; width:20px;height:20px; background:url("i
 .column-active{width: 45px;}
 
 .content-wrapper{padding:20px;}
+
+.top-panel{width:22%;padding-top:42px;}
+.wrap{width:75%;}
+.top-panel table{margin-bottom:20px;}

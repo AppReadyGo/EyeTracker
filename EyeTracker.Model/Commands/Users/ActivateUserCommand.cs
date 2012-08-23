@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EyeTracker.Common.Commands.Users
 {
-    public class ActivateUserCommand : ICommand<bool>
+    public class ActivateUserCommand : ICommand<int?>
     {
         public string Email { get; set; }
 

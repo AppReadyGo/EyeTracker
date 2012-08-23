@@ -6,12 +6,13 @@ using EyeTracker.Common.QueryResults.Portfolio;
 using EyeTracker.Domain.Model;
 using NHibernate;
 using NHibernate.Linq;
+using EyeTracker.Common.Queries.Analytics;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {
     public abstract class FilterBaseQueryHandler
     {
-        protected TResult GetResult<TResult>(ISession session, int userId)
+        protected TResult GetResult<TResult>(ISession session, int userId, FilterQuery query = null)
             where TResult : FilterDataResult, new()
         {
             var filterData = new TResult();
@@ -79,6 +80,17 @@ namespace EyeTracker.Domain.Queries.Analytics
             }
 
             filterData.Portfolios = portfolios.Select(p => p.details);
+
+            if (query != null && query.ApplicationId.HasValue && !string.IsNullOrEmpty(query.Path) && query.ScreenSize.HasValue)
+            {
+                filterData.ScreenId = session.Query<Screen>()
+                                    .Where(s => s.Application.Id == query.ApplicationId.Value &&
+                                                s.Path.ToLower() == query.Path.ToLower() &&
+                                                s.Width == query.ScreenSize.Value.Width &&
+                                                s.Height == query.ScreenSize.Value.Height)
+                                    .Select(s => (int?)s.Id)
+                                    .FirstOrDefault();
+            }
 
             return filterData;
         }

@@ -15,20 +15,20 @@ namespace EyeTracker.Controllers
 {
     public abstract class FilterController : Master.AnalyticsMasterController
     {
-        protected virtual ActionResult View<TViewModel>(TViewModel viewModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, FilterDataResult filterDataResult, FilterParametersModel filter, bool isSingleMode)
+        protected virtual ActionResult View<TViewModel>(TViewModel viewModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, FilterDataResult filterDataResult, FilterParametersModel filter, bool isSingleMode, string placeHolderHTML = null)
             where TViewModel : FilterModel
         {
-            FillFilter(viewModel, leftMenuSelectedItem, filterDataResult, filter, isSingleMode);
+            FillFilter(viewModel, leftMenuSelectedItem, filterDataResult, filter, isSingleMode, placeHolderHTML);
 
-            return View(viewModel, leftMenuSelectedItem, GetUrlPart(viewModel));
+            return View(viewModel, leftMenuSelectedItem, GetUrlPart(viewModel), filter.ApplicationId.HasValue ? (int?)filter.PortfolioId : null);
         }
 
-        protected virtual ActionResult View<TViewModel>(TViewModel viewModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem)
-            where TViewModel : FilterModel
-        {
-            viewModel.NoData = true;
-            return View(viewModel, leftMenuSelectedItem, GetUrlPart(viewModel));
-        }
+        //protected virtual ActionResult View<TViewModel>(TViewModel viewModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem)
+        //    where TViewModel : FilterModel
+        //{
+        //    viewModel.NoData = true;
+        //    return View(viewModel, leftMenuSelectedItem, GetUrlPart(viewModel));
+        //}
 
         private string GetUrlPart(FilterModel filter)
         {
@@ -48,11 +48,13 @@ namespace EyeTracker.Controllers
             }
         }
 
-        private void FillFilter(FilterModel filterModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, FilterDataResult filterDataResult, FilterParametersModel filter, bool isSingleMode)
+        private void FillFilter(FilterModel filterModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, FilterDataResult filterDataResult, FilterParametersModel filter, bool isSingleMode, string placeHolderHTML)
         {
             if (filter != null && filterDataResult != null)
             {
                 var curPortfolio = filterDataResult.Portfolios.Single(p => p.Id == filter.PortfolioId);
+
+                filterModel.PlaceHolderHTML = placeHolderHTML;
 
                 filterModel.SelectedPortfolioId = curPortfolio.Id;
                 filterModel.PortfolioName = curPortfolio.Description;

@@ -9,9 +9,9 @@ using EyeTracker.Domain.Model.Users;
 
 namespace EyeTracker.Domain.CommandHandlers.Users
 {
-    public class ActivateUserCommandHandler : ICommandHandler<ActivateUserCommand, bool>
+    public class ActivateUserCommandHandler : ICommandHandler<ActivateUserCommand, int?>
     {
-        public bool Execute(ISession session, ActivateUserCommand cmd)
+        public int? Execute(ISession session, ActivateUserCommand cmd)
         {
             var user = session.Query<User>()
                             .Where(u => u.Email.ToLower() == cmd.Email.ToLower())
@@ -20,11 +20,11 @@ namespace EyeTracker.Domain.CommandHandlers.Users
             if (user != null)
             {
                 user.Activate();
-                return true;
+                return user.Id;
             }
             else
             {
-                return false;
+                return null;
             }
         }
     }

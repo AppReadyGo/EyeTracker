@@ -81,6 +81,13 @@
 <div class="filter">
     <div class="title">
         <ul>
+            <%if(!string.IsNullOrEmpty(Model.PlaceHolderHTML)){ %>
+            <li><%= Model.PlaceHolderHTML%></li>
+            <%}%>
+            <%if(!string.IsNullOrEmpty(Model.SelectedScreenSize)){ %>
+            <li><strong>Size:</strong></li>
+            <li><%: Model.SelectedScreenSize%></li>
+            <%}%>
             <li><strong>Portfolio:</strong></li>
             <li><%: Model.PortfolioName%></li>
             <li><strong>Application:</strong></li>

@@ -1,18 +1,18 @@
 ﻿/*
-Post-Deployment Script Template							
+Post-Deployment Script Template                                                 
 --------------------------------------------------------------------------------------
- This file contains SQL statements that will be appended to the build script.		
- Use SQLCMD syntax to include a file in the post-deployment script.			
- Example:      :r .\myfile.sql								
- Use SQLCMD syntax to reference a variable in the post-deployment script.		
- Example:      :setvar TableName MyTable							
-               SELECT * FROM [$(TableName)]					
+ This file contains SQL statements that will be appended to the build script.           
+ Use SQLCMD syntax to include a file in the post-deployment script.                     
+ Example:      :r .\myfile.sql                                                          
+ Use SQLCMD syntax to reference a variable in the post-deployment script.               
+ Example:      :setvar TableName MyTable                                                        
+               SELECT * FROM [$(TableName)]                                     
 --------------------------------------------------------------------------------------
 */
 
 DELETE [cont].[Items]
 GO
-DELETE [cont].[Keys]
+DELETE [cont].[KEYS]
 GO
 DELETE [cont].[Mails]
 GO
@@ -21,10 +21,10 @@ GO
 DELETE [cont].[Themes]  
 GO
 
-INSERT INTO [cont].[Themes] ([ID], [Name], [Url], [Type])
+INSERT INTO [cont].[Themes] ([ID], [Name], [Url], [TYPE])
 VALUES (1, 'System Email', 'Mails\System.aspx', 1),
-		(2, 'Promotion Email', 'Mails\Promotion.aspx', 2),
-		(3, 'Base page', 'Home\PageContent.aspx', 3);
+                (2, 'Promotion Email', 'Mails\Promotion.aspx', 2),
+                (3, 'Base page', 'Home\PageContent.aspx', 3);
 GO
 
 --=====================  Pages =========================-
@@ -34,35 +34,35 @@ SET IDENTITY_INSERT [cont].[Pages] ON
 
 INSERT INTO [cont].[Pages] ([ID], [ThemeID], [Url])
 VALUES (1, 3, 'products/touch-map'),
-		(2, 3, 'products/play-back'),
-		(3, 3, 'products/eye-track'),
-		(4, 3, 'thank-you'),
-		(5, 3, 'activation-email-sent'),
-		(6, 3, 'account-activated'),
-		(7, 3, 'forgot-password-email-sent'),
-		(8, 3, 'unsubscrubed-successful'),
-		(9, 3, 'products'),
-		(10, 3, 'planandpricing'),
-		(11, 3, 'm/products/touch-map'),
-		(12, 3, 'm/products/play-back'),
-		(13, 3, 'm/products/eye-track'),
-		(14, 3, 'm/products'),
-		(15, 3, 'm/planandpricing'),
-		(16, 3, 'special-access-required'),
-		(17, 3, 'tutorials');
+                (2, 3, 'products/play-back'),
+                (3, 3, 'products/eye-track'),
+                (4, 3, 'thank-you'),
+                (5, 3, 'activation-email-sent'),
+                (6, 3, 'account-activated'),
+                (7, 3, 'forgot-password-email-sent'),
+                (8, 3, 'unsubscrubed-successful'),
+                (9, 3, 'products'),
+                (10, 3, 'planandpricing'),
+                (11, 3, 'm/products/touch-map'),
+                (12, 3, 'm/products/play-back'),
+                (13, 3, 'm/products/eye-track'),
+                (14, 3, 'm/products'),
+                (15, 3, 'm/planandpricing'),
+                (16, 3, 'special-access-required'),
+                (17, 3, 'tutorials');
 
 SET IDENTITY_INSERT [cont].[Pages] OFF
-GO		
-INSERT INTO [cont].[Items]([PageID], [IsHTML], [SubKey], [Value])
+GO              
+INSERT INTO [cont].[Items]([PageID], [IsHTML], [SubKey], [VALUE])
 VALUES (1, 0, 'title', 'Touch Map'),
-		(1, 1, 'content', '<article class="col-1-2">
-							<h2>Products</h2>
-							<ul class="list1">
-								<li><a href="/p/products/touch-map">Touch Map</a></li>
-								<li><a href="/p/products/eye-track">Eye Track</a></li>
-								<li><a href="/p/products/play-back">Play Back</a></li>
-							</ul>
-							</article><article class="col-2-2"><h2>Touch map:</h2>
+                (1, 1, 'content', '<article class="col-1-2">
+                                                        <h2>Products</h2>
+                                                        <ul class="list1">
+                                                                <li><a href="/p/products/touch-map">Touch Map</a></li>
+                                                                <li><a href="/p/products/eye-track">Eye Track</a></li>
+                                                                <li><a href="/p/products/play-back">Play Back</a></li>
+                                                        </ul>
+                                                        </article><article class="col-2-2"><h2>Touch map:</h2>
 <p><strong>Touch Map</strong> gives you the marketing power to know everywhere your visitors touch on your application, whether it''s links, images, text or dead space. Know what ads, images and links aren''t getting enough click attention and what call to action buttons are being completely ignored.</p>
 <img alt="Touch map preview" style="float:right;margin-left:20px;" src="/Resources/TouchMap1.jpg" />
 <p><strong>Discover if visitors are clicking on</strong> parts of your web pages that aren''t links but should be. Are visitors clicking on your images and text, such as “Special Offers” banners, buttons or icons, without going anywhere? If these critical page elements are not linked to anything you are losing potential customers and sales!</p>
@@ -71,15 +71,15 @@ VALUES (1, 0, 'title', 'Touch Map'),
 Having the cumulative statistics of your website visitor’s interaction within your website will empower you to design one of the most attractive and efficient profit pulling marketing websites on the Internet.  Your visitors are visually showing you what they want and expect of you to make them your profit source.  Eye-tracking allows you to listen and perform for them!</p>
 <p><strong>Now Eye-tracking is open to everyone and at an incredibly affordable price.</p>
 </article>'),
-		(2, 0, 'title', 'Play Back'),
-		(2, 1, 'content', '<article class="col-1-2">
-							<h2>Products</h2>
-							<ul class="list1">
-								<li><a href="/p/products/touch-map">Touch Map</a></li>
-								<li><a href="/p/products/eye-track">Eye Track</a></li>
-								<li><a href="/p/products/play-back">Play Back</a></li>
-							</ul>
-							</article><article class="col-2-2">
+                (2, 0, 'title', 'Play Back'),
+                (2, 1, 'content', '<article class="col-1-2">
+                                                        <h2>Products</h2>
+                                                        <ul class="list1">
+                                                                <li><a href="/p/products/touch-map">Touch Map</a></li>
+                                                                <li><a href="/p/products/eye-track">Eye Track</a></li>
+                                                                <li><a href="/p/products/play-back">Play Back</a></li>
+                                                        </ul>
+                                                        </article><article class="col-2-2">
 <h2>Play back</h2>
 <p>Do you need to track what your users are doing with your application? PlayBack is like looking right over their shoulder and helping them every step of the way. Understand exactly how your customers use your application to know how to improve it.</p>
 <img src="/Resources/play_back1.jpg" alt="Play back preview" style="float:right;margin-left:20px;">
@@ -91,15 +91,15 @@ Having the cumulative statistics of your website visitor’s interaction within 
                     PlayBack is a powerful analysis tool. Improve your app to have the best user experience possible using the data you collect. 
                     If your application is a great one, people will want to use it. </p>
 <div style="clear:both;"></div></article>'),
-		(3, 0, 'title', 'Eye Track'),
-		(3, 1, 'content', '<article class="col-1-2">
-							<h2>Products</h2>
-							<ul class="list1">
-								<li><a href="/p/products/touch-map">Touch Map</a></li>
-								<li><a href="/p/products/eye-track">Eye Track</a></li>
-								<li><a href="/p/products/play-back">Play Back</a></li>
-							</ul>
-							</article><article class="col-2-2"><h2>Eye track</h2>
+                (3, 0, 'title', 'Eye Track'),
+                (3, 1, 'content', '<article class="col-1-2">
+                                                        <h2>Products</h2>
+                                                        <ul class="list1">
+                                                                <li><a href="/p/products/touch-map">Touch Map</a></li>
+                                                                <li><a href="/p/products/eye-track">Eye Track</a></li>
+                                                                <li><a href="/p/products/play-back">Play Back</a></li>
+                                                        </ul>
+                                                        </article><article class="col-2-2"><h2>Eye track</h2>
 <p><strong>Understanding</strong> how much attention your visitors pay to a specific spot on your application and knowing what your visitors care about the most, what they read, and what content was completely skipped over is pure gold to increased monetization of your business.</p>
 <img src="/Resources/play_back1.jpg" alt="Play back preview" style="float:right;margin-left:20px;">
 <p><strong>Knowing what your potential customers are viewing</strong> and clicking on and what they are not will enable you to tweak your website in the most creative and effective way to attract more sales. Give your potential buying visitors the exact information they want in the least amount of time and watch your sales increase dramatically.</p>
@@ -107,32 +107,32 @@ Having the cumulative statistics of your website visitor’s interaction within 
 <p><strong>By identifying the boring areas of your web pages</strong> you will be able to revise and monitor your edits for best marketing performance indicated by increased viewing and purchase touches. Optimizing ideal ad and button locations dramatically impacts profit performance. Turn skipped over pages into more touched over pages.</p>
 <p><strong>Now you can know the fold of your apps!</strong>  Learn what keeps your visitor on pages longer and how far down they are willing to scroll.  Lengthen some pages and shorten others. Turn more visitors into buyers because you give them exactly what they want in the least amount of words and time and do this with the most efficient and profit pulling attractive page layout.</p>
 </article>'),
-		(4, 0, 'title', 'Thank You'),
-		(4, 1, 'content', '<article class="col"><h2 style="color:#333;display:block;font-family:Arial;font-size:30px;font-weight:bold;line-height:120%;margin-top:40px;margin-right:0;margin-bottom:15px;margin-left:0;text-align:left">Thank You</h2>
-		<p style="margin-bottom:16px">Dear customer,</p>
+                (4, 0, 'title', 'Thank You'),
+                (4, 1, 'content', '<article class="col"><h2 style="color:#333;display:block;font-family:Arial;font-size:30px;font-weight:bold;line-height:120%;margin-top:40px;margin-right:0;margin-bottom:15px;margin-left:0;text-align:left">Thank You</h2>
+                <p style="margin-bottom:16px">Dear customer,</p>
 <p style="margin-bottom:16px">Thank you for signing up for our mobile apps analytical service. Due to high demand
         for our analytics services, we are constantly increasing our capacity and processing
         hundreds of new customers weekly. Now you are in fast moving line and we shall open
         your account within two weeks, notification will be sent to your email.</p>
 <p style="margin-bottom:16px">Thanks again for your patience.</p>
 <p style="margin-bottom:16px"><em>Looking forward to serve you,<br>Mobillify team</em></p></article>'),
-		(5, 0, 'title', 'Activation email was sent'),
-		(5, 1, 'content', ' <article class="col center"><h2>Activation email was sent</h2>
-							<p>Please check your email.</p>
-							<p>And use activation link in the email to activate your account.</p>
-							</article>'),
-		(6, 0, 'title', 'Your account was activated'),
-		(6, 1, 'content', ' <article class="col center"><h2>Your account was activated</h2>
-							<p>Account was activated.</p>
-							<p>You can use your user name and password to log in.</p>
-							<p><a href="/Account/LogOn" class="link2"><span><span>Log On</span></span></a></p>
-							</article>'),
-		(7, 0, 'title', 'Forgot password email was sent'),
-		(7, 1, 'content', '<article class="col center"><h2>Forgot password email was sent</h2></article>'),
-		(8, 0, 'title', 'Unsubscrubed successful'),
-		(8, 1, 'content', '<article class="col center"><h2>Unsubscrubed successful</h2></article>'),
-		(9, 0, 'title', 'Products'),
-		(9, 1, 'content', '<article class="col-1-3">
+                (5, 0, 'title', 'Activation email was sent'),
+                (5, 1, 'content', ' <article class="col center"><h2>Activation email was sent</h2>
+                                                        <p>Please check your email.</p>
+                                                        <p>And use activation link in the email to activate your account.</p>
+                                                        </article>'),
+                (6, 0, 'title', 'Your account was activated'),
+                (6, 1, 'content', ' <article class="col center"><h2>Your account was activated</h2>
+                                                        <p>Account was activated.</p>
+                                                        <p>You can use your user name and password to log in.</p>
+                                                        <p><a href="/Account/LogOn" class="link2"><span><span>Log On</span></span></a></p>
+                                                        </article>'),
+                (7, 0, 'title', 'Forgot password email was sent'),
+                (7, 1, 'content', '<article class="col center"><h2>Forgot password email was sent</h2></article>'),
+                (8, 0, 'title', 'Unsubscrubed successful'),
+                (8, 1, 'content', '<article class="col center"><h2>Unsubscrubed successful</h2></article>'),
+                (9, 0, 'title', 'Products'),
+                (9, 1, 'content', '<article class="col-1-3">
                 <h2>
                     TouchMap</h2>
                 <a href="/p/products/touch-map">
@@ -189,104 +189,104 @@ Having the cumulative statistics of your website visitor’s interaction within 
                 </ul>
                 <a href="/p/products/play-back" class="link2"><span><span>Read more</span></span></a>
             </article>
-			<div style="clear:both;"></div>'),
-		(10, 0, 'title', 'Plan And Pricing'),
-		(10, 1, 'content', '<div class="wrapper row-1">
-					<div class="box col-1-3 maxheight">
-						<div class="border-right maxheight">
-							<div class="border-bot maxheight">
-								<div class="border-left maxheight">
-									<div class="left-top-corner maxheight">
-										<div class="right-top-corner maxheight">
-											<div class="right-bot-corner maxheight">
-												<div class="left-bot-corner maxheight">
-													<div class="inner">
-														<h3>Basic</h3>
-														<ul class="info-list">
-															<li><span>Active applications</span>up to 3</li>
-															<li><span>Sessions per application</span>1000</li>
-															<li><span>Eye-Track</span>No</li>
-															<li><span>Play-Back</span>No</li>
-															<li><span>Alerts</span>Weekly</li>
-														</ul>
-														<span class="price">Free</span>
-														<div class="aligncenter"><a href="/account/register" class="link1"><span><span>Learn More</span></span></a></div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="box col-2-3 maxheight">
-						<div class="border-right maxheight">
-							<div class="border-bot maxheight">
-								<div class="border-left maxheight">
-									<div class="left-top-corner maxheight">
-										<div class="right-top-corner maxheight">
-											<div class="right-bot-corner maxheight">
-												<div class="left-bot-corner maxheight">
-													<div class="inner">
-														<h3>Plus</h3>
-														<ul class="info-list">
-															<li><span>Active applications</span>up to 5</li>
-															<li><span>Sessions per application</span>10000</li>
-															<li><span>Eye-Track</span>Yes</li>
-															<li><span>Play-Back</span>Yes</li>
-															<li><span>Alerts</span>Daily</li>
-														</ul>
-														<span class="price">$ 49 p/m</span>
-														<div class="aligncenter"><a href="/account/register" class="link1"><span><span>Learn More</span></span></a></div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="box col-3-3 maxheight">
-						<div class="border-right maxheight">
-							<div class="border-bot maxheight">
-								<div class="border-left maxheight">
-									<div class="left-top-corner maxheight">
-										<div class="right-top-corner maxheight">
-											<div class="right-bot-corner maxheight">
-												<div class="left-bot-corner maxheight">
-													<div class="inner">
-														<h3>Pro</h3>
-														<ul class="info-list">
-															<li><span>Active applications</span>up to 15</li>
-															<li><span>Sessions per application</span>30000</li>
-															<li><span>Eye-Track</span>Yes</li>
-															<li><span>Play-Back</span>Yes</li>
-															<li><span>Alerts</span>Hourly</li>
-														</ul>
-														<span class="price">$ 99 p/m</span>
-														<div class="aligncenter"><a href="/account/register" class="link1"><span><span>Learn More</span></span></a></div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+                        <div style="clear:both;"></div>'),
+                (10, 0, 'title', 'Plan And Pricing'),
+                (10, 1, 'content', '<div class="wrapper row-1">
+                                        <div class="box col-1-3 maxheight">
+                                                <div class="border-right maxheight">
+                                                        <div class="border-bot maxheight">
+                                                                <div class="border-left maxheight">
+                                                                        <div class="left-top-corner maxheight">
+                                                                                <div class="right-top-corner maxheight">
+                                                                                        <div class="right-bot-corner maxheight">
+                                                                                                <div class="left-bot-corner maxheight">
+                                                                                                        <div class="inner">
+                                                                                                                <h3>Basic</h3>
+                                                                                                                <ul class="info-list">
+                                                                                                                        <li><span>Active applications</span>up to 3</li>
+                                                                                                                        <li><span>Sessions per application</span>1000</li>
+                                                                                                                        <li><span>Eye-Track</span>No</li>
+                                                                                                                        <li><span>Play-Back</span>No</li>
+                                                                                                                        <li><span>Alerts</span>Weekly</li>
+                                                                                                                </ul>
+                                                                                                                <span class="price">Free</span>
+                                                                                                                <div class="aligncenter"><a href="/account/register" class="link1"><span><span>Learn More</span></span></a></div>
+                                                                                                        </div>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div class="box col-2-3 maxheight">
+                                                <div class="border-right maxheight">
+                                                        <div class="border-bot maxheight">
+                                                                <div class="border-left maxheight">
+                                                                        <div class="left-top-corner maxheight">
+                                                                                <div class="right-top-corner maxheight">
+                                                                                        <div class="right-bot-corner maxheight">
+                                                                                                <div class="left-bot-corner maxheight">
+                                                                                                        <div class="inner">
+                                                                                                                <h3>Plus</h3>
+                                                                                                                <ul class="info-list">
+                                                                                                                        <li><span>Active applications</span>up to 5</li>
+                                                                                                                        <li><span>Sessions per application</span>10000</li>
+                                                                                                                        <li><span>Eye-Track</span>Yes</li>
+                                                                                                                        <li><span>Play-Back</span>Yes</li>
+                                                                                                                        <li><span>Alerts</span>Daily</li>
+                                                                                                                </ul>
+                                                                                                                <span class="price">$ 49 p/m</span>
+                                                                                                                <div class="aligncenter"><a href="/account/register" class="link1"><span><span>Learn More</span></span></a></div>
+                                                                                                        </div>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div class="box col-3-3 maxheight">
+                                                <div class="border-right maxheight">
+                                                        <div class="border-bot maxheight">
+                                                                <div class="border-left maxheight">
+                                                                        <div class="left-top-corner maxheight">
+                                                                                <div class="right-top-corner maxheight">
+                                                                                        <div class="right-bot-corner maxheight">
+                                                                                                <div class="left-bot-corner maxheight">
+                                                                                                        <div class="inner">
+                                                                                                                <h3>Pro</h3>
+                                                                                                                <ul class="info-list">
+                                                                                                                        <li><span>Active applications</span>up to 15</li>
+                                                                                                                        <li><span>Sessions per application</span>30000</li>
+                                                                                                                        <li><span>Eye-Track</span>Yes</li>
+                                                                                                                        <li><span>Play-Back</span>Yes</li>
+                                                                                                                        <li><span>Alerts</span>Hourly</li>
+                                                                                                                </ul>
+                                                                                                                <span class="price">$ 99 p/m</span>
+                                                                                                                <div class="aligncenter"><a href="/account/register" class="link1"><span><span>Learn More</span></span></a></div>
+                                                                                                        </div>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
 '),
 (11, 0, 'title', 'Touch Map'),
-		(11, 1, 'content', '<article class="col-1-2">
-							<h2>Products</h2>
-							<ul class="list1">
-								<li><a href="/m/products/touch-map">Touch Map</a></li>
-								<li><a href="/m/products/eye-track">Eye Track</a></li>
-								<li><a href="/m/products/play-back">Play Back</a></li>
-							</ul>
-							</article><article class="col-2-2"><h2>Touch map:</h2>
+                (11, 1, 'content', '<article class="col-1-2">
+                                                        <h2>Products</h2>
+                                                        <ul class="list1">
+                                                                <li><a href="/m/products/touch-map">Touch Map</a></li>
+                                                                <li><a href="/m/products/eye-track">Eye Track</a></li>
+                                                                <li><a href="/m/products/play-back">Play Back</a></li>
+                                                        </ul>
+                                                        </article><article class="col-2-2"><h2>Touch map:</h2>
 <p><strong>Touch Map</strong> gives you the marketing power to know everywhere your visitors touch on your application, whether it''s links, images, text or dead space. Know what ads, images and links aren''t getting enough click attention and what call to action buttons are being completely ignored.</p>
 <img alt="Touch map preview" style="float:right;margin-left:20px;" src="/Resources/TouchMap1.jpg" />
 <p><strong>Discover if visitors are clicking on</strong> parts of your web pages that aren''t links but should be. Are visitors clicking on your images and text, such as “Special Offers” banners, buttons or icons, without going anywhere? If these critical page elements are not linked to anything you are losing potential customers and sales!</p>
@@ -295,15 +295,15 @@ Having the cumulative statistics of your website visitor’s interaction within 
 Having the cumulative statistics of your website visitor’s interaction within your website will empower you to design one of the most attractive and efficient profit pulling marketing websites on the Internet.  Your visitors are visually showing you what they want and expect of you to make them your profit source.  Eye-tracking allows you to listen and perform for them!</p>
 <p><strong>Now Eye-tracking is open to everyone and at an incredibly affordable price.</p>
 </article>'),
-		(12, 0, 'title', 'Play Back'),
-		(12, 1, 'content', '<article class="col-1-2">
-							<h2>Products</h2>
-							<ul class="list1">
-								<li><a href="/m/products/touch-map">Touch Map</a></li>
-								<li><a href="/m/products/eye-track">Eye Track</a></li>
-								<li><a href="/m/products/play-back">Play Back</a></li>
-							</ul>
-							</article><article class="col-2-2">
+                (12, 0, 'title', 'Play Back'),
+                (12, 1, 'content', '<article class="col-1-2">
+                                                        <h2>Products</h2>
+                                                        <ul class="list1">
+                                                                <li><a href="/m/products/touch-map">Touch Map</a></li>
+                                                                <li><a href="/m/products/eye-track">Eye Track</a></li>
+                                                                <li><a href="/m/products/play-back">Play Back</a></li>
+                                                        </ul>
+                                                        </article><article class="col-2-2">
 <h2>Play back</h2>
 <p>Do you need to track what your users are doing with your application? PlayBack is like looking right over their shoulder and helping them every step of the way. Understand exactly how your customers use your application to know how to improve it.</p>
 <img src="/Resources/play_back1.jpg" alt="Play back preview" style="float:right;margin-left:20px;">
@@ -315,15 +315,15 @@ Having the cumulative statistics of your website visitor’s interaction within 
                     PlayBack is a powerful analysis tool. Improve your app to have the best user experience possible using the data you collect. 
                     If your application is a great one, people will want to use it. </p>
 <div style="clear:both;"></div></article>'),
-		(13, 0, 'title', 'Eye Track'),
-		(13, 1, 'content', '<article class="col-1-2">
-							<h2>Products</h2>
-							<ul class="list1">
-								<li><a href="/m/products/touch-map">Touch Map</a></li>
-								<li><a href="/m/products/eye-track">Eye Track</a></li>
-								<li><a href="/m/products/play-back">Play Back</a></li>
-							</ul>
-							</article><article class="col-2-2"><h2>Eye track</h2>
+                (13, 0, 'title', 'Eye Track'),
+                (13, 1, 'content', '<article class="col-1-2">
+                                                        <h2>Products</h2>
+                                                        <ul class="list1">
+                                                                <li><a href="/m/products/touch-map">Touch Map</a></li>
+                                                                <li><a href="/m/products/eye-track">Eye Track</a></li>
+                                                                <li><a href="/m/products/play-back">Play Back</a></li>
+                                                        </ul>
+                                                        </article><article class="col-2-2"><h2>Eye track</h2>
 <p><strong>Understanding</strong> how much attention your visitors pay to a specific spot on your application and knowing what your visitors care about the most, what they read, and what content was completely skipped over is pure gold to increased monetization of your business.</p>
 <img src="/Resources/play_back1.jpg" alt="Play back preview" style="float:right;margin-left:20px;">
 <p><strong>Knowing what your potential customers are viewing</strong> and clicking on and what they are not will enable you to tweak your website in the most creative and effective way to attract more sales. Give your potential buying visitors the exact information they want in the least amount of time and watch your sales increase dramatically.</p>
@@ -332,7 +332,7 @@ Having the cumulative statistics of your website visitor’s interaction within 
 <p><strong>Now you can know the fold of your apps!</strong>  Learn what keeps your visitor on pages longer and how far down they are willing to scroll.  Lengthen some pages and shorten others. Turn more visitors into buyers because you give them exactly what they want in the least amount of words and time and do this with the most efficient and profit pulling attractive page layout.</p>
 </article>'),
 (14, 0, 'title', 'Products'),
-		(14, 1, 'content', '<article class="col-1-3">
+                (14, 1, 'content', '<article class="col-1-3">
                 <h2>
                     TouchMap</h2>
                 <a href="/m/products/touch-map">
@@ -389,9 +389,9 @@ Having the cumulative statistics of your website visitor’s interaction within 
                 </ul>
                 <a href="/m/products/play-back" class="link2"><span><span>Read more</span></span></a>
             </article>
-			<div style="clear:both;"></div>'),
-		(15, 0, 'title', 'Plan And Pricing'),
-		(15, 1, 'content', '<style>
+                        <div style="clear:both;"></div>'),
+                (15, 0, 'title', 'Plan And Pricing'),
+                (15, 1, 'content', '<style>
     .box{font-size:13px;width:290px;margin: 30px auto;background: url("/Content/template/images/box-tail.gif") repeat-x scroll left top #FFFFFF;}
     .box .border-right { background: url("/Content/template/images/border-right.gif") repeat-y scroll right top transparent;}
     .box .border-bot { background: url("/Content/template/images/border-bot.gif") repeat-x scroll left bottom transparent;}
@@ -406,99 +406,103 @@ Having the cumulative statistics of your website visitor’s interaction within 
     .box ul { list-style: none outside none;margin:0;padding:0;}
     .box .info-list li { border-bottom: 1px solid #DFDFDF; margin: 0 0 6px -5px; overflow: hidden; padding: 0 0 6px 5px; text-align: right;vertical-align: top;width: 100%;}
     .box .info-list li span {float: left;}
-    .box .price {color:	#464646; display: block; font-size: 30px; letter-spacing: -1px; line-height: 1.2em; padding-bottom: 10px; text-align: center;}
+    .box .price {color: #464646; display: block; font-size: 30px; letter-spacing: -1px; line-height: 1.2em; padding-bottom: 10px; text-align: center;}
     .box .aligncenter {text-align: center;}
-</style>						
+</style>                                                
 <div class="box col-1-3">
     <div class="border-right">
-		<div class="border-bot">
-			<div class="border-left">
-				<div class="left-top-corner">
-					<div class="right-top-corner">
-						<div class="right-bot-corner">
-							<div class="left-bot-corner">
-								<div class="inner">
-									<h3>Basic</h3>
-									<ul class="info-list">
-										<li><span>Active applications</span>up to 3</li>
-										<li><span>Sessions per application</span>1000</li>
-										<li><span>Eye-Track</span>No</li>
-										<li><span>Play-Back</span>No</li>
-										<li><span>Alerts</span>Weekly</li>
-									</ul>
-									<span class="price">Free</span>
-									<div class="aligncenter"><a data-role="button" data-inline="true" data-transition="slide" data-icon="arrow-r" data-iconpos="right" href="/m/account/register">Learn More</a></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                <div class="border-bot">
+                        <div class="border-left">
+                                <div class="left-top-corner">
+                                        <div class="right-top-corner">
+                                                <div class="right-bot-corner">
+                                                        <div class="left-bot-corner">
+                                                                <div class="inner">
+                                                                        <h3>Basic</h3>
+                                                                        <ul class="info-list">
+                                                                                <li><span>Active applications</span>up to 3</li>
+                                                                                <li><span>Sessions per application</span>1000</li>
+                                                                                <li><span>Eye-Track</span>No</li>
+                                                                                <li><span>Play-Back</span>No</li>
+                                                                                <li><span>Alerts</span>Weekly</li>
+                                                                        </ul>
+                                                                        <span class="price">Free</span>
+                                                                        <div class="aligncenter"><a data-role="button" data-inline="true" data-transition="slide" data-icon="arrow-r" data-iconpos="right" href="/m/account/register">Learn More</a></div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
 </div>
 <div class="box col-2-3 maxheight">
-	<div class="border-right maxheight">
-		<div class="border-bot maxheight">
-			<div class="border-left maxheight">
-				<div class="left-top-corner maxheight">
-					<div class="right-top-corner maxheight">
-						<div class="right-bot-corner maxheight">
-							<div class="left-bot-corner maxheight">
-								<div class="inner">
-									<h3>Plus</h3>
-									<ul class="info-list">
-										<li><span>Active applications</span>up to 5</li>
-										<li><span>Sessions per application</span>10000</li>
-										<li><span>Eye-Track</span>Yes</li>
-										<li><span>Play-Back</span>Yes</li>
-										<li><span>Alerts</span>Daily</li>
-									</ul>
-									<span class="price">$ 49 p/m</span>
-									<div class="aligncenter"><a data-role="button" data-inline="true" data-transition="slide" data-icon="arrow-r" data-iconpos="right" href="/m/account/register">Learn More</a></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="border-right maxheight">
+                <div class="border-bot maxheight">
+                        <div class="border-left maxheight">
+                                <div class="left-top-corner maxheight">
+                                        <div class="right-top-corner maxheight">
+                                                <div class="right-bot-corner maxheight">
+                                                        <div class="left-bot-corner maxheight">
+                                                                <div class="inner">
+                                                                        <h3>Plus</h3>
+                                                                        <ul class="info-list">
+                                                                                <li><span>Active applications</span>up to 5</li>
+                                                                                <li><span>Sessions per application</span>10000</li>
+                                                                                <li><span>Eye-Track</span>Yes</li>
+                                                                                <li><span>Play-Back</span>Yes</li>
+                                                                                <li><span>Alerts</span>Daily</li>
+                                                                        </ul>
+                                                                        <span class="price">$ 49 p/m</span>
+                                                                        <div class="aligncenter"><a data-role="button" data-inline="true" data-transition="slide" data-icon="arrow-r" data-iconpos="right" href="/m/account/register">Learn More</a></div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
 </div>
 <div class="box col-3-3 maxheight">
-	<div class="border-right maxheight">
-		<div class="border-bot maxheight">
-			<div class="border-left maxheight">
-				<div class="left-top-corner maxheight">
-					<div class="right-top-corner maxheight">
-						<div class="right-bot-corner maxheight">
-							<div class="left-bot-corner maxheight">
-								<div class="inner">
-									<h3>Pro</h3>
-									<ul class="info-list">
-										<li><span>Active applications</span>up to 15</li>
-										<li><span>Sessions per application</span>30000</li>
-										<li><span>Eye-Track</span>Yes</li>
-										<li><span>Play-Back</span>Yes</li>
-										<li><span>Alerts</span>Hourly</li>
-									</ul>
-									<span class="price">$ 99 p/m</span>
-									<div class="aligncenter"><a data-role="button" data-inline="true" data-transition="slide" data-icon="arrow-r" data-iconpos="right" href="/m/account/register">Learn More</a></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="border-right maxheight">
+                <div class="border-bot maxheight">
+                        <div class="border-left maxheight">
+                                <div class="left-top-corner maxheight">
+                                        <div class="right-top-corner maxheight">
+                                                <div class="right-bot-corner maxheight">
+                                                        <div class="left-bot-corner maxheight">
+                                                                <div class="inner">
+                                                                        <h3>Pro</h3>
+                                                                        <ul class="info-list">
+                                                                                <li><span>Active applications</span>up to 15</li>
+                                                                                <li><span>Sessions per application</span>30000</li>
+                                                                                <li><span>Eye-Track</span>Yes</li>
+                                                                                <li><span>Play-Back</span>Yes</li>
+                                                                                <li><span>Alerts</span>Hourly</li>
+                                                                        </ul>
+                                                                        <span class="price">$ 99 p/m</span>
+                                                                        <div class="aligncenter"><a data-role="button" data-inline="true" data-transition="slide" data-icon="arrow-r" data-iconpos="right" href="/m/account/register">Learn More</a></div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
 </div>'),
-		(16, 0, 'title', 'Special Access Required'),
-		(16, 1, 'content', ' <article class="col center"><h2>Special Access Required</h2>
-							<p>At this stage we provide access just for selected number of users, </br>if you would like to get the access please contact us by the email: <a href="mailto:support@mobillify.com">support@mobillify.com</a>.</p>
-							</article>'),
-		(17, 0, 'title', 'Get Started'),
-		(17, 1, 'content', '<h2>Getting Started</h2>
+                (16, 0, 'title', 'Special Access Required'),
+                (16, 1, 'content', ' <article class="col center"><h2>Welcome on board!</h2>
+                                                        <p>The Mobilify crew members are really excited because with your help, we are creating something really new.
+Please keep in mind that we are only in the first (closed) stage of the BETA. This version of Fingerprint is not a final product. 
+Rather, it is a tool that will allow us to demonstrate Fingerprint’s great potential as we continue to improve and expand the site’s content, accessibility, and functionality.</p>
+<p>We appreciate your help and feedback for improving our service.</p>
+<p>The skipper.</p>
+                                                        </article>'),
+                (17, 0, 'title', 'Get Started'),
+                (17, 1, 'content', '<h2>Getting Started</h2>
 <p dir="LTR">
     <strong>Requirements</strong>
     <strong></strong>
@@ -604,16 +608,27 @@ SET IDENTITY_INSERT [cont].[Mails] ON
 
 INSERT INTO [cont].[Mails] ([ID], [IsSystem], [ThemeID], [Url])
 VALUES (1, 1, 1, 'mails/activationemail'),
-		(2, 1, 1, 'mails/forgotpasswordmail');
+                (2, 1, 1, 'mails/forgotpasswordmail'),
+                (4, 1, 1, 'mails/specialaccessemail');
 
 SET IDENTITY_INSERT [cont].[Mails] OFF
 
-GO		
-INSERT INTO [cont].[Items]([MailID], [IsHTML], [SubKey], [Value])
+GO              
+INSERT INTO [cont].[Items]([MailID], [IsHTML], [SubKey], [VALUE])
 VALUES (1, 0, 'subject', 'Please activate your account'),
 		(1, 1, 'body', 'Please activate your account by the link: {activation_link}'),
 		(2, 0, 'subject', 'Reset password'),
-		(2, 1, 'body', 'Please use the link to reset password: {reset_password_link}');
+		(2, 1, 'body', 'Please use the link to reset password: {reset_password_link}'),
+		(4, 0, 'subject', 'Hello from Mobillify! The wait is over'),
+		(4, 1, 'body', '<p style="margin-bottom:16px">Dear Friend,</p>
+                <p style="margin-bottom:16px">Welcome on board!</p>
+                <p style="margin-bottom:16px">Your account has been activated.</p>
+<p style="margin-bottom:16px">The Mobilify crew members are really excited because with your help, we are creating something really new. 
+This version of Fingerprint is not a final product. Rather, it is a tool that will allow us to demonstrate Fingerprint’s great potential as we continue to improve and expand the site’s content, accessibility, and functionality.</p>
+<p style="margin-bottom:16px">We appreciate your help and feedback for improving our service.</p>
+<p style="margin-bottom:16px"><em>The skipper</em></p>
+<p style="margin-bottom:16px">http://finger.mobillify.com</p>
+');
 
 GO
 
@@ -627,11 +642,11 @@ VALUES (3, 0, 2, 'mails/thank-you');
 
 SET IDENTITY_INSERT [cont].[Mails] OFF
 
-GO		
-INSERT INTO [cont].[Items]([MailID], [IsHTML], [SubKey], [Value])
+GO              
+INSERT INTO [cont].[Items]([MailID], [IsHTML], [SubKey], [VALUE])
 VALUES (3, 0, 'subject', 'Thank You'),
-		(3, 1, 'body', '<h2 style="color:#333;display:block;font-family:Arial;font-size:30px;font-weight:bold;line-height:120%;margin-top:40px;margin-right:0;margin-bottom:15px;margin-left:0;text-align:left">Thank You</h2>
-		<p style="margin-bottom:16px">Dear customer,</p>
+                (3, 1, 'body', '<h2 style="color:#333;display:block;font-family:Arial;font-size:30px;font-weight:bold;line-height:120%;margin-top:40px;margin-right:0;margin-bottom:15px;margin-left:0;text-align:left">Thank You</h2>
+                <p style="margin-bottom:16px">Dear customer,</p>
 <p style="margin-bottom:16px">Thank you for signing up for our mobile apps analytical service. Due to high demand
         for our analytics services, we are constantly increasing our capacity and processing
         hundreds of new customers weekly. Now you are in fast moving line and we shall open
@@ -640,38 +655,16 @@ VALUES (3, 0, 'subject', 'Thank You'),
 <p style="margin-bottom:16px"><em>Looking forward to serve you,<br>Mobillify team</em></p>');
 
 GO
---=====================  Special Access Mail =========================--
-SET IDENTITY_INSERT [cont].[Mails] ON
-
-INSERT INTO [cont].[Mails] ([ID], [IsSystem], [ThemeID], [Url])
-VALUES (4, 1, 1, 'mails/specialaccessemail');
-
-SET IDENTITY_INSERT [cont].[Mails] OFF
-
-GO	
-INSERT INTO [cont].[Items]([MailID], [IsHTML], [SubKey], [Value])
-VALUES (4, 0, 'subject', 'Hello from Mobillify! The wait is over'),
-		(4, 1, 'body', '<p style="margin-bottom:16px">Dear Friend,</p>
-		<p style="margin-bottom:16px">Welcome on board!</p>
-		<p style="margin-bottom:16px">Your account has been activated.</p>
-<p style="margin-bottom:16px">The Mobilify crew members are really excited because with your help, we are creating something really new. 
-This version of Fingerprint is not a final product. Rather, it is a tool that will allow us to demonstrate Fingerprint’s great potential as we continue to improve and expand the site’s content, accessibility, and functionality.</p>
-<p style="margin-bottom:16px">We appreciate your help and feedback for improving our service.</p>
-<p style="margin-bottom:16px"><em>The skipper</em></p>
-<p style="margin-bottom:16px">http://finger.mobillify.com</p>
-');
-
-GO	
 
 --====================== Keys ====================----
-SET IDENTITY_INSERT [cont].[Keys] ON
+SET IDENTITY_INSERT [cont].[KEYS] ON
 
-INSERT INTO [cont].[Keys] ([ID], [Url])
+INSERT INTO [cont].[KEYS] ([ID], [Url])
 VALUES (1, 'account/terms-and-coditions');
 
-SET IDENTITY_INSERT [cont].[Keys] OFF
+SET IDENTITY_INSERT [cont].[KEYS] OFF
 
-INSERT INTO [cont].[Items]([KeyID], [IsHTML], [SubKey], [Value])
+INSERT INTO [cont].[Items]([KeyID], [IsHTML], [SubKey], [VALUE])
 VALUES (1, 1, 'content', '<h2>FingerPrint Terms Of Service</h2>
 <h5>Acceptance of Terms</h5>
 <p>

@@ -9,16 +9,17 @@ namespace EyeTracker.Model.Master
 {
     public class AnalyticsMasterModel
     {
-        public FilterModel Filter { get; set; }
-        public MenuItem SelectedItem { get; set; }
-        public string FilterUrlPart { get; set; }
+        public MenuItem SelectedItem { get; private set; }
+        public string FilterUrlPart { get; private set; }
+        public int? PortfolioId { get; private set; }
 
         public bool IsMenuDisabled { get { return string.IsNullOrEmpty(this.FilterUrlPart); } }
 
-        public AnalyticsMasterModel(MenuItem selectedItem, string filterUrlPart)
+        public AnalyticsMasterModel(MenuItem selectedItem, string filterUrlPart, int? portfolioId)
         {
             this.SelectedItem = selectedItem;
             this.FilterUrlPart = filterUrlPart;
+            this.PortfolioId = portfolioId;
         }
 
         public string GetMenuItemClass(MenuItem item)
