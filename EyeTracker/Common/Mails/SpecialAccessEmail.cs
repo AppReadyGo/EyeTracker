@@ -19,7 +19,7 @@ namespace EyeTracker.Common.Mails
 
             this.Model = new SystemEmailModel(true)
             {
-                //ContactUsEmail = EmailSettings.Settings.Email.ContactUsEmail,
+                ContactUsEmail = EmailSettings.Settings.Email.ContactUsEmail,
                 SiteRootUrl = siteRootUrl,
                 Subject = mailContent.Subject,
                 Body = body
