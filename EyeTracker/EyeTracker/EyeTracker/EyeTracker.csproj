@@ -380,6 +380,7 @@
     <Content Include="Restricted\Packages\fingerprint-1.8.62.jar" />
     <Content Include="Restricted\Packages\fingerprint-1.9.07.jar" />
     <Content Include="Restricted\Packages\fingerprint-1.9.23.jar" />
+    <Content Include="Restricted\Packages\fingerprint-1.9.26.jar" />
     <Content Include="Restricted\Packages\fingerprint.828.jar" />
     <Content Include="Restricted\Packages\fingerprint-1.0.jar" />
     <Content Include="Scripts\Analytics.Index.js" />
@@ -648,6 +649,7 @@
     <None Include="Restricted\Packages\fingerprint-1.0.properties" />
     <None Include="Restricted\Packages\fingerprint-1.9.07.properties" />
     <None Include="Restricted\Packages\fingerprint-1.9.23.properties" />
+    <None Include="Restricted\Packages\fingerprint-1.9.26.properties" />
     <None Include="Scripts\ThridParty\fancybox\helpers\Thumbs.db" />
     <None Include="Scripts\ThridParty\jquery-lightbox-0.5\photos\Thumbs.db" />
   </ItemGroup>
