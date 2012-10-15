@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<style>		    
+		    body{margin:0;padding:0;color:#000;text-align:center;font-family:Arial;}
+		    .content-wrapper{margin:auto;width:1024px;text-align:left;}
+		    
+		    .clear{clear:both;margin:0;padding:0;}
+		   
+		    nav ul, #features ul, #login ul{margin:0;padding:0;}
+		    nav ul li, #features li, #login li{margin:0;padding:0;list-style:none;display:inline;}
+
+		    header{height:68px;color:#FFF;background:url(bg.png) repeat-x 0px 0px;padding:14px 0;line-height:68px;}
+		    header .content-wrapper{text-align:center;}
+		    header nav{margin:auto;text-transform:uppercase;font-weight:bold;}
+		    header nav li{margin:0 10px;}
+		    header nav li a{color:#FFF;text-decoration:none;}
+		    header #logo{float:left;}
+		    header #login{float:right;}
+		    header #login input{height:38px;width:120px;background-color:#5d5d5d;border:1px solid #000;font-size:20px;}
+		    
+		    #slideshow{height:540px;color:#FFF;background:url(bg.png) repeat-x 0px -96px;padding:8px;}
+		    #slideshow h1{margin-top:83px;font-size:36px;}
+		    #slideshow img{float:right;margin-top:-83px;}
+		    
+		    #content{height:540px;color:FFF;background:url(white_texture.png) repeat 0px 0px;padding-top:10px;}
+		    #features h2{text-align:center;font-weight:normal;font-size:32px;}
+		    #features li{width:23%;float:left;margin:10px;}
+		    #features li img{float:left;}
+		    #features li h3{text-align:center;}
+		    
+		    #action{background-color:#FFF;border:1px solid #b0b0b0;text-align:center;padding:35px;font-size:25px;margin-top:50px;}
+		    
+		    #info video{float:left;}
+		    
+		    footer{color:FFF;height:269px;background:url(bg.png) repeat-x 0px -1479px;}
+		    
+		</style>
+	</head>
+	<body>
+        <header>
+            <div class="content-wrapper">
+            <a id="logo" href="#"><img src="logo.png" /></a>
+            <form id="login">
+                <ul>
+                    <li><input type="email" maxlength="100" /></li>
+                    <li><input type="password" maxlength="100" /></li>
+                    <li><input type="submit" value="Login" /></li>
+                </ul>
+            </form><!-- /#login --> 
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Plans & Pricing</a></li>
+                    <li><a href="#">Get Started</a></li>
+                </ul>
+            </nav>
+            </div>
+        </header>
+        <section id="slideshow">
+            <div class="content-wrapper">
+            <img src="screens.png" />
+            <h1>Start Testing Your App</h1>
+            <p>Using Fingerprint, we’re able to test your app completely, finding out exactly what you need to do to optimize your users’ experience. Our system includes Eye Tracker, Touch Map, Play Back, and Life-cycle.</p>
+            <a href="#" class="button">Get Started Now</a>
+            </div>
+        </section><!-- /#slideshow --> 
+        <section id="content">
+            <div class="content-wrapper">
+            <article id="features">
+                <h2>Put your app to the test with Mobillify</h2>
+                <ul>
+                    <li>
+                        <img src="eyetrack_grey.png" />
+                        <h3>Eye Tracker</h3>
+                        <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
+                    </li>
+                    <li>
+                        <img src="eyetrack_grey.png" />
+                        <h3>Eye Tracker</h3>
+                        <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
+                    </li>
+                    <li>
+                        <img src="eyetrack_grey.png" />
+                        <h3>Eye Tracker</h3>
+                        <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
+                    </li>
+                    <li>
+                        <img src="eyetrack_grey.png" />
+                        <h3>Eye Tracker</h3>
+                        <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
+                    </li>
+                </ul>
+                <p class="clear"></p>
+            </article><!-- /#content --> 
+            <article id="action">
+                <span>If you’re still not convinced, try it free!</span>
+                <a href="#">Get Started</a>
+            </article><!-- /#action --> 
+            <article id="info">
+                <video width="320" height="240" controls="controls">
+                    <source src="movie.ogg" type="video/ogg" />
+                    <source src="movie.mp4" type="video/mp4" />
+                    <source src="movie.webm" type="video/webm" />
+                    Your browser does not support the video tag.
+                </video>
+                <p>
+                    some description
+                </p>
+                <p class="clear"></p>
+            </article><!-- /#info --> 
+            </div>
+        </section>
+        <footer>
+            <div class="content-wrapper">
+            <nav>
+                <ul>
+                    <li>lnk 1</li>
+                    <li>lnk 2</li>
+                    <li>lnk 3</li>
+                </ul>
+            </nav>
+            <div id="copyright">
+                &copy; some copyrights
+            </div>
+            </div>
+        </footer>
+	</body>
+</html>
