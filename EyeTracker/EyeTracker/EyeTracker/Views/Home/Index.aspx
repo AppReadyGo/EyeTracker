@@ -18,7 +18,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
         $('#domain-form').jqTransform({ imgPath: 'jqtransformplugin/img/' });
     });
 </script>
-<link rel="stylesheet" href="<%: Url.Content("~/Content/template/css/home.index.css") %>" type="text/css" media="all">
+<link rel="stylesheet" href="<%: Url.Content("~/Content/template/css/home.index.1.0.css") %>" type="text/css" media="all">
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -75,7 +75,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
 								<div class="right-bot-corner maxheight">
 									<div class="left-bot-corner maxheight">
 										<div class="inner">
-											<h3>Touch Map</h3>
+											<h3>Touch Map<img src="../../Content/touchmap_grey.png" /></h3>
 											<p>Visualized reports of end-user attention held by each area, on every page of a given application.</p>
 											<div class="aligncenter"><a href="/p/products/touch-map" class="link1"><span><span>Learn More</span></span></a></div>
 										</div>
@@ -96,7 +96,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
 								<div class="right-bot-corner maxheight">
 									<div class="left-bot-corner maxheight">
 										<div class="inner">
-											<h3>Eye Track</h3>
+											<h3>Eye Track<img src="../../Content/eyetrack_grey.png" /></h3>
 											<p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
 											<div class="aligncenter"><a href="/p/products/eye-track" class="link1"><span><span>Learn More</span></span></a></div>
 										</div>
@@ -117,7 +117,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
 								<div class="right-bot-corner maxheight">
 									<div class="left-bot-corner maxheight">
 										<div class="inner">
-											<h3>Play Back</h3>
+											<h3>Play Back<img src="../../Content/playback_grey.png" /></h3>
 											<p>Rewind or watch your visitors' full browsing sessions to discover exactly how they use your application.</p>
 											<div class="aligncenter"><a href="/p/products/play-back" class="link1"><span><span>Learn More</span></span></a></div>
 										</div>
