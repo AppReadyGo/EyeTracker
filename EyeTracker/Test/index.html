@@ -1,46 +1,81 @@
 ﻿<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-		
-		<style>		    
-		    body{margin:0;padding:0;color:#000;text-align:center;font-family:Arial;}
-		    .content-wrapper{margin:auto;width:1024px;text-align:left;}
-		    
-		    .clear{clear:both;margin:0;padding:0;}
-		   
-		    nav ul, #features ul, #login ul{margin:0;padding:0;}
-		    nav ul li, #features li, #login li{margin:0;padding:0;list-style:none;display:inline;}
+        <head>
+                <meta charset="utf-8">
+                <title></title>
+                
+                <style>             
+                    body{margin:0;padding:0;color:#000;text-align:center;font-family:Arial;}
+                    .content-wrapper{margin:auto;width:1024px;text-align:left;}
+                    
+                    .clear{clear:both;margin:0;padding:0;}
+                    
+                    .button { display: inline-block;outline: none; cursor: pointer; text-align: center;
+	                    text-decoration: none;
+	                    -webkit-border-radius: 5px; -moz-border-radius: 5px;
+	                    border-radius: 5px; -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);box-shadow: 0 1px 2px rgba(0,0,0,.2);}
+                    .button:hover {text-decoration: none;}
+                    .yellow {color: #814B1A;border: solid 1px #814B1A;background: #E0AE54; text-shadow: -2px -1px 0px #f0d393;
+	                    background: -webkit-gradient(linear, left top, left bottom, from(#F0C770), to(#D09639));background: -moz-linear-gradient(top,  #F0C770,  #D09639);
+	                    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#F0C770', endColorstr='#D09639');}
+                    .yellow:hover {background: #f47c20;
+	                    background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));background: -moz-linear-gradient(top,  #f88e11,  #f06015);
+	                    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');}
+                    .green {color: #FFF;border: solid 1px #30460A;background: #5F8A29; text-shadow: -2px -1px 0px #345F10;
+	                    background: -webkit-gradient(linear, left top, left bottom, from(#6E9F31), to(#527921));background: -moz-linear-gradient(top,  #6E9F31,  #527921);
+	                    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#6E9F31', endColorstr='#527921');}
+                    .green:hover {background: #f47c20;
+	                    background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));background: -moz-linear-gradient(top,  #f88e11,  #f06015);
+	                    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');}
+                   
+                    header nav ul, #features ul, #login ul{margin:0;padding:0;}
+                    header nav ul li, #features li, #login li{margin:0;padding:0;list-style:none;display:inline;}
 
-		    header{height:68px;color:#FFF;background:url(bg.png) repeat-x 0px 0px;padding:14px 0;line-height:68px;}
-		    header .content-wrapper{text-align:center;}
-		    header nav{margin:auto;text-transform:uppercase;font-weight:bold;}
-		    header nav li{margin:0 10px;}
-		    header nav li a{color:#FFF;text-decoration:none;}
-		    header #logo{float:left;}
-		    header #login{float:right;}
-		    header #login input{height:38px;width:120px;background-color:#5d5d5d;border:1px solid #000;font-size:20px;}
-		    
-		    #slideshow{height:540px;color:#FFF;background:url(bg.png) repeat-x 0px -96px;padding:8px;}
-		    #slideshow h1{margin-top:83px;font-size:36px;}
-		    #slideshow img{float:right;margin-top:-83px;}
-		    
-		    #content{height:540px;color:FFF;background:url(white_texture.png) repeat 0px 0px;padding-top:10px;}
-		    #features h2{text-align:center;font-weight:normal;font-size:32px;}
-		    #features li{width:23%;float:left;margin:10px;}
-		    #features li img{float:left;}
-		    #features li h3{text-align:center;}
-		    
-		    #action{background-color:#FFF;border:1px solid #b0b0b0;text-align:center;padding:35px;font-size:25px;margin-top:50px;}
-		    
-		    #info video{float:left;}
-		    
-		    footer{color:FFF;height:269px;background:url(bg.png) repeat-x 0px -1479px;}
-		    
-		</style>
-	</head>
-	<body>
+                    header{height:68px;color:#FFF;background:url(bg.png) repeat-x 0px 0px;padding:14px 0;line-height:68px;}
+                    header .content-wrapper{text-align:center;}
+                    header nav{margin:auto;text-transform:uppercase;font-weight:bold;}
+                    header nav li{margin:0 10px;}
+                    header nav li a{color:#FFF;text-decoration:none;}
+                    header #logo{float:left;}
+                    header #login{float:right;}
+                    header #login input[type="email"],
+                    header #login input[type="password"]{height:28px;width:120px;background-color:#5d5d5d;border:1px solid #000;font-size:20px;padding:5px;color:#FFF;
+                                        -moz-border-radius: 5px;border-radius: 5px;-webkit-border-radius: 5px;
+                                        -moz-box-shadow: inset 0 0 10px #000000;-webkit-box-shadow: inset 0 0 10px #000000; box-shadow: inset 0 0 10px #000000;}
+                    header #btn_login{padding: 12px 10px 8px;font-weight:bold;font-size:12px;text-transform:uppercase;}
+                    
+                    #slideshow{height:540px;color:#FFF;background:url(bg.png) repeat-x 0px -96px;padding:8px;text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);}
+                    #slideshow h1{margin-top:83px;font-size:36px;}
+                    #slideshow img{float:right;margin-top:-83px;}
+                    #slideshow p{line-height:29px;}
+                    #slideshow .btn-getstarted{padding: 25px 39px 23px;font-weight:bold;font-size:18px;text-transform:uppercase;margin-top:30px;}
+                    
+                    #content{color:#000;background:url(white_texture.png) repeat 0px 0px;padding-top:10px;}
+                    #features h2{text-align:center;font-weight:normal;font-size:32px;}
+                    #features li{width:23%;float:left;margin:10px;}
+                    #features li img{float:left;}
+                    #features li h3{text-align:center;}
+                    
+                    #action{background-color:#FFF;border:1px solid #b0b0b0;text-align:center;padding:35px 0;font-size:25px;margin-top:50px;}
+                    #action .btn-getstarted{padding: 25px 39px 23px;font-weight:bold;font-size:18px;text-transform:uppercase;margin-left:30px;}
+                    
+                    #info{margin:50px auto 0px auto;}
+                    #info .video{float:left;margin-right:20px;margin-bottom:50px;}
+                    #info h2{margin-top:100px;font-weight:normal;}
+                    
+                    footer{color:#FFF;height:269px;background:url(bg.png) repeat-x 0px -1479px;padding-top:20px;font-size:12px;}
+                    footer h4{text-transform:uppercase;margin-bottom:25px;}
+                    footer a{color:#FFF;text-decoration:none;}
+                    footer a:hover{text-decoration:underline;}
+                    footer ul{margin:0;padding:0;}
+                    footer li{padding:0;list-style:none;}
+                    footer nav > ul > li{margin: 0 5px 0 5px;float:left;width:27%;}
+                    footer nav > ul > li > ul > li{margin: 10px 0px 10px 0px;}
+                    #copyright{float:right;}
+                    
+                </style>
+        </head>
+        <body>
         <header>
             <div class="content-wrapper">
             <a id="logo" href="#"><img src="logo.png" /></a>
@@ -48,7 +83,7 @@
                 <ul>
                     <li><input type="email" maxlength="100" /></li>
                     <li><input type="password" maxlength="100" /></li>
-                    <li><input type="submit" value="Login" /></li>
+                    <li><input type="submit" value="Log in" class="button yellow" id="btn_login"/></li>
                 </ul>
             </form><!-- /#login --> 
             <nav>
@@ -57,77 +92,96 @@
                     <li><a href="#">Features</a></li>
                     <li><a href="#">Plans & Pricing</a></li>
                     <li><a href="#">Get Started</a></li>
-                </ul>
-            </nav>
-            </div>
-        </header>
-        <section id="slideshow">
-            <div class="content-wrapper">
-            <img src="screens.png" />
-            <h1>Start Testing Your App</h1>
-            <p>Using Fingerprint, we’re able to test your app completely, finding out exactly what you need to do to optimize your users’ experience. Our system includes Eye Tracker, Touch Map, Play Back, and Life-cycle.</p>
-            <a href="#" class="button">Get Started Now</a>
-            </div>
-        </section><!-- /#slideshow --> 
-        <section id="content">
-            <div class="content-wrapper">
-            <article id="features">
-                <h2>Put your app to the test with Mobillify</h2>
-                <ul>
-                    <li>
-                        <img src="eyetrack_grey.png" />
-                        <h3>Eye Tracker</h3>
-                        <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
-                    </li>
-                    <li>
-                        <img src="eyetrack_grey.png" />
-                        <h3>Eye Tracker</h3>
-                        <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
-                    </li>
-                    <li>
-                        <img src="eyetrack_grey.png" />
-                        <h3>Eye Tracker</h3>
-                        <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
-                    </li>
-                    <li>
-                        <img src="eyetrack_grey.png" />
-                        <h3>Eye Tracker</h3>
-                        <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
-                    </li>
-                </ul>
-                <p class="clear"></p>
-            </article><!-- /#content --> 
-            <article id="action">
-                <span>If you’re still not convinced, try it free!</span>
-                <a href="#">Get Started</a>
-            </article><!-- /#action --> 
-            <article id="info">
-                <video width="320" height="240" controls="controls">
-                    <source src="movie.ogg" type="video/ogg" />
-                    <source src="movie.mp4" type="video/mp4" />
-                    <source src="movie.webm" type="video/webm" />
-                    Your browser does not support the video tag.
-                </video>
-                <p>
-                    some description
-                </p>
-                <p class="clear"></p>
-            </article><!-- /#info --> 
-            </div>
-        </section>
-        <footer>
-            <div class="content-wrapper">
-            <nav>
-                <ul>
-                    <li>lnk 1</li>
-                    <li>lnk 2</li>
-                    <li>lnk 3</li>
-                </ul>
-            </nav>
-            <div id="copyright">
-                &copy; some copyrights
-            </div>
-            </div>
+               </ul>
+           </nav>
+           </div>
+       </header>
+       <section id="slideshow">
+           <div class="content-wrapper">
+           <img src="screens.png" />
+           <h1>Start Testing Your App</h1>
+           <p>Using Fingerprint, we’re able to test your app completely, finding out exactly what you need to do to optimize your users’ experience. Our system includes Eye Tracker, Touch Map, Play Back, and Life-cycle.</p>
+           <a href="#" class="button yellow btn-getstarted">Get Started Now</a>
+           </div>
+       </section><!-- /#slideshow --> 
+       <section id="content">
+           <article id="features" class="content-wrapper">
+               <h2>Put your app to the test with Mobillify</h2>
+               <ul>
+                   <li>
+                       <img src="eyetrack_grey.png" />
+                       <h3>Eye Tracker</h3>
+                       <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
+                   </li>
+                   <li>
+                       <img src="eyetrack_grey.png" />
+                       <h3>Eye Tracker</h3>
+                       <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
+                   </li>
+                   <li>
+                       <img src="eyetrack_grey.png" />
+                       <h3>Eye Tracker</h3>
+                       <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
+                   </li>
+                   <li>
+                       <img src="eyetrack_grey.png" />
+                       <h3>Eye Tracker</h3>
+                       <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
+                   </li>
+               </ul>
+               <p class="clear"></p>
+           </article><!-- /#content --> 
+           <article id="action" class="content-wrapper">
+               <span>If you’re still not convinced, try it free!</span>
+               <a href="#" class="button green btn-getstarted">Get Started</a>
+           </article><!-- /#action --> 
+           <article id="info" class="content-wrapper">
+               <iframe width="320" height="240" src="http://www.youtube.com/embed/hTausXI9aYw" frameborder="0" allowfullscreen class="video"></iframe>
+               <h2>Why Mobillify?</h2>
+               <p>
+                   The aside element represents a section of a page that consists of content that is tangentially related to the content around the aside element, and which could be considered separate from that content. Such sections are often represented as sidebars in printed typography.
+               </p>
+               <p class="clear"></p>
+           </article><!-- /#info --> 
+       </section>
+       <footer>
+           <div class="content-wrapper">
+           <div id="copyright">
+               <img src="logo.png" />
+               <p>&copy; 2012, All Rights Recerved</p>
+           </div>
+           <nav>
+               <ul>
+                   <li>
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="#">Touch Map</a></li>
+                            <li><a href="#">Eye Track</a></li>
+                            <li><a href="#">Fingerprint</a></li>
+                            <li><a href="#">Play Back</a></li>
+                        </ul>
+                   </li>
+                   <li>
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="#">Touch Map</a></li>
+                            <li><a href="#">Eye Track</a></li>
+                            <li><a href="#">Fingerprint</a></li>
+                            <li><a href="#">Play Back</a></li>
+                        </ul>
+                   </li>
+                   <li>
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="#">Touch Map</a></li>
+                            <li><a href="#">Eye Track</a></li>
+                            <li><a href="#">Fingerprint</a></li>
+                            <li><a href="#">Play Back</a></li>
+                        </ul>
+                   </li>
+               </ul>
+           </nav>
+           </div>
         </footer>
-	</body>
+        </body>
 </html>
