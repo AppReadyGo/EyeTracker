@@ -6,183 +6,62 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
 <asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Home</asp:Content>
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
-<script type="text/javascript">
-    $(function () {
-        $("#faded").faded({
-            speed: 500,
-            crossfade: true,
-            autoplay: 10000,
-            autopagination: false
-        });
-
-        $('#domain-form').jqTransform({ imgPath: 'jqtransformplugin/img/' });
-    });
-</script>
-<link rel="stylesheet" href="<%: Url.Content("~/Content/template/css/home.index.1.0.css") %>" type="text/css" media="all">
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
-<div id="faded">
-	<ul class="slides">
-		<li>
-            <div>
-            <img style="top:18px; position:absolute; right:375px; width:200px;" src="/Resources/eye_track.png"/>
-            <h3 style="position: absolute;right: 62px;top: 92px;width: 200px;">Eye Tracker</h3>
-            <h4 style="position: absolute;right: 62px;top: 147px;width: 200px;">Know what people look at!</h4>
-            </div>
-            <a href="/account/register"><span><span>Register</span></span></a>
-        </li>
-		<li>
-            <div>
-            <img style="top:18px; position:absolute; right:375px; width:200px;" src="/Resources/touch_map.png"/>
-            <h3 style="position: absolute;right: 62px;top: 92px;width: 200px;">Touch Map</h3>
-            <h4 style="position: absolute;right: 62px;top: 147px;width: 200px;">Get to see every touch!</h4>
-            </div>
-            <a href="/account/register"><span><span>Register</span></span></a>
-        </li>
-		<li>
-            <div>
-            <img style="top:18px; position:absolute; right:375px; width:200px;" src="/Resources/play_back.png"/>
-            <h3 style="position: absolute;right: 62px;top: 92px;width: 200px;">Play Back</h3>
-            <h4 style="position: absolute;right: 62px;top: 147px;width: 200px;">Rewind any session!</h4>
-            </div>
-            <a href="/account/register"><span><span>Register</span></span></a>
-         </li>
-		 <li>
-            <div>
-            <img style="top:18px; position:absolute; right:375px; width:200px;" src="/Resources/life_cycle.png"/>
-            <h3 style="position: absolute;right: 62px;top: 92px;width: 200px;">Life-cycle</h3>
-            <h4 style="position: absolute;right: 62px;top: 147px;width: 200px;">Understand UI changes!</h4>
-            </div>
-            <a href="/account/register"><span><span>Register</span></span></a>
-         </li>
-	</ul>
-	<ul class="pagination">
-		<li><a href="/p/products/eye-track" rel="0"><span>Eye tracker</span><small>Get more information</small></a></li>
-		<li><a href="/p/products/touch-map" rel="1"><span>Touch Map</span><small>Get more information</small></a></li>
-		<li><a href="/p/products/play-back" rel="2"><span>Play Back</span><small>Get more information</small></a></li>
-		<li><a href="/p/account/register" rel="3"><span>Life-cycle</span><small>Get more information</small></a></li>
-	</ul>
-</div>
-<div class="inside">
-	<div class="wrapper row-1">
-		<div class="box col-1 maxheight">
-			<div class="border-right maxheight">
-				<div class="border-bot maxheight">
-					<div class="border-left maxheight">
-						<div class="left-top-corner maxheight">
-							<div class="right-top-corner maxheight">
-								<div class="right-bot-corner maxheight">
-									<div class="left-bot-corner maxheight">
-										<div class="inner">
-											<h3>Touch Map<img src="../../Content/touchmap_grey.png" /></h3>
-											<p>Visualized reports of end-user attention held by each area, on every page of a given application.</p>
-											<div class="aligncenter"><a href="/p/products/touch-map" class="link1"><span><span>Learn More</span></span></a></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="box col-2 maxheight">
-			<div class="border-right maxheight">
-				<div class="border-bot maxheight">
-					<div class="border-left maxheight">
-						<div class="left-top-corner maxheight">
-							<div class="right-top-corner maxheight">
-								<div class="right-bot-corner maxheight">
-									<div class="left-bot-corner maxheight">
-										<div class="inner">
-											<h3>Eye Track<img src="../../Content/eyetrack_grey.png" /></h3>
-											<p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
-											<div class="aligncenter"><a href="/p/products/eye-track" class="link1"><span><span>Learn More</span></span></a></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="box col-3 maxheight">
-			<div class="border-right maxheight">
-				<div class="border-bot maxheight">
-					<div class="border-left maxheight">
-						<div class="left-top-corner maxheight">
-							<div class="right-top-corner maxheight">
-								<div class="right-bot-corner maxheight">
-									<div class="left-bot-corner maxheight">
-										<div class="inner">
-											<h3>Play Back<img src="../../Content/playback_grey.png" /></h3>
-											<p>Rewind or watch your visitors' full browsing sessions to discover exactly how they use your application.</p>
-											<div class="aligncenter"><a href="/p/products/play-back" class="link1"><span><span>Learn More</span></span></a></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-<%--<h2>VISULAZE YOUR VISITORS</h2>
-<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to manage your business...</h3>
-<div>
-	<ul class="roundabout">
-		<li>
-            <div>
-            <img src="/Resources/eye_track.jpg"/>
-            <h3>Eye tracker</h3>
-            <h4>Know what people look at!</h4>
-            </div>
-        </li>
-		<li>
-            <div>
-            <img src="/Resources/play_back.jpg" />
-            <h3>Play Back</h3>
-            <h4>Rewind any session!</h4>
-            </div>
-        </li>
-		<li>
-            <div>
-            <img src="/Resources/touch_map.jpg"/>
-            <h3>Touch Map</h3>
-            <h4>Get to see every touch!</h4>
-            </div>
-        </li>
-	</ul>
-</div>
-<a href="/Account/Register" class="btn-access">REGISTER</a>
---%>
-<%--<div class="middle-panel">
-    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
-</div>
-<div class="features">
-    <div>
-        <h3>Touch Map</h3>
-        <p>Visualized reports of end-user attention held by each area, on every page of a given application.</p>
-        <div class="action"><a href="/p/products/touch-map">Read more</a></div>
-    </div>
-    <div>
-        <h3>Play Back</h3>
-        <p>Rewind or watch your visitors' full browsing sessions to discover exactly how they use your application.</p>
-        <div class="action"><a href="/p/products/play-back">Read more</a></div>
-    </div>
-    <div>
-        <h3>Eye Track</h3>
-        <p>Realize what your visitors look at or read, and what part of content was completely skipped over.</p>
-        <div class="action"><a href="/p/products/eye-track">Read more</a></div>
-    </div>
-    <p style="clear:both;"></p>
-</div>--%>
+    <section id="slideshow">
+        <div class="content-wrapper">
+        <img src="/content/new/images/screens.png" />
+        <h1>Start Testing Your App</h1>
+        <p>
+            <strong>Get</strong> you user. <strong>Improve</strong> your app
+            FingerPrint helps your understand how users interact with your application        
+        </p>
+        <a href="/account/register" class="button yellow btn-getstarted">Get Started Now</a>
+        </div>
+    </section><!-- /#slideshow --> 
+    <section id="content">
+        <div class="content-wrapper">
+        <article id="features">
+            <h2>Put your app to the test with Mobillify</h2>
+            <ul>
+                <li>
+                    <img src="/content/new/images/touchmap_grey.png" />
+                    <h3>TouchMap</h3>
+                    <p>TouchMap shows touches (by means of hot or cold  spots)  in any area of an application.</p>
+                </li>
+                <li>
+                    <img src="/content/new/images/eyetrack_grey.png" />
+                    <h3>EyeTrack</h3>
+                    <p>EyeTrack shows you how much time and attention application users spend on each part of the content.</p>
+                </li>
+                <li>
+                    <img src="/content/new/images/playback_grey.png" />
+                    <h3>PlayBack</h3>
+                    <p>PlayBack helps you understand how users find specific application features.</p>
+                </li>
+                <li>
+                    <img src="/content/new/images/eyetrack_grey.png" />
+                    <h3>A/B</h3>
+                    <p>A/B is an aggregation of all features that compares one design to another.</p>
+                </li>
+            </ul>
+            <p class="clear"></p>
+        </article><!-- /#features --> 
+        <article id="action">
+            <span>If you are still not convinced, try it free!</span>
+            <a href="/account/register" class="button green btn-getstarted">Get Started</a>
+        </article><!-- /#action --> 
+        <article id="info">
+            <iframe width="320" height="240" src="http://www.youtube.com/embed/hTausXI9aYw" frameborder="0" allowfullscreen class="video"></iframe>
+            <h2>Why Mobillify?</h2>
+            <p>
+                We help developers understand how users interact with a mobile application or a mobile web site and compare two versions of a design for a length of time to see which performs better.
+            </p>
+            <p class="clear"></p>
+        </article><!-- /#info -->
+        </div><!-- /.content-wrapper --> 
+    </section><!-- /#content --> 
 </asp:Content>
 
 

@@ -1,15 +1,13 @@
 ﻿<%@ Control Language="C#" Inherits="ViewUserControl<EyeTracker.Model.Pages.Account.ForgotPasswordModel>" %>
+<h2>Forgot Password</h2>
+<p>
+    Use the form below to send email with reset password instructions. 
+</p>
 <% using (Html.BeginForm()) { %>
-	<h2>Forgot Password</h2>
-    <p>
-        Use the form below to send email with reset password instructions. 
-    </p>
     <fieldset>
-	    <div class="field text">
-            <%: Html.LabelFor(m => m.Email) %><%: Html.TextBoxFor(m => m.Email, new { autocomplete="off" })%>
-            <%: Html.ValidationMessageFor(m => m.Email) %>
-        </div>
-        <%: Html.ValidationSummary(true) %>
-	    <div class="alignright"><a href="#" class="link2" onClick="$(this).closest('form').submit();"><span><span>Send</span></span></a></div>
+        <%: Html.LabelFor(m => m.Email) %><%: Html.TextBoxFor(m => m.Email, new { autocomplete="off" })%>
+        <div class="error"><%: Html.ValidationMessageFor(m => m.Email) %></div>
+        <div class="error"><%: Html.ValidationSummary(true) %></div>
     </fieldset>
+	<input type="submit" value="Send" class="button green medium"/>
 <% } %>

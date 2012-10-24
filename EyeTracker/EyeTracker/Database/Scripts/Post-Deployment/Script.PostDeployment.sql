@@ -49,7 +49,8 @@ VALUES (1, 3, 'products/touch-map'),
                 (14, 3, 'm/products'),
                 (15, 3, 'm/planandpricing'),
                 (16, 3, 'special-access-required'),
-                (17, 3, 'tutorials');
+                (17, 3, 'tutorials'),
+				(18, 3, 'm/activation-email-sent');
 
 SET IDENTITY_INSERT [cont].[Pages] OFF
 GO              
@@ -597,7 +598,12 @@ FingerPrint.finish(this);
 
 </pre>
 <br/>
-</p>');
+</p>'),                
+				(18, 0, 'title', 'Activation email was sent'),
+                (18, 1, 'content', ' <article class="col center"><h2>Activation email was sent</h2>
+                                                        <p>Please check your email.</p>
+                                                        <p>And use activation link in the email to activate your account.</p>
+                                                        </article>');
 
 GO
 
