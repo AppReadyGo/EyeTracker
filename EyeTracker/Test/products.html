@@ -10,6 +10,8 @@
                     
             .clear{clear:both;margin:0;padding:0;}
             img{border:0;}
+            a{color:#527921;text-decoration:none;}
+            a:hover{text-decoration:underline;}
                     
             .button { display: inline-block;outline: none; cursor: pointer; text-align: center;
                     text-decoration: none;
@@ -49,7 +51,7 @@
             #slideshow{height:540px;color:#FFF;background:url(bg.png) repeat-x 0px -96px;padding:8px;text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);}
             #slideshow h1{margin-top:83px;font-size:36px;}
             #slideshow img{float:right;margin-top:-83px;}
-            #slideshow p{line-height:29px;font-size:20px;}
+            #slideshow p{line-height:29px;}
             #slideshow .btn-getstarted{padding: 25px 39px 23px;font-weight:bold;font-size:18px;text-transform:uppercase;margin-top:30px;}
                     
             #content{color:#000;background:url(white_texture.png) repeat 0px 0px;padding-top:30px;padding-bottom:30px;}
@@ -65,7 +67,7 @@
             #content aside.column ul li.active a{color:#000;}
             #content aside.column ul li.active a:hover{text-decoration:none;cursor:default;}
             #content article.column{float:left;width:800px;margin:0 0 0 40px;}
-                  
+                    
             #action{background-color:#FFF;border:1px solid #b0b0b0;text-align:center;padding:35px 0;font-size:25px;margin-top:50px;}
             #action .btn-getstarted{padding: 25px 39px 23px;font-weight:bold;font-size:18px;text-transform:uppercase;margin-left:30px;}
                     
@@ -106,58 +108,28 @@
         </nav>
         </div>
     </header>
-    <section id="slideshow">
-        <div class="content-wrapper">
-        <img src="screens.png" />
-        <h1>Start Testing Your App</h1>
-        <p>
-            <strong>Get</strong> you user. <strong>Improve</strong> your app
-            FingerPrint helps your understand how users interact with your application        
-        </p>
-        <a href="#" class="button yellow btn-getstarted">Get Started Now</a>
-        </div>
-    </section><!-- /#slideshow --> 
     <section id="content">
         <div class="content-wrapper">
-        <article id="features">
-            <h2>Put your app to the test with Mobillify</h2>
+        <aside class="column">
+            <h3>Products</h3>
             <ul>
-                <li>
-                    <img src="touchmap_grey.png" />
-                    <h3>TouchMap</h3>
-                    <p>TouchMap shows touches (by means of hot or cold  spots)  in any area of an application.</p>
-                </li>
-                <li>
-                    <img src="eyetrack_grey.png" />
-                    <h3>EyeTrack</h3>
-                    <p>EyeTrack shows you how much time and attention application users spend on each part of the content.</p>
-                </li>
-                <li>
-                    <img src="playback_grey.png" />
-                    <h3>PlayBack</h3>
-                    <p>PlayBack helps you understand how users find specific application features.</p>
-                </li>
-                <li>
-                    <img src="eyetrack_grey.png" />
-                    <h3>A/B</h3>
-                    <p>A/B is an aggregation of all features that compares one design to another.</p>
-                </li>
+                <li class="active"><a href="/p/products/touch-map">Touch Map</a></li>
+                <li><a href="/p/products/eye-track">Eye Track</a></li>
+                <li><a href="/p/products/play-back">Play Back</a></li>
             </ul>
-            <p class="clear"></p>
-        </article><!-- /#features --> 
-        <article id="action">
-            <span>If you are still not convinced, try it free!</span>
-            <a href="#" class="button green btn-getstarted">Get Started</a>
-        </article><!-- /#action --> 
-        <article id="info">
-            <iframe width="320" height="240" src="http://www.youtube.com/embed/hTausXI9aYw" frameborder="0" allowfullscreen class="video"></iframe>
-            <h2>Why Mobillify?</h2>
-            <p>
-                We help developers understand how users interact with a mobile application or a mobile web site and compare two versions of a design for a length of time to see which performs better.
-            </p>
-            <p class="clear"></p>
-        </article><!-- /#info -->
+        </aside>
+        <article class="column">
+            <h3>Touch map:</h3>
+            <p><strong>Touch Map</strong> gives you the marketing power to know everywhere your visitors touch on your application, whether it's links, images, text or dead space. Know what ads, images and links aren't getting enough click attention and what call to action buttons are being completely ignored.</p>
+            <img alt="Touch map preview" style="float:right;margin-left:20px;" src="http://finger.mobillify.com/Resources/TouchMap1.jpg" />
+            <p><strong>Discover if visitors are clicking on</strong> parts of your web pages that aren't links but should be. Are visitors clicking on your images and text, such as “Special Offers” banners, buttons or icons, without going anywhere? If these critical page elements are not linked to anything you are losing potential customers and sales!</p>
+            <p><strong>Quickly and easily conduct A/B testing</strong> to dramatically increase your conversion rates. Learn how even the smallest design and layout changes can help improve your visitors' interactions and ultimately increase your ROI (return on investment).</p>
+            <p><strong>Conduct accurate eye-tracking on a massive scale at a fraction of the cost.</strong> Now Eye-tracking is open to everyone and at incredibly affordable pricing.
+            Having the cumulative statistics of your website visitor’s interaction within your website will empower you to design one of the most attractive and efficient profit pulling marketing websites on the Internet.  Your visitors are visually showing you what they want and expect of you to make them your profit source.  Eye-tracking allows you to listen and perform for them!</p>
+            <p>Now Eye-tracking is open to everyone and at an incredibly affordable price.</p>
+        </article>
         </div><!-- /.content-wrapper --> 
+        <p class="clear"></p>
     </section><!-- /#content --> 
     <footer>
         <div class="content-wrapper">

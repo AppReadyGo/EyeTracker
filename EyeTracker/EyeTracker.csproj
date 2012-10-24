@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -16,14 +15,6 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>4.0</OldToolsVersion>
-    <UpgradeBackupLocation />
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +24,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+    <ExcludeApp_Data>true</ExcludeApp_Data>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -124,6 +118,7 @@
     <Compile Include="Common\CSSFilter.cs" />
     <Compile Include="App_Data\CustomMembershipProvider.cs" />
     <Compile Include="App_Data\CustomRoleProvider.cs" />
+    <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\Extentions.cs" />
     <Compile Include="Common\Mails\ActivationEmail.cs" />
     <Compile Include="Common\Mails\Email.cs" />
@@ -232,6 +227,8 @@
     <Content Include="Content\account.termsandconditions.css" />
     <Content Include="Content\application.screennew.css" />
     <Content Include="Content\analytics.screen.css" />
+    <Content Include="Content\eyetrack_grey.gif" />
+    <Content Include="Content\eyetrack_grey.png" />
     <Content Include="Content\images\crumb-left.png" />
     <Content Include="Content\images\crumb-middle.png" />
     <Content Include="Content\images\crumb-right.png" />
@@ -243,6 +240,9 @@
     <Content Include="Content\images\manufacturers.png" />
     <Content Include="Content\images\right.png" />
     <Content Include="Content\images\sort.gif" />
+    <Content Include="Content\New\main.css" />
+    <Content Include="Content\playback_grey.gif" />
+    <Content Include="Content\playback_grey.png" />
     <Content Include="Content\shared\bredcrumbs.css" />
     <Content Include="Content\shared\table.css" />
     <Content Include="Content\template\css\account.forgotpassword.css" />
@@ -277,7 +277,7 @@
     <Content Include="Content\template\css\secure.change.password.css" />
     <Content Include="Content\template\css\content.authenticated.page.css" />
     <Content Include="Content\template\css\form.css" />
-    <Content Include="Content\template\css\home.index.css" />
+    <Content Include="Content\template\css\home.index.1.0.css" />
     <Content Include="Content\template\css\layout.css" />
     <Content Include="Content\template\css\reset.css" />
     <Content Include="Content\template\css\style.css" />
@@ -364,6 +364,11 @@
     <Content Include="Content\themes\cupertino\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\themes\cupertino\jquery-ui.css" />
     <Content Include="Content\ThridParty\jquery.multiselect.css" />
+    <Content Include="Content\touchmap_grey.gif" />
+    <Content Include="Content\touchmap_grey.png" />
+    <Content Include="Content\New\Images\bg.png" />
+    <Content Include="Content\New\Images\eyetrack_grey.png" />
+    <Content Include="Test\index.html" />
     <Content Include="maintenance.htm" />
     <Content Include="fatal-error.html" />
     <Content Include="Resources\EyeTrack1.jpg" />
@@ -537,6 +542,12 @@
     <Content Include="Scripts\ThridParty\snippet\jquery.snippet.min.css" />
     <Content Include="Scripts\ThridParty\snippet\jquery.snippet.min.js" />
     <Content Include="test.htm" />
+    <Content Include="Content\New\Images\logo.png" />
+    <Content Include="Content\New\Images\playback_grey.png" />
+    <Content Include="Test\products.html" />
+    <Content Include="Content\New\Images\screens.png" />
+    <Content Include="Content\New\Images\touchmap_grey.png" />
+    <Content Include="Content\New\Images\white_texture.png" />
     <Content Include="Views\Account\TermsAndConditions.aspx" />
     <Content Include="Views\Account\Unsubscribe.aspx" />
     <Content Include="Views\Account\Forms\UnsubscribeForm.ascx" />
@@ -647,19 +658,18 @@
     <None Include="Resources\Packages\fingerprint.properties" />
     <None Include="Restricted\Packages\fingerprint-1.8.62.properties" />
     <None Include="Restricted\Packages\fingerprint-1.0.properties" />
+    <None Include="Restricted\Packages\fingerprint-1.8.81.properties" />
+    <None Include="Restricted\Packages\fingerprint-1.8.84.properties" />
+    <None Include="Restricted\Packages\fingerprint-1.8.86.properties" />
     <None Include="Restricted\Packages\fingerprint-1.9.07.properties" />
     <None Include="Restricted\Packages\fingerprint-1.9.23.properties" />
     <None Include="Restricted\Packages\fingerprint-1.9.26.properties" />
     <None Include="Scripts\ThridParty\fancybox\helpers\Thumbs.db" />
     <None Include="Scripts\ThridParty\jquery-lightbox-0.5\photos\Thumbs.db" />
+    <Content Include="Views\Shared\MainNew.Master" />
   </ItemGroup>
-  <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -673,7 +683,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>16577</DevelopmentServerPort>
+          <DevelopmentServerPort>6542</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

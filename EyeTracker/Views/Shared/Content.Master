@@ -6,12 +6,12 @@
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<div class="inside">
-	<div class="wrap">
-    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-    <div class="clear"></div>
-	</div>
-</div>
+    <section id="content">
+        <div class="content-wrapper">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div><!-- /.content-wrapper --> 
+        <p class="clear"></p>
+    </section><!-- /#content --> 
 </asp:Content>
 
 

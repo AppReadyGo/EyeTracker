@@ -1,5 +1,5 @@
 ﻿<%@ Master Language="C#" 
-MasterPageFile="~/Views/Shared/Main.Master" 
+MasterPageFile="~/Views/Shared/MainNew.Master" 
 Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
 
 <asp:Content ContentPlaceHolderID="PageTitleContent" runat="server">
@@ -8,59 +8,80 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
 
 <asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
    <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
-   <link rel="stylesheet" href="<%: Url.Content("~/Content/template/css/beforelogin.master.css") %>" type="text/css" media="all">
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<div class="tail-top">
-<!-- header -->
-	<header>
-		<div class="container">
-			<div class="header-box">
-				<div class="left">
-					<div class="right">
-						<nav>
-							<ul>
-                                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Home) %>"><a href="/">Home</a></li>
-                            <%--<li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Tutorials) %>"><a href="/p/Tutorials/">Tutorials</a></li>--%>
-                                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Products) %>"><a href="/p/Products">Products</a></li>
-                                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing) %>"><a href="/p/PlanAndPricing">Plans and Pricing</a></li>
-							</ul>
-						</nav>
-						<h1><a href="/"><img title="Finger" alt="Home" src="/Content/images/logo_43.png"></a></h1>
-					</div>
-				</div>
-			</div>
-			<!-- AddThis Button BEGIN -->
-            <div class="addthis_toolbox addthis_default_style " style="position:absolute; top:20px;left:5px;width:300px;">
-            <a class="addthis_button_preferred_1"></a>
-            <a class="addthis_button_preferred_2"></a>
-            <a class="addthis_button_preferred_3"></a>
-            <a class="addthis_button_preferred_4"></a>
-            <a class="addthis_button_compact"></a>
-            <a class="addthis_counter addthis_bubble_style"></a>
-            </div>
-            <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4fc7cd9c2af8afd3"></script>
-            <!-- AddThis Button END -->
-			<form action="/Account/LogOn" method="post" id="login-form">
-				<fieldset>
-					<span class="text">
-						<input type="text" name="UserName" value="Username" onFocus="if(this.value=='Username'){this.value=''}" onBlur="if(this.value==''){this.value='Username'}">
-					</span>
-					<span class="text">
-						<input type="password" name="Password" value="Password" onFocus="if(this.value=='Password'){this.value=''}" onBlur="if(this.value==''){this.value='Password'}">
-					</span>
-					<a href="#" class="login" onClick="$(this).closest('form').submit();"><span><span>Login</span></span></a>
-					<span class="links"><%: Html.ActionLink("Forgot Password?", "ForgotPassword", "Account") %><br/><%: Html.ActionLink("Register", "Register", "Account")%></span>
-				</fieldset>
-			</form>
-	</div>
-	</header>
-<!-- content -->
-	<section id="content">
-		<div class="container">
-             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-       </div>
-    </section>
-</div>
+    <header>
+        <div class="content-wrapper">
+        <a id="logo" href="/"><img src="/content/new/images/logo.png" /></a>
+        <form id="login" action="/Account/LogOn" method="post">
+            <ul>
+                <li><input type="email" name="UserName" maxlength="100" /></li>
+                <li><input type="password" name="Password" maxlength="100" /></li>
+                <li><input type="submit" value="Log in" class="button yellow" id="btn_login"/></li>
+            </ul>
+            <span class="links"><%: Html.ActionLink("Forgot Password?", "ForgotPassword", "Account") %> | <%: Html.ActionLink("Register", "Register", "Account")%></span>
+       </form><!-- /#login --> 
+        <nav>
+            <ul>
+                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Home) %>"><a href="/">Home</a></li>
+                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Products) %>"><a href="/p/Products">Features</a></li>
+                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing) %>"><a href="/p/PlanAndPricing">Plans and Pricing</a></li>
+                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Tutorials) %>"><a href="/p/Tutorials/">Get Started</a></li>
+            </ul>
+        </nav>
+        </div>
+    </header>
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    <footer>
+        <div class="content-wrapper">
+        <div id="copyright">
+            <img src="/content/new/images/logo.png" />
+            <p>Copyright &#169; 2011<%= DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "" %> <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></p>
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <h4>Products</h4>
+                    <ul>
+				        <li><a href="/p/products/touch-map">Touch Map</a></li>
+				        <li><a href="/p/products/eye-track">Eye Track</a></li>
+				        <li><a href="/p/products/play-back">Play Back</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>Stay Connected</h4>
+                    <ul>
+				        <li><a href="http://mobillify.com" target="_blank">Mobillify</a></li>
+				        <li><a href="http://twitter.com/mobillify" target="_blank">Twitter</a></li>
+				        <li><a href="http://www.youtube.com/user/TheMobillify" target="_blank">Youtube</a></li>
+
+				        <li><a href="http://www.facebook.com/Mobillify" target="_blank">Facebook</a></li>
+				        <li><a href="http://www.linkedin.com/company/2531757?trk=pro_other_cmpy" target="_blank">LinkedIn</a></li>
+				        <li><a href="http://angel.co/mobillify" target="_blank">Angellist</a></li> 
+                    </ul>
+                </li>
+                <li>
+                    <h4>Plans And Pricing</h4>
+                    <ul>
+				        <li><a href="/p/planandpricing">Basic</a></li>
+				        <li><a href="/p/planandpricing">Plus</a></li>
+				        <li><a href="/p/planandpricing">Pro</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        </div>
+    </footer>
+	<%--<!-- AddThis Button BEGIN -->
+    <div class="addthis_toolbox addthis_default_style " style="position:absolute; top:20px;left:5px;width:300px;">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4fc7cd9c2af8afd3"></script>
+    <!-- AddThis Button END -->--%>
 </asp:Content>

@@ -10,6 +10,6 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, EyeTracker.Models.Ac
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <div>
-<% Html.RenderPartial("Forms/UnsubscribeForm", Model.View); %>
+    <% Html.RenderPartial("Forms/UnsubscribeForm", Model.View); %>
 </div>
 </asp:Content>
