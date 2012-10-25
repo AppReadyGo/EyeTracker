@@ -12,7 +12,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, ContentModel>>" %>
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
-<article class="col-2">
+<article class="borders">
     <h2>We Couldn't Find Your Page! (404 Error)</h2>
     <p>Unfortunately, the page you've requested cannot be displayed. It appears that you've lost your way either through an outdated link or a typo on the page you were trying to reach.</p>
 </article>

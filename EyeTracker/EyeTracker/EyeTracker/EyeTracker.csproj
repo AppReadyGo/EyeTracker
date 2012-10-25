@@ -368,6 +368,9 @@
     <Content Include="Content\touchmap_grey.png" />
     <Content Include="Content\New\Images\bg.png" />
     <Content Include="Content\New\Images\eyetrack_grey.png" />
+    <Content Include="Resources\Feature_TouchMap.jpg" />
+    <Content Include="Resources\Feature_EyeTrack.jpg" />
+    <Content Include="Resources\Feature_PlayBack.jpg" />
     <Content Include="Test\index.html" />
     <Content Include="maintenance.htm" />
     <Content Include="fatal-error.html" />
