@@ -25,9 +25,9 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
         <nav>
             <ul>
                 <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Home) %>"><a href="/">Home</a></li>
-                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Products) %>"><a href="/p/Products">Features</a></li>
+                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Products) %>"><a href="/p/Features">Features</a></li>
                 <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.PlanAndPricing) %>"><a href="/p/PlanAndPricing">Plans and Pricing</a></li>
-                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Tutorials) %>"><a href="/p/Tutorials/">Get Started</a></li>
+                <li class="<%= Model.Master.GetMenuItemClass(BeforeLoginMasterModel.MenuItem.Tutorials) %>"><a href="/p/GetStarted">Get Started</a></li>
             </ul>
         </nav>
         </div>

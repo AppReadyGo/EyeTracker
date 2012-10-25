@@ -12,7 +12,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, ContentModel>>" %>
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
-<article class="col-2">
+<article class="borders">
     <h2>An error occurred while processing your request!</h2>
     <p>Sorry, an error occurred while processing your request. Please contact to administrator.</p>
 </article>

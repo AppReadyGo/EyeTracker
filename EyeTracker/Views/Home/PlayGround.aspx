@@ -1,36 +1,29 @@
-﻿<%@ Import Namespace="EyeTracker.Model.Pages.Home" %>
-
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/BeforeLogin.Master"
-    Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, PricingModel>>" %>
-
-<asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">
-    Pricing
-</asp:Content>
-<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
+﻿<%@ Page Title="" Language="C#" 
+MasterPageFile="~/Views/Shared/Content.Master" 
+Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, EyeTracker.Model.Pages.Home.PricingModel>>" %>
+<asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Log On</asp:Content>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeaderContent" runat="server">
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="background-color: #fff; padding: 50px 263px;">
-        <p>
-            Dear customer,</p>
-        <p>
-            Thank you for signing up for our mobile apps analytical service. Due to high demand
-            for our analytics services, we are constantly increasing our capacity and processing
-            hundreds of new customers weekly. Now you are in fast moving line and we shall open
-            your account within two weeks, notification will be sent to your email.</p>
-        <p>
-            Thanks again for your patience.</p>
-        <p>
-            Looking forward to serve you,</p>
-        <p>
-            Mobillify team</p>
-
-            <br /><br />
-            <h3>Play back:</h3>
-<p>Record & track what visitors do with your app. It's as if you're looking over their shoulder!</p>
-<ul>
-<li>Understand how people use your app</li>
-<li>What users are trying to achieve and where they encounter errors.</li>
-<li>Find specific videos of customers who complete or drop out.</li>
-</ul>
-    </div>
+<div id="page_features">
+<article>
+    <img alt="Touch map preview" src="/Resources/Feature_TouchMap.jpg" />
+    <h3>Touch map:</h3>
+    <p>TouchMap is a unique technology which analyzes touches in any area of your application. Links, images, text, or empty spaces - see what’s being clicked and what parts users ignore. Use this data in order to:</p>
+    <p class="clear"></p>
+</article>
+<article>
+    <img alt="Touch map preview" src="/Resources/Feature_EyeTrack.jpg" />
+    <h3>Eye Track:</h3>
+    <p>EyeTrack technology will indicate for you how much time and attention your application or website users spend per each part of your content.</p>
+    <p class="clear"></p>
+</article>
+<article>
+    <img alt="Touch map preview" src="/Resources/Feature_PlayBack.jpg" />
+    <h3>Play Back:</h3>
+    <p>PlayBack to make the most out of you applications. Improve them using the data you collect for your users to have the best experience possible.</p>
+    <p class="clear"></p>
+</article>
+<p class="get-started">Are you ready to try Mobillify? &nbsp; <a href="/p/getstarted" class="button green big">Get Started</a> </p>
+</div>
 </asp:Content>

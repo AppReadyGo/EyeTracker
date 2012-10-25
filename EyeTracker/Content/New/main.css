@@ -3,6 +3,8 @@
                     
 .clear{clear:both;margin:0;padding:0;}
 .right{float:right;}
+.center{text-align:center;}
+.borders{margin:120px auto;width:600px;}
 img{border:0;}
 a{color:#527921;text-decoration:none;}
 a:hover{text-decoration:underline;}
@@ -33,7 +35,7 @@ header nav ul li, #features li, #login li{margin:0;padding:0;list-style:none;dis
 
 header{height:68px;color:#FFF;background:url(images/bg.png) repeat-x 0px 0px;padding:14px 0;line-height:68px;}
 header .content-wrapper{text-align:center;}
-header nav{margin:auto;text-transform:uppercase;font-weight:bold;}
+header nav{margin:auto;text-transform:uppercase;}
 header nav ul li{margin:0 10px;}
 header nav li a{color:#FFF;text-decoration:none;}
 header nav li a:hover{text-decoration:underline;}
@@ -111,8 +113,7 @@ header #btn_login{padding: 12px 10px 8px;font-weight:bold;font-size:12px;text-tr
 #content article.center form .error{color:Red;margin-bottom:20px;font-size:14px;padding-left:113px;}
 #content article.center form .error ul{margin:0;padding:0;}
 #content article.center form .error li{margin:0;padding:0;list-style:none;}
-
-         
+   
 #action{background-color:#FFF;border:1px solid #b0b0b0;text-align:center;padding:35px 0;font-size:25px;margin-top:50px;}
 #action .btn-getstarted{padding: 25px 39px 23px;font-weight:bold;font-size:18px;text-transform:uppercase;margin-left:30px;}
                     
@@ -129,3 +130,12 @@ footer li{padding:0;list-style:none;}
 footer nav > ul > li{margin: 0 5px 0 5px;float:left;width:25%;}
 footer nav > ul > li > ul > li{margin: 10px 0px 10px 0px;}
 #copyright{float:right;}
+
+
+/* Features Page */
+#page_features article{padding:20px;border:1px solid #000;background-color:#FFF;-moz-box-shadow: 0 0 10px #000000;-webkit-box-shadow: 0 0 10px #000000; box-shadow: 0 0 10px #000000;margin:30px 0px;}
+#page_features article img{float:right;padding:5px;background-color:#FFF;border:1px solid #000;}
+#page_features article h3{}
+#page_features article p{}
+#page_features .get-started{text-align:center;margin:60px 0px 25px;font-size:30px;}
+                    
