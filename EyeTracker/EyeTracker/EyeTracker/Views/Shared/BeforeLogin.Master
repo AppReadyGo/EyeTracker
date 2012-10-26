@@ -42,32 +42,22 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
         <nav>
             <ul>
                 <li>
-                    <h4>Products</h4>
-                    <ul>
-				        <li><a href="/p/products/touch-map">Touch Map</a></li>
-				        <li><a href="/p/products/eye-track">Eye Track</a></li>
-				        <li><a href="/p/products/play-back">Play Back</a></li>
-                    </ul>
+				    <a href="http://mobillify.com" target="_blank">Mobillify</a>
                 </li>
                 <li>
-                    <h4>Stay Connected</h4>
-                    <ul>
-				        <li><a href="http://mobillify.com" target="_blank">Mobillify</a></li>
-				        <li><a href="http://twitter.com/mobillify" target="_blank">Twitter</a></li>
-				        <li><a href="http://www.youtube.com/user/TheMobillify" target="_blank">Youtube</a></li>
-
-				        <li><a href="http://www.facebook.com/Mobillify" target="_blank">Facebook</a></li>
-				        <li><a href="http://www.linkedin.com/company/2531757?trk=pro_other_cmpy" target="_blank">LinkedIn</a></li>
-				        <li><a href="http://angel.co/mobillify" target="_blank">Angellist</a></li> 
-                    </ul>
+				    <a href="http://twitter.com/mobillify" target="_blank">Twitter</a>
                 </li>
                 <li>
-                    <h4>Plans And Pricing</h4>
-                    <ul>
-				        <li><a href="/p/planandpricing">Basic</a></li>
-				        <li><a href="/p/planandpricing">Plus</a></li>
-				        <li><a href="/p/planandpricing">Pro</a></li>
-                    </ul>
+                    <a href="http://www.youtube.com/user/TheMobillify" target="_blank">Youtube</a>
+                </li>
+				<li>
+                    <a href="http://www.facebook.com/Mobillify" target="_blank">Facebook</a>
+                </li>
+                <li>
+                    <a href="http://www.linkedin.com/company/2531757?trk=pro_other_cmpy" target="_blank">LinkedIn</a>
+                </li>
+				<li>
+                    <a href="http://angel.co/mobillify" target="_blank">Angellist</a>
                 </li>
             </ul>
         </nav>
