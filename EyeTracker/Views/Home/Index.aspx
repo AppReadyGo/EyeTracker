@@ -56,7 +56,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
             <iframe width="320" height="240" src="http://www.youtube.com/embed/hTausXI9aYw" frameborder="0" allowfullscreen class="video"></iframe>
             <h2>Why Mobillify?</h2>
             <p>
-                We help developers understand how users interact with a mobile application or a mobile web site and compare two versions of a design for a length of time to see which performs better.
+                We help developers understand how users interact with a mobile application or a mobile web site and compare two versions of a design for a length of time to see which performs better. Using FingerPrint, you are able to test you UI and UX design completely, finding out exactly what you need to do to optimize your users experience. 
             </p>
             <p class="clear"></p>
         </article><!-- /#info -->
