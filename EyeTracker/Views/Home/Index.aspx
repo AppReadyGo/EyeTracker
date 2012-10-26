@@ -28,22 +28,22 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
                 <li>
                     <img src="/content/new/images/touchmap_grey.png" />
                     <h3>TouchMap</h3>
-                    <p>TouchMap shows touches (by means of hot or cold  spots)  in any area of an application.</p>
+                    <p>See where users touch in any area of an application.</p>
                 </li>
                 <li>
                     <img src="/content/new/images/eyetrack_grey.png" />
                     <h3>EyeTrack</h3>
-                    <p>EyeTrack shows you how much time and attention application users spend on each part of the content.</p>
+                    <p>Check you how much attention users spend on each part of the content..</p>
                 </li>
                 <li>
                     <img src="/content/new/images/playback_grey.png" />
                     <h3>PlayBack</h3>
-                    <p>PlayBack helps you understand how users find specific application features.</p>
+                    <p>Understand how users reach specific application features.</p>
                 </li>
                 <li>
                     <img src="/content/new/images/eyetrack_grey.png" />
                     <h3>A/B</h3>
-                    <p>A/B is an aggregation of all features that compares one design to another.</p>
+                    <p>Compare two versions of a design to see which performs better.</p>
                 </li>
             </ul>
             <p class="clear"></p>
