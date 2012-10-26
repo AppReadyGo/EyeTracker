@@ -125,92 +125,10 @@ VALUES
 '),
 (10, 0, 'title', 'Plan And Pricing'),
 (10, 1, 'content', '
-<div class="wrapper row-1">
-        <div class="box col-1-3 maxheight">
-                <div class="border-right maxheight">
-                        <div class="border-bot maxheight">
-                                <div class="border-left maxheight">
-                                        <div class="left-top-corner maxheight">
-                                                <div class="right-top-corner maxheight">
-                                                        <div class="right-bot-corner maxheight">
-                                                                <div class="left-bot-corner maxheight">
-                                                                        <div class="inner">
-                                                                                <h3>Basic</h3>
-                                                                                <ul class="info-list">
-                                                                                        <li><span>Active applications</span>up to 3</li>
-                                                                                        <li><span>Sessions per application</span>1000</li>
-                                                                                        <li><span>Eye-Track</span>No</li>
-                                                                                        <li><span>Play-Back</span>No</li>
-                                                                                        <li><span>Alerts</span>Weekly</li>
-                                                                                </ul>
-                                                                                <span class="price">Free</span>
-                                                                                <div class="aligncenter"><a href="/account/register" class="link1"><span><span>Learn More</span></span></a></div>
-                                                                        </div>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                        </div>
-                                </div>
-                        </div>
-                </div>
-        </div>
-        <div class="box col-2-3 maxheight">
-                <div class="border-right maxheight">
-                        <div class="border-bot maxheight">
-                                <div class="border-left maxheight">
-                                        <div class="left-top-corner maxheight">
-                                                <div class="right-top-corner maxheight">
-                                                        <div class="right-bot-corner maxheight">
-                                                                <div class="left-bot-corner maxheight">
-                                                                        <div class="inner">
-                                                                                <h3>Plus</h3>
-                                                                                <ul class="info-list">
-                                                                                        <li><span>Active applications</span>up to 5</li>
-                                                                                        <li><span>Sessions per application</span>10000</li>
-                                                                                        <li><span>Eye-Track</span>Yes</li>
-                                                                                        <li><span>Play-Back</span>Yes</li>
-                                                                                        <li><span>Alerts</span>Daily</li>
-                                                                                </ul>
-                                                                                <span class="price">$ 49 p/m</span>
-                                                                                <div class="aligncenter"><a href="/account/register" class="link1"><span><span>Learn More</span></span></a></div>
-                                                                        </div>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                        </div>
-                                </div>
-                        </div>
-                </div>
-        </div>
-        <div class="box col-3-3 maxheight">
-                <div class="border-right maxheight">
-                        <div class="border-bot maxheight">
-                                <div class="border-left maxheight">
-                                        <div class="left-top-corner maxheight">
-                                                <div class="right-top-corner maxheight">
-                                                        <div class="right-bot-corner maxheight">
-                                                                <div class="left-bot-corner maxheight">
-                                                                        <div class="inner">
-                                                                                <h3>Pro</h3>
-                                                                                <ul class="info-list">
-                                                                                        <li><span>Active applications</span>up to 15</li>
-                                                                                        <li><span>Sessions per application</span>30000</li>
-                                                                                        <li><span>Eye-Track</span>Yes</li>
-                                                                                        <li><span>Play-Back</span>Yes</li>
-                                                                                        <li><span>Alerts</span>Hourly</li>
-                                                                                </ul>
-                                                                                <span class="price">$ 99 p/m</span>
-                                                                                <div class="aligncenter"><a href="/account/register" class="link1"><span><span>Learn More</span></span></a></div>
-                                                                        </div>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                        </div>
-                                </div>
-                        </div>
-                </div>
-        </div>
-</div>
+<article id="action" class="borders">
+    <span>FingerPrint is in open beta try it for free</span>
+    <a href="/account/register" class="button green medium">Register</a>
+</article>
 '),
 (11, 0, 'title', 'Touch Map'),
 (11, 1, 'content', '
