@@ -97,7 +97,7 @@ VALUES
     <img alt="Touch map preview" src="/Resources/Feature_TouchMap.jpg" />
     <h3>Touch map:</h3>
     <p>TouchMap shows touches (by means of hot or cold  spots)  in any area of an application. Developer can see where exactly people touch the screen.</p>
-    <p>- Improve designs to increase visitor interaction.</p>
+    <p>- Improve application UI designs to increase visitor interaction.</p>
     <p>- Make you your application more interesting by placing important features at the “right” places.</p>
     <p class="clear"></p>
 </article>
