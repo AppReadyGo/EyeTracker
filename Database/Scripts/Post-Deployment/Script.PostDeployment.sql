@@ -96,8 +96,10 @@ VALUES
 <article>
     <img alt="Touch map preview" src="/Resources/Feature_TouchMap.jpg" />
     <h3>Touch map:</h3>
-    <p>TouchMap is a unique technology which analyzes touches in any area of your application. Links, images, text, or empty spaces - see what’s being clicked and what parts users ignore. Use this data in order to:</p>
-    <p class="clear"></p>
+    <p>TouchMap shows touches (by means of hot or cold  spots)  in any area of an application. Developer can see where exactly people touch.</p>
+    <p>Improve designs to increase visitor interaction.</p>
+    <p>Make you your application more interesting by placing important content and banners at the “right” places</p>
+	<p class="clear"></p>
 </article>
 <article>
     <img alt="Touch map preview" src="/Resources/Feature_EyeTrack.jpg" />
