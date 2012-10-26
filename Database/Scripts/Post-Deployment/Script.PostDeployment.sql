@@ -96,28 +96,28 @@ VALUES
 <article>
     <img alt="Touch map preview" src="/Resources/Feature_TouchMap.jpg" />
     <h3>Touch map:</h3>
-    <p>TouchMap shows touches (by means of hot or cold  spots)  in any area of an application. Developer can see where exactly people touch the screen.</p>
-    <p>- Improve application UI designs to increase visitor interaction.</p>
-    <p>- Make you your application more interesting by placing important features at the “right” places.</p>
+    <p>TouchMap shows touches (by means of hot or cold  spots)  in any area of an application. Developer can see where exactly people touch.<br/>
+    - Improve designs to increase visitor interaction.<br/>
+    - Make you your application more interesting by placing important features at the “right” places.</p>
     <p class="clear"></p>
 </article>
 <article>
     <img alt="Touch map preview" src="/Resources/Feature_EyeTrack.jpg" />
     <h3>Eye Track:</h3>
-    <p>EyeTrack shows the amount of time and attention application users spend on each part of the content.  Scrolls on your content are meticulously tracked, giving you a precise understanding of what attracts users. 
-    These allows to make adjutments that will have users reading more content on your app.</p>
-    <p>- Know how much of your content is scrolled by visitors.</p>
-    <p>- Decide which pages to shorten or lengthen.</p>
-    <p>- Identify boring content that is usually skipped.</p>
+    <p>EyeTrack shows the amount of time application users spend on each part of the content. Scrolls on your content are meticulously tracked, giving you a precise understanding of what attracts users. 
+    These allows to make adjutments that will have users reading more content.<br/>
+    - Know how much of your content is scrolled by visitors.<br/>
+    - Decide which pages to shorten or lengthen.<br/>
+    - Identify boring content that is usually skipped.</p>
     <p class="clear"></p>
 </article>
 <article>
     <img alt="Touch map preview" src="/Resources/Feature_PlayBack.jpg" />
     <h3>Play Back:</h3>
-    <p>PlayBack gives you feed back on how users find specific application features. That information helps you understand what users need , allowing you to make your applications easier to use.</p>
-    <p>- See what users do with your app.</p>
-    <p>- Fix the UI to make it easier for customers to comprehend.</p>
-    <p>- Make your application more intuitive</p>
+    <p>PlayBack gives you feed back on how users find specific application features. That information helps you understand what users need , allowing you to make your applications easier to use.<br/>
+    - See what users do with your app.<br/>
+    - Fix the UI to make it easier for customers to comprehend.<br/>
+    - Make your application more intuitive</p>
     <p class="clear"></p>
 </article>
 <p class="get-started">Are you ready to try Mobillify? &nbsp; <a href="/p/GetStarted" class="button green big">Get Started</a> </p>
