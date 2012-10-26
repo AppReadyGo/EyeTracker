@@ -12,7 +12,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
     <section id="slideshow">
         <div class="content-wrapper">
         <img src="/content/new/images/screens.png" />
-        <h1><strong>Get</strong> you user. 
+        <h1><strong>Get</strong> you user<br /> 
             <strong>Improve</strong> your app</h1>
         <h2>
            FingerPrint helps you understand how users interact with your application        
@@ -33,7 +33,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
                 <li>
                     <img src="/content/new/images/eyetrack_grey.png" />
                     <h3>EyeTrack</h3>
-                    <p>Check you how much attention users spend on each part of the content..</p>
+                    <p>Check you how much attention users spend on each part of the content.</p>
                 </li>
                 <li>
                     <img src="/content/new/images/playback_grey.png" />
