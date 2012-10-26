@@ -12,18 +12,18 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
     <section id="slideshow">
         <div class="content-wrapper">
         <img src="/content/new/images/screens.png" />
-        <h1>Start Testing Your App</h1>
-        <p>
-            <strong>Get</strong> you user. <strong>Improve</strong> your app
-            FingerPrint helps your understand how users interact with your application        
-        </p>
+        <h1><strong>Get</strong> you user. 
+            <strong>Improve</strong> your app</h1>
+        <h2>
+           FingerPrint helps your understand how users interact with your application        
+        </h2>
         <a href="/account/register" class="button yellow btn-getstarted">Get Started Now</a>
         </div>
     </section><!-- /#slideshow --> 
     <section id="content">
         <div class="content-wrapper">
         <article id="features">
-            <h2>Put your app to the test with Mobillify</h2>
+            <h2>Improve you application with the features of FingePrint</h2>
             <ul>
                 <li>
                     <img src="/content/new/images/touchmap_grey.png" />
@@ -42,7 +42,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
                 </li>
                 <li>
                     <img src="/content/new/images/eyetrack_grey.png" />
-                    <h3>A/B</h3>
+                    <h3>A/B compare</h3>
                     <p>Compare two versions of a design to see which performs better.</p>
                 </li>
             </ul>
