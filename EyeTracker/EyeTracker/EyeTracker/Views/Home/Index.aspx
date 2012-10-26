@@ -15,7 +15,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
         <h1><strong>Get</strong> you user. 
             <strong>Improve</strong> your app</h1>
         <h2>
-           FingerPrint helps your understand how users interact with your application        
+           FingerPrint helps you understand how users interact with your application        
         </h2>
         <a href="/account/register" class="button yellow btn-getstarted">Get Started Now</a>
         </div>
