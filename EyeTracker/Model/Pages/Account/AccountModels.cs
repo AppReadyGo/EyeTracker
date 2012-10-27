@@ -52,7 +52,7 @@ namespace EyeTracker.Models.Account
     {
         [Required]
         [DataType(DataType.EmailAddress)]
-        [DisplayName("Email address")]
+        [DisplayName("Email")]
         public string Email { get; set; }
 
         [Required]
