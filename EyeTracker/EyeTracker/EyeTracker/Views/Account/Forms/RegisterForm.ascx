@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="ViewUserControl<EyeTracker.Models.Account.RegisterModel>" %>
-<h2>Regiser</h2>
+<h2>Sign Up, Free</h2>
 <p class="subtitle">Passwords are required to be a minimum of 6 characters in length.</p>
 <% using (Html.BeginForm()) { %>
     <fieldset>
