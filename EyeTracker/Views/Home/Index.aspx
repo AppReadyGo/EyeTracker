@@ -49,7 +49,7 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
             <p class="clear"></p>
         </article><!-- /#features --> 
         <article id="action">
-            <span><strong>Improve your design today. Try FingerPrint for FREE</strong></span>
+            <span><strong>Improve your design today. Try FingerPrint for FREE!</strong></span>
             <a href="/account/register" class="button green btn-getstarted">Get Started</a>
         </article><!-- /#action --> 
         <article id="info">
