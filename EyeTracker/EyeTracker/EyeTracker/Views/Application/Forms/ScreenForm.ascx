@@ -1,7 +1,6 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<EyeTracker.Model.Pages.Application.ScreenModel>" %>
 <%: Html.HiddenFor(m => m.ApplicationId) %>
 <%: Html.HiddenFor(m => m.FileExtention) %>
-<%: Html.HiddenFor(m => m.ScreenReturn) %>
 <table>
     <tbody>
         <tr><td class="label"><label for="file">Filename:</label></td><td><input type="file" name="file" id="file" /><br /><%=Html.ValidationMessage("file")%> </td></tr>
