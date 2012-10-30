@@ -261,9 +261,9 @@ namespace EyeTracker.Models
             return bmpPic;
         }
 
-        public static Image CreateEmpityBackground(string title, int width, int height)
+        public static Image CreateEmpityBackground(string title, int width, int height, Image bgImg = null)
         {
-            Bitmap nImgPic = new Bitmap(width, height);
+            Image nImgPic = bgImg == null ? new Bitmap(width, height) : bgImg;
             using (Graphics g = Graphics.FromImage(nImgPic))
             {
                 using (StringFormat s = new StringFormat())
@@ -278,16 +278,21 @@ namespace EyeTracker.Models
                 //int diagonal = (int)Math.Sqrt(width * width + hight * hight);
                 //RotateText(g, new Font(FontFamily.GenericSerif, 20, FontStyle.Bold), "NO IMAGE", -45, new SolidBrush(Color.Black), 100, 100);
             }
+            
             var opacBmp = SetImgOpacity((Image)nImgPic, 0.3F);
 
             Bitmap bmpPic = new Bitmap(width, height);
             using (Graphics g = Graphics.FromImage(bmpPic))
             {
                 g.FillRectangle(new SolidBrush(Color.White), 0, 0, bmpPic.Width, bmpPic.Height);
-                g.DrawString(GetGibberish(), new Font(FontFamily.GenericSerif, 12), new SolidBrush(Color.Black), new Rectangle(10, 10, width - 20, height - 20));
+                if (bgImg == null)
+                {
+                    g.DrawString(GetGibberish(), new Font(FontFamily.GenericSerif, 12), new SolidBrush(Color.Black), new Rectangle(10, 10, width - 20, height - 20));
+                }
                 g.DrawImage(opacBmp, 0, 0);
             }
             opacBmp.Dispose();
+            
             return bmpPic;
         }
 

@@ -32,7 +32,7 @@ a:hover{text-decoration:underline;}
 header nav ul, #features ul, #login ul{margin:0;padding:0;}
 header nav ul li, #features li, #login li{margin:0;padding:0;list-style:none;display:inline;}
 
-header{height:68px;color:#FFF;background:url(images/bg.png) repeat-x 0px 0px;padding:14px 0;line-height:68px;}
+header{height:68px;color:#FFF;background:url(images/bg.png) repeat-x 0px 0px;padding:14px 0;line-height:60px;}
 header .content-wrapper{text-align:center;}
 header nav{margin:auto;text-transform:uppercase;}
 header nav ul li{margin:0 10px;}
@@ -60,9 +60,8 @@ header #login input[type=email]:focus {
 header #login span.links {
   display: block;
   font-size: 14px;
-  margin-top: -37px;
-  position: relative;
   text-align: right;
+  line-height: 14px;
 }
 header #btn_login{padding: 12px 10px 8px;font-weight:bold;font-size:12px;text-transform:uppercase;}
                     

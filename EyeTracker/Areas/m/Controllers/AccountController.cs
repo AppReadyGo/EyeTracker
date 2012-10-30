@@ -31,12 +31,8 @@ namespace EyeTracker.Areas.m.Controllers
 
                 if (!result.Validation.Any())
                 {
-                    //TODO: send welcome email
-                    new MailGenerator(this.ControllerContext).Send(new PromotionEmail("thank-you", model.Email));
-                    return Redirect("/m/thank-you");
-                    ////Waiting for activation
-                    //new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
-                    //return Redirect("/activation-email-sent");
+                    new MailGenerator(this.ControllerContext).Send(new ActivationEmail(model.Email));
+                    return Redirect("/m/activation-email-sent");
                 }
                 else
                 {
@@ -52,6 +48,10 @@ namespace EyeTracker.Areas.m.Controllers
             if (validations.Any(v => v.ErrorCode == ErrorCode.EmailExists))
             {
                 return "User with the email already exists, please check your email.";
+            }
+            else if (validations.Any(v => v.ErrorCode == ErrorCode.WrongEmail))
+            {
+                return "Email has wrong format, please correct and try again.";
             }
             return "System error, please contact to administrator.";
         }
