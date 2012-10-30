@@ -163,6 +163,14 @@ namespace EyeTracker.Controllers
                                      null));
 
                 string placeHolderHTML = string.Empty;
+                //if (filterData.ScreenId.HasValue)
+                //{
+                //    placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}/3\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", filterData.ScreenId.Value);
+                //}
+                //else
+                //{
+                //    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}/{1}/{2}/{3}/3\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, HttpUtility.UrlEncode(filter.Path));
+                //}
                 if (filterData.ScreenId.HasValue)
                 {
                     placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", filterData.ScreenId.Value);
@@ -198,6 +206,14 @@ namespace EyeTracker.Controllers
                                     null));
 
                 string placeHolderHTML = string.Empty;
+                //if (filterData.ScreenId.HasValue)
+                //{
+                //    placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}?returl={1}\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", filterData.ScreenId.Value);
+                //}
+                //else
+                //{
+                //    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}/{1}/{2}/{3}?returl={4}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, HttpUtility.UrlEncode(filter.Path), HttpUtility.UrlEncode("/Analytics/FingerPrint/?pid=2&fd=06-Aug-2012&td=05-Sep-2012&aid=5&ss=480X800&p=Some View"));
+                //}
                 if (filterData.ScreenId.HasValue)
                 {
                     placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", filterData.ScreenId.Value);
@@ -224,12 +240,16 @@ namespace EyeTracker.Controllers
             if (result.Data.Any())
             {
                 Image bgImg = GetBackgroundImage(result.Screen);
-                image = HeatMapImage_.CreateClickHeatMap(result.Data, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, bgImg);
+                if (bgImg == null)
+                {
+                    bgImg = HeatMapImage_.CreateEmpityBackground("NO IMAGE", filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height);
+                }
+                image = new HeatMapImage().CreateClicksHeatMap((Bitmap)bgImg, result.Data.Select(x => new IntensityPoint() { X = x.ClientX, Y = x.ClientY, Intensity = x.Count }).ToList());
             }
             else
             {
                 //Show no data
-                image = HeatMapImage_.CreateEmpityBackground("NO DATA", filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height);
+                image = HeatMapImage_.CreateEmpityBackground("NO DATA", filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, GetBackgroundImage(result.Screen));
             }
 
             if (image != null)
@@ -267,7 +287,7 @@ namespace EyeTracker.Controllers
             else
             {
                 //Show no data
-                image = HeatMapImage_.CreateEmpityBackground("NO DATA", filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height);
+                image = HeatMapImage_.CreateEmpityBackground("NO DATA", filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, GetBackgroundImage(result.Screen));
             }
 
             if (image != null)
