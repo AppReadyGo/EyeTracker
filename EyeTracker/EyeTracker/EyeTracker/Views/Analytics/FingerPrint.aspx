@@ -5,7 +5,6 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitleContent" runat="server">Finger Print</asp:Content>
 
-
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeaderContent" runat="server">
 <script src="<%: Url.Content("~/Scripts/ThridParty/DateFormat.js")%>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Scripts/ThridParty/Flot/jquery.flot.min.js")%>" type="text/javascript"></script>
@@ -20,13 +19,22 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <% Html.RenderPartial("Filter", Model.View); %>
 <div>
-<%if (Model.View.NoData)
-  { %>
-<img src="http://images.newcars.com/images/monthly_trend_grph_no_data.png" />
-<%}
-  else
-  { %>
-<img src="/Analytics/ClickHeatMapImage/<%=Model.SubMaster.FilterUrlPart %>" />
-<%} %>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#show_image').click(function () {
+                var url = $('#image').attr('src');
+                if (url.indexOf('&cscreen=true') > -1) {
+                    url = url.replace('&cscreen=true', '');
+                    $('#image').attr('src', url);
+                    $('#show_image').text('Show Report');
+                } else {
+                    $('#image').attr('src', url + '&cscreen=true');
+                    $('#show_image').text('Show Screen');
+                }
+            });
+        });
+    </script>
+    <p><a id="show_image" style="cursor:pointer;">Show Screen</a></p>
+    <img id="image" src="/Analytics/ClickHeatMapImage/<%=Model.SubMaster.FilterUrlPart %>" />
 </div>
 </asp:Content>
