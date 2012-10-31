@@ -240,11 +240,19 @@ namespace EyeTracker.Controllers
             if (result.Data.Any())
             {
                 Image bgImg = GetBackgroundImage(result.Screen);
-                if (bgImg == null)
+                if (string.IsNullOrEmpty(Request["cscreen"]))
                 {
-                    bgImg = HeatMapImage_.CreateEmpityBackground("NO IMAGE", filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height);
+                    if (bgImg == null)
+                    {
+                        bgImg = HeatMapImage_.CreateEmpityBackground("NO IMAGE", filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height);
+                    }
+
+                    image = new HeatMapImage().CreateClicksHeatMap((Bitmap)bgImg, result.Data.Select(x => new IntensityPoint() { X = x.ClientX, Y = x.ClientY, Intensity = x.Count }).ToList());
                 }
-                image = new HeatMapImage().CreateClicksHeatMap((Bitmap)bgImg, result.Data.Select(x => new IntensityPoint() { X = x.ClientX, Y = x.ClientY, Intensity = x.Count }).ToList());
+                else
+                {
+                    image = bgImg;
+                }
             }
             else
             {
@@ -282,7 +290,14 @@ namespace EyeTracker.Controllers
             if (result.Data.Any())
             {
                 Image bgImg = GetBackgroundImage(result.Screen);
-                image = HeatMapImage_.CreateViewHeatMap(result.Data, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, bgImg);
+                if (string.IsNullOrEmpty(Request["cscreen"]))
+                {
+                    image = HeatMapImage_.CreateViewHeatMap(result.Data, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, bgImg);
+                }
+                else
+                {
+                    image = bgImg;
+                }
             }
             else
             {
