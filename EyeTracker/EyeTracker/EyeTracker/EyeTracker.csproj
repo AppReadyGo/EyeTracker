@@ -240,6 +240,7 @@
     <Content Include="Content\images\manufacturers.png" />
     <Content Include="Content\images\right.png" />
     <Content Include="Content\images\sort.gif" />
+    <Content Include="Content\New\Images\logo-141X76.png" />
     <Content Include="Content\New\main.css" />
     <Content Include="Content\playback_grey.gif" />
     <Content Include="Content\playback_grey.png" />
