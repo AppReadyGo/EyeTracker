@@ -13,7 +13,7 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <header>
         <div class="content-wrapper">
-        <a id="logo" href="/"><img src="/content/new/images/logo.png" /></a>
+        <a id="logo" href="/"><img src="/content/new/images/logo-141X76.png" /></a>
         <form id="login" action="/Account/LogOn" method="post">
             <ul>
                 <li><input type="email" name="UserName" maxlength="100" /></li>
