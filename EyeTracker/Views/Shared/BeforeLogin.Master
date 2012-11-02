@@ -36,7 +36,7 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<BeforeLoginMasterModel>>" %>
     <footer>
         <div class="content-wrapper">
         <div id="copyright">
-            <img src="/content/new/images/logo.png" />
+            <img src="/content/new/images/logo-141X76.png" />
             <p>Copyright &#169; 2011<%= DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "" %> <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></p>
         </div>
         <nav>
