@@ -14,16 +14,16 @@ Inherits="ViewPage<ViewModelWrapper<BeforeLoginMasterModel, IndexModel>>" %>
         <img src="/content/new/images/screens.png" />
         <h1><strong>Get</strong> you user<br /> 
             <strong>Improve</strong> your app</h1>
-        <h2>
+        <h3>
            FingerPrint helps you understand how users interact with your application        
-        </h2>
+        </h3>
         <a href="/account/register" class="button yellow btn-getstarted">Get Started Now</a>
         </div>
     </section><!-- /#slideshow --> 
     <section id="content">
         <div class="content-wrapper">
         <article id="features">
-            <h2>Improve you application with the features of FingePrint</h2>
+            <h2>Improve you application with the features of FingerPrint</h2>
             <ul>
                 <li>
                     <img src="/content/new/images/touchmap_grey.png" />
