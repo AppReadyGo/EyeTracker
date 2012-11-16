@@ -1,0 +1,13 @@
+﻿@using EyeTracker.Model.Pages.Home
+@using EyeTracker.Model
+@using EyeTracker.Model.Master
+@using EyeTracker.Helpers;
+@model ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, ContentModel>
+@{
+    Layout = "~/Views/Shared/_Content.cshtml";
+}
+@section title { @Model.View.Title }
+@section header { }
+@Html.Raw(Model.View.Content)
+
+

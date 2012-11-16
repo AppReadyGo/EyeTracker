@@ -1,0 +1,17 @@
+﻿@using EyeTracker.Model.Pages.Home
+@using EyeTracker.Model
+@using EyeTracker.Model.Master
+@using EyeTracker.Helpers;
+@model ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, ContentModel>
+@{
+    Layout = "~/Views/Shared/_Content.cshtml";
+}
+@section title { Error }
+@section header 
+{
+    <link href="@Html.Content("~/Content/template/css/error.css")" rel="stylesheet" type="text/css" /> 
+}
+<article class="borders">
+    <h2>An error occurred while processing your request!</h2>
+    <p>Sorry, an error occurred while processing your request. Please contact to administrator.</p>
+</article>

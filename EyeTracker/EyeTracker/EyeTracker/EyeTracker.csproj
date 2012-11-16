@@ -163,10 +163,12 @@
     <Compile Include="CustomModelBinders\Parsers\JsonViewAreaParser.cs" />
     <Compile Include="Helpers\General.cs" />
     <Compile Include="Common\MailGenerator.cs" />
+    <Compile Include="Helpers\HTMLHelper.cs" />
     <Compile Include="Model\Mails\MailMasterModel.cs" />
     <Compile Include="Model\Mails\PromotionEmailModel.cs" />
     <Compile Include="Model\Mails\SystemEmailModel.cs" />
     <Compile Include="Model\Master\BeforeLoginMasterModel.cs" />
+    <Compile Include="Model\Master\MainMasterModel.cs" />
     <Compile Include="Model\Pages\Account\ForgotPasswordModel.cs" />
     <Compile Include="Model\Pages\Account\ResetPasswordModel.cs" />
     <Compile Include="Model\Pages\Account\UnsubscribeModel.cs" />
@@ -241,6 +243,7 @@
     <Content Include="Content\images\right.png" />
     <Content Include="Content\images\sort.gif" />
     <Content Include="Content\New\Images\logo-141X76.png" />
+    <Content Include="Content\New\Images\arrow-down.png" />
     <Content Include="Content\New\main.css" />
     <Content Include="Content\playback_grey.gif" />
     <Content Include="Content\playback_grey.png" />
@@ -273,7 +276,6 @@
     <Content Include="Content\template\css\404.css" />
     <Content Include="Content\template\css\beforelogin.master.css" />
     <Content Include="Content\template\css\afterlogin.master.css" />
-    <Content Include="Content\template\css\content.public.page.css" />
     <Content Include="Content\template\css\error.css" />
     <Content Include="Content\template\css\secure.change.password.css" />
     <Content Include="Content\template\css\content.authenticated.page.css" />
@@ -560,14 +562,16 @@
     <Content Include="Views\Admin\Staff.aspx" />
     <Content Include="Views\Admin\Logs.aspx" />
     <Content Include="Views\Admin\Forms\LogsFilter.ascx" />
+    <Content Include="Views\Analytics\ABFingerPrint.aspx" />
     <Content Include="Views\Application\ScreenNew.aspx" />
     <Content Include="Views\Application\ScreenEdit.aspx" />
     <Content Include="Views\Application\Forms\ScreenForm.ascx" />
     <Content Include="Views\Application\Screens.aspx" />
     <Content Include="Views\Application\Index.aspx" />
     <Content Include="Views\Content\AuthenticatedError.aspx" />
-    <Content Include="Views\Content\PublicError.aspx" />
-    <Content Include="Views\Content\Public404.aspx" />
+    <None Include="Views\Content\PublicError.cshtml" />
+    <None Include="Views\Content\Public404.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Portfolio\Index.aspx" />
     <Content Include="Views\Secure\Forms\ChangePasswordForm.ascx" />
     <Content Include="Views\Account\Forms\ResetPasswordForm.ascx" />
@@ -584,8 +588,7 @@
     <Content Include="Views\Account\Details.aspx" />
     <Content Include="Views\Content\AuthenticatedPageContent.aspx" />
     <Content Include="Views\Home\PlayGround.aspx" />
-    <Content Include="Views\Home\Index.aspx" />
-    <Content Include="Views\Content\PublicPageContent.aspx" />
+    <None Include="Views\Content\PublicPageContent.cshtml" />
     <Content Include="Views\Analytics\Usage.aspx" />
     <Content Include="Views\Analytics\Dashboard.aspx" />
     <Content Include="Views\Home\Mails\Basic.aspx" />
@@ -618,7 +621,6 @@
     <Content Include="Views\Admin\Membership.aspx" />
     <Content Include="Views\Admin\UserEdit.aspx" />
     <Content Include="Views\Shared\Main.Master" />
-    <Content Include="Views\Shared\BeforeLogin.Master" />
     <Content Include="Views\Shared\AfterLogin.Master" />
     <Content Include="Views\Shared\Mail.Master" />
     <Content Include="Views\Web.config" />
@@ -654,7 +656,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Areas\m\Content\JQThemes\images\Thumbs.db" />
-    <Content Include="Views\Shared\Content.Master" />
+    <None Include="Views\Shared\_Content.cshtml" />
     <Content Include="Views\Shared\AfterLoginContent.Master" />
     <Content Include="Views\Shared\AfterLoginLeftMenu.Master" />
     <Content Include="Views\Admin\Admin.master" />
@@ -670,7 +672,8 @@
     <None Include="Restricted\Packages\fingerprint-1.9.26.properties" />
     <None Include="Scripts\ThridParty\fancybox\helpers\Thumbs.db" />
     <None Include="Scripts\ThridParty\jquery-lightbox-0.5\photos\Thumbs.db" />
-    <Content Include="Views\Shared\MainNew.Master" />
+    <Content Include="Views\Shared\_Main.cshtml" />
+    <None Include="Views\Shared\_BeforeLogin.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

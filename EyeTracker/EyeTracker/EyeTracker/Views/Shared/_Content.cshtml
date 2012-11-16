@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Views/Shared/_BeforeLogin.cshtml";
+}
+@section title { @RenderSection("title") }
+@section header { @RenderSection("header") }
+<section id="content">
+    <div class="content-wrapper">
+        @RenderBody()
+    </div><!-- /.content-wrapper --> 
+    <p class="clear"></p>
+</section><!-- /#content --> 
+
+

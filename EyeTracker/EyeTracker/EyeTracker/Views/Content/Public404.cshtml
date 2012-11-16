@@ -1,0 +1,17 @@
+﻿@using EyeTracker.Model.Pages.Home
+@using EyeTracker.Model
+@using EyeTracker.Model.Master
+@using EyeTracker.Helpers;
+@model ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, ContentModel>
+@{
+    Layout = "~/Views/Shared/_Content.cshtml";
+}
+@section title { 404 Error }
+@section header 
+{
+    <link href="@Html.Content("~/Content/template/css/404.css")" rel="stylesheet" type="text/css" /> 
+}
+<article class="borders">
+    <h2>We Couldn't Find Your Page! (404 Error)</h2>
+    <p>Unfortunately, the page you've requested cannot be displayed. It appears that you've lost your way either through an outdated link or a typo on the page you were trying to reach.</p>
+</article>

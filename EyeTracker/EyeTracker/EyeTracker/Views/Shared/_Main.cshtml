@@ -1,0 +1,48 @@
+﻿@using EyeTracker.Common.Entities;
+@using EyeTracker.Helpers;
+@using EyeTracker.Model.Master;
+@model EyeTracker.Model.MasterViewModelWrapper<MainMasterModel>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Finger - @RenderSection("title")</title>
+    <meta name="description" content="Place your description here">
+    <meta name="keywords" content="put, your, keyword, here">
+    <meta name="author" content="mobillify.com">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="@Html.Content("~/Content/new/main.css")" type="text/css" media="all">
+    <script type="text/javascript" src="@Url.Content("~/Scripts/ThridParty/jquery-1.4.4.min.js")"></script>
+    @RenderSection("header")
+    <!--script type="text/javascript">
+    var _mfyaq = _mfyaq || {};
+    _mfyaq.key = 'WP-0002-000019';
+
+    (function () {
+        var mfyaq = document.createElement('script'); mfyaq.type = 'text/javascript'; mfyaq.async = true;
+        mfyaq.src = ('https:' == document.location.protocol ? 'https://ssl' : ('//www' == document.location ? 'http://www' : 'http://'))
+        mfyaq.src += 'localhost:1059/Analytics/analytics.js';
+        var scr = document.getElementsByTagName('script')[0]; scr.parentNode.insertBefore(mfyaq, scr);
+    })();
+    </script-->
+    </head>
+<body>
+@RenderBody()
+@if (Model.Master.GoogleAnalytics)
+{
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10271152-1']);
+      _gaq.push(['_setDomainName', 'finger.mobillify.com']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+}
+</body>
+</html>

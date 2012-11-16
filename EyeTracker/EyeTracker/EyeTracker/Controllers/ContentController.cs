@@ -165,7 +165,7 @@ namespace EyeTracker.Controllers
 
         private ActionResult View<TViewModel>(string view, TViewModel viewModel, BeforeLoginMasterModel.MenuItem selectedItem)
         {
-            var model = new ViewModelWrapper<BeforeLoginMasterModel, TViewModel>(new BeforeLoginMasterModel(selectedItem), viewModel);
+            var model = new ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, TViewModel>(new MainMasterModel(), new BeforeLoginMasterModel(selectedItem), viewModel);
 
             return base.View(view, model);
         }
@@ -201,6 +201,13 @@ namespace EyeTracker.Controllers
             }
             byte[] byteArray = Encoding.ASCII.GetBytes(RemoveWhiteSpaceFromStylesheets(sb.ToString()));
             return base.File(byteArray, "text/css");
+        }
+
+        public ActionResult Cache(string version, string file)
+        {
+            var dir = Server.MapPath("~/Content/New/");
+            var fileContent = System.IO.File.ReadAllText(dir + file);
+            return File(fileContent, "text/css");
         }
 
         private string RemoveWhiteSpaceFromStylesheets(string body)
