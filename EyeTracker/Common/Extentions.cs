@@ -15,9 +15,13 @@ namespace EyeTracker.Common
             {
                 case ContentPredefinedKeys.AndroidPackageVersion:
                     return ConfigurationManager.AppSettings["AndroidPackageVersion"];
+                case ContentPredefinedKeys.ContentVersion:
+                    return ConfigurationManager.AppSettings["ContentVersion"];
                 default:
                     return string.Empty;
             }
         }
+
+        //public static string GetContentUrl(this Url
     }
 }

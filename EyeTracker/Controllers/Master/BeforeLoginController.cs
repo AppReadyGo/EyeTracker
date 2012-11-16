@@ -8,7 +8,7 @@ using EyeTracker.Model;
 
 namespace EyeTracker.Controllers.Master
 {
-    public class BeforeLoginController : Controller
+    public class BeforeLoginController : MainController
     {
         protected virtual BeforeLoginMasterModel GetModel(BeforeLoginMasterModel.MenuItem selectedItem)
         {
@@ -17,9 +17,7 @@ namespace EyeTracker.Controllers.Master
 
         protected virtual ActionResult View<TViewModel>(TViewModel viewModel, BeforeLoginMasterModel.MenuItem selectedItem)
         {
-            var model = new ViewModelWrapper<BeforeLoginMasterModel, TViewModel>(GetModel(selectedItem), viewModel);
-
-            return base.View(model);
+            return base.View(GetModel(selectedItem), viewModel);
         }
 
         protected virtual ActionResult View<TViewModel>(string viewName, TViewModel viewModel, BeforeLoginMasterModel.MenuItem selectedItem)
@@ -27,6 +25,16 @@ namespace EyeTracker.Controllers.Master
             var model = new ViewModelWrapper<BeforeLoginMasterModel, TViewModel>(GetModel(selectedItem), viewModel);
 
             return base.View(viewName, model);
+        }
+    }
+
+    public class MainController : Controller
+    {
+        protected virtual ActionResult View<TSubMaster, TViewModel>(TSubMaster subMater,TViewModel viewModel)
+        {
+            var model = new ViewModelWrapper<MainMasterModel, TSubMaster, TViewModel>(new MainMasterModel(), subMater, viewModel);
+
+            return base.View(model);
         }
     }
 }
