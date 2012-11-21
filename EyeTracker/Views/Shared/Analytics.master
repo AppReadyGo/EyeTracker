@@ -22,6 +22,7 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel, Analytics
         <%= Html.MenuItem("Dashboard", "/Analytics/Dashboard/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.Dashboard, Model.SubMaster.IsMenuDisabled) %>
         <%= Html.MenuItem("Finger Print", "/Analytics/FingerPrint/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.FingerPrint, Model.SubMaster.IsMenuDisabled)%>
         <%= Html.MenuItem("Eye Tracker", "/Analytics/EyeTracker/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.EyeTracker, Model.SubMaster.IsMenuDisabled)%>
+        <%= Html.MenuItem("A/B Compare", "/Analytics/ABFingerPrint/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.ABFingerPrint, Model.SubMaster.IsMenuDisabled)%>
         <%= Html.MenuItem("Usage", "/Analytics/Usage/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.Usage, true)%>
         <%= Html.MenuItem("Visitors", "/Analytics/Visitors/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.Visitors, true)%>
         <%= Html.MenuItem("Map Overlay", "/Analytics/MapOverlay/", Model.SubMaster.FilterUrlPart, Model.SubMaster.SelectedItem == AnalyticsMasterModel.MenuItem.MapOverlay, true)%>

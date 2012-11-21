@@ -20,7 +20,7 @@ namespace EyeTracker.Controllers
         {
             FillFilter(viewModel, leftMenuSelectedItem, filterDataResult, filter, isSingleMode, placeHolderHTML);
 
-            return View(viewModel, leftMenuSelectedItem, GetUrlPart(viewModel), filter.ApplicationId.HasValue ? (int?)filter.PortfolioId : null);
+            return View(viewModel, leftMenuSelectedItem, viewModel.GetUrlPart(), filter.ApplicationId.HasValue ? (int?)filter.PortfolioId : null);
         }
 
         //protected virtual ActionResult View<TViewModel>(TViewModel viewModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem)
@@ -30,23 +30,7 @@ namespace EyeTracker.Controllers
         //    return View(viewModel, leftMenuSelectedItem, GetUrlPart(viewModel));
         //}
 
-        private string GetUrlPart(FilterModel filter)
-        {
-            if (filter.NoData)
-            {
-                return null;
-            }
-            else
-            {
-                var parts = new List<string>(){string.Format("pid={0}",filter.SelectedPortfolioId)};
-                if (filter.SelectedApplicationId != 0) parts.Add(string.Format("aid={0}", filter.SelectedApplicationId));
-                if (!string.IsNullOrEmpty(filter.SelectedScreenSize)) parts.Add(string.Format("ss={0}", filter.SelectedScreenSize));
-                if (!string.IsNullOrEmpty(filter.SelectedPath)) parts.Add(string.Format("p={0}", HttpUtility.UrlEncode(filter.SelectedPath)));
-                parts.Add(string.Format("fd={0}", filter.SelectedDateFrom.ToString("dd-MMM-yyyy")));
-                parts.Add(string.Format("td={0}", filter.SelectedDateTo.ToString("dd-MMM-yyyy")));
-                return "?" + string.Join("&", parts.ToArray());
-            }
-        }
+        
 
         private void FillFilter(FilterModel filterModel, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, FilterDataResult filterDataResult, FilterParametersModel filter, bool isSingleMode, string placeHolderHTML)
         {

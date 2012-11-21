@@ -121,6 +121,7 @@
     <Compile Include="Queries\Admin\GetAllStaffQuery.cs" />
     <Compile Include="Queries\Analytics\ClickHeatMapDataQuery.cs" />
     <Compile Include="Queries\Analytics\HeatMapDataQuery.cs" />
+    <Compile Include="Queries\Analytics\IFilterQuery.cs" />
     <Compile Include="Queries\Application\GetScreenDataQuery.cs" />
     <Compile Include="Queries\Application\GetAllApplicationsQuery.cs" />
     <Compile Include="Queries\Application\GetScreenDetailsQuery.cs" />

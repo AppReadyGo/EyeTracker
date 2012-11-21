@@ -12,7 +12,6 @@ using EyeTracker.Common.Commands;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {
-    /*
     public class FingerPrintViewDataQueryHandler : FilterBaseQueryHandler, IQueryHandler<FingerPrintViewDataQuery, FingerPrintViewDataResult>
     {
         private IRepository repository;
@@ -26,8 +25,24 @@ namespace EyeTracker.Domain.Queries.Analytics
 
         public FingerPrintViewDataResult Run(ISession session, FingerPrintViewDataQuery query)
         {
-            return GetResult<FingerPrintViewDataResult>(session, securityContext.CurrentUser.Id, query);
+            var data = GetResult<FingerPrintViewDataResult>(session, this.securityContext.CurrentUser.Id, query);
+            if(data.ScreenId.HasValue)
+            {
+                data.ScreenFileExtention = session.Query<Screen>()
+                                        .Where(s => s.Id == data.ScreenId.Value)
+                                        .Select(s => s.FileExtension)
+                                        .FirstOrDefault();
+                data.PointsOnReport = session.Query<PageView>()
+                                        .Where(p => p.Application.Id == query.ApplicationId &&
+                                                    p.Path.ToLower() == query.Path.ToLower() &&
+                                                    p.ScreenWidth == query.ScreenSize.Value.Width &&
+                                                    p.ScreenHeight == query.ScreenSize.Value.Height &&
+                                                    p.Date >= query.From &&
+                                                    p.Date <= query.To)
+                                        .SelectMany(p => p.Clicks)
+                                        .Count();
+            }
+            return data;
         }
     }
-    */
 }

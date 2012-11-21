@@ -188,6 +188,62 @@ namespace EyeTracker.Controllers
             }
        }
 
+        public ActionResult ABFingerPrint(ABFilterParametersModel filter)
+        {
+            if (ModelState.IsValid)
+            {
+                var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
+                                     filter.FromDate,
+                                     filter.ToDate,
+                                     filter.PortfolioId,
+                                     filter.ApplicationId,
+                                     filter.ScreenSize,
+                                     filter.Path,
+                                     null,
+                                     null,
+                                     null,
+                                     null));
+
+                string placeHolderHTML = string.Empty;
+                //if (filterData.ScreenId.HasValue)
+                //{
+                //    placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}/3\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", filterData.ScreenId.Value);
+                //}
+                //else
+                //{
+                //    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}/{1}/{2}/{3}/3\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, HttpUtility.UrlEncode(filter.Path));
+                //}
+                if (filterData.ScreenId.HasValue)
+                {
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", filterData.ScreenId.Value);
+                }
+                else
+                {
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value);
+                }
+
+                var pathes = filterData.Portfolios.First(x => x.Id == filter.PortfolioId).Applications.First(x => x.Id == filter.ApplicationId).Pathes;
+
+                var firstScreenPathes = pathes.Select(x => new SelectListItem { Text = x, Value = x, Selected = string.IsNullOrEmpty(filter.Path) ? false : filter.Path == x });
+                var secondScreenPathes = pathes.Select(x => new SelectListItem { Text = x, Value = x, Selected = string.IsNullOrEmpty(filter.Path) ? false : filter.SecondPath == x });
+
+                var model = new ABCompareModel()
+                {
+                    Title = "Fingerprint",
+                    FirstScreenPathes = firstScreenPathes,
+                    SecondScreenPathes = secondScreenPathes,
+                    FirstPath = filter.Path,
+                    SecondPath = filter.SecondPath
+                };
+
+                return View(model, AnalyticsMasterModel.MenuItem.ABFingerPrint, filterData, filter, true, placeHolderHTML);
+            }
+            else
+            {
+                return Redirect("~/Error");
+            }
+        }
+
         public ActionResult EyeTracker(FilterParametersModel filter)
         {
             if (ModelState.IsValid)

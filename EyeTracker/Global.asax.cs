@@ -102,8 +102,14 @@ namespace EyeTracker
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
+            //routes.MapRoute(
+            //    "Application",
+            //    "Application/{action}/{id}/{width}/{height}/{path}/{ret}",
+            //    new { controller = "Application", action = "Index", width = UrlParameter.Optional, height = UrlParameter.Optional, path = UrlParameter.Optional, ret = UrlParameter.Optional },
+            //    new[] { "EyeTracker.Controllers" } // Namespaces
+            //);
             routes.MapRoute(
-                "Application", 
+                "Application",
                 "Application/{action}/{id}",
                 new { controller = "Application", action = "Index" },
                 new[] { "EyeTracker.Controllers" } // Namespaces
@@ -191,10 +197,18 @@ namespace EyeTracker
                new[] { "EyeTracker.Controllers" } // Namespaces
             );
             
+            /*
             routes.MapRoute(
                 "CSS", // Route name
                 "content/css/{path1}/{path2}/{path3}/{path4}/{path5}/{path6}/{path7}", // URL with parameters
                 new { controller = "Content", action = "css", path2 = UrlParameter.Optional, path3 = UrlParameter.Optional, path4 = UrlParameter.Optional, path5 = UrlParameter.Optional, path6 = UrlParameter.Optional, path7 = UrlParameter.Optional }, // Parameter defaults
+                new[] { "EyeTracker.Controllers" } // Namespaces
+            );
+            */
+            routes.MapRoute(
+                "CSS", // Route name
+                "content/cache/{version}/{file}", // URL with parameters
+                new { controller = "Content", action = "Cache" }, // Parameter defaults
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
@@ -251,6 +265,7 @@ namespace EyeTracker
             GlobalFilters.Filters.Add(new RedirectToMobileAttribute(), 1);
 
 
+            ModelBinders.Binders[typeof(ABFilterParametersModel)] = new ABFilterParametersModelBinder();
             ModelBinders.Binders[typeof(FilterParametersModel)] = new FilterParametersModelBinder();
 
             ObjectContainer.Instance.GetType();

@@ -146,6 +146,7 @@
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\Master\AdminMasterController.cs" />
     <Compile Include="Controllers\SecureController.cs" />
+    <Compile Include="CustomModelBinders\ABFilterParametersModelBinder.cs" />
     <Compile Include="CustomModelBinders\FilterParametersModelBinder.cs" />
     <Compile Include="CustomModelBinders\EventParser.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
@@ -175,6 +176,8 @@
     <Compile Include="Model\Pages\Admin\AdminModel.cs" />
     <Compile Include="Model\Pages\Admin\AdminMasterModel.cs" />
     <Compile Include="Model\Pages\Admin\LogsModel.cs" />
+    <Compile Include="Model\Pages\Analytics\ABCompareModel.cs" />
+    <Compile Include="Model\Pages\Analytics\ABFilterParametersModel.cs" />
     <Compile Include="Model\Pages\Analytics\FilterParametersModel.cs" />
     <Compile Include="Model\Pages\Analytics\FingerPrintModel.cs" />
     <Compile Include="Model\Pages\Analytics\UsageModel.cs" />
