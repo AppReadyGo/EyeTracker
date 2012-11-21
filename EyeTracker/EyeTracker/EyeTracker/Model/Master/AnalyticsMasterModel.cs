@@ -33,6 +33,7 @@ namespace EyeTracker.Model.Master
             Dashboard,
             FingerPrint,
             EyeTracker,
+            ABFingerPrint,
             Usage,
             Visitors,
             MapOverlay,

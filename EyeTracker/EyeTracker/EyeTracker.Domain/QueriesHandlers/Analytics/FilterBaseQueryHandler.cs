@@ -12,7 +12,7 @@ namespace EyeTracker.Domain.Queries.Analytics
 {
     public abstract class FilterBaseQueryHandler
     {
-        protected TResult GetResult<TResult>(ISession session, int userId, FilterQuery query = null)
+        protected TResult GetResult<TResult>(ISession session, int userId, IFilterQuery query = null)
             where TResult : FilterDataResult, new()
         {
             var filterData = new TResult();

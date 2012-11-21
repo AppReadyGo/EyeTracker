@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace EyeTracker.Common.Queries.Analytics
 {
-    public class FilterQuery : IQuery<FilterDataResult>
+    public class FilterQuery : IQuery<FilterDataResult>, IFilterQuery
     {
         public DateTime From { get; private set; }
         public DateTime To { get; private set; }

@@ -22,6 +22,7 @@ using System.IO;
 using EyeTracker.Common.Queries.Application;
 using System.Configuration;
 using EyeTracker.Common.QueryResults.Application;
+using System.Drawing;
 
 namespace EyeTracker.Controllers
 {
@@ -65,7 +66,7 @@ namespace EyeTracker.Controllers
             };
             return View(model, AfterLoginMasterModel.MenuItem.Analytics);
         }
-        
+
         public ActionResult New(int id)
         {
             var portfolio = ObjectContainer.Instance.RunQuery(new GetPortfolioDetailsQuery(id));
@@ -241,10 +242,27 @@ namespace EyeTracker.Controllers
             return View(model, AfterLoginMasterModel.MenuItem.Analytics);
         }
 
+        //public ActionResult ScreenNew(int id, int width, int height, string path, ScreenReturn ret)
+        //{
+        //    switch (ret)
+        //    {
+        //        case ScreenReturn.EyeTracker:
+        //            ViewBag.ReturnUrl = string.Format("/Analytics/EyeTracker/?pid={0}&aid={1}&ss={2}&p={3}", 1, id, new Size(width, height).ToFormatedString(), path);
+        //            break;
+        //        case ScreenReturn.FingerPrint:
+        //            ViewBag.ReturnUrl = string.Format("/Analytics/FingerPrint/?pid={0}&aid={1}&ss={2}&p={3}", 1, id, new Size(width, height).ToFormatedString(), path);
+        //            break;
+        //        default:
+        //            ViewBag.ReturnUrl = Redirect("/Application/Screens/" + id);
+        //            break;
+        //    }
+        //    return GetActionData(id, new ScreenModel { ApplicationId = id, Height = height, Width = width, Path = HttpUtility.UrlDecode(path), ScreenReturn = ret });
+        //}
         public ActionResult ScreenNew(int id)
         {
             return GetActionData(id, new ScreenModel { ApplicationId = id });
         }
+
 
         [HttpPost]
         public ActionResult ScreenNew(ScreenModel model)
@@ -278,7 +296,18 @@ namespace EyeTracker.Controllers
                     log.WriteInformation("Save file: {0}", path);
                     Request.Files[0].SaveAs(path);
                 }
+
                 return Redirect("/Application/Screens/" + model.ApplicationId);
+
+                //switch (model.ScreenReturn)
+                //{
+                //    case ScreenReturn.EyeTracker:
+                //        return Redirect(string.Format("/Analytics/EyeTracker/?pid={0}&aid={1}&ss={2}&p={3}", 1, model.ApplicationId, new Size(model.Width, model.Height).ToFormatedString(), model.Path));
+                //    case ScreenReturn.FingerPrint:
+                //        return Redirect(string.Format("/Analytics/FingerPrint/?pid={0}&aid={1}&ss={2}&p={3}", 1, model.ApplicationId, new Size(model.Width, model.Height).ToFormatedString(), model.Path));
+                //    default:
+                //        return Redirect("/Application/Screens/" + model.ApplicationId);
+                //}
             }
             else
             {
@@ -311,7 +340,7 @@ namespace EyeTracker.Controllers
             return View(model, AfterLoginMasterModel.MenuItem.Analytics);
         }
 
-        public ActionResult ScreenEdit(int id)
+        public ActionResult ScreenEdit(int id/*, ScreenReturn ret*/)
         {
             var data = ObjectContainer.Instance.RunQuery(new GetScreenEditDataQuery(id));
             if (data == null)

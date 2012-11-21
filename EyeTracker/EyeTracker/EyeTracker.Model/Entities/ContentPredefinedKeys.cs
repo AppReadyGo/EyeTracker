@@ -7,6 +7,8 @@ namespace EyeTracker.Common.Entities
 {
     public enum ContentPredefinedKeys
     {
-        AndroidPackageVersion
+        AndroidPackageVersion,
+
+        ContentVersion
     }
 }

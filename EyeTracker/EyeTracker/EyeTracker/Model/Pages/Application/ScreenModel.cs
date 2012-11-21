@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using EyeTracker.Common;
 
 namespace EyeTracker.Model.Pages.Application
 {
@@ -27,5 +28,7 @@ namespace EyeTracker.Model.Pages.Application
         public string FileExtention { get; set; }
 
         public int ApplicationId { get; set; }
+
+        public ScreenReturn ScreenReturn { get; set; }
     }
 }

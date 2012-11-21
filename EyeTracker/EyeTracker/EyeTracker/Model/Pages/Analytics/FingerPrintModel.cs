@@ -8,6 +8,10 @@ namespace EyeTracker.Model.Pages.Analytics
 {
     public class FingerPrintModel : FilterModel
     {
-        public string ImageUrl { get; set; }
+        public int ScreenId { get; set; }
+
+        public string ScreenFileExtention { get; set; }
+
+        public int PointsOnReport { get; set; }
     }
 }

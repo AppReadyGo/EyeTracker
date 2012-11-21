@@ -11,9 +11,9 @@ using System.Drawing;
 
 namespace EyeTracker.Domain.Queries.Application
 {
-    public class GetScreenEditDataQueryHandler : IQueryHandler<GetScreenDetailsQuery, ScreenDetailsDataResult>
+    public class GetScreenEditDataQueryHandler : IQueryHandler<GetScreenEditDataQuery, ScreenDetailsDataResult>
     {
-        public ScreenDetailsDataResult Run(ISession session, GetScreenDetailsQuery query)
+        public ScreenDetailsDataResult Run(ISession session, GetScreenEditDataQuery query)
         {
             var data = session.Query<Model.Screen>()
                         .Where(s => s.Id == query.Id)
