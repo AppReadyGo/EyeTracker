@@ -557,6 +557,7 @@
     <Content Include="Content\New\Images\screens.png" />
     <Content Include="Content\New\Images\touchmap_grey.png" />
     <Content Include="Content\New\Images\white_texture.png" />
+    <Content Include="underconstruction.htm" />
     <Content Include="Views\Account\TermsAndConditions.aspx" />
     <Content Include="Views\Account\Unsubscribe.aspx" />
     <Content Include="Views\Account\Forms\UnsubscribeForm.ascx" />
