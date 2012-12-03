@@ -53,16 +53,16 @@ article{width:47%;float:left;padding:0 10px;}
         $('#firstScreen,#secondScreen').change(function () {
             var from = $("#datepicker_from").datepicker("getDate");
             var to = $("#datepicker_to").datepicker("getDate");
-            var portfolios = $('#SelectedPortfolioId').val();
-            var applications = $('#SelectedApplicationId').val();
+            //var portfolios = $('#SelectedPortfolioId').val();
+            //var applications = $('#SelectedApplicationId').val();
             var screenSizes = $('#SelectedScreenSize').val();
             var paths = $('#firstScreen').val();
             var secondPath = $('#secondScreen').val();
             var url = '/Analytics/' + analytics.action +
-                '/?pid=' + portfolios +
+                '/?pid=' + analytics.pid +
                 '&fd=' + $.datepicker.formatDate('dd-M-yy', from) +
                 '&td=' + $.datepicker.formatDate('dd-M-yy', to);
-            if (applications) url += '&aid=' + applications;
+            if (analytics.aid) url += '&aid=' + analytics.aid;
             if (screenSizes) url += '&ss=' + screenSizes;
             if (paths) url += '&p=' + paths;
             if (secondPath) url += '&sp=' + secondPath;

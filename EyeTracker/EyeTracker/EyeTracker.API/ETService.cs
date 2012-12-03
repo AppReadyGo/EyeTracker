@@ -26,6 +26,8 @@ namespace EyeTracker.API
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
+
+
           /// <summary>
           /// Check service status 
           /// </summary>

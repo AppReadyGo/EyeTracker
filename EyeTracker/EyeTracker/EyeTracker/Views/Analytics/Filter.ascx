@@ -8,6 +8,8 @@
         dateToMin: '<%=Model.SelectedDateFrom.ToString("dd MMM yyyy") %>',
         dateToMax: '<%=DateTime.UtcNow.ToString("dd MMM yyyy") %>',
         pData: <%=Model.PortfoliosData %>,
+        aid: <%=Model.SelectedApplicationId %>,
+        pid: <%=Model.SelectedPortfolioId %>,
         aData: <%=Model.ApplicationsData %>,
         action: '<%= Model.FormAction %>'
     };
@@ -96,7 +98,7 @@
         </ul>
     </div>
     <div class="advanced_filter" id="advanced_filter">
-        <p>
+       <%--By PM <p>
             <label>
                 <strong>Portfolio:</strong>
                 <%= Html.DropDownList("SelectedPortfolioId", Model.Portfolios)%>
@@ -105,7 +107,7 @@
                 <strong>Application:</strong>
                 <%= Html.DropDownList("SelectedApplicationId", Model.Applications)%>
             </label>
-        </p>
+        </p>--%>
         <p>
             <label>
                 <strong>Screen size:</strong>
