@@ -19,10 +19,21 @@ using System.Drawing;
 
 namespace EyeTracker.CustomModelBinders
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class ABFilterParametersModelBinder : FilterParametersModelBinder
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="controllerContext"></param>
+        /// <param name="bindingContext"></param>
+        /// <returns></returns>
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             var mState = bindingContext.ModelState;
