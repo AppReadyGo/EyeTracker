@@ -35,6 +35,6 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
         });
     </script>
     <p><a id="show_image" style="cursor:pointer;">Show Screen</a></p>
-    <img id="image" src="/Analytics/ClickHeatMapImage/<%=Model.SubMaster.FilterUrlPart %>" />
+    <img id="image" width="320" height="480" src="/Analytics/ClickHeatMapImage/<%=Model.SubMaster.FilterUrlPart %>" />
 </div>
 </asp:Content>
