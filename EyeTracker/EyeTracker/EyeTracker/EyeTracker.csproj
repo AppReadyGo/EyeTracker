@@ -27,6 +27,8 @@
     <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
     <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
     <ExcludeApp_Data>true</ExcludeApp_Data>
+    <PublishDatabases>false</PublishDatabases>
+    <PackageAsSingleFile>false</PackageAsSingleFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -374,6 +376,7 @@
     <Content Include="Content\touchmap_grey.png" />
     <Content Include="Content\New\Images\bg.png" />
     <Content Include="Content\New\Images\eyetrack_grey.png" />
+    <Content Include="underconstruction.htm" />
     <Content Include="Resources\Feature_TouchMap.jpg" />
     <Content Include="Resources\Feature_EyeTrack.jpg" />
     <Content Include="Resources\Feature_PlayBack.jpg" />
@@ -573,6 +576,7 @@
     <Content Include="Views\Application\Screens.aspx" />
     <Content Include="Views\Application\Index.aspx" />
     <Content Include="Views\Content\AuthenticatedError.aspx" />
+    <Content Include="Views\Account\Forms\LogOnForm.cshtml" />
     <None Include="Views\Content\PublicError.cshtml" />
     <None Include="Views\Content\Public404.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
@@ -580,9 +584,8 @@
     <Content Include="Views\Secure\Forms\ChangePasswordForm.ascx" />
     <Content Include="Views\Account\Forms\ResetPasswordForm.ascx" />
     <Content Include="Views\Account\Forms\ForgotPasswordForm.ascx" />
-    <Content Include="Views\Account\ForgotPassword.aspx" />
+    <None Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\Forms\RegisterForm.ascx" />
-    <Content Include="Views\Account\Forms\LogOnForm.ascx" />
     <Content Include="Views\Application\Forms\ApplicationForm.ascx" />
     <Content Include="Views\Analytics\Filter.ascx" />
     <Content Include="Views\Analytics\FingerPrint.aspx" />
@@ -618,8 +621,8 @@
     <Content Include="Scripts\ThridParty\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\ThridParty\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\Secure\ChangePassword.aspx" />
-    <Content Include="Views\Account\LogOn.aspx" />
-    <Content Include="Views\Account\Register.aspx" />
+    <None Include="Views\Account\LogOn.cshtml" />
+    <None Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\Analytics.master" />
     <Content Include="Views\Admin\Index.aspx" />
     <Content Include="Views\Admin\Membership.aspx" />

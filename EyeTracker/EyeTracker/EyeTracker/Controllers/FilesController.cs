@@ -12,6 +12,8 @@ using EyeTracker.Core.Services;
 using System.IO;
 using System.Configuration;
 using EyeTracker.Common.Entities;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace EyeTracker.Controllers
 {
@@ -97,5 +99,31 @@ namespace EyeTracker.Controllers
             }
             return base.File(System.Text.Encoding.UTF8.GetBytes(sb.ToString()), "application/octet-stream");
         }
+
+        [Authorize]
+        public FileResult Thumbnails(string filename)
+        {
+            byte[] imageData = null;
+            var dir = Server.MapPath("~/Restricted/Screens");
+            var path = Path.Combine(dir, filename);
+            var file = new FileInfo(path);
+            if (file.Exists)
+            {
+                var img = new Bitmap(path);
+                var thumbnail = img.GetThumbnailImage(100, 100, () => {return false;}, IntPtr.Zero);
+
+                using (MemoryStream mStream = new MemoryStream())
+                {
+                    thumbnail.Save(mStream, ImageFormat.Png);
+                    imageData = mStream.ToArray();
+                }
+            }
+            else
+            {
+                throw new HttpException(404, "Not found");
+            }
+            return base.File(imageData, "Image/png");
+        }
+
    }
 }

@@ -1,0 +1,12 @@
+﻿@using EyeTracker.Model
+@using EyeTracker.Model.Master
+@model ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, EyeTracker.Models.Account.LogOnModel>
+@{
+    Layout = "~/Views/Shared/_BeforeLogin.cshtml";
+}
+@section title { Log On }
+@section header { }
+
+<article class="center">
+    @Html.Partial("Forms/LogOnForm", Model.View)
+</article>

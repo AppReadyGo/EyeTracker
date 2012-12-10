@@ -1,4 +1,4 @@
-﻿body{margin:0;padding:0;color:#000;text-align:center;font-family:Arial;}
+﻿body{margin:0;padding:0;color:#000;text-align:center;font-family:Arial;background-color:#000;}
 .content-wrapper{margin:auto;width:1024px;text-align:left;}
                     
 .clear{clear:both;margin:0;padding:0;}
@@ -119,7 +119,7 @@ header #btn_login{padding: 12px 10px 8px;font-weight:bold;font-size:12px;text-tr
 #info .video{float:left;margin-right:20px;margin-bottom:50px;}
 #info h2{margin-top:100px;font-weight:normal;}
                     
-footer{color:#FFF;height:251px;background:url(images/bg.png) repeat-x 0px -1479px;padding-top:20px;font-size:12px;}
+footer{color:#FFF;height:120px;background:url(images/bg.png) repeat-x 0px -1479px;padding-top:20px;font-size:12px;}
 footer h4{text-transform:uppercase;margin-bottom:25px;}
 footer a{color:#FFF;text-decoration:none;}
 footer a:hover{text-decoration:underline;}

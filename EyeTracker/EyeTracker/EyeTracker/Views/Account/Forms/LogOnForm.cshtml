@@ -1,0 +1,28 @@
+﻿@model EyeTracker.Models.Account.LogOnModel
+<style>
+.login{-webkit-border-radius:3px;border-radius:3px;border-width:1px;border-style:solid;background:#fbfbfb;font-family:"HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;}
+</style>
+<div class="login">
+<h2>Log On</h2>
+<p class="subtitle">
+    Please enter your username and password. 
+</p>
+@using (Html.BeginForm()) {
+	<p>
+		@Html.LabelFor(m => m.UserName)<br>
+		@Html.TextBoxFor(m => m.UserName)
+        <div class="error">@Html.ValidationMessageFor(m => m.UserName)</div>
+	</p>
+	<p>
+		@Html.LabelFor(m => m.Password)<br>
+		@Html.PasswordFor(m => m.Password)
+        <div class="error">@Html.ValidationMessageFor(m => m.Password)</div>
+        <div class="error">@Html.ValidationSummary(true)</div>
+	</p>
+	<p class="forgetmenot"><label for="RememberMe">@Html.CheckBoxFor(m => m.RememberMe) Remember Me</label>@Html.ActionLink("Forgot Password ?", "ForgotPassword")</p>
+	<p class="submit">
+		<input type="submit" value="Log in" class="button green medium" id="btn_login"/> or @Html.ActionLink("Register", "Register")
+	</p>
+    <div class="clear"></div>
+}
+</div>

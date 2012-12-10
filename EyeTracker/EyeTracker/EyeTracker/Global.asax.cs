@@ -26,6 +26,13 @@ namespace EyeTracker
 
 
             routes.MapRoute(
+                "Thumbnails",
+                "Thumbnails/{filename}",
+                new { controller = "Files", action = "Thumbnails" },
+                new[] { "EyeTracker.Controllers" } // Namespaces
+            );
+
+            routes.MapRoute(
                 "AjaxData", 
                 "Data/{action}/",
                 new { controller = "Data" },
