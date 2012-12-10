@@ -37,6 +37,7 @@ namespace EyeTracker.Controllers
             log.WriteInformation("Dashboard");
             if (ModelState.IsValid)
             {
+                //TODO: Pavel: change 
                 var dashboardViewData = ObjectContainer.Instance.RunQuery(
                             new DashboardViewDataQuery(filter.FromDate,
                                                 filter.ToDate,

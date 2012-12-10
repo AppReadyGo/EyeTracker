@@ -1,0 +1,11 @@
+﻿@using EyeTracker.Model
+@using EyeTracker.Model.Master
+@model ViewModelWrapper<MainMasterModel, BeforeLoginMasterModel, EyeTracker.Models.Account.RegisterModel>
+@{
+    Layout = "~/Views/Shared/_BeforeLogin.cshtml";
+}
+@section title { Register }
+@section header { }
+<article class="center">
+    @Html.Partial("Forms/RegisterForm", Model.View)
+</article>
