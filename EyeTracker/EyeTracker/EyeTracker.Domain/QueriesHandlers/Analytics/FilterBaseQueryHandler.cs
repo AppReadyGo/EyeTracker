@@ -63,6 +63,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                                 })
                                 .ToArray().Distinct();
 
+
             foreach (var item in portfolios)
             {
                 item.details.Applications = applications.Where(ai => ai.key == item.key)
@@ -83,13 +84,34 @@ namespace EyeTracker.Domain.Queries.Analytics
 
             if (query != null && query.ApplicationId.HasValue && !string.IsNullOrEmpty(query.Path) && query.ScreenSize.HasValue)
             {
-                filterData.ScreenId = session.Query<Screen>()
+                filterData.ScreenData = new FilterDataResult.Screen();
+
+                var screen = session.Query<Screen>()
                                     .Where(s => s.Application.Id == query.ApplicationId.Value &&
                                                 s.Path.ToLower() == query.Path.ToLower() &&
                                                 s.Width == query.ScreenSize.Value.Width &&
                                                 s.Height == query.ScreenSize.Value.Height)
-                                    .Select(s => (int?)s.Id)
+                                    .Select(s => new { Id = s.Id, FileExtention = s.FileExtension} )
                                     .FirstOrDefault();
+                if (screen != null)
+                {
+                    filterData.ScreenData.Id = screen.Id;
+                    filterData.ScreenData.FileExtention = screen.FileExtention;
+                }
+
+                filterData.ScreenData.ClicksAmount = session.Query<Click>()
+                                                    .Where(s => s.PageView.Application.Id == query.ApplicationId.Value &&
+                                                                s.PageView.Path.ToLower() == query.Path.ToLower() &&
+                                                                s.PageView.ClientWidth == query.ScreenSize.Value.Width &&
+                                                                s.PageView.ClientHeight == query.ScreenSize.Value.Height)
+                                                    .Count();
+                filterData.ScreenData.HasScrolls = session.Query<Scroll>()
+                                                    .Where(s => s.PageView.Application.Id == query.ApplicationId.Value &&
+                                                                s.PageView.Path.ToLower() == query.Path.ToLower() &&
+                                                                s.PageView.ClientWidth == query.ScreenSize.Value.Width &&
+                                                                s.PageView.ClientHeight == query.ScreenSize.Value.Height)
+                                                    .Any();
+
             }
 
             return filterData;
