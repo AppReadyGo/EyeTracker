@@ -9,6 +9,7 @@ using EyeTracker.Domain.Model;
 using EyeTracker.Common;
 using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 using EyeTracker.Common.Commands;
+using EyeTracker.Common.QueryResults.Analytics;
 
 namespace EyeTracker.Domain.Queries.Analytics
 {
@@ -26,6 +27,18 @@ namespace EyeTracker.Domain.Queries.Analytics
         public FingerPrintViewDataResult Run(ISession session, FingerPrintViewDataQuery query)
         {
             var data = GetResult<FingerPrintViewDataResult>(session, this.securityContext.CurrentUser.Id, query);
+            data.Screens = session.Query<Screen>()
+                                        .Where(s => s.Application.Id == query.ApplicationId.Value)
+                                        .Select(s => new ScreenResult
+                                        {
+                                            Id = s.Id,
+                                            Path = s.Path,
+                                            ApplicationId = s.Application.Id,
+                                            Height = s.Height,
+                                            Width = s.Width,
+                                            FileExtension = s.FileExtension
+                                        })
+                                        .ToArray();
             if(data.ScreenId.HasValue)
             {
                 data.ScreenFileExtention = session.Query<Screen>()
