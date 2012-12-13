@@ -34,6 +34,8 @@ namespace EyeTracker.Model.Filter
         public string ApplicationsData { get; set; }
 
         public bool NoData { get; set; }
+        public int ClicksAmount { get; set; }
+        public bool HasScrolls { get; set; }
 
         //Top Panel
         public string PortfolioName { get; set; }
@@ -75,5 +77,7 @@ namespace EyeTracker.Model.Filter
             parts.Add(string.Format("td={0}", dateTo.ToString("dd-MMM-yyyy")));
             return "?" + string.Join("&", parts.ToArray());
         }
+
+        public int? ScreenId { get; set; }
     }
 }

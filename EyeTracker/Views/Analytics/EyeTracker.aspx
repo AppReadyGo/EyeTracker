@@ -20,12 +20,16 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <% Html.RenderPartial("Filter", Model.View); %>
 <div>
-<%if (Model.View.NoData)
-  { %>
-<%--<img src="http://images.newcars.com/images/monthly_trend_grph_no_data.png" />
---%><%}
-  else
-  { %>
+    <%if (!Model.View.ScreenId.HasValue)
+      {%>
+        <img src="http://dyn.com/wp-content/uploads/2012/09/wearehiring.png" /><!--No screen-->
+    <%}
+      else if (!Model.View.HasScrolls)
+      { %>
+        <img src="http://dyn.com/wp-content/uploads/2012/09/wearehiring.png" /><!--No data-->
+    <%}
+      else
+      { %>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#show_image').click(function () {

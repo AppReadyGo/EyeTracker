@@ -26,6 +26,16 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 <%} %>
 </div>
 <div>
+    <%if (!Model.View.ScreenId.HasValue)
+      {%>
+        <img src="http://dyn.com/wp-content/uploads/2012/09/wearehiring.png" /><!--No screen-->
+    <%}
+      else if (Model.View.ClicksAmount == 0)
+      { %>
+        <img src="http://dyn.com/wp-content/uploads/2012/09/wearehiring.png" /><!--No data-->
+    <%}
+      else
+      { %>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#show_image').click(function () {
@@ -43,5 +53,6 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
     </script>
     <p><a id="show_image" style="cursor:pointer;">Show Screen</a></p>
     <img id="image" width="320" src="/Analytics/ClickHeatMapImage/<%=Model.SubMaster.FilterUrlPart %>" />
+    <%} %>
 </div>
 </asp:Content>

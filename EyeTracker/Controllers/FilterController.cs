@@ -58,6 +58,10 @@ namespace EyeTracker.Controllers
                 var sizes = new List<SelectListItem>();
                 var pathes = new List<SelectListItem>();
 
+                filterModel.ClicksAmount = filterDataResult.ScreenData.ClicksAmount;
+                filterModel.HasScrolls = filterDataResult.ScreenData.HasScrolls;
+                filterModel.ScreenId = filterDataResult.ScreenData.Id;
+
                 //Set current application
                 if (!curPortfolio.Applications.Any())
                 {
