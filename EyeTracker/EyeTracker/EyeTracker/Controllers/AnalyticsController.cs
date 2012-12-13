@@ -151,7 +151,7 @@ namespace EyeTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
+                var data = ObjectContainer.Instance.RunQuery(new FingerPrintViewDataQuery(
                                      filter.FromDate,
                                      filter.ToDate,
                                      filter.PortfolioId,
@@ -172,16 +172,16 @@ namespace EyeTracker.Controllers
                 //{
                 //    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}/{1}/{2}/{3}/3\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, HttpUtility.UrlEncode(filter.Path));
                 //}
-                if (filterData.ScreenId.HasValue)
+                if (data.ScreenId.HasValue)
                 {
-                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", filterData.ScreenId.Value);
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", data.ScreenId.Value);
                 }
                 else
                 {
                     placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value);
                 }
 
-                return View(new FilterModel() { Title = "Fingerprint" }, AnalyticsMasterModel.MenuItem.FingerPrint, filterData, filter, true, placeHolderHTML);
+                return View(new FingerPrintModel() { Title = "Fingerprint", Screens = data.Screens }, AnalyticsMasterModel.MenuItem.FingerPrint, data, filter, true, placeHolderHTML);
             }
             else
             {

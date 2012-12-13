@@ -10,6 +10,7 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel>>" %>
    <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
    <link rel="stylesheet" href="<%: Url.Content("~/Content/template/css/afterlogin.master.css") %>" type="text/css" media="all">
    <link href="<%: Url.Content("~/Content/after.login.master.css")%>" rel="stylesheet" type="text/css" />
+   <link href="<%: Url.Content("~/Content/New/other.css")%>" rel="stylesheet" type="text/css" />
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">

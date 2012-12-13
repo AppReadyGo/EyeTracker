@@ -23,12 +23,6 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <% Html.RenderPartial("Filter", Model.View); %>
-<div style="width:500px;overflow-x:auto;position:relative;">
-<%foreach(var screen in Model.Screens)
-  { %>
-<a href=""><img src="/Thumbnails/<%=screen.Id %>.png"/></a>    
-<%} %>
-</div>
 <table class="dashboard">
 <tr>
     <td colspan="2">

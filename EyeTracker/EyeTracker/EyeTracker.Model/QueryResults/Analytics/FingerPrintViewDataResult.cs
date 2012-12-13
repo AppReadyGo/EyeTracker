@@ -10,5 +10,7 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
         public string ScreenFileExtention { get; set; }
 
         public int PointsOnReport { get; set; }
+
+        public IEnumerable<ScreenResult> Screens { get; set; }
     }
 }

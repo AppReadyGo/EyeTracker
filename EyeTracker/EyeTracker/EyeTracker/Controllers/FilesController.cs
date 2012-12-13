@@ -14,13 +14,14 @@ using System.Configuration;
 using EyeTracker.Common.Entities;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 namespace EyeTracker.Controllers
 {
     public class FilesController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
- 
+
         public FileResult Analytics(string filename)
         {
             //TODO: check client id
@@ -88,12 +89,12 @@ namespace EyeTracker.Controllers
             sb.AppendFormat("AllowSend3G={0}", ConfigurationManager.AppSettings["AllowSend3G"]).AppendLine();
             sb.AppendFormat("ApplicationName={0}", ApplicationController.GetAppKey(type, pId, appId)).AppendLine();
             var cacheInDatabase = ConfigurationManager.AppSettings["CacheInDatabase"];
-            if(!string.IsNullOrEmpty(cacheInDatabase))
+            if (!string.IsNullOrEmpty(cacheInDatabase))
             {
                 sb.AppendFormat("CacheInDatabase={0}", cacheInDatabase).AppendLine();
             }
             var servermode = ConfigurationManager.AppSettings["ServerMode"];
-            if(!string.IsNullOrEmpty(servermode))
+            if (!string.IsNullOrEmpty(servermode))
             {
                 sb.AppendFormat("ServerMode={0}", servermode).AppendLine();
             }
@@ -109,12 +110,11 @@ namespace EyeTracker.Controllers
             var file = new FileInfo(path);
             if (file.Exists)
             {
-                var img = new Bitmap(path);
-                var thumbnail = img.GetThumbnailImage(100, 100, () => {return false;}, IntPtr.Zero);
+                var img = resizeImage(new Bitmap(path), 100);
 
                 using (MemoryStream mStream = new MemoryStream())
                 {
-                    thumbnail.Save(mStream, ImageFormat.Png);
+                    img.Save(mStream, ImageFormat.Png);
                     imageData = mStream.ToArray();
                 }
             }
@@ -125,5 +125,27 @@ namespace EyeTracker.Controllers
             return base.File(imageData, "Image/png");
         }
 
-   }
+        private static Image resizeImage(Image imgToResize, int longEdgeSize)
+        {
+            int sourceWidth = imgToResize.Width;
+            int sourceHeight = imgToResize.Height;
+
+            int destWidth = longEdgeSize;
+            int destHeight = longEdgeSize;
+
+            if (sourceWidth < sourceHeight)
+                destWidth = sourceWidth * destHeight / sourceHeight;
+            else
+                destHeight = sourceHeight * destWidth / sourceWidth;
+
+            Bitmap b = new Bitmap(destWidth, destHeight);
+            Graphics g = Graphics.FromImage((Image)b);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
+            g.Dispose();
+
+            return (Image)b;
+        }
+    }
 }

@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" 
 Language="C#" 
 MasterPageFile="~/Views/Shared/Analytics.Master" 
-Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel, EyeTracker.Model.Filter.FilterModel>>" %>
+Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel, EyeTracker.Model.Pages.Analytics.FingerPrintModel>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitleContent" runat="server">Finger Print</asp:Content>
 
@@ -18,6 +18,12 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <% Html.RenderPartial("Filter", Model.View); %>
+<div class="thumbnails">
+<%foreach(var screen in Model.View.Screens)
+  { %>
+    <a href="<%=Model.SubMaster.FilterUrlPart %>"><img src="/Thumbnails/<%=screen.Id %><%=screen.FileExtension %>"/></a>    
+<%} %>
+</div>
 <div>
     <script type="text/javascript">
         $(document).ready(function () {

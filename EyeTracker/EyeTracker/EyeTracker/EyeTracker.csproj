@@ -250,6 +250,7 @@
     <Content Include="Content\New\Images\logo-141X76.png" />
     <Content Include="Content\New\Images\arrow-down.png" />
     <Content Include="Content\New\main.css" />
+    <Content Include="Content\New\other.css" />
     <Content Include="Content\playback_grey.gif" />
     <Content Include="Content\playback_grey.png" />
     <Content Include="Content\shared\bredcrumbs.css" />
