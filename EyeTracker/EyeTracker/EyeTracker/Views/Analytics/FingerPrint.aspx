@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" 
+﻿<%@ Import Namespace="EyeTracker.Common" %>
+<%@ Page Title="" 
 Language="C#" 
 MasterPageFile="~/Views/Shared/Analytics.Master" 
 Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel, EyeTracker.Model.Pages.Analytics.FingerPrintModel>>" %>
@@ -21,7 +22,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 <div class="thumbnails">
 <%foreach(var screen in Model.View.Screens)
   { %>
-    <a href="<%=Model.SubMaster.FilterUrlPart %>"><img src="/Thumbnails/<%=screen.Id %><%=screen.FileExtension %>"/></a>    
+    <a href="<%=Model.View.GetUrlPart(Model.View.SelectedPortfolioId, screen.ApplicationId, screen.Size.ToFormatedString(), screen.Path, Model.View.SelectedDateFrom, Model.View.SelectedDateTo) %>"><img src="/Thumbnails/<%=screen.Id %><%=screen.FileExtension %>"/></a>    
 <%} %>
 </div>
 <div>
@@ -41,6 +42,6 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
         });
     </script>
     <p><a id="show_image" style="cursor:pointer;">Show Screen</a></p>
-    <img id="image" width="320" height="480" src="/Analytics/ClickHeatMapImage/<%=Model.SubMaster.FilterUrlPart %>" />
+    <img id="image" width="320" src="/Analytics/ClickHeatMapImage/<%=Model.SubMaster.FilterUrlPart %>" />
 </div>
 </asp:Content>
