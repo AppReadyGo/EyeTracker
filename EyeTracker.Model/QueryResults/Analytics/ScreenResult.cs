@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace EyeTracker.Common.QueryResults.Analytics
 {
@@ -18,5 +19,7 @@ namespace EyeTracker.Common.QueryResults.Analytics
         public int Height { get; set; }
 
         public string FileExtension { get; set; }
+
+        public Size Size { get { return new Size(this.Width, this.Height); } }
     }
 }
