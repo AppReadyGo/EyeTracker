@@ -82,36 +82,60 @@ namespace EyeTracker.Domain.Queries.Analytics
 
             filterData.Portfolios = portfolios.Select(p => p.details);
 
-            if (query != null && query.ApplicationId.HasValue && !string.IsNullOrEmpty(query.Path) && query.ScreenSize.HasValue)
+            if (query != null)
             {
-                filterData.ScreenData = new FilterDataResult.Screen();
+                int? applicationId = query.ApplicationId;
+                string path = query.Path;
+                Size? screenSize = query.ScreenSize;
+                ApplicationResult app = null;
+                PortfolioResult portfolio = filterData.Portfolios.Single(p => p.Id == query.PortfolioId);
 
-                var screen = session.Query<Screen>()
-                                    .Where(s => s.Application.Id == query.ApplicationId.Value &&
-                                                s.Path.ToLower() == query.Path.ToLower() &&
-                                                s.Width == query.ScreenSize.Value.Width &&
-                                                s.Height == query.ScreenSize.Value.Height)
-                                    .Select(s => new { Id = s.Id, FileExtention = s.FileExtension} )
-                                    .FirstOrDefault();
-                if (screen != null)
+                app = applicationId.HasValue ? portfolio.Applications.Single(a => a.Id == applicationId.Value) : portfolio.Applications.First();
+
+                if (app != null)
                 {
-                    filterData.ScreenData.Id = screen.Id;
-                    filterData.ScreenData.FileExtention = screen.FileExtention;
+                    applicationId = app.Id;
+                    if (string.IsNullOrEmpty(query.Path) && app.Pathes.Any())
+                    {
+                        path = app.Pathes.First();
+                    }
+                    if (!query.ScreenSize.HasValue && app.ScreenSizes.Any())
+                    {
+                        screenSize = app.ScreenSizes.First();
+                    }
+
+                    if (!string.IsNullOrEmpty(path) && screenSize.HasValue)
+                    {
+                        filterData.ScreenData = new FilterDataResult.Screen();
+
+                        var screen = session.Query<Screen>()
+                                            .Where(s => s.Application.Id == applicationId.Value &&
+                                                        s.Path.ToLower() == path.ToLower() &&
+                                                        s.Width == screenSize.Value.Width &&
+                                                        s.Height == screenSize.Value.Height)
+                                            .Select(s => new { Id = s.Id, FileExtention = s.FileExtension })
+                                            .FirstOrDefault();
+                        if (screen != null)
+                        {
+                            filterData.ScreenData.Id = screen.Id;
+                            filterData.ScreenData.FileExtention = screen.FileExtention;
+                        }
+
+                        filterData.ScreenData.ClicksAmount = session.Query<Click>()
+                                                            .Where(s => s.PageView.Application.Id == applicationId.Value &&
+                                                                        s.PageView.Path.ToLower() == path.ToLower() &&
+                                                                        s.PageView.ClientWidth == screenSize.Value.Width &&
+                                                                        s.PageView.ClientHeight == screenSize.Value.Height)
+                                                            .Count();
+                        filterData.ScreenData.HasScrolls = session.Query<Scroll>()
+                                                            .Where(s => s.PageView.Application.Id == applicationId.Value &&
+                                                                        s.PageView.Path.ToLower() == path.ToLower() &&
+                                                                        s.PageView.ClientWidth == screenSize.Value.Width &&
+                                                                        s.PageView.ClientHeight == screenSize.Value.Height)
+                                                            .Any();
+
+                    }
                 }
-
-                filterData.ScreenData.ClicksAmount = session.Query<Click>()
-                                                    .Where(s => s.PageView.Application.Id == query.ApplicationId.Value &&
-                                                                s.PageView.Path.ToLower() == query.Path.ToLower() &&
-                                                                s.PageView.ClientWidth == query.ScreenSize.Value.Width &&
-                                                                s.PageView.ClientHeight == query.ScreenSize.Value.Height)
-                                                    .Count();
-                filterData.ScreenData.HasScrolls = session.Query<Scroll>()
-                                                    .Where(s => s.PageView.Application.Id == query.ApplicationId.Value &&
-                                                                s.PageView.Path.ToLower() == query.Path.ToLower() &&
-                                                                s.PageView.ClientWidth == query.ScreenSize.Value.Width &&
-                                                                s.PageView.ClientHeight == query.ScreenSize.Value.Height)
-                                                    .Any();
-
             }
 
             return filterData;

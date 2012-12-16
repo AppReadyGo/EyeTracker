@@ -91,9 +91,9 @@
             <li><%: Model.SelectedScreenSize%></li>
             <%}%>
             <li><strong>Portfolio:</strong></li>
-            <li><%: Model.PortfolioName%></li>
+            <li class="stricted-width"><%: Model.PortfolioName%></li>
             <li><strong>Application:</strong></li>
-            <li><%: Model.ApplicationName%></li>
+            <li class="stricted-width"><%: Model.ApplicationName%></li>
             <li class="multiselect"><button id="advanced_filter_btn">Advanced filter</button></li>
         </ul>
     </div>
@@ -121,9 +121,9 @@
         <label>Language <select><option>All</option></select></label>
         <label>Country <select><option>All</option></select></label>
         <label>City <select><option>All</option></select></label-->
+            <span class="actions"><a id="advanced_filter_apply">Apply</a><a id="advanced_filter_cancel">Cancel</a></span>
         </p>
-        <p class="actions">
-            <a id="advanced_filter_apply">Apply</a><a id="advanced_filter_cancel">Cancel</a></p>
+        
     </div>
 </div>
 <div id="current_filter">

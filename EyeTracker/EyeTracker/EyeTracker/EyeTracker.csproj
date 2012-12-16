@@ -233,7 +233,6 @@
     <Content Include="Content\application.screenedit.css" />
     <Content Include="Content\account.termsandconditions.css" />
     <Content Include="Content\application.screennew.css" />
-    <Content Include="Content\analytics.screen.css" />
     <Content Include="Content\eyetrack_grey.gif" />
     <Content Include="Content\eyetrack_grey.png" />
     <Content Include="Content\images\crumb-left.png" />
@@ -249,6 +248,9 @@
     <Content Include="Content\images\sort.gif" />
     <Content Include="Content\New\Images\logo-141X76.png" />
     <Content Include="Content\New\Images\arrow-down.png" />
+    <Content Include="Content\New\Images\notice_no-data.png" />
+    <Content Include="Content\New\Images\notice_nobody_used.png" />
+    <Content Include="Content\New\Images\notice_no_screen_shot.png" />
     <Content Include="Content\New\main.css" />
     <Content Include="Content\New\other.css" />
     <Content Include="Content\playback_grey.gif" />
