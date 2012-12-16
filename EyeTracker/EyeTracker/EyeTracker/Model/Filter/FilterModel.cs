@@ -36,7 +36,7 @@ namespace EyeTracker.Model.Filter
         public bool NoData { get; set; }
         public int ClicksAmount { get; set; }
         public bool HasScrolls { get; set; }
-        public bool HasFilteredScrolls { get; set; }
+        public int ScrollsAmount { get; set; }
         public bool HasClicks { get; set; }
 
 

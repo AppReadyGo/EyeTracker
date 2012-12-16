@@ -34,7 +34,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
       {%>
         <img alt="Uh-oh! Nobody used your application yet." class="notice" src="/Content/New/Images/notice_nobody_used.png" />
     <%}
-      else if (!Model.View.HasFilteredScrolls)
+      else if (Model.View.ScrollsAmount == 0)
       { %>
         <img alt="Oops, ther is no data for this time period" class="notice" src="/Content/New/Images/notice_no-data.png" />
      }
