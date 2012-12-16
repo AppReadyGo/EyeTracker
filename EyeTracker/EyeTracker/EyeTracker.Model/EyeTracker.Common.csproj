@@ -120,7 +120,9 @@
     <Compile Include="Queries\Admin\GetAllMembersQuery.cs" />
     <Compile Include="Queries\Admin\GetAllStaffQuery.cs" />
     <Compile Include="Queries\Analytics\ClickHeatMapDataQuery.cs" />
+    <Compile Include="Queries\Analytics\ABCompareViewDataQuery.cs" />
     <Compile Include="Queries\Analytics\EyeTrackerViewDataQuery.cs" />
+    <Compile Include="QueryResults\Analytics\ABCompareViewDataResult.cs" />
     <Compile Include="QueryResults\Analytics\EyeTrackerViewDataResult.cs" />
     <Compile Include="Queries\Analytics\HeatMapDataQuery.cs" />
     <Compile Include="Queries\Analytics\IFilterQuery.cs" />

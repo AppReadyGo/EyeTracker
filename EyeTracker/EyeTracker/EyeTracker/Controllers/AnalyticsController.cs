@@ -193,13 +193,14 @@ namespace EyeTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
+                var filterData = ObjectContainer.Instance.RunQuery(new ABCompareViewDataQuery(
                                      filter.FromDate,
                                      filter.ToDate,
                                      filter.PortfolioId,
                                      filter.ApplicationId,
                                      filter.ScreenSize,
                                      filter.Path,
+                                     filter.SecondPath,
                                      null,
                                      null,
                                      null,
@@ -234,7 +235,11 @@ namespace EyeTracker.Controllers
                     FirstScreenPathes = firstScreenPathes,
                     SecondScreenPathes = secondScreenPathes,
                     FirstPath = filter.Path,
-                    SecondPath = filter.SecondPath
+                    SecondPath = filter.SecondPath,
+                    FirstHasFilteredClicks = filterData.ScreenData.ClicksAmount > 0,
+                    SecondHasFilteredClicks = filterData.SecondHasFilteredClicks,
+                    SecondHasClicks = filterData.SecondHasClicks,
+                    FirstHasClicks = filterData.ScreenData.HasClicks
                 };
 
                 return View(model, AnalyticsMasterModel.MenuItem.ABFingerPrint, filterData, filter, true, placeHolderHTML);
