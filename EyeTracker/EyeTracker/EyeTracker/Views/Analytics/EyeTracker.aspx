@@ -16,6 +16,29 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 <link href="<%: Url.Content("~/Content/shared/filter.css")%>" rel="stylesheet" type="text/css" />
 <link href="<%: Url.Content("~/Content/analytics.screen.css")%>" rel="stylesheet" type="text/css" />
 <script src="<%: Url.Content("~/Scripts/filter.js")%>" type="text/javascript"></script>
+<script type="text/javascript">
+    var usageChartData = <%= Model.View.UsageChartData %>;
+    $(document).ready(function () {
+    var placeholder = $("#usage_charts_place_holder");
+    var plot = $.plot(placeholder, usageChartData, {
+        xaxis: { mode: "time", timeformat: '%d %b %y' },
+        yaxis: { min: 0, tickDecimals: 0 },
+        series: {
+            lines: { show: true },
+            points: { show: true }
+        },
+        grid: { hoverable: true, clickable: true }
+    });
+});
+</script>
+<style>
+.fingerprint td{vertical-align:top;padding:0px;}
+.fingerprint .title{border-bottom:1px solid #666; margin-bottom:10px;}
+.fingerprint .title span{line-height:23px;color:#fff;
+                       background-color:#666;border:1px solid #666;border-bottom-width:2px;
+                       border-radius:2px 2px 0px 0px;padding:2px 5px 2px 5px;}
+.fingerprint .charts{margin-left:20px;}
+</style>
 </asp:Content>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -60,6 +83,15 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
         });
     </script>
     <p><a id="show_image" style="cursor:pointer;">Show Screen</a></p>
-    <img id="image" src="/Analytics/ViewHeatMapImage/<%=Model.SubMaster.FilterUrlPart %>" />
+    <table class="fingerprint">
+        <tr><td>
+            <img id="image" src="/Analytics/ViewHeatMapImage/<%=Model.SubMaster.FilterUrlPart %>" />
+        </td><td>
+        <div class="charts">
+            <div class="title"><span>Screen Usage Data (<%=Model.View.ScrollsAmount %> scrolls)</span></div>
+            <div id="usage_charts_place_holder" style="height:200px;width:575px;"></div>
+        </div>
+        </td></tr>
+    </table>
 <%} %>
 </div></asp:Content>

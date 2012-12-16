@@ -8,5 +8,7 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
     public class EyeTrackerViewDataResult : FilterDataResult
     {
         public IEnumerable<ScreenResult> Screens { get; set; }
+
+        public Dictionary<DateTime, int> UsageData { get; set; }
     }
 }
