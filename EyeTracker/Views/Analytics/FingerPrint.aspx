@@ -19,20 +19,27 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <% Html.RenderPartial("Filter", Model.View); %>
+<%if (Model.View.Screens.Any())
+  { %>
 <div class="thumbnails">
-<%foreach(var screen in Model.View.Screens)
+<%foreach (var screen in Model.View.Screens)
   { %>
     <a href="<%=Model.View.GetUrlPart(Model.View.SelectedPortfolioId, screen.ApplicationId, screen.Size.ToFormatedString(), screen.Path, Model.View.SelectedDateFrom, Model.View.SelectedDateTo) %>"><img src="/Thumbnails/<%=screen.Id %><%=screen.FileExtension %>"/></a>    
 <%} %>
 </div>
+<%} %>
 <div>
-    <%if (!Model.View.ScreenId.HasValue)
-      {%>
-        <img src="http://dyn.com/wp-content/uploads/2012/09/wearehiring.png" /><!--No screen-->
-    <%}
-      else if (Model.View.ClicksAmount == 0)
+    <%if (!Model.View.HasClicks)
       { %>
-        <img src="http://dyn.com/wp-content/uploads/2012/09/wearehiring.png" /><!--No data-->
+        <img alt="Uh-oh! Nobody used your application yet." class="notice" src="/Content/New/Images/notice_nobody_used.png" />
+    <%}
+      else if (Model.View.ClicksAmount > 0)
+      { %>
+        <img alt="Oops, ther is no data for this time period" class="notice" src="/Content/New/Images/notice_no-data.png" />
+    <%}
+     else if (!Model.View.ScreenId.HasValue && !Model.View.HasScrolls)
+      {%>
+        <img alt="Ahem! We have the data but no screenshot." class="notice" src="/Content/New/Images/notice_no_screen_shot.png" style="margin-bottom:40px;" />
     <%}
       else
       { %>

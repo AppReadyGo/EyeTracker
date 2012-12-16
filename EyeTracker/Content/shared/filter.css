@@ -5,12 +5,13 @@
                border-color: #E8E8E8 #E8E8E8 #CCCCCC;border-radius: 4px 4px 4px 4px;border-style: solid;
                border-width: 1px;color: #444444;cursor: auto;line-height: normal;margin: 0 0 1px;min-width: 770px;
                padding: 10px 10px 4px;white-space: nowrap;}
-.filter .title ul{height: 25px;list-style: none outside none;margin:0;padding:0;}
-.filter .title li{display:inline;margin-right:5px;}
+.filter .title ul{height:41px;list-style: none outside none;margin:0;padding:0;}
+.filter .title li{display:inline;margin-right:5px;display:inline-block;height:36px;line-height:34px;overflow:hidden;}
+.filter .title li.stricted-width{width:300px;}
 .filter .title select{margin-right:5px;}
 .filter .advanced_filter{display:none;background-color:#EEE;
                 border-color: #E8E8E8 #E8E8E8 #CCCCCC;border-radius: 4px 4px 4px 4px;border-style: solid;
-                border-width: 1px;color: #444444;line-height: normal;margin: 0 0 1px;min-width: 590px;
+                border-width: 1px;color: #444444;line-height: normal;margin: 0 0 1px;xmin-width: 590px;
                 padding: 10px 10px 4px;white-space: nowrap;font-size:12px;position:absolute;z-index:1;margin-top:3px;left:0px;}
 .filter .advanced_filter .cancel-btn{float:right;display:block;width:10px;height:10px;margin-right:-6px;margin-top:-6px;
                           background:url("../images/sprite.10.png") no-repeat scroll -345px -84px transparent;}
@@ -93,6 +94,10 @@ li.multiselect, .date-range .actions, .advanced_filter .actions, .ui-multiselect
   white-space: nowrap;
 }
 .fc tr:hover td{background-color:#ffffcc;}
+
+
+
+.notice{margin-bottom:100px;}
 
 
 
