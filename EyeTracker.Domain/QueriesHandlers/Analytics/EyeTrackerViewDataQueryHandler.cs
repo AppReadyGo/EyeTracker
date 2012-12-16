@@ -28,7 +28,7 @@ namespace EyeTracker.Domain.Queries.Analytics
         {
             var data = GetResult<EyeTrackerViewDataResult>(session, this.securityContext.CurrentUser.Id, query);
             data.Screens = session.Query<Screen>()
-                                        .Where(s => s.Application.Id == query.ApplicationId.Value)
+                                        .Where(s => s.Application.Id == data.SelectedApplicationId.Value)
                                         .Select(s => new ScreenResult
                                         {
                                             Id = s.Id,
@@ -39,6 +39,16 @@ namespace EyeTracker.Domain.Queries.Analytics
                                             FileExtension = s.FileExtension
                                         })
                                         .ToArray();
+
+            data.UsageData = session.Query<Scroll>()
+                                    .Where(s => s.PageView.Application.Id == data.SelectedApplicationId.Value &&
+                                                s.PageView.Path.ToLower() == data.SelectedPath.ToLower() &&
+                                                s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
+                                                s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&
+                                                s.PageView.Date >= query.From && s.PageView.Date <= query.To)
+                                    .GroupBy(c => c.PageView.Date)
+                                    .Select(g => new KeyValuePair<DateTime, int>(g.Key, g.Count()))
+                                    .ToList().ToDictionary(v => v.Key, v => v.Value);
             return data;
         }
     }

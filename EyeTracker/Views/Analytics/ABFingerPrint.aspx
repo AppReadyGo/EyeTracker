@@ -141,19 +141,19 @@ article{width:47%;float:left;padding:0 10px;}
 <div>
     <article>
         <p><a id="showFirstImage" style="cursor:pointer;">Show Screen</a> &nbsp; <%= Html.DropDownList("firstScreen", Model.View.FirstScreenPathes) %></p>
-        <%if (!Model.View.HasClicks)
+        <%if (!Model.View.FirstHasClicks)
             { %>
             <div class="no-data">
                 <img alt="Uh-oh! Nobody used your application yet." class="notice" src="/Content/New/Images/notice_nobody_used.png" />
             </div>
         <%}
-            else if (Model.View.ClicksAmount > 0)
+            else if (!Model.View.FirstHasClicks)
             { %>
             <div class="no-data">
                 <img alt="Oops, ther is no data for this time period" class="notice" src="/Content/New/Images/notice_no-data.png" />
             </div>
         <%}
-          else if (!Model.View.ScreenId.HasValue && !Model.View.HasScrolls)
+          else if (!Model.View.FirstHasClicks && !Model.View.FirstHasClicks)
           {%>
             <div class="no-data">
                 <img alt="Ahem! We have the data but no screenshot." class="notice" src="/Content/New/Images/notice_no_screen_shot.png" style="margin-bottom:40px;" />
@@ -169,19 +169,19 @@ article{width:47%;float:left;padding:0 10px;}
     </article>
     <article>
         <p><a id="showSecondImage" style="cursor:pointer;">Show Screen</a> &nbsp; <%= Html.DropDownList("secondScreen", Model.View.SecondScreenPathes)%></p>
-        <%if (!Model.View.HasClicks)
+        <%if (!Model.View.SecondHasClicks)
             { %>
             <div class="no-data">
                 <img alt="Uh-oh! Nobody used your application yet." class="notice" src="/Content/New/Images/notice_nobody_used.png" />
             </div>
         <%}
-            else if (Model.View.ClicksAmount > 0)
+          else if (!Model.View.SecondHasClicks)
             { %>
             <div class="no-data">
                 <img alt="Oops, ther is no data for this time period" class="notice" src="/Content/New/Images/notice_no-data.png" />
             </div>
         <%}
-          else if (!Model.View.ScreenId.HasValue && !Model.View.HasScrolls)
+          else if (!Model.View.SecondHasClicks && !Model.View.SecondHasClicks)
           {%>
             <div class="no-data">
                 <img alt="Ahem! We have the data but no screenshot." class="notice" src="/Content/New/Images/notice_no_screen_shot.png" style="margin-bottom:40px;" />

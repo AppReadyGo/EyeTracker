@@ -12,5 +12,7 @@ namespace EyeTracker.Model.Pages.Analytics
         public int PointsOnReport { get; set; }
 
         public IEnumerable<ScreenResult> Screens { get; set; }
+
+        public string UsageChartData { get; set; }
     }
 }
