@@ -12,7 +12,6 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 <script src="<%: Url.Content("~/Scripts/ThridParty/jquery-ui.min.js")%>" type="text/javascript"></script>
 <link href="<%: Url.Content("~/Content/themes/cupertino/jquery-ui.css") %>" rel="stylesheet" type="text/css" />
 <link href="<%: Url.Content("~/Content/shared/filter.css")%>" rel="stylesheet" type="text/css" />
-<link href="<%: Url.Content("~/Content/analytics.screen.css")%>" rel="stylesheet" type="text/css" />
 <script src="<%: Url.Content("~/Scripts/filter.js")%>" type="text/javascript"></script>
 <style type="text/css">
     /*Some CSS*/
@@ -131,7 +130,7 @@ article{width:47%;float:left;padding:0 10px;}
 //                    large.css({ left: px, top: py, backgroundPosition: bgp });
 //                }
 //            }
-        })
+//        })
     })
 </script>
 </asp:Content>
@@ -147,7 +146,7 @@ article{width:47%;float:left;padding:0 10px;}
                 <img alt="Uh-oh! Nobody used your application yet." class="notice" src="/Content/New/Images/notice_nobody_used.png" />
             </div>
         <%}
-            else if (!Model.View.FirstHasClicks)
+            else if (!Model.View.FirstHasFilteredClicks)
             { %>
             <div class="no-data">
                 <img alt="Oops, ther is no data for this time period" class="notice" src="/Content/New/Images/notice_no-data.png" />
@@ -175,7 +174,7 @@ article{width:47%;float:left;padding:0 10px;}
                 <img alt="Uh-oh! Nobody used your application yet." class="notice" src="/Content/New/Images/notice_nobody_used.png" />
             </div>
         <%}
-          else if (!Model.View.SecondHasClicks)
+          else if (!Model.View.SecondHasFilteredClicks)
             { %>
             <div class="no-data">
                 <img alt="Oops, ther is no data for this time period" class="notice" src="/Content/New/Images/notice_no-data.png" />

@@ -27,18 +27,19 @@ namespace EyeTracker.Domain.Queries.Analytics
         public ABCompareViewDataResult Run(ISession session, ABCompareViewDataQuery query)
         {
             var data = GetResult<ABCompareViewDataResult>(session, this.securityContext.CurrentUser.Id, query);
+            var secondPath = string.IsNullOrEmpty(query.Path) ? data.SelectedPath : query.Path;
             data.SecondHasFilteredClicks = session.Query<Click>()
-                                                    .Where(s => s.PageView.Application.Id == query.ApplicationId.Value &&
-                                                                s.PageView.Path.ToLower() == query.SecondPath.ToLower() &&
-                                                                s.PageView.ScreenWidth == query.ScreenSize.Value.Width &&
-                                                                s.PageView.ScreenHeight == query.ScreenSize.Value.Height &&
+                                                    .Where(s => s.PageView.Application.Id == data.SelectedApplicationId.Value &&
+                                                                s.PageView.Path.ToLower() == secondPath.ToLower() &&
+                                                                s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
+                                                                s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&
                                                                 s.PageView.Date >= query.From && s.PageView.Date <= query.To)
                                                     .Any();
             data.SecondHasClicks = session.Query<Click>()
-                                                    .Where(s => s.PageView.Application.Id == query.ApplicationId.Value &&
-                                                                s.PageView.Path.ToLower() == query.SecondPath.ToLower() &&
-                                                                s.PageView.ScreenWidth == query.ScreenSize.Value.Width &&
-                                                                s.PageView.ScreenHeight == query.ScreenSize.Value.Height)
+                                                    .Where(s => s.PageView.Application.Id == data.SelectedApplicationId.Value &&
+                                                                s.PageView.Path.ToLower() == secondPath.ToLower() &&
+                                                                s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
+                                                                s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height)
                                                     .Any();
             return data;
         }
