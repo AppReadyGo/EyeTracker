@@ -23,12 +23,25 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
 
             public string FileExtention { get; set; }
 
+
+            /// <summary>
+            /// Click on this screen in this time span
+            /// </summary>
             public int ClicksAmount { get; set; }
 
+            /// <summary>
+            /// Clicks on this screen in this time span
+            /// </summary>
             public int ScrollsAmount { get; set; }
 
+            /// <summary>
+            /// Any scrolls on this screen ever
+            /// </summary>
             public bool HasScrolls { get; set; }
 
+            /// <summary>
+            /// Any scrools on this sceen ever
+            /// </summary>
             public bool HasClicks { get; set; }
         }
     }
