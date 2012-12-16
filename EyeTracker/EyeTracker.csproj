@@ -580,6 +580,7 @@
     <Content Include="Views\Application\Index.aspx" />
     <Content Include="Views\Content\AuthenticatedError.aspx" />
     <Content Include="Views\Account\Forms\LogOnForm.cshtml" />
+    <Compile Include="Model\Pages\Analytics\EyeTrackerModel.cs" />
     <None Include="Views\Content\PublicError.cshtml" />
     <None Include="Views\Content\Public404.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
