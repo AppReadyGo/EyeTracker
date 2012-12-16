@@ -64,6 +64,8 @@ namespace EyeTracker.Controllers
                     filterModel.ClicksAmount = filterDataResult.ScreenData.ClicksAmount;
                     filterModel.HasScrolls = filterDataResult.ScreenData.HasScrolls;
                     filterModel.ScreenId = filterDataResult.ScreenData.Id;
+                    filterModel.HasClicks = filterDataResult.ScreenData.HasClicks;
+                    filterModel.HasFilteredScrolls = filterDataResult.ScreenData.HasFilteredScrolls;
                 }
                 //Set current application
                 if (!curPortfolio.Applications.Any())
