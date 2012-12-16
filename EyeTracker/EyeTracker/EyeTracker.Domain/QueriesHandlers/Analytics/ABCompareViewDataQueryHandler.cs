@@ -36,7 +36,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                                                     .Any();
             data.SecondHasClicks = session.Query<Click>()
                                                     .Where(s => s.PageView.Application.Id == query.ApplicationId.Value &&
-                                                                s.PageView.Path.ToLower() == query.Path.ToLower() &&
+                                                                s.PageView.Path.ToLower() == query.SecondPath.ToLower() &&
                                                                 s.PageView.ScreenWidth == query.ScreenSize.Value.Width &&
                                                                 s.PageView.ScreenHeight == query.ScreenSize.Value.Height)
                                                     .Any();
