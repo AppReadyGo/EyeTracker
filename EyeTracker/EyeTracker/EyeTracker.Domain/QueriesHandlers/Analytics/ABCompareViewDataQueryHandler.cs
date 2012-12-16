@@ -30,15 +30,15 @@ namespace EyeTracker.Domain.Queries.Analytics
             data.SecondHasFilteredClicks = session.Query<Click>()
                                                     .Where(s => s.PageView.Application.Id == query.ApplicationId.Value &&
                                                                 s.PageView.Path.ToLower() == query.SecondPath.ToLower() &&
-                                                                s.PageView.ClientWidth == query.ScreenSize.Value.Width &&
-                                                                s.PageView.ClientHeight == query.ScreenSize.Value.Height &&
+                                                                s.PageView.ScreenWidth == query.ScreenSize.Value.Width &&
+                                                                s.PageView.ScreenHeight == query.ScreenSize.Value.Height &&
                                                                 s.PageView.Date >= query.From && s.PageView.Date <= query.To)
                                                     .Any();
             data.SecondHasClicks = session.Query<Click>()
                                                     .Where(s => s.PageView.Application.Id == query.ApplicationId.Value &&
                                                                 s.PageView.Path.ToLower() == query.Path.ToLower() &&
-                                                                s.PageView.ClientWidth == query.ScreenSize.Value.Width &&
-                                                                s.PageView.ClientHeight == query.ScreenSize.Value.Height)
+                                                                s.PageView.ScreenWidth == query.ScreenSize.Value.Width &&
+                                                                s.PageView.ScreenHeight == query.ScreenSize.Value.Height)
                                                     .Any();
             return data;
         }

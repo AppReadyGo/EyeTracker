@@ -124,22 +124,22 @@ namespace EyeTracker.Domain.Queries.Analytics
                         filterData.ScreenData.ClicksAmount = session.Query<Click>()
                                                             .Where(s => s.PageView.Application.Id == applicationId.Value &&
                                                                         s.PageView.Path.ToLower() == path.ToLower() &&
-                                                                        s.PageView.ClientWidth == screenSize.Value.Width &&
-                                                                        s.PageView.ClientHeight == screenSize.Value.Height &&
+                                                                        s.PageView.ScreenWidth == screenSize.Value.Width &&
+                                                                        s.PageView.ScreenHeight == screenSize.Value.Height &&
                                                                         s.PageView.Date >= query.From && s.PageView.Date <= query.To)
                                                             .Count();
                         filterData.ScreenData.HasClicks = session.Query<Click>()
                                                             .Where(s => s.PageView.Application.Id == applicationId.Value &&
                                                                         s.PageView.Path.ToLower() == path.ToLower() &&
-                                                                        s.PageView.ClientWidth == screenSize.Value.Width &&
-                                                                        s.PageView.ClientHeight == screenSize.Value.Height)
+                                                                        s.PageView.ScreenWidth == screenSize.Value.Width &&
+                                                                        s.PageView.ScreenHeight == screenSize.Value.Height)
                                                             .Any();
 
                         filterData.ScreenData.HasScrolls = session.Query<Scroll>()
                                                             .Where(s => s.PageView.Application.Id == applicationId.Value &&
                                                                         s.PageView.Path.ToLower() == path.ToLower() &&
-                                                                        s.PageView.ClientWidth == screenSize.Value.Width &&
-                                                                        s.PageView.ClientHeight == screenSize.Value.Height)
+                                                                        s.PageView.ScreenWidth == screenSize.Value.Width &&
+                                                                        s.PageView.ScreenHeight == screenSize.Value.Height)
                                                             .Any();
 
                     }
