@@ -7,7 +7,7 @@
                padding: 10px 10px 4px;white-space: nowrap;}
 .filter .title ul{height:41px;list-style: none outside none;margin:0;padding:0;}
 .filter .title li{display:inline;margin-right:5px;display:inline-block;height:36px;line-height:34px;overflow:hidden;}
-.filter .title li.stricted-width{width:300px;}
+.filter .title li.stricted-width{width:226px;}
 .filter .title select{margin-right:5px;}
 .filter .advanced_filter{display:none;background-color:#EEE;
                 border-color: #E8E8E8 #E8E8E8 #CCCCCC;border-radius: 4px 4px 4px 4px;border-style: solid;

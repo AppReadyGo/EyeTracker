@@ -157,6 +157,7 @@
     <Compile Include="QueriesHandlers\Admin\GetAllMembersQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Admin\GetAllStaffQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Admin\LogQueryHadler.cs" />
+    <Compile Include="QueriesHandlers\Analytics\EyeTrackerViewDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\HeatMapDataQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\FilterQueryHandler.cs" />
     <Compile Include="QueriesHandlers\Analytics\ClickHeatMapDataQueryHandler.cs" />

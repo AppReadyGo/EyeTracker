@@ -250,7 +250,7 @@ namespace EyeTracker.Controllers
             if (ModelState.IsValid)
             {
 
-                var filterData = ObjectContainer.Instance.RunQuery(new FilterQuery(
+                var data = ObjectContainer.Instance.RunQuery(new EyeTrackerViewDataQuery(
                                     filter.FromDate,
                                     filter.ToDate,
                                     filter.PortfolioId,
@@ -271,16 +271,16 @@ namespace EyeTracker.Controllers
                 //{
                 //    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}/{1}/{2}/{3}?returl={4}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value, filter.ScreenSize.Value.Width, filter.ScreenSize.Value.Height, HttpUtility.UrlEncode(filter.Path), HttpUtility.UrlEncode("/Analytics/FingerPrint/?pid=2&fd=06-Aug-2012&td=05-Sep-2012&aid=5&ss=480X800&p=Some View"));
                 //}
-                if (filterData.ScreenData.Id.HasValue)
+                if (data.ScreenData.Id.HasValue)
                 {
-                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", filterData.ScreenData.Id.Value);
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenEdit/{0}\" class=\"link2 btn-screen\"><span><span>Update Screen</span></span></a>", data.ScreenData.Id.Value);
                 }
                 else
                 {
                     placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value);
                 }
 
-                return View(new FilterModel() { Title = "Eye Tracker" }, AnalyticsMasterModel.MenuItem.EyeTracker, filterData, filter, true, placeHolderHTML);
+                return View(new EyeTrackerModel() { Title = "Eye Tracker", Screens = data.Screens }, AnalyticsMasterModel.MenuItem.EyeTracker, data, filter, true, placeHolderHTML);
             }
             else
             {

@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" 
+﻿<%@ Import Namespace="EyeTracker.Common" %>
+<%@ Page Title="" Language="C#" 
 MasterPageFile="~/Views/Shared/Analytics.Master" 
-Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel, EyeTracker.Model.Filter.FilterModel>>" %>
+Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel, EyeTracker.Model.Pages.Analytics.EyeTrackerModel>>" %>
 
 <asp:Content ID="PageTitleContent" ContentPlaceHolderID="PageTitleContent" runat="server">Eye Tracker</asp:Content>
 
