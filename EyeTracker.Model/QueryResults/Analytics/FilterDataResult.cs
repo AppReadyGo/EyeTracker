@@ -17,6 +17,10 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
         public List<string> Cities { get; private set; }
         public Screen ScreenData { get; set; }
 
+        public int? SelectedApplicationId { get; set; }
+        public string SelectedPath { get; set; }
+        public Size? SelectedScreenSize { get; set; }
+
         public class Screen
         {
             public int? Id { get; set; }

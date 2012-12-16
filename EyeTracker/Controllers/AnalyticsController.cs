@@ -181,7 +181,37 @@ namespace EyeTracker.Controllers
                     placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value);
                 }
 
-                return View(new FingerPrintModel() { Title = "Fingerprint", Screens = data.Screens }, AnalyticsMasterModel.MenuItem.FingerPrint, data, filter, true, placeHolderHTML);
+                //Grouping data by day. To show on graph all days from start till end.
+                var visitsData = new List<object[]>();
+                int diffDays = (filter.ToDate - filter.FromDate).Days;
+                for (int i = 0; i < diffDays; i++)
+                {
+                    int count = 0;
+                    var curDate = filter.FromDate.AddDays(i);
+                    if (data.UsageData.ContainsKey(curDate))
+                    {
+                        count = data.UsageData[curDate];
+                    }
+                    visitsData.Add(new object[] { curDate.MilliTimeStamp(), count });
+                }
+
+                //Create chart data
+                var usageInitData = new List<object>();
+                usageInitData.Add(new
+                {
+                    data = visitsData,
+                    color = "#461D7C"
+                });
+
+
+                var model = new FingerPrintModel()
+                {
+                    Title = "Fingerprint",
+                    Screens = data.Screens,
+                    UsageChartData = new JavaScriptSerializer().Serialize(usageInitData)
+                };
+
+                return View(model, AnalyticsMasterModel.MenuItem.FingerPrint, data, filter, true, placeHolderHTML);
             }
             else
             {
