@@ -26,6 +26,10 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
             public int ClicksAmount { get; set; }
 
             public bool HasScrolls { get; set; }
+
+            public bool HasClicks { get; set; }
+
+            public bool HasFilteredScrolls { get; set; }
         }
     }
 }

@@ -32,5 +32,11 @@ namespace EyeTracker.Model.Pages.Analytics
                 return this.GetUrlPart(this.SecondPath);
             }
         }
+
+        public bool FirstHasFilteredClicks { get; set; }
+        public bool FirstHasClicks { get; set; }
+
+        public bool SecondHasFilteredClicks { get; set; }
+        public bool SecondHasClicks { get; set; } 
     }
 }
