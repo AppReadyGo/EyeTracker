@@ -128,6 +128,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                                                                         s.PageView.ScreenHeight == screenSize.Value.Height &&
                                                                         s.PageView.Date >= query.From && s.PageView.Date <= query.To)
                                                             .Count();
+
                         filterData.ScreenData.HasClicks = session.Query<Click>()
                                                             .Where(s => s.PageView.Application.Id == applicationId.Value &&
                                                                         s.PageView.Path.ToLower() == path.ToLower() &&
@@ -135,14 +136,20 @@ namespace EyeTracker.Domain.Queries.Analytics
                                                                         s.PageView.ScreenHeight == screenSize.Value.Height)
                                                             .Any();
 
-                        filterData.ScreenData.Scrolls = session.Query<Scroll>()
+                        filterData.ScreenData.ScrollsAmount = session.Query<Scroll>()
+                                                            .Where(s => s.PageView.Application.Id == applicationId.Value &&
+                                                                        s.PageView.Path.ToLower() == path.ToLower() &&
+                                                                        s.PageView.ScreenWidth == screenSize.Value.Width &&
+                                                                        s.PageView.ScreenHeight == screenSize.Value.Height &&
+                                                                        s.PageView.Date >= query.From && s.PageView.Date <= query.To)
+                                                            .Count();
+
+                        filterData.ScreenData.HasScrolls = session.Query<Scroll>()
                                                             .Where(s => s.PageView.Application.Id == applicationId.Value &&
                                                                         s.PageView.Path.ToLower() == path.ToLower() &&
                                                                         s.PageView.ScreenWidth == screenSize.Value.Width &&
                                                                         s.PageView.ScreenHeight == screenSize.Value.Height)
-                                                            .Count();
-
-                        filterData.ScreenData.HasScrolls = filterData.ScreenData.Scrolls > 0 ? true : false;
+                                                            .Any();
 
                     }
                 }
