@@ -135,12 +135,14 @@ namespace EyeTracker.Domain.Queries.Analytics
                                                                         s.PageView.ScreenHeight == screenSize.Value.Height)
                                                             .Any();
 
-                        filterData.ScreenData.HasScrolls = session.Query<Scroll>()
+                        filterData.ScreenData.Scrolls = session.Query<Scroll>()
                                                             .Where(s => s.PageView.Application.Id == applicationId.Value &&
                                                                         s.PageView.Path.ToLower() == path.ToLower() &&
                                                                         s.PageView.ScreenWidth == screenSize.Value.Width &&
                                                                         s.PageView.ScreenHeight == screenSize.Value.Height)
-                                                            .Any();
+                                                            .Count();
+
+                        filterData.ScreenData.HasScrolls = filterData.ScreenData.Scrolls > 0 ? true : false;
 
                     }
                 }
