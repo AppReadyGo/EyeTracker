@@ -32,6 +32,8 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
         </div>
     </td>
 </tr>
+
+
 <%--<tr>  
     <td>
         <div class="title"><span>Visitors</span></div>
@@ -49,44 +51,89 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
     </td>--%>
     <td colspan="2">
         <div class="title"><span>Content Overview</span></div>
-        <section id="content" class="content-overview">
+         <section id="content" class="content-overview">
 
         <table class="content-overview">
             <thead>
                 <tr>
                     <th class="index"></th>
-                    <th class="path">Pathes</th>
+                    <th class="path">Active screens</th>
                     <th class="visit">Visits</th>
                     <th class="action"></th>
                 </tr>
             </thead>
             <tbody>
                 <%if (Model.View.ContentOverviewData.Any())
-                {
-                    foreach (var item in Model.View.ContentOverviewData)
-                    { %>
+                  {
+
+                      Model.View.Pathes.ToString();
+                      
+                      foreach (var item in Model.View.ContentOverviewData)
+                      { %>
                         <tr class="<%= item.IndexIsOdd ? "odd" : "" %>">
                             <td class="index">
-                                <%= item.Index %>
+                                <%= item.Index%>
                             </td>
                             <td class="path">
-                                <a href="<%= item.GetPathUrl(Model.SubMaster.FilterUrlPart) %>"><%= item.Path %></a>
+                                <a href="<%= item.GetPathUrl(Model.SubMaster.FilterUrlPart) %>"><%= item.Path%></a>
                             </td>
                             <td class="view">
-                                <%= item.Views %>
+                                <%= item.Views%>
                             </td>
                             <td class="action">
                                 <a href="/Application/Screens/<%: item.ApplicationId %>">Add/Edit Screens</a>
                             </td>
                         </tr>
 					<% }
-                }%>
+                  }%>
+
+                <%else
+                  { 
+                    %>
+                      <tr>
+                            <td class="index"></td>
+                            <td class="path">Ooppss... there is no data for this time period</td>
+                            <td class="view"></td>
+                            <td class="action"></td>
+                      </tr>
+                    <%  
+                  }
+                   %>
             </tbody>
         </table>
         </section>
-        <div class="item"></div>
+       <%-- <div class="item"></div>- Ask Yura -%>
     </td>
 </tr>
+
+<tr>
+    <td colspan="2">
+    <div class="title"><span>All Screens</span></div>
+        <table class="content-overview">
+           <%-- <thead>
+                <tr>
+                    <th class="index"></th>
+                    <th class="path">All screens</th>
+                 </tr>
+            </thead>--%>
+            <tbody>
+                <%if (Model.View.Pathes.Any())
+                  {      
+                      foreach (var item in Model.View.Pathes)
+                      {
+                      %>
+                      <tr>
+                        <td class="path">
+                           <a href="<%= Model.View.GetUrlPart(item.Value)%>"> <%=item.Value%></a>
+                         </td>
+                      </tr>
+                 <% }
+                  } %>
+            </tbody>
+        </table>
+    </td>
+</tr>
+
 </table>
 </asp:Content>
 
