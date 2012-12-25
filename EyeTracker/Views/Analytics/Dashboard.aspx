@@ -81,7 +81,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
                                 <%= item.Views%>
                             </td>
                             <td class="action">
-                                <a href="/Application/Screens/<%: item.ApplicationId %>">Add/Edit Screens</a>
+                                <a href="/Application/Screens/<%: item.ApplicationId %>">Add/Edit Screen</a>
                             </td>
                         </tr>
 					<% }
@@ -102,7 +102,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
             </tbody>
         </table>
         </section>
-       <%-- <div class="item"></div>- Ask Yura -%>
+      <%--<div class="item"></div>--%>
     </td>
 </tr>
 
@@ -110,12 +110,6 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
     <td colspan="2">
     <div class="title"><span>All Screens</span></div>
         <table class="content-overview">
-           <%-- <thead>
-                <tr>
-                    <th class="index"></th>
-                    <th class="path">All screens</th>
-                 </tr>
-            </thead>--%>
             <tbody>
                 <%if (Model.View.Pathes.Any())
                   {      
