@@ -44,7 +44,7 @@ article .magnify{border:5px solid #000;
 }
 article .large{z-index:1000;}
 article img{width:100%;}
-article{width:47%;float:left;padding:0 10px;}
+article{width:33%;float:left;padding:0 10px;}
 </style>
 <script type="text/javascript">
     $(document).ready(function () {
