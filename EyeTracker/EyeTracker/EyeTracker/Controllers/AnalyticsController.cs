@@ -259,6 +259,49 @@ namespace EyeTracker.Controllers
                 var firstScreenPathes = pathes.Select(x => new SelectListItem { Text = x, Value = x, Selected = string.IsNullOrEmpty(filter.Path) ? false : filter.Path == x });
                 var secondScreenPathes = pathes.Select(x => new SelectListItem { Text = x, Value = x, Selected = string.IsNullOrEmpty(filter.Path) ? false : filter.SecondPath == x });
 
+
+                var firstScreenPath = firstScreenPathes.Any(x => x.Selected) ? firstScreenPathes.First(x => x.Selected).Text : firstScreenPathes.First().Text;
+                var secondScreenPath = secondScreenPathes.Any(x => x.Selected) ? secondScreenPathes.First(x => x.Selected).Text : secondScreenPathes.First().Text;
+
+                var clicks = filterData.ScreenData.ClicksAmount + filterData.SecondFilteredClicks;
+                int firstClicksData = clicks / 2;
+                int secondClicksData = 100 - firstClicksData;
+                var scrolls = filterData.ScreenData.ScrollsAmount + filterData.SecondFilteredScrolls;
+                int firstScrollsData = scrolls / 2;
+                int secondScrollsData = 100 - firstScrollsData;
+                //Create chart data
+                var pieData = new
+                {
+                    clicks = new []
+                    {
+                        new {
+                            label = filterData.SelectedPath,
+                            data = firstClicksData,
+                            color = "#c0504d"
+                        },           
+                        new {
+                            label = filterData.SelectedSecondPath,
+                            data = secondClicksData,
+                            color = "#5182bd"
+                        }
+                    },
+                    scrolls = new[]
+                    {
+                        new {
+                            label = filterData.SelectedPath,
+                            data = firstScrollsData,
+                            color = "#c0504d"
+                        },           
+                        new {
+                            label = filterData.SelectedSecondPath,
+                            data = secondScrollsData,
+                            color = "#5182bd"
+                        }
+                    }
+                };
+
+                ViewData["PieData"] = new JavaScriptSerializer().Serialize(pieData);
+
                 var model = new ABCompareModel()
                 {
                     Title = "Fingerprint",
@@ -267,7 +310,7 @@ namespace EyeTracker.Controllers
                     FirstPath = filter.Path,
                     SecondPath = filter.SecondPath,
                     FirstHasFilteredClicks = filterData.ScreenData.ClicksAmount > 0,
-                    SecondHasFilteredClicks = filterData.SecondHasFilteredClicks,
+                    SecondHasFilteredClicks = filterData.SecondFilteredClicks > 0,
                     SecondHasClicks = filterData.SecondHasClicks,
                     FirstHasClicks = filterData.ScreenData.HasClicks
                 };

@@ -379,6 +379,7 @@
     <Content Include="Content\touchmap_grey.png" />
     <Content Include="Content\New\Images\bg.png" />
     <Content Include="Content\New\Images\eyetrack_grey.png" />
+    <Content Include="Scripts\ThridParty\Flot\jquery.flot.pyramid.min.js" />
     <Content Include="underconstruction.htm" />
     <Content Include="Resources\Feature_TouchMap.jpg" />
     <Content Include="Resources\Feature_EyeTrack.jpg" />
@@ -637,6 +638,15 @@
     <Content Include="Views\Web.config" />
     <Content Include="Web.prod.config">
       <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.UnitTest.config">
+      <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
