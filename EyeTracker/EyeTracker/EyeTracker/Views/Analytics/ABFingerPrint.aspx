@@ -243,7 +243,7 @@ article{width:30%;float:left;padding:0 10px;}
         <%} %>
     </article>
     <article>
-    <%if (true/*Model.View.FirstHasClicks && Model.View.SecondHasClicks && Model.View.SecondHasFilteredClicks && Model.View.FirstHasFilteredClicks*/)
+    <%if (Model.View.FirstHasClicks && Model.View.SecondHasClicks && Model.View.SecondHasFilteredClicks && Model.View.FirstHasFilteredClicks)
       { %>
         <p>Scrolls</p>
         <div id="scrolls_pie"></div>
