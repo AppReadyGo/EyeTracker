@@ -264,10 +264,10 @@ namespace EyeTracker.Controllers
                 var secondScreenPath = secondScreenPathes.Any(x => x.Selected) ? secondScreenPathes.First(x => x.Selected).Text : secondScreenPathes.First().Text;
 
                 var clicks = filterData.ScreenData.ClicksAmount + filterData.SecondFilteredClicks;
-                int firstClicksData = clicks / 2;
+                int firstClicksData = filterData.ScreenData.ClicksAmount * 100 / clicks;
                 int secondClicksData = 100 - firstClicksData;
                 var scrolls = filterData.ScreenData.ScrollsAmount + filterData.SecondFilteredScrolls;
-                int firstScrollsData = scrolls / 2;
+                int firstScrollsData = filterData.ScreenData.ScrollsAmount * 100 / scrolls;
                 int secondScrollsData = 100 - firstScrollsData;
                 //Create chart data
                 var pieData = new
