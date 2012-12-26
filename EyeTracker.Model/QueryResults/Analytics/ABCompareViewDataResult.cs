@@ -7,8 +7,12 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
 {
     public class ABCompareViewDataResult : FilterDataResult
     {
-        public bool SecondHasFilteredClicks { get; set; }
+        public int SecondFilteredClicks { get; set; }
 
         public bool SecondHasClicks { get; set; }
+
+        public int SecondFilteredScrolls { get; set; }
+
+        public string SelectedSecondPath { get; set; }
     }
 }

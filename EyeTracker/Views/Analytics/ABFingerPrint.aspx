@@ -9,6 +9,7 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 <script src="<%: Url.Content("~/Scripts/ThridParty/DateFormat.js")%>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Scripts/ThridParty/Flot/jquery.flot.min.js")%>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Scripts/ThridParty/Flot/jquery.flot.resize.min.js")%>" type="text/javascript"></script>
+<script src="<%: Url.Content("~/Scripts/ThridParty/Flot/jquery.flot.pie.js")%>" type="text/javascript"></script>
 <script src="<%: Url.Content("~/Scripts/ThridParty/jquery-ui.min.js")%>" type="text/javascript"></script>
 <link href="<%: Url.Content("~/Content/themes/cupertino/jquery-ui.css") %>" rel="stylesheet" type="text/css" />
 <link href="<%: Url.Content("~/Content/shared/filter.css")%>" rel="stylesheet" type="text/css" />
@@ -44,8 +45,55 @@ article .magnify{border:5px solid #000;
 }
 article .large{z-index:1000;}
 article img{width:100%;}
-article{width:33%;float:left;padding:0 10px;}
+article{width:30%;float:left;padding:0 10px;}
+
+#scrolls_pie, #clicks_pie{height:200px;}
 </style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var data = <%= ViewData["PieData"] %>;
+        $.plot($('#scrolls_pie'), data.scrolls,
+        {
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    label: {
+                        show: true,
+                        radius: 2 / 3,
+                        formatter: function (label, series) {
+                            return '<div style="font-size:8pt;text-align:center;padding:2px;color:black;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+                        },
+                        threshold: 0.1
+                    }
+                }
+            },
+            legend: {
+                show: false
+            }
+        });
+        $.plot($('#clicks_pie'), data.clicks,
+        {
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    label: {
+                        show: true,
+                        radius: 2 / 3,
+                        formatter: function (label, series) {
+                            return '<div style="font-size:8pt;text-align:center;padding:2px;color:black;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+                        },
+                        threshold: 0.1
+                    }
+                }
+            },
+            legend: {
+                show: false
+            }
+        });
+    });
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -193,6 +241,15 @@ article{width:33%;float:left;padding:0 10px;}
                 <img class="small" src="/Analytics/ClickHeatMapImage/<%=Model.View.SecondScreenUrlPart %>"/>
             </div>
         <%} %>
+    </article>
+    <article>
+    <%if (true/*Model.View.FirstHasClicks && Model.View.SecondHasClicks && Model.View.SecondHasFilteredClicks && Model.View.FirstHasFilteredClicks*/)
+      { %>
+        <p>Scrolls</p>
+        <div id="scrolls_pie"></div>
+        <p>Clicks</p>
+        <div id="clicks_pie"></div>
+    <%} %>
     </article>
     <div style="clear:both;"></div>
 </div>
