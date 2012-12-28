@@ -9,6 +9,10 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
     {
         public IEnumerable<ScreenResult> Screens { get; set; }
 
-        public Dictionary<DateTime, int> UsageData { get; set; }
+        public Dictionary<DateTime, int> VisitsData { get; set; }
+
+        public Dictionary<DateTime, int> ScrollsData { get; set; }
+
+        public Dictionary<DateTime, int> ClicksData { get; set; }
     }
 }

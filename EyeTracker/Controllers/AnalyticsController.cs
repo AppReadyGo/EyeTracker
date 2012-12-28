@@ -183,32 +183,52 @@ namespace EyeTracker.Controllers
 
                 //Grouping data by day. To show on graph all days from start till end.
                 var visitsData = new List<object[]>();
+                var clicksData = new List<object[]>();
+                var scrollsData = new List<object[]>();
                 int diffDays = (filter.ToDate - filter.FromDate).Days;
                 for (int i = 0; i < diffDays; i++)
                 {
-                    int count = 0;
                     var curDate = filter.FromDate.AddDays(i);
-                    if (data.UsageData.ContainsKey(curDate))
-                    {
-                        count = data.UsageData[curDate];
-                    }
-                    visitsData.Add(new object[] { curDate.MilliTimeStamp(), count });
+                    visitsData.Add(new object[] { curDate.MilliTimeStamp(), data.VisitsData.ContainsKey(curDate) ? data.VisitsData[curDate] : 0 });
+                    clicksData.Add(new object[] { curDate.MilliTimeStamp(), data.ClicksData.ContainsKey(curDate) ? data.ClicksData[curDate] : 0 });
+                    scrollsData.Add(new object[] { curDate.MilliTimeStamp(), data.ScrollsData.ContainsKey(curDate) ? data.ScrollsData[curDate] : 0 });
                 }
 
                 //Create chart data
-                var usageInitData = new List<object>();
-                usageInitData.Add(new
+                var graphsInitData = new 
                 {
-                    data = visitsData,
-                    color = "#461D7C"
-                });
-
+                    visits = new object[]
+                    { 
+                        new
+                        {
+                            data = visitsData,
+                            color = "#461D7C"
+                        }
+                    },
+                    clicks = new object[]
+                    { 
+                        new
+                        {
+                            data = clicksData,
+                            color = "#461D7C"
+                        }
+                    },
+                    scrolls = new object[]
+                    { 
+                        new
+                        {
+                            data = scrollsData,
+                            color = "#461D7C"
+                        }
+                    }
+                };
 
                 var model = new FingerPrintModel()
                 {
                     Title = "Fingerprint",
                     Screens = data.Screens,
-                    UsageChartData = new JavaScriptSerializer().Serialize(usageInitData)
+                    GraphsData = new JavaScriptSerializer().Serialize(graphsInitData),
+                    VisitsAmount = data.VisitsData.Sum(x => x.Value)
                 };
 
                 return View(model, AnalyticsMasterModel.MenuItem.FingerPrint, data, filter, true, placeHolderHTML);
