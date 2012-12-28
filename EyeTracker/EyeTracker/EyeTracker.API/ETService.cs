@@ -12,6 +12,9 @@ using EyeTracker.API.BL.Contract;
 using EyeTracker.Common.Logger;
 using EyeTracker.Core.Services;
 using EyeTracker.Domain.Model.Events;
+using GaDotNet.Common.Data;
+using GaDotNet.Common.Helpers;
+using GaDotNet.Common;
 
 namespace EyeTracker.API
 {
@@ -77,15 +80,16 @@ namespace EyeTracker.API
                 //---OperationResult objSaveResult = objEventSvc.HandlePackageEvent(objParserResult);
                 //---log.WriteVerbose("return result is " + !objSaveResult.HasError);
 
-                
+                // Google analytics
+                GooglePageView pageView = new GooglePageView("Get API status", "api.mobillify.com", "/ETService/GetStatus");
+                TrackingRequest request = new RequestFactory().BuildRequest(pageView);
+                GoogleTracking.FireTrackingEvent(request);
 
                 //#region TEMP
                 DataRepositoryServices objDataRepositorySvc = new DataRepositoryServices("EyeTracker.Domain", "EyeTracker.Domain.Repositories.DataRepository");
                 return !objDataRepositorySvc.HandlePackageEvent(objParserResult).HasError;
                 //#endregion
 
-
-                
                 //---return !objSaveResult.HasError;
             }
             catch (Exception ex)
