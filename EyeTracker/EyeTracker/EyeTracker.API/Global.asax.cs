@@ -16,7 +16,7 @@ namespace EyeTracker.API
         {
             // Edit the base address of Service1 by replacing the "Service1" string below
             RouteTable.Routes.Add(new ServiceRoute("et", new WebServiceHostFactory(), typeof(ETService)));
-            RouteTable.Routes.Add(new ServiceRoute("et", new WebServiceHostFactory(), typeof(MarketService)));
+            RouteTable.Routes.Add(new ServiceRoute("market", new WebServiceHostFactory(), typeof(MarketService)));
         }
     }
 }

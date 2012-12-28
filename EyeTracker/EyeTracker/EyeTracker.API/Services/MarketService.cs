@@ -8,6 +8,8 @@ using System.ServiceModel.Web;
 using System.IO;
 using EyeTracker.Common.Logger;
 using System.Reflection;
+using EyeTracker.API.Data;
+using System.EnterpriseServices;
 
 namespace EyeTracker.API
 {
@@ -24,8 +26,9 @@ namespace EyeTracker.API
 
         private static readonly ApplicationLogging m_log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
-        [WebGet(UriTemplate = "app/{id}")]
-        public Stream DownloadApp(string id)
+        [WebInvoke(UriTemplate = "dapp", Method="POST", RequestFormat = WebMessageFormat.Json)]
+        [Description("Download app from the server")]
+        public Stream DownloadApp(MarketData data)
         {
             WebOperationContext.Current.OutgoingResponse.ContentType = "application/txt";
             FileStream f = new FileStream("C:\\Test.txt", FileMode.Open);
@@ -42,26 +45,30 @@ namespace EyeTracker.API
             return new MemoryStream(buffer);
         }
 
-        [WebGet(UriTemplate = "catalogue/{uId}")]
-        public string GetCalatogue(string uId)
+        [WebInvoke(UriTemplate = "catalogue", Method = "POST", RequestFormat = WebMessageFormat.Json)]
+        [Description("Retrieve apps list")]
+        public string GetCalatogue(MarketData data)
         {
             return "hello";
         }
 
-        [WebInvoke(UriTemplate = "reg/{req}")]
-        public string Register(string req)
+        [WebInvoke(UriTemplate = "reg")]
+        [Description("User registration")]
+        public string Register(MarketData data)
         {
             return null;
         }
 
-        [WebInvoke(UriTemplate = "login/{req}")]
-        public string LogIn(string req)
+        [WebInvoke(UriTemplate = "login", Method="POST", RequestFormat=WebMessageFormat.Json)]
+        [Description("UserLogin")]
+        public string LogIn(MarketData data)
         {
             return null;
         }
 
-        [WebInvoke(UriTemplate = "confirm/{ack}")]
-        public void DownloadConfirmation(string confirm)
+        [WebInvoke(UriTemplate = "confirm", Method = "POST", RequestFormat = WebMessageFormat.Json)]
+        [Description("Download app confirmation")]
+        public void DownloadConfirm(MarketData data)
         { 
             
         }

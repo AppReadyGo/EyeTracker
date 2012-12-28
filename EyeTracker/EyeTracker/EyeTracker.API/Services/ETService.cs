@@ -12,9 +12,10 @@ using EyeTracker.API.BL.Contract;
 using EyeTracker.Common.Logger;
 using EyeTracker.Core.Services;
 using EyeTracker.Domain.Model.Events;
+using EyeTracker.API.Data;
 using GaDotNet.Common.Data;
-using GaDotNet.Common.Helpers;
 using GaDotNet.Common;
+using GaDotNet.Common.Helpers;
 
 namespace EyeTracker.API
 {
@@ -85,11 +86,14 @@ namespace EyeTracker.API
                 TrackingRequest request = new RequestFactory().BuildRequest(pageView);
                 GoogleTracking.FireTrackingEvent(request);
 
+
                 //#region TEMP
                 DataRepositoryServices objDataRepositorySvc = new DataRepositoryServices("EyeTracker.Domain", "EyeTracker.Domain.Repositories.DataRepository");
                 return !objDataRepositorySvc.HandlePackageEvent(objParserResult).HasError;
                 //#endregion
 
+
+                
                 //---return !objSaveResult.HasError;
             }
             catch (Exception ex)
