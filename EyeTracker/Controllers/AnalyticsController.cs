@@ -269,6 +269,9 @@ namespace EyeTracker.Controllers
                 var scrolls = filterData.ScreenData.ScrollsAmount + filterData.SecondFilteredScrolls;
                 int firstScrollsData = scrolls > 0 ? filterData.ScreenData.ScrollsAmount * 100 / scrolls : 0;
                 int secondScrollsData = 100 - firstScrollsData;
+                var visits = filterData.ScreenData.VisitsAmount + filterData.SecondFilteredVisits;
+                int firstVisitsData = visits > 0 ? filterData.ScreenData.VisitsAmount * 100 / visits : 0;
+                int secondVisitsData = 100 - firstScrollsData;
                 //Create chart data
                 var pieData = new
                 {
@@ -295,6 +298,19 @@ namespace EyeTracker.Controllers
                         new {
                             label = filterData.SelectedPath,
                             data = 80,//firstScrollsData,
+                            color = "#c0504d"
+                        }          
+                    },
+                    visits = new[]
+                    {
+                        new {
+                            label = filterData.SelectedSecondPath,
+                            data = secondVisitsData,
+                            color = "#5182bd"
+                        },
+                        new {
+                            label = filterData.SelectedPath,
+                            data = firstVisitsData,
                             color = "#c0504d"
                         }          
                     }

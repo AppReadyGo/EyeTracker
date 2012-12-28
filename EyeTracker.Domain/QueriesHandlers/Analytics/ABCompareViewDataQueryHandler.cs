@@ -45,6 +45,16 @@ namespace EyeTracker.Domain.Queries.Analytics
                                                                 s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height)
                                                     .Any();
 
+            data.SecondFilteredVisits = session.Query<PageView>()
+                                        .Where(p => p.Application.Id == data.SelectedApplicationId.Value &&
+                                                    p.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
+                                                    p.ScreenWidth == data.SelectedScreenSize.Value.Width &&
+                                                    p.ScreenHeight == data.SelectedScreenSize.Value.Height &&
+                                                    p.Date >= query.From && p.Date <= query.To)
+                                                    .Select(s => s.Id)
+                                                    .ToArray()
+                                                    .Count();
+
             data.SecondFilteredScrolls = session.Query<Scroll>()
                                         .Where(s => s.PageView.Application.Id == data.SelectedApplicationId.Value &&
                                                     s.PageView.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
