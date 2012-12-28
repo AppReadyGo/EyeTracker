@@ -636,9 +636,9 @@
     <Content Include="Views\Shared\AfterLogin.Master" />
     <Content Include="Views\Shared\Mail.Master" />
     <Content Include="Views\Web.config" />
-    <Content Include="Web.prod.config">
+    <None Include="Web.prod.config_">
       <SubType>Designer</SubType>
-    </Content>
+    </None>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

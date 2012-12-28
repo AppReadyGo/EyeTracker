@@ -9,6 +9,9 @@ using System.ServiceModel.Channels;
 using System.Web;
 using System.Xml;
 using System.Xml.Linq;
+using GaDotNet.Common.Data;
+using GaDotNet.Common.Helpers;
+using GaDotNet.Common;
 
 namespace EyeTracker.API
 {
@@ -53,6 +56,11 @@ namespace EyeTracker.API
 
             // Get the query string
             NameValueCollection queryParams = HttpUtility.ParseQueryString(requestProp.QueryString);
+
+            // Google analytics
+            var pageView = new GooglePageView("Get API Key", "api.mobillify.com", "/ETAuthorizationManager/GetAPIKey");
+            var tRequest = new RequestFactory().BuildRequest(pageView);
+            GoogleTracking.FireTrackingEvent(tRequest);
 
             // Return the API key (if present, null if not)
             return queryParams[APIKEY];
