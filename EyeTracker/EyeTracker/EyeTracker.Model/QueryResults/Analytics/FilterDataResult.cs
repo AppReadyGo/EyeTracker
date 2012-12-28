@@ -47,6 +47,8 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
             /// Any scrools on this sceen ever
             /// </summary>
             public bool HasClicks { get; set; }
+
+            public int VisitsAmount { get; set; }
         }
     }
 }

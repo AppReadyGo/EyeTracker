@@ -14,5 +14,7 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
         public int SecondFilteredScrolls { get; set; }
 
         public string SelectedSecondPath { get; set; }
+
+        public int SecondFilteredVisits { get; set; }
     }
 }

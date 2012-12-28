@@ -47,7 +47,7 @@ article .large{z-index:1000;}
 article img{width:100%;}
 article{width:30%;float:left;padding:0 10px;}
 
-#scrolls_pie, #clicks_pie{height:200px;}
+#scrolls_pie, #clicks_pie, #visits_pie{height:200px;}
 </style>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -73,6 +73,26 @@ article{width:30%;float:left;padding:0 10px;}
             }
         });
         $.plot($('#clicks_pie'), data.clicks,
+        {
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    label: {
+                        show: true,
+                        radius: 2 / 3,
+                        formatter: function (label, series) {
+                            return '<div style="font-size:8pt;text-align:center;padding:2px;color:black;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+                        },
+                        threshold: 0.1
+                    }
+                }
+            },
+            legend: {
+                show: false
+            }
+        });
+        $.plot($('#visits_pie'), data.visits,
         {
             series: {
                 pie: {
@@ -249,6 +269,8 @@ article{width:30%;float:left;padding:0 10px;}
         <div id="scrolls_pie"></div>
         <p>Clicks</p>
         <div id="clicks_pie"></div>
+        <p>Visits</p>
+        <div id="visits_pie"></div>
     <%} %>
     </article>
     <div style="clear:both;"></div>

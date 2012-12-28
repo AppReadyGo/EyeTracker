@@ -145,6 +145,14 @@ namespace EyeTracker.Domain.Queries.Analytics
                                                                         s.PageView.Date >= query.From && s.PageView.Date <= query.To)
                                                             .Count();
 
+                        filterData.ScreenData.VisitsAmount = session.Query<PageView>()
+                                                            .Where(p => p.Application.Id == filterData.SelectedApplicationId.Value &&
+                                                                        p.Path.ToLower() == filterData.SelectedPath.ToLower() &&
+                                                                        p.ScreenWidth == filterData.SelectedScreenSize.Value.Width &&
+                                                                        p.ScreenHeight == filterData.SelectedScreenSize.Value.Height &&
+                                                                        p.Date >= query.From && p.Date <= query.To)
+                                                            .Count();
+
                         filterData.ScreenData.HasScrolls = session.Query<Scroll>()
                                                             .Where(s => s.PageView.Application.Id == filterData.SelectedApplicationId.Value &&
                                                                         s.PageView.Path.ToLower() == filterData.SelectedPath.ToLower() &&
