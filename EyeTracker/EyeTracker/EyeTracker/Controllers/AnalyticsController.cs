@@ -275,28 +275,28 @@ namespace EyeTracker.Controllers
                     clicks = new []
                     {
                         new {
-                            label = filterData.SelectedPath,
-                            data = firstClicksData,
-                            color = "#c0504d"
-                        },           
-                        new {
-                            label = filterData.SelectedSecondPath,
+                            label = secondScreenPath,
                             data = secondClicksData,
                             color = "#5182bd"
-                        }
+                        },
+                        new {
+                            label = firstScreenPath,
+                            data = firstClicksData,
+                            color = "#c0504d"
+                        }         
                     },
                     scrolls = new[]
                     {
                         new {
-                            label = filterData.SelectedPath,
-                            data = firstScrollsData,
-                            color = "#c0504d"
-                        },           
-                        new {
                             label = filterData.SelectedSecondPath,
                             data = secondScrollsData,
                             color = "#5182bd"
-                        }
+                        },
+                        new {
+                            label = filterData.SelectedPath,
+                            data = firstScrollsData,
+                            color = "#c0504d"
+                        }          
                     }
                 };
 
