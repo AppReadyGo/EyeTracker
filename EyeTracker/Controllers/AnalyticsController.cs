@@ -289,12 +289,12 @@ namespace EyeTracker.Controllers
                     {
                         new {
                             label = filterData.SelectedSecondPath,
-                            data = secondScrollsData,
+                            data = 20,//secondScrollsData,
                             color = "#5182bd"
                         },
                         new {
                             label = filterData.SelectedPath,
-                            data = firstScrollsData,
+                            data = 80,//firstScrollsData,
                             color = "#c0504d"
                         }          
                     }
