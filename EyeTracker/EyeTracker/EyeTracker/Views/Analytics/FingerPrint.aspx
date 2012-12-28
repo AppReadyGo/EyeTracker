@@ -58,62 +58,69 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <% Html.RenderPartial("Filter", Model.View); %>
-<%if (Model.View.Screens.Any())
-  { %>
-<div class="thumbnails">
-<%foreach (var screen in Model.View.Screens)
-  { %>
-    <a href="<%=Model.View.GetUrlPart(Model.View.SelectedPortfolioId, screen.ApplicationId, screen.Size.ToFormatedString(), screen.Path, Model.View.SelectedDateFrom, Model.View.SelectedDateTo) %>"><img src="/Thumbnails/<%=screen.Id %><%=screen.FileExtension %>"/></a>    
-<%} %>
-</div>
-<%} %>
 <div>
-    <%if (!Model.View.HasClicks)
-      { %>
-        <img alt="Uh-oh! Nobody used your application yet." class="notice" src="/Content/New/Images/notice_nobody_used.png" />
-    <%}
-      else if (Model.View.ClicksAmount == 0)
-      { %>
-        <img alt="Oops, ther is no data for this time period" class="notice" src="/Content/New/Images/notice_no-data.png" />
-    <%}
-     else if (!Model.View.ScreenId.HasValue && !Model.View.HasScrolls)
-      {%>
-        <img alt="Ahem! We have the data but no screenshot." class="notice" src="/Content/New/Images/notice_no_screen_shot.png" style="margin-bottom:40px;" />
-    <%}
-      else
-      { %>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#show_image').click(function () {
-                var url = $('#image').attr('src');
-                if (url.indexOf('&cscreen=true') > -1) {
-                    url = url.replace('&cscreen=true', '');
-                    $('#image').attr('src', url);
-                    $(this).text('Show Report');
-                } else {
-                    $('#image').attr('src', url + '&cscreen=true');
-                    $(this).text('Show Screen');
-                }
-            });
-        });
-    </script>
-    <p><a id="show_image" style="cursor:pointer;">Show Screen</a></p>
     <table class="fingerprint">
-        <tr><td>
-            <img sc id="image" width="320" src="/Analytics/ClickHeatMapImage/<%=Model.SubMaster.FilterUrlPart %>" /></div>
-        </td><td>
-        <div class="charts">
-            <div class="title"><span>Visits (<%=Model.View.VisitsAmount %>)</span></div>
-            <div id="visits_graph" style="height:200px;width:575px;"></div>
-        </div>
-        <div class="charts">
-            <div class="title"><span>Clicks (<%=Model.View.ClicksAmount %>)</span></div>
-            <div id="clicks_graph" style="height:200px;width:575px;"></div>
-        <div class="charts">
-            <div class="title"><span>Scrolls (<%=Model.View.ScrollsAmount%>)</span></div>
-            <div id="scrolls_graph" style="height:200px;width:575px;"></div>
-        </td></tr>
+        <tr>
+            <td>
+                <%if (Model.View.Screens.Any())
+                  { %>
+                        <div class="thumbnails">
+                        <%foreach (var screen in Model.View.Screens)
+                            { %>
+                            <a href="<%=Model.View.GetUrlPart(Model.View.SelectedPortfolioId, screen.ApplicationId, screen.Size.ToFormatedString(), screen.Path, Model.View.SelectedDateFrom, Model.View.SelectedDateTo) %>"><img src="/Thumbnails/<%=screen.Id %><%=screen.FileExtension %>"/></a>    
+                        <%} %>
+                        </div>
+                <%} %>
+                <%if (!Model.View.HasClicks)
+                    { %>
+                    <img alt="Uh-oh! Nobody used your application yet." class="notice" src="/Content/New/Images/notice_nobody_used.png" />
+                <%}
+                    else if (Model.View.ClicksAmount == 0)
+                    { %>
+                    <img alt="Oops, ther is no data for this time period" class="notice" src="/Content/New/Images/notice_no-data.png" />
+                <%}
+                    else if (!Model.View.ScreenId.HasValue && !Model.View.HasScrolls)
+                    {%>
+                    <img alt="Ahem! We have the data but no screenshot." class="notice" src="/Content/New/Images/notice_no_screen_shot.png" style="margin-bottom:40px;" />
+                <%}
+                    else
+                    { %>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#show_image').click(function () {
+                                var url = $('#image').attr('src');
+                                if (url.indexOf('&cscreen=true') > -1) {
+                                    url = url.replace('&cscreen=true', '');
+                                    $('#image').attr('src', url);
+                                    $(this).text('Show Report');
+                                } else {
+                                    $('#image').attr('src', url + '&cscreen=true');
+                                    $(this).text('Show Screen');
+                                }
+                            });
+                        });
+                    </script>
+                    <p><a id="show_image" style="cursor:pointer;">Show Screen</a></p>
+                    <div><img sc id="image" width="320" src="/Analytics/ClickHeatMapImage/<%=Model.SubMaster.FilterUrlPart %>" /></div>
+                <%} %>
+            </td>
+            <td>
+                <%if (Model.View.HasClicks && Model.View.ClicksAmount > 0 && (Model.View.ScreenId.HasValue || Model.View.HasScrolls))
+                    {%>
+                <div class="charts">
+                    <div class="title"><span>Visits (<%=Model.View.VisitsAmount%>)</span></div>
+                    <div id="visits_graph" style="height:200px;width:575px;"></div>
+                </div>
+                <div class="charts">
+                    <div class="title"><span>Clicks (<%=Model.View.ClicksAmount%>)</span></div>
+                    <div id="clicks_graph" style="height:200px;width:575px;"></div>
+                <div class="charts">
+                    <div class="title"><span>Scrolls (<%=Model.View.ScrollsAmount%>)</span></div>
+                    <div id="scrolls_graph" style="height:200px;width:575px;"></div>
+                </div>
+                <%} %>
+            </td>
+         </tr>
     </table>
-    <%} %>
 </div>
 </asp:Content>
