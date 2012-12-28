@@ -85,14 +85,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\MarketData.cs" />
     <Compile Include="ETAuthorizationManager.cs" />
     <Compile Include="ETKeyRepository.cs" />
-    <Compile Include="ETService.cs" />
+    <Compile Include="Services\ETService.cs" />
     <Compile Include="Data\FPData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MarketService.cs" />
+    <Compile Include="Services\MarketService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +123,12 @@
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="TestData\HelloActivity.apk" />
+    <None Include="TestData\HelloWorld.apk" />
+    <None Include="TestData\Notepadv3.apk" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.Release.config">
