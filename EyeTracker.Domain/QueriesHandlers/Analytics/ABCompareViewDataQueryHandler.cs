@@ -27,7 +27,7 @@ namespace EyeTracker.Domain.Queries.Analytics
         public ABCompareViewDataResult Run(ISession session, ABCompareViewDataQuery query)
         {
             var data = GetResult<ABCompareViewDataResult>(session, this.securityContext.CurrentUser.Id, query);
-            data.SelectedSecondPath = string.IsNullOrEmpty(query.Path) ? data.SelectedPath : query.Path;
+            data.SelectedSecondPath = string.IsNullOrEmpty(query.SecondPath) ? data.SelectedPath : query.SecondPath;
             data.SecondFilteredClicks = session.Query<Click>()
                                         .Where(s => s.PageView.Application.Id == data.SelectedApplicationId.Value &&
                                                     s.PageView.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
