@@ -13,6 +13,9 @@ namespace EyeTracker.Model.Pages.Analytics
 
         public IEnumerable<ScreenResult> Screens { get; set; }
 
-        public string UsageChartData { get; set; }
+        public string GraphsData { get; set; }
+
+        public int VisitsAmount { get; set; }
+
     }
 }

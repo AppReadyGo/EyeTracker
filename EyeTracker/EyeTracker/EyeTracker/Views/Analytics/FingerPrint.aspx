@@ -15,10 +15,27 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
 <link href="<%: Url.Content("~/Content/shared/filter.css")%>" rel="stylesheet" type="text/css" />
 <script src="<%: Url.Content("~/Scripts/filter.js")%>" type="text/javascript"></script>
 <script type="text/javascript">
-    var usageChartData = <%= Model.View.UsageChartData %>;
+    var graphsData = <%= Model.View.GraphsData %>;
     $(document).ready(function () {
-    var placeholder = $("#usage_charts_place_holder");
-    var plot = $.plot(placeholder, usageChartData, {
+    var plot = $.plot($("#visits_graph"), graphsData.visits, {
+        xaxis: { mode: "time", timeformat: '%d %b %y' },
+        yaxis: { min: 0, tickDecimals: 0 },
+        series: {
+            lines: { show: true },
+            points: { show: true }
+        },
+        grid: { hoverable: true, clickable: true }
+    });
+    var plot = $.plot($("#clicks_graph"), graphsData.clicks, {
+        xaxis: { mode: "time", timeformat: '%d %b %y' },
+        yaxis: { min: 0, tickDecimals: 0 },
+        series: {
+            lines: { show: true },
+            points: { show: true }
+        },
+        grid: { hoverable: true, clickable: true }
+    });
+    var plot = $.plot($("#scrolls_graph"), graphsData.scrolls, {
         xaxis: { mode: "time", timeformat: '%d %b %y' },
         yaxis: { min: 0, tickDecimals: 0 },
         series: {
@@ -72,10 +89,10 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
                 if (url.indexOf('&cscreen=true') > -1) {
                     url = url.replace('&cscreen=true', '');
                     $('#image').attr('src', url);
-                    $('#show_image').text('Show Report');
+                    $(this).text('Show Report');
                 } else {
                     $('#image').attr('src', url + '&cscreen=true');
-                    $('#show_image').text('Show Screen');
+                    $(this).text('Show Screen');
                 }
             });
         });
@@ -86,9 +103,15 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
             <img sc id="image" width="320" src="/Analytics/ClickHeatMapImage/<%=Model.SubMaster.FilterUrlPart %>" /></div>
         </td><td>
         <div class="charts">
-            <div class="title"><span>Screen Usage Data (<%=Model.View.ClicksAmount %> clicks)</span></div>
-            <div id="usage_charts_place_holder" style="height:200px;width:575px;"></div>
+            <div class="title"><span>Visits (<%=Model.View.VisitsAmount %>)</span></div>
+            <div id="visits_graph" style="height:200px;width:575px;"></div>
         </div>
+        <div class="charts">
+            <div class="title"><span>Clicks (<%=Model.View.ClicksAmount %>)</span></div>
+            <div id="clicks_graph" style="height:200px;width:575px;"></div>
+        <div class="charts">
+            <div class="title"><span>Scrolls (<%=Model.View.ScrollsAmount%>)</span></div>
+            <div id="scrolls_graph" style="height:200px;width:575px;"></div>
         </td></tr>
     </table>
     <%} %>
