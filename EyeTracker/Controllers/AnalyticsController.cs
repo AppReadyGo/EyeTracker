@@ -186,12 +186,24 @@ namespace EyeTracker.Controllers
                 var clicksData = new List<object[]>();
                 var scrollsData = new List<object[]>();
                 int diffDays = (filter.ToDate - filter.FromDate).Days;
+
+                var scroollValues = data.ScrollsData.Keys;
+                
+
+
                 for (int i = 0; i < diffDays; i++)
                 {
+
                     var curDate = filter.FromDate.AddDays(i);
+
+                    var scrollsKeys = data.ScrollsData.Where(s => s.Key.Year == curDate.Year
+                                            && s.Key.DayOfYear == curDate.DayOfYear).Select(s => s.Key).ToList();
+                    var count = data.ScrollsData.Where(s => scrollsKeys.Contains(s.Key)).Sum(g => g.Value);
+
+          
                     visitsData.Add(new object[] { curDate.MilliTimeStamp(), data.VisitsData.ContainsKey(curDate) ? data.VisitsData[curDate] : 0 });
                     clicksData.Add(new object[] { curDate.MilliTimeStamp(), data.ClicksData.ContainsKey(curDate) ? data.ClicksData[curDate] : 0 });
-                    scrollsData.Add(new object[] { curDate.MilliTimeStamp(), data.ScrollsData.ContainsKey(curDate) ? data.ScrollsData[curDate] : 0 });
+                    scrollsData.Add(new object[] { curDate.MilliTimeStamp(),count });
                 }
 
                 //Create chart data
