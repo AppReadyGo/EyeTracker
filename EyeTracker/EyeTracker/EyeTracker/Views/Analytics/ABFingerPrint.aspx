@@ -18,6 +18,20 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
     /*Some CSS*/
 .magnify * {margin: 0; padding: 0;}
 .magnify {position: relative;}
+.charts .title span {
+line-height: 23px;
+color: white;
+background-color: #666;
+border: 1px solid #666;
+border-bottom-width: 2px;
+border-radius: 2px 2px 0px 0px;
+padding: 2px 5px 2px 5px;
+}
+
+.charts .title {
+border-bottom: 1px solid #666;
+margin-bottom: 10px;
+}
 
 /*Lets create the magnifying glass*/
 .large {
@@ -265,12 +279,20 @@ article{width:30%;float:left;padding:0 10px;}
     <article>
     <%if (Model.View.FirstHasClicks && Model.View.SecondHasClicks && Model.View.SecondHasFilteredClicks && Model.View.FirstHasFilteredClicks)
       { %>
-        <p>Scrolls</p>
-        <div id="scrolls_pie"></div>
-        <p>Clicks</p>
+      <div class="charts">
+        <div class="title"><span>Clicks</span></div>
+       
         <div id="clicks_pie"></div>
-        <p>Visits</p>
+         </div>
+         <div class="charts">
+        <div class="title"><span>Visits</span></div>
         <div id="visits_pie"></div>
+        </div>
+         <div class="charts">
+        <div class="title"><span>Scrolls</span></div>
+        <div id="scrolls_pie"></div>
+        </div>
+        
     <%} %>
     </article>
     <div style="clear:both;"></div>
