@@ -114,10 +114,10 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, AnalyticsMasterModel,
                 <div class="charts">
                     <div class="title"><span>Clicks (<%=Model.View.ClicksAmount%>)</span></div>
                     <div id="clicks_graph" style="height:200px;width:575px;"></div>
-                <div class="charts">
+               <%-- <div class="charts">
                     <div class="title"><span>Scrolls (<%=Model.View.ScrollsAmount%>)</span></div>
                     <div id="scrolls_graph" style="height:200px;width:575px;"></div>
-                </div>
+                </div>--%>
                 <%} %>
             </td>
          </tr>
