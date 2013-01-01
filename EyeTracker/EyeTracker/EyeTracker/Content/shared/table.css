@@ -48,12 +48,17 @@ th.sorted.desc .sorting-indicator,th.asc:hover span.sorting-indicator{display:bl
 .tbl td p{margin:2px 0 .8em}
 .tbl .column-comment p{margin:.6em 0}
 .tbl th.sortable,.tbl th.sorted{padding:0}
-.tbl td,.tbl th{border-top-color:#fff;border-bottom-color:#dfdfdf}
-.tbl th{text-shadow:rgba(255,255,255,0.8) 0 1px 0}
+.tbl td,.tbl th{border-top-color:#fff;border-bottom-color: white}
 .tbl td{color:#555}
 .tbl p,.tbl ol,.tbl ul{color:#333}
-.tbl thead tr th,.tbl tfoot tr th{color:#333}
-.tbl thead tr th,.tbl tfoot tr th{background-color:#f1f1f1;background-image:-ms-linear-gradient(top,#f9f9f9,#ececec);background-image:-moz-linear-gradient(top,#f9f9f9,#ececec);background-image:-o-linear-gradient(top,#f9f9f9,#ececec);background-image:-webkit-gradient(linear,left top,left bottom,from(#f9f9f9),to(#ececec));background-image:-webkit-linear-gradient(top,#f9f9f9,#ececec);background-image:linear-gradient(top,#f9f9f9,#ececec)}
+.tbl thead tr th,.tbl tfoot tr th{color:white; font-family:Arial;}
+.tbl thead tr th,.tbl tfoot tr th{background-color:#f1f1f1;
+                                  background-image:-ms-linear-gradient(top,#f9f9f9,#ececec);
+                                  background-image:-moz-linear-gradient(top,#f9f9f9,#ececec);
+                                  background-image:-o-linear-gradient(top,#f9f9f9,#ececec);
+                                  background-image:-webkit-gradient(linear,left top,left bottom,from(#f9f9f9),to(#ececec));
+                                  background-image:-webkit-linear-gradient(top,#727D74,#727D74);
+                                  background-image:linear-gradient(top,#f9f9f9,#ececec)}
 table.tbl span.delete a,table.tbl span.trash a,table.tbl span.spam a{color:#bc0b0b}
 .row-actions{visibility:hidden;padding:2px 0 0}
 tr:hover .row-actions{visibility:visible}
@@ -61,7 +66,11 @@ tr:hover .row-actions{visibility:visible}
 
 th.sortable a,th.sorted a{display:block;overflow:hidden;padding:7px 7px 8px}
 th.sortable a span,th.sorted a span{float:left;cursor:pointer}
-.alternate,.alt{background-color:#fcfcfc}
+.alternate,.alt{background-color:#d9e0e4}
+
+.tbl, .alt {
+background-color: #e7eef1;
+}
 
 textarea, input[type="text"], input[type="password"], input[type="file"], input[type="button"], input[type="submit"], input[type="reset"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="url"], select {
   background-color: #FFFFFF;
