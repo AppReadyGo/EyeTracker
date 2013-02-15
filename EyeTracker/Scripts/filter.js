@@ -25,6 +25,9 @@ function beforeShow(input, inst) {
 }
 
 $(function () {
+    $('#SelectedScreenSize, #SelectedPath').selectBoxIt({ theme: "jqueryui" });
+    $('#SelectedScreenSize, #SelectedPath').change(function () { $('#advanced_filter_apply').button("option", "disabled", false); });
+    $('#date_range_btn').button();
     $('#preset_range').change(function () {
         var val = $(this).val();
         var dFrom, dTo;
@@ -101,10 +104,9 @@ $(document).ready(function () {
         var screenSizes = $('#SelectedScreenSize').val();
         var paths = $('#SelectedPath').val();
         var url = '/Analytics/' + analytics.action +
-                  '/?pid=' + analytics.pid +
+                  '/?aid=' + analytics.aid +
                   '&fd=' + $.datepicker.formatDate('dd-M-yy', from) +
                   '&td=' + $.datepicker.formatDate('dd-M-yy', to);
-        if (analytics.aid) url += '&aid=' + analytics.aid;
         if (screenSizes) url += '&ss=' + screenSizes;
         if (paths) url += '&p=' + paths;
 
@@ -116,7 +118,8 @@ $(document).ready(function () {
         //$('#portfolios,#applications').multiselect('enable');
     }
 
-    $('a', '.actions').button();
+    $('#advanced_filter_apply').button({ disabled: true });
+    $('#date_range_pnl .actions a').button();
 
     $('#advanced_filter_btn').button({
         icons: { primary: 'ui-icon-plus' },
@@ -126,15 +129,12 @@ $(document).ready(function () {
     // --- Data range buttons
     $('#date_range_btn').click(function () {
         $('#date_range_pnl').show();
-        $('#advanced_filter').hide();
     });
 
     $('#date_range_apply').click(function () {
-        advancedFilteApply();
-        
-        // Not need for update will refresh page
-        $('#date_range_btn').text($('#date_from').val() + ' - ' + $('#date_to').val());
+        $('#date_range_btn').html('&nbsp;&nbsp;' + $('#date_from').val() + ' - ' + $('#date_to').val() + '&nbsp;&nbsp;');
         $('#date_range_pnl').hide();
+        $('#advanced_filter_apply').button("option", "disabled", false);
     });
 
     $('#date_range_cancel').click(function () {
@@ -143,11 +143,7 @@ $(document).ready(function () {
 
     // --- advanced filter buttons
     $('#advanced_filter_btn').click(function () {
-        $('#advanced_filter').show();
         $('#date_range_pnl').hide();
-    });
-    $('#advanced_filter_cancel').click(function () {
-        $('#advanced_filter').hide();
     });
     $('#advanced_filter_apply').click(advancedFilteApply);
 

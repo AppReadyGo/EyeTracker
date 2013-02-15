@@ -17,9 +17,7 @@ namespace EyeTracker.Controllers.Master
 
         protected virtual AfterLoginMasterModel GetModel(AfterLoginMasterModel.MenuItem selectedItem)
         {
-            var model = new AfterLoginMasterModel(ObjectContainer.Instance.CurrentUserDetails.DisplayName, selectedItem);
-            model.IsAdmin = User.IsInRole(StaffRole.Administrator.ToString());
-            return model;
+            return new AfterLoginMasterModel(this, selectedItem);
         }
 
         protected virtual ActionResult View<TViewModel>(TViewModel viewModel)
@@ -48,6 +46,11 @@ namespace EyeTracker.Controllers.Master
             var model = new ViewModelWrapper<AfterLoginMasterModel, TTemplateModel, TViewModel>(GetModel(SelectedMenuItem), templateModel, viewModel);
 
             return base.View(model);
+        }
+
+        protected ActionResult View(string viewName, object model, string tmp)
+        {
+            return base.View(viewName, model);
         }
     }
 }

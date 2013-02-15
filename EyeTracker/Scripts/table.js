@@ -6,5 +6,9 @@ $(document).ready(function () {
             $('#search-submit').click();
         }
     });
+    $('tr.portf').click(function () {
+        var id = $(this).attr('portfid');
+        $('tr.portf-' + id).toggle();
+    });
 });
 

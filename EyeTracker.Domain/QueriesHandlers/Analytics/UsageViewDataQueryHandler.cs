@@ -25,15 +25,9 @@ namespace EyeTracker.Domain.Queries.Analytics
 
         public UsageViewDataResult Run(ISession session, UsageViewDataQuery query)
         {
-            var pageViewQuery = session.Query<PageView>();
-            if (query.ApplicationId.HasValue)
-            {
-                pageViewQuery = pageViewQuery.Where(pv => pv.Application.Id == query.ApplicationId.Value);
-            }
-            else if (query.PortfolioId.HasValue)
-            {
-                pageViewQuery = pageViewQuery.Where(pv => pv.Application.Portfolio.Id == query.PortfolioId.Value);
-            }
+            var pageViewQuery = session.Query<PageView>()
+                                        .Where(pv => pv.Application.Id == query.ApplicationId);
+
             var pageViews = pageViewQuery.Where(pv => pv.Date >= query.From && pv.Date <= query.To.Date).ToList();
             Dictionary<DateTime, int> result = null;
             switch (query.DataGrouping)

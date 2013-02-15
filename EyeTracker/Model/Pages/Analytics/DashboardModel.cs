@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using EyeTracker.Model.Filter;
 using EyeTracker.Common.QueryResults.Analytics;
+using EyeTracker.Model.Master;
+using EyeTracker.Common.QueryResults.Analytics.QueryResults;
+using System.Web.Mvc;
 
 namespace EyeTracker.Model.Pages.Analytics
 {
@@ -12,6 +15,11 @@ namespace EyeTracker.Model.Pages.Analytics
         public string UsageChartData { get; set; }
 
         public ContentOverviewModel[] ContentOverviewData { get; set; }
+
+        public DashboardModel(Controller controller, FilterParametersModel filter, MenuItem selectedItem, FilterDataResult filterDataResult, bool isSingleMode)
+            : base(controller, filter, selectedItem, filterDataResult, isSingleMode)
+        {
+        }
     }
 
     public class ContentOverviewModel

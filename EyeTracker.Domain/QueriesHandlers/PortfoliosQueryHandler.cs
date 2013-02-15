@@ -8,6 +8,7 @@ using NHibernate.Linq;
 using EyeTracker.Common.QueryResults.Portfolio;
 using System;
 using System.Drawing;
+using EyeTracker.Common.QueryResults.Application;
 
 namespace EyeTracker.Domain.Queries
 {
@@ -52,11 +53,12 @@ namespace EyeTracker.Domain.Queries
 
             var applications = session.Query<Model.Application>()
                                 .Where(a => a.Portfolio.User.Id == securityContext.CurrentUser.Id)
-                                .GroupBy(a => a.Portfolio.Id)
-                                .Select(g => new
+                                .Select(a => new PortfolioApplicationDataItemResult
                                 {
-                                    PortfolioId = g.Key,
-                                    AppCount = g.Count()
+                                    PortfolioId = a.Portfolio.Id,
+                                    Id = a.Id,
+                                    Description = a.Description,
+                                    Type = a.Type
                                 })
                                 .ToArray();
             
@@ -113,17 +115,27 @@ namespace EyeTracker.Domain.Queries
 
             foreach (var portfolio in res.Portfolios)
             {
-                var appCount = applications.Where(a => a.PortfolioId == portfolio.Id).Select(a => a.AppCount);
-                portfolio.ApplicationsCount = appCount.Any() ? appCount.Single() : 0;
+                portfolio.Applications = applications.Where(a => a.PortfolioId == portfolio.Id).Cast<ApplicationDataItemResult>().ToArray();
 
-                var pVisits = visits.Where(a => a.Key.PortfolioId == portfolio.Id);
+                foreach (var app in portfolio.Applications)
+                {
+                    var appVisits = visits.Where(a => a.Key.ApplicationId == app.Id);
 
-                portfolio.Visits = pVisits.Any() ? pVisits.Sum(x => x.VisitsCount) : 0;
+                    app.Visits = appVisits.Any() ? appVisits.Sum(x => x.VisitsCount) : 0;
+                    portfolio.Visits += app.Visits;
 
-                portfolio.IsActive = pVisits.Any(x => x.LastRecivedDataDate > dt) ? true : false;
+                    app.IsActive = appVisits.Any(x => x.LastRecivedDataDate > dt) ? true : false;
+                }
+
+                portfolio.IsActive = visits.Any(x => x.Key.PortfolioId == portfolio.Id && x.LastRecivedDataDate > dt) ? true : false;
             }
 
             return res;
+        }
+
+        private class PortfolioApplicationDataItemResult : ApplicationDataItemResult
+        {
+            public int PortfolioId { get; set; }
         }
     }
 }

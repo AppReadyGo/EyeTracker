@@ -16,6 +16,18 @@ namespace EyeTracker.Model.Pages.Portfolio
     {
         public string Key { get; set; }
 
-        public bool IsAlternative { get; set; }
+        public bool Alternate { get; set; }
+
+        public string Published { get; set; }
+
+        public string TargetGroup { get; set; }
+
+        public int Downloads { get; set; }
+
+        public int Time { get; set; }
+
+        public int Clicks { get; set; }
+
+        public int Scrolls { get; set; }
     }
 }

@@ -1,0 +1,98 @@
+﻿@using EyeTracker.Common.Entities;
+@using EyeTracker.Helpers;
+@using EyeTracker.Model.Master;
+@model MainMasterModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Finger - @RenderSection("title")</title>
+    @*<meta name="description" content="Place your description here">*@
+    @*<meta name="keywords" content="put, your, keyword, here">*@
+    <meta name="author" content="AppDryRun">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="@Html.Content("~/Content/template/css/reset.css")" type="text/css" media="all">
+    <link rel="stylesheet" href="@Html.Content("~/Content/template/css/layout.css")" type="text/css" media="all">
+    <link rel="stylesheet" href="@Html.Content("~/Content/template/css/style.css")" type="text/css" media="all">
+    <script type="text/javascript" src="@Html.Content("~/scripts/template/js/maxheight.js")%>"></script>
+    <script type="text/javascript" src="@Html.Content("~/scripts/template/js/cufon-yui.js")%>"></script>
+    <script type="text/javascript" src="@Html.Content("~/scripts/template/js/cufon-replace.js")%>"></script>
+    <script type="text/javascript" src="@Html.Content("~/Scripts/ThridParty/jquery-1.8.3.min.js")"></script>
+    <script type="text/javascript" src="@Html.Content("~/scripts/template/js/Myriad_Pro_300.font.js")%>"></script>
+    <script type="text/javascript" src="@Html.Content("~/scripts/template/js/Myriad_Pro_400.font.js")%>"></script>
+    <script type="text/javascript" src="@Html.Content("~/scripts/template/js/jquery.faded.js")%>"></script>
+    <script type="text/javascript" src="@Html.Content("~/scripts/template/js/jquery.jqtransform.js")%>"></script>
+    <script type="text/javascript" src="@Html.Content("~/scripts/template/js/script.js")%>"></script>
+    <script type="text/javascript" src="@Html.Content("~/scripts/global.js")%>"></script>
+    @RenderSection("header")
+    <!--script type="text/javascript">
+    var _mfyaq = _mfyaq || {};
+    _mfyaq.key = 'WP-0002-000019';
+
+    (function () {
+        var mfyaq = document.createElement('script'); mfyaq.type = 'text/javascript'; mfyaq.async = true;
+        mfyaq.src = ('https:' == document.location.protocol ? 'https://ssl' : ('//www' == document.location ? 'http://www' : 'http://'))
+        mfyaq.src += 'localhost:1059/Analytics/analytics.js';
+        var scr = document.getElementsByTagName('script')[0]; scr.parentNode.insertBefore(mfyaq, scr);
+    })();
+    </script-->
+    </head>
+<body id="page1" onLoad="new ElementMaxHeight();">
+@RenderBody()
+<!-- aside -->
+<aside>
+	<div class="container">
+		<div class="inside">
+            <div class="wrapper">
+			    <ul class="list col-1">
+				    <li>Products</li>
+				    <li><a href="/p/products/touch-map">Touch Map</a></li>
+				    <li><a href="/p/products/eye-track">Eye Track</a></li>
+				    <li><a href="/p/products/play-back">Play Back</a></li>
+			    </ul>
+			    <ul class="list col-3">
+				    <li>Stay connected</li>
+				    <li><a href="http://mobillify.com" target="_blank">Mobillify</a></li>
+				    <li><a href="http://twitter.com/mobillify" target="_blank">Twitter</a></li>
+				    <li><a href="http://www.youtube.com/user/TheMobillify" target="_blank">Youtube</a></li>
+				    <li><a href="http://www.facebook.com/Mobillify" target="_blank">Facebook</a></li>
+				    <li><a href="http://www.linkedin.com/company/2531757?trk=pro_other_cmpy" target="_blank">LinkedIn</a></li>
+				    <li><a href="http://angel.co/mobillify" target="_blank">Angellist</a></li> 
+			    </ul>
+			    <ul class="list col-2">
+				    <li>Plans And Pricing</li>
+				    <li><a href="/p/planandpricing">Basic</a></li>
+				    <li><a href="/p/planandpricing">Plus</a></li>
+				    <li><a href="/p/planandpricing">Pro</a></li>
+			    </ul>
+            </div>
+		</div>
+	</div>
+</aside>
+<!-- footer -->
+<footer>
+	<div class="container">
+		<div class="inside">
+			<a rel="nofollow" href="http://www.templatemonster.com" class="new_window">Website template</a> designed by TemplateMonster.com<br>
+			<a href="http://www.templates.com/product/3d-models/" class="new_window">3D Models</a> provided by Templates.com<br>
+            <span>Copyright &#169; 2011@(DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "") AppDryRun</span>
+		</div>
+	</div>
+</footer>
+<script type="text/javascript">    Cufon.now(); </script>
+<!--script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-10271152-1']);
+  _gaq.push(['_setDomainName', 'finger.mobillify.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script-->
+<div style="clear:both;"></div>
+</body>
+</html>

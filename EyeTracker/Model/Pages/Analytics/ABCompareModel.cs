@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using EyeTracker.Model.Filter;
 using System.Web.Mvc;
+using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 
 namespace EyeTracker.Model.Pages.Analytics
 {
@@ -37,6 +38,11 @@ namespace EyeTracker.Model.Pages.Analytics
         public bool FirstHasClicks { get; set; }
 
         public bool SecondHasFilteredClicks { get; set; }
-        public bool SecondHasClicks { get; set; } 
+        public bool SecondHasClicks { get; set; }
+
+        public ABCompareModel(Controller controller, FilterParametersModel filter, MenuItem selectedItem, FilterDataResult filterDataResult, bool isSingleMode)
+            : base(controller, filter, selectedItem, filterDataResult, isSingleMode)
+        {
+        }
     }
 }

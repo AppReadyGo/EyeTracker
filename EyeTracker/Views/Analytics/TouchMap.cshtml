@@ -1,0 +1,128 @@
+﻿@using EyeTracker.Helpers;
+@using EyeTracker.Model
+@using EyeTracker.Common
+@using EyeTracker.Model.Master
+@using EyeTracker.Model.Pages.Portfolio
+@using EyeTracker.Model.Pages.Analytics
+@model FingerPrintModel
+@{
+    Layout = "~/Views/Shared/_Analytics.cshtml";
+}
+@section title { Touch Map }
+@section header 
+{
+
+    <script src="@Html.Content("~/Scripts/ThridParty/DateFormat.js")" type="text/javascript"></script>
+    <script src="@Html.Content("~/Scripts/ThridParty/Flot/jquery.flot.min.js")" type="text/javascript"></script>
+    <script src="@Html.Content("~/Scripts/ThridParty/Flot/jquery.flot.resize.min.js")" type="text/javascript"></script>
+    <link href="@Html.Content("~/Content/shared/filter.css")" rel="stylesheet" type="text/css" />
+    <script src="@Html.Content("~/Scripts/filter.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        var graphsData = @Html.Raw(Model.GraphsData);
+        $(document).ready(function () {
+        var plot = $.plot($("#visits_graph"), graphsData.visits, {
+            xaxis: { mode: "time", timeformat: '%d %b %y' },
+            yaxis: { min: 0, tickDecimals: 0 },
+            series: {
+                lines: { show: true },
+                points: { show: true }
+            },
+            grid: { hoverable: true, clickable: true }
+        });
+        var plot = $.plot($("#clicks_graph"), graphsData.clicks, {
+            xaxis: { mode: "time", timeformat: '%d %b %y' },
+            yaxis: { min: 0, tickDecimals: 0 },
+            series: {
+                lines: { show: true },
+                points: { show: true }
+            },
+            grid: { hoverable: true, clickable: true }
+        });
+        var plot = $.plot($("#scrolls_graph"), graphsData.scrolls, {
+            xaxis: { mode: "time", timeformat: '%d %b %y' },
+            yaxis: { min: 0, tickDecimals: 0 },
+            series: {
+                lines: { show: true },
+                points: { show: true }
+            },
+            grid: { hoverable: true, clickable: true }
+        });
+    });
+    </script>
+    <style>
+    .fingerprint td{vertical-align:top;padding:0px;}
+    .fingerprint .title{border-bottom:1px solid #666; margin-bottom:10px;}
+    .fingerprint .title span{line-height:23px;color:#fff;
+                           background-color:#666;border:1px solid #666;border-bottom-width:2px;
+                           border-radius:2px 2px 0px 0px;padding:2px 5px 2px 5px;}
+    .fingerprint .charts{margin-left:20px;}
+    </style>
+}
+@section topmenu { }
+@Html.Partial("~/Views/Analytics/Filter.cshtml", Model)
+<div>
+    <table class="fingerprint">
+        <tr>
+            <td>
+                @if (Model.Screens.Any())
+                { 
+                    <div class="thumbnails">
+                    @foreach (var screen in Model.Screens)
+                    {
+                        <a href="@Model.GetUrlPart(Model.SelectedPortfolioId, screen.ApplicationId, screen.Size.ToFormatedString(), screen.Path, Model.SelectedDateFrom, Model.SelectedDateTo) %>"><img src="/Thumbnails/<%=screen.Id %><%=screen.FileExtension %>"/></a>    
+                    }
+                    </div>
+                }
+                @if (!Model.HasClicks)
+                {
+                    <img alt="Uh-oh! Nobody used your application yet." class="notice" src="/Content/New/Images/notice_nobody_used.png" />
+                }
+                else if (Model.ClicksAmount == 0)
+                {
+                    <img alt="Oops, ther is no data for this time period" class="notice" src="/Content/New/Images/notice_no-data.png" />
+                }
+                else if (!Model.ScreenId.HasValue && !Model.HasScrolls)
+                {
+                    <img alt="Ahem! We have the data but no screenshot." class="notice" src="/Content/New/Images/notice_no_screen_shot.png" style="margin-bottom:40px;" />
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#show_image').click(function () {
+                                var url = $('#image').attr('src');
+                                if (url.indexOf('&cscreen=true') > -1) {
+                                    url = url.replace('&cscreen=true', '');
+                                    $('#image').attr('src', url);
+                                    $(this).text('Show Report');
+                                } else {
+                                    $('#image').attr('src', url + '&cscreen=true');
+                                    $(this).text('Show Screen');
+                                }
+                            });
+                        });
+                    </script>
+                    <p><a id="show_image" style="cursor:pointer;">Show Screen</a></p>
+                    <div><img id="image" width="320" src="/Analytics/ClickHeatMapImage/@Model.FilterUrlPart" /></div>
+                }
+            </td>
+            <td>
+                @if (Model.HasClicks && Model.ClicksAmount > 0 && (Model.ScreenId.HasValue || Model.HasScrolls))
+                {
+                    <div class="charts">
+                        <div class="title"><span>Visits (@Model.VisitsAmount)</span></div>
+                        <div id="visits_graph" style="height:200px;width:575px;"></div>
+                    </div>
+                    <div class="charts">
+                        <div class="title"><span>Clicks (@Model.ClicksAmount)</span></div>
+                        <div id="clicks_graph" style="height:200px;width:575px;"></div>
+                    </div>
+                    @*<div class="charts">
+                        <div class="title"><span>Scrolls (<%=Model.View.ScrollsAmount%>)</span></div>
+                        <div id="scrolls_graph" style="height:200px;width:575px;"></div>
+                    </div>*@
+                }
+            </td>
+         </tr>
+    </table>
+</div>

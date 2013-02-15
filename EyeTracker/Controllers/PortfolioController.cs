@@ -37,8 +37,10 @@ namespace EyeTracker.Controllers
             var data = ObjectContainer.Instance.RunQuery(new PortfoliosQuery(srch, cp, 15));
             ViewData["IsAdmin"] = User.IsInRole(StaffRole.Administrator.ToString());
 
+            var rnd = new Random();
+
             var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
-            var model = new PortfolioIndexModel
+            var model = new PortfolioIndexModelTmp(this, AfterLoginMasterModel.MenuItem.Analytics)
             {
                 IsOnePage = data.TotalPages == 1,
                 Count = data.Count,
@@ -53,9 +55,23 @@ namespace EyeTracker.Controllers
                     Id = p.Id,
                     Description = p.Description,
                     IsActive = p.IsActive,
-                    IsAlternative = i % 2 != 0,
-                    ApplicationsCount = p.ApplicationsCount,
-                    Visits = p.Visits
+                    Alternate = i % 2 != 0,
+                    Visits = p.Visits,
+                    Applications = p.Applications.Select((a, aIndx) => new ApplicationItemModel
+                    {
+                        Id = a.Id,
+                        Description = a.Description,
+                        IsActive = a.IsActive,
+                        Alternate = aIndx % 2 != 0,
+                        Visits = a.Visits,
+                        Key = a.Type.GetAppKey(p.Id,a.Id),
+                        Downloads = rnd.Next(100),
+                        Published = DateTime.Now.AddDays(-rnd.Next(100)).ToString("dd MMM yyyy"),
+                        Scrolls = rnd.Next(1000),
+                        Clicks = rnd.Next(1000),
+                        Time = rnd.Next(100),
+                        TargetGroup = rnd.Next(100) > 50 ? "Men 18+" : "Women 18+"
+                    }).ToArray()
                 }).ToArray(),
                 TopApplications = data.TopApplications.Select((a,i) => new TopApplicationsItemModel
                 {
@@ -73,7 +89,7 @@ namespace EyeTracker.Controllers
                     Path = s.Path
                 }).ToArray()
             };
-            return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+            return View("~/Views/Portfolio/Index.cshtml", model, "Tmp");
         }
 
         public ActionResult New()

@@ -11,8 +11,7 @@ namespace EyeTracker.Common.Queries.Analytics
     {
         public DateTime From { get; private set; }
         public DateTime To { get; private set; }
-        public int? PortfolioId { get; private set; }
-        public int? ApplicationId { get; private set; }
+        public int ApplicationId { get; private set; }
         public Size? ScreenSize { get; private set; }
         public string Path { get; private set; }
         public string Language { get; private set; }
@@ -23,8 +22,7 @@ namespace EyeTracker.Common.Queries.Analytics
         public FilterQuery(
             DateTime from,
             DateTime to,
-            int? portfolioId,
-            int? applicationId,
+            int applicationId,
             Size? screenSize,
             string path,
             string language,
@@ -34,7 +32,6 @@ namespace EyeTracker.Common.Queries.Analytics
         {
             this.From = from.StartDay();
             this.To = to.EndDay();
-            this.PortfolioId = portfolioId;
             this.ApplicationId = applicationId;
             this.ScreenSize = screenSize;
             this.Path = path;

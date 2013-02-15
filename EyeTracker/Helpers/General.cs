@@ -10,7 +10,7 @@ namespace EyeTracker.Helpers
 {
     public static class HTMLExtentions
     {
-        public static string BreadCrumbNavigation(this HtmlHelper helper, List<KeyValuePair<string,string>> items)
+        public static IHtmlString BreadCrumbNavigation(this HtmlHelper helper, List<KeyValuePair<string, string>> items)
         {
             var sb = new StringBuilder();
             foreach (var item in items)
@@ -24,10 +24,10 @@ namespace EyeTracker.Helpers
                     sb.AppendFormat("<span>{0}</span>", item.Value);
                 }
             }
-            return sb.ToString();
+            return helper.Raw(sb.ToString());
         }
 
-        public static string MenuItem(this HtmlHelper helper, string title, string baseUrl, string filterUrlPart, bool isSelected, bool isDisabled)
+        public static IHtmlString MenuItem(this HtmlHelper helper, string title, string baseUrl, string filterUrlPart, bool isSelected, bool isDisabled)
         {
             string href = string.Format("href=\"{0}{1}\"", baseUrl, filterUrlPart);
             var classes = new List<string>();
@@ -38,7 +38,7 @@ namespace EyeTracker.Helpers
                 classes.Add("disabled");
             }
 
-            return string.Format("<li class=\"{0}\"><span></span><a {1}>{2}</a></li>", string.Join(" ", classes.ToArray()), href, title);
+            return helper.Raw(string.Format("<li class=\"{0}\"><span></span><a {1}>{2}</a></li>", string.Join(" ", classes.ToArray()), href, title));
         }
     }
 }

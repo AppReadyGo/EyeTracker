@@ -28,7 +28,7 @@ namespace EyeTracker.Domain.Queries.Analytics
         {
             var data = GetResult<FingerPrintViewDataResult>(session, this.securityContext.CurrentUser.Id, query);
             data.Screens = session.Query<Screen>()
-                                        .Where(s => s.Application.Id == data.SelectedApplicationId.Value)
+                                        .Where(s => s.Application.Id == data.SelectedApplicationId)
                                         .Select(s => new ScreenResult
                                         {
                                             Id = s.Id,
@@ -41,7 +41,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                                         .ToArray();
 
             data.VisitsData = session.Query<PageView>()
-                                    .Where(s => s.Application.Id == data.SelectedApplicationId.Value &&
+                                    .Where(s => s.Application.Id == data.SelectedApplicationId &&
                                                 s.Path.ToLower() == data.SelectedPath.ToLower() &&
                                                 s.ScreenWidth == data.SelectedScreenSize.Value.Width &&
                                                 s.ScreenHeight == data.SelectedScreenSize.Value.Height &&
@@ -51,7 +51,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                                     .ToList().ToDictionary(v => v.Key, v => v.Value);
 
             data.ClicksData = session.Query<Click>()
-                                    .Where(s => s.PageView.Application.Id == data.SelectedApplicationId.Value &&
+                                    .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
                                                 s.PageView.Path.ToLower() == data.SelectedPath.ToLower() &&
                                                 s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
                                                 s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&
@@ -61,7 +61,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                                     .ToList().ToDictionary(v => v.Key, v => v.Value);
 
             data.ScrollsData = session.Query<Scroll>()
-                                    .Where(s => s.PageView.Application.Id == data.SelectedApplicationId.Value &&
+                                    .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
                                                 s.PageView.Path.ToLower() == data.SelectedPath.ToLower() &&
                                                 s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
                                                 s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&

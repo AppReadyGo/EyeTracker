@@ -172,7 +172,7 @@ namespace EyeTracker.Controllers
 
         private ActionResult View<TViewModel>(string view, TViewModel viewModel, AfterLoginMasterModel.MenuItem selectedItem)
         {
-            var masterModel = new AfterLoginMasterModel(ObjectContainer.Instance.CurrentUserDetails.DisplayName, selectedItem);
+            var masterModel = new AfterLoginMasterModel(this, selectedItem);
             masterModel.IsAdmin = User.IsInRole(StaffRole.Administrator.ToString());
             var model = new ViewModelWrapper<AfterLoginMasterModel, TViewModel>(masterModel, viewModel);
             return base.View(view, model);

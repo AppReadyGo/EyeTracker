@@ -9,13 +9,14 @@
 .filter .title li{display:inline;margin-right:5px;display:inline-block;height:36px;line-height:34px;overflow:hidden;}
 .filter .title li.stricted-width{width:226px;}
 .filter .title select{margin-right:5px;}
-.filter .advanced_filter{display:none;background-color:#EEE;
+.filter .advanced_filter{background-color:#EEE;
                 border-color: #E8E8E8 #E8E8E8 #CCCCCC;border-radius: 4px 4px 4px 4px;border-style: solid;
                 border-width: 1px;color: #444444;line-height: normal;margin: 0 0 1px;xmin-width: 590px;
-                padding: 10px 10px 4px;white-space: nowrap;font-size:12px;position:absolute;z-index:1;margin-top:3px;left:0px;}
+                padding: 10px 10px 4px;white-space: nowrap;font-size:12px;margin-top:3px;left:0px;}
 .filter .advanced_filter .cancel-btn{float:right;display:block;width:10px;height:10px;margin-right:-6px;margin-top:-6px;
                           background:url("../images/sprite.10.png") no-repeat scroll -345px -84px transparent;}
  .filter .advanced_filter h3{margin-top:0px;text-align:left;}
+ .filter .advanced_filter p{line-height:30px;}
 
 .filter .advanced_filter .hasDatepicker{float:left;margin-right:10px;font-size:10px;}
 .filter .advanced_filter .input-wrapper{margin-top:10px;}
@@ -28,18 +29,14 @@
 
 .filter h2{font-size:20px;text-align:left;}
 
-.date-range{float:right;margin-top:11px;position:relative;}
-.date-range .date-button{cursor:pointer;background: -moz-linear-gradient(center top , #FBFBFB, #EEEEEE) repeat scroll 0 0 transparent;
-                border-color: #E8E8E8 #E8E8E8 #CCCCCC;border-radius: 4px 4px 4px 4px;border-style: solid;
-                border-width: 1px;color: #444444;line-height: normal;margin: 0 0 1px;
-                padding: 10px 10px 4px;white-space: nowrap;font-size:20px;}
-.date-range .selector{display:none;background: #EEE;
+                
+#date_range_pnl{display:none;background: #EEE;position:absolute;
                 border-color: #E8E8E8 #E8E8E8 #CCCCCC;border-radius: 4px 4px 4px 4px;border-style: solid;
                 border-width: 1px;color: #444444;line-height: normal;margin: 0 0 1px;min-width: 687px;
                 padding: 10px 10px 4px;white-space: nowrap;font-size:12px;position:absolute;right:0px;z-index:1;margin-top:7px;}
-.date-range .selector td.picker-wrapper{padding:0 5px 10px 5px;font-size:10px;}
-.date-range .selector td.form-wrapper{padding:0 5px 10px 5px;}
-.date-range .actions, .advanced_filter .actions{text-align:right;}
+#date_range_pnl td.picker-wrapper{padding:0 5px 10px 5px;font-size:10px;}
+#date_range_pnl td.form-wrapper{padding:0 5px 10px 5px;}
+#date_range_pnl .actions, .advanced_filter .actions{text-align:right;}
 
 li.multiselect, .date-range .actions, .advanced_filter .actions, .ui-multiselect-header ul, .ui-multiselect-checkboxes li{font-size:11px !important;}
 

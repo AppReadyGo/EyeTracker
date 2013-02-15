@@ -1,0 +1,24 @@
+﻿@using EyeTracker.Helpers;
+@using EyeTracker.Model.Pages.Home
+@using EyeTracker.Model
+@using EyeTracker.Model.Master
+@model AfterLoginMasterModel
+@{
+    Layout = "~/Views/Shared/_AfterLogin.cshtml";
+}
+@section title { @RenderSection("title") }
+@section header 
+{ 
+    @RenderSection("header")
+}
+<div class="left-panel">
+    <div class="left-menu">
+        @RenderSection("leftMenu")
+    </div>
+    <div class="footer">
+        <span>Copyright &#64; 2011 @(DateTime.Today.Year > 2011 ? (" - " + DateTime.Today.Year) : "") <a href="http://www.mobillify.mobi" target="_blank">Mobillify</a></span>
+    </div>
+</div>
+<div class="right-panel">
+    @RenderBody()
+</div>

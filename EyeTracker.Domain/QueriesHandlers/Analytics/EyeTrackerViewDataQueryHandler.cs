@@ -28,7 +28,7 @@ namespace EyeTracker.Domain.Queries.Analytics
         {
             var data = GetResult<EyeTrackerViewDataResult>(session, this.securityContext.CurrentUser.Id, query);
             data.Screens = session.Query<Screen>()
-                                        .Where(s => s.Application.Id == data.SelectedApplicationId.Value)
+                                        .Where(s => s.Application.Id == data.SelectedApplicationId)
                                         .Select(s => new ScreenResult
                                         {
                                             Id = s.Id,
@@ -41,7 +41,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                                         .ToArray();
 
             data.UsageData = session.Query<Scroll>()
-                                    .Where(s => s.PageView.Application.Id == data.SelectedApplicationId.Value &&
+                                    .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
                                                 s.PageView.Path.ToLower() == data.SelectedPath.ToLower() &&
                                                 s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
                                                 s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&

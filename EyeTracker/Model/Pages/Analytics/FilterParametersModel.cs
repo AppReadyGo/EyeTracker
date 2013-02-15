@@ -6,13 +6,11 @@ namespace EyeTracker.Model.Pages.Analytics
 {
     public class FilterParametersModel
     {
-        public int PortfolioId { get; set; }
+        public int ApplicationId { get; set; }
 
         public DateTime FromDate { get; set;  }
 
         public DateTime ToDate { get; set; }
-
-        public int? ApplicationId { get; set; }
 
         public Size? ScreenSize { get; set; }
 

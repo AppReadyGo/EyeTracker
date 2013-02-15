@@ -4,36 +4,41 @@ using System.Linq;
 using System.Web;
 
 using EyeTracker.Model.Filter;
+using System.Web.Mvc;
 
 namespace EyeTracker.Model.Master
 {
-    public class AnalyticsMasterModel
+    public class AnalyticsMasterModel : AfterLoginMasterModel
     {
-        public MenuItem SelectedItem { get; private set; }
-        public string FilterUrlPart { get; private set; }
-        public int? PortfolioId { get; private set; }
+        public MenuItem SelectedMenuItem { get; private set; }
 
+        public string FilterUrlPart { get; protected set; }
+
+        public int PortfolioId { get; protected set; }
+
+        /// <summary>
+        /// Disable menu when Filter does not have url
+        /// </summary>
         public bool IsMenuDisabled { get { return string.IsNullOrEmpty(this.FilterUrlPart); } }
 
-        public AnalyticsMasterModel(MenuItem selectedItem, string filterUrlPart, int? portfolioId)
+        public AnalyticsMasterModel(Controller controller, MenuItem selectedItem)
+            : base(controller, AfterLoginMasterModel.MenuItem.Analytics)
         {
-            this.SelectedItem = selectedItem;
-            this.FilterUrlPart = filterUrlPart;
-            this.PortfolioId = portfolioId;
+            this.SelectedMenuItem = selectedItem;
         }
 
         public string GetMenuItemClass(MenuItem item)
         {
-            return item == this.SelectedItem ? "active" : string.Empty;
+            return item == this.SelectedMenuItem ? "active" : string.Empty;
         }
 
         public enum MenuItem
         {
             Portfolios,
             Dashboard,
-            FingerPrint,
+            TouchMap,
             EyeTracker,
-            ABFingerPrint,
+            ABCompare,
             Usage,
             Visitors,
             MapOverlay,
