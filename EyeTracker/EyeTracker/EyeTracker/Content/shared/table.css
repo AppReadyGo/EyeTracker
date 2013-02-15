@@ -52,13 +52,13 @@ th.sorted.desc .sorting-indicator,th.asc:hover span.sorting-indicator{display:bl
 .tbl td{color:#555}
 .tbl p,.tbl ol,.tbl ul{color:#333}
 .tbl thead tr th,.tbl tfoot tr th{color:white; font-family:Arial;}
-.tbl thead tr th,.tbl tfoot tr th{background-color:#f1f1f1;
-                                  background-image:-ms-linear-gradient(top,#f9f9f9,#ececec);
+.tbl thead tr th,.tbl tfoot tr th{background-color:#727D74;
+                                  /*background-image:-ms-linear-gradient(top,#f9f9f9,#ececec);
                                   background-image:-moz-linear-gradient(top,#f9f9f9,#ececec);
                                   background-image:-o-linear-gradient(top,#f9f9f9,#ececec);
                                   background-image:-webkit-gradient(linear,left top,left bottom,from(#f9f9f9),to(#ececec));
                                   background-image:-webkit-linear-gradient(top,#727D74,#727D74);
-                                  background-image:linear-gradient(top,#f9f9f9,#ececec)}
+                                  background-image:linear-gradient(top,#f9f9f9,#ececec)*/}
 table.tbl span.delete a,table.tbl span.trash a,table.tbl span.spam a{color:#bc0b0b}
 .row-actions{visibility:hidden;padding:2px 0 0}
 tr:hover .row-actions{visibility:visible}
@@ -66,11 +66,15 @@ tr:hover .row-actions{visibility:visible}
 
 th.sortable a,th.sorted a{display:block;overflow:hidden;padding:7px 7px 8px}
 th.sortable a span,th.sorted a span{float:left;cursor:pointer}
-.alternate,.alt{background-color:#d9e0e4}
 
-.tbl, .alt {
-background-color: #e7eef1;
-}
+tr.portf{cursor:pointer;}
+.alt{background-color:#d9e0e4}
+.app{background-color:#cbd1d4;display:none;}
+.app-alt{background-color:#bec3c4}
+
+td.no-app{text-align:center;}
+
+.tbl, .alt {background-color: #e7eef1;}
 
 textarea, input[type="text"], input[type="password"], input[type="file"], input[type="button"], input[type="submit"], input[type="reset"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="url"], select {
   background-color: #FFFFFF;
@@ -89,4 +93,5 @@ input[type="checkbox"],input[type="radio"]{vertical-align:text-top;padding:0;mar
 input[type="search"]{-webkit-appearance:textfield}
 input[type="search"]::-webkit-search-decoration{display:none}
 
-textarea,input[type="text"],input[type="password"],input[type="file"],input[type="button"],input[type="submit"],input[type="reset"],input[type="email"],input[type="number"],input[type="search"],input[type="tel"],input[type="url"],select{-webkit-border-radius:3px;border-radius:3px;border-width:1px;border-style:solid}
+textarea,input[type="text"],input[type="password"],input[type="file"],input[type="button"],input[type="submit"],input[type="reset"],input[type="email"],input[type="number"],input[type="search"],input[type="tel"],input[type="url"],select
+{-webkit-border-radius:3px;border-radius:3px;border-width:1px;border-style:solid}

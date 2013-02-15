@@ -42,7 +42,7 @@ Inherits="ViewMasterPage<MasterViewModelWrapper<AfterLoginMasterModel>>" %>
 			<form action="/Account/LogOff">
                 <a href="/Account/ChangePassword">Change password</a><br/><a href="#" onClick="$(this).closest('form').submit();">Logout</a>
 			</form>
-            <h2>Welcome! &nbsp;<%=Model.Master.DisplayName%></h2>
+            <h2>Welcome! &nbsp;<%=Model.Master.CurrentUserDisplayName%></h2>
             </div>
 		</div>
 	</header>

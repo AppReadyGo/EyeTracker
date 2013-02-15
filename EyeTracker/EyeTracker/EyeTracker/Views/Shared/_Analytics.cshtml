@@ -1,0 +1,39 @@
+﻿@using EyeTracker.Helpers;
+@using EyeTracker.Model.Pages.Home
+@using EyeTracker.Model
+@using EyeTracker.Model.Master
+@model AnalyticsMasterModel
+@{
+    Layout = "~/Views/Shared/_AfterLoginLeftMenu.cshtml";
+}
+@section title { @RenderSection("title") }
+@section header 
+{ 
+    <!-- jquery-ui -->
+    <script src="@Html.Content("~/Scripts/ThridParty/jquery-ui-1.9.2.min.js")" type="text/javascript"></script>
+    <link href="@Html.Content("~/Content/themes/cupertino/jquery-ui-1.9.2.css")" rel="stylesheet" type="text/css" />
+    <!-- selectBoxIt -->
+    <script src="@Html.Content("~/Scripts/ThridParty/selectBoxIt-2.9.0/jquery.selectBoxIt.min.js")" type="text/javascript"></script>
+    <link href="@Html.Content("~/Scripts/ThridParty/selectBoxIt-2.9.0/jquery.selectBoxIt.css")" rel="stylesheet" type="text/css" />
+
+    <link href="@Html.Content("~/Content/analytics.master.css")" rel="stylesheet" type="text/css" />
+    <link href="@Html.Content("~/Content/after.login.master.css")" rel="stylesheet" type="text/css" />
+    @RenderSection("header")
+}
+@section leftMenu 
+{ 
+    <ul>
+        <li><span></span><a href="/Portfolio">Portfolios</a></li>
+        @Html.MenuItem("Dashboard", "/Analytics/Dashboard/", Model.FilterUrlPart, Model.SelectedMenuItem == AnalyticsMasterModel.MenuItem.Dashboard, Model.IsMenuDisabled)
+        @Html.MenuItem("TouchMap", "/Analytics/TouchMap/", Model.FilterUrlPart, Model.SelectedMenuItem == AnalyticsMasterModel.MenuItem.TouchMap, Model.IsMenuDisabled)
+        @Html.MenuItem("EyeTracker", "/Analytics/EyeTracker/", Model.FilterUrlPart, Model.SelectedMenuItem == AnalyticsMasterModel.MenuItem.EyeTracker, Model.IsMenuDisabled)
+        @Html.MenuItem("A/B Compare", "/Analytics/ABCompare/", Model.FilterUrlPart, Model.SelectedMenuItem == AnalyticsMasterModel.MenuItem.ABCompare, Model.IsMenuDisabled)
+        @Html.MenuItem("Usage", "/Analytics/Usage/", Model.FilterUrlPart, Model.SelectedMenuItem == AnalyticsMasterModel.MenuItem.Usage, true)
+        @Html.MenuItem("Visitors", "/Analytics/Visitors/", Model.FilterUrlPart, Model.SelectedMenuItem == AnalyticsMasterModel.MenuItem.Visitors, true)
+        @Html.MenuItem("Map Overlay", "/Analytics/MapOverlay/", Model.FilterUrlPart, Model.SelectedMenuItem == AnalyticsMasterModel.MenuItem.MapOverlay, true)
+        @Html.MenuItem("Trafic Sources", "/Analytics/TraficSources/", Model.FilterUrlPart, Model.SelectedMenuItem == AnalyticsMasterModel.MenuItem.TraficSources, true)
+        @Html.MenuItem("Content Overview", "/Analytics/ContentOverview/", Model.FilterUrlPart, Model.SelectedMenuItem == AnalyticsMasterModel.MenuItem.ContentOverview, true)
+    </ul>
+}
+@RenderSection("topmenu")
+@RenderBody()

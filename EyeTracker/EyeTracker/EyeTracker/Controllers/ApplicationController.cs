@@ -23,6 +23,7 @@ using EyeTracker.Common.Queries.Application;
 using System.Configuration;
 using EyeTracker.Common.QueryResults.Application;
 using System.Drawing;
+using EyeTracker.Common;
 
 namespace EyeTracker.Controllers
 {
@@ -59,8 +60,8 @@ namespace EyeTracker.Controllers
                     Id = a.Id,
                     Description = a.Description,
                     IsActive = a.IsActive,
-                    IsAlternative = i % 2 != 0,
-                    Key = GetAppKey(a.Type, data.PortfolioId, a.Id),
+                    Alternate = i % 2 != 0,
+                    Key = a.Type.GetAppKey(data.PortfolioId, a.Id),
                     Visits = a.Visits
                 }).ToArray()
             };
@@ -87,7 +88,7 @@ namespace EyeTracker.Controllers
                 res = new
                 {
                     HasError = false,
-                    code = GetAppKey((ApplicationType)model.Type, model.PortfolioId, appId.Result),
+                    code = ((ApplicationType)model.Type).GetAppKey(model.PortfolioId, appId.Result),
                     appId = appId.Result
                 };
             }
@@ -162,43 +163,8 @@ namespace EyeTracker.Controllers
             {
                 Screens = new List<Screen>(),
                 TypesList = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() }),
-                PropertyId = GetAppKey(type, portfolioId, appId)
+                PropertyId = type.HasValue && appId.HasValue ? type.Value.GetAppKey(portfolioId, appId.Value) : "**-****-******"
             };
-        }
-
-        public static string GetAppKey(ApplicationType? type, int? portfolioId, int? applicationId)
-        {
-            string key = "";
-            if (type.HasValue)
-            {
-                switch (type)
-                {
-                    case ApplicationType.Android:
-                        key = "MA";
-                        break;
-                    case ApplicationType.Web:
-                        key = "WP";
-                        break;
-                    case ApplicationType.iPhone:
-                        key = "MI";
-                        break;
-                    case ApplicationType.WebMobile:
-                        key = "WM";
-                        break;
-                    case ApplicationType.WindowsMobile:
-                        key = "MW";
-                        break;
-                }
-            }
-
-            if (type.HasValue && portfolioId.HasValue && applicationId.HasValue)
-            {
-                return string.Format("{0}-{1:0000}-{2:000000}", key, portfolioId.Value, applicationId.Value);
-            }
-            else
-            {
-                return "**-****-******";
-            }
         }
 
         public ActionResult Screens(int id, string srch = "", int scol = 1, int cp = 1, string orderby = "", string order = "")
@@ -250,7 +216,7 @@ namespace EyeTracker.Controllers
         //            ViewBag.ReturnUrl = string.Format("/Analytics/EyeTracker/?pid={0}&aid={1}&ss={2}&p={3}", 1, id, new Size(width, height).ToFormatedString(), path);
         //            break;
         //        case ScreenReturn.FingerPrint:
-        //            ViewBag.ReturnUrl = string.Format("/Analytics/FingerPrint/?pid={0}&aid={1}&ss={2}&p={3}", 1, id, new Size(width, height).ToFormatedString(), path);
+        //            ViewBag.ReturnUrl = string.Format("/Analytics/TouchMap/?pid={0}&aid={1}&ss={2}&p={3}", 1, id, new Size(width, height).ToFormatedString(), path);
         //            break;
         //        default:
         //            ViewBag.ReturnUrl = Redirect("/Application/Screens/" + id);
@@ -304,7 +270,7 @@ namespace EyeTracker.Controllers
                 //    case ScreenReturn.EyeTracker:
                 //        return Redirect(string.Format("/Analytics/EyeTracker/?pid={0}&aid={1}&ss={2}&p={3}", 1, model.ApplicationId, new Size(model.Width, model.Height).ToFormatedString(), model.Path));
                 //    case ScreenReturn.FingerPrint:
-                //        return Redirect(string.Format("/Analytics/FingerPrint/?pid={0}&aid={1}&ss={2}&p={3}", 1, model.ApplicationId, new Size(model.Width, model.Height).ToFormatedString(), model.Path));
+                //        return Redirect(string.Format("/Analytics/TouchMap/?pid={0}&aid={1}&ss={2}&p={3}", 1, model.ApplicationId, new Size(model.Width, model.Height).ToFormatedString(), model.Path));
                 //    default:
                 //        return Redirect("/Application/Screens/" + model.ApplicationId);
                 //}

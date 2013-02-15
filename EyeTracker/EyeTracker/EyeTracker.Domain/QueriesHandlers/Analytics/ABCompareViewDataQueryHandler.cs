@@ -27,9 +27,10 @@ namespace EyeTracker.Domain.Queries.Analytics
         public ABCompareViewDataResult Run(ISession session, ABCompareViewDataQuery query)
         {
             var data = GetResult<ABCompareViewDataResult>(session, this.securityContext.CurrentUser.Id, query);
+
             data.SelectedSecondPath = string.IsNullOrEmpty(query.SecondPath) ? data.SelectedPath : query.SecondPath;
             data.SecondFilteredClicks = session.Query<Click>()
-                                        .Where(s => s.PageView.Application.Id == data.SelectedApplicationId.Value &&
+                                        .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
                                                     s.PageView.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
                                                     s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
                                                     s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&
@@ -39,14 +40,14 @@ namespace EyeTracker.Domain.Queries.Analytics
                                                     .Count();
 
             data.SecondHasClicks = session.Query<Click>()
-                                                    .Where(s => s.PageView.Application.Id == data.SelectedApplicationId.Value &&
+                                                    .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
                                                                 s.PageView.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
                                                                 s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
                                                                 s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height)
                                                     .Any();
 
             data.SecondFilteredVisits = session.Query<PageView>()
-                                        .Where(p => p.Application.Id == data.SelectedApplicationId.Value &&
+                                        .Where(p => p.Application.Id == data.SelectedApplicationId &&
                                                     p.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
                                                     p.ScreenWidth == data.SelectedScreenSize.Value.Width &&
                                                     p.ScreenHeight == data.SelectedScreenSize.Value.Height &&
@@ -56,7 +57,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                                                     .Count();
 
             data.SecondFilteredScrolls = session.Query<Scroll>()
-                                        .Where(s => s.PageView.Application.Id == data.SelectedApplicationId.Value &&
+                                        .Where(s => s.PageView.Application.Id == data.SelectedApplicationId &&
                                                     s.PageView.Path.ToLower() == data.SelectedSecondPath.ToLower() &&
                                                     s.PageView.ScreenWidth == data.SelectedScreenSize.Value.Width &&
                                                     s.PageView.ScreenHeight == data.SelectedScreenSize.Value.Height &&

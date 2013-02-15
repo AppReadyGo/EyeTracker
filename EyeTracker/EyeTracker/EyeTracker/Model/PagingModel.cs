@@ -6,6 +6,27 @@ using EyeTracker.Common.QueryResults.Analytics.QueryResults;
 
 namespace EyeTracker.Model
 {
+    public interface IPagingModel
+    {
+        bool IsOnePage { get; set; }
+
+        int? PreviousPage { get; set; }
+
+        int? NextPage { get; set; }
+
+        int Count { get; set; }
+
+        int TotalPages { get; set; }
+
+        int CurPage { get; set; }
+
+        string UrlPart { get; set; }
+
+        string SearchStr { get; set; }
+
+        string SearchStrUrlPart { get; set; }
+    }
+
     public class PagingModel
     {
         public bool IsOnePage { get; set; }

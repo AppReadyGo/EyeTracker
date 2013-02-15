@@ -43,19 +43,17 @@ namespace EyeTracker.CustomModelBinders
         protected T GetFilterModel<T>(ModelStateDictionary mState, NameValueCollection queryString)
             where T : FilterParametersModel, new()
         {
-            int portfolioId = 0;
-            var value = queryString["pid"];
-            if (string.IsNullOrEmpty(value) || !int.TryParse(value, out portfolioId))
+            int applicationId = 0;
+            var value = queryString["aid"];
+            if (string.IsNullOrEmpty(value) || !int.TryParse(value, out applicationId))
             {
-                mState.Add("PortfolioId(pid)", new ModelState { });
-                mState.AddModelError("PortfolioId(pid)", "Parameter PortfolioId is required.");
+                mState.Add("ApplicationId(aid)", new ModelState { });
+                mState.AddModelError("ApplicationId(aid)", "Parameter ApplicationId is required.");
                 return null;
             }
 
-            var result = new T() { PortfolioId = portfolioId };
+            var result = new T() { ApplicationId = applicationId };
 
-            value = queryString["aid"];
-            result.ApplicationId = string.IsNullOrEmpty(value) ? null : (int?)int.Parse(value);
             value = queryString["fd"];
             result.FromDate = string.IsNullOrEmpty(value) ? DateTime.UtcNow.AddDays(-30).StartDay() : DateTime.Parse(value).StartDay();
             value = queryString["td"];

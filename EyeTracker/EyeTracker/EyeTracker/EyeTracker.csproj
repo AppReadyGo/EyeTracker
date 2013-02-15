@@ -373,13 +373,15 @@
     <Content Include="Content\themes\cupertino\images\ui-icons_3d80b3_256x240.png" />
     <Content Include="Content\themes\cupertino\images\ui-icons_72a7cf_256x240.png" />
     <Content Include="Content\themes\cupertino\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Content\themes\cupertino\jquery-ui.css" />
+    <Content Include="Content\themes\cupertino\jquery-ui-1.9.2.css" />
     <Content Include="Content\ThridParty\jquery.multiselect.css" />
     <Content Include="Content\touchmap_grey.gif" />
     <Content Include="Content\touchmap_grey.png" />
     <Content Include="Content\New\Images\bg.png" />
     <Content Include="Content\New\Images\eyetrack_grey.png" />
     <Content Include="Scripts\ThridParty\Flot\jquery.flot.pyramid.min.js" />
+    <Content Include="Scripts\ThridParty\selectBoxIt-2.9.0\jquery.selectBoxIt.min.js" />
+    <Content Include="Scripts\ThridParty\selectBoxIt-2.9.0\jquery.selectBoxIt.css" />
     <Content Include="underconstruction.htm" />
     <Content Include="Resources\Feature_TouchMap.jpg" />
     <Content Include="Resources\Feature_EyeTrack.jpg" />
@@ -458,7 +460,7 @@
     <Content Include="Scripts\ThridParty\jquery-lightbox-0.5\photos\thumb_image3.jpg" />
     <Content Include="Scripts\ThridParty\jquery-lightbox-0.5\photos\thumb_image4.jpg" />
     <Content Include="Scripts\ThridParty\jquery-lightbox-0.5\photos\thumb_image5.jpg" />
-    <Content Include="Scripts\ThridParty\jquery-ui.min.js" />
+    <Content Include="Scripts\ThridParty\jquery-ui-1.9.2.min.js" />
     <Content Include="Scripts\ThridParty\jquery.mousewheel-3.0.6.pack.js" />
     <Content Include="Scripts\ThridParty\jquery.multiselect.js" />
     <Content Include="Scripts\ThridParty\jquery.multiselect.min.js" />
@@ -527,12 +529,7 @@
     <Content Include="Scripts\ThridParty\Flot\jquery.flot.symbol.min.js" />
     <Content Include="Scripts\ThridParty\Flot\jquery.flot.threshold.js" />
     <Content Include="Scripts\ThridParty\Flot\jquery.flot.threshold.min.js" />
-    <Content Include="Scripts\ThridParty\jquery-1.4.3.min.js" />
-    <Content Include="Scripts\ThridParty\jquery-1.4.4.js" />
-    <Content Include="Scripts\ThridParty\jquery-1.4.4-vsdoc.js" />
-    <Content Include="Scripts\ThridParty\jquery-1.4.4.min.js" />
-    <Content Include="Scripts\ThridParty\jquery-ui.js" />
-    <Content Include="Scripts\ThridParty\jquery-ui.min_.js" />
+    <Content Include="Scripts\ThridParty\jquery-1.8.3.min.js" />
     <Content Include="Scripts\ThridParty\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\ThridParty\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\ThridParty\jquery.validate.unobtrusive.js" />
@@ -573,7 +570,10 @@
     <Content Include="Views\Admin\Staff.aspx" />
     <Content Include="Views\Admin\Logs.aspx" />
     <Content Include="Views\Admin\Forms\LogsFilter.ascx" />
-    <Content Include="Views\Analytics\ABFingerPrint.aspx" />
+    <None Include="Views\Analytics\ABCompare.cshtml" />
+    <None Include="Views\Analytics\Dashboard.cshtml" />
+    <None Include="Views\Analytics\Filter.cshtml" />
+    <None Include="Views\Analytics\TouchMap.cshtml" />
     <Content Include="Views\Application\ScreenNew.aspx" />
     <Content Include="Views\Application\ScreenEdit.aspx" />
     <Content Include="Views\Application\Forms\ScreenForm.ascx" />
@@ -585,16 +585,14 @@
     <None Include="Views\Content\PublicError.cshtml" />
     <None Include="Views\Content\Public404.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Portfolio\Index.aspx" />
+    <None Include="Views\Portfolio\Index.cshtml" />
     <Content Include="Views\Secure\Forms\ChangePasswordForm.ascx" />
     <Content Include="Views\Account\Forms\ResetPasswordForm.ascx" />
     <Content Include="Views\Account\Forms\ForgotPasswordForm.ascx" />
     <None Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\Forms\RegisterForm.ascx" />
     <Content Include="Views\Application\Forms\ApplicationForm.ascx" />
-    <Content Include="Views\Analytics\Filter.ascx" />
-    <Content Include="Views\Analytics\FingerPrint.aspx" />
-    <Content Include="Views\Analytics\EyeTracker.aspx" />
+    <None Include="Views\Analytics\EyeTracker.cshtml" />
     <Content Include="Views\Application\Edit.aspx" />
     <Content Include="Views\Application\New.aspx" />
     <Content Include="Views\Account\Details.aspx" />
@@ -602,7 +600,6 @@
     <Content Include="Views\Home\PlayGround.aspx" />
     <None Include="Views\Content\PublicPageContent.cshtml" />
     <Content Include="Views\Analytics\Usage.aspx" />
-    <Content Include="Views\Analytics\Dashboard.aspx" />
     <Content Include="Views\Home\Mails\Basic.aspx" />
     <Content Include="Views\Mails\Promotion.aspx" />
     <Content Include="Views\Mails\System.aspx" />
@@ -613,9 +610,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Scripts\ThridParty\jquery-1.4.1.js" />
-    <Content Include="Scripts\ThridParty\jquery-1.4.1.min.js" />
-    <Content Include="Scripts\ThridParty\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\ThridParty\jquery.validate.js" />
     <Content Include="Scripts\ThridParty\jquery.validate.min.js" />
     <Content Include="Scripts\ThridParty\jquery.validate-vsdoc.js" />
@@ -628,7 +622,6 @@
     <Content Include="Views\Secure\ChangePassword.aspx" />
     <None Include="Views\Account\LogOn.cshtml" />
     <None Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Shared\Analytics.master" />
     <Content Include="Views\Admin\Index.aspx" />
     <Content Include="Views\Admin\Membership.aspx" />
     <Content Include="Views\Admin\UserEdit.aspx" />
@@ -636,6 +629,10 @@
     <Content Include="Views\Shared\AfterLogin.Master" />
     <Content Include="Views\Shared\Mail.Master" />
     <Content Include="Views\Web.config" />
+    <None Include="Views\Shared\_AfterLoginLeftMenu.cshtml" />
+    <None Include="Views\Shared\_Analytics.cshtml" />
+    <None Include="Views\Shared\_MainTmp.cshtml" />
+    <None Include="Views\Shared\_AfterLogin.cshtml" />
     <None Include="Web.prod.config_">
       <SubType>Designer</SubType>
     </None>

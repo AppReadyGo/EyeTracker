@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using EyeTracker.Common.QueryResults.Application;
 
 namespace EyeTracker.Common.QueryResults.Portfolio
 {
@@ -13,8 +14,8 @@ namespace EyeTracker.Common.QueryResults.Portfolio
 
         public long Visits { get; set; }
 
-        public int ApplicationsCount { get; set; }
-
         public bool IsActive { get; set; }
+
+        public IEnumerable<ApplicationDataItemResult> Applications { get; set; }
     }
 }

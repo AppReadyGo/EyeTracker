@@ -23,25 +23,19 @@ using EyeTracker.Common.QueryResults.Analytics;
 namespace EyeTracker.Controllers
 {
     [Authorize]
-    public class AnalyticsController : FilterController
+    public class AnalyticsController : Controller
     {
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
         
-        public override AfterLoginMasterModel.MenuItem SelectedMenuItem
-        {
-            get { return AfterLoginMasterModel.MenuItem.Analytics; }
-        }
-
         public ActionResult Dashboard(FilterParametersModel filter)
         {
             log.WriteInformation("Dashboard");
             if (ModelState.IsValid)
             {
-                //TODO: Pavel: change 
+                //TODO: Pavel: change Yuri: What to change?
                 var dashboardViewData = ObjectContainer.Instance.RunQuery(
                             new DashboardViewDataQuery(filter.FromDate,
                                                 filter.ToDate,
-                                                filter.PortfolioId,
                                                 filter.ApplicationId,
                                                 filter.ScreenSize,
                                                 filter.Path,
@@ -73,7 +67,7 @@ namespace EyeTracker.Controllers
                     color = "#461D7C"
                 });
 
-                var dashboardModel = new DashboardModel
+                var dashboardModel = new DashboardModel(this, filter, AnalyticsMasterModel.MenuItem.Dashboard, dashboardViewData, false)
                 {
                     UsageChartData = new JavaScriptSerializer().Serialize(usageInitData),
                     ContentOverviewData = dashboardViewData.ContentOverview.Select((d, i) => new ContentOverviewModel 
@@ -86,9 +80,8 @@ namespace EyeTracker.Controllers
                                             }).ToArray()
                 };
 
-                dashboardModel.Title = "Dashboard";
-
-                return View(dashboardModel, AnalyticsMasterModel.MenuItem.Dashboard, dashboardViewData, filter, false);
+                // dashboardModel.Title = "Dashboard";
+                return View("~/Views/Analytics/Dashboard.cshtml", dashboardModel);
             }
             else
             {
@@ -103,7 +96,6 @@ namespace EyeTracker.Controllers
                 var query = new UsageViewDataQuery(
                 filter.FromDate,
                 filter.ToDate,
-                filter.PortfolioId,
                 filter.ApplicationId,
                 filter.ScreenSize,
                 filter.Path,
@@ -137,9 +129,12 @@ namespace EyeTracker.Controllers
                     color = "#461D7C"
                 });
 
-                var model = new UsageModel { UsageChartData = new JavaScriptSerializer().Serialize(usageInitData) };
+                var model = new UsageModel(this, filter, AnalyticsMasterModel.MenuItem.Dashboard, usageViewData, false)
+                { 
+                    UsageChartData = new JavaScriptSerializer().Serialize(usageInitData) 
+                };
 
-                return View(model, AnalyticsMasterModel.MenuItem.Usage, usageViewData, filter, false);
+                return View("", model);
             }
             else
             {
@@ -147,14 +142,13 @@ namespace EyeTracker.Controllers
             }
         }
 
-        public ActionResult FingerPrint(FilterParametersModel filter)
+        public ActionResult TouchMap(FilterParametersModel filter)
         {
             if (ModelState.IsValid)
             {
                 var data = ObjectContainer.Instance.RunQuery(new FingerPrintViewDataQuery(
                                      filter.FromDate,
                                      filter.ToDate,
-                                     filter.PortfolioId,
                                      filter.ApplicationId,
                                      filter.ScreenSize,
                                      filter.Path,
@@ -178,7 +172,7 @@ namespace EyeTracker.Controllers
                 }
                 else
                 {
-                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value);
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId);
                 }
 
                 //Grouping data by day. To show on graph all days from start till end.
@@ -235,15 +229,15 @@ namespace EyeTracker.Controllers
                     }
                 };
 
-                var model = new FingerPrintModel()
+                var model = new FingerPrintModel(this, filter, AnalyticsMasterModel.MenuItem.TouchMap, data, false)
                 {
-                    Title = "Fingerprint",
+                    // Title = "Fingerprint",
                     Screens = data.Screens,
                     GraphsData = new JavaScriptSerializer().Serialize(graphsInitData),
                     VisitsAmount = data.VisitsData.Sum(x => x.Value)
                 };
 
-                return View(model, AnalyticsMasterModel.MenuItem.FingerPrint, data, filter, true, placeHolderHTML);
+                return View("~/Views/Analytics/TouchMap.cshtml", model);
             }
             else
             {
@@ -251,14 +245,13 @@ namespace EyeTracker.Controllers
             }
        }
 
-        public ActionResult ABFingerPrint(ABFilterParametersModel filter)
+        public ActionResult ABCompare(ABFilterParametersModel filter)
         {
             if (ModelState.IsValid)
             {
                 var filterData = ObjectContainer.Instance.RunQuery(new ABCompareViewDataQuery(
                                      filter.FromDate,
                                      filter.ToDate,
-                                     filter.PortfolioId,
                                      filter.ApplicationId,
                                      filter.ScreenSize,
                                      filter.Path,
@@ -283,10 +276,10 @@ namespace EyeTracker.Controllers
                 }
                 else
                 {
-                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value);
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId);
                 }
 
-                var pathes = filterData.Portfolios.First(x => x.Id == filter.PortfolioId).Applications.First(x => x.Id == filter.ApplicationId).Pathes;
+                var pathes = filterData.Portfolios.SelectMany(p => p.Applications).Single(x => x.Id == filter.ApplicationId).Pathes;
 
                 var firstScreenPathes = pathes.Select(x => new SelectListItem { Text = x, Value = x, Selected = string.IsNullOrEmpty(filter.Path) ? false : filter.Path == x });
                 var secondScreenPathes = pathes.Select(x => new SelectListItem { Text = x, Value = x, Selected = string.IsNullOrEmpty(filter.Path) ? false : filter.SecondPath == x });
@@ -350,9 +343,9 @@ namespace EyeTracker.Controllers
 
                 ViewData["PieData"] = new JavaScriptSerializer().Serialize(pieData);
 
-                var model = new ABCompareModel()
+                var model = new ABCompareModel(this, filter, AnalyticsMasterModel.MenuItem.ABCompare, filterData, false/*, placeHolderHTML*/)
                 {
-                    Title = "Fingerprint",
+                    // Title = "Fingerprint",
                     FirstScreenPathes = firstScreenPathes,
                     SecondScreenPathes = secondScreenPathes,
                     FirstPath = filter.Path,
@@ -363,7 +356,7 @@ namespace EyeTracker.Controllers
                     FirstHasClicks = filterData.ScreenData.HasClicks
                 };
 
-                return View(model, AnalyticsMasterModel.MenuItem.ABFingerPrint, filterData, filter, true, placeHolderHTML);
+                return View("~/Views/Analytics/ABCompare.cshtml", model);
             }
             else
             {
@@ -379,7 +372,6 @@ namespace EyeTracker.Controllers
                 var data = ObjectContainer.Instance.RunQuery(new EyeTrackerViewDataQuery(
                                     filter.FromDate,
                                     filter.ToDate,
-                                    filter.PortfolioId,
                                     filter.ApplicationId,
                                     filter.ScreenSize,
                                     filter.Path,
@@ -403,7 +395,7 @@ namespace EyeTracker.Controllers
                 }
                 else
                 {
-                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId.Value);
+                    placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId);
                 }
 
                 //Grouping data by day. To show on graph all days from start till end.
@@ -429,14 +421,14 @@ namespace EyeTracker.Controllers
                 });
 
 
-                var model = new EyeTrackerModel()
+                var model = new EyeTrackerModel(this, filter, AnalyticsMasterModel.MenuItem.EyeTracker, data, false)
                 {
-                    Title = "Eye Tracker",
+                    // Title = "Eye Tracker",
                     Screens = data.Screens,
                     UsageChartData = new JavaScriptSerializer().Serialize(usageInitData)
                 };
 
-                return View(model, AnalyticsMasterModel.MenuItem.EyeTracker, data, filter, true, placeHolderHTML);
+                return View("~/Views/Analytics/EyeTracker.cshtml", model);
             }
             else
             {
@@ -446,7 +438,7 @@ namespace EyeTracker.Controllers
 
         public FileResult ClickHeatMapImage(FilterParametersModel filter)
         {
-            var result = ObjectContainer.Instance.RunQuery(new ClickHeatMapDataQuery(filter.ApplicationId.Value, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
+            var result = ObjectContainer.Instance.RunQuery(new ClickHeatMapDataQuery(filter.ApplicationId, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
             
             byte[] imageData = null;
             Image image = null;
@@ -495,7 +487,7 @@ namespace EyeTracker.Controllers
 
         public FileResult ViewHeatMapImage(FilterParametersModel filter)
         {
-            var result = ObjectContainer.Instance.RunQuery(new HeatMapDataQuery(filter.ApplicationId.Value, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
+            var result = ObjectContainer.Instance.RunQuery(new HeatMapDataQuery(filter.ApplicationId, filter.Path, filter.ScreenSize.Value, filter.FromDate, filter.ToDate));
             
             byte[] imageData = null;
             Image image = null;

@@ -71,23 +71,23 @@ Inherits="ViewPage<ViewModelWrapper<AfterLoginMasterModel, ApplicationIndexModel
           {
               foreach (var item in Model.View.Applications)
               { %>	
-		<tr class="<%= item.IsAlternative ? "" : "alternate" %>">
-			<td class="column-email">
-				<div class="<%: !item.IsActive ? "status-alert" : "status-ok"%>" title="<%: item.IsActive ? "" : "The application has not been active for past 3 days." %>"></div>
-			</td>
-			<td class="column-desc">
-                <span><a href="/Analytics/Dashboard/?pid=<%= Model.View.PortfolioId %>&aid=<%= item.Id %>"><%= item.Description%></a></span>
-				<br />
-				<div class="row-actions">
-					<span class='screens'><a href="/Application/Screens/<%= item.Id %>">Screens</a> | </span>
-                    <span class='edit'><a href="/Application/Edit/<%= item.Id %>">Edit</a> | </span>
-					<span class='delete'><a class='submitdelete' href='/Application/Remove/<%= item.Id %>' onclick="javascript:return confirm('Are you realy want to remove <%= item.Description %> application? The operation is not recoverable!');">Delete</a></span>
-				</div>          
-            </td>
-			<td class="role column-visits"><%= item.Key %></td>
-			<td class="role column-visits"><%= item.Visits %></td>
-		</tr>
-        <%} 
+		        <tr class="<%= item.Alternate ? "" : "alternate" %>">
+			        <td class="column-email">
+				        <div class="<%: !item.IsActive ? "status-alert" : "status-ok"%>" title="<%: item.IsActive ? "" : "The application has not been active for past 3 days." %>"></div>
+			        </td>
+			        <td class="column-desc">
+                        <span><a href="/Analytics/Dashboard/?pid=<%= Model.View.PortfolioId %>&aid=<%= item.Id %>"><%= item.Description%></a></span>
+				        <br />
+				        <div class="row-actions">
+					        <span class='screens'><a href="/Application/Screens/<%= item.Id %>">Screens</a> | </span>
+                            <span class='edit'><a href="/Application/Edit/<%= item.Id %>">Edit</a> | </span>
+					        <span class='delete'><a class='submitdelete' href='/Application/Remove/<%= item.Id %>' onclick="javascript:return confirm('Are you realy want to remove <%= item.Description %> application? The operation is not recoverable!');">Delete</a></span>
+				        </div>          
+                    </td>
+			        <td class="role column-visits"><%= item.Key %></td>
+			        <td class="role column-visits"><%= item.Visits %></td>
+		        </tr>
+                <%} 
           }
           else
           {%>
