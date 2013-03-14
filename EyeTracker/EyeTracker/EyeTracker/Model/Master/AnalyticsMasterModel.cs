@@ -14,8 +14,6 @@ namespace EyeTracker.Model.Master
 
         public string FilterUrlPart { get; protected set; }
 
-        public int PortfolioId { get; protected set; }
-
         /// <summary>
         /// Disable menu when Filter does not have url
         /// </summary>

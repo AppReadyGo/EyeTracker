@@ -9,7 +9,7 @@ namespace EyeTracker.Domain.Model.Users
 {
     public class User
     {
-        private Iesi.Collections.Generic.ISet<Portfolio> portfolios = null;
+        private Iesi.Collections.Generic.ISet<Application> applications = null;
 
         public virtual int Id { get; protected set; }
         public virtual string Email { get; protected set; }
@@ -24,9 +24,9 @@ namespace EyeTracker.Domain.Model.Users
         public virtual bool SpecialAccess { get; protected set; }
         public virtual bool AcceptedTermsAndConditions { get; protected set; }
         public virtual Membership Membership { get; protected set; }
-        public virtual IEnumerable<Portfolio> Portfolios
+        public virtual IEnumerable<Application> Applications
         {
-            get { return this.portfolios; }
+            get { return this.applications; }
         }
 
         public virtual UserType Type

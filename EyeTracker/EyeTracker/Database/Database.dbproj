@@ -166,6 +166,7 @@
     <Folder Include="Schema Objects\Schemas\cont" />
     <Folder Include="Schema Objects\Schemas\usr\Tables" />
     <Folder Include="Schema Objects\Schemas\cont\Tables" />
+    <Folder Include="Schema Objects\Schemas\api" />
   </ItemGroup>
   <ItemGroup>
     <PropertiesFile Include="Properties\Database.sqldeployment">
@@ -243,9 +244,6 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\PageView.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Portfolio.table.sql">
-      <SubType>Code</SubType>
-    </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Screen.table.sql">
       <SubType>Code</SubType>
     </Build>
@@ -268,9 +266,6 @@
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\ScrollEvent.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\PackageEvent.table.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\SessionInfoEvent.table.sql">
@@ -357,6 +352,21 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\GeoKeys.table.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Schema Objects\Schemas\api\Users.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\api\Roles.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Packages.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Database Level Objects\Security\Schemas\api.schema.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Targets.table.sql">
+      <SubType>Code</SubType>
+    </Build>
   </ItemGroup>
   <ItemGroup>
     <NotInBuild Include="Scripts\DevelopmentData.sql">
@@ -369,6 +379,9 @@
       <SubType>NotInBuild</SubType>
     </NotInBuild>
     <NotInBuild Include="Scripts\Post-Deployment\Script.PostDeployment.Roles.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
+    <NotInBuild Include="Scripts\Pre-Deployment\RemovePortfolios.sql">
       <SubType>NotInBuild</SubType>
     </NotInBuild>
   </ItemGroup>

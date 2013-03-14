@@ -9,11 +9,7 @@ namespace EyeTracker.Common.QueryResults.Application
     {
         public int ApplicationId { get; set; }
 
-        public int PortfolioId { get; set; }
-
         public string ApplicationDescription { get; set; }
-
-        public string PortfolioDescription { get; set; }
 
         public IEnumerable<ScreenDataItemResult> Screens { get; set; }
     }

@@ -1,0 +1,64 @@
+﻿@using EyeTracker.Helpers;
+@using EyeTracker.Model
+@using EyeTracker.Model.Master
+@using EyeTracker.Model.Pages.Application
+@model PublishModel
+@{
+    Layout = "~/Views/Shared/_AfterLogin.cshtml";
+}
+@section title { Portfolios }
+@section header 
+{
+    <link href="@Html.Content("~/Content/shared/bredcrumbs.css")" rel="stylesheet" type="text/css" />
+}
+<div class="crumb">
+    <div class="border-right">
+		<div class="border-left">
+			<div class="inner">
+                <ul>
+		           <li><a href="/Portfolio"><h4>Portfolios</h4></a></li>
+		        </ul>
+			</div>
+		</div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+<div class="content-wrapper">
+    <h2>Publish Package</h2>
+    @using (Html.BeginForm()) 
+    {
+        <table>
+            <tbody>
+                <tr>
+                    <td class="label">@Html.LabelFor(m => m.Target)</td>
+                    <td>
+                        @*Html.DropDownList("Target", Model.TargetListItems)*@
+                        <br />
+                        @Html.ValidationMessageFor(m => m.Target)
+                     </td>
+                </tr>
+                <tr>
+                    <td class="label">Package</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(Model.FileName))
+                        {
+                            <div>Warning: The exists package will be overridden by a new one.</div>
+                            @Model.FileName
+                        }
+                        <br />
+                        <input type="file" name="file" id="file"/>
+                        <br />
+                        @Html.ValidationMessageFor(m => m.FileName)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="actions">
+                        <a class="link2" onclick="$(this).closest('form').submit();"><span><span>Save</span></span></a>&nbsp;
+                        <a class="link4" href="/Application/Screens/@Model.ApplicationId"><span><span>Cancel</span></span></a>
+                    </td>
+                 </tr>
+              </tbody>
+        </table>
+    }
+</div>
+

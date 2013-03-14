@@ -21,8 +21,6 @@ namespace EyeTracker.Domain.QueriesHandlers.Application
                         {
                             ApplicationId = a.Id,
                             ApplicationDescription = a.Description,
-                            PortfolioId = a.Portfolio.Id,
-                            PortfolioDescription = a.Portfolio.Description
                         })
                         .SingleOrDefault(); ;
 

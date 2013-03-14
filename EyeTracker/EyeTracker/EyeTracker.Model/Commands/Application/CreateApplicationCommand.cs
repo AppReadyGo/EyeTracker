@@ -5,13 +5,11 @@ namespace EyeTracker.Common.Commands.Application
 {
     public class CreateApplicationCommand : ICommand<int>
     {
-        public int PortfolioId { get; protected set; }
         public string Description { get; protected set; }
         public ApplicationType Type { get; protected set; }
 
-        public CreateApplicationCommand(int portfolioId, string description, ApplicationType type)
+        public CreateApplicationCommand(string description, ApplicationType type)
         {
-            this.PortfolioId = portfolioId;
             this.Description = description;
             this.Type = type;
         }

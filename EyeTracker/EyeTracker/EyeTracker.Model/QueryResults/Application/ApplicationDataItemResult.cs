@@ -2,12 +2,8 @@
 
 namespace EyeTracker.Common.QueryResults.Application
 {
-    public class ApplicationDataItemResult
+    public class ApplicationDataItemResult : ApplicationResult
     {
-        public int Id { get; set; }
-
-        public string Description { get; set; }
-
         public int Visits { get; set; }
 
         public ApplicationType Type { get; set; }

@@ -30,7 +30,7 @@ namespace EyeTracker.Domain.Mapping.Users
             Property(x => x.Membership, map => { map.NotNullable(true); map.Column("MembershipID"); });
           
             Set(
-              x => x.Portfolios,
+              x => x.Applications,
               map =>
               {
                   map.Key(k => k.Column("UserID"));
