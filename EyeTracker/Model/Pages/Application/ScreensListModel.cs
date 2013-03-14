@@ -12,10 +12,6 @@ namespace EyeTracker.Model.Pages.Application
 
         public string ApplicationDescription { get; set; }
 
-        public int PortfolioId { get; set; }
-
-        public string PortfolioDescription { get; set; }
-
         public IEnumerable<ScreenItemModel> Screens { get; set; }
 
         public string PathOrder { get; set; }

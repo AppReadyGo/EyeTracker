@@ -13,7 +13,6 @@ namespace EyeTracker.Model.Filter
 {
     public class FilterModel : AnalyticsMasterModel
     {
-        public int SelectedPortfolioId { get; protected set; }
         public int SelectedApplicationId { get; protected set; }
         public DateTime SelectedDateFrom { get; protected set; }
         public DateTime SelectedDateTo { get; protected set; }
@@ -34,7 +33,6 @@ namespace EyeTracker.Model.Filter
         public bool HasClicks { get; protected set; }
 
         //Top Panel
-        public string PortfolioName { get; protected set; }
         public string Title { get; protected set; }
         public bool IsSingleMode { get; protected set; }
         public string ApplicationName { get; protected set; }
@@ -42,13 +40,7 @@ namespace EyeTracker.Model.Filter
         public FilterModel(Controller controller, FilterParametersModel filter, AnalyticsMasterModel.MenuItem leftMenuSelectedItem, FilterDataResult filterDataResult, bool isSingleMode, string placeHolderHTML = null)
             : base(controller, leftMenuSelectedItem)
         {
-            var curPortfolio = filterDataResult.Portfolios.Single(x => x.Applications.Any(a => a.Id == filter.ApplicationId));
-
             this.PlaceHolderHTML = placeHolderHTML;
-
-            this.SelectedPortfolioId = curPortfolio.Id;
-            this.PortfolioId = curPortfolio.Id;
-            this.PortfolioName = curPortfolio.Description;
 
             this.IsSingleMode = isSingleMode;
 
@@ -72,9 +64,9 @@ namespace EyeTracker.Model.Filter
                 this.ScrollsAmount = filterDataResult.ScreenData.ScrollsAmount;
             }
 
-            this.NoData =  !curPortfolio.Applications.SelectMany(a => a.ScreenSizes).Any();
+            this.NoData = !filterDataResult.Applications.SelectMany(a => a.ScreenSizes).Any();
 
-            var curApplication = curPortfolio.Applications.Single(a => a.Id == filter.ApplicationId);
+            var curApplication = filterDataResult.Applications.Single(a => a.Id == filter.ApplicationId);
 
             this.SelectedApplicationId = curApplication.Id;
             this.ApplicationName = curApplication.Description;

@@ -84,6 +84,7 @@
     <Compile Include="Commands\Admin\ClearLogCommand.cs" />
     <Compile Include="Commands\API\AddPackageCommand.cs" />
     <Compile Include="Commands\Application\AddScreenCommand.cs" />
+    <Compile Include="Commands\Application\SetPackageCommand.cs" />
     <Compile Include="Commands\Application\RemoveScreenCommand.cs" />
     <Compile Include="Commands\Application\UpdateScreenCommand.cs" />
     <Compile Include="Commands\Content\CreateMailCommand.cs" />
@@ -146,6 +147,8 @@
     <Compile Include="QueryResults\Analytics\ContentOverviewResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationDataItemResult.cs" />
     <Compile Include="QueryResults\Application\ApplicationsDataResult.cs" />
+    <Compile Include="QueryResults\Application\ApplicationResult.cs" />
+    <Compile Include="QueryResults\Application\ApplicationScreenResult.cs" />
     <Compile Include="QueryResults\Application\ScreenDataItemResult.cs" />
     <Compile Include="QueryResults\Application\ScreenDataResult.cs" />
     <Compile Include="QueryResults\Application\ScreenDetailsDataResult.cs" />
@@ -154,8 +157,6 @@
     <Compile Include="QueryResults\PageingResult.cs" />
     <Compile Include="QueryResults\PortfolioDetailsResult.cs" />
     <Compile Include="QueryResults\Portfolio\PortfolioDataItemResult.cs" />
-    <Compile Include="QueryResults\Portfolio\TopApplicationsItemResult.cs" />
-    <Compile Include="QueryResults\Portfolio\TopScreensItemResult.cs" />
     <Compile Include="SecurityContext.cs" />
     <Compile Include="Commands\Application\CreateApplicationCommand.cs" />
     <Compile Include="Commands\Users\ActivateUserCommand.cs" />
@@ -183,7 +184,6 @@
     <Compile Include="Queries\Analytics\DashboardViewDataQuery.cs" />
     <Compile Include="Queries\Analytics\FilterQuery.cs" />
     <Compile Include="Queries\Analytics\FingerPrintViewDataQuery.cs" />
-    <Compile Include="Queries\PortfoliosQuery.cs" />
     <Compile Include="Queries\Analytics\UsageViewDataQuery.cs" />
     <Compile Include="Queries\Content\GetAllKeysQuery.cs" />
     <Compile Include="Queries\Content\GetAllMailsQuery.cs" />
@@ -199,7 +199,7 @@
     <Compile Include="Queries\Users\GetUserDetailsByEmailQuery.cs" />
     <Compile Include="QueryResults\Admin\LogDataResult.cs" />
     <Compile Include="QueryResults\Admin\LogResult.cs" />
-    <Compile Include="QueryResults\Application\ApplicationResult.cs" />
+    <Compile Include="QueryResults\Application\ExtendedApplicationResult.cs" />
     <Compile Include="QueryResults\Analytics\DashboardViewDataResult.cs" />
     <Compile Include="QueryResults\Analytics\FilterDataResult.cs" />
     <Compile Include="QueryResults\Analytics\FingerPrintViewDataResult.cs" />

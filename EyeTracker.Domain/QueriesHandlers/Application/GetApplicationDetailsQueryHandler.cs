@@ -20,8 +20,6 @@ namespace EyeTracker.Domain.Queries.Application
                         Id = a.Id,
                         Description = a.Description,
                         Type = a.Type,
-                        PortfolioId = a.Portfolio.Id,
-                        PortfolioDescription = a.Portfolio.Description
                     })
                     .SingleOrDefault();
         }

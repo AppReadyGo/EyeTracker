@@ -279,7 +279,7 @@ namespace EyeTracker.Controllers
                     placeHolderHTML = string.Format("<a href=\"/Application/ScreenNew/{0}\" class=\"link2 btn-screen\"><span><span>Add Screen</span></span></a>", filter.ApplicationId);
                 }
 
-                var pathes = filterData.Portfolios.SelectMany(p => p.Applications).Single(x => x.Id == filter.ApplicationId).Pathes;
+                var pathes = filterData.Applications.Single(x => x.Id == filter.ApplicationId).Pathes;
 
                 var firstScreenPathes = pathes.Select(x => new SelectListItem { Text = x, Value = x, Selected = string.IsNullOrEmpty(filter.Path) ? false : filter.Path == x });
                 var secondScreenPathes = pathes.Select(x => new SelectListItem { Text = x, Value = x, Selected = string.IsNullOrEmpty(filter.Path) ? false : filter.SecondPath == x });

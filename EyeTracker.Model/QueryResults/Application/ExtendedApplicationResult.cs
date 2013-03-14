@@ -6,14 +6,12 @@ using System.Drawing;
 
 namespace EyeTracker.Common.QueryResults.Application
 {
-    public class ScreenDataResult
+    public class ExtendedApplicationResult : ApplicationResult
     {
-        public int ApplicationId { get; set; }
-
-        public string ApplicationDescription { get; set; }
+        public IEnumerable<Size> ScreenSizes { get; set; }
 
         public IEnumerable<string> Pathes { get; set; }
 
-        public IEnumerable<Size> Sizes { get; set; }
+        public long Visits { get; set; }
     }
 }

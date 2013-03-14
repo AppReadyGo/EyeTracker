@@ -19,7 +19,7 @@ namespace EyeTracker
         private static readonly ApplicationLogging log = new ApplicationLogging(MethodBase.GetCurrentMethod().DeclaringType);
 
         WindsorContainer applicationWideWindsorContainer = new WindsorContainer();
-        
+
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -33,14 +33,14 @@ namespace EyeTracker
             );
 
             routes.MapRoute(
-                "AjaxData", 
+                "AjaxData",
                 "Data/{action}/",
                 new { controller = "Data" },
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
             routes.MapRoute(
-                "Home", 
+                "Home",
                 "",
                 new { controller = "Home", action = "Index" },
                 new[] { "EyeTracker.Controllers" } // Namespaces
@@ -89,7 +89,7 @@ namespace EyeTracker
             );
 
             routes.MapRoute(
-                "ApplicationScreen", 
+                "ApplicationScreen",
                 "Application/Screen/{appId}/{width}/{height}/{file}",
                 new { controller = "Application", action = "Screen", appId = UrlParameter.Optional },
                 new[] { "EyeTracker.Controllers" } // Namespaces
@@ -152,7 +152,7 @@ namespace EyeTracker
             routes.MapRoute(
                 "Analytics",
                 "Analytics/{action}/",
-                new { controller = "Analytics", action = "Index"},
+                new { controller = "Analytics", action = "Index" },
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
 
@@ -203,7 +203,7 @@ namespace EyeTracker
                new { controller = "Content", action = "ErrorPage" },
                new[] { "EyeTracker.Controllers" } // Namespaces
             );
-            
+
             /*
             routes.MapRoute(
                 "CSS", // Route name
@@ -232,7 +232,7 @@ namespace EyeTracker
                 new { controller = "Content", action = "PageContent", urlPart2 = UrlParameter.Optional, urlPart3 = UrlParameter.Optional },
                 new[] { "EyeTracker.Controllers" } // Namespaces
             );
-            
+
 
             //routes.MapRoute(
             //    "AjaxVisit", 
@@ -291,30 +291,32 @@ namespace EyeTracker
         private void EncryptConnectionStringsSection()
         {
 #if !DEBUG
-                try
-                {
-                    Configuration config = WebConfigurationManager.OpenWebConfiguration(HostingEnvironment.ApplicationVirtualPath);
-                    ConfigurationSection connStringsConfigSection = config.ConnectionStrings;
-                    if (connStringsConfigSection != null)
-                    {
-                        if (!connStringsConfigSection.SectionInformation.IsProtected)
-                        {
-                            if (!connStringsConfigSection.ElementInformation.IsLocked)
-                            {
-                                connStringsConfigSection.SectionInformation.ProtectSection("RsaProtectedConfigurationProvider");
-                                connStringsConfigSection.SectionInformation.ForceSave = true;
-                                connStringsConfigSection.CurrentConfiguration.Save(ConfigurationSaveMode.Full);
-                            }
+            //try
+            //{
+            //    Configuration config = WebConfigurationManager.OpenWebConfiguration(HostingEnvironment.ApplicationVirtualPath);
+            //    ConfigurationSection connStringsConfigSection = config.ConnectionStrings;
+            //    if (connStringsConfigSection != null)
+            //    {
+            //        if (!connStringsConfigSection.SectionInformation.IsProtected)
+            //        {
+            //            if (!connStringsConfigSection.ElementInformation.IsLocked)
+            //            {
+            //                connStringsConfigSection.SectionInformation.ProtectSection("RsaProtectedConfigurationProvider");
+            //                connStringsConfigSection.SectionInformation.ForceSave = true;
+            //                connStringsConfigSection.CurrentConfiguration.Save(ConfigurationSaveMode.Full);
+            //            }
 
-                        }
-                    }
-                }
-                finally
-                {
-                    //no logs here
-                }
-            }
+            //        }
+            //    }
+            //}
+            //finally
+            //{
+            //    //no logs here
+            //}
 #endif
         }
     }
 }
+
+
+

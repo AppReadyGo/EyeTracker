@@ -17,35 +17,19 @@ namespace EyeTracker.Domain.Queries.Analytics
         {
             var filterData = new TResult();
 
-            var portfolios = session.Query<Portfolio>()
+            filterData.Applications = session.Query<Model.Application>()
                 .Where(p => p.User.Id == userId)
-                .Select(p => new
+                .Select(a => new ExtendedApplicationResult
                 {
-                    key = p.Id,
-                    details = new PortfolioResult
-                    {
-                        Id = p.Id,
-                        Description = p.Description
-                    }
-                }).ToList();
-
-            var portfoliosIds = portfolios.Select(p => p.key).ToArray();
-
-            var applications = session.Query<Model.Application>()
-                .Where(a => portfoliosIds.Contains(a.Portfolio.Id))
-                .Select(a => new
-                {
-                    key = a.Portfolio.Id,
-                    app = new
-                    {
-                        Id = a.Id,
-                        Description = a.Description
-                    }
+                    Id = a.Id,
+                    Description = a.Description
                 })
                 .ToArray();
 
+            var applicationsIds = filterData.Applications.Select(p => p.Id).ToArray();
+
             var sizes = session.Query<PageView>()
-                                .Where(p => portfoliosIds.Contains(p.Application.Portfolio.Id))
+                                .Where(p => applicationsIds.Contains(p.Application.Id))
                                 .Select(p => new
                                 {
                                     key = p.Application.Id,
@@ -55,7 +39,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                                 .ToArray().Distinct();
 
             var pathes = session.Query<PageView>()
-                                .Where(p => portfoliosIds.Contains(p.Application.Portfolio.Id))
+                                .Where(p => applicationsIds.Contains(p.Application.Id))
                                 .Select(p => new
                                 {
                                     key = p.Application.Id,
@@ -64,23 +48,15 @@ namespace EyeTracker.Domain.Queries.Analytics
                                 .ToArray().Distinct();
 
 
-            foreach (var item in portfolios)
+            foreach (var item in filterData.Applications)
             {
-                item.details.Applications = applications.Where(ai => ai.key == item.key)
-                                                        .Select(ai => new ApplicationResult
-                                                        {
-                                                            Id = ai.app.Id,
-                                                            Description = ai.app.Description,
-                                                            ScreenSizes = sizes.Where(s => s.key == ai.app.Id)
-                                                                            .Select(s => new Size(s.width, s.height))
-                                                                            .ToArray(),
-                                                            Pathes = pathes.Where(p => p.key == ai.app.Id)
-                                                                            .Select(p => p.path)
-                                                                            .ToArray()
-                                                        }).ToArray();
+                item.Pathes = pathes.Where(p => p.key == item.Id)
+                                    .Select(p => p.path)
+                                    .ToArray();
+                item.ScreenSizes = sizes.Where(s => s.key == item.Id)
+                                        .Select(s => new Size(s.width, s.height))
+                                        .ToArray();
             }
-
-            filterData.Portfolios = portfolios.Select(p => p.details);
 
             if (query != null)
             {
@@ -88,8 +64,7 @@ namespace EyeTracker.Domain.Queries.Analytics
                 filterData.SelectedPath = query.Path;
                 filterData.SelectedScreenSize = query.ScreenSize;
 
-                ApplicationResult app = filterData.Portfolios.SelectMany(x => x.Applications).Single(a => a.Id == filterData.SelectedApplicationId);
-                PortfolioResult portfolio = filterData.Portfolios.Single(p => p.Applications.Any(a => a.Id == filterData.SelectedApplicationId));
+                ExtendedApplicationResult app = filterData.Applications.Single(a => a.Id == filterData.SelectedApplicationId);
 
                 if (app != null)
                 {

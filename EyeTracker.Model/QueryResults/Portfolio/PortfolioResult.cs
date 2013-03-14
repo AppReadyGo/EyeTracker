@@ -9,7 +9,7 @@ namespace EyeTracker.Common.QueryResults.Portfolio
 
         public string Description { get; set; }
 
-        public IEnumerable<ApplicationResult> Applications { get; set; }
+        public IEnumerable<ExtendedApplicationResult> Applications { get; set; }
 
         public long Visits { get; set; }
     }

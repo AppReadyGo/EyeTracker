@@ -26,8 +26,6 @@ namespace EyeTracker.Domain.Queries.Application
                             FileExtention = s.FileExtension,
                             ApplicationId = s.Application.Id,
                             ApplicationDescription = s.Application.Description,
-                            PortfolioId = s.Application.Portfolio.Id,
-                            PortfolioDescription = s.Application.Portfolio.Description
                         })
                         .SingleOrDefault();
 

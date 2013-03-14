@@ -10,7 +10,7 @@ namespace EyeTracker.Model.Pages.Portfolio
 {
     public class PortfolioIndexModelTmp : AfterLoginMasterModel, IPagingModel
     {
-        public IEnumerable<PortfolioItemModel> Portfolios { get; set; }
+        public IEnumerable<ApplicationItemModel> Applications { get; set; }
 
         public IEnumerable<TopApplicationsItemModel> TopApplications { get; set; }
 
@@ -46,18 +46,11 @@ namespace EyeTracker.Model.Pages.Portfolio
 
     public class PortfolioIndexModel : PagingModel
     {
-        public IEnumerable<PortfolioItemModel> Portfolios { get; set; }
+        public IEnumerable<ApplicationItemModel> Applications { get; set; }
 
         public IEnumerable<TopApplicationsItemModel> TopApplications { get; set; }
 
         public IEnumerable<TopScreensItemModel> TopScreens { get; set; }
-    }
-
-    public class PortfolioItemModel : PortfolioDataItemResult
-    {
-        public bool Alternate { get; set; }
-
-        public new IEnumerable<ApplicationItemModel> Applications { get; set; }
     }
 
     public class TopApplicationsItemModel

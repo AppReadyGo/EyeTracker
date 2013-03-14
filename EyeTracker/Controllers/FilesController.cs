@@ -87,7 +87,7 @@ namespace EyeTracker.Controllers
             var sb = new StringBuilder();
             sb.AppendFormat("FingerPrint={0}", ConfigurationManager.AppSettings["FingerprintEnabled"]).AppendLine();
             sb.AppendFormat("AllowSend3G={0}", ConfigurationManager.AppSettings["AllowSend3G"]).AppendLine();
-            sb.AppendFormat("ApplicationName={0}", type.GetAppKey(pId, appId)).AppendLine();
+            sb.AppendFormat("ApplicationName={0}", type.GetAppKey(appId)).AppendLine();
             var cacheInDatabase = ConfigurationManager.AppSettings["CacheInDatabase"];
             if (!string.IsNullOrEmpty(cacheInDatabase))
             {

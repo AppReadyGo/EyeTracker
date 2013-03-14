@@ -20,9 +20,7 @@ namespace EyeTracker.Domain.Queries.Application
                         .Select(a => new ScreensDataResult
                         {
                             ApplicationId = a.Id,
-                            ApplicationDescription = a.Description,
-                            PortfolioId = a.Portfolio.Id,
-                            PortfolioDescription = a.Portfolio.Description
+                            ApplicationDescription = a.Description
                         })
                         .Single();
 

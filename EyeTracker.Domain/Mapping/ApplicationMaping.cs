@@ -20,11 +20,10 @@ namespace EyeTracker.Domain.Mapping
             });
             Property(x => x.Type, map => map.NotNullable(true));
             Property(x => x.CreateDate, map => map.NotNullable(true));
-            ManyToOne(x => x.Portfolio, map =>
+            ManyToOne(p => p.User, map =>
             {
+                map.Column("UserID");
                 map.NotNullable(true);
-                map.Column("PortfolioID");
-                map.Cascade(Cascade.DeleteOrphans);
             });
 
             Set(p => p.Screens,
@@ -33,9 +32,15 @@ namespace EyeTracker.Domain.Mapping
                     map.Key(k => k.Column("ApplicationID"));
                     map.Table("Screen");
                     map.Inverse(true);
+                    map.Access(Accessor.Field);
                     map.Cascade(Cascade.All);
                 },
                 rel => rel.OneToMany());
+
+            ManyToOne(p => p.Package, map =>
+            {
+                map.Column("PackageID");
+            });
         }
     }
 }

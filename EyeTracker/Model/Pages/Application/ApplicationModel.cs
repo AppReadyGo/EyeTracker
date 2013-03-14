@@ -10,7 +10,7 @@ namespace EyeTracker.Model.Pages.Application
         public int Id { get; set; }
 
         [Required]
-        public int PortfolioId { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         [DataType(DataType.Text)]

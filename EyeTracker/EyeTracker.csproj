@@ -184,6 +184,7 @@
     <Compile Include="Model\Pages\Analytics\FingerPrintModel.cs" />
     <Compile Include="Model\Pages\Analytics\UsageModel.cs" />
     <Compile Include="Model\Pages\Application\ApplicationIndexModel.cs" />
+    <Compile Include="Model\Pages\Application\PublishModel.cs" />
     <Compile Include="Model\Pages\Application\ScreenModel.cs" />
     <Compile Include="Model\Pages\Application\ScreensListModel.cs" />
     <Compile Include="Model\Pages\Home\ContentModel.cs" />
@@ -582,10 +583,11 @@
     <Content Include="Views\Content\AuthenticatedError.aspx" />
     <Content Include="Views\Account\Forms\LogOnForm.cshtml" />
     <Compile Include="Model\Pages\Analytics\EyeTrackerModel.cs" />
+    <Content Include="Views\Application\Publish.cshtml" />
     <None Include="Views\Content\PublicError.cshtml" />
     <None Include="Views\Content\Public404.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
-    <None Include="Views\Portfolio\Index.cshtml" />
+    <None Include="Views\Application\Index.cshtml" />
     <Content Include="Views\Secure\Forms\ChangePasswordForm.ascx" />
     <Content Include="Views\Account\Forms\ResetPasswordForm.ascx" />
     <Content Include="Views\Account\Forms\ForgotPasswordForm.ascx" />
@@ -638,6 +640,7 @@
     </None>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -650,6 +653,7 @@
     <Folder Include="Areas\m\Models\" />
     <Folder Include="Model\Pages\Secure\" />
     <Folder Include="Restricted\Screens\" />
+    <Folder Include="Restricted\UserPackages\" />
     <Folder Include="Scripts\Tests\UnitTests\" />
   </ItemGroup>
   <ItemGroup>

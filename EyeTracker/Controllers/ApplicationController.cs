@@ -1,29 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Web;
 using System.Web.Mvc;
-using EyeTracker.Common.Commands;
+using EyeTracker.Common;
+using EyeTracker.Common.Commands.Application;
 using EyeTracker.Common.Entities;
 using EyeTracker.Common.Logger;
+using EyeTracker.Common.Queries.Analytics;
+using EyeTracker.Common.Queries.Application;
 using EyeTracker.Common.Queries.Users;
+using EyeTracker.Common.QueryResults.Application;
+using EyeTracker.Controllers.Master;
 using EyeTracker.Core;
-using EyeTracker.Core.Services;
 using EyeTracker.Domain.Model;
 using EyeTracker.Model.Master;
 using EyeTracker.Model.Pages.Application;
-using EyeTracker.Controllers.Master;
-using EyeTracker.Common.Queries.Analytics;
-using EyeTracker.Common;
-using System.Web;
 using EyeTracker.Model.Pages.Portfolio;
-using EyeTracker.Common.Commands.Application;
-using System.IO;
-using EyeTracker.Common.Queries.Application;
-using System.Configuration;
-using EyeTracker.Common.QueryResults.Application;
-using System.Drawing;
-using EyeTracker.Common;
 
 namespace EyeTracker.Controllers
 {
@@ -36,17 +31,17 @@ namespace EyeTracker.Controllers
         {
             get { return AfterLoginMasterModel.MenuItem.Analytics; }
         }
-
-        public ActionResult Index(int id, string srch = "", int scol = 1, int cp = 1)
+        public ActionResult Index(string srch = "", int scol = 1, int cp = 1)
         {
-            var data = ObjectContainer.Instance.RunQuery(new GetAllApplicationsQuery(id, srch, cp, 15));
+            var data = ObjectContainer.Instance.RunQuery(new GetAllApplicationsQuery(srch, cp, 15));
+
             ViewData["IsAdmin"] = User.IsInRole(StaffRole.Administrator.ToString());
 
+            var rnd = new Random();
+
             var searchStrUrlPart = string.IsNullOrEmpty(srch) ? string.Empty : string.Concat("&srch=", HttpUtility.UrlEncode(srch));
-            var model = new ApplicationIndexModel
+            var model = new PortfolioIndexModelTmp(this, AfterLoginMasterModel.MenuItem.Analytics)
             {
-                PortfolioId = data.PortfolioId,
-                PortfolioDescription = data.PortfolioDescription,
                 IsOnePage = data.TotalPages == 1,
                 Count = data.Count,
                 PreviousPage = data.CurPage == 1 ? null : (int?)(data.CurPage - 1),
@@ -61,11 +56,42 @@ namespace EyeTracker.Controllers
                     Description = a.Description,
                     IsActive = a.IsActive,
                     Alternate = i % 2 != 0,
-                    Key = a.Type.GetAppKey(data.PortfolioId, a.Id),
-                    Visits = a.Visits
+                    Visits = a.Visits,
+                    Key = a.Type.GetAppKey(a.Id),
+                    Downloads = rnd.Next(100),
+                    Published = DateTime.Now.AddDays(-rnd.Next(100)).ToString("dd MMM yyyy"),
+                    Scrolls = rnd.Next(1000),
+                    Clicks = rnd.Next(1000),
+                    Time = rnd.Next(100),
+                    TargetGroup = rnd.Next(100) > 50 ? "Men 18+" : "Women 18+"
+                }).ToArray(),
+                TopApplications = data.TopApplications.Select((a, i) => new TopApplicationsItemModel
+                {
+                    IsAlternative = i % 2 != 0,
+                    Id = a.Id,
+                    Description = a.Description
+                }).ToArray(),
+                TopScreens = data.TopScreens.Select((s, i) => new TopScreensItemModel
+                {
+                    IsAlternative = i % 2 != 0,
+                    ApplicationId = s.ApplicationId,
+                    ScreenSize = s.ScreenSize.ToFormatedString(),
+                    Path = s.Path
                 }).ToArray()
             };
-            return View(model, AfterLoginMasterModel.MenuItem.Analytics);
+            return View("~/Views/Application/Index.cshtml", model, "Tmp");
+        }
+
+        public ActionResult Publish(int id)
+        {
+
+            return View("~/Views/Application/Publish.cshtml", new PublishModel(this, AfterLoginMasterModel.MenuItem.Analytics), "Tmp");
+        }
+
+        [HttpPost]
+        public ActionResult Publish()
+        {
+            return View("~/Views/Application/Publish.cshtml", new PublishModel(this, AfterLoginMasterModel.MenuItem.Analytics), "Tmp");
         }
 
         public ActionResult New(int id)
@@ -74,8 +100,8 @@ namespace EyeTracker.Controllers
             ViewBag.Edit = false;
             ViewBag.PortfolioDescritpion = portfolio.Description;
             ViewBag.Version = ContentPredefinedKeys.AndroidPackageVersion.GetContent();
-            var viewData = GetViewData(id);
-            return View(new ApplicationModel { PortfolioId = id, ViewData = viewData }, AfterLoginMasterModel.MenuItem.Analytics);
+            var viewData = GetViewData();
+            return View(new ApplicationModel { ViewData = viewData }, AfterLoginMasterModel.MenuItem.Analytics);
         }
 
         [HttpPost]
@@ -84,11 +110,11 @@ namespace EyeTracker.Controllers
             object res = null;
             if (ModelState.IsValid)
             {
-                var appId = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.PortfolioId, model.Description, (ApplicationType)model.Type));
+                var appId = ObjectContainer.Instance.Dispatch(new CreateApplicationCommand(model.Description, (ApplicationType)model.Type));
                 res = new
                 {
                     HasError = false,
-                    code = ((ApplicationType)model.Type).GetAppKey(model.PortfolioId, appId.Result),
+                    code = ((ApplicationType)model.Type).GetAppKey(appId.Result),
                     appId = appId.Result
                 };
             }
@@ -110,15 +136,14 @@ namespace EyeTracker.Controllers
             }
             else
             {
-                ViewBag.PortfolioDescription = app.PortfolioDescription;
                 var model = new ApplicationModel
                 {
                     Id = app.Id,
                     Description = app.Description,
                     Type = (int)app.Type,
-                    PortfolioId = app.PortfolioId
+                    UserId = ObjectContainer.Instance.CurrentUserDetails.Id
                 };
-                model.ViewData = GetViewData(model.PortfolioId, app.Type, model.Id);
+                model.ViewData = GetViewData(app.Type, model.Id);
 
                 return View(model, AfterLoginMasterModel.MenuItem.Analytics);
             }
@@ -130,15 +155,13 @@ namespace EyeTracker.Controllers
             if (ModelState.IsValid)
             {
                 var appId = ObjectContainer.Instance.Dispatch(new UpdateApplicationCommand(model.Id, model.Description));
-                return Redirect("/Application/" + model.PortfolioId);
+                return Redirect("/Application");
             }
             else
             {
-                var portfolio = ObjectContainer.Instance.RunQuery(new GetPortfolioDetailsQuery(model.PortfolioId));
                 ViewBag.Edit = true;
-                ViewBag.PortfolioDescritpion = portfolio.Description;
                 ViewBag.Version = ContentPredefinedKeys.AndroidPackageVersion.GetContent();
-                model.ViewData = GetViewData(model.PortfolioId, (ApplicationType)model.Type, model.Id);
+                model.ViewData = GetViewData((ApplicationType)model.Type, model.Id);
                 return View(model, AfterLoginMasterModel.MenuItem.Analytics);
             }
         }
@@ -154,16 +177,16 @@ namespace EyeTracker.Controllers
             {
                 ObjectContainer.Instance.Dispatch(new RemoveApplicationCommand(id));
             }
-            return Redirect("/Application/" + app.PortfolioId);
+            return Redirect("/Application");
         }
 
-        private static ApplicationViewModel GetViewData(int portfolioId, ApplicationType? type = null, int? appId = null)
+        private static ApplicationViewModel GetViewData(ApplicationType? type = null, int? appId = null)
         {
             return new ApplicationViewModel
             {
                 Screens = new List<Screen>(),
                 TypesList = Enum.GetValues(typeof(ApplicationType)).Cast<ApplicationType>().Select(i => new SelectListItem() { Text = i.ToString(), Value = ((int)i).ToString() }),
-                PropertyId = type.HasValue && appId.HasValue ? type.Value.GetAppKey(portfolioId, appId.Value) : "**-****-******"
+                PropertyId = type.HasValue && appId.HasValue ? type.Value.GetAppKey(appId.Value) : "**-******"
             };
         }
 
@@ -193,8 +216,6 @@ namespace EyeTracker.Controllers
 
                 ApplicationId = data.ApplicationId,
                 ApplicationDescription = data.ApplicationDescription,
-                PortfolioId = data.PortfolioId,
-                PortfolioDescription = data.PortfolioDescription,
                 Screens = data.Screens.Select((s, i) => new ScreenItemModel
                 {
                     Id = s.Id,
@@ -291,8 +312,6 @@ namespace EyeTracker.Controllers
 
         private ActionResult PrepareAction(ScreenModel model, ScreenDataResult data)
         {
-            ViewBag.PortfolioId = data.PortfolioId;
-            ViewBag.PortfolioDescription = data.PortfolioDescription;
             ViewBag.ApplicationDescription = data.ApplicationDescription;
 
             var pathes = data.Pathes.Select(p => new SelectListItem { Text = p, Value = p }).ToList();

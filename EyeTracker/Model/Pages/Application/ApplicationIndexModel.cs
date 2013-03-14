@@ -29,5 +29,7 @@ namespace EyeTracker.Model.Pages.Portfolio
         public int Clicks { get; set; }
 
         public int Scrolls { get; set; }
+
+        public IEnumerable<object> AnalyticsVersions { get; set; }
     }
 }

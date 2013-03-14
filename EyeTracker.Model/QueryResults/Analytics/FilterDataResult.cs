@@ -7,8 +7,7 @@ namespace EyeTracker.Common.QueryResults.Analytics.QueryResults
 {
     public class FilterDataResult
     {
-        public IEnumerable<PortfolioResult> Portfolios { get; set; }
-        public IEnumerable<ApplicationResult> Applications { get; set; }
+        public IEnumerable<ExtendedApplicationResult> Applications { get; set; }
         public List<Size> ScreenSizes { get; set; }
         public List<string> Pathes { get; private set; }
         public List<string> Languages { get; private set; }

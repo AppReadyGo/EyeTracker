@@ -63,6 +63,7 @@
     <Compile Include="CommandHandlers\Admin\ClearLogCommandHandler.cs" />
     <Compile Include="CommandHandlers\API\AddPackageCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\AddScreenCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Application\SetPackageCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\RemoveScreenCommandHandler.cs" />
     <Compile Include="CommandHandlers\Application\UpdateScreenCommandHandler.cs" />
     <Compile Include="CommandHandlers\Content\CreatePageCommandHandler.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Mapping\BackOffice\SystemMembershipMapping.cs" />
     <Compile Include="Mapping\Content\ItemMapping.cs" />
     <Compile Include="Mapping\Content\PageMapping.cs" />
+    <Compile Include="Mapping\PackageMapping.cs" />
     <Compile Include="Mapping\ScreenMapping.cs" />
     <Compile Include="Mapping\ScrollMapping.cs" />
     <Compile Include="Mapping\Users\UserMapping.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="Model\Events\VisitEvent.cs" />
     <Compile Include="Model\Language.cs" />
     <Compile Include="Model\Nameable.cs" />
+    <Compile Include="Model\Package.cs" />
     <Compile Include="Model\PageView.cs" />
     <Compile Include="Model\BackOffice\SystemUser.cs" />
     <Compile Include="Model\BackOffice\Entity.cs" />

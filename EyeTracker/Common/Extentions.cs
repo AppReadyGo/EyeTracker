@@ -22,7 +22,7 @@ namespace EyeTracker.Common
             }
         }
 
-        public static string GetAppKey(this ApplicationType type, int portfolioId, int applicationId)
+        public static string GetAppKey(this ApplicationType type, int applicationId)
         {
             string key = "";
             switch (type)
@@ -44,7 +44,7 @@ namespace EyeTracker.Common
                     break;
             }
 
-            return string.Format("{0}-{1:0000}-{2:000000}", key, portfolioId, applicationId);
+            return string.Format("{0}-{1:000000}", key, applicationId);
         }
 
         //public static string GetContentUrl(this Url

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using EyeTracker.Common.Entities;
+using NHibernate.Collection.Generic;
+using EyeTracker.Domain.Model.Users;
 
 namespace EyeTracker.Domain.Model
 {
@@ -12,7 +14,7 @@ namespace EyeTracker.Domain.Model
     /// </summary>
     public class Application
     {
-        private Iesi.Collections.Generic.ISet<Screen> screens;
+        private PersistentGenericSet<Screen> screens;
 
         /// <summary>
         /// application ID 
@@ -31,26 +33,28 @@ namespace EyeTracker.Domain.Model
         /// </summary>
         public virtual ApplicationType Type { get; protected set; }
         /// <summary>
-        /// this member holds Portfolio 
+        /// this member holds User 
         /// </summary>
-        public virtual Portfolio Portfolio { get; protected set; }
+        public virtual User User { get; protected set; }
         /// <summary>
         /// holds application screens list 
         /// </summary>
-        public virtual IEnumerable<Screen> Screens { get { return screens; } set { } }
+        public virtual IEnumerable<Screen> Screens { get { return screens; } }
+
+        public virtual Package Package { get; protected set; }
 
         public Application()
         {
-            this.screens = new Iesi.Collections.Generic.HashedSet<Screen>();
+            this.screens = new PersistentGenericSet<Screen>();
             this.CreateDate = DateTime.UtcNow;
         }
 
-        public Application(Portfolio portfolio, string description, ApplicationType type)
+        public Application(User user, string description, ApplicationType type)
             : this()
         {
             this.Description = description;
             this.Type = type;
-            this.Portfolio = portfolio;
+            this.User = user;
         }
 
         protected internal virtual void Update(string description)
@@ -69,6 +73,11 @@ namespace EyeTracker.Domain.Model
             {
                 this.screens.Remove(screen);
             }
+        }
+
+        public virtual void SetPakage(Package package)
+        {
+            this.Package = package;
         }
     }
 }
