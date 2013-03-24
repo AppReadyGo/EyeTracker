@@ -42,7 +42,7 @@ namespace EyeTracker.Domain.Queries.Application
             res.CurPage = query.CurPage > res.TotalPages ? res.TotalPages : query.CurPage;
             res.PageSize = query.PageSize;
 
-            var applications = applicationsQuery.Select(a => new ApplicationDataItemResult
+            res.Applications = applicationsQuery.Select(a => new ApplicationDataItemResult
                                             {
                                                 Id = a.Id,
                                                 Description = a.Description,
@@ -50,7 +50,7 @@ namespace EyeTracker.Domain.Queries.Application
                                             })
                                             .ToArray();
 
-            applications = applications.Skip(res.PageSize * (res.CurPage - 1))
+            res.Applications = res.Applications.Skip(res.PageSize * (res.CurPage - 1))
                                     .Take(res.PageSize)
                                     .ToArray();
             
